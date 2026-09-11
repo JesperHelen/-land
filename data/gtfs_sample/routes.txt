@@ -1,0 +1,7 @@
+route_id,route_short_name,route_long_name,route_type
+1,1,Mariehamn–Hammarland–Eckerö,3
+2,2,Mariehamn–Godby–Geta,3
+3,3,Mariehamn–Godby–Saltvik,3
+4,4,Mariehamn–Godby–Sund–Vårdö,3
+5,5,Mariehamn–Lemland–Lumparland,3
+6,6,Skollinje Emkarby–Gölby,3

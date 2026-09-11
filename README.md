@@ -22,6 +22,21 @@ Det är Åland-motsvarigheten till Mandl-notebooken i repot `Genetic_Algorithm_U
 └── README.md
 ```
 
+## Två notebooks
+
+| Notebook | Vad den gör |
+|---|---|
+| `notebooks/gtfs_natverk.ipynb` | **GTFS-utforskning** – läs in GTFS, se hela nätet på en interaktiv karta, klicka på en linje för avgångar/dag, avgångar/timme i förmiddags- (06–09) och eftermiddagsrusning (15–18) samt riktning, och välj ut linjer att arbeta vidare med. |
+| `notebooks/aland_busslinjer_ga.ipynb` | **Optimering** (genetisk algoritm) – för närvarande pausad, se ovan. |
+
+### GTFS-verktyget (`gtfs_natverk.ipynb`)
+1. Sätt `GTFS_PATH` till din GTFS-mapp eller `.zip` (lämnas den tom används det medföljande exemplet i
+   `data/gtfs_sample/`; i Colab erbjuds uppladdning).
+2. Statistik beräknas för ett vardagsdygn (väljs automatiskt) med rusning FM 06–09 och EM 15–18.
+3. Kryssa linjer (ipywidgets) → kartan framhäver dem. Pilar (▶) visar färdriktning; linjer åt båda hållen får
+   två parallella spår, enkelriktade bara ett. Klicka på en linje för statistik.
+4. Urvalet sparas i `output/valda_linjer.csv` för det fortsatta arbetet.
+
 ## Kom igång
 
 1. Installera beroenden:
