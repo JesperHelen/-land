@@ -12,30 +12,34 @@ Det är Åland-motsvarigheten till Mandl-notebooken i repot `Genetic_Algorithm_U
 ```
 -land/
 ├── notebooks/
-│   └── aland_busslinjer_ga.ipynb   # Huvudleverans – kör denna
+│   └── aland_busslinjer_ga.ipynb   # Enda notebooken – kör denna (Del 1 GTFS + Del 2 optimering)
 ├── data/
-│   ├── hallplatser.geojson         # Hållplatser (koordinater)
-│   ├── centroid_nyckel.csv         # Centroider/zoner (zon_id, lon, lat)
-│   └── OD_matris.xlsx              # OD-matris (efterfrågan zon→zon, EM)
-├── output/                         # Genereras vid körning (restidscache, resultat, karta)
+│   ├── gtfs_sample/                # Medföljande GTFS-exempel (Åland) för Del 1
+│   ├── hallplatser.geojson         # Hållplatser (koordinater) – Del 2
+│   ├── centroid_nyckel.csv         # Centroider/zoner (zon_id, lon, lat) – Del 2
+│   └── OD_matris.xlsx              # OD-matris (efterfrågan zon→zon, EM) – Del 2
+├── output/                         # Genereras vid körning (kartor, cache, resultat)
 ├── requirements.txt
 └── README.md
 ```
 
-## Två notebooks
+## En notebook, två delar
 
-| Notebook | Vad den gör |
-|---|---|
-| `notebooks/gtfs_natverk.ipynb` | **GTFS-utforskning** – läs in GTFS, se hela nätet på en interaktiv karta, klicka på en linje för avgångar/dag, avgångar/timme i förmiddags- (06–09) och eftermiddagsrusning (15–18) samt riktning, och välj ut linjer att arbeta vidare med. |
-| `notebooks/aland_busslinjer_ga.ipynb` | **Optimering** (genetisk algoritm) – för närvarande pausad, se ovan. |
+Allt ligger i **`notebooks/aland_busslinjer_ga.ipynb`**:
 
-### GTFS-verktyget (`gtfs_natverk.ipynb`)
-1. Sätt `GTFS_PATH` till din GTFS-mapp eller `.zip` (lämnas den tom används det medföljande exemplet i
-   `data/gtfs_sample/`; i Colab erbjuds uppladdning).
-2. Statistik beräknas för ett vardagsdygn (väljs automatiskt) med rusning FM 06–09 och EM 15–18.
-3. Kryssa linjer (ipywidgets) → kartan framhäver dem. Pilar (▶) visar färdriktning; linjer åt båda hållen får
-   två parallella spår, enkelriktade bara ett. Klicka på en linje för statistik.
+### Del 1 – GTFS-utforskning (aktiv)
+1. **Välj mappen med GTFS-filerna** via knappen **📁 Välj GTFS-mapp** (i Colab läses hela mappen in i webbläsaren;
+   lokalt används en uppladdningsknapp eller `GTFS_PATH`). Lämnar du det tomt kan du köra `anvand_exempeldata()`
+   som använder `data/gtfs_sample/`.
+2. Statistik beräknas för ett vardagsdygn (väljs automatiskt), rusning **FM 06–09** och **EM 15–18**.
+3. Interaktiv karta över **hela nätet**. **Klicka på en linje** → avgångar/dag, avgångar/timme i FM/EM-rusning
+   och riktning. Pilar (▶) visar färdriktning; linjer åt båda hållen ritas som två parallella spår, enkelriktade
+   som ett. Kryssa linjer (ipywidgets) för att framhäva ett urval.
 4. Urvalet sparas i `output/valda_linjer.csv` för det fortsatta arbetet.
+
+### Del 2 – Optimering med genetisk algoritm (pausad)
+Den tidigare optimeringen ligger kvar men är **pausad**: den körs bara om du sätter `KOR_OPTIMERING = True`.
+Vid *Kör alla* stannar notebooken vid Del 2 så att den tunga optimeringen inte startar av misstag.
 
 ## Kom igång
 
