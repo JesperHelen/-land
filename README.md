@@ -31,11 +31,11 @@ Allt ligger i **`notebooks/aland_busslinjer_ga.ipynb`**:
 1. **Välj mappen med GTFS-filerna** via knappen **📁 Välj GTFS-mapp** (i Colab läses hela mappen in i webbläsaren;
    lokalt används en uppladdningsknapp eller `GTFS_PATH`). Lämnar du det tomt kan du köra `anvand_exempeldata()`
    som använder `data/gtfs_sample/`.
-2. Statistik beräknas för ett vardagsdygn (väljs automatiskt), rusning **FM 06–09** och **EM 15–18**.
+2. **Välj trafikdygn** bland GTFS:ens tillgängliga datum (dropdown), rusning **FM 06–09** och **EM 15–18**.
 3. Interaktiv karta över **hela nätet**. **Klicka på en linje** → avgångar/dag, avgångar/timme i FM/EM-rusning
    och riktning. Pilar (▶) visar färdriktning; linjer åt båda hållen ritas som två parallella spår, enkelriktade
    som ett. Kryssa linjer (ipywidgets) för att framhäva ett urval.
-4. Urvalet sparas i `output/valda_linjer.csv` för det fortsatta arbetet.
+4. **Exportera nätverket** för valt datum till `output/natverk_<datum>.xlsx` (blad **Linjer**: avgångar totalt/FM/EM per linje; **Hållplatser**: bussar som passerar totalt/FM/EM per hållplats + vilka linjer; **Avgångar**: alla individuella avgångar) plus CSV:er. Urvalet sparas även i `valda_linjer.csv`.
 
 ### Del 2 – Optimering med genetisk algoritm (pausad)
 Den tidigare optimeringen ligger kvar men är **pausad**: den körs bara om du sätter `KOR_OPTIMERING = True`.
