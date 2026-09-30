@@ -45,8 +45,9 @@ Vid *Kör alla* stannar notebooken vid Del 2 så att den tunga optimeringen inte
 Kör de två cellerna längst ner och välj Excel-filen med OD-matriserna (bladen `OD_FM` och `OD_EM`, koordinater från
 `OD_Zoner`). Du får en karta per period med **bågar från start- till målområde**: tjockare och mörkare båge = fler
 resor, samma skala för FM och EM, pilspets vid målet och cirkelstorlek = på- + avstigande. Som standard visas de
-största flödena som står för 90 % av resorna (`VISA_ANDEL`). Resultatet sparas i `output/od_kartor/` och laddas
-ner som zip: PNG-kartor, interaktiv HTML (hovra för antal resor) och GeoJSON (bågar + zoner) för QGIS/ArcGIS.
+största flödena som står för 90 % av resorna (`VISA_ANDEL`). Kartorna visas bara i notebooken – inget sparas
+automatiskt. När du är nöjd kör du sparcellen, som lägger PNG-kartor, interaktiv HTML (hovra för antal resor) och
+GeoJSON (bågar + zoner) för QGIS/ArcGIS i `output/od_kartor/` (valfritt som zip med `LADDA_NER_ZIP = True`).
 Cellerna kräver varken GTFS eller Del 2.
 
 ## Kom igång
