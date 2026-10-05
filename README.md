@@ -35,7 +35,7 @@ Allt ligger i **`notebooks/aland_busslinjer_ga.ipynb`**:
 3. Interaktiv karta över **hela nätet**. **Klicka på en linje** → avgångar/dag, avgångar/timme i FM/EM-rusning
    och riktning. Pilar (▶) visar färdriktning; linjer åt båda hållen ritas som två parallella spår, enkelriktade
    som ett. Kryssa linjer (ipywidgets) för att framhäva ett urval.
-4. **Exportera nätverket** för valt datum till `output/natverk_<datum>.xlsx` (blad **Linjer**: avgångar totalt/FM/EM per linje; **Hållplatser**: bussar som passerar totalt/FM/EM per hållplats + vilka linjer; **Avgångar**: alla individuella avgångar) plus CSV:er. Urvalet sparas även i `valda_linjer.csv`.
+4. **Exportera nätverket** för valt datum – **bara för linjerna du kryssat i Steg 3** (inga kryssade = hela nätet) – till `output/natverk_<datum>.xlsx` (blad **Linjer**: avgångar totalt/FM/EM per linje; **Hållplatser**: bussar som passerar totalt/FM/EM per hållplats + vilka linjer; **Avgångar**: alla individuella avgångar) plus CSV:er. Urvalet sparas även i `valda_linjer.csv`.
 
 ### Del 2 – Optimering med genetisk algoritm (pausad)
 Den tidigare optimeringen ligger kvar men är **pausad**: den körs bara om du sätter `KOR_OPTIMERING = True`.
