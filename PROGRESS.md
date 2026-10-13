@@ -11,7 +11,11 @@ Bocka av varje steg när det är klart och committat. Nästa körning fortsätte
       centrum-påstigning på föregående turs sista hpl); 21 % FM / 15 % EM av centrums påstigning felregistrerad
       (intervall 10–21 %); linje Ö saknades (filter 'E'); gångpar 2 %. Andel resor till/från centrum 79 % → 63 %.
       **Korrigerad matris: `data/processed/a1_od_{FM,EM}_korrigerad.csv` – använd i B4–B5.**
-- [ ] **A2 Täckningsgrad med turtäthet**
+- [x] **A2 Täckningsgrad med turtäthet**
+      `src/a2_tackning.py`, `src/a2_kartor.py` → `data/processed/a2_*`, `output/kartor/a2_*.png`,
+      `rapport/A2_tackning_turtathet.md`. Mariehamn: 84 % inom 400 m men bara 56 % med ≥ 30 avg/vardag;
+      svag faktisk tillgänglighet (hpl nära, ≤ 29 avg) 28 % ≈ 4 150 inv.; otäckt 16 % ≈ 2 430 inv.
+      Delpunkter 50 m med klass i `a2_delpunkter.csv.gz` – används i A3.
 - [ ] **A3 Förslag på nya hållplatslägen och överflödiga hållplatser**
 - [ ] ⏸ **STOPP – invänta beställarens granskning av Fas A innan Fas B påbörjas**
 

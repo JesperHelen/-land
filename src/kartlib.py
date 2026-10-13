@@ -29,6 +29,7 @@ plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 8.5, 'axes.title
 
 # Kartutsnitt (xmin, xmax, ymin, ymax) i EPSG:3067
 UTSNITT = {
+    'omrade': (101600, 115400, 6672400, 6693600),   # hela befolkningsrutnätet (Mariehamn + Jomala)
     'tatort': (105200, 112400, 6672800, 6687600),   # Mariehamn med Järsö/Nåtö i söder
     'stad': (105600, 111400, 6679200, 6687400),     # Mariehamns stad
     'centrum': (107300, 109500, 6681900, 6684600),  # centrum
@@ -81,6 +82,9 @@ def ram(ax, **kw):
 
 
 def spara(fig, namn, dpi=200):
+    for a in fig.axes:
+        if not a.get_xticks().size:
+            a.set_xlabel(''); a.set_ylabel('')
     ut = C.KARTOR / namn
     fig.savefig(ut, dpi=dpi, bbox_inches='tight', pad_inches=0.06)
     plt.close(fig)

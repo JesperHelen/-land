@@ -1,0 +1,90 @@
+{
+ "typvardag": "2026-09-01",
+ "hela_omradet_alla_bussar": {
+  "befolkning": 17697,
+  "Ingen hållplats inom 400 m": {
+   "invanare": 4652,
+   "andel": 0.2629
+  },
+  "Mycket låg (1–14 avg/vardag)": {
+   "invanare": 508,
+   "andel": 0.0287
+  },
+  "Låg (15–29)": {
+   "invanare": 4209,
+   "andel": 0.2378
+  },
+  "Medel (30–59)": {
+   "invanare": 4637,
+   "andel": 0.262
+  },
+  "God (≥ 60)": {
+   "invanare": 3691,
+   "andel": 0.2086
+  },
+  "inom_400m_andel": 0.7371,
+  "minst_15_avg_andel": 0.7084,
+  "minst_30_avg_andel": 0.4706,
+  "svag_andel": 0.2665,
+  "svag_invanare": 4716
+ },
+ "mariehamn_alla_bussar": {
+  "befolkning": 14821,
+  "Ingen hållplats inom 400 m": {
+   "invanare": 2431,
+   "andel": 0.164
+  },
+  "Mycket låg (1–14 avg/vardag)": {
+   "invanare": 385,
+   "andel": 0.0259
+  },
+  "Låg (15–29)": {
+   "invanare": 3769,
+   "andel": 0.2543
+  },
+  "Medel (30–59)": {
+   "invanare": 4546,
+   "andel": 0.3067
+  },
+  "God (≥ 60)": {
+   "invanare": 3691,
+   "andel": 0.249
+  },
+  "inom_400m_andel": 0.836,
+  "minst_15_avg_andel": 0.81,
+  "minst_30_avg_andel": 0.5558,
+  "svag_andel": 0.2802,
+  "svag_invanare": 4153
+ },
+ "mariehamn_endast_stadslinjer": {
+  "befolkning": 14821,
+  "Ingen hållplats inom 400 m": {
+   "invanare": 2731,
+   "andel": 0.1842
+  },
+  "Mycket låg (1–14 avg/vardag)": {
+   "invanare": 330,
+   "andel": 0.0222
+  },
+  "Låg (15–29)": {
+   "invanare": 5046,
+   "andel": 0.3405
+  },
+  "Medel (30–59)": {
+   "invanare": 4380,
+   "andel": 0.2955
+  },
+  "God (≥ 60)": {
+   "invanare": 2336,
+   "andel": 0.1576
+  },
+  "inom_400m_andel": 0.8158,
+  "minst_15_avg_andel": 0.7935,
+  "minst_30_avg_andel": 0.4531,
+  "svag_andel": 0.3627,
+  "svag_invanare": 5376
+ },
+ "mariehamn_fm_minst_3_avg_andel": 0.8184,
+ "hallplatslagen_med_avgang": 576,
+ "hallplatslagen_stadslinjer": 111
+}
