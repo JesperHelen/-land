@@ -11,3 +11,5 @@ Rapporttexten skrivs kapitelvis här och sammanställs till ett PM i steg B6. Ka
 | 4 Justering av linjenätet – tre förslag | – | Fas B, efter granskning |
 | 5 Ekonomisk kalkyl | – | Fas B |
 | PM (sammanställning) | – | Fas B |
+
+Kartorna finns även som GIS-lager för QGIS i `output/gis/linjenatsutredning.gpkg` (se `output/gis/LASMIG.md`).

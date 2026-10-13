@@ -51,5 +51,7 @@ Bocka av varje steg när det är klart och committat. Nästa körning fortsätte
 ## Noteringar till nästa körning
 - Typvardag i GTFS: tisdag 2026-09-01 (`data_las.typvardag()`); restider ur GTFS (ingen shapes.txt).
 - Gemensamma moduler: `src/data_las.py` (inläsning), `src/kartlib.py` (kartstil, bågar, etiketter).
+- **GIS-export för QGIS:** `src/gis_export.py` → `output/gis/linjenatsutredning.gpkg` (EPSG:3067, stilar inbäddade
+  i `layer_styles`, även som .qml i `output/gis/stilar/`). Kör om efter varje steg; lägg till Fas B-lagren där.
 - Internet: endast PyPI och repo-GitHub nås. Inga baskarte-tjänster/OSRM – kartor byggs av egna lager.
 - Python-paket utöver requirements: geopandas, shapely, pyproj, pyogrio (installeras med pip).

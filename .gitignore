@@ -3,6 +3,8 @@ output/*
 !output/.gitkeep
 # PM:ets kartor versionshanteras
 !output/kartor/
+# GIS-lager för QGIS versionshanteras
+!output/gis/
 data/od_long.csv
 
 # Python / Jupyter
