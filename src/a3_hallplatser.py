@@ -221,7 +221,7 @@ def main():
 
     bedom = {}
     borttagna = set()
-    ordning = sorted((z for z in stad_omr if z is not None and z in xy_omr), key=lambda z: past.get(z, 0.0))
+    ordning = sorted((z for z in stad_omr if z is not None and z in xy_omr), key=lambda z: (past.get(z, 0.0), z))
     for z in ordning:
         lag = past.get(z, 0.0) < LAG_PAST
         L = lucka(z, borttagna); U = unik_tackning(z, borttagna)
@@ -248,7 +248,7 @@ def main():
                     'pastigande_vardag': round(past.get(z, 0.0), 3), 'lucka_efter_indragning_m': round(L),
                     'unik_tackning_inv': round(U), 'lagt_pastigande': lag, 'lucka_ok': k2, 'liten_unik_tackning': k3,
                     'bedomning': bed, 'kommentar': '; '.join(orsak)}
-    ov = pd.DataFrame(bedom.values()).sort_values(['bedomning', 'pastigande_vardag'])
+    ov = pd.DataFrame(bedom.values()).sort_values(['bedomning', 'pastigande_vardag', 'omrade'])
     ov['lon'], ov['lat'] = tr.transform(ov.x.values, ov.y.values)
 
     # ---------------- indikativa hållplatslägen i områden som kräver ändrad linjesträckning
