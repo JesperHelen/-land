@@ -24,6 +24,7 @@ Bocka av varje steg när det är klart och committat. Nästa körning fortsätte
 - [x] ⏸ **STOPP – Fas A klar. Invänta beställarens granskning innan Fas B påbörjas** (Fas A klar 2026-10-13)
 
 ## Fas B – förslag, kalkyl och rapport (efter godkännande)
+- ⏳ **Väntar på beställarens granskning och godkännande av Fas A** (kontrollerat 2026-10-13) – Fas B (B4–B6) påbörjas först när godkännande antecknas här.
 - [ ] B4 Justering av linjenätet – tre förslag, verifierade mot dagens omloppsplaner
 - [ ] B5 Grov ekonomisk kalkyl
 - [ ] B6 Färdigställ PM
