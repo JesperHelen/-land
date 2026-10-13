@@ -1,0 +1,224 @@
+{
+ "D1": [
+  {
+   "linje": "1",
+   "grupp": "Landsbygdslinje",
+   "terminal": "Mariehamn, Bussplan",
+   "pastigande_terminal": 1166.0,
+   "andel_forsta_hpl": 0.9451,
+   "andel_sista_hpl": 0.0249,
+   "andel_linjens_pastigande_vid_terminal": 0.2134
+  },
+  {
+   "linje": "2",
+   "grupp": "Landsbygdslinje",
+   "terminal": "Mariehamn, Bussplan",
+   "pastigande_terminal": 1243.0,
+   "andel_forsta_hpl": 0.9847,
+   "andel_sista_hpl": 0.0153,
+   "andel_linjens_pastigande_vid_terminal": 0.1854
+  },
+  {
+   "linje": "3",
+   "grupp": "Landsbygdslinje",
+   "terminal": "Mariehamn, Bussplan",
+   "pastigande_terminal": 849.0,
+   "andel_forsta_hpl": 0.9941,
+   "andel_sista_hpl": 0.0,
+   "andel_linjens_pastigande_vid_terminal": 0.1578
+  },
+  {
+   "linje": "4",
+   "grupp": "Landsbygdslinje",
+   "terminal": "Mariehamn, Bussplan",
+   "pastigande_terminal": 713.0,
+   "andel_forsta_hpl": 0.9874,
+   "andel_sista_hpl": 0.0,
+   "andel_linjens_pastigande_vid_terminal": 0.2038
+  },
+  {
+   "linje": "5",
+   "grupp": "Landsbygdslinje",
+   "terminal": "Mariehamn, Bussplan",
+   "pastigande_terminal": 820.0,
+   "andel_forsta_hpl": 0.9512,
+   "andel_sista_hpl": 0.0488,
+   "andel_linjens_pastigande_vid_terminal": 0.1658
+  },
+  {
+   "linje": "J",
+   "grupp": "Stadslinje",
+   "terminal": "Centrum, Nygatan",
+   "pastigande_terminal": 442.0,
+   "andel_forsta_hpl": 0.0,
+   "andel_sista_hpl": 1.0,
+   "andel_linjens_pastigande_vid_terminal": 0.2235
+  },
+  {
+   "linje": "N",
+   "grupp": "Stadslinje",
+   "terminal": "Centrum, Nygatan",
+   "pastigande_terminal": 1338.0,
+   "andel_forsta_hpl": 0.0,
+   "andel_sista_hpl": 0.8961,
+   "andel_linjens_pastigande_vid_terminal": 0.4411
+  },
+  {
+   "linje": "S",
+   "grupp": "Stadslinje",
+   "terminal": "Centrum, Nygatan",
+   "pastigande_terminal": 901.0,
+   "andel_forsta_hpl": 0.0,
+   "andel_sista_hpl": 1.0,
+   "andel_linjens_pastigande_vid_terminal": 0.4745
+  },
+  {
+   "linje": "V",
+   "grupp": "Stadslinje",
+   "terminal": "Centrum, Nygatan",
+   "pastigande_terminal": 534.0,
+   "andel_forsta_hpl": 0.0,
+   "andel_sista_hpl": 1.0,
+   "andel_linjens_pastigande_vid_terminal": 0.6512
+  },
+  {
+   "linje": "Ö",
+   "grupp": "Stadslinje",
+   "terminal": "Centrum, Nygatan",
+   "pastigande_terminal": 551.0,
+   "andel_forsta_hpl": 0.0,
+   "andel_sista_hpl": 0.9292,
+   "andel_linjens_pastigande_vid_terminal": 0.2906
+  }
+ ],
+ "D3": {
+  "pastigande_vardag_med_O": 9626.0,
+  "pastigande_vardag_utan_O": 7730.0,
+  "andel_saknas": 0.19696654892998133
+ },
+ "steg": {
+  "FM": {
+   "S0 levererad": {
+    "resor_h": 8.416666666666666,
+    "andel_O_centrum": 0.2776582001912231,
+    "andel_D_centrum": 0.5111321648507816,
+    "andel_resor_via_centrum": 0.7887903650420047,
+    "andel_gangpar": 0.02114925150361238
+   },
+   "S1 återskapad": {
+    "resor_h": 8.416666666666666,
+    "andel_O_centrum": 0.277658200602669,
+    "andel_D_centrum": 0.5111321648507815,
+    "andel_resor_via_centrum": 0.7887903654534506,
+    "andel_gangpar": 0.01784170738779681
+   },
+   "S2 + linje Ö": {
+    "resor_h": 10.373188405797102,
+    "andel_O_centrum": 0.2808243101641635,
+    "andel_D_centrum": 0.473644859813084,
+    "andel_resor_via_centrum": 0.7544691699772476,
+    "andel_gangpar": 0.012213991322571664
+   },
+   "S3 + gångpar exkluderade": {
+    "resor_h": 10.373188405797103,
+    "andel_O_centrum": 0.2808243101641634,
+    "andel_D_centrum": 0.4736448598130841,
+    "andel_resor_via_centrum": 0.7544691699772474,
+    "andel_gangpar": 0.0
+   },
+   "S4 + centrumkorrigering": {
+    "resor_h": 10.373188405797102,
+    "andel_O_centrum": 0.22302018809524524,
+    "andel_D_centrum": 0.4030203626910937,
+    "andel_resor_via_centrum": 0.626040550786339,
+    "andel_gangpar": 0.0
+   },
+   "validering": {
+    "korrelation_cell": 0.9983531494320254,
+    "max_abs_avvikelse": 0.04925938872500879,
+    "medelrestid_lev_min": 11.168799101546336
+   }
+  },
+  "EM": {
+   "S0 levererad": {
+    "resor_h": 7.6485507246376825,
+    "andel_O_centrum": 0.5111321638681948,
+    "andel_D_centrum": 0.27765820060266894,
+    "andel_resor_via_centrum": 0.7887903644708637,
+    "andel_gangpar": 0.019515575377290734
+   },
+   "S1 återskapad": {
+    "resor_h": 7.648550724637681,
+    "andel_O_centrum": 0.5111321648507816,
+    "andel_D_centrum": 0.27765820060266905,
+    "andel_resor_via_centrum": 0.7887903654534506,
+    "andel_gangpar": 0.01624815861135944
+   },
+   "S2 + linje Ö": {
+    "resor_h": 9.692028985507246,
+    "andel_O_centrum": 0.4736448598130841,
+    "andel_D_centrum": 0.2808243101641634,
+    "andel_resor_via_centrum": 0.7544691699772474,
+    "andel_gangpar": 0.011828420900362345
+   },
+   "S3 + gångpar exkluderade": {
+    "resor_h": 9.692028985507246,
+    "andel_O_centrum": 0.47364485981308413,
+    "andel_D_centrum": 0.28082431016416354,
+    "andel_resor_via_centrum": 0.7544691699772477,
+    "andel_gangpar": 0.0
+   },
+   "S4 + centrumkorrigering": {
+    "resor_h": 9.692028985507244,
+    "andel_O_centrum": 0.4030203626910937,
+    "andel_D_centrum": 0.22302018809524524,
+    "andel_resor_via_centrum": 0.6260405507863389,
+    "andel_gangpar": 0.0
+   },
+   "validering": {
+    "korrelation_cell": 0.9990725481427354,
+    "max_abs_avvikelse": 0.027384397298549912,
+    "medelrestid_lev_min": 10.842949407989416
+   }
+  }
+ },
+ "R_bas": {
+  "FM": 0.4118673647469459,
+  "EM": 0.2796610169491525,
+  "dygn": 0.2967339922647185
+ },
+ "andel_felregistrerade_centrum": {
+  "2": {
+   "FM": 0.1812750917228529,
+   "EM": 0.09755022437474964
+  },
+  "3": {
+   "FM": 0.20583731527775218,
+   "EM": 0.14910854759378409
+  },
+  "4": {
+   "FM": 0.21383782307972338,
+   "EM": 0.16236754397618142
+  }
+ },
+ "startsegment_bas": {
+  "J": [
+   "Skillnadsgatan vsk.",
+   "Torget"
+  ],
+  "N": [
+   "Mariehamn, Bussplan",
+   "Polishuset",
+   "Strandgränd"
+  ],
+  "S": [
+   "Kyrkan",
+   "Torget",
+   "Ukrainaplatsen"
+  ],
+  "V": [
+   "Ålandsplan"
+  ]
+ },
+ "bussbyte_centrum_andel_av_centrum": 0.022039298990971852
+}

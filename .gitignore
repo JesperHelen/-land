@@ -1,6 +1,8 @@
 # Genererade filer (skapas när notebooken körs)
 output/*
 !output/.gitkeep
+# PM:ets kartor versionshanteras
+!output/kartor/
 data/od_long.csv
 
 # Python / Jupyter

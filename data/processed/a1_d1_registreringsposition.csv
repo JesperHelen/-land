@@ -1,0 +1,11 @@
+linje,grupp,terminal,pastigande_terminal,andel_forsta_hpl,andel_sista_hpl,andel_linjens_pastigande_vid_terminal
+1,Landsbygdslinje,"Mariehamn, Bussplan",1166.0,0.9451114922813036,0.024871355060034305,0.21343584111294162
+2,Landsbygdslinje,"Mariehamn, Bussplan",1243.0,0.9847144006436042,0.015285599356395816,0.18538404175988069
+3,Landsbygdslinje,"Mariehamn, Bussplan",849.0,0.9941107184923439,0.0,0.1577773648020814
+4,Landsbygdslinje,"Mariehamn, Bussplan",713.0,0.9873772791023843,0.0,0.2037725064304087
+5,Landsbygdslinje,"Mariehamn, Bussplan",820.0,0.9512195121951219,0.04878048780487805,0.16575702445926824
+J,Stadslinje,"Centrum, Nygatan",442.0,0.0,1.0,0.22345803842264914
+N,Stadslinje,"Centrum, Nygatan",1338.0,0.0,0.8961136023916293,0.4411473788328388
+S,Stadslinje,"Centrum, Nygatan",901.0,0.0,1.0,0.47446024223275407
+V,Stadslinje,"Centrum, Nygatan",534.0,0.0,1.0,0.651219512195122
+Ö,Stadslinje,"Centrum, Nygatan",551.0,0.0,0.9292196007259528,0.29061181434599154
