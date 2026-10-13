@@ -1,0 +1,1162 @@
+route_id,service_id,trip_id,trip_headsign,direction_id
+1,1,1000000826,Mariehamn,0
+1,2,1000001031,Mariehamn,0
+1,1,1000000855,Eckerö Färjterminal,1
+1,2,1000001043,Eckerö Färjterminal,1
+1,3,1000000840,Jomala skola,0
+1,2,1000001038,Mariehamn,0
+1,2,1000001044,Eckerö Färjterminal,1
+1,3,1000001115,Eckerö Färjterminal,1
+1,3,1000000839,Jomala skola,0
+1,2,1000001037,Mariehamn,0
+1,4,1000000856,Eckerö Färjterminal,1
+1,2,1000001042,Eckerö Färjterminal,1
+1,4,1000000837,Mariehamn,0
+1,2,1000001033,Mariehamn,0
+1,5,1000000861,Eckerö Färjterminal,1
+1,2,1000001040,Eckerö Färjterminal,1
+1,4,1000000835,Mariehamn,0
+1,2,1000001034,Mariehamn,0
+1,6,1000000862,Eckerö Färjterminal,1
+1,2,1000001047,Eckerö Färjterminal,1
+1,3,1000000836,Mariehamn,0
+1,2,1000001035,Mariehamn,0
+1,1,1000000850,Eckerö Färjterminal,1
+1,2,1000001045,Eckerö Färjterminal,1
+1,1,10013,Mariehamn,0
+1,3,1000000849,Kattby,1
+1,2,1000001039,Degersandsvägen vsk,1
+1,3,1000000829,Mariehamn,0
+1,2,1000001036,Mariehamn,0
+1,3,1000000848,Eckerö Torp via Eckerö färjterminal,1
+1,2,1000001041,Eckerö Färjterminal,1
+1,1,10017,Mariehamn,0
+1,3,1000000847,Frebbenby. Bussbyte till Eckerö,1
+1,2,1000001046,Eckerö Färjterminal,1
+1,3,10019,Mariehamn,0
+1,4,10020,Eckerö Torp via Eckerö färjterminal,1
+1,4,10021,Mariehamn,0
+1,1,10022,Eckerö Färjterminal,1
+1,1,10023,Mariehamn,0
+1,3,10024,Eckerö Färjterminal,1
+1,1,1000000834,Mariehamn,0
+1,2,1000001032,Mariehamn,0
+1,4,10026,Eckerö Färjterminal,1
+1,1,10027,Mariehamn,0
+1,1,10028,Eckerö Färjterminal,1
+1,7,10029,Mariehamn,0
+1,1,10030,Eckerö Färjterminal,1
+1,8,10031,Mariehamn,0
+1,1,10032,Eckerö Färjterminal,1
+1,8,10033,Mariehamn,0
+1,7,10034,Eckeröhallen,1
+1,8,10035,Mariehamn,0
+1,8,10036,Eckerö Färjterminal,1
+1,8,10037,Mariehamn,0
+1,8,10038,Eckerö Färjterminal,1
+1,8,10040,Eckerö Färjterminal,1
+1,8,10042,Eckerö Färjterminal,1
+2,2,1000000068,Mariehamn,0
+2,1,1000000080,Mariehamn,0
+2,2,1000000044,Geta,1
+2,1,1000000078,Geta,1
+2,2,1000000042,Mariehamn via Gölby/Sviby,0
+2,1,1000000954,Mariehamn,0
+2,1,1000000015,Kroklund,1
+2,2,1000000048,Kroklund,1
+2,2,1000000041,Mariehamn via Jomalaby,0
+2,3,1000000953,Mariehamn,0
+2,2,1000000047,Geta,1
+2,1,1000000955,Geta,1
+2,2,1000000233,Mariehamn,0
+2,4,1000000952,Mariehamn,0
+2,3,1000000014,Kroklund,1
+2,2,1000000046,Kroklund,1
+2,1,1000000001,Godby,0
+2,2,1000000070,Mariehamn,0
+2,4,1000000013,Kroklund,1
+2,2,1000001064,Geta via Gölby,1
+2,2,1000000040,Godby,0
+2,1,1000000951,Mariehamn,0
+2,2,1000000045,Geta,1
+2,1,1000000803,Geta,1
+2,3,1000000002,Mariehamn,0
+2,2,1000000043,Mariehamn,0
+2,2,1000000009,Geta,1
+2,1,1000000012,Geta,1
+2,4,1000000007,Mariehamn,0
+2,2,1000000039,Mariehamn via Gölby,0
+2,1,20016,Kroklund,1
+2,1,1000000003,Godby,0
+2,2,1000000069,Mariehamn,0
+2,1,20018,Geta,1
+2,1,1000000004,Mariehamn,0
+2,2,1000000234,Mariehamn,0
+2,1,20020,Geta,1
+2,9,20021,Mariehamn,0
+2,1,20022,Godby,1
+2,10,20023,Mariehamn,0
+2,1,20024,Godby,1
+2,1,20025,Mariehamn,0
+2,1,20027,Godby,0
+2,1,20029,Mariehamn,0
+2,1,20031,Mariehamn,0
+3,2,1000000052,Mariehamn,0
+3,1,1000000790,Mariehamn,0
+3,2,1000000054,Kroklund,1
+3,1,1000000791,Nääs/Ödkarby,1
+3,2,1000000051,Mariehamn via Gölby/Sviby,0
+3,3,1000000969,Godby högstadium,0
+3,1,1000000030,Godby,1
+3,2,1000000057,Kroklund,1
+3,2,1000000050,Mariehamn,0
+3,3,1000000789,Godby högstadium,0
+3,1,1000000021,Kroklund,1
+3,2,1000000056,Kroklund,1
+3,2,1000000053,Mariehamn via Jomalaby,0
+3,1,1000000788,Mariehamn,0
+3,3,1000000029,Pettböle/Nääs,1
+3,2,1000000055,Kroklund,1
+3,1,1000000020,Godby,0
+3,2,1000000049,Mariehamn,0
+3,3,30010,Kroklund,1
+3,1,30011,Godby,0
+3,4,30012,Kroklund,1
+3,1,30013,Godby,0
+3,1,30014,Kroklund,1
+3,1,30015,Godby,0
+3,1,30016,Kroklund,1
+3,1,30018,Kroklund,1
+3,1,30020,Kroklund,1
+3,1,30022,Kroklund,1
+3,11,30101,Kvarnbo,0
+3,11,30102,Tengsödavik,1
+4,1,1000000795,Godby,0
+4,2,1000000986,Godby,0
+4,2,1000000066,Prästö,1
+4,3,1000000179,Simskäla färjfäste,1
+4,2,1000000058,Mariehamn,0
+4,3,1000000798,Mariehamn,0
+4,2,1000000061,Prästö,1
+4,4,1000000177,Vårdö/Strömsby,1
+4,4,1000000796,Mariehamn,0
+4,2,1000000985,Mariehamn,0
+4,12,1000000173,Hummelvik,1
+4,2,1000000993,Hummelvik,1
+4,2,1000000060,Mariehamn,0
+4,12,1000000063,Mariehamn,0
+4,2,1000000067,Prästö,1
+4,13,1000000979,Hummelvik,1
+4,13,1000000797,Mariehamn,0
+4,2,1000000987,Mariehamn,0
+4,2,40010,Prästö,1
+4,2,40011,Mariehamn,0
+4,2,1000000232,Hummelvik,1
+4,12,1000000978,Godby,1
+4,12,1000000801,Mariehamn,0
+4,2,1000000989,Mariehamn,0
+4,1,1000000037,Prästö färjfäste,1
+4,2,1000000231,Hummelvik,1
+4,1,40015,Godby,0
+4,3,40016,Simskäla färjfäste,1
+4,1,40017,Mariehamn,0
+4,4,40018,Vårdö/Strömsby,1
+4,1,40019,Mariehamn,0
+4,1,40020,Hummelvik,1
+4,14,40021,Mariehamn,0
+4,1,40022,Hummelvik,1
+4,14,40023,Mariehamn,0
+4,14,40024,Hummelvik,1
+4,2,1000000065,Godby,0
+4,15,1000000972,Mariehamn,0
+4,14,1000000976,Hummelvik,1
+4,2,1000000990,Vårdö/Strömsby,1
+4,15,40027,Mariehamn,0
+4,15,40028,Hummelvik,1
+4,16,40029,Mariehamn,0
+4,15,40030,Hummelvik,1
+4,16,40032,Hummelvik,1
+4,1,1000000062,Töftö färjfäste,0
+4,2,1000000064,Töftö färjfäste,0
+4,1,1000000032,Hummelvik,1
+4,2,1000000991,Hummelvik,1
+4,2,1000000059,Töftö färjfäste,0
+4,15,1000000793,Hummelvik,0
+4,1,1000000033,Hummelvik,1
+4,2,1000000992,Hummelvik,1
+5,1,1000000868,Mariehamn,0
+5,2,1000001048,Mariehamn,0
+5,1,1000000892,Klemetsby - Svinö,1
+5,2,1000001063,Klemetsby Svinö,1
+5,3,1000000946,Jomala skola,0
+5,2,1000001052,Mariehamn,0
+5,4,1000000893,Klemetsby - Svinö,1
+5,2,1000001062,Långnäs Svinö Klemetsby,1
+5,4,1000000980,Mariehamn,0
+5,2,1000001049,Mariehamn,0
+5,3,1000000880,Klemetsby Lumpo Svinö,1
+5,2,1000001060,Långnäs Klemetsby,1
+5,3,1000000869,Jomala skola,0
+5,2,1000001050,Mariehamn,0
+5,3,1000000881,Vessingsboda,1
+5,2,1000001056,Långnäs Mariehamn,1
+5,3,1000000870,Mariehamn,0
+5,2,1000001051,Mariehamn,0
+5,3,1000000882,Söderby Valborg,1
+5,2,1000001057,Klemetsby Mariehamn,1
+5,1,1000000947,Mariehamn via Svinö,0
+5,2,1000001055,Mariehamn,0
+5,1,1000000883,Långnäs Svinö Klemetsby,1
+5,2,1000001058,Långnäs Mariehamn,1
+5,1,1000000871,Mariehamn,0
+5,2,1000001053,Mariehamn,0
+5,2,1000001059,Långnäs Svinö Mariehamn,1
+5,1,1000001114,Långnäs Mariehamn,1
+5,1,1000000879,Mariehamn,0
+5,2,1000001054,Mariehamn,0
+5,1,1000000885,Långnäs Mariehamn,1
+5,2,1000001061,Långnäs Svinö Mariehamn,1
+5,17,50017,Mariehamn,0
+5,17,50018,Söderby Valborg,1
+5,18,50019,Mariehamn,0
+5,18,50020,Söderby Valborg,1
+5,3,50021,Mariehamn,0
+5,3,50022,Flaka,1
+5,1,50023,Mariehamn,0
+5,1,50024,Långnäs Svinö Klemetsby,1
+5,1,50025,Mariehamn,0
+5,4,50026,Klemetsby Mariehamn,1
+5,1,50027,Mariehamn,0
+5,3,50028,Klemetsby Mariehamn,1
+5,1,50029,Mariehamn,0
+5,1,50030,Långnäs Svinö Mariehamn,1
+5,19,50031,Mariehamn,0
+5,1,50032,Klemetsby Svinö,1
+5,20,50033,Mariehamn,0
+5,21,50034,Långnäs hamn Svinö Mariehamn,1
+5,14,50035,Mariehamn,0
+5,17,50036,Långnäs hamn Svinö Mariehamn,1
+5,14,50037,Mariehamn,0
+5,20,50038,Långnäs hamn Svinö Mariehamn,1
+5,15,50039,Mariehamn via Svinö,0
+5,14,50040,Långnäs Svinö Klemetsby,1
+5,14,50042,Långnäs Svinö Klemetsby,1
+5,15,50044,Långnäs Svinö Mariehamn,1
+6,3,60001,Mariehamn,0
+6,3,60002,Godby Källbo skola,0
+6,3,60003,Jomala skola Maxinge Mariehamn,0
+6,3,60004,Mariehamn via Maxinge,0
+6,3,60005,KHS Mariehamn Maxinge,0
+6,3,60006,Mariehamn,0
+11,1,110001,Järsö,0
+11,1,110002,Järsö,0
+11,1,110003,Järsö,0
+11,1,110004,Ytternäs/Östernäs,0
+11,1,110005,Järsö,0
+11,1,110006,Järsö,0
+11,1,110007,Centrum,0
+11,1,110008,Centrum,0
+11,1,110009,Centrum,0
+12,1,120001,Ytternäs/Östernäs,0
+12,1,1000000766,Ytternäs/Östernäs,0
+12,2,1000001014,Centrum,0
+12,1,120003,Ytternäs/Östernäs,0
+12,1,1000000768,Ytternäs/Östernäs,0
+12,2,1000001015,Centrum,0
+12,1,120005,Ytternäs/Östernäs,0
+12,22,1000000770,Ytternäs/Östernäs,0
+12,2,1000001016,Centrum,0
+12,1,120007,Centrum,0
+12,22,1000000760,Centrum,0
+12,2,1000001017,Centrum,0
+12,22,1000000761,Centrum,0
+12,2,1000001018,Centrum,0
+12,22,120010,Ytternäs/Östernäs,0
+12,22,1000000762,Centrum,0
+12,2,1000001019,Centrum,0
+12,1,1000000772,Ytternäs/Östernäs,0
+12,2,1000001020,Centrum,0
+12,1,1000000773,Ytternäs/Östernäs,0
+12,2,1000001021,Centrum,0
+12,1,1000000774,Ytternäs/Östernäs,0
+12,2,1000001022,Centrum,0
+12,1,1000000775,Ytternäs/Östernäs,0
+12,2,1000001023,Centrum,0
+12,1,1000000763,Centrum,0
+12,2,1000001024,Centrum,0
+12,1,120017,Ytternäs/Östernäs,0
+12,1,1000000777,Ytternäs/Östernäs,0
+12,2,1000001025,Centrum,0
+12,1,120019,Centrum,0
+12,1,1000000778,Ytternäs/Östernäs,0
+12,2,1000001026,Centrum,0
+12,1,120021,Ytternäs/Östernäs,0
+12,1,1000000780,Ytternäs/Östernäs,0
+12,2,1000001027,Centrum,0
+13,1,1000000243,Maxinge,0
+13,2,1000000994,Centrum,0
+13,1,1000000244,Maxinge,0
+13,2,1000000995,Centrum,0
+13,1,1000000245,Maxinge,0
+13,2,1000000996,Centrum,0
+13,1,1000000246,Maxinge,0
+13,2,1000000997,Centrum,0
+13,1,1000000247,Maxinge,0
+13,2,1000001008,Centrum,0
+13,1,1000000248,Maxinge,0
+13,2,1000000998,Centrum,0
+13,22,1000000249,Maxinge,0
+13,2,1000000999,Centrum,0
+13,22,1000000250,Maxinge,0
+13,2,1000001009,Centrum,0
+13,22,1000000251,Maxinge,0
+13,2,1000001000,Centrum,0
+13,22,1000000252,Maxinge,0
+13,2,1000001001,Centrum,0
+13,22,1000000240,Centrum,0
+13,2,1000001002,Centrum,0
+13,1,1000000253,Maxinge,0
+13,2,1000001010,Centrum,0
+13,1,1000000254,Maxinge,0
+13,2,1000001003,Centrum,0
+13,1,1000000255,Maxinge,0
+13,2,1000001004,Centrum,0
+13,1,1000000256,Maxinge,0
+13,2,1000001005,Centrum,0
+13,1,1000000241,Centrum,0
+13,2,1000001006,Centrum,0
+13,1,1000000257,Maxinge,0
+13,2,1000001007,Centrum,0
+13,1,130018,Maxinge,0
+13,1,130019,Maxinge,0
+13,1,130020,Maxinge,0
+13,1,130021,Maxinge,0
+13,1,130022,Centrum,0
+14,2,1000000071,Centrum,0
+14,1,1000000127,Möckelö,0
+14,2,1000000072,Centrum,0
+14,1,1000000128,Möckelö,0
+14,2,1000000073,Centrum,0
+14,1,1000000131,Möckelö,0
+14,2,1000000074,Centrum,0
+14,1,1000000132,Möckelö,0
+14,2,1000000075,Centrum,0
+14,22,1000000129,Möckelö,0
+14,2,1000000076,Centrum,0
+14,1,1000000130,Möckelö,0
+14,22,1000000133,Centrum,0
+14,2,1000000235,Centrum,0
+14,2,1000000236,Centrum,0
+14,14,1000000781,Centrum,0
+14,2,1000000237,Centrum,0
+14,14,1000000782,Centrum,0
+14,1,1000000134,Möckelö,0
+14,2,1000000238,Centrum,0
+14,2,1000000239,Centrum,0
+14,14,1000000783,Centrum,0
+14,1,140012,Möckelö,0
+14,1,140013,Möckelö,0
+14,1,140014,Möckelö,0
+14,1,140015,Möckelö,0
+14,1,140016,Möckelö,0
+14,1,140017,Maxinge,0
+14,1,140018,Möckelö,0
+14,1,140019,Möckelö,0
+14,1,140020,Centrum,0
+14,1,140021,Möckelö,0
+14,1,140022,Möckelö,0
+14,1,140023,Möckelö,0
+15,23,150001,Kalmarnäs/Solberget,0
+15,1,150002,Kalmarnäs/Solberget,0
+15,2,1000000149,Kalmarnäs/Solberget,0
+15,1,1000000264,Kalmarnäs/Solberget,0
+15,1,150004,Kalmarnäs/Solberget,0
+15,23,150005,Kalmarnäs/Solberget,0
+15,22,150006,Kalmarnäs/Solberget,0
+15,1,150007,Centrum,0
+15,14,1000000784,Kalmarnäs/Solberget,0
+15,2,1000001011,Kalmarnäs/Solberget,0
+15,14,150009,Kalmarnäs/Solberget,0
+15,14,1000000786,Kalmarnäs/Solberget,0
+15,2,1000001012,Kalmarnäs/Solberget,0
+15,1,150011,Kalmarnäs/Solberget,0
+15,1,150012,Kalmarnäs/Solberget,0
+15,14,150013,Kalmarnäs/Solberget,0
+15,1,1000000155,Kalmarnäs/Solberget,0
+15,2,1000001013,Kalmarnäs/Solberget,0
+15,1,150015,Kalmarnäs/Solberget,0
+15,1,150016,Kalmarnäs/Solberget,0
+15,1,150017,Kalmarnäs/Solberget,0
+15,1,150018,Kalmarnäs/Solberget,0
+15,1,150019,Kalmarnäs/Solberget,0
+15,1,150020,Kalmarnäs/Solberget,0
+15,1,150021,Kalmarnäs/Solberget,0
+15,1,150022,Kalmarnäs/Solberget,0
+15,1,150023,Kalmarnäs/Solberget,0
+15,1,150024,Centrum,0
+50,23,500001,Töftö färjfäste,0
+50,23,500002,Töftö färjfäste,1
+50,23,500003,Töftö färjfäste,0
+50,23,500004,Töftö färjfäste,1
+50,23,500005,Töftö färjfäste,0
+50,23,500006,Töftö färjfäste,1
+50,23,500007,Töftö färjfäste,0
+50,23,500008,Töftö färjfäste,1
+50,23,500009,Töftö färjfäste,0
+50,23,500010,Töftö färjfäste,1
+50,23,500011,Töftö färjfäste,0
+50,23,500012,Töftö färjfäste,1
+50,23,500013,Töftö färjfäste,0
+50,23,500014,Töftö färjfäste,1
+50,23,500015,Töftö färjfäste,0
+50,23,500016,Töftö färjfäste,1
+50,24,500017,Töftö färjfäste,0
+50,24,500018,Töftö färjfäste,1
+50,24,500019,Töftö färjfäste,0
+50,24,500020,Töftö färjfäste,1
+50,24,500021,Töftö färjfäste,0
+50,24,500022,Töftö färjfäste,1
+50,24,500023,Töftö färjfäste,0
+50,24,500024,Töftö färjfäste,1
+50,24,500025,Töftö färjfäste,0
+50,24,500026,Töftö färjfäste,1
+50,23,500027,Töftö färjfäste,0
+50,23,500028,Töftö färjfäste,1
+50,24,500029,Töftö färjfäste,0
+50,24,500030,Töftö färjfäste,1
+50,24,500031,Töftö färjfäste,0
+50,24,500032,Töftö färjfäste,1
+50,24,500033,Töftö färjfäste,0
+50,24,500034,Töftö färjfäste,1
+50,24,500035,Töftö färjfäste,0
+50,24,500036,Töftö färjfäste,1
+50,24,500037,Töftö färjfäste,0
+50,24,500038,Töftö färjfäste,1
+50,24,500039,Töftö färjfäste,0
+50,24,500040,Töftö färjfäste,1
+50,24,500041,Töftö färjfäste,0
+50,24,500042,Töftö färjfäste,1
+50,24,500043,Töftö färjfäste,0
+50,24,500044,Töftö färjfäste,1
+50,24,500045,Töftö färjfäste,0
+50,24,500046,Töftö färjfäste,1
+50,24,500047,Töftö färjfäste,0
+50,24,500048,Töftö färjfäste,1
+50,23,500049,Töftö färjfäste,0
+50,23,500050,Töftö färjfäste,1
+50,23,500051,Töftö färjfäste,0
+50,23,500052,Töftö färjfäste,1
+50,24,500053,Töftö färjfäste,0
+50,24,500054,Töftö färjfäste,1
+50,24,500055,Töftö färjfäste,0
+50,24,500056,Töftö färjfäste,1
+50,24,500057,Töftö färjfäste,0
+50,24,500058,Töftö färjfäste,1
+50,24,500059,Töftö färjfäste,0
+50,24,500060,Töftö färjfäste,1
+50,24,500061,Töftö färjfäste,0
+50,24,500062,Töftö färjfäste,1
+50,24,500063,Töftö färjfäste,0
+50,24,500064,Töftö färjfäste,1
+50,24,500065,Töftö färjfäste,0
+50,24,500066,Töftö färjfäste,1
+50,24,500067,Töftö färjfäste,0
+50,24,500068,Töftö färjfäste,1
+50,24,500069,Töftö färjfäste,0
+50,24,500070,Töftö färjfäste,1
+50,24,500071,Töftö färjfäste,0
+50,24,500072,Töftö färjfäste,1
+50,24,500073,Töftö färjfäste,0
+50,24,500074,Töftö färjfäste,1
+50,24,500075,Töftö färjfäste,0
+50,24,500076,Töftö färjfäste,1
+50,24,500077,Töftö färjfäste,0
+50,24,500078,Töftö färjfäste,1
+50,24,500079,Töftö färjfäste,0
+50,24,500080,Töftö färjfäste,1
+50,24,500081,Töftö färjfäste,0
+50,24,500082,Töftö färjfäste,1
+50,24,500083,Töftö färjfäste,0
+50,24,500084,Töftö färjfäste,1
+50,24,500085,Töftö färjfäste,0
+50,24,500086,Töftö färjfäste,1
+50,24,500087,Töftö färjfäste,0
+50,24,500088,Töftö färjfäste,1
+50,24,500089,Töftö färjfäste,0
+50,24,500090,Töftö färjfäste,1
+50,24,500091,Töftö färjfäste,0
+50,24,500092,Töftö färjfäste,1
+50,24,500093,Töftö färjfäste,0
+50,24,500094,Töftö färjfäste,1
+50,24,500095,Töftö färjfäste,0
+50,24,500096,Töftö färjfäste,1
+50,23,500097,Töftö färjfäste,0
+50,23,500098,Töftö färjfäste,1
+50,23,500099,Töftö färjfäste,0
+50,23,500100,Töftö färjfäste,1
+50,24,500101,Töftö färjfäste,0
+50,24,500102,Töftö färjfäste,1
+50,24,500103,Töftö färjfäste,0
+50,24,500104,Töftö färjfäste,1
+50,24,500105,Töftö färjfäste,0
+50,24,500106,Töftö färjfäste,1
+50,24,500107,Töftö färjfäste,0
+50,24,500108,Töftö färjfäste,1
+50,24,500109,Töftö färjfäste,0
+50,24,500110,Töftö färjfäste,1
+50,24,500111,Töftö färjfäste,0
+50,24,500112,Töftö färjfäste,1
+50,23,500113,Töftö färjfäste,0
+50,23,500114,Töftö färjfäste,1
+50,24,500115,Töftö färjfäste,0
+50,24,500116,Töftö färjfäste,1
+50,24,500117,Töftö färjfäste,0
+50,24,500118,Töftö färjfäste,1
+50,24,500119,Töftö färjfäste,0
+50,24,500120,Töftö färjfäste,1
+50,24,500121,Töftö färjfäste,0
+50,24,500122,Töftö färjfäste,1
+50,24,500123,Töftö färjfäste,0
+50,24,500124,Töftö färjfäste,1
+50,24,500125,Töftö färjfäste,0
+50,24,500126,Töftö färjfäste,1
+50,24,500127,Töftö färjfäste,0
+51,24,510001,Vattungs revet,0
+51,24,510002,Timskär,1
+51,24,510003,Vattungs revet,0
+51,24,510004,Timskär,1
+51,23,510005,Vattungs revet,0
+51,23,510006,Timskär,1
+51,24,510007,Vattungs revet,0
+51,24,510008,Timskär,1
+51,24,510009,Vattungs revet,0
+51,24,510010,Timskär,1
+51,24,510011,Vattungs revet,0
+51,24,510012,Timskär,1
+51,24,510013,Vattungs revet,0
+51,24,510014,Timskär,1
+51,24,510015,Vattungs revet,0
+51,24,510016,Timskär,1
+51,24,510017,Vattungs revet,0
+51,24,510018,Timskär,1
+51,24,510019,Vattungs revet,0
+51,24,510020,Timskär,1
+51,24,510021,Vattungs revet,0
+51,24,510022,Timskär,1
+51,24,510023,Vattungs revet,0
+51,24,510024,Timskär,1
+51,24,510026,Timskär,1
+51,24,510027,Vattungs revet,0
+51,24,510028,Timskär,1
+51,24,510029,Vattungs revet,0
+51,24,510030,Timskär,1
+51,24,510031,Vattungs revet,0
+51,24,510032,Timskär,1
+51,24,510033,Vattungs revet,0
+51,24,510034,Timskär,1
+51,24,510035,Vattungs revet,0
+51,24,510036,Timskär,1
+51,24,510037,Vattungs revet,0
+51,24,510038,Timskär,1
+51,24,510039,Vattungs revet,0
+51,24,510040,Timskär,1
+51,24,510041,Vattungs revet,0
+51,24,510042,Timskär,1
+51,24,510043,Vattungs revet,0
+51,24,510044,Timskär,1
+51,24,510045,Vattungs revet,0
+51,24,510046,Timskär,1
+51,24,510047,Vattungs revet,0
+51,24,510048,Timskär,1
+51,24,510049,Vattungs revet,0
+51,24,510050,Timskär,1
+51,24,510051,Vattungs revet,0
+51,24,510052,Timskär,1
+51,24,510053,Vattungs revet,0
+51,24,510054,Timskär,1
+51,24,510055,Vattungs revet,0
+51,24,510056,Timskär,1
+51,24,510057,Vattungs revet,0
+51,24,510058,Timskär,1
+51,24,510059,Vattungs revet,0
+51,24,510060,Timskär,1
+51,24,510061,Vattungs revet,0
+51,24,510062,Timskär,1
+51,24,510063,Vattungs revet,0
+52,24,520001,Seglinge (Snäckö),1
+52,24,520002,Seglinge (Seglinge),0
+52,24,520003,Seglinge (Snäckö),1
+52,24,520004,Seglinge (Seglinge),0
+52,24,520005,Seglinge (Snäckö),1
+52,24,520006,Seglinge (Seglinge),0
+52,24,520007,Seglinge (Snäckö),1
+52,24,520008,Seglinge (Seglinge),0
+52,24,520009,Seglinge (Snäckö),1
+52,24,520010,Seglinge (Seglinge),0
+52,24,520011,Seglinge (Snäckö),1
+52,24,520012,Seglinge (Seglinge),0
+52,24,520013,Seglinge (Snäckö),1
+52,24,520014,Seglinge (Seglinge),0
+52,24,520015,Seglinge (Snäckö),1
+52,24,520016,Seglinge (Seglinge),0
+52,24,520017,Seglinge (Snäckö),1
+52,24,520018,Seglinge (Seglinge),0
+52,24,520019,Seglinge (Snäckö),1
+52,24,520020,Seglinge (Seglinge),0
+52,24,520021,Seglinge (Snäckö),1
+52,24,520022,Seglinge (Seglinge),0
+52,24,520023,Seglinge (Snäckö),1
+52,24,520024,Seglinge (Seglinge),0
+52,24,520025,Seglinge (Snäckö),1
+52,23,520026,Seglinge (Seglinge),0
+52,23,520027,Seglinge (Snäckö),1
+52,24,520028,Seglinge (Seglinge),0
+52,24,520029,Seglinge (Snäckö),1
+52,24,520030,Seglinge (Seglinge),0
+52,24,520031,Seglinge (Snäckö),1
+52,24,520032,Seglinge (Seglinge),0
+52,24,520033,Seglinge (Snäckö),1
+52,24,520034,Seglinge (Seglinge),0
+52,24,520035,Seglinge (Snäckö),1
+52,24,520036,Seglinge (Seglinge),0
+52,24,520037,Seglinge (Snäckö),1
+52,24,520038,Seglinge (Seglinge),0
+52,24,520039,Seglinge (Snäckö),1
+52,24,520042,Seglinge (Seglinge),0
+52,24,520043,Seglinge (Snäckö),1
+52,24,520044,Seglinge (Seglinge),0
+52,24,520045,Seglinge (Snäckö),1
+52,24,520046,Seglinge (Seglinge),0
+52,24,520047,Seglinge (Snäckö),1
+52,24,520048,Seglinge (Seglinge),0
+52,24,520049,Seglinge (Snäckö),1
+52,24,520050,Seglinge (Seglinge),0
+52,24,520051,Seglinge (Snäckö),1
+52,24,520052,Seglinge (Seglinge),0
+52,24,520053,Seglinge (Snäckö),1
+52,24,520054,Seglinge (Seglinge),0
+52,24,520055,Seglinge (Snäckö),1
+52,24,520056,Seglinge (Seglinge),0
+52,24,520057,Seglinge (Snäckö),1
+52,24,520058,Seglinge (Seglinge),0
+52,24,520059,Seglinge (Snäckö),1
+52,24,520060,Seglinge (Seglinge),0
+52,24,520061,Seglinge (Snäckö),1
+52,24,520062,Seglinge (Seglinge),0
+52,24,520063,Seglinge (Snäckö),1
+52,24,520064,Seglinge (Seglinge),0
+52,24,520065,Seglinge (Snäckö),1
+52,24,520066,Seglinge (Seglinge),0
+53,24,530001,Embarsund (Jyddö),0
+53,24,530002,Embarsund (Finholma),1
+53,24,530003,Embarsund (Jyddö),0
+53,24,530004,Embarsund (Finholma),1
+53,24,530005,Embarsund (Jyddö),0
+53,24,530006,Embarsund (Finholma),1
+53,24,530007,Embarsund (Jyddö),0
+53,24,530008,Embarsund (Finholma),1
+53,24,530009,Embarsund (Jyddö),0
+53,24,530010,Embarsund (Finholma),1
+53,24,530011,Embarsund (Jyddö),0
+53,24,530012,Embarsund (Finholma),1
+53,24,530013,Embarsund (Jyddö),0
+53,24,530014,Embarsund (Finholma),1
+53,24,530015,Embarsund (Jyddö),0
+53,24,530016,Embarsund (Finholma),1
+53,24,530017,Embarsund (Jyddö),0
+53,24,530018,Embarsund (Finholma),1
+53,24,530019,Embarsund (Jyddö),0
+53,24,530020,Embarsund (Finholma),1
+53,24,530021,Embarsund (Jyddö),0
+53,24,530022,Embarsund (Finholma),1
+53,24,530023,Embarsund (Jyddö),0
+53,24,530024,Embarsund (Finholma),1
+53,24,530025,Embarsund (Jyddö),0
+53,24,530026,Embarsund (Finholma),1
+53,24,530027,Embarsund (Jyddö),0
+53,24,530028,Embarsund (Finholma),1
+53,24,530031,Embarsund (Jyddö),0
+53,24,530032,Embarsund (Finholma),1
+53,24,530033,Embarsund (Jyddö),0
+53,24,530034,Embarsund (Finholma),1
+53,24,530035,Embarsund (Jyddö),0
+53,24,530036,Embarsund (Finholma),1
+53,24,530037,Embarsund (Jyddö),0
+53,24,530038,Embarsund (Finholma),1
+53,24,530039,Embarsund (Jyddö),0
+53,24,530040,Embarsund (Finholma),1
+53,24,530041,Embarsund (Jyddö),0
+53,24,530042,Embarsund (Finholma),1
+53,24,530043,Embarsund (Jyddö),0
+53,24,530044,Embarsund (Finholma),1
+53,24,530045,Embarsund (Jyddö),0
+53,24,530046,Embarsund (Finholma),1
+53,24,530047,Embarsund (Jyddö),0
+53,24,530048,Embarsund (Finholma),1
+53,24,530049,Embarsund (Jyddö),0
+53,24,530050,Embarsund (Finholma),1
+53,24,530051,Embarsund (Jyddö),0
+53,24,530052,Embarsund (Finholma),1
+53,24,530053,Embarsund (Jyddö),0
+53,24,530054,Embarsund (Finholma),1
+53,24,530055,Embarsund (Jyddö),0
+53,24,530056,Embarsund (Finholma),1
+53,24,530057,Embarsund (Jyddö),0
+53,24,530058,Embarsund (Finholma),1
+53,24,530059,Embarsund (Jyddö),0
+53,24,530060,Embarsund (Finholma),1
+53,24,530061,Embarsund (Jyddö),0
+53,24,530062,Embarsund (Finholma),1
+53,24,530063,Embarsund (Jyddö),0
+53,24,530064,Embarsund (Finholma),1
+53,24,530065,Embarsund (Jyddö),0
+53,24,530066,Embarsund (Finholma),1
+53,24,530069,Embarsund (Jyddö),0
+53,24,530070,Embarsund (Finholma),1
+53,24,530071,Embarsund (Jyddö),0
+53,24,530072,Embarsund (Finholma),1
+53,24,530073,Embarsund (Jyddö),0
+53,24,530074,Embarsund (Finholma),1
+53,24,530075,Embarsund (Jyddö),0
+53,24,530076,Embarsund (Finholma),1
+53,24,530077,Embarsund (Jyddö),0
+53,24,530078,Embarsund (Finholma),1
+53,24,530079,Embarsund (Jyddö),0
+53,24,530080,Embarsund (Finholma),1
+53,24,530081,Embarsund (Jyddö),0
+53,24,530082,Embarsund (Finholma),1
+53,24,530083,Embarsund (Jyddö),0
+53,24,530084,Embarsund (Finholma),1
+53,24,530085,Embarsund (Jyddö),0
+53,24,530086,Embarsund (Finholma),1
+53,24,530087,Embarsund (Jyddö),0
+53,24,530088,Embarsund (Finholma),1
+53,24,530089,Embarsund (Jyddö),0
+53,24,530090,Embarsund (Finholma),1
+53,24,530091,Embarsund (Jyddö),0
+53,24,530092,Embarsund (Finholma),1
+53,24,530093,Embarsund (Jyddö),0
+53,24,530094,Embarsund (Finholma),1
+53,24,530095,Embarsund (Jyddö),0
+53,24,530096,Embarsund (Finholma),1
+54,24,540001,Ängösund (Ängö),0
+54,24,540002,Ängösund (Lumparland),1
+55,24,550001,Björkö (Björkö),0
+55,24,550002,Björkö (Lappo),1
+401,25,4010101,Torsholma,0
+401,26,4010102,Hummelvik,1
+401,27,4010103,Torsholma,0
+401,28,4010104,Hummelvik,1
+401,29,4010105,Torsholma,0
+401,27,4010106,Hummelvik,1
+401,28,4010107,Torsholma,0
+401,30,4010108,Hummelvik,1
+401,26,4010109,Torsholma,0
+401,31,4010110,Hummelvik,1
+401,32,4010111,Torsholma,0
+401,33,4010112,Hummelvik,1
+401,34,4010113,Torsholma,0
+401,34,4010114,Hummelvik,1
+401,28,4010115,Torsholma,0
+401,35,4010116,Hummelvik,1
+401,27,4010117,Torsholma,0
+401,29,4010118,Hummelvik,1
+401,36,4010119,Torsholma,0
+401,2,4010120,Hummelvik,1
+401,26,4010122,Hummelvik,1
+401,26,4010123,Torsholma,0
+401,28,4010124,Hummelvik,1
+401,2,4010125,Torsholma,0
+401,34,4010126,Hummelvik,1
+401,32,4010127,Torsholma,0
+401,32,4010128,Hummelvik,1
+401,34,4010129,Torsholma,0
+401,37,4010130,Hummelvik,1
+401,27,4010132,Hummelvik,1
+401,35,4010133,Torsholma,0
+401,38,4010134,Hummelvik,1
+401,29,4010135,Torsholma,0
+401,26,4010136,Hummelvik,1
+401,2,4010137,Torsholma,0
+401,28,4010138,Hummelvik,1
+401,37,4010139,Kumlinge,0
+401,26,4010141,Torsholma,0
+401,34,4010142,Hummelvik,1
+401,28,4010143,Torsholma,0
+401,32,4010144,Hummelvik,1
+401,34,4010145,Torsholma,0
+401,37,4010146,Hummelvik,1
+401,32,4010147,Torsholma,0
+401,27,4010149,Torsholma,0
+401,26,4010150,Hummelvik,1
+401,25,4010151,Torsholma,0
+401,29,4010153,Torsholma,0
+401,28,4010154,Hummelvik,1
+401,34,4010156,Hummelvik,1
+401,39,4010157,Torsholma,0
+401,35,4010158,Hummelvik,1
+401,40,4010159,Torsholma,0
+401,29,4010160,Hummelvik,1
+401,41,4010161,Kumlinge,0
+401,32,4010162,Hummelvik,1
+401,34,4010163,Torsholma,0
+401,38,4010164,Hummelvik,1
+401,27,4010166,Hummelvik,1
+401,32,4010167,Torsholma,0
+402,41,4020201,Kumlinge,0
+402,41,4020202,Enklinge,1
+402,42,4020203,Kumlinge,0
+402,42,4020204,Enklinge,1
+402,43,4020205,Kumlinge,0
+402,41,4020206,Enklinge,1
+402,44,4020207,Kumlinge,0
+402,45,4020208,Enklinge,1
+402,46,4020209,Kumlinge,0
+402,47,4020210,Enklinge,1
+402,48,4020211,Kumlinge,0
+402,43,4020212,Enklinge,1
+402,29,4020213,Kumlinge,0
+402,44,4020214,Enklinge,1
+402,44,4020215,Kumlinge,0
+402,2,4020217,Kumlinge,0
+402,48,4020218,Enklinge,1
+402,29,4020220,Enklinge,1
+402,44,4020221,Kumlinge,0
+402,44,4020222,Enklinge,1
+402,28,4020223,Kumlinge,0
+402,41,4020224,Enklinge,1
+402,49,4020225,Kumlinge,0
+402,50,4020226,Enklinge,1
+402,51,4020227,Kumlinge,0
+402,44,4020228,Enklinge,1
+402,40,4020229,Kumlinge,0
+402,40,4020230,Enklinge,1
+402,28,4020231,Kumlinge,0
+402,28,4020232,Enklinge,1
+402,52,4020233,Kumlinge,0
+402,53,4020234,Enklinge,1
+402,29,4020236,Enklinge,1
+402,54,4020237,Kumlinge,0
+402,44,4020238,Enklinge,1
+402,43,4020239,Kumlinge,0
+402,43,4020240,Enklinge,1
+402,54,4020241,Kumlinge,0
+402,54,4020242,Enklinge,1
+402,43,4020243,Kumlinge,0
+402,43,4020244,Enklinge,1
+402,44,4020245,Kumlinge,0
+402,54,4020246,Enklinge,1
+402,43,4020248,Enklinge,1
+402,43,4020249,Kumlinge,0
+402,34,4020250,Enklinge,1
+402,37,4020251,Kumlinge,0
+402,32,4020252,Enklinge,1
+402,46,4020253,Kumlinge,0
+402,2,4020254,Enklinge,1
+402,2,4020255,Kumlinge,0
+402,39,4020256,Enklinge,1
+402,44,4020257,Kumlinge,0
+402,40,4020258,Enklinge,1
+402,27,4020259,Kumlinge,0
+402,55,4020261,Kumlinge,0
+402,56,4020262,Enklinge,1
+402,57,4020263,Kumlinge,0
+402,2,4020264,Enklinge,1
+402,41,4020265,Kumlinge,0
+402,46,4020266,Enklinge,1
+402,54,4020267,Kumlinge,0
+402,58,4020268,Enklinge,1
+402,45,4020269,Kumlinge,0
+402,44,4020270,Enklinge,1
+402,41,4020272,Enklinge,1
+402,45,4020274,Enklinge,1
+403,59,4030301,Torsholma,0
+403,60,4030302,Lappo,1
+403,60,4030303,Torsholma,0
+403,61,4030304,Lappo,1
+403,61,4030305,Torsholma,0
+403,35,4030307,Lappo,0
+403,33,4030309,Lappo,0
+403,62,4030310,Kumlinge,1
+403,35,4030311,Asterholma,0
+403,63,4030312,Kumlinge,1
+403,34,4030313,Lappo,0
+403,28,4030314,Kumlinge,1
+403,29,4030315,Asterholma,0
+403,26,4030316,Kumlinge,1
+403,2,4030317,Torsholma,0
+403,29,4030318,Asterholma,1
+403,32,4030319,Torsholma,0
+403,64,4030320,Lappo,1
+403,34,4030321,Torsholma,0
+403,65,4030322,Lappo,1
+403,61,4030323,Torsholma,0
+403,39,4030324,Kumlinge,1
+403,66,4030325,Torsholma,0
+403,40,4030326,Kumlinge,1
+403,35,4030327,Torsholma,0
+403,35,4030328,Asterholma,1
+403,29,4030329,Torsholma,0
+403,32,4030330,Asterholma,1
+403,34,4030332,Asterholma,1
+403,44,4030333,Lappo,0
+403,40,4030334,Kumlinge,1
+403,67,4030335,Asterholma,0
+403,39,4030336,Kumlinge,1
+403,2,4030337,Asterholma,0
+403,34,4030339,Asterholma,0
+403,68,4030340,Lappo,1
+403,40,4030341,Torsholma,0
+403,69,4030342,Lappo,1
+403,32,4030343,Asterholma,0
+403,70,4030344,Lappo,1
+403,29,4030346,Asterholma,1
+403,2,4030347,Lappo,0
+403,71,4030348,Asterholma,1
+403,72,4030349,Torsholma,0
+403,73,4030350,Lappo,1
+403,39,4030351,Torsholma,0
+403,2,4030352,Kumlinge,1
+403,74,4030353,Torsholma,0
+403,69,4030354,Asterholma,1
+403,67,4030355,Lappo,0
+403,70,4030356,Asterholma,1
+403,54,4030357,Lappo,0
+403,75,4030358,Asterholma,1
+403,64,4030359,Torsholma,0
+403,40,4030360,Asterholma,1
+403,54,4030361,Asterholma,0
+403,39,4030362,Asterholma,1
+403,76,4030363,Torsholma,0
+403,68,4030364,Asterholma,1
+403,29,4030365,Torsholma,0
+403,28,4030366,Asterholma,1
+403,77,4030367,Torsholma,0
+403,29,4030368,Asterholma,1
+403,69,4030369,Torsholma,0
+403,39,4030370,Asterholma,1
+403,40,4030371,Torsholma,0
+403,39,4030373,Torsholma,0
+403,70,4030377,Torsholma,0
+403,75,4030379,Torsholma,0
+403,28,4030381,Lappo,0
+403,26,4030383,Lappo,0
+403,32,4030385,Lappo,0
+403,34,4030387,Lappo,0
+403,41,4030389,Asterholma,0
+403,44,4030391,Asterholma,0
+403,78,4030393,Lappo,0
+403,79,4030395,Lappo,0
+403,35,4030397,Lappo,0
+403,80,4030399,Lappo,0
+403,78,4030401,Asterholma,0
+403,81,4030403,Asterholma,0
+403,32,4030405,Lappo,0
+403,34,4030407,Asterholma,0
+403,38,4030409,Torsholma,0
+403,28,4030411,Torsholma,0
+403,29,4030415,Torsholma,0
+403,26,4030417,Torsholma,0
+403,32,4030421,Asterholma,0
+403,27,4030423,Lappo,0
+403,27,4030425,Asterholma,0
+404,41,4040401,Åva,0
+404,41,4040402,Jurmo,1
+404,41,4040403,Åva,0
+404,41,4040404,Jurmo,1
+404,82,4040405,Åva,0
+404,2,4040406,Jurmo,1
+404,32,4040407,Åva,0
+404,83,4040408,Jurmo,1
+404,34,4040409,Åva,0
+404,32,4040410,Jurmo,1
+404,58,4040411,Åva,0
+404,34,4040412,Jurmo,1
+404,54,4040413,Åva,0
+404,54,4040414,Jurmo,1
+404,43,4040416,Jurmo,1
+404,44,4040417,Åva,0
+404,54,4040418,Jurmo,1
+404,54,4040419,Åva,0
+404,2,4040421,Åva,0
+404,44,4040422,Jurmo,1
+404,84,4040423,Åva,0
+404,84,4040424,Jurmo,1
+404,85,4040425,Åva,0
+404,86,4040426,Jurmo,1
+404,41,4040427,Åva,0
+404,41,4040428,Jurmo,1
+404,44,4040429,Åva,0
+404,45,4040431,Åva,0
+404,85,4040432,Jurmo,1
+404,54,4040433,Åva,0
+404,41,4040435,Åva,0
+404,44,4040436,Jurmo,1
+404,44,4040437,Åva,0
+404,85,4040438,Jurmo,1
+404,85,4040439,Åva,0
+404,2,4040440,Jurmo,1
+404,2,4040441,Åva,0
+404,54,4040442,Jurmo,1
+404,44,4040443,Åva,0
+404,41,4040444,Jurmo,1
+404,43,4040445,Åva,0
+404,44,4040446,Jurmo,1
+404,44,4040447,Åva,0
+404,85,4040448,Jurmo,1
+404,58,4040449,Åva,0
+404,2,4040450,Jurmo,1
+404,85,4040451,Åva,0
+404,44,4040452,Jurmo,1
+404,2,4040453,Åva,0
+404,43,4040454,Jurmo,1
+404,44,4040456,Jurmo,1
+404,41,4040457,Åva,0
+404,54,4040459,Åva,0
+404,58,4040460,Jurmo,1
+404,44,4040461,Åva,0
+404,85,4040462,Jurmo,1
+404,2,4040463,Åva,0
+404,2,4040464,Jurmo,1
+404,37,4040465,Åva,0
+404,41,4040466,Jurmo,1
+404,46,4040467,Åva,0
+404,54,4040468,Jurmo,1
+404,44,4040469,Åva,0
+404,44,4040470,Jurmo,1
+404,45,4040471,Åva,0
+404,54,4040473,Åva,0
+404,43,4040474,Jurmo,1
+404,87,4040475,Åva,0
+404,44,4040478,Jurmo,1
+404,82,4040480,Jurmo,1
+404,87,4040482,Jurmo,1
+405,82,4050501,Åva,0
+405,41,4050502,Osnäs,1
+405,82,4050504,Osnäs,1
+405,88,4050505,Åva,0
+405,44,4050508,Osnäs,1
+405,44,4050509,Åva,0
+405,2,4050510,Osnäs,1
+405,45,4050511,Åva,0
+405,26,4050512,Osnäs,1
+405,41,4050513,Åva,0
+405,28,4050514,Osnäs,1
+405,44,4050515,Åva,0
+405,44,4050516,Osnäs,1
+405,58,4050517,Åva,0
+405,89,4050518,Osnäs,1
+405,90,4050519,Åva,0
+405,2,4050520,Osnäs,1
+405,44,4050521,Åva,0
+405,28,4050522,Osnäs,1
+405,45,4050523,Åva,0
+405,44,4050524,Osnäs,1
+405,44,4050525,Åva,0
+405,91,4050526,Osnäs,1
+405,2,4050528,Osnäs,1
+405,44,4050530,Osnäs,1
+405,37,4050532,Osnäs,1
+405,26,4050536,Osnäs,1
+405,28,4050538,Osnäs,1
+405,92,4050542,Osnäs,1
+501,93,5010601,Svinö,0
+501,42,5010602,Degerby,1
+501,94,5010603,Svinö,0
+501,95,5010604,Degerby,1
+501,96,5010605,Svinö,0
+501,97,5010606,Degerby,1
+501,98,5010607,Svinö,0
+501,96,5010608,Degerby,1
+501,42,5010609,Svinö,0
+501,98,5010610,Degerby,1
+501,42,5010611,Svinö,0
+501,42,5010612,Degerby,1
+501,99,5010613,Svinö,0
+501,99,5010614,Degerby,1
+501,42,5010615,Svinö,0
+501,42,5010616,Degerby,1
+501,100,5010617,Svinö,0
+501,42,5010618,Degerby,1
+501,101,5010619,Svinö,0
+501,42,5010620,Degerby,1
+501,94,5010621,Svinö,0
+501,94,5010622,Degerby,1
+501,42,5010623,Svinö,0
+501,42,5010624,Degerby,1
+501,42,5010625,Svinö,0
+502,102,5020702,Galtby,1
+502,103,5020703,Långnäs,0
+502,104,5020704,Kökar,1
+502,105,5020705,Långnäs,0
+502,106,5020706,Kökar,1
+502,107,5020707,Långnäs,0
+502,108,5020709,Långnäs,0
+502,109,5020711,Långnäs,0
+502,2,5020712,Kökar,1
+502,110,5020713,Långnäs,0
+502,111,5020714,Galtby,1
+502,112,5020715,Långnäs,0
+502,44,5020716,Galtby,1
+502,113,5020718,Kökar,1
+502,114,5020719,Långnäs,0
+502,115,5020720,Kökar,1
+502,116,5020721,Långnäs,0
+502,117,5020722,Kökar,1
+502,118,5020724,Kökar,1
+502,111,5020725,Långnäs,0
+502,104,5020727,Långnäs,0
+502,106,5020729,Långnäs,0
+502,110,5020731,Långnäs,0
+502,102,5020732,Kökar,1
+502,111,5020734,Kökar,1
+502,2,5020735,Kökar,0
+502,44,5020736,Kökar,1
+502,115,5020737,Långnäs,0
+502,113,5020739,Långnäs,0
+502,119,5020741,Långnäs,0
+502,120,5020742,Kökar,1
+502,121,5020743,Långnäs,0
+502,121,5020744,Kökar,1
+502,122,5020745,Långnäs,0
+502,2,5020748,Kökar,1
+502,123,5020750,Kökar,1
+502,2,5020751,Långnäs,0
+502,2,5020752,Galtby,1
+502,111,5020753,Långnäs,0
+502,44,5020755,Långnäs,0
+502,124,5020756,Galtby,1
+502,125,5020758,Galtby,1
+502,126,5020759,Långnäs,0
+502,2,5020760,Kökar,1
+502,127,5020761,Långnäs,0
+502,41,5020762,Galtby,1
+502,128,5020763,Långnäs,0
+502,37,5020764,Galtby,1
+502,129,5020765,Långnäs,0
+502,103,5020766,Galtby,1
+502,115,5020767,Långnäs,0
+502,117,5020768,Galtby,1
+502,117,5020769,Långnäs,0
+502,130,5020770,Kökar,1
+502,131,5020773,Långnäs,0
+502,114,5020774,Kökar,1
+502,2,5020775,Långnäs,0
+502,112,5020776,Kökar,1
+502,112,5020777,Långnäs,0
+502,111,5020778,Kökar,1
+502,116,5020779,Långnäs,0
+502,116,5020780,Kökar,1
+502,111,5020781,Långnäs,0
+502,130,5020782,Kökar,1
+502,2,5020783,Kökar,0
+502,132,5020784,Kökar,1
+502,2,5020785,Långnäs,0
+502,2,5020786,Kökar,1
+502,103,5020788,Kökar,1
+502,133,5020790,Kökar,1
+502,102,5020793,Långnäs,0
+502,37,5020795,Långnäs,0
+502,2,5020796,Galtby,1
+502,121,5020798,Kökar,1
+502,119,5020804,Kökar,1

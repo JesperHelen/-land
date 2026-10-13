@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,default_lang,feed_start_date,feed_end_date,feed_version,feed_contact_email,feed_contact_url
+Ålands landskapsregering,https://www.regeringen.ax/,sv,en,20260818,20280209,8/17/2026 11:00:28 PM,,

@@ -1,0 +1,4 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url
+AX,"Ålandstrafiken",https://www.alandstrafiken.ax/,Europe/Helsinki,sv,018-25600,https://www.alandstrafiken.ax/sv/priser
+VLB,"Viking Line Buss",https://www.vikinglinebuss.ax/,Europe/Helsinki,sv,018-26311,https://www.alandstrafiken.ax/sv/priser
+AXB,"AxBuss",https://axbuss.ax/,Europe/Helsinki,sv,+358408253360,https://www.alandstrafiken.ax/sv/priser

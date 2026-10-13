@@ -1,0 +1,25 @@
+route_id,agency_id,route_short_name,route_long_name,route_type
+1,AXB,"1","Mariehamn - Eckerö Färjterminal",3
+2,VLB,"2","Mariehamn - Geta/Kroklund",3
+3,VLB,"3","Mariehamn/Godby - Kroklund",3
+4,VLB,"4","Mariehamn - Hummelvik",3
+5,AXB,"5","Mariehamn - Långnäs Svinö",3
+6,AXB,"6","Godby Källbo skola - Finström Källbo skola",3
+11,AXB,"J","Järsö/Centrum - Centrum, Nygatan",3
+12,AXB,"N","Centrum/Maxinge - Centrum, Nygatan",3
+13,AXB,"S","Centrum/Ytternäs/Östernäs - Centrum, Nygatan",3
+14,AXB,"Ö","Kalmarnäs/Solberget - Centrum, Nygatan",3
+15,AXB,"V","Möckelö/Centrum - Centrum, Nygatan",3
+50,AX,"Töftö","Töftö färjfäste - Töftö färjfäste",4
+51,AX,"Simskäla","Vattungs revet - Timskär",4
+52,AX,"Seglinge","Seglinge (Seglinge) - Seglinge (Snäckö)",4
+53,AX,"Embarsun","Embarsund (Jyddö) - Embarsund (Finholma)",4
+54,AX,"Ängösund","Ängösund (Ängö) - Ängösund (Lumparland)",4
+55,AX,"Björkö","Björkö (Björkö) - Björkö (Lappo)",4
+401,AX,"Norra","Torsholma - Hummelvik",4
+402,AX,"Norra","Kumlinge - Enklinge",4
+403,AX,"Norra","Lappo/Asterholma - Asterholma/Lappo",4
+404,AX,"Norra","Åva - Jurmo",4
+405,AX,"Norra","Åva - Osnäs",4
+501,AX,"Föglö","Svinö - Degerby",4
+502,AX,"Södra","Långnäs - Kökar",4
