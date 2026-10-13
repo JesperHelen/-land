@@ -53,5 +53,9 @@ Bocka av varje steg när det är klart och committat. Nästa körning fortsätte
 - Gemensamma moduler: `src/data_las.py` (inläsning), `src/kartlib.py` (kartstil, bågar, etiketter).
 - **GIS-export för QGIS:** `src/gis_export.py` → `output/gis/linjenatsutredning.gpkg` (EPSG:3067, stilar inbäddade
   i `layer_styles`, även som .qml i `output/gis/stilar/`). Kör om efter varje steg; lägg till Fas B-lagren där.
+- **Vägdragning (OSRM) + förskjutning av linjer på samma gata:** `src/s01_vagdragning.py` (cache
+  `data/processed/vagdragning_segment.gpkg`). OSRM blockerat i molnmiljön → i nuläget raka streck (kalla='rak').
+  När `router.project-osrm.org` är tillåten (eller lokalt): `python src/kor_alla.py` kör om hela kedjan
+  (s01 → A1–A3 → kartor → GIS). A3:s kandidatlägen följer då gatunätet – granska om resultaten i A3.
 - Internet: endast PyPI och repo-GitHub nås. Inga baskarte-tjänster/OSRM – kartor byggs av egna lager.
 - Python-paket utöver requirements: geopandas, shapely, pyproj, pyogrio (installeras med pip).

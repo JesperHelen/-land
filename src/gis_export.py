@@ -79,6 +79,23 @@ def linje(namn, farg, bredd, pil=False, streckad=False, alpha=255, halo=False):
     return f'<symbol type="line" name="{namn}" alpha="1" clip_to_extent="1" force_rhr="0">{"".join(lager)}</symbol>'
 
 
+def linje_forskjuten(namn, farg, bredd, mm_per_spar=1.1, attr='forskjutning'):
+    """Linjesymbol (vit kant + färg) vars förskjutning i mm styrs av attributet (spår × mm_per_spar)."""
+    uttryck = quoteattr('"' + attr + '" * ' + str(mm_per_spar))
+    dd = ('<data_defined_properties><Option type="Map"><Option type="QString" name="name" value=""/>'
+          '<Option type="Map" name="properties"><Option type="Map" name="offset">'
+          '<Option type="bool" name="active" value="true"/>'
+          f'<Option type="QString" name="expression" value={uttryck}/>'
+          '<Option type="int" name="type" value="3"/></Option></Option>'
+          '<Option type="QString" name="type" value="collection"/></Option></data_defined_properties>')
+    lager = ''
+    for f, b in [('#ffffff', bredd + 0.45), (farg, bredd)]:
+        lager += ('<layer class="SimpleLine" enabled="1" locked="0" pass="0">' + _props({
+            'line_color': rgba(f), 'line_width': b, 'line_width_unit': 'MM', 'capstyle': 'round', 'joinstyle': 'round',
+            'line_style': 'solid', 'offset': 0, 'offset_unit': 'MM'}) + dd + '</layer>')
+    return f'<symbol type="line" name="{namn}" alpha="1" clip_to_extent="1" force_rhr="0">{lager}</symbol>'
+
+
 def r_enkel(sym):
     return f'<renderer-v2 type="singleSymbol" symbollevels="0" forceraster="0" enableorderby="0"><symbols>{sym}</symbols></renderer-v2>'
 
@@ -147,13 +164,21 @@ def bas():
     stil('00_befolkningsrutor', 'Befolkning 2024', qml(r_klassad('befolkning', kl, lambda n, f: fyll(n, f, 200, 'solid', '#ffffff', 0.2))), True)
     stil('00_befolkningsrutor', 'Endast rutnät', qml(r_enkel(fyll('0', '#ffffff', 0, 'solid', '#8a877f', 0.2))))
 
-    geom = K.linjegeometrier()
+    import s01_vagdragning as V
+    geo = V.segmentgeometri(); kedjor = V.linjekedjor()
     t = D.turer_dag(None, C.STADSLINJER).groupby('linje').size()
-    lin = gpd.GeoDataFrame({'linje': list(geom), 'turer_vardag': [int(t.get(l, 0)) for l in geom]},
-                           geometry=[LineString(xy) for xy in geom.values()], crs=C.CRS_METRISK)
+    vag = 'OSRM' if V.kalla_text().startswith('Linjernas') else 'rak linje mellan hållplatser'
+    lin = gpd.GeoDataFrame({'linje': list(kedjor), 'turer_vardag': [int(t.get(l, 0)) for l in kedjor], 'vagdragning': vag},
+                           geometry=[shapely.MultiLineString([geo[s] for k in kl for s in k]) for kl in kedjor.values()],
+                           crs=C.CRS_METRISK)
     skriv(lin, '00_stadslinjer')
     stil('00_stadslinjer', 'Stadslinjer', qml(r_kategori('linje', [(l, f'Linje {l}', C.FARG_LINJE[l]) for l in C.STADSLINJER],
                                                          lambda n, f: linje(n, f, 0.7, halo=True))), True)
+    delar = V.forskjutna_delar()
+    skriv(delar, '00_stadslinjer_forskjutna')
+    stil('00_stadslinjer_forskjutna', 'Förskjutna stadslinjer',
+         qml(r_kategori('linje', [(l, f'Linje {l}', C.FARG_LINJE[l]) for l in C.STADSLINJER],
+                        lambda n, f: linje_forskjuten(n, f, 0.7))), True)
 
     h = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0).reset_index().rename(columns={'stop_id': 'stop_id'})
     hg = gpd.GeoDataFrame(h.rename(columns={'avgangar': 'avgangar_vardag'}), geometry=gpd.points_from_xy(h.x, h.y), crs=C.CRS_METRISK)

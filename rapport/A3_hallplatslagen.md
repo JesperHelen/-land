@@ -15,8 +15,9 @@
 ## 3.1 Metod
 
 **Nya hållplatslägen längs dagens linjer.** Kandidatlägen har genererats var 50:e meter längs
-stadslinjernas körvägar. Körvägen återges som rak linje mellan hållplatserna i GTFS, eftersom underlaget
-saknar vägnät. Lägen på vatten och lägen närmare än 250 m från en befintlig hållplats på samma linje har
+stadslinjernas körvägar. I den här versionen återges körvägen som rak linje mellan hållplatserna i GTFS.
+Analysen är förberedd för att i stället använda linjernas faktiska vägdragning längs gatunätet (OSRM) och
+körs om när vägdragningen har hämtats. Lägen på vatten och lägen närmare än 250 m från en befintlig hållplats på samma linje har
 uteslutits. Ett läges nytta är antalet invånare som
 
 - i dag saknar hållplats inom 400 m och skulle få det, eller

@@ -18,7 +18,8 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 
 | Figur i PM | Lager | Stil |
 |---|---|---|
-| Bakgrund i alla kartor | `00_land`, `00_stadslinjer`, `00_hallplatser`, `00_befolkningsrutor` | Standard |
+| Bakgrund i alla kartor | `00_land`, `00_stadslinjer_forskjutna`, `00_hallplatser`, `00_befolkningsrutor` | Standard |
+| (Linjerna utan förskjutning, en geometri per linje) | `00_stadslinjer` | Standard |
 | 1.2 Omfördelning av centrumpåstigningar | `a1_omfordelning_centrum` | Flyttade påstigningar |
 | 1.3 Påstigande före/efter korrigering | `a1_zoner_pastigande` | *Påstigande ursprungligt* / *Påstigande korrigerat* |
 | 1.4 OD-flöden FM | `a1_od_FM_levererad`, `a1_od_FM_korrigerad` | Standard (bredd och färg efter resor/h) |
@@ -28,6 +29,21 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 2.3 Svag faktisk tillgänglighet | `a2_tackningsytor`, `a2_tackning_per_ruta` | *Svag faktisk tillgänglighet* / *Invånare med svag tillgänglighet per ruta* |
 | 3.1 Nya hållplatslägen | `a3_nya_hallplatser`, `a3_nya_hallplatser_400m`, `a3_behov_ny_linjestrackning`, `a3_behov_400m` | Standard |
 | 3.2 Bedömning av hållplatser | `a3_hallplatsbedomning` | Hållplatsbedömning |
+
+## Linjer som delar gata
+
+`00_stadslinjer_forskjutna` delar upp linjerna där de går tillsammans med andra linjer. Fältet `forskjutning`
+anger linjens spår (…, −1, −0,5, 0, 0,5, 1, …), och stilen förskjuter linjen `forskjutning × 1,1 mm` vid
+ritning. Linjerna hålls därmed isär i alla skalor. Spåravståndet ändras i *Symbologi > Förskjutning*
+(uttrycket `"forskjutning" * 1.1`).
+
+## Vägdragning längs gatorna (OSRM)
+
+Linjerna och kandidatlägena för nya hållplatser följer gatunätet när vägdragningen har hämtats från OSRM
+(`python src/s01_vagdragning.py`, resultat i `data/processed/vagdragning_segment.gpkg`). OSRM kunde inte nås
+från analysmiljön, så i den här versionen är linjerna **raka streck mellan hållplatserna** (fältet
+`vagdragning` i `00_stadslinjer`). Kör `python src/kor_alla.py` på en dator med internet för att hämta
+vägdragningen och skapa om alla kartor och lager.
 
 ## Att tänka på
 

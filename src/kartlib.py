@@ -72,7 +72,12 @@ def norrpil(ax, loc=(0.94, 0.93)):
                 arrowprops=dict(arrowstyle='-|>', color=TEXT, lw=1.1), path_effects=HALO)
 
 
-def kalla(ax, text='Underlag: Ålandstrafiken (GTFS, valideringsdata), befolkningsrutor 2024, kust GSHHG.'):
+def kalla(ax, text=None):
+    if text is None:
+        import s01_vagdragning as V
+        vag = 'Linjernas vägdragning: OSRM, © OpenStreetMap-bidragsgivare.' if V.kalla_text().startswith('Linjernas') \
+            else 'Linjerna ritade som raka streck mellan hållplatser.'
+        text = f'Underlag: Ålandstrafiken (GTFS, valideringsdata), befolkningsrutor 2024, kust GSHHG.\n{vag}'
     ax.text(0.995, 0.004, text, transform=ax.transAxes, ha='right', va='bottom', fontsize=5.6, color=TEXT2,
             zorder=20, path_effects=HALO)
 
@@ -104,30 +109,47 @@ def teckenforklaring(ax, rader, titel=None, loc='upper left', fontsize=7.5):
 
 # ------------------------------------------------------------------ linjenät
 def linjegeometrier(datum=None):
-    """Hållplatsföljd (x, y) per stadslinje: vanligaste turmönstret på typvardagen."""
-    g = D.gtfs()
-    t = D.turer_dag(datum, C.STADSLINJER)
-    st = g['stop_times'][g['stop_times'].trip_id.isin(t.trip_id)].merge(t[['trip_id', 'linje']], on='trip_id')
-    st = st.merge(g['stops'][['stop_id', 'lat', 'lon']], on='stop_id').sort_values(['trip_id', 'seq'])
+    """Mittlinje (x, y) per stadslinje för det vanligaste turmönstret – längs gatunätet om vägdragning (OSRM)
+    finns i data/processed/vagdragning_segment.gpkg, annars raka streck mellan hållplatserna."""
+    import s01_vagdragning as V
+    geo = V.segmentgeometri()
     ut = {}
-    for ln, d in st.groupby('linje'):
-        monster = d.groupby('trip_id').stop_id.apply(tuple)
-        vanl = monster.value_counts().index[0]
-        p = g['stops'].set_index('stop_id').loc[list(vanl), ['lon', 'lat']]
-        x, y = D.till_metrisk(p.lon.values, p.lat.values)
-        ut[ln] = np.column_stack([x, y])
-    return ut
+    for ln, kedjor in V.linjekedjor().items():
+        k = kedjor[0]
+        ut[ln] = np.vstack([geo[s] if i == 0 else geo[s][1:] for i, s in enumerate(k)])
+    return {ln: ut[ln] for ln in C.STADSLINJER if ln in ut}
 
 
-def rita_linjer(ax, geom=None, alpha=1.0, lw=2.0, etikett=True, zorder=5):
-    geom = geom or linjegeometrier()
+def _m_per_mm(ax):
+    ax.figure.canvas.draw_idle()
+    bb = ax.get_window_extent()
+    h_mm = bb.height / ax.figure.dpi * 25.4
+    y0, y1 = ax.get_ylim()
+    return (y1 - y0) / max(h_mm, 1e-6)
+
+
+def rita_linjer(ax, geom=None, alpha=1.0, lw=2.0, etikett=True, zorder=5, forskjut=True):
+    """Ritar stadslinjerna längs gatunätet. Där flera linjer delar gata förskjuts de till egna spår
+    (spåravstånd anpassat efter kartskalan) så att varje linje syns."""
+    import s01_vagdragning as V
     h = []
-    for ln, xy in geom.items():
+    if geom is None:
+        avst = 0.0
+        if forskjut:
+            avst = round((lw * 0.3528 + 0.45) * _m_per_mm(ax))   # linjebredd + luft, i meter
+        kedjor = V.forskjutna_linjer(avst) if avst > 0 else {
+            ln: [np.vstack([V.segmentgeometri()[s] if i == 0 else V.segmentgeometri()[s][1:] for i, s in enumerate(k)])
+                 for k in kl] for ln, kl in V.linjekedjor().items()}
+    else:
+        kedjor = {ln: [xy] for ln, xy in geom.items()}
+    for ln in [l for l in C.STADSLINJER if l in kedjor]:
         f = C.FARG_LINJE[ln]
-        line, = ax.plot(xy[:, 0], xy[:, 1], color=f, lw=lw, alpha=alpha, solid_capstyle='round',
-                        solid_joinstyle='round', zorder=zorder, label=f'Linje {ln}',
-                        path_effects=[pe.Stroke(linewidth=lw + 1.6, foreground='white'), pe.Normal()])
-        h.append(line)
+        for i, xy in enumerate(kedjor[ln]):
+            line, = ax.plot(xy[:, 0], xy[:, 1], color=f, lw=lw, alpha=alpha, solid_capstyle='round',
+                            solid_joinstyle='round', zorder=zorder, label=f'Linje {ln}' if i == 0 else None,
+                            path_effects=[pe.Stroke(linewidth=lw + 1.4, foreground='white'), pe.Normal()])
+            if i == 0:
+                h.append(line)
     return h
 
 

@@ -2,8 +2,9 @@
 """A3 – Förslag på nya hållplatslägen samt markering av överflödiga hållplatser.
 
 Nya hållplatser
-  * Kandidatlägen var 50:e meter längs stadslinjernas nuvarande körvägar (rak linje mellan hållplatser enligt
-    GTFS; underlaget saknar vägnät), på land och minst 250 m från befintliga hållplatser på samma linje.
+  * Kandidatlägen var 50:e meter längs stadslinjernas nuvarande körvägar (gatunätet enligt OSRM, se
+    s01_vagdragning.py; rak linje mellan hållplatser om vägdragning saknas), på land och minst 250 m från
+    befintliga hållplatser på samma linje.
   * Nytta för ett läge = invånare som får hållplats inom 400 m (i dag ingen) + invånare som lyfts från svag
     tillgänglighet (1–29 avg/vardag) till minst 30 avg/vardag när linjens turer stannar i läget.
   * Lägen väljs girigt (störst nytta först, nyttan räknas om efter varje val så att samma invånare inte räknas
@@ -36,6 +37,9 @@ import config as C  # noqa: E402
 import data_las as D  # noqa: E402
 from a1_od_granskning import vardagsurval  # noqa: E402
 from a2_tackning import hallplatser_med_avgangar  # noqa: E402
+import s01_vagdragning as V  # noqa: E402
+
+VAG = V.segmentgeometri()   # körvägar längs gatunätet (OSRM) eller raka streck om vägdragning saknas
 
 STEG_M = 50
 MIN_AVST_BEFINTLIG = 250
@@ -73,9 +77,10 @@ def kandidater(monster, hpl_xy, land):
     for (a, b), v in seg.items():
         if a not in hpl_xy or b not in hpl_xy:
             continue
-        pa, pb = np.array(hpl_xy[a]), np.array(hpl_xy[b]); L = float(np.hypot(*(pb - pa)))
+        xy = VAG.get((a, b), np.array([hpl_xy[a], hpl_xy[b]]))      # gatunätet (OSRM) om det finns
+        d = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(xy, axis=0).T))]); L = float(d[-1])
         for s in np.arange(STEG_M, L - STEG_M / 2, STEG_M):
-            p = pa + (pb - pa) * s / L
+            p = (np.interp(s, d, xy[:, 0]), np.interp(s, d, xy[:, 1]))
             rader.append({'x': p[0], 'y': p[1], 'turer': frozenset(v['turer']), 'linjer': ','.join(sorted(v['linjer'])),
                           'seg': f'{a}-{b}'})
     k = pd.DataFrame(rader)
@@ -164,8 +169,9 @@ def main():
     # ---------------- otäckt befolkning utom räckhåll för stadslinjernas körvägar
     efter_n = np.array([len(t) for t in nuvarande])
     pkt['efter_avg'] = efter_n
-    korvag = shapely.MultiLineString([[hpl_xy[a], hpl_xy[b]] for m in monster
-                                      for a, b in zip(m['monster'][:-1], m['monster'][1:]) if a in hpl_xy and b in hpl_xy])
+    korvag = shapely.MultiLineString([VAG.get((a, b), np.array([hpl_xy[a], hpl_xy[b]])) for m in monster
+                                      for a, b in zip(m['monster'][:-1], m['monster'][1:])
+                                      if a in hpl_xy and b in hpl_xy and a != b])
     o = pkt[(efter_n == 0) & pkt.mariehamn].copy()
     o['d_korvag'] = shapely.distance(korvag, shapely.points(o.x.to_numpy(), o.y.to_numpy()))
     utom = o[o.d_korvag > C.TACKNING_M]

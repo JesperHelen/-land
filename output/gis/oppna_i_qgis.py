@@ -23,9 +23,9 @@ GRUPPER = [
     ('Kap 2 Täckning och turtäthet (fig 2.1–2.3)', ['a2_tackning_per_ruta', 'a2_tackningsytor'], False),
     ('Kap 1 OD-matris (fig 1.2–1.5)', ['a1_zoner_pastigande', 'a1_omfordelning_centrum', 'a1_od_FM_korrigerad',
                                       'a1_od_FM_levererad', 'a1_od_EM_korrigerad', 'a1_od_EM_levererad'], False),
-    ('Bakgrund', ['00_hallplatser', '00_stadslinjer', '00_befolkningsrutor', '00_land'], True),
+    ('Bakgrund', ['00_hallplatser', '00_stadslinjer_forskjutna', '00_stadslinjer', '00_befolkningsrutor', '00_land'], True),
 ]
-EJ_TANDA = {'00_befolkningsrutor', '00_hallplatser', 'a1_od_FM_levererad', 'a1_od_EM_korrigerad', 'a1_od_EM_levererad'}
+EJ_TANDA = {'00_stadslinjer', '00_befolkningsrutor', '00_hallplatser', 'a1_od_FM_levererad', 'a1_od_EM_korrigerad', 'a1_od_EM_levererad'}
 
 projekt = QgsProject.instance()
 projekt.setCrs(QgsCoordinateReferenceSystem('EPSG:3067'))
