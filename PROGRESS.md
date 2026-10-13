@@ -16,13 +16,27 @@ Bocka av varje steg när det är klart och committat. Nästa körning fortsätte
       `rapport/A2_tackning_turtathet.md`. Mariehamn: 84 % inom 400 m men bara 56 % med ≥ 30 avg/vardag;
       svag faktisk tillgänglighet (hpl nära, ≤ 29 avg) 28 % ≈ 4 150 inv.; otäckt 16 % ≈ 2 430 inv.
       Delpunkter 50 m med klass i `a2_delpunkter.csv.gz` – används i A3.
-- [ ] **A3 Förslag på nya hållplatslägen och överflödiga hållplatser**
-- [ ] ⏸ **STOPP – invänta beställarens granskning av Fas A innan Fas B påbörjas**
+- [x] **A3 Förslag på nya hållplatslägen och överflödiga hållplatser**
+      `src/a3_hallplatser.py`, `src/a3_kartor.py` → `data/processed/a3_*`, `output/kartor/a3_*.png`,
+      `rapport/A3_hallplatslagen.md`. 5 nya lägen längs dagens linjer (N1–N5: +136 inv. täckning, 95 lyfts ur svag);
+      9 områden (≈ 1 130 inv.) kräver ändrad linjesträckning → indata B4 (`a3_behov_ny_linjestrackning.csv`);
+      6 kandidater för indragning (5 på S, 1 på V), 13 bör prövas.
+- [x] ⏸ **STOPP – Fas A klar. Invänta beställarens granskning innan Fas B påbörjas** (Fas A klar 2026-10-13)
 
 ## Fas B – förslag, kalkyl och rapport (efter godkännande)
 - [ ] B4 Justering av linjenätet – tre förslag, verifierade mot dagens omloppsplaner
 - [ ] B5 Grov ekonomisk kalkyl
 - [ ] B6 Färdigställ PM
+
+## Att ta ställning till vid granskningen av Fas A
+1. **OD-korrigeringen (A1):** godtas landsbygdslinjerna som kontrollgrupp och startsegmentet (3 hpl, ≤ 800 m)
+   som basfall? Korrigerad matris (63 % av resorna via centrum) blir underlag för B4–B5.
+2. **Svag faktisk tillgänglighet (A2):** gränsen sattes till < 30 avgångar per vardag (sämre än halvtimmestrafik).
+3. **Hållplatskriterier (A3):** lågt påstigande < 0,1/vardag, lucka efter indragning ≤ 600 m, < 25 inv. förlorar
+   täckning. Påstigandet är sommardata – indragning föreslås först efter kontroll med terminsdata.
+4. **Fas B, linjeförslag:** utgå från områdena i `a3_behov_ny_linjestrackning.csv` (norr/nordost mellan linje N
+   och Ö, Möckelö Strand, Dalkullavägen) och körtidsutrymmet från indragna hållplatser på linje S/V.
+   Omloppsverifiering kräver omloppsdata (block) – GTFS saknar block_id; härleds ur tidtabellen i B4.
 
 ## Underlag (inventerat i A0)
 | Underlag | Fil | Kommentar |

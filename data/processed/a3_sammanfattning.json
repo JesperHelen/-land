@@ -1,0 +1,17 @@
+{
+ "nya_hallplatser": 5,
+ "ny_tackning_inv": 136,
+ "lyft_fran_svag_inv": 95,
+ "mariehamn_inom_400m_fore": 0.836,
+ "mariehamn_inom_400m_efter": 0.8452,
+ "mariehamn_svag_fore": 0.2802,
+ "mariehamn_svag_efter": 0.2829,
+ "otackt_utom_korvag_inv": 2013,
+ "bedomning": {
+  "Behålls": 62,
+  "Bör prövas": 13,
+  "Kandidat för indragning": 6,
+  "Saknar påstigningsdata": 5,
+  "Undantas (ändhållplats/vändplats)": 5
+ }
+}

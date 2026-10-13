@@ -234,3 +234,13 @@ def ruta_axes(ax, x0, y0, x1, y1):
     """Bounding box (pixlar) för ett område angivet i axes-koordinater – att undvika vid etikettplacering."""
     (a, b), (c, d) = ax.transAxes.transform([(x0, y0), (x1, y1)])
     return (a, b, c, d)
+
+
+def punkt_hinder(ax, xs, ys, px=7):
+    """Pixelboxar runt punkter – används som hinder vid etikettplacering."""
+    ax.figure.canvas.draw()
+    ut = []
+    for x, y in zip(xs, ys):
+        cx, cy = ax.transData.transform((x, y))
+        ut.append((cx - px, cy - px, cx + px, cy + px))
+    return ut
