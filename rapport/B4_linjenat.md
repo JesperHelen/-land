@@ -354,6 +354,35 @@ Resultatet pekar mot att Örtvägen är det som ryms med genomgående N/S och S 
 Lillåkersvägen och Österkalmare hör ihop med en omläggning av N och Ö i nordost (B4.6).
 Områdespunkter med resultat finns som GeoJSON: `output/kartor/b4_ns_sammanslagning.geojson`.
 
+### 4.5.4 Nordost – omläggning av N och Ö (B4.6)
+
+Områdena Örtvägen (125 inv.), Lillåkersvägen (183), Österkalmare (90), Solberget (155) och Solberget södra (81)
+ligger 0,6–1,6 km från linje N respektive Ö (avstånd N/Ö: Örtvägen 632/642 m, Lillåkersvägen 969/1 324 m,
+Österkalmare 1 568/1 571 m, Solberget 1 442/711 m, Solberget södra 1 908/582 m). Behovet per tur skattas med tur och
+retur till det avlägsnaste området på avsticket och 0,5 min per hållplats; körvägarna är raka streck med omvägsfaktor
+1,3 tills OSRM kan användas. Alternativen verifieras gemensamt mot omloppen (`src/b4_nordost.py`,
+`data/processed/b4_nordost.csv/json`, `output/kartor/b4_nordost.geojson`). Antal turer anges för den bästa av
+S-avgång ≤ 2 respektive ≤ 4 min efter pulsen (N) och V-avgång ≤ 2 min (Ö); alla alternativ ryms med fem bussar.
+
+| Alt. | Innehåll | Tillägg/tur | Invånare | Turer som ryms |
+|---|---|---|---|---|
+| A | N till Örtvägen | 4,4 min | 125 | N 22/22 (S ≤ 2 min efter pulsen) |
+| B | N till Örtvägen + Lillåkersvägen | 7,0 min | 308 | N 7/22 (S ≤ 2), 20/22 (S ≤ 4, robust) |
+| B+ | som B, med indragna S-hållplatser | 7,0 min | 308 | N 22/22 (S ≤ 4, ej robust) |
+| C | N till alla tre | 11,3 min | 398 | N 6/22 – ryms ej |
+| D | Ö till Solberget + Solberget södra | 5,4 min | 236 | Ö 17/20 (V/Ö sammanslagna) |
+| E | Ö till Österkalmare, Solberget indragen | 10,3 min | 90 | Ö 17/20, 17 varv under 3 min reglering – ej robust |
+| F | B + D samtidigt | 7,0 + 5,4 min | 544 | ryms **inte** gemensamt |
+| G | A + E samtidigt | 4,4 + 10,3 min | 215 | ryms **inte** gemensamt, ej robust |
+
+* **Örtvägen med N (A)** är den enda utökningen som ryms på alla turer med S ≤ 2 min efter pulsen.
+* **Lillåkersvägen tillsammans med Örtvägen (B/B+)** kräver att S-avgången släpps upp till 4 min efter pulsen, och
+  med S-indragning (antagen besparing 0,5 min/hållplats) ryms alla turer men inte robust.
+* **Österkalmare** ryms inte i något alternativ utan större omläggning (C, E) – området ligger lika långt från N
+  som från Ö (≈ 1,6 km). Ett gemensamt avstick för Lillåkersvägen – Österkalmare – Solberget kräver en ny
+  vägförbindelse mellan N:s och Ö:s körvägar; sträckan går inte att bedöma utan OSRM/gatunät och lämnas till B4.7.
+* **N och Ö samtidigt (F, G)** ger ett sjätte fordon: regleringen hos S och V räcker inte till båda förlängningarna.
+
 ## 4.6 Förslag 4 – linje V till flygplatsen
 
 **Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I förslaget kör bussen från Posten upp till

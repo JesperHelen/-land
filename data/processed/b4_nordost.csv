@@ -1,0 +1,15 @@
+alt,text,n_omraden,o_omraden,inv,behov_N_min,behov_O_min,skift_N_max,turer_N,turer_N_tot,turer_O,turer_O_tot,fordon,omloppstid_h,varv_utan_reglering,gemensamt_ryms,robust
+A,N till Örtvägen,Örtvägen,,125.0,4.4,0.0,2.0,22.0,22.0,,,5,61.52,2,True,False
+A,N till Örtvägen,Örtvägen,,125.0,4.4,0.0,4.0,22.0,22.0,,,5,61.52,2,True,False
+B,N till Örtvägen + Lillåkersvägen,"Örtvägen, Lillåkersvägen",,308.0,7.0,0.0,2.0,7.0,22.0,,,5,61.55,1,True,True
+B,N till Örtvägen + Lillåkersvägen,"Örtvägen, Lillåkersvägen",,308.0,7.0,0.0,4.0,20.0,22.0,,,5,61.55,1,True,True
+B+,"som B, med S-indragning","Örtvägen, Lillåkersvägen",,308.0,7.0,0.0,2.0,7.0,22.0,,,5,61.51,1,True,True
+B+,"som B, med S-indragning","Örtvägen, Lillåkersvägen",,308.0,7.0,0.0,4.0,22.0,22.0,,,5,61.57,2,True,False
+C,"N till Örtvägen, Lillåkersvägen och Österkalmare","Örtvägen, Lillåkersvägen, Österkalmare",,398.0,11.3,0.0,2.0,6.0,22.0,,,5,61.58,1,True,True
+C,"N till Örtvägen, Lillåkersvägen och Österkalmare","Örtvägen, Lillåkersvägen, Österkalmare",,398.0,11.3,0.0,4.0,6.0,22.0,,,5,61.58,1,True,True
+D,Ö till Solberget + Solberget södra,,"Solberget, Solberget södra",236.0,0.0,5.4,,,,17.0,20.0,5,61.52,2,True,False
+E,"Ö till Österkalmare, Solberget indragen",,Österkalmare,90.0,0.0,10.3,,,,17.0,20.0,5,61.59,17,True,False
+F,B + D (N och Ö),"Örtvägen, Lillåkersvägen","Solberget, Solberget södra",544.0,7.0,5.4,2.0,7.0,22.0,17.0,20.0,5,61.6,1,False,True
+F,B + D (N och Ö),"Örtvägen, Lillåkersvägen","Solberget, Solberget södra",544.0,7.0,5.4,4.0,22.0,22.0,17.0,20.0,5,61.66,3,False,False
+G,"A + E (N till Örtvägen, Ö till Österkalmare)",Örtvägen,Österkalmare,215.0,4.4,10.3,2.0,22.0,22.0,17.0,20.0,5,61.67,18,False,False
+G,"A + E (N till Örtvägen, Ö till Österkalmare)",Örtvägen,Österkalmare,215.0,4.4,10.3,4.0,22.0,22.0,17.0,20.0,5,61.67,18,False,False

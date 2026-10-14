@@ -68,7 +68,10 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         rapport 4.5.3. Bo-Bil ryms 22/22 utan skift; Örtvägen 22/22 om S ≤ 2 min efter pulsen (robust med S-indragning);
         Lillåkersvägen kräver S ≤ 4 min efter (pulsen släpps); Österkalmare ryms ej (20/22 först utan puls + S-indragning,
         ej robust). S/Ö-par sämre (6,5 min: 10/22). S-indragning antas spara 0,5 min/hpl – ersätt med operatörens tider.
-  - [ ] **B4.6 Todo – nordost:** omläggning av N och Ö norr/nordost (Lillåkersvägen, Örtvägen, Solberget, Österkalmare).
+  - [x] **B4.6 Nordost (screening)** – `src/b4_nordost.py` → `b4_nordost.csv/json`, `output/kartor/b4_nordost.geojson`,
+        rapport 4.5.4. N till Örtvägen ryms 22/22 (S ≤ 2 min); + Lillåkersvägen 7,0 min kräver S ≤ 4 min efter pulsen;
+        Österkalmare ryms ej; N- och Ö-förlängning samtidigt kräver sjätte bussen. Avstånd är raka streck ×1,3 – verklig
+        omläggning (ny förbindelse N–Ö) kräver OSRM/gatunät → hanteras i B4.7.
   - [ ] **B4.7 Tre samlade linjeförslag** verifierade mot omloppen med körtidspåverkan per förslag.
   - [ ] Stäm av härledda omlopp mot operatörens omloppsplaner (om de kan fås) och körtider för nya delsträckor.
 - [x] **B5 Grov ekonomisk kalkyl (överslag)** – `src/b5_kalkyl.py` → `b5_kalkyl.json/csv`, `output/kartor/b5_1_kalkyl.png`,
