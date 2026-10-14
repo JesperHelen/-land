@@ -1,0 +1,85 @@
+{
+ "typvardag": "2026-09-01",
+ "idag": {
+  "fordon": 5,
+  "turer": 93,
+  "korttid_h": 42.45,
+  "omloppstid_h": 61.38,
+  "regleringstid_h": 11.47,
+  "uppstallning_h": 7.47,
+  "km": 1136.5,
+  "min_vandtid": 1.0,
+  "vandningar_under_rek": 7,
+  "genomgangar": 0,
+  "forsta_avg": 410.0,
+  "sista_ank": 1273.0
+ },
+ "fordon_vid_minsta_vandtid": {
+  "0": 5,
+  "1": 5,
+  "2": 6,
+  "3": 6
+ },
+ "linjer": {
+  "J": {
+   "turer_dag": 9,
+   "kortid_median": 48.0,
+   "kortid_max": 62.0,
+   "turintervall_rusning": 60.0,
+   "vandtid_median": 5.5,
+   "vandtid_min": 1.0,
+   "km_tur": 25.92
+  },
+  "N": {
+   "turer_dag": 22,
+   "kortid_median": 26.0,
+   "kortid_max": 26.0,
+   "turintervall_rusning": 30.0,
+   "vandtid_median": 4.0,
+   "vandtid_min": 4.0,
+   "km_tur": 10.18
+  },
+  "S": {
+   "turer_dag": 22,
+   "kortid_median": 23.0,
+   "kortid_max": 23.0,
+   "turintervall_rusning": 30.0,
+   "vandtid_median": 7.0,
+   "vandtid_min": 2.0,
+   "km_tur": 8.76
+  },
+  "V": {
+   "turer_dag": 20,
+   "kortid_median": 27.0,
+   "kortid_max": 27.0,
+   "turintervall_rusning": 30.0,
+   "vandtid_median": 3.0,
+   "vandtid_min": 3.0,
+   "km_tur": 11.54
+  },
+  "Ö": {
+   "turer_dag": 20,
+   "kortid_median": 23.0,
+   "kortid_max": 29.0,
+   "turintervall_rusning": 30.0,
+   "vandtid_median": 7.0,
+   "vandtid_min": 1.0,
+   "km_tur": 12.81
+  }
+ },
+ "genomgangar_idag": [
+  "S→Ö 08:43–08:45",
+  "Ö→S 08:49–08:50",
+  "J→Ö 18:07–18:10",
+  "Ö→V 18:33–18:40",
+  "N→S 18:46–18:50",
+  "V→Ö 19:07–19:10",
+  "S→N 19:13–19:20",
+  "Ö→V 19:33–19:40",
+  "N→S 19:46–19:50",
+  "V→Ö 20:07–20:10",
+  "S→N 20:13–20:20",
+  "Ö→V 20:33–20:40",
+  "N→S 20:46–20:50"
+ ]
+}

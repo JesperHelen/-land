@@ -314,6 +314,47 @@ def a3():
                                 '"omrade" || \' (\' || "pastigande_92_vardagar" || \')\', \'\')')), True)
 
 
+def b4():
+    g = gpd.read_file(P / 'b4_forslag.gpkg', layer='forslag')
+    pk = g[g.geom_type == 'Point'].copy(); ln = g[g.geom_type == 'LineString'].copy()
+    skriv(pk, 'b4_forslag_hallplatser')
+    kat = [('ny hållplats', 'Ny hållplats', 'star', '#1c5cab', 5.0, '#ffffff'),
+           ('ny hållplats för linje N', 'Hållplats som linje N börjar trafikera', 'star', '#1c5cab', 5.0, '#ffffff'),
+           ('hållplats utgår för linje N', 'Hållplats som linje N slutar trafikera', 'cross_fill', '#c0392b', 3.4, '#ffffff')]
+    stil('b4_forslag_hallplatser', 'Förslag – hållplatser (fig 4.2, 4.4, 4.6)',
+         qml(r_kategori('objekt', kat, lambda n, form, f, st, k: markor(n, form, f, st, k, 0.3)),
+             labeling=etiketter('"forslag" || \': \' || "namn"')), True)
+    skriv(ln, 'b4_forslag_korvagar')
+    kat = [('ny körväg (schematisk)', 'Ny körväg (schematisk)', '#1c5cab', True),
+           ('körväg utgår (schematisk)', 'Körväg som utgår (schematisk)', '#3d3d3a', True)]
+    stil('b4_forslag_korvagar', 'Förslag – körvägar (schematiska)',
+         qml(r_kategori('objekt', kat, lambda n, f, st: linje(n, f, 0.8, streckad=st, halo=True))), True)
+
+    t = pd.read_csv(P / 'b4_tackning_forslag.csv.gz', dtype={'forslag': str})
+    t = t[t.klass_efter != t.klass_fore].copy()
+    h = C.DELRUTA_M
+    t['forandring'] = np.where(t.klass_efter > t.klass_fore, 'Bättre', 'Sämre')
+    t['geometry'] = shapely.box(t.x - h / 2, t.y - h / 2, t.x + h / 2, t.y + h / 2)
+    tg = gpd.GeoDataFrame(t[['forslag', 'forandring', 'bef', 'geometry']], crs=C.CRS_METRISK)
+    tg = tg.dissolve(by=['forslag', 'forandring'], aggfunc={'bef': 'sum'}).reset_index().rename(columns={'bef': 'invanare'})
+    tg['invanare'] = tg.invanare.round(0)
+    skriv(tg, 'b4_tackning_forandring')
+    stil('b4_tackning_forandring', 'Förändrad tillgänglighet (fig 4.2, 4.4, 4.6)',
+         qml(r_kategori('forandring', [('Bättre', 'Bättre (ny täckning eller fler avgångar)', '#2f9e44'),
+                                       ('Sämre', 'Sämre (förlorad täckning eller färre avgångar)', '#c0392b')],
+                        lambda n, f: fyll(n, f, 210)), 0.9), True)
+
+    o = pd.read_csv(P / 'b4_sammanslagning_omraden.csv')
+    og = gpd.GeoDataFrame(o.drop(columns=['x', 'y']), geometry=gpd.points_from_xy(o.x, o.y), crs=C.CRS_METRISK)
+    skriv(og, 'b4_sammanslagning_omraden')
+    kat = [('Ryms i dag', 'Ryms i dag', '#2f9e44'), ('Ryms med genomgående linje', 'Ryms med genomgående linje', '#1c5cab'),
+           ('Kräver större omläggning', 'Kräver större omläggning', '#c0392b'),
+           ('Linje J (timtrafik) – prövas separat', 'Linje J (timtrafik) – prövas separat', '#7a776f')]
+    stil('b4_sammanslagning_omraden', 'Behövd tid per tur (fig 4.8)',
+         qml(r_kategori('bedomning', kat, lambda n, f: markor(n, 'diamond', f, 3.6, '#ffffff', 0.3)),
+             labeling=etiketter('"omrade" || \' +\' || format_number("behov_min_per_tur", 1) || \' min/tur (linje \' || "linje" || \')\'')), True)
+
+
 # ====================================================================== stiltabell
 def skriv_stilar():
     """Skriver stilarna till GeoPackage-tabellen layer_styles (läses av QGIS) och som .qml-filer."""
@@ -331,7 +372,8 @@ def skriv_stilar():
                       'styleSLD': '', 'useAsDefault': bool(standard), 'description': namn, 'owner': '', 'ui': '',
                       'update_time': nu})
         bas = namn.split(' (')[0].replace(' ', '_').replace('/', '-')
-        fil = f"{lager}__{bas.translate(str.maketrans('åäöÅÄÖ', 'aaoAAO'))}.qml"
+        bas = bas.translate(str.maketrans('åäöÅÄÖ–', 'aaoAAO-')).encode('ascii', 'ignore').decode()
+        fil = f"{lager}__{bas}.qml"
         (STILAR / fil).write_text(xml, encoding='utf-8')
     df = pd.DataFrame(rader)
     pyogrio.write_dataframe(df, GPKG, layer='layer_styles', driver='GPKG', layer_options={'FID': 'id'})
@@ -341,7 +383,7 @@ def main():
     UT.mkdir(parents=True, exist_ok=True)
     if GPKG.exists():
         GPKG.unlink()
-    bas(); a1(); a2(); a3()
+    bas(); a1(); a2(); a3(); b4()
     skriv_stilar()
     lager = pyogrio.list_layers(GPKG)
     print(f'{GPKG} – {len(lager)} lager, {len(STYLES)} stilar')

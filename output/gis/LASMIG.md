@@ -29,6 +29,9 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 2.3 Svag faktisk tillgänglighet | `a2_tackningsytor`, `a2_tackning_per_ruta` | *Svag faktisk tillgänglighet* / *Invånare med svag tillgänglighet per ruta* |
 | 3.1 Nya hållplatslägen | `a3_nya_hallplatser`, `a3_nya_hallplatser_400m`, `a3_behov_ny_linjestrackning`, `a3_behov_400m` | Standard |
 | 3.2 Bedömning av hållplatser | `a3_hallplatsbedomning` | Hållplatsbedömning |
+| 4.2, 4.4, 4.6 Linjeförslag 1–3 | `b4_forslag_hallplatser`, `b4_forslag_korvagar`, `b4_tackning_forandring` | Standard (filtrera på fältet `forslag`: 1a, 1b, 2, 3) |
+| 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |
+| 4.1, 4.3, 4.5, 4.7 Omlopp | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv` |
 
 ## Linjer som delar gata
 

@@ -1,0 +1,427 @@
+{
+ "idag": {
+  "fordon": 5,
+  "turer": 93,
+  "korttid_h": 42.45,
+  "omloppstid_h": 61.38,
+  "regleringstid_h": 11.47,
+  "uppstallning_h": 7.47,
+  "km": 1136.5,
+  "min_vandtid": 1.0,
+  "vandningar_under_rek": 7,
+  "genomgangar": 0,
+  "forsta_avg": 410.0,
+  "sista_ank": 1273.0
+ },
+ "antaganden": {
+  "uppehall_min": 0.5,
+  "kmh_ny_stracka": 25.0,
+  "bobil": {
+   "tid_idag_min": 1.4499999999999886,
+   "faglvag_idag_m": 1298.985292635415,
+   "faglvag_ny_m": 951.5005473559602,
+   "delta_min": -0.4,
+   "delta_km": -0.43
+  },
+  "pastigande_per_inv": {
+   "alla": 0.003364844459959826,
+   "J": 0.003201543344858245,
+   "N": 0.004156376248689494,
+   "S": 0.0020610893578829046,
+   "V": 0.0026628801642072427,
+   "Ö": 0.0071307053260211885
+  },
+  "dagsfaktor": 10.43
+ },
+ "forslag": {
+  "1a": {
+   "namn": "Linje V till Möckelö Strand (dagens gatunät)",
+   "linje": "V",
+   "delta_min_per_tur": 6.5,
+   "km_per_tur": 2.5,
+   "linjens_turer": 20,
+   "turer_som_trafikerar": 8,
+   "driftform": "ryms",
+   "omlopp": {
+    "alla": {
+     "fordon": 6,
+     "turer": 93,
+     "korttid_h": 44.62,
+     "omloppstid_h": 72.98,
+     "regleringstid_h": 17.73,
+     "uppstallning_h": 10.63,
+     "km": 1186.5,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 9,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.5,
+     "ryms": false,
+     "turer_med_andring": 20,
+     "genomgaende": []
+    },
+    "genomgaende": {
+     "fordon": 6,
+     "turer": 93,
+     "korttid_h": 44.62,
+     "omloppstid_h": 72.98,
+     "regleringstid_h": 17.73,
+     "uppstallning_h": 10.63,
+     "km": 1186.5,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 8,
+     "genomgangar": 14,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.5,
+     "ryms": false,
+     "turer_med_andring": 20,
+     "genomgaende": [
+      "V/Ö"
+     ]
+    },
+    "ryms": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 43.32,
+     "omloppstid_h": 61.49,
+     "regleringstid_h": 10.82,
+     "uppstallning_h": 7.36,
+     "km": 1156.5,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 9,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 8,
+     "genomgaende": []
+    }
+   },
+   "tackning": {
+    "ny_tackning_inv": 179,
+    "forlorad_tackning_inv": 0,
+    "lyft_fran_svag_inv": 0,
+    "battre_klass_inv": 179,
+    "samre_klass_inv": 0,
+    "inv_inom_400m_ny_hpl": 186
+   },
+   "resenarer": {
+    "FM": {
+     "resenarsminuter_h": 1.036,
+     "resor_langre_h": 0.159,
+     "resor_kortare_h": 0.0,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "EM": {
+     "resenarsminuter_h": 0.028,
+     "resor_langre_h": 0.004,
+     "resor_kortare_h": 0.0,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "vardag": {
+     "berorda_resor": 0.9,
+     "resenarsminuter": 5.6,
+     "resor_utan_forbindelse": 0.0
+    }
+   },
+   "nytt_pastigande_vardag": [
+    0.19,
+    0.89
+   ],
+   "xy": [
+    105636.61417322831,
+    6683413.976377953
+   ]
+  },
+  "1b": {
+   "namn": "Linje V till Möckelö Strand (Norrgårdsvägen förlängd till Hamnskärsvägen)",
+   "linje": "V",
+   "delta_min_per_tur": 2.5,
+   "km_per_tur": 0.83,
+   "linjens_turer": 20,
+   "turer_som_trafikerar": 20,
+   "driftform": "genomgaende",
+   "omlopp": {
+    "alla": {
+     "fordon": 6,
+     "turer": 93,
+     "korttid_h": 43.28,
+     "omloppstid_h": 72.73,
+     "regleringstid_h": 17.68,
+     "uppstallning_h": 11.78,
+     "km": 1153.2,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 9,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": false,
+     "turer_med_andring": 20,
+     "genomgaende": []
+    },
+    "genomgaende": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 43.28,
+     "omloppstid_h": 61.42,
+     "regleringstid_h": 10.72,
+     "uppstallning_h": 7.42,
+     "km": 1153.2,
+     "min_vandtid": 0.5,
+     "vandningar_under_rek": 8,
+     "genomgangar": 17,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 20,
+     "genomgaende": [
+      "V/Ö"
+     ]
+    },
+    "ryms": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 42.87,
+     "omloppstid_h": 61.47,
+     "regleringstid_h": 11.18,
+     "uppstallning_h": 7.42,
+     "km": 1144.8,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 9,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 10,
+     "genomgaende": []
+    },
+    "ryms_genomgaende": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 43.28,
+     "omloppstid_h": 61.42,
+     "regleringstid_h": 10.72,
+     "uppstallning_h": 7.42,
+     "km": 1153.2,
+     "min_vandtid": 0.5,
+     "vandningar_under_rek": 8,
+     "genomgangar": 17,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 20,
+     "genomgaende": [
+      "V/Ö"
+     ]
+    }
+   },
+   "tackning": {
+    "ny_tackning_inv": 179,
+    "forlorad_tackning_inv": 0,
+    "lyft_fran_svag_inv": 0,
+    "battre_klass_inv": 179,
+    "samre_klass_inv": 0,
+    "inv_inom_400m_ny_hpl": 186
+   },
+   "resenarer": {
+    "FM": {
+     "resenarsminuter_h": 0.996,
+     "resor_langre_h": 0.399,
+     "resor_kortare_h": 0.0,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "EM": {
+     "resenarsminuter_h": 0.027,
+     "resor_langre_h": 0.011,
+     "resor_kortare_h": 0.0,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "vardag": {
+     "berorda_resor": 2.1,
+     "resenarsminuter": 5.3,
+     "resor_utan_forbindelse": 0.0
+    }
+   },
+   "nytt_pastigande_vardag": [
+    0.48,
+    2.22
+   ],
+   "xy": [
+    105636.61417322831,
+    6683413.976377953
+   ]
+  },
+  "2": {
+   "namn": "Ny hållplats N2 på linje Ö",
+   "linje": "Ö",
+   "delta_min_per_tur": 0.5,
+   "km_per_tur": 0.0,
+   "linjens_turer": 20,
+   "turer_som_trafikerar": 19,
+   "driftform": "ryms",
+   "omlopp": {
+    "alla": {
+     "fordon": 6,
+     "turer": 93,
+     "korttid_h": 42.62,
+     "omloppstid_h": 61.38,
+     "regleringstid_h": 11.31,
+     "uppstallning_h": 7.46,
+     "km": 1136.5,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 6,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": false,
+     "turer_med_andring": 20,
+     "genomgaende": []
+    },
+    "genomgaende": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 42.62,
+     "omloppstid_h": 61.39,
+     "regleringstid_h": 11.32,
+     "uppstallning_h": 7.46,
+     "km": 1136.5,
+     "min_vandtid": 0.5,
+     "vandningar_under_rek": 3,
+     "genomgangar": 18,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 20,
+     "genomgaende": [
+      "Ö/V"
+     ]
+    },
+    "ryms": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 42.61,
+     "omloppstid_h": 61.39,
+     "regleringstid_h": 11.32,
+     "uppstallning_h": 7.46,
+     "km": 1136.5,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 7,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 19,
+     "genomgaende": []
+    },
+    "ryms_genomgaende": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 42.62,
+     "omloppstid_h": 61.39,
+     "regleringstid_h": 11.32,
+     "uppstallning_h": 7.46,
+     "km": 1136.5,
+     "min_vandtid": 0.5,
+     "vandningar_under_rek": 3,
+     "genomgangar": 18,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 20,
+     "genomgaende": [
+      "Ö/V"
+     ]
+    }
+   },
+   "tackning": {
+    "ny_tackning_inv": 55,
+    "forlorad_tackning_inv": 0,
+    "lyft_fran_svag_inv": 0,
+    "battre_klass_inv": 55,
+    "samre_klass_inv": 0,
+    "inv_inom_400m_ny_hpl": 55
+   },
+   "resenarer": {
+    "FM": {
+     "resenarsminuter_h": 0.042,
+     "resor_langre_h": 0.085,
+     "resor_kortare_h": 0.0,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "EM": {
+     "resenarsminuter_h": 0.164,
+     "resor_langre_h": 0.328,
+     "resor_kortare_h": 0.0,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "vardag": {
+     "berorda_resor": 2.2,
+     "resenarsminuter": 1.1,
+     "resor_utan_forbindelse": 0.0
+    }
+   },
+   "nytt_pastigande_vardag": [
+    0.37,
+    1.77
+   ],
+   "xy": [
+    110322.21345472928,
+    6683248.477796325
+   ]
+  },
+  "3": {
+   "namn": "Linje N via Bo-Bil i stället för Vikingagränd",
+   "linje": "N",
+   "delta_min_per_tur": -0.4,
+   "km_per_tur": -0.43,
+   "linjens_turer": 22,
+   "turer_som_trafikerar": 22,
+   "driftform": "alla",
+   "omlopp": {
+    "alla": {
+     "fordon": 5,
+     "turer": 93,
+     "korttid_h": 42.3,
+     "omloppstid_h": 61.38,
+     "regleringstid_h": 11.61,
+     "uppstallning_h": 7.47,
+     "km": 1127.0,
+     "min_vandtid": 1.0,
+     "vandningar_under_rek": 7,
+     "genomgangar": 0,
+     "forsta_avg": 410.0,
+     "sista_ank": 1273.0,
+     "ryms": true,
+     "turer_med_andring": 22,
+     "genomgaende": []
+    }
+   },
+   "tackning": {
+    "ny_tackning_inv": 0,
+    "forlorad_tackning_inv": 23,
+    "lyft_fran_svag_inv": 44,
+    "battre_klass_inv": 44,
+    "samre_klass_inv": 24
+   },
+   "resenarer": {
+    "FM": {
+     "resenarsminuter_h": -0.073,
+     "resor_langre_h": 0.016,
+     "resor_kortare_h": 0.347,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "EM": {
+     "resenarsminuter_h": -0.166,
+     "resor_langre_h": 0.045,
+     "resor_kortare_h": 1.014,
+     "resor_utan_forbindelse_h": 0.0
+    },
+    "vardag": {
+     "berorda_resor": 7.4,
+     "resenarsminuter": -1.2,
+     "resor_utan_forbindelse": 0.0
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,316 @@
+# -*- coding: utf-8 -*-
+"""B4 – Omloppsplan (fordonsomlopp) för stadslinjerna och verifiering av linjeförslag mot den.
+
+GTFS saknar block_id, så omloppen härleds ur tidtabellen för typvardagen:
+  * Alla stadslinjeturer börjar och slutar i Centrum, Nygatan. Turerna kedjas till omlopp med minsta möjliga
+    antal fordon (minimikostnadstilldelning, scipy linear_sum_assignment). Ett fordon kan ta en tur som avgår
+    tidigast MIN_VANDTID efter fordonets ankomst. Bland lösningar med minsta antal fordon väljs kortast
+    omloppstid (summa över fordonen av tiden från första avgång till sista ankomst, dvs. fordonstimmar) och vid
+    lika väntan samma linje. Fordonsbehovet blir därmed det minsta som tidtabellen kräver. Uppehåll i centrum
+    ≤ 60 min redovisas som vändtid (reglering), längre uppehåll som uppställning.
+  * Dagens minsta vändtid i tidtabellen är 1 min (bl.a. linje J 14:19 → 14:20); med 2 min krävs ett sjätte fordon.
+    Kravet för förslagen sätts därför till samma nivå som i dag: vändtid ≥ 1 min.
+  * Genomgående linjer (t.ex. V/Ö): när ett fordon fortsätter direkt som en annan linje vid samma hållplatsläge
+    behövs bara ett uppehåll för av- och påstigning (≥ GENOMGANG_MIN). Regleringen tas då i andra änden av varvet.
+Verifiering av ett förslag (ramen 'inga fler bussar')
+  * Förslagets körtidsförändring läggs på berörda turer (ankomsten till centrum senareläggs, avgångstiderna –
+    pulsen i centrum – ligger fast). Omloppen byggs om. Förslaget ryms om antalet fordon inte ökar och
+    omloppstiden (fordonstimmar) inte ökar mer än OMLOPPSTID_TOL.
+  * Ryms inte alla turer prövas turerna en i taget i tidsordning; redovisas hur många som ryms.
+  * Robusthet redovisas som antal vändningar under REKOMMENDERAD_VANDTID och total regleringstid.
+Utdata: data/processed/b4_omlopp_idag.csv, b4_omlopp_nyckeltal.json, output/kartor/b4_1_omlopp_idag.png
+"""
+import json
+import sys
+from pathlib import Path
+
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt  # noqa: E402
+import numpy as np  # noqa: E402
+import pandas as pd  # noqa: E402
+from matplotlib.lines import Line2D  # noqa: E402
+from matplotlib.patches import Patch, Rectangle  # noqa: E402
+from scipy.optimize import linear_sum_assignment  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import config as C  # noqa: E402
+import data_las as D  # noqa: E402
+
+MIN_VANDTID = 1.0              # min – dagens lägsta vändtid i tidtabellen (krav)
+GENOMGANG_MIN = 0.5            # min – uppehåll i centrum när fordonet fortsätter som annan linje (genomgående)
+REKOMMENDERAD_VANDTID = 3.0    # min – robusthetsnivå (redovisas, inget krav)
+DEPA_GRANS = 60.0              # min – längre uppehåll redovisas som uppställning i stället för vändtid
+LINJEBYTE_STRAFF = 0.5         # min – svag preferens (vid lika väntan) för att fordonet fortsätter på samma linje
+REFERENS_BONUS = 0.3           # min – vid lika väntan behålls dagens koppling (stabila omlopp före/efter)
+OMLOPPSTID_TOL = 10.0          # min/dag – tillåten ökning av omloppstiden (≈ 0,2 %; t.ex. att dagens sista tur blir längre)
+TEXT, TEXT2 = '#1f1f1e', '#52514e'
+
+
+# ====================================================================== turer
+def turer(datum=None):
+    """Stadslinjernas turer en typvardag: avgång/ankomst centrum (min efter midnatt), körtid, hållplatsföljd, km."""
+    import s01_vagdragning as V
+    g = D.gtfs(); t = D.turer_dag(datum, C.STADSLINJER)
+    st = g['stop_times'][g['stop_times'].trip_id.isin(t.trip_id)].sort_values(['trip_id', 'seq'])
+    geo = V.segmentgeometri()
+    xy, _ = V.hallplats_xy()
+
+    def km(m):
+        s = 0.0
+        for a, b in zip(m[:-1], m[1:]):
+            p = geo.get((a, b), np.array([xy[a], xy[b]]) if a in xy and b in xy else np.zeros((2, 2)))
+            s += float(np.hypot(*np.diff(p, axis=0).T).sum())
+        return s / 1000
+    f = st.groupby('trip_id').agg(avg=('t_dep', 'min'), ank=('t_arr', 'max'), forsta=('stop_id', 'first'),
+                                  sista=('stop_id', 'last'), monster=('stop_id', tuple))
+    f = f.join(t.set_index('trip_id')[['linje']])
+    f['kortid'] = f.ank - f.avg
+    f['km'] = f.monster.map(km)
+    f['n_hpl'] = f.monster.map(len)
+    return f.reset_index().sort_values(['avg', 'linje']).reset_index(drop=True)
+
+
+# ====================================================================== omlopp
+def bygg_omlopp(t, min_vand=MIN_VANDTID, genomgaende=(), genomgang_min=GENOMGANG_MIN, referens=None):
+    """Kedjar turer till omlopp med minsta antal fordon. genomgaende: par (linje_a, linje_b) där fordonet får
+    fortsätta direkt från a till b med kortare uppehåll (genomgang_min). referens: mängd (trip_id, trip_id)
+    med dagens kopplingar som behålls vid lika väntan. Returnerar kopia med kolumnerna buss, nasta (index),
+    vand_efter (min), genomgang (bool)."""
+    t = t.reset_index(drop=True)
+    n = len(t)
+    avg, ank, lin = t.avg.to_numpy(), t.ank.to_numpy(), t.linje.to_numpy()
+    gen = set(map(tuple, genomgaende))
+    ref = referens or set()
+    tid = t.trip_id.to_numpy()
+    K, OMOJLIG = 1e6, 1e9
+    kost = np.full((n, 2 * n), OMOJLIG)
+    kost[:, n:] = K                                               # ingen efterföljare = omloppet slutar
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            vant = avg[j] - ank[i]
+            krav = genomgang_min if (lin[i], lin[j]) in gen else min_vand
+            if vant >= krav - 1e-9:
+                if (lin[i], lin[j]) in gen or (lin[j], lin[i]) in gen:
+                    straff = -LINJEBYTE_STRAFF              # genomgående par: fordonet växlar gärna mellan linjerna
+                else:
+                    straff = LINJEBYTE_STRAFF if lin[i] != lin[j] else 0.0
+                if (tid[i], tid[j]) in ref:
+                    straff -= REFERENS_BONUS
+                kost[i, j] = vant + straff
+    r, c = linear_sum_assignment(kost)
+    nasta = np.full(n, -1)
+    for i, j in zip(r, c):
+        if j < n and kost[i, j] < K:
+            nasta[i] = j
+    har_fore = np.zeros(n, bool); har_fore[nasta[nasta >= 0]] = True
+    buss = np.zeros(n, int); nr = 0
+    for s in np.argsort(avg):
+        if har_fore[s]:
+            continue
+        nr += 1; k = s
+        while k >= 0:
+            buss[k] = nr; k = nasta[k]
+    # numrera fordonen efter första avgång
+    forsta = pd.Series(avg).groupby(buss).min().sort_values()
+    om = {b: i + 1 for i, b in enumerate(forsta.index)}
+    ut = t.copy()
+    ut['buss'] = [om[b] for b in buss]
+    ut['nasta'] = nasta
+    ut['vand_efter'] = [avg[j] - ank[i] if j >= 0 else np.nan for i, j in enumerate(nasta)]
+    ut['genomgang'] = [bool(j >= 0 and (lin[i], lin[j]) in gen and avg[j] - ank[i] <= DEPA_GRANS)
+                       for i, j in enumerate(nasta)]
+    return ut
+
+
+def nyckeltal(o):
+    v = o.vand_efter.dropna()
+    v_i_trafik = v[v <= DEPA_GRANS]
+    vand = o.loc[o.vand_efter.notna() & ~o.genomgang, 'vand_efter']        # vändningar (ej genomgång)
+    span = o.groupby('buss').apply(lambda d: d.ank.max() - d.avg.min(), include_groups=False)
+    return {'fordon': int(o.buss.nunique()),
+            'turer': int(len(o)),
+            'korttid_h': round(float(o.kortid.sum() / 60), 2),
+            'omloppstid_h': round(float(span.sum() / 60), 2),
+            'regleringstid_h': round(float(v_i_trafik.sum() / 60), 2),
+            'uppstallning_h': round(float(v[v > DEPA_GRANS].sum() / 60), 2),
+            'km': round(float(o.km.sum()), 1),
+            'min_vandtid': round(float(v.min()), 1),
+            'vandningar_under_rek': int((vand < REKOMMENDERAD_VANDTID - 1e-9).sum()),
+            'genomgangar': int(o.genomgang.sum()),
+            'forsta_avg': round(float(o.avg.min()), 1), 'sista_ank': round(float(o.ank.max()), 1)}
+
+
+def fordon_i_trafik(o, steg=1.0):
+    """Antal fordon i trafik (kör eller väntar ≤ DEPA_GRANS) per minut."""
+    tid = np.arange(np.floor(o.avg.min()) - 10, np.ceil(o.ank.max()) + 10, steg)
+    n = np.zeros(len(tid))
+    for r in o.itertuples():
+        slut = r.ank + (r.vand_efter if (not np.isnan(r.vand_efter) and r.vand_efter <= DEPA_GRANS) else 0.0)
+        n += (tid >= r.avg) & (tid < slut)
+    return tid, n
+
+
+# ====================================================================== verifiering
+def med_andring(t, delta):
+    """delta: {trip_id: min} läggs på turens ankomst (avgången ligger fast)."""
+    t = t.copy()
+    t['delta'] = t.trip_id.map(delta).fillna(0.0).astype(float)
+    t['ank'] = t.ank + t.delta
+    t['kortid'] = t.ank - t.avg
+    return t
+
+
+def ram(t):
+    """Ramen från dagens omlopp: antal fordon och omloppstid."""
+    nt = nyckeltal(bygg_omlopp(t))
+    return {'fordon': nt['fordon'], 'omloppstid_h': nt['omloppstid_h']}
+
+
+def kopplingar(plan):
+    """Dagens kopplingar (trip_id, nästa trip_id) – referens så att omloppen efter en ändring liknar dagens."""
+    tid = plan.trip_id.to_numpy()
+    return {(tid[i], tid[j]) for i, j in enumerate(plan.nasta) if j >= 0}
+
+
+def inom_ram(nt, r):
+    return nt['fordon'] <= r['fordon'] and nt['omloppstid_h'] <= r['omloppstid_h'] + OMLOPPSTID_TOL / 60 + 1e-9
+
+
+def verifiera(t, delta, r, km_delta=None, **kw):
+    """Bygger omlopp med förslagets körtider. Returnerar (plan, nyckeltal, ryms inom ramen)."""
+    tt = med_andring(t, delta)
+    if km_delta:
+        tt['km'] = tt.km + tt.trip_id.map(km_delta).fillna(0.0)
+    plan = bygg_omlopp(tt, **kw)
+    nt = nyckeltal(plan)
+    return plan, nt, inom_ram(nt, r)
+
+
+def turer_som_ryms(t, kandidater, d, r, **kw):
+    """Prövar turerna en i taget (tidsordning) – behåller ändringen om förslaget fortfarande ryms i ramen."""
+    valda = []
+    for tid in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
+        prov = {k: d for k in valda + [tid]}
+        if inom_ram(nyckeltal(bygg_omlopp(med_andring(t, prov), **kw)), r):
+            valda.append(tid)
+    return valda
+
+
+# ====================================================================== figurer
+def hm(m):
+    m = int(round(m)); return f'{m // 60:02d}:{m % 60:02d}'
+
+
+def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, etikett_vand=True):
+    """Gantt: ett band per fordon, staplar per tur i linjefärg. Förlängd del av ändrade turer skrafferas;
+    vändningar under rekommenderad nivå markeras (röd < 1 min, orange < 3 min)."""
+    andrade = set(andrade)
+    nb = plan.buss.max()
+    for r in plan.itertuples():
+        y = nb - r.buss
+        f = C.FARG_LINJE[r.linje]
+        d = getattr(r, 'delta', 0.0) if r.trip_id in andrade else 0.0
+        ax.add_patch(Rectangle((r.avg, y - 0.34), r.kortid - d, 0.68, facecolor=f, edgecolor='white', lw=0.5, zorder=3))
+        if d > 0:
+            ax.add_patch(Rectangle((r.ank - d, y - 0.34), d, 0.68, facecolor='white', edgecolor=f, hatch='//////',
+                                   lw=0.6, zorder=3))
+        elif d < 0:
+            ax.add_patch(Rectangle((r.ank, y - 0.34), -d, 0.68, facecolor='none', edgecolor=f, ls=':', lw=0.6, zorder=3))
+        if r.kortid >= 14:
+            ax.text(r.avg + (r.kortid - max(d, 0)) / 2, y, r.linje, ha='center', va='center', fontsize=6.3,
+                    color='white', fontweight='bold', zorder=4)
+        if etikett_vand and not np.isnan(r.vand_efter) and r.vand_efter < REKOMMENDERAD_VANDTID - 1e-9:
+            farg = '#c0392b' if r.vand_efter < MIN_VANDTID - 1e-9 else '#e8590c'
+            if getattr(r, 'genomgang', False):
+                farg = '#1c5cab'
+            ax.plot([r.ank, r.ank + r.vand_efter], [y + 0.43, y + 0.43], color=farg, lw=2.2, solid_capstyle='butt', zorder=5)
+            ax.plot([r.ank + r.vand_efter / 2], [y + 0.43], marker='v', color=farg, ms=3.2, zorder=5)
+    ax.set_ylim(-0.7, nb - 0.3)
+    ax.set_yticks(range(nb)); ax.set_yticklabels([f'Buss {nb - i}' for i in range(nb)], fontsize=7.5)
+    ax.set_xlim(t0, t1)
+    xt = np.arange(np.ceil(t0 / 60) * 60, t1 + 1, 60)
+    ax.set_xticks(xt); ax.set_xticklabels([hm(x) for x in xt], fontsize=7)
+    ax.set_xticks(np.arange(np.ceil(t0 / 30) * 30, t1 + 1, 30), minor=True)
+    ax.grid(axis='x', which='major', color='#dcdad3', lw=0.6, zorder=0)
+    ax.grid(axis='x', which='minor', color='#efeee9', lw=0.4, zorder=0)
+    ax.tick_params(axis='y', length=0)
+    for s in ['top', 'right', 'left']:
+        ax.spines[s].set_visible(False)
+    ax.spines['bottom'].set_color('#b9b6ad')
+    if titel:
+        ax.set_title(titel, loc='left', fontsize=9.5, fontweight='bold', pad=4)
+
+
+def omlopp_forklaring(fig, extra=(), y=0.005, ncol=None):
+    h = [Patch(facecolor=C.FARG_LINJE[l], label=f'Linje {l}') for l in C.STADSLINJER]
+    h += list(extra)
+    h += [Line2D([], [], color='#e8590c', lw=2.2, label=f'Vändtid < {REKOMMENDERAD_VANDTID:g} min'),
+          Line2D([], [], color='#c0392b', lw=2.2, label=f'Vändtid < {MIN_VANDTID:g} min (ryms ej)')]
+    lg = fig.legend(handles=h, loc='lower left', bbox_to_anchor=(0.01, y), ncol=ncol or len(h), fontsize=7,
+                    frameon=False, handlelength=1.6, columnspacing=1.2)
+    return lg
+
+
+def fig_idag(t, plan):
+    nt = nyckeltal(plan)
+    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(12.4, 5.6), gridspec_kw={'height_ratios': [3.2, 1.0], 'hspace': 0.32})
+    rita_omlopp(ax, plan, titel=f'Härledd omloppsplan, typvardag {D.typvardag():%Y-%m-%d} – {nt["fordon"]} fordon')
+    tid, n = fordon_i_trafik(plan)
+    ax2.fill_between(tid, n, step='post', color='#9aa7b4', alpha=0.55, lw=0)
+    ax2.step(tid, n, where='post', color='#3d4a57', lw=0.9)
+    ax2.set_xlim(ax.get_xlim()); ax2.set_xticks(ax.get_xticks()); ax2.set_xticklabels(ax.get_xticklabels())
+    ax2.set_ylim(0, nt['fordon'] + 0.6); ax2.set_yticks(range(0, nt['fordon'] + 1))
+    ax2.tick_params(labelsize=7); ax2.grid(axis='both', color='#e6e4de', lw=0.5)
+    for s in ['top', 'right']:
+        ax2.spines[s].set_visible(False)
+    ax2.set_title('Fordon i trafik (kör eller vänder i centrum)', loc='left', fontsize=8.5, fontweight='bold', pad=3)
+    txt = (f"Turer {nt['turer']}   ·   körtid {nt['korttid_h']:.1f} h   ·   omloppstid {nt['omloppstid_h']:.1f} h "
+           f"(därav vändtid i centrum {nt['regleringstid_h']:.1f} h, uppställning {nt['uppstallning_h']:.1f} h)   ·   "
+           f"{nt['km']:.0f} km   ·   minsta vändtid {nt['min_vandtid']:g} min")
+    fig.text(0.01, 0.955, txt.replace('.', ','), fontsize=7.5, color=TEXT2)
+    omlopp_forklaring(fig, y=-0.035)
+    fig.subplots_adjust(left=0.06, right=0.99, top=0.9, bottom=0.08)
+    ut = C.KARTOR / 'b4_1_omlopp_idag.png'
+    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    return ut
+
+
+# ====================================================================== huvudflöde
+def linjeprofil(t, plan):
+    """Körtid och vändtid per linje i rusning (06–09, 15–18) – underlag för förslag och sammanslagning."""
+    r = plan[plan.avg.between(6 * 60, 18 * 60)]
+    ut = {}
+    for ln, d in r.groupby('linje'):
+        d = d.sort_values('avg')
+        intervall = d.avg.diff().median()
+        ut[ln] = {'turer_dag': int((t.linje == ln).sum()), 'kortid_median': float(d.kortid.median()),
+                  'kortid_max': float(d.kortid.max()), 'turintervall_rusning': float(intervall),
+                  'vandtid_median': float(d.vand_efter[d.vand_efter <= DEPA_GRANS].median()),
+                  'vandtid_min': float(d.vand_efter.min()),
+                  'km_tur': round(float(d.km.median()), 2)}
+    return ut
+
+
+def main():
+    P = C.PROCESSED
+    t = turer()
+    plan = bygg_omlopp(t)
+    kansl = {f'{L:g}': int(bygg_omlopp(t, min_vand=L).buss.nunique()) for L in (0.0, 1.0, 2.0, 3.0)}
+    plan.drop(columns=['monster']).assign(avg_hm=plan.avg.map(hm), ank_hm=plan.ank.map(hm)).to_csv(
+        P / 'b4_omlopp_idag.csv', index=False)
+    res = {'typvardag': str(D.typvardag()), 'idag': nyckeltal(plan), 'fordon_vid_minsta_vandtid': kansl,
+           'linjer': linjeprofil(t, plan),
+           'genomgangar_idag': [f"{plan.linje[i]}→{plan.linje[j]} {hm(plan.ank[i])}–{hm(plan.avg[j])}"
+                                for i, j in enumerate(plan.nasta) if j >= 0 and plan.linje[i] != plan.linje[j]
+                                and plan.vand_efter[i] <= DEPA_GRANS]}
+    with open(P / 'b4_omlopp_nyckeltal.json', 'w', encoding='utf-8') as fh:
+        json.dump(res, fh, ensure_ascii=False, indent=1)
+    print(json.dumps(res, ensure_ascii=False, indent=1))
+    print(fig_idag(t, plan))
+
+
+if __name__ == '__main__':
+    main()

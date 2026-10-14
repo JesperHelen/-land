@@ -18,14 +18,16 @@ if not os.path.exists(GPKG):
 
 # (grupp, [lager uppifrån och ned], tänd vid start)
 GRUPPER = [
+    ('Kap 4 Linjeförslag (fig 4.2–4.8)', ['b4_forslag_hallplatser', 'b4_forslag_korvagar', 'b4_sammanslagning_omraden',
+                                          'b4_tackning_forandring'], True),
     ('Kap 3 Hållplatslägen (fig 3.1–3.2)', ['a3_nya_hallplatser', 'a3_behov_ny_linjestrackning', 'a3_hallplatsbedomning',
-                                           'a3_nya_hallplatser_400m', 'a3_behov_400m'], True),
+                                           'a3_nya_hallplatser_400m', 'a3_behov_400m'], False),
     ('Kap 2 Täckning och turtäthet (fig 2.1–2.3)', ['a2_tackning_per_ruta', 'a2_tackningsytor'], False),
     ('Kap 1 OD-matris (fig 1.2–1.5)', ['a1_zoner_pastigande', 'a1_omfordelning_centrum', 'a1_od_FM_korrigerad',
                                       'a1_od_FM_levererad', 'a1_od_EM_korrigerad', 'a1_od_EM_levererad'], False),
     ('Bakgrund', ['00_hallplatser', '00_stadslinjer_forskjutna', '00_stadslinjer', '00_befolkningsrutor', '00_land'], True),
 ]
-EJ_TANDA = {'00_stadslinjer', '00_befolkningsrutor', '00_hallplatser', 'a1_od_FM_levererad', 'a1_od_EM_korrigerad', 'a1_od_EM_levererad'}
+EJ_TANDA = {'b4_sammanslagning_omraden', '00_stadslinjer', '00_befolkningsrutor', '00_hallplatser', 'a1_od_FM_levererad', 'a1_od_EM_korrigerad', 'a1_od_EM_levererad'}
 
 projekt = QgsProject.instance()
 projekt.setCrs(QgsCoordinateReferenceSystem('EPSG:3067'))

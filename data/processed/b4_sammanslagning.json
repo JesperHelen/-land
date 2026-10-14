@@ -1,0 +1,265 @@
+{
+ "parametrar": {
+  "intervall": 30.0,
+  "genomgang_min": 0.5,
+  "reglering_min": 3.0
+ },
+ "par": [
+  {
+   "forlangs": "N",
+   "partner": "S",
+   "t_forlangs": 26.0,
+   "t_partner": 23.0,
+   "vandtid_idag": 4.0,
+   "utrymme_idag": 1.0,
+   "utrymme_genomgaende": 3.5,
+   "utrymme_utan_puls": 7.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "N",
+   "partner": "V",
+   "t_forlangs": 26.0,
+   "t_partner": 27.0,
+   "vandtid_idag": 4.0,
+   "utrymme_idag": 1.0,
+   "utrymme_genomgaende": 3.5,
+   "utrymme_utan_puls": 3.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "N",
+   "partner": "Ö",
+   "t_forlangs": 26.0,
+   "t_partner": 23.0,
+   "vandtid_idag": 4.0,
+   "utrymme_idag": 1.0,
+   "utrymme_genomgaende": 3.5,
+   "utrymme_utan_puls": 7.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "S",
+   "partner": "N",
+   "t_forlangs": 23.0,
+   "t_partner": 26.0,
+   "vandtid_idag": 7.0,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "utrymme_utan_puls": 7.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "S",
+   "partner": "V",
+   "t_forlangs": 23.0,
+   "t_partner": 27.0,
+   "vandtid_idag": 7.0,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "utrymme_utan_puls": 6.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "S",
+   "partner": "Ö",
+   "t_forlangs": 23.0,
+   "t_partner": 23.0,
+   "vandtid_idag": 7.0,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "utrymme_utan_puls": 10.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "V",
+   "partner": "N",
+   "t_forlangs": 27.0,
+   "t_partner": 26.0,
+   "vandtid_idag": 3.0,
+   "utrymme_idag": 0.0,
+   "utrymme_genomgaende": 2.5,
+   "utrymme_utan_puls": 3.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "V",
+   "partner": "S",
+   "t_forlangs": 27.0,
+   "t_partner": 23.0,
+   "vandtid_idag": 3.0,
+   "utrymme_idag": 0.0,
+   "utrymme_genomgaende": 2.5,
+   "utrymme_utan_puls": 6.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "V",
+   "partner": "Ö",
+   "t_forlangs": 27.0,
+   "t_partner": 23.0,
+   "vandtid_idag": 3.0,
+   "utrymme_idag": 0.0,
+   "utrymme_genomgaende": 2.5,
+   "utrymme_utan_puls": 6.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "Ö",
+   "partner": "N",
+   "t_forlangs": 23.0,
+   "t_partner": 26.0,
+   "vandtid_idag": 7.0,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "utrymme_utan_puls": 7.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "Ö",
+   "partner": "S",
+   "t_forlangs": 23.0,
+   "t_partner": 23.0,
+   "vandtid_idag": 7.0,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "utrymme_utan_puls": 10.5,
+   "partner_klarar_reglering": true
+  },
+  {
+   "forlangs": "Ö",
+   "partner": "V",
+   "t_forlangs": 23.0,
+   "t_partner": 27.0,
+   "vandtid_idag": 7.0,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "utrymme_utan_puls": 6.5,
+   "partner_klarar_reglering": true
+  }
+ ],
+ "genomgaende_resor": [
+  {
+   "par": "N/S",
+   "direktresor_vardag": 0.8,
+   "sparade_resenarsminuter_vardag": 0.8
+  },
+  {
+   "par": "N/V",
+   "direktresor_vardag": 0.5,
+   "sparade_resenarsminuter_vardag": 0.5
+  },
+  {
+   "par": "N/Ö",
+   "direktresor_vardag": 0.8,
+   "sparade_resenarsminuter_vardag": 0.9
+  },
+  {
+   "par": "S/V",
+   "direktresor_vardag": 0.6,
+   "sparade_resenarsminuter_vardag": 0.8
+  },
+  {
+   "par": "S/Ö",
+   "direktresor_vardag": 1.8,
+   "sparade_resenarsminuter_vardag": 2.6
+  },
+  {
+   "par": "V/Ö",
+   "direktresor_vardag": 0.6,
+   "sparade_resenarsminuter_vardag": 1.1
+  }
+ ],
+ "omraden": [
+  {
+   "omrade": "Möckelö Strand",
+   "inv": 239.0,
+   "linje": "V",
+   "avstand_m": 718,
+   "behov_min_per_tur": 2.5,
+   "utrymme_idag": 0.0,
+   "utrymme_genomgaende": 2.5,
+   "bedomning": "Ryms med genomgående linje"
+  },
+  {
+   "omrade": "Lillåkersvägen",
+   "inv": 183.0,
+   "linje": "N",
+   "avstand_m": 969,
+   "behov_min_per_tur": 6.5,
+   "utrymme_idag": 1.0,
+   "utrymme_genomgaende": 3.5,
+   "bedomning": "Kräver större omläggning"
+  },
+  {
+   "omrade": "Solberget",
+   "inv": 155.0,
+   "linje": "Ö",
+   "avstand_m": 711,
+   "behov_min_per_tur": 4.9,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "bedomning": "Ryms med genomgående linje"
+  },
+  {
+   "omrade": "Örtvägen",
+   "inv": 125.0,
+   "linje": "N",
+   "avstand_m": 632,
+   "behov_min_per_tur": 4.4,
+   "utrymme_idag": 1.0,
+   "utrymme_genomgaende": 3.5,
+   "bedomning": "Kräver större omläggning"
+  },
+  {
+   "omrade": "Dalkullavägen",
+   "inv": 99.0,
+   "linje": "V",
+   "avstand_m": 622,
+   "behov_min_per_tur": 4.4,
+   "utrymme_idag": 0.0,
+   "utrymme_genomgaende": 2.5,
+   "bedomning": "Kräver större omläggning"
+  },
+  {
+   "omrade": "Österkalmare",
+   "inv": 90.0,
+   "linje": "N",
+   "avstand_m": 1568,
+   "behov_min_per_tur": 10.3,
+   "utrymme_idag": 1.0,
+   "utrymme_genomgaende": 3.5,
+   "bedomning": "Kräver större omläggning"
+  },
+  {
+   "omrade": "Skrakvägen",
+   "inv": 84.0,
+   "linje": "J",
+   "avstand_m": 480,
+   "behov_min_per_tur": 3.5,
+   "utrymme_idag": NaN,
+   "utrymme_genomgaende": NaN,
+   "bedomning": "Linje J (timtrafik) – prövas separat"
+  },
+  {
+   "omrade": "Solberget södra",
+   "inv": 81.0,
+   "linje": "Ö",
+   "avstand_m": 582,
+   "behov_min_per_tur": 4.1,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "bedomning": "Ryms med genomgående linje"
+  },
+  {
+   "omrade": "Strömsnäs",
+   "inv": 78.0,
+   "linje": "Ö",
+   "avstand_m": 1557,
+   "behov_min_per_tur": 10.2,
+   "utrymme_idag": 4.0,
+   "utrymme_genomgaende": 6.5,
+   "bedomning": "Kräver större omläggning"
+  }
+ ]
+}
