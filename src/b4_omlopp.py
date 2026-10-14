@@ -22,6 +22,9 @@ Verifiering av ett förslag (ramen 'inga fler bussar')
     omloppstiden (fordonstimmar) inte ökar mer än OMLOPPSTID_TOL.
   * Ryms inte alla turer prövas turerna en i taget i tidsordning; redovisas hur många som ryms.
   * Robusthet redovisas som antal vändningar under REKOMMENDERAD_VANDTID och total regleringstid.
+  * Genomgående linje (sammanslagning av normparet, t.ex. V → Ö): bussen fortsätter direkt som partnerlinjen
+    efter GENOMGANG_MIN, och partnerlinjens avgång får skjutas högst MAX_SKIFT_PARTNER min efter pulsen
+    (genomgaende_ryms). Regleringen tas då vid bytet tillbaka (Ö → V).
 Utdata: data/processed/b4_omlopp_idag.csv, b4_omlopp_nyckeltal.json, output/kartor/b4_1_omlopp_idag.png
 """
 import json
@@ -50,6 +53,7 @@ SAMMA_LINJE_STRAFF = 8.0       # min – fordonet fortsätter på samma linje (u
 ANNAT_BYTE_STRAFF = 2.0        # min – byte till en linje utanför normparet
 REFERENS_BONUS = 0.3           # min – vid lika väntan behålls dagens koppling (stabila omlopp före/efter)
 OMLOPPSTID_TOL = 10.0          # min/dag – tillåten ökning av omloppstiden (≈ 0,2 %; t.ex. att dagens sista tur blir längre)
+MAX_SKIFT_PARTNER = 2.0        # min – vid genomgående linje får partnerlinjen avgå högst så mycket efter pulsen
 TEXT, TEXT2 = '#1f1f1e', '#52514e'
 
 
@@ -187,11 +191,14 @@ def fordon_i_trafik(o, steg=1.0):
 
 
 # ====================================================================== verifiering
-def med_andring(t, delta):
-    """delta: {trip_id: min} läggs på turens ankomst (avgången ligger fast)."""
+def med_andring(t, delta, skift=None):
+    """delta: {trip_id: min} läggs på turens ankomst (avgången ligger fast). skift: {trip_id: min} – turen avgår
+    (och ankommer) så mycket senare än i dag (partnerlinjen vid genomgående linje)."""
     t = t.copy()
     t['delta'] = t.trip_id.map(delta).fillna(0.0).astype(float)
-    t['ank'] = t.ank + t.delta
+    t['skift'] = t.trip_id.map(skift or {}).fillna(0.0).astype(float)
+    t['avg'] = t.avg + t.skift
+    t['ank'] = t.ank + t.skift + t.delta
     t['kortid'] = t.ank - t.avg
     return t
 
@@ -219,9 +226,9 @@ def ar_robust(nt, r):
     return nt['varv_utan_reglering'] <= r.get('varv_utan_reglering', 10 ** 6)
 
 
-def verifiera(t, delta, r, km_delta=None, **kw):
+def verifiera(t, delta, r, km_delta=None, skift=None, **kw):
     """Bygger omlopp med förslagets körtider. Returnerar (plan, nyckeltal, ryms inom ramen)."""
-    tt = med_andring(t, delta)
+    tt = med_andring(t, delta, skift)
     if km_delta:
         tt['km'] = tt.km + tt.trip_id.map(km_delta).fillna(0.0)
     plan = bygg_omlopp(tt, **kw)
@@ -240,6 +247,34 @@ def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, **kw):
         if inom_ram(nyckeltal(bygg_omlopp(med_andring(t, prov), **kw)), r, robust):
             valda.append(tid)
     return valda
+
+
+def genomgaende_ryms(t, kandidater, d, r, partner='Ö', max_skift=MAX_SKIFT_PARTNER, robust=False, bas=None, **kw):
+    """Genomgående linje: turerna prövas en i taget (tidsordning). Hinner bussen inte till partnerlinjens tur som
+    följer i omloppet skjuts den turens avgång (högst max_skift min efter dagens) så att bytet blir GENOMGANG_MIN;
+    går det inte prövas turen utan skift (omloppen byggs om). bas: andra ändringar {trip_id: min} (t.ex. kortare
+    körtid för partnerlinjen). Returnerar (valda turer, {trip_id: skift})."""
+    valda, skift, bas = [], {}, dict(bas or {})
+    plan = bygg_omlopp(med_andring(t, bas), **kw)
+    for tid in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
+        d2 = dict(bas)
+        for k in valda + [tid]:
+            d2[k] = d2.get(k, 0.0) + d
+        tt = med_andring(t, d2, skift).set_index('trip_id')
+        i = plan.index[plan.trip_id == tid][0]; j = plan.nasta.iat[i]
+        forsok = []
+        if j >= 0 and tt.at[plan.trip_id.iat[j], 'linje'] == partner:
+            nx = plan.trip_id.iat[j]
+            behov = tt.at[tid, 'ank'] + GENOMGANG_MIN - tt.at[nx, 'avg']
+            if 0 < behov and skift.get(nx, 0.0) + behov <= max_skift + 1e-9:
+                forsok.append({**skift, nx: skift.get(nx, 0.0) + behov})
+        forsok.append(dict(skift))
+        for s_ in forsok:
+            p2 = bygg_omlopp(med_andring(t, d2, s_), **kw)
+            if inom_ram(nyckeltal(p2), r, robust):
+                valda.append(tid); skift = s_; plan = p2
+                break
+    return valda, {k: round(v, 2) for k, v in skift.items() if v > 0}
 
 
 # ====================================================================== figurer
@@ -262,6 +297,10 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
                                    lw=0.6, zorder=3))
         elif d < 0:
             ax.add_patch(Rectangle((r.ank, y - 0.34), -d, 0.68, facecolor='none', edgecolor=f, ls=':', lw=0.6, zorder=3))
+        sk = getattr(r, 'skift', 0.0)
+        if sk > 0:                                                 # avgår senare än i dag
+            ax.add_patch(Rectangle((r.avg - sk, y - 0.34), sk, 0.68, facecolor='none', edgecolor='#1f1f1e', ls=(0, (1, 1)),
+                                   lw=0.6, zorder=3))
         if r.kortid >= 14:
             ax.text(r.avg + (r.kortid - max(d, 0)) / 2, y, r.linje, ha='center', va='center', fontsize=6.3,
                     color='white', fontweight='bold', zorder=4)

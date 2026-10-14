@@ -1,10 +1,10 @@
-omrade,inv,x,y,linje,avstand_m,behov_min_per_tur,utrymme_idag,utrymme_genomgaende,bedomning
-Möckelö Strand,239.0,105636.61417322831,6683413.976377953,V,718,2.5,0.0,2.5,Ryms med reglering hos partnerlinjen
-Lillåkersvägen,183.0,109503.58942065491,6686503.211586902,N,969,6.5,1.0,3.5,Kräver större omläggning
-Solberget,155.0,110559.05572755417,6685577.6315789465,Ö,711,4.9,4.0,6.5,Ryms med reglering hos partnerlinjen
-Örtvägen,125.0,109725.00000000004,6685771.330275232,N,632,4.4,1.0,3.5,Kräver större omläggning
-Dalkullavägen,99.0,107504.56204379564,6687387.043795621,V,622,4.4,0.0,2.5,Kräver större omläggning
-Österkalmare,90.0,110360.26119402988,6686553.171641792,N,1568,10.3,1.0,3.5,Kräver större omläggning
-Skrakvägen,84.0,107312.5,6681137.500000001,J,480,3.5,,,Linje J (timtrafik) – prövas separat
-Solberget södra,81.0,110856.60919540228,6684622.126436781,Ö,582,4.1,4.0,6.5,Ryms med reglering hos partnerlinjen
-Strömsnäs,78.0,111524.20844327178,6681482.915567283,Ö,1557,10.2,4.0,6.5,Kräver större omläggning
+omrade,inv,x,y,linje,avstand_m,behov_min_per_tur,utrymme_idag,utrymme_genomgaende,utrymme_skift,bedomning
+Möckelö Strand,239.0,105636.61417322831,6683413.976377953,V,718,4.5,0.0,2.5,4.5,Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen
+Lillåkersvägen,183.0,109503.58942065491,6686503.211586902,N,969,6.5,1.0,3.5,5.5,Kräver större omläggning
+Solberget,155.0,110559.05572755417,6685577.6315789465,Ö,711,4.9,4.0,6.5,6.5,Ryms med reglering hos partnerlinjen
+Örtvägen,125.0,109725.00000000004,6685771.330275232,N,632,4.4,1.0,3.5,5.5,Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen
+Dalkullavägen,99.0,107504.56204379564,6687387.043795621,V,622,4.4,0.0,2.5,4.5,Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen
+Österkalmare,90.0,110360.26119402988,6686553.171641792,N,1568,10.3,1.0,3.5,5.5,Kräver större omläggning
+Skrakvägen,84.0,107312.5,6681137.500000001,J,480,3.5,,,,Linje J (timtrafik) – prövas separat
+Solberget södra,81.0,110856.60919540228,6684622.126436781,Ö,582,4.1,4.0,6.5,6.5,Ryms med reglering hos partnerlinjen
+Strömsnäs,78.0,111524.20844327178,6681482.915567283,Ö,1557,10.2,4.0,6.5,6.5,Kräver större omläggning

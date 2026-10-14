@@ -7,9 +7,11 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 
 - **Enklast:** dra in `linjenatsutredning.gpkg` i QGIS och markera de lager du vill se. Varje lager har en
   inbäddad standardstil som laddas automatiskt, med samma färger och klasser som PNG-kartorna.
-- **Alla lager på en gång, grupperade per kapitel och per linjeförslag:** öppna QGIS Python-konsol
-  (*Insticksprogram > Python-konsol*), klicka *Visa redigerare*, öppna `oppna_i_qgis.py` och kör det. Skriptet
-  sparar projektet som `linjenatsutredning.qgz` i samma mapp; därefter räcker det att öppna projektfilen.
+- **Alla lager på en gång, grupperade per kapitel och per linjeförslag:** öppna **`linjenatsutredning.qgz`**
+  (*Projekt > Öppna*). Projektfilen är skapad med `oppna_i_qgis.py` och öppnas inzoomad på Mariehamn.
+  Skriptet kan köras om (QGIS Python-konsol: *Insticksprogram > Python-konsol*, *Visa redigerare*, öppna
+  `oppna_i_qgis.py`, kör) – kör det i ett nytt, tomt projekt. En äldre sparad `.qgz` från en tidigare leverans
+  saknar de nya lagren och scenarierna och ska inte användas.
 - **Alternativa stilar** (där ett lager används i flera figurer): *Lageregenskaper > Symbologi > Stil* (nederst i
   dialogen) och välj stil i listan. Stilarna finns även som `.qml`-filer i `stilar/` (*Stil > Läs in stil*).
 - **Bakgrundskarta:** lägg till t.ex. OpenStreetMap via *XYZ Tiles* i webbläsarpanelen och lägg den underst.
@@ -30,12 +32,14 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 2.3 Svag faktisk tillgänglighet | `a2_tackningsytor`, `a2_tackning_per_ruta` | *Svag faktisk tillgänglighet* / *Invånare med svag tillgänglighet per ruta* |
 | 3.1 Nya hållplatslägen | `a3_nya_hallplatser`, `a3_nya_hallplatser_400m`, `a3_behov_ny_linjestrackning`, `a3_behov_400m` | Standard |
 | 3.2 Bedömning av hållplatser | `a3_hallplatsbedomning` | Hållplatsbedömning |
-| 4.2, 4.4, 4.6 Linjeförslag 1–3 | `b4_forslag_hallplatser`, `b4_forslag_korvagar` (fält `forslag`: 1a, 1b, 2, 3), `b4_tackning_forandring` (fält `scenario`) | Standard |
-| 4.9 Linjerna i förslagen (bl.a. genomgående V/Ö) | `b4_linjer_forslag` (fält `forslag`: 1a, 1b_VÖ, 2, 3) | Linjer i förslagen |
-| 4.11–4.12 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` (fält `scenario`: idag, paket_A), `b4_tackning_forandring` (scenario paket_A) | Turtäthet inom 400 m |
+| 4.2, 4.4, 4.6 Linjeförslag 1–3 | `b4_forslag_hallplatser`, `b4_forslag_korvagar` (fält `forslag`: 1a, 1b, 2, 3; `objekt`: befintlig väg / planerad väg / utgår) | Standard |
+| Linjerna i förslagen | `b4_linjer_forslag` (fält `forslag`: 1a, 1a_VO = V och Ö sammanslagna, 1b, 2, 3, 4) | Linjer i förslagen |
+| 4.10 Flygplatsen | `b4_forslag_hallplatser`, `b4_forslag_korvagar`, `b4_linjer_forslag` (forslag 4) | Standard |
+| 4.13–4.14 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` och `b4_tackning_forandring` (fält `scenario`: idag, 1a, 1a_ryms, 1a_VO, 1b, 2, 3, 4, 4_VO, 4_VO_sol, 4_Y) | Turtäthet inom 400 m / Förändrad turtäthetsklass |
 | Nyckeltal per scenario (bussar, omloppstid, km, täckning, kostnad) | `b4_nyckeltal_scenarier` (tabell utan geometri) | – |
 | 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |
-| 4.1, 4.3, 4.5, 4.7, 4.10 Omlopp | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv`, `b4_paket_omlopp.csv` |
+| 4.1, 4.3, 4.5, 4.7, 4.9, 4.11, 4.12 Omlopp och tidsbudget | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv`, `b4_systemeffekter_omlopp.csv` |
+| Via-punkter för OSRM ("gömda stopp") | `00_viapunkter` (fält `from_stop`, `to_stop`, `kommentar`) | Via-punkter för OSRM |
 
 ## Linjer som delar gata
 
@@ -56,12 +60,21 @@ Vägdragningen hämtas enklast i QGIS:
    dvs. 2–3 minuter) och uppdaterar sedan:
    - `00_stadslinjer` och `00_stadslinjer_forskjutna` i gruppen *Bakgrund*; förskjutningen där linjer delar gata
      räknas om längs de ruttade gatorna;
-   - `b4_linjer_forslag` och `b4_forslag_korvagar`, dvs. förslagens linjer och nya delsträckor (Möckelö Strand
-     via dagens gator, Maxinge – Bo-Bil – Bolstavägen). Förlängningen av Norrgårdsvägen (1b) är en planerad väg
-     och behålls schematisk.
+   - `b4_linjer_forslag` och `b4_forslag_korvagar`, dvs. förslagens linjer och nya delsträckor (den befintliga
+     vägen Norrgårdsvägen – Möckelö Strand ny, Maxinge – Bo-Bil – Bolstavägen, Posten – flygplatsen). Förlängningen av Norrgårdsvägen
+     (1b) är en planerad väg och behålls schematisk (fältet `planerad_del`).
 3. Lagren laddas om i projektet. Fältet `vagdragning` anger OSRM, och `00_segment` visar källan, OSRM:s längd och
    körtid per segment. En OSRM-rutt som är orimligt lång (mer än 2,5 × fågelvägen + 300 m) avvisas och behålls
    rak (`kalla = osrm_avvisad`) för kontroll.
+
+**Via-punkter ("gömda stopp").** Väljer OSRM en annan väg än bussen – t.ex. huvudvägen i stället för bussens
+gata, eller en vändning vid en hållplats – lägg en punkt på rätt gata i lagret **`00_viapunkter`** (gruppen
+*Bakgrund*: *Växla redigering*, *Lägg till punktobjekt*, spara) och kör `rutta_med_osrm.py` igen. Rutten tvingas
+då över punkten (utan vändning där). Fälten `from_stop`/`to_stop` (hållplatsernas id, se `00_segment`) kan
+lämnas tomma: punkten gäller då det närmaste hållplatssegmentet, och alltid även segmentet i motsatt riktning.
+Lagret innehåller från början en punkt: linje V Lönnhagsvägen – Norrgårdsvägen kör vägen söder om huvudvägen
+och vänder inte vid hållplatsen. Segment med via-punkter ruttas om varje gång skriptet körs. Samma punkter finns
+i `src/s01_vagdragning.py` (`VIA_PUNKTER`) för analyskedjan.
 
 Skriptet kan köras igen; redan ruttade segment hoppas över. Vill du att även analyserna och PNG-kartorna ska
 använda vägdragningen: `python src/s01_vagdragning.py --fran-gis` och därefter `python src/kor_alla.py --utan-osrm`
@@ -69,10 +82,31 @@ använda vägdragningen: `python src/s01_vagdragning.py --fran-gis` och därefte
 
 ## Linjeförslagen i QGIS
 
-Skriptet lägger förslagen i gruppen *Kap 4 Linjeförslag* med en undergrupp per förslag (filter på fälten
-`forslag`/`scenario`): *Paket A* (tänd vid start), *Förslag 1a*, *1b*, *2*, *3*, *Systemeffekter* och
-*Sammanslagning av linjer*. Tänd/släck undergrupperna för att jämföra. Filtren kan ändras under
-*Lageregenskaper > Källa > Frågebyggare*. Nya körvägar är schematiska (raka) tills vägdragning finns.
+Förslagen redovisas var för sig i gruppen *Kap 4 Linjeförslag (var för sig)*, med en undergrupp per förslag
+(filter på fälten `forslag`/`scenario`): *Förslag 1a* (tänd vid start), *1b*, *2*, *3* och *4* (flygplatsen,
+med Solberget som dras in i en variant). Varje grupp visar ny
+hållplats, körväg, linjen efter förslaget och **förändrad turtäthet** (gröna celler = bättre, röda = sämre än i
+dag). Tänd/släck grupperna för att jämföra.
+
+**Systemeffekter – turtäthet inom 400 m per scenario (välj ett)** är en *exklusiv* grupp: tänd gruppen och
+klicka i ett scenario (I dag, 1a alla turer, 1a med dagens tidtabell, 1a med V och Ö sammanslagna, 1b, 2, 3, 4
+alla turer, 4 med V och Ö sammanslagna, 4 med Solberget indragen och 4Y flygturerna).
+Varje scenario visar turtäthetsklassen inom 400 m med förslaget och, ovanpå, cellerna som förändras mot i dag.
+Förändringarna är lokala – zooma in vid Möckelö Strand, Kalmarnäs eller Bo-Bil för att se dem. Nyckeltalen per
+scenario finns i tabellen *Nyckeltal per scenario* (högerklick > *Öppna attributtabell*).
+Filtren kan ändras under *Lageregenskaper > Källa > Frågebyggare*.
+
+## Om lager saknas, är tomma eller osynliga
+
+- **Använd den levererade `linjenatsutredning.qgz`** eller kör `oppna_i_qgis.py` i ett nytt, tomt projekt. En
+  äldre sparad projektfil pekar på lager och filter som inte längre finns. I tidigare leveranser var lagret
+  `b4_tackning_forandring` dessutom tomt (fel i exporten, rättat 2026-10-14).
+- **Förändringarna är lokala.** Zooma in vid Möckelö Strand, Kalmarnäs, Bo-Bil, flygplatsen eller Solberget.
+  På kartan över hela Mariehamn ser scenarierna nästan likadana ut.
+- **"unable to open database file" i QGIS:s logg:** QGIS öppnar GeoPackage i WAL-läge, och det fungerar inte i
+  alla mappar, t.ex. synkade mappar (OneDrive/SharePoint) och nätverksdiskar. Kopiera mappen `output/gis` till en
+  lokal disk, eller sätt miljövariabeln `OGR_SQLITE_JOURNAL=DELETE` (*Inställningar > Alternativ > System >
+  Miljö*, lägg till variabeln och starta om QGIS).
 
 ## Att tänka på
 

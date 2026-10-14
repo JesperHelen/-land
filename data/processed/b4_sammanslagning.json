@@ -176,10 +176,11 @@
    "inv": 239.0,
    "linje": "V",
    "avstand_m": 718,
-   "behov_min_per_tur": 2.5,
+   "behov_min_per_tur": 4.5,
    "utrymme_idag": 0.0,
    "utrymme_genomgaende": 2.5,
-   "bedomning": "Ryms med reglering hos partnerlinjen"
+   "utrymme_skift": 4.5,
+   "bedomning": "Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen"
   },
   {
    "omrade": "Lillåkersvägen",
@@ -189,6 +190,7 @@
    "behov_min_per_tur": 6.5,
    "utrymme_idag": 1.0,
    "utrymme_genomgaende": 3.5,
+   "utrymme_skift": 5.5,
    "bedomning": "Kräver större omläggning"
   },
   {
@@ -199,6 +201,7 @@
    "behov_min_per_tur": 4.9,
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 6.5,
+   "utrymme_skift": 6.5,
    "bedomning": "Ryms med reglering hos partnerlinjen"
   },
   {
@@ -209,7 +212,8 @@
    "behov_min_per_tur": 4.4,
    "utrymme_idag": 1.0,
    "utrymme_genomgaende": 3.5,
-   "bedomning": "Kräver större omläggning"
+   "utrymme_skift": 5.5,
+   "bedomning": "Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen"
   },
   {
    "omrade": "Dalkullavägen",
@@ -219,7 +223,8 @@
    "behov_min_per_tur": 4.4,
    "utrymme_idag": 0.0,
    "utrymme_genomgaende": 2.5,
-   "bedomning": "Kräver större omläggning"
+   "utrymme_skift": 4.5,
+   "bedomning": "Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen"
   },
   {
    "omrade": "Österkalmare",
@@ -229,6 +234,7 @@
    "behov_min_per_tur": 10.3,
    "utrymme_idag": 1.0,
    "utrymme_genomgaende": 3.5,
+   "utrymme_skift": 5.5,
    "bedomning": "Kräver större omläggning"
   },
   {
@@ -239,6 +245,7 @@
    "behov_min_per_tur": 3.5,
    "utrymme_idag": NaN,
    "utrymme_genomgaende": NaN,
+   "utrymme_skift": NaN,
    "bedomning": "Linje J (timtrafik) – prövas separat"
   },
   {
@@ -249,6 +256,7 @@
    "behov_min_per_tur": 4.1,
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 6.5,
+   "utrymme_skift": 6.5,
    "bedomning": "Ryms med reglering hos partnerlinjen"
   },
   {
@@ -259,6 +267,7 @@
    "behov_min_per_tur": 10.2,
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 6.5,
+   "utrymme_skift": 6.5,
    "bedomning": "Kräver större omläggning"
   }
  ]

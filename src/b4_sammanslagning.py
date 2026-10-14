@@ -20,9 +20,13 @@ Princip
     byte i centrum och sparade resenärsminuter (b4_natverk.py).
   * Körtiden är medianen för rusningsturerna. Linje Ö:s skolturer (08:20, 08:45, 13:10–15:10 via Strandnäs skola
     södra) är 5–6 min längre och har därför mindre utrymme – se omloppsverifieringen för enskilda förslag.
+  * Partnerlinjen kan dessutom avgå upp till MAX_SKIFT (2 min) efter pulsen, om den har reglering kvar efter
+    bytet tillbaka (≥ REGLERING). Det ger ytterligare min(MAX_SKIFT, 30 − t_B − REGLERING) min per tur
+    ('utrymme_skift'). För V/Ö: V kan förlängas 2,5 + 2 = 4,5 min i rusning (prövat tur för tur i
+    b4_forslag/b4_omlopp.genomgaende_ryms).
   * Nåbarhet för områden som i dag saknar hållplats inom 400 m (A3, behov av ändrad linjesträckning): behövd
     tilläggstid per tur = 2 × avstånd till närmaste körväg × 1,3 (omvägsfaktor) / 25 km/h + 0,5 min uppehåll.
-    För Möckelö Strand används beställarens restider (förslag 1a/1b).
+    För Möckelö Strand används beställarens restider via dagens vägar (förslag 1a: 2 + 0,5 + 2 min).
 Utdata: data/processed/b4_sammanslagning_par.csv, b4_sammanslagning_omraden.csv, b4_sammanslagning.json,
         output/kartor/b4_8_sammanslagning.png
 """
@@ -48,6 +52,8 @@ LINJER = ['N', 'S', 'V', 'Ö']        # 30-minuterslinjer i pulsen (J går en g�
 INTERVALL = 30.0
 GENOMGANG = O.GENOMGANG_MIN          # 0,5 min – samma som i omloppsverifieringen
 REGLERING = O.REKOMMENDERAD_VANDTID  # 3 min
+MAX_SKIFT = O.MAX_SKIFT_PARTNER      # 2 min – partnerlinjen får avgå så mycket efter pulsen
+PARTNER = {'N': 'S', 'S': 'N', 'V': 'Ö', 'Ö': 'V'}
 OMVAG = 1.3
 KMH = 25.0
 
@@ -94,6 +100,14 @@ def genomgaende_resor():
     return pd.DataFrame(ut)
 
 
+SKIFT_TEXT = f'Ryms om partnerlinjen dessutom avgår ≤ {MAX_SKIFT:g} min efter pulsen'
+
+
+def skift(prof, l):
+    """Extra tid om partnerlinjen avgår upp till MAX_SKIFT efter pulsen (kräver reglering kvar hos partnern)."""
+    return float(max(0.0, min(MAX_SKIFT, INTERVALL - prof[PARTNER[l]]['kortid_median'] - REGLERING)))
+
+
 def omraden(prof):
     """A3-områden utanför räckhåll: behövd tilläggstid per tur och om den ryms (i dag / genomgående)."""
     import s01_vagdragning as V
@@ -118,19 +132,23 @@ def omraden(prof):
                         bast = (d, l)
         d, l = bast
         behov_min = 2 * d * OMVAG / 1000 / KMH * 60 + 0.5
-        if r.narmaste_hpl == 'Möckelö Strand':
-            behov_min = 2 * 1.0 + 0.5                     # förslag 1b (förlängd Norrgårdsvägen)
+        if r.narmaste_hpl == 'Möckelö Strand':           # förslag 1a (dagens vägar, beställarens restider)
+            import b4_forslag as F
+            behov_min = 2 * F.RESTID_BEFINTLIG_VAG + F.UPPEHALL
         rader.append({'omrade': r.narmaste_hpl, 'inv': r.inv, 'x': r.x, 'y': r.y, 'linje': l, 'avstand_m': round(d),
                       'behov_min_per_tur': round(behov_min, 1)})
     df = pd.DataFrame(rader)
     utr = {l: (INTERVALL - REGLERING - prof[l]['kortid_median'] if l in LINJER else np.nan) for l in C.STADSLINJER}
     utr_g = {l: INTERVALL - GENOMGANG - prof[l]['kortid_median'] if l in LINJER else np.nan for l in C.STADSLINJER}
+    utr_s = {l: utr_g[l] + skift(prof, l) if l in LINJER else np.nan for l in C.STADSLINJER}
     df['utrymme_idag'] = df.linje.map(utr)
     df['utrymme_genomgaende'] = df.linje.map(utr_g)
-    df['bedomning'] = np.where(df.behov_min_per_tur <= df.utrymme_idag, 'Ryms i dag',
-                      np.where(df.behov_min_per_tur <= df.utrymme_genomgaende, 'Ryms med reglering hos partnerlinjen',
-                               np.where(df.linje == 'J', 'Linje J (timtrafik) – prövas separat',
-                                        'Kräver större omläggning')))
+    df['utrymme_skift'] = df.linje.map(utr_s)
+    df['bedomning'] = np.select(
+        [df.behov_min_per_tur <= df.utrymme_idag, df.behov_min_per_tur <= df.utrymme_genomgaende,
+         df.behov_min_per_tur <= df.utrymme_skift, df.linje == 'J'],
+        ['Ryms i dag', 'Ryms med reglering hos partnerlinjen', SKIFT_TEXT, 'Linje J (timtrafik) – prövas separat'],
+        'Kräver större omläggning')
     return df
 
 
@@ -142,7 +160,7 @@ def figur(par, resor, omr, prof):
     ax = fig.add_subplot(gs[:, 0])
     K.ny_karta((104900, 112100, 6680300, 6688100), ax=ax, titel='Områden utan hållplats inom 400 m – behövd tid per tur')
     K.rita_linjer(ax, lw=1.9, zorder=4)
-    farg = {'Ryms i dag': '#2f9e44', 'Ryms med reglering hos partnerlinjen': '#1c5cab',
+    farg = {'Ryms i dag': '#2f9e44', 'Ryms med reglering hos partnerlinjen': '#1c5cab', SKIFT_TEXT: '#159a9c',
             'Kräver större omläggning': '#c0392b', 'Linje J (timtrafik) – prövas separat': '#7a776f'}
     for r in omr.itertuples():
         ax.scatter([r.x], [r.y], s=40 + r.inv * 0.9, marker='D', color=farg[r.bedomning], edgecolor='white',
@@ -152,7 +170,7 @@ def figur(par, resor, omr, prof):
     K.placera_etiketter(ax, etik, fontsize=6.4, undvik=K.punkt_hinder(ax, omr.x, omr.y, px=9))
     h = [Line2D([], [], marker='D', ls='', color=c, markersize=7, label=k) for k, c in farg.items()]
     h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
-    ax.legend(handles=h, loc='upper left', bbox_to_anchor=(0.0, -0.01), ncol=3, fontsize=6.8, frameon=False,
+    ax.legend(handles=h, loc='upper left', bbox_to_anchor=(0.0, -0.01), ncol=2, fontsize=6.8, frameon=False,
               handlelength=1.6, columnspacing=1.4)
     K.ram(ax)
 
@@ -165,12 +183,16 @@ def figur(par, resor, omr, prof):
         partner = {'N': 'S', 'S': 'N', 'V': 'Ö', 'Ö': 'V'}[l]
         d = par[(par.forlangs == l) & (par.partner == partner) & par.partner_klarar_reglering]
         gen.append(float(d.utrymme_genomgaende.max()) if len(d) else np.nan)
-    ax2.barh(y + 0.2, idag, height=0.36, color='#b9b4a8', label=f'Reglering ≥ {REGLERING:g} min vid varje byte')
-    ax2.barh(y - 0.2, gen, height=0.36, color='#1c5cab',
+    sk = [g + skift(prof, l) for g, l in zip(gen, LINJER)]
+    ax2.barh(y + 0.27, idag, height=0.25, color='#b9b4a8', label=f'Reglering ≥ {REGLERING:g} min vid varje byte')
+    ax2.barh(y, gen, height=0.25, color='#1c5cab',
              label=f'Kort byte ({GENOMGANG:g} min) till partnerlinjen, reglering vid nästa byte'.replace('.', ','))
-    for yy, a, b in zip(y, idag, gen):
-        ax2.text(max(a, 0) + 0.1, yy + 0.2, f'{a:g}'.replace('.', ','), va='center', fontsize=7.5, color=K.TEXT)
-        ax2.text(b + 0.1, yy - 0.2, f'{b:g}'.replace('.', ','), va='center', fontsize=7.5, color=K.TEXT)
+    ax2.barh(y - 0.27, sk, height=0.25, color='#159a9c',
+             label=f'… och partnerlinjen avgår ≤ {MAX_SKIFT:g} min efter pulsen')
+    for yy, a, b, c in zip(y, idag, gen, sk):
+        ax2.text(max(a, 0) + 0.1, yy + 0.27, f'{a:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
+        ax2.text(b + 0.1, yy, f'{b:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
+        ax2.text(c + 0.1, yy - 0.27, f'{c:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
     ax2.axvline(0, color='#52514e', lw=0.8)
     ax2.set_yticks(y); ax2.set_yticklabels([f"Linje {l} ({prof[l]['kortid_median']:.0f} min)" for l in LINJER], fontsize=8)
     ax2.invert_yaxis()

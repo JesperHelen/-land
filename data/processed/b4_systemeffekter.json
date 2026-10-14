@@ -1,10 +1,10 @@
 {
  "idag": {
-  "namn": "I dag",
-  "atgarder": [],
-  "driftform": "alla",
+  "forslag": null,
+  "driftform": null,
   "ryms": true,
   "robust": true,
+  "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
@@ -22,8 +22,10 @@
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer_per_atgard": {},
-  "turer_per_atgard_tot": {},
+  "turer": 0,
+  "turer_tot": 0,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -86,6 +88,8 @@
    "resor_langre_vardag": 0.0,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "I dag",
+  "kort": "I dag",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 0,
    "lyft_till_minst_30": 0,
@@ -109,36 +113,32 @@
   }
  },
  "1a": {
-  "namn": "1a Möckelö Strand, dagens gator – alla turer",
-  "atgarder": [
-   "1a"
-  ],
-  "driftform": "fler_bussar",
+  "forslag": "1a",
+  "driftform": "alla",
   "ryms": false,
   "robust": true,
+  "fler_bussar": true,
   "omlopp": {
    "fordon": 6,
    "turer": 93,
-   "korttid_h": 44.62,
-   "omloppstid_h": 73.0,
-   "regleringstid_h": 14.18,
-   "uppstallning_h": 14.2,
-   "km": 1186.5,
+   "korttid_h": 43.95,
+   "omloppstid_h": 72.87,
+   "regleringstid_h": 14.65,
+   "uppstallning_h": 14.27,
+   "km": 1190.8,
    "min_vandtid": 1.0,
-   "vandningar_under_rek": 4,
+   "vandningar_under_rek": 3,
    "varv_utan_reglering": 1,
    "byten_enligt_norm": 72,
    "samma_linje": 0,
    "genomgangar": 72,
    "forsta_avg": 410.0,
-   "sista_ank": 1273.5
+   "sista_ank": 1273.0
   },
-  "turer_per_atgard": {
-   "1a": 20
-  },
-  "turer_per_atgard_tot": {
-   "1a": 20
-  },
+  "turer": 20,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -203,10 +203,12 @@
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 13.9,
+   "resenarsminuter_vardag": 9.6,
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "1a Möckelö Strand ny via dagens vägar – alla 20 turer (6 bussar)",
+  "kort": "1a alla turer\n(6 bussar)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -224,29 +226,27 @@
   },
   "forandring_omlopp": {
    "fordon": 1,
-   "omloppstid_h": 11.57,
-   "korttid_h": 2.17,
-   "km": 50.0
+   "omloppstid_h": 11.44,
+   "korttid_h": 1.5,
+   "km": 54.3
   }
  },
- "1a_del": {
-  "namn": "1a – bara turer som ryms",
-  "atgarder": [
-   "1a"
-  ],
+ "1a_ryms": {
+  "forslag": "1a",
   "driftform": "ryms",
   "ryms": true,
   "robust": true,
+  "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
-   "korttid_h": 43.32,
-   "omloppstid_h": 61.54,
-   "regleringstid_h": 7.59,
-   "uppstallning_h": 10.63,
-   "km": 1156.5,
+   "korttid_h": 43.12,
+   "omloppstid_h": 61.58,
+   "regleringstid_h": 7.76,
+   "uppstallning_h": 10.7,
+   "km": 1160.9,
    "min_vandtid": 1.0,
-   "vandningar_under_rek": 5,
+   "vandningar_under_rek": 4,
    "varv_utan_reglering": 1,
    "byten_enligt_norm": 69,
    "samma_linje": 0,
@@ -254,12 +254,10 @@
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer_per_atgard": {
-   "1a": 8
-  },
-  "turer_per_atgard_tot": {
-   "1a": 20
-  },
+  "turer": 9,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -318,16 +316,18 @@
   },
   "nya_hallplatser": {
    "1a": {
-    "avgangar": 8,
+    "avgangar": 9,
     "ny_tackning_inv": 179,
     "pastigande_vardag": 0.48
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 5.6,
+   "resenarsminuter_vardag": 4.3,
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "1a – dagens tidtabell, 9 av 20 turer",
+  "kort": "1a dagens tidtabell\n(9 av 20 turer)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -345,19 +345,136 @@
   },
   "forandring_omlopp": {
    "fordon": 0,
-   "omloppstid_h": 0.11,
-   "korttid_h": 0.87,
-   "km": 20.0
+   "omloppstid_h": 0.15,
+   "korttid_h": 0.67,
+   "km": 24.4
   }
  },
- "1b_VÖ": {
-  "namn": "1b Möckelö Strand, förlängd Norrgårdsvägen",
-  "atgarder": [
-   "1b"
-  ],
-  "driftform": "ryms",
+ "1a_VO": {
+  "forslag": "1a",
+  "driftform": "VO",
   "ryms": true,
   "robust": false,
+  "fler_bussar": false,
+  "omlopp": {
+   "fordon": 5,
+   "turer": 93,
+   "korttid_h": 43.73,
+   "omloppstid_h": 61.54,
+   "regleringstid_h": 6.89,
+   "uppstallning_h": 10.93,
+   "km": 1182.6,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 3,
+   "varv_utan_reglering": 3,
+   "byten_enligt_norm": 73,
+   "samma_linje": 0,
+   "genomgangar": 73,
+   "forsta_avg": 410.0,
+   "sista_ank": 1273.0
+  },
+  "turer": 17,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 14,
+  "tackning_mariehamn": {
+   "befolkning": 14821,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 2252,
+    "andel": 0.152
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 385,
+    "andel": 0.0259
+   },
+   "Låg (15–29)": {
+    "invanare": 3947,
+    "andel": 0.2663
+   },
+   "Medel (30–59)": {
+    "invanare": 4546,
+    "andel": 0.3067
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.249
+   },
+   "inom_400m_andel": 0.848,
+   "minst_15_avg_andel": 0.8221,
+   "minst_30_avg_andel": 0.5558,
+   "svag_andel": 0.2923,
+   "svag_invanare": 4332
+  },
+  "tackning_hela_omradet": {
+   "befolkning": 17697,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 4473,
+    "andel": 0.2528
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 508,
+    "andel": 0.0287
+   },
+   "Låg (15–29)": {
+    "invanare": 4387,
+    "andel": 0.2479
+   },
+   "Medel (30–59)": {
+    "invanare": 4637,
+    "andel": 0.262
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.2086
+   },
+   "inom_400m_andel": 0.7472,
+   "minst_15_avg_andel": 0.7185,
+   "minst_30_avg_andel": 0.4706,
+   "svag_andel": 0.2766,
+   "svag_invanare": 4895
+  },
+  "nya_hallplatser": {
+   "1a": {
+    "avgangar": 17,
+    "ny_tackning_inv": 179,
+    "pastigande_vardag": 0.48
+   }
+  },
+  "resenarer": {
+   "resenarsminuter_vardag": 7.0,
+   "resor_langre_vardag": 2.1,
+   "resor_kortare_vardag": 0.5
+  },
+  "namn": "1a – V och Ö sammanslagna (Ö ≤ 2 min efter pulsen), 17 av 20 turer",
+  "kort": "1a V och Ö samman-\nslagna (17 av 20 turer)",
+  "forandring_invanare_mariehamn": {
+   "ny_tackning": 179,
+   "lyft_till_minst_30": 0,
+   "battre_klass": 179,
+   "samre_klass": 0,
+   "forlorad_tackning": 0,
+   "samre_klass_kvar_tackning": 0
+  },
+  "forandring_mariehamn": {
+   "inom_400m_inv": 179,
+   "minst_15_inv": 178,
+   "minst_30_inv": 0,
+   "svag_inv": 179,
+   "otackt_inv": -179
+  },
+  "forandring_omlopp": {
+   "fordon": 0,
+   "omloppstid_h": 0.11,
+   "korttid_h": 1.28,
+   "km": 46.1
+  }
+ },
+ "1b": {
+  "forslag": "1b",
+  "driftform": "alla",
+  "ryms": true,
+  "robust": false,
+  "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
@@ -365,7 +482,7 @@
    "omloppstid_h": 61.48,
    "regleringstid_h": 7.2,
    "uppstallning_h": 10.99,
-   "km": 1153.2,
+   "km": 1168.4,
    "min_vandtid": 0.5,
    "vandningar_under_rek": 4,
    "varv_utan_reglering": 8,
@@ -375,12 +492,10 @@
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer_per_atgard": {
-   "1b": 20
-  },
-  "turer_per_atgard_tot": {
-   "1b": 20
-  },
+  "turer": 20,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -449,6 +564,8 @@
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "1b Möckelö Strand ny via förlängd Norrgårdsvägen – alla 20 turer",
+  "kort": "1b förlängd Norr-\ngårdsvägen (20 av 20)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -468,17 +585,15 @@
    "fordon": 0,
    "omloppstid_h": 0.05,
    "korttid_h": 0.83,
-   "km": 16.7
+   "km": 31.9
   }
  },
  "2": {
-  "namn": "2 N2 på linje Ö",
-  "atgarder": [
-   "2"
-  ],
-  "driftform": "ryms",
+  "forslag": "2",
+  "driftform": "alla",
   "ryms": true,
   "robust": true,
+  "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
@@ -496,12 +611,10 @@
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer_per_atgard": {
-   "2": 20
-  },
-  "turer_per_atgard_tot": {
-   "2": 20
-  },
+  "turer": 20,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -570,6 +683,8 @@
    "resor_langre_vardag": 2.3,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "2 N2 på linje Ö",
+  "kort": "2 N2 linje Ö",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 55,
    "lyft_till_minst_30": 0,
@@ -593,13 +708,11 @@
   }
  },
  "3": {
-  "namn": "3 Linje N via Bo-Bil",
-  "atgarder": [
-   "3"
-  ],
-  "driftform": "ryms",
+  "forslag": "3",
+  "driftform": "alla",
   "ryms": true,
   "robust": true,
+  "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
@@ -617,12 +730,10 @@
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer_per_atgard": {
-   "3": 22
-  },
-  "turer_per_atgard_tot": {
-   "3": 22
-  },
+  "turer": 22,
+  "turer_tot": 22,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -685,6 +796,8 @@
    "resor_langre_vardag": 7.4,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "3 Linje N via Bo-Bil",
+  "kort": "3 N via Bo-Bil",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 0,
    "lyft_till_minst_30": 44,
@@ -707,400 +820,480 @@
    "km": -9.5
   }
  },
- "paket_A": {
-  "namn": "Paket A: 1b + 2 + 3",
-  "atgarder": [
-   "1b",
-   "3",
-   "2"
-  ],
-  "driftform": "ryms",
-  "ryms": true,
-  "robust": false,
-  "omlopp": {
-   "fordon": 5,
-   "turer": 93,
-   "korttid_h": 43.49,
-   "omloppstid_h": 61.48,
-   "regleringstid_h": 7.02,
-   "uppstallning_h": 10.98,
-   "km": 1143.7,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 4,
-   "varv_utan_reglering": 8,
-   "byten_enligt_norm": 75,
-   "samma_linje": 0,
-   "genomgangar": 75,
-   "forsta_avg": 410.0,
-   "sista_ank": 1273.0
-  },
-  "turer_per_atgard": {
-   "1b": 20,
-   "3": 22,
-   "2": 20
-  },
-  "turer_per_atgard_tot": {
-   "1b": 20,
-   "3": 22,
-   "2": 20
-  },
-  "tackning_mariehamn": {
-   "befolkning": 14821,
-   "Ingen hållplats inom 400 m": {
-    "invanare": 2220,
-    "andel": 0.1498
-   },
-   "Mycket låg (1–14 avg/vardag)": {
-    "invanare": 384,
-    "andel": 0.0259
-   },
-   "Låg (15–29)": {
-    "invanare": 3937,
-    "andel": 0.2656
-   },
-   "Medel (30–59)": {
-    "invanare": 4589,
-    "andel": 0.3097
-   },
-   "God (≥ 60)": {
-    "invanare": 3691,
-    "andel": 0.249
-   },
-   "inom_400m_andel": 0.8502,
-   "minst_15_avg_andel": 0.8243,
-   "minst_30_avg_andel": 0.5587,
-   "svag_andel": 0.2915,
-   "svag_invanare": 4320
-  },
-  "tackning_hela_omradet": {
-   "befolkning": 17697,
-   "Ingen hållplats inom 400 m": {
-    "invanare": 4441,
-    "andel": 0.251
-   },
-   "Mycket låg (1–14 avg/vardag)": {
-    "invanare": 507,
-    "andel": 0.0287
-   },
-   "Låg (15–29)": {
-    "invanare": 4377,
-    "andel": 0.2473
-   },
-   "Medel (30–59)": {
-    "invanare": 4681,
-    "andel": 0.2645
-   },
-   "God (≥ 60)": {
-    "invanare": 3691,
-    "andel": 0.2086
-   },
-   "inom_400m_andel": 0.749,
-   "minst_15_avg_andel": 0.7204,
-   "minst_30_avg_andel": 0.4731,
-   "svag_andel": 0.276,
-   "svag_invanare": 4884
-  },
-  "nya_hallplatser": {
-   "1b": {
-    "avgangar": 20,
-    "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
-   },
-   "2": {
-    "avgangar": 20,
-    "ny_tackning_inv": 55,
-    "pastigande_vardag": 0.39
-   }
-  },
-  "resenarer": {
-   "resenarsminuter_vardag": 8.9,
-   "resor_langre_vardag": 11.6,
-   "resor_kortare_vardag": 0.0
-  },
-  "forandring_invanare_mariehamn": {
-   "ny_tackning": 234,
-   "lyft_till_minst_30": 44,
-   "battre_klass": 278,
-   "samre_klass": 24,
-   "forlorad_tackning": 23,
-   "samre_klass_kvar_tackning": 1
-  },
-  "forandring_mariehamn": {
-   "inom_400m_inv": 211,
-   "minst_15_inv": 211,
-   "minst_30_inv": 43,
-   "svag_inv": 167,
-   "otackt_inv": -211
-  },
-  "forandring_omlopp": {
-   "fordon": 0,
-   "omloppstid_h": 0.05,
-   "korttid_h": 1.04,
-   "km": 7.2
-  }
- },
- "paket_A_robust": {
-  "namn": "Paket A robust: 1b på 15 av 20 turer + 2 + 3",
-  "atgarder": [
-   "3",
-   "2",
-   "1b"
-  ],
-  "driftform": "robust",
-  "ryms": true,
-  "robust": true,
-  "omlopp": {
-   "fordon": 5,
-   "turer": 93,
-   "korttid_h": 43.28,
-   "omloppstid_h": 61.48,
-   "regleringstid_h": 7.23,
-   "uppstallning_h": 10.98,
-   "km": 1139.5,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 4,
-   "varv_utan_reglering": 1,
-   "byten_enligt_norm": 75,
-   "samma_linje": 0,
-   "genomgangar": 75,
-   "forsta_avg": 410.0,
-   "sista_ank": 1273.0
-  },
-  "turer_per_atgard": {
-   "3": 22,
-   "2": 20,
-   "1b": 15
-  },
-  "turer_per_atgard_tot": {
-   "3": 22,
-   "2": 20,
-   "1b": 20
-  },
-  "tackning_mariehamn": {
-   "befolkning": 14821,
-   "Ingen hållplats inom 400 m": {
-    "invanare": 2220,
-    "andel": 0.1498
-   },
-   "Mycket låg (1–14 avg/vardag)": {
-    "invanare": 384,
-    "andel": 0.0259
-   },
-   "Låg (15–29)": {
-    "invanare": 3937,
-    "andel": 0.2656
-   },
-   "Medel (30–59)": {
-    "invanare": 4589,
-    "andel": 0.3097
-   },
-   "God (≥ 60)": {
-    "invanare": 3691,
-    "andel": 0.249
-   },
-   "inom_400m_andel": 0.8502,
-   "minst_15_avg_andel": 0.8243,
-   "minst_30_avg_andel": 0.5587,
-   "svag_andel": 0.2915,
-   "svag_invanare": 4320
-  },
-  "tackning_hela_omradet": {
-   "befolkning": 17697,
-   "Ingen hållplats inom 400 m": {
-    "invanare": 4441,
-    "andel": 0.251
-   },
-   "Mycket låg (1–14 avg/vardag)": {
-    "invanare": 507,
-    "andel": 0.0287
-   },
-   "Låg (15–29)": {
-    "invanare": 4377,
-    "andel": 0.2473
-   },
-   "Medel (30–59)": {
-    "invanare": 4681,
-    "andel": 0.2645
-   },
-   "God (≥ 60)": {
-    "invanare": 3691,
-    "andel": 0.2086
-   },
-   "inom_400m_andel": 0.749,
-   "minst_15_avg_andel": 0.7204,
-   "minst_30_avg_andel": 0.4731,
-   "svag_andel": 0.276,
-   "svag_invanare": 4884
-  },
-  "nya_hallplatser": {
-   "2": {
-    "avgangar": 20,
-    "ny_tackning_inv": 55,
-    "pastigande_vardag": 0.39
-   },
-   "1b": {
-    "avgangar": 15,
-    "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
-   }
-  },
-  "resenarer": {
-   "resenarsminuter_vardag": 7.6,
-   "resor_langre_vardag": 11.6,
-   "resor_kortare_vardag": 0.0
-  },
-  "forandring_invanare_mariehamn": {
-   "ny_tackning": 234,
-   "lyft_till_minst_30": 44,
-   "battre_klass": 278,
-   "samre_klass": 24,
-   "forlorad_tackning": 23,
-   "samre_klass_kvar_tackning": 1
-  },
-  "forandring_mariehamn": {
-   "inom_400m_inv": 211,
-   "minst_15_inv": 211,
-   "minst_30_inv": 43,
-   "svag_inv": 167,
-   "otackt_inv": -211
-  },
-  "forandring_omlopp": {
-   "fordon": 0,
-   "omloppstid_h": 0.05,
-   "korttid_h": 0.83,
-   "km": 3.0
-  }
- },
- "paket_B": {
-  "namn": "Paket B: 1a (alla turer) + 2 + 3",
-  "atgarder": [
-   "1a",
-   "3",
-   "2"
-  ],
-  "driftform": "fler_bussar",
+ "4": {
+  "forslag": "4",
+  "driftform": "alla",
   "ryms": false,
   "robust": true,
+  "fler_bussar": true,
   "omlopp": {
    "fordon": 6,
    "turer": 93,
-   "korttid_h": 44.82,
-   "omloppstid_h": 73.01,
-   "regleringstid_h": 14.0,
-   "uppstallning_h": 14.19,
-   "km": 1177.0,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 4,
+   "korttid_h": 43.78,
+   "omloppstid_h": 72.83,
+   "regleringstid_h": 14.77,
+   "uppstallning_h": 14.28,
+   "km": 1164.1,
+   "min_vandtid": 1.0,
+   "vandningar_under_rek": 3,
    "varv_utan_reglering": 1,
    "byten_enligt_norm": 72,
    "samma_linje": 0,
    "genomgangar": 72,
    "forsta_avg": 410.0,
-   "sista_ank": 1273.5
+   "sista_ank": 1273.0
   },
-  "turer_per_atgard": {
-   "1a": 20,
-   "3": 22,
-   "2": 20
-  },
-  "turer_per_atgard_tot": {
-   "1a": 20,
-   "3": 22,
-   "2": 20
-  },
+  "turer": 20,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 0,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
-    "invanare": 2220,
-    "andel": 0.1498
+    "invanare": 2411,
+    "andel": 0.1627
    },
    "Mycket låg (1–14 avg/vardag)": {
     "invanare": 384,
     "andel": 0.0259
    },
    "Låg (15–29)": {
-    "invanare": 3937,
-    "andel": 0.2656
+    "invanare": 3789,
+    "andel": 0.2556
    },
    "Medel (30–59)": {
-    "invanare": 4589,
-    "andel": 0.3097
+    "invanare": 4546,
+    "andel": 0.3067
    },
    "God (≥ 60)": {
     "invanare": 3691,
     "andel": 0.249
    },
-   "inom_400m_andel": 0.8502,
-   "minst_15_avg_andel": 0.8243,
-   "minst_30_avg_andel": 0.5587,
-   "svag_andel": 0.2915,
-   "svag_invanare": 4320
+   "inom_400m_andel": 0.8373,
+   "minst_15_avg_andel": 0.8114,
+   "minst_30_avg_andel": 0.5558,
+   "svag_andel": 0.2815,
+   "svag_invanare": 4173
   },
   "tackning_hela_omradet": {
    "befolkning": 17697,
    "Ingen hållplats inom 400 m": {
-    "invanare": 4441,
-    "andel": 0.251
+    "invanare": 4632,
+    "andel": 0.2618
    },
    "Mycket låg (1–14 avg/vardag)": {
     "invanare": 507,
     "andel": 0.0287
    },
    "Låg (15–29)": {
-    "invanare": 4377,
-    "andel": 0.2473
+    "invanare": 4229,
+    "andel": 0.239
    },
    "Medel (30–59)": {
-    "invanare": 4681,
-    "andel": 0.2645
+    "invanare": 4637,
+    "andel": 0.262
    },
    "God (≥ 60)": {
     "invanare": 3691,
     "andel": 0.2086
    },
-   "inom_400m_andel": 0.749,
-   "minst_15_avg_andel": 0.7204,
-   "minst_30_avg_andel": 0.4731,
-   "svag_andel": 0.276,
-   "svag_invanare": 4884
+   "inom_400m_andel": 0.7382,
+   "minst_15_avg_andel": 0.7096,
+   "minst_30_avg_andel": 0.4706,
+   "svag_andel": 0.2676,
+   "svag_invanare": 4736
   },
   "nya_hallplatser": {
-   "1a": {
+   "4": {
     "avgangar": 20,
-    "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
-   },
-   "2": {
-    "avgangar": 20,
-    "ny_tackning_inv": 55,
-    "pastigande_vardag": 0.39
+    "ny_tackning_inv": 20,
+    "pastigande_vardag": 0.05
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 17.4,
-   "resor_langre_vardag": 11.6,
+   "resenarsminuter_vardag": 11.6,
+   "resor_langre_vardag": 2.9,
    "resor_kortare_vardag": 0.0
   },
+  "namn": "4 Linje V till flygplatsen – alla 20 turer (6 bussar)",
+  "kort": "4 flygplatsen alla\nturer (6 bussar)",
   "forandring_invanare_mariehamn": {
-   "ny_tackning": 234,
-   "lyft_till_minst_30": 44,
-   "battre_klass": 278,
-   "samre_klass": 24,
-   "forlorad_tackning": 23,
-   "samre_klass_kvar_tackning": 1
+   "ny_tackning": 20,
+   "lyft_till_minst_30": 0,
+   "battre_klass": 20,
+   "samre_klass": 0,
+   "forlorad_tackning": 0,
+   "samre_klass_kvar_tackning": 0
   },
   "forandring_mariehamn": {
-   "inom_400m_inv": 211,
-   "minst_15_inv": 211,
-   "minst_30_inv": 43,
-   "svag_inv": 167,
-   "otackt_inv": -211
+   "inom_400m_inv": 20,
+   "minst_15_inv": 20,
+   "minst_30_inv": 0,
+   "svag_inv": 20,
+   "otackt_inv": -20
   },
   "forandring_omlopp": {
    "fordon": 1,
-   "omloppstid_h": 11.58,
-   "korttid_h": 2.37,
-   "km": 40.5
+   "omloppstid_h": 11.4,
+   "korttid_h": 1.33,
+   "km": 27.6
+  }
+ },
+ "4_VO": {
+  "forslag": "4",
+  "driftform": "VO",
+  "ryms": true,
+  "robust": false,
+  "fler_bussar": false,
+  "omlopp": {
+   "fordon": 5,
+   "turer": 93,
+   "korttid_h": 43.72,
+   "omloppstid_h": 61.52,
+   "regleringstid_h": 6.87,
+   "uppstallning_h": 10.94,
+   "km": 1162.7,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 7,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
+   "forsta_avg": 410.0,
+   "sista_ank": 1273.0
+  },
+  "turer": 19,
+  "turer_tot": 20,
+  "solberget_indragen": false,
+  "skiftade_turer": 16,
+  "tackning_mariehamn": {
+   "befolkning": 14821,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 2411,
+    "andel": 0.1627
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 384,
+    "andel": 0.0259
+   },
+   "Låg (15–29)": {
+    "invanare": 3789,
+    "andel": 0.2556
+   },
+   "Medel (30–59)": {
+    "invanare": 4546,
+    "andel": 0.3067
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.249
+   },
+   "inom_400m_andel": 0.8373,
+   "minst_15_avg_andel": 0.8114,
+   "minst_30_avg_andel": 0.5558,
+   "svag_andel": 0.2815,
+   "svag_invanare": 4173
+  },
+  "tackning_hela_omradet": {
+   "befolkning": 17697,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 4632,
+    "andel": 0.2618
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 507,
+    "andel": 0.0287
+   },
+   "Låg (15–29)": {
+    "invanare": 4229,
+    "andel": 0.239
+   },
+   "Medel (30–59)": {
+    "invanare": 4637,
+    "andel": 0.262
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.2086
+   },
+   "inom_400m_andel": 0.7382,
+   "minst_15_avg_andel": 0.7096,
+   "minst_30_avg_andel": 0.4706,
+   "svag_andel": 0.2676,
+   "svag_invanare": 4736
+  },
+  "nya_hallplatser": {
+   "4": {
+    "avgangar": 19,
+    "ny_tackning_inv": 20,
+    "pastigande_vardag": 0.05
+   }
+  },
+  "resenarer": {
+   "resenarsminuter_vardag": 9.9,
+   "resor_langre_vardag": 2.9,
+   "resor_kortare_vardag": 0.5
+  },
+  "namn": "4 – V och Ö sammanslagna, 19 av 20 turer",
+  "kort": "4 V och Ö samman-\nslagna (19 av 20 turer)",
+  "forandring_invanare_mariehamn": {
+   "ny_tackning": 20,
+   "lyft_till_minst_30": 0,
+   "battre_klass": 20,
+   "samre_klass": 0,
+   "forlorad_tackning": 0,
+   "samre_klass_kvar_tackning": 0
+  },
+  "forandring_mariehamn": {
+   "inom_400m_inv": 20,
+   "minst_15_inv": 20,
+   "minst_30_inv": 0,
+   "svag_inv": 20,
+   "otackt_inv": -20
+  },
+  "forandring_omlopp": {
+   "fordon": 0,
+   "omloppstid_h": 0.09,
+   "korttid_h": 1.27,
+   "km": 26.2
+  }
+ },
+ "4_VO_sol": {
+  "forslag": "4",
+  "driftform": "VO_sol",
+  "ryms": true,
+  "robust": false,
+  "fler_bussar": false,
+  "omlopp": {
+   "fordon": 5,
+   "turer": 93,
+   "korttid_h": 43.03,
+   "omloppstid_h": 61.48,
+   "regleringstid_h": 7.47,
+   "uppstallning_h": 10.98,
+   "km": 1164.1,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 7,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
+   "forsta_avg": 410.0,
+   "sista_ank": 1273.0
+  },
+  "turer": 20,
+  "turer_tot": 20,
+  "solberget_indragen": true,
+  "skiftade_turer": 17,
+  "tackning_mariehamn": {
+   "befolkning": 14821,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 2453,
+    "andel": 0.1655
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 391,
+    "andel": 0.0264
+   },
+   "Låg (15–29)": {
+    "invanare": 3747,
+    "andel": 0.2528
+   },
+   "Medel (30–59)": {
+    "invanare": 4539,
+    "andel": 0.3063
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.249
+   },
+   "inom_400m_andel": 0.8345,
+   "minst_15_avg_andel": 0.8081,
+   "minst_30_avg_andel": 0.5553,
+   "svag_andel": 0.2792,
+   "svag_invanare": 4138
+  },
+  "tackning_hela_omradet": {
+   "befolkning": 17697,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 4674,
+    "andel": 0.2641
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 514,
+    "andel": 0.0291
+   },
+   "Låg (15–29)": {
+    "invanare": 4187,
+    "andel": 0.2366
+   },
+   "Medel (30–59)": {
+    "invanare": 4630,
+    "andel": 0.2616
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.2086
+   },
+   "inom_400m_andel": 0.7359,
+   "minst_15_avg_andel": 0.7068,
+   "minst_30_avg_andel": 0.4702,
+   "svag_andel": 0.2657,
+   "svag_invanare": 4701
+  },
+  "nya_hallplatser": {
+   "4": {
+    "avgangar": 20,
+    "ny_tackning_inv": 20,
+    "pastigande_vardag": 0.05
+   }
+  },
+  "resenarer": {
+   "resenarsminuter_vardag": 2.3,
+   "resor_langre_vardag": 2.9,
+   "resor_kortare_vardag": 12.2
+  },
+  "namn": "4 – V och Ö sammanslagna, Solberget indragen, 20 av 20 turer",
+  "kort": "4 dito + Solberget\nindragen (20 av 20)",
+  "forandring_invanare_mariehamn": {
+   "ny_tackning": 20,
+   "lyft_till_minst_30": 0,
+   "battre_klass": 20,
+   "samre_klass": 49,
+   "forlorad_tackning": 42,
+   "samre_klass_kvar_tackning": 7
+  },
+  "forandring_mariehamn": {
+   "inom_400m_inv": -22,
+   "minst_15_inv": -29,
+   "minst_30_inv": -7,
+   "svag_inv": -15,
+   "otackt_inv": 22
+  },
+  "forandring_omlopp": {
+   "fordon": 0,
+   "omloppstid_h": 0.05,
+   "korttid_h": 0.58,
+   "km": 27.6
+  }
+ },
+ "4_Y": {
+  "forslag": "4",
+  "driftform": "Y_VO_sol",
+  "ryms": true,
+  "robust": true,
+  "fler_bussar": false,
+  "omlopp": {
+   "fordon": 5,
+   "turer": 93,
+   "korttid_h": 42.23,
+   "omloppstid_h": 61.39,
+   "regleringstid_h": 8.18,
+   "uppstallning_h": 10.98,
+   "km": 1147.5,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 3,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
+   "forsta_avg": 410.0,
+   "sista_ank": 1273.0
+  },
+  "turer": 8,
+  "turer_tot": 8,
+  "solberget_indragen": true,
+  "skiftade_turer": 7,
+  "tackning_mariehamn": {
+   "befolkning": 14821,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 2453,
+    "andel": 0.1655
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 411,
+    "andel": 0.0277
+   },
+   "Låg (15–29)": {
+    "invanare": 3727,
+    "andel": 0.2514
+   },
+   "Medel (30–59)": {
+    "invanare": 4539,
+    "andel": 0.3063
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.249
+   },
+   "inom_400m_andel": 0.8345,
+   "minst_15_avg_andel": 0.8068,
+   "minst_30_avg_andel": 0.5553,
+   "svag_andel": 0.2792,
+   "svag_invanare": 4138
+  },
+  "tackning_hela_omradet": {
+   "befolkning": 17697,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 4674,
+    "andel": 0.2641
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 534,
+    "andel": 0.0302
+   },
+   "Låg (15–29)": {
+    "invanare": 4167,
+    "andel": 0.2355
+   },
+   "Medel (30–59)": {
+    "invanare": 4630,
+    "andel": 0.2616
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.2086
+   },
+   "inom_400m_andel": 0.7359,
+   "minst_15_avg_andel": 0.7057,
+   "minst_30_avg_andel": 0.4702,
+   "svag_andel": 0.2657,
+   "svag_invanare": 4701
+  },
+  "nya_hallplatser": {
+   "4": {
+    "avgangar": 8,
+    "ny_tackning_inv": 20,
+    "pastigande_vardag": 0.05
+   }
+  },
+  "resenarer": {
+   "resenarsminuter_vardag": -4.6,
+   "resor_langre_vardag": 2.8,
+   "resor_kortare_vardag": 12.3
+  },
+  "namn": "4Y – bara turerna för flygen (8 av 8), V och Ö sammanslagna, Solberget indragen",
+  "kort": "4Y flygturerna\n(8 av 8), dito",
+  "forandring_invanare_mariehamn": {
+   "ny_tackning": 20,
+   "lyft_till_minst_30": 0,
+   "battre_klass": 20,
+   "samre_klass": 49,
+   "forlorad_tackning": 42,
+   "samre_klass_kvar_tackning": 7
+  },
+  "forandring_mariehamn": {
+   "inom_400m_inv": -22,
+   "minst_15_inv": -49,
+   "minst_30_inv": -7,
+   "svag_inv": -15,
+   "otackt_inv": 22
+  },
+  "forandring_omlopp": {
+   "fordon": 0,
+   "omloppstid_h": -0.04,
+   "korttid_h": -0.22,
+   "km": 11.0
   }
  }
 }

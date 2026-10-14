@@ -9,12 +9,18 @@ Anropen går via QGIS nätverksinställningar (proxy m.m.). Publika servern till
 Skriptet
   1. läser lagret 00_segment (ett segment per hållplatspar) och ruttar varje segment som inte redan är ruttat;
      en OSRM-rutt som är orimligt lång (> 2,5 × fågelvägen + 300 m) avvisas och segmentet behålls rakt;
+     via-punkter ("gömda stopp") i lagret 00_viapunkter tvingar rutten över punkten där OSRM:s snabbaste väg
+     inte är bussens väg (se nedan) – segment med via-punkter ruttas om varje gång;
   2. skriver vägdragningen till 00_segment (kalla = 'osrm', langd_m, tid_s);
   3. byter ut de raka delarna i 00_stadslinjer, b4_linjer_forslag och b4_forslag_korvagar mot de ruttade
      (planerade vägar, t.ex. Norrgårdsvägens förlängning i förslag 1b, behålls schematiska);
   4. räknar om 00_stadslinjer_forskjutna, så att linjer som delar gata får egna spår även längs de ruttade gatorna;
   5. laddar om lagren i projektet.
 Skriptet kan köras igen; redan ruttade segment hoppas över (sätt RUTTA_OM_ALLA = True för att rutta om).
+Via-punkter: väljer OSRM fel väg (t.ex. huvudvägen i stället för bussens gata, eller en vändning vid en hållplats),
+lägg en punkt på rätt gata i lagret 00_viapunkter (Lägg till punktobjekt) och kör skriptet igen. Fälten from_stop
+och to_stop (hållplatsernas id, se 00_segment) kan lämnas tomma – punkten gäller då det närmaste segmentet. Punkten
+gäller också segmentet i motsatt riktning. Saknas lagret används punkterna i VIA_STANDARD nedan.
 Vill du föra över vägdragningen till analyskedjan (kartor, km, hållplatskandidater):
   python src/s01_vagdragning.py --fran-gis   och därefter   python src/kor_alla.py --utan-osrm
 """
@@ -33,6 +39,10 @@ SAMMA_GATA_M = 15.0                            # linjer inom detta avstånd och 
 STEG_M = 6.0                                   # samplingssteg för förskjutningen (m)
 ORDNING = {l: i for i, l in enumerate(['J', 'N', 'S', 'V', 'Ö'])}
 LINJELAGER = ['00_stadslinjer', 'b4_linjer_forslag', 'b4_forslag_korvagar']
+TVILLING_M = 100.0                             # motsatt riktning: hållplatserna inom detta avstånd (m)
+VIA_STANDARD = [                               # EPSG:3067 – samma som VIA_PUNKTER i src/s01_vagdragning.py
+    {'from_stop': '9025302000029202', 'to_stop': '9025302000067702', 'x': 106101.0, 'y': 6684603.0,
+     'kommentar': 'Linje V Lönnhagsvägen – Norrgårdsvägen kör vägen söder om huvudvägen och vänder inte vid hållplatsen'}]
 
 try:
     from qgis.core import (QgsBlockingNetworkRequest, QgsCoordinateReferenceSystem, QgsCoordinateTransform,
@@ -74,15 +84,43 @@ def _urllib_json(url):
         return json.loads(svar.read().decode('utf-8'))
 
 
-def osrm_rutt(lon1, lat1, lon2, lat2, url=None):
-    """Rutt mellan två punkter: ([(lon, lat), ...], längd m, tid s)."""
-    url = (f'{(url or OSRM_URL).rstrip("/")}/route/v1/driving/{lon1:.6f},{lat1:.6f};{lon2:.6f},{lat2:.6f}'
-           '?overview=full&geometries=geojson&steps=false')
+def osrm_rutt(lon1, lat1, lon2, lat2, url=None, via=()):
+    """Rutt mellan två punkter, ev. över via-punkter [(lon, lat), ...]: ([(lon, lat), ...], längd m, tid s)."""
+    pkt = ';'.join(f'{x:.6f},{y:.6f}' for x, y in [(lon1, lat1), *via, (lon2, lat2)])
+    url = (f'{(url or OSRM_URL).rstrip("/")}/route/v1/driving/{pkt}?overview=full&geometries=geojson&steps=false'
+           + ('&continue_straight=true' if via else ''))
     j = hamta_json(url)
     if j.get('code') != 'Ok' or not j.get('routes'):
         raise ValueError(f"OSRM svarade {j.get('code')}")
     rt = j['routes'][0]
     return [tuple(c) for c in rt['geometry']['coordinates']], float(rt['distance']), float(rt['duration'])
+
+
+def _punkt_linje(p, a, b):
+    """(avstånd, läge 0–1) från punkten p till sträckan a–b."""
+    vx, vy = b[0] - a[0], b[1] - a[1]
+    L2 = vx * vx + vy * vy
+    t = 0.0 if L2 == 0 else max(0.0, min(1.0, ((p[0] - a[0]) * vx + (p[1] - a[1]) * vy) / L2))
+    return math.hypot(a[0] + t * vx - p[0], a[1] + t * vy - p[1]), t
+
+
+def via_per_segment(segment, punkter, tvilling_m=TVILLING_M):
+    """segment: {(a, b): ((xa, ya), (xb, yb))}; punkter: [{'from_stop', 'to_stop', 'x', 'y'}]. Returnerar
+    {(a, b): [(x, y), ...]} i körordning a → b. En punkt utan (känt) from_stop/to_stop gäller det närmaste
+    segmentet; den gäller också segmentet i motsatt riktning (ändpunkterna inom tvilling_m, omvänd ordning)."""
+    ut = {}
+    for p in punkter:
+        q = (float(p['x']), float(p['y']))
+        k0 = (str(p.get('from_stop') or ''), str(p.get('to_stop') or ''))
+        if k0 not in segment:
+            k0 = min(segment, key=lambda k: _punkt_linje(q, *segment[k])[0])
+        (xa, ya), (xb, yb) = segment[k0]
+        for k, (pa, pb) in segment.items():
+            if k == k0 or (math.hypot(pa[0] - xb, pa[1] - yb) <= tvilling_m and math.hypot(pb[0] - xa, pb[1] - ya) <= tvilling_m):
+                ut.setdefault(k, []).append(q)
+    for k, lista in ut.items():
+        lista.sort(key=lambda q: _punkt_linje(q, *segment[k])[1])
+    return ut
 
 
 def nyckel(p0, p1):
@@ -185,19 +223,47 @@ def oppna(gpkg, lager):
     return lyr
 
 
-def rutta_segment(seg):
+def viapunkter(gpkg, seg):
+    """Via-punkterna i lagret 00_viapunkter (eller VIA_STANDARD) per segment: {(från, till): [(x, y), ...]}."""
+    punkter = VIA_STANDARD
+    lyr = QgsVectorLayer(f'{gpkg}|layername=00_viapunkter', '00_viapunkter', 'ogr')
+    if lyr.isValid():
+        tr = QgsCoordinateTransform(lyr.crs(), seg.crs(), QgsProject.instance())
+        punkter = []
+        for f in lyr.getFeatures():
+            if f.geometry().isEmpty():
+                continue
+            p = tr.transform(f.geometry().asPoint())
+            nm = f.fields().names()
+            punkter.append({'from_stop': f['from_stop'] if 'from_stop' in nm and f['from_stop'] else '',
+                            'to_stop': f['to_stop'] if 'to_stop' in nm and f['to_stop'] else '', 'x': p.x(), 'y': p.y()})
+    segment = {}
+    for f in seg.getFeatures():
+        pl = f.geometry().asPolyline() or f.geometry().asMultiPolyline()[0]
+        segment[(str(f['from_stop']), str(f['to_stop']))] = ((pl[0].x(), pl[0].y()), (pl[-1].x(), pl[-1].y()))
+    via = via_per_segment(segment, punkter) if punkter and segment else {}
+    print(f'Via-punkter: {len(punkter)} st, gäller {len(via)} segment.')
+    return via
+
+
+def rutta_segment(seg, via=None):
     """Steg 1–2: ruttar segmenten i 00_segment och skriver tillbaka geometri och attribut."""
+    via = via or {}
     tr = QgsCoordinateTransform(QgsCoordinateReferenceSystem('EPSG:4326'), seg.crs(), QgsProject.instance())
+    till_wgs = QgsCoordinateTransform(seg.crs(), QgsCoordinateReferenceSystem('EPSG:4326'), QgsProject.instance())
     fi = {f.name(): i for i, f in enumerate(seg.fields())}
     geom_upd, attr_upd, n_ok, n_avv = {}, {}, 0, 0
-    kvar = [f for f in seg.getFeatures() if RUTTA_OM_ALLA or f['kalla'] != 'osrm']
+    kvar = [f for f in seg.getFeatures()
+            if RUTTA_OM_ALLA or f['kalla'] != 'osrm' or (str(f['from_stop']), str(f['to_stop'])) in via]
     print(f'Ruttar {len(kvar)} segment med OSRM ({OSRM_URL}) …')
     for nr, f in enumerate(kvar, 1):
         pl = f.geometry().asPolyline() or f.geometry().asMultiPolyline()[0]
         a, b = QgsPointXY(pl[0]), QgsPointXY(pl[-1])
         rak = math.hypot(b.x() - a.x(), b.y() - a.y())
+        v_ = [till_wgs.transform(QgsPointXY(x, y)) for x, y in via.get((str(f['from_stop']), str(f['to_stop'])), [])]
         try:
-            coords, langd, tid = osrm_rutt(f['from_lon'], f['from_lat'], f['to_lon'], f['to_lat'])
+            coords, langd, tid = osrm_rutt(f['from_lon'], f['from_lat'], f['to_lon'], f['to_lat'],
+                                           via=[(p.x(), p.y()) for p in v_])
         except Exception as e:
             print(f'  OSRM kunde inte nås ({e}) – avbryter. Redan ruttade segment sparas.')
             break
@@ -223,30 +289,34 @@ def rutta_segment(seg):
 
 
 def segmenttabell(seg):
-    """{nyckel: [QgsPointXY, ...]} för ruttade segment, {(från, till): punkter} för alla och pseudohållplatsernas läge."""
-    rutt, alla, pseudo = {}, {}, {}
+    """{nyckel: [QgsPointXY, ...]} för ruttade segment, {(från, till): punkter} för alla och hållplatsernas läge
+    {id: (x, y)} (från segmentens ändpunkter)."""
+    rutt, alla, punkt = {}, {}, {}
     for f in seg.getFeatures():
         pl = f.geometry().asPolyline() or f.geometry().asMultiPolyline()[0]
         alla[(f['from_stop'], f['to_stop'])] = [QgsPointXY(p) for p in pl]
         if f['kalla'] == 'osrm':
             rutt[nyckel((pl[0].x(), pl[0].y()), (pl[-1].x(), pl[-1].y()))] = [QgsPointXY(p) for p in pl]
         for k, p in ((f['from_stop'], pl[0]), (f['to_stop'], pl[-1])):
-            if not str(k).isdigit():
-                pseudo[k] = (round(p.x(), 1), round(p.y(), 1))
-    return rutt, alla, pseudo
+            punkt[str(k)] = (p.x(), p.y())
+    return rutt, alla, punkt
 
 
-def byt_delar(lyr, rutt, pseudo):
-    """Steg 3: byter raka hållplatssegment i flerdelsgeometrier mot ruttade."""
+def byt_delar(lyr, rutt, punkt):
+    """Steg 3: byter raka hållplatssegment i flerdelsgeometrier mot ruttade. En planerad väg (fältet planerad_del,
+    'från>till') finns inte i gatunätet och behålls schematisk."""
     fi = {f.name(): i for i, f in enumerate(lyr.fields())}
     geom_upd, attr_upd = {}, {}
     for f in lyr.getFeatures():
-        planerad = pseudo.get(f['planerad_vag_till']) if 'planerad_vag_till' in fi and f['planerad_vag_till'] else None
+        planerad = None
+        if 'planerad_del' in fi and f['planerad_del'] and '>' in str(f['planerad_del']):
+            a_, b_ = str(f['planerad_del']).split('>', 1)
+            if a_ in punkt and b_ in punkt:
+                planerad = {nyckel(punkt[a_], punkt[b_]), nyckel(punkt[b_], punkt[a_])}
         delar, n_rutt, n_tot = [], 0, 0
         for d in f.geometry().asMultiPolyline():
             k = nyckel((d[0].x(), d[0].y()), (d[-1].x(), d[-1].y()))
-            skyddad = planerad is not None and (k[:2] == planerad or k[2:] == planerad)
-            if skyddad:
+            if planerad is not None and k in planerad:
                 delar.append([QgsPointXY(p) for p in d])
                 continue
             n_tot += 1
@@ -256,7 +326,11 @@ def byt_delar(lyr, rutt, pseudo):
                 delar.append([QgsPointXY(p) for p in d])
         geom_upd[f.id()] = QgsGeometry.fromMultiPolylineXY(delar)
         if 'vagdragning' in fi:
-            txt = 'OSRM' if n_rutt == n_tot else ('delvis OSRM' if n_rutt else f['vagdragning'])
+            txt = f['vagdragning'] if n_tot == 0 else ('OSRM' if n_rutt == n_tot else ('delvis OSRM' if n_rutt else f['vagdragning']))
+            if n_tot == 0:                                   # bara planerad väg i objektet
+                attr_upd[f.id()] = {fi['vagdragning']: txt}
+                geom_upd[f.id()] = QgsGeometry.fromMultiPolylineXY(delar)
+                continue
             if planerad is not None:
                 txt += '; planerad väg schematisk'
             attr_upd[f.id()] = {fi['vagdragning']: txt}
@@ -313,13 +387,13 @@ def main():
         print('Ingen GeoPackage vald.')
         return
     seg = oppna(gpkg, '00_segment')
-    rutta_segment(seg)
-    rutt, alla, pseudo = segmenttabell(oppna(gpkg, '00_segment'))
+    rutta_segment(seg, viapunkter(gpkg, seg))
+    rutt, alla, punkt = segmenttabell(oppna(gpkg, '00_segment'))
     if not rutt:
         print('Inga ruttade segment – lagren lämnas oförändrade.')
         return
     for namn in LINJELAGER:
-        byt_delar(oppna(gpkg, namn), rutt, pseudo)
+        byt_delar(oppna(gpkg, namn), rutt, punkt)
         print(f'{namn}: uppdaterat.')
     gor_forskjutna(gpkg, alla)
     ladda_om(gpkg)
