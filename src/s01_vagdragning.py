@@ -16,6 +16,7 @@ Förskjutning (för kartor)
 
 Kör (kräver nätåtkomst till OSRM):  python src/s01_vagdragning.py
 Egen server:                       OSRM_URL=http://localhost:5000 python src/s01_vagdragning.py
+Vägdragning ruttad i QGIS:         python src/s01_vagdragning.py --fran-gis   (se output/gis/rutta_med_osrm.py)
 """
 import math
 import os
@@ -312,8 +313,19 @@ def forskjutna_delar(steg=6.0):
     return gpd.GeoDataFrame(rader, crs=C.CRS_METRISK)
 
 
+def fran_gis(gpkg=None):
+    """Läser vägdragning som ruttats i QGIS (output/gis/rutta_med_osrm.py) från GIS-filens lager 00_segment."""
+    gpkg = gpkg or C.ROT / 'output' / 'gis' / 'linjenatsutredning.gpkg'
+    g = gpd.read_file(gpkg, layer='00_segment').to_crs(C.CRS_METRISK)
+    g['rak_m'] = [round(float(math.hypot(x.coords[-1][0] - x.coords[0][0], x.coords[-1][1] - x.coords[0][1])), 1)
+                  for x in g.geometry]
+    seg = g[['from_stop', 'to_stop', 'linjer', 'rak_m', 'kalla', 'langd_m', 'tid_s', 'geometry']].copy()
+    print(f'Från {gpkg}: {len(seg)} segment ({(seg.kalla == "osrm").sum()} OSRM).')
+    return seg
+
+
 def main():
-    seg = hamta()
+    seg = fran_gis() if '--fran-gis' in sys.argv else hamta()
     spara(seg)
     print('Sparat:', CACHE)
     av = seg[seg.kalla == 'osrm_avvisad']

@@ -73,6 +73,12 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       (FORSLAG_SEGMENT, NY_MOCKELO) och `forslagsgeometri()` används i kartor/GIS; OSRM-körtider redovisas i
       `b4_forslag.json` (osrm_kontroll_nya_delstrackor). Blockerat i molnmiljön (router.project-osrm.org nekas) –
       tillåt domänen i miljöns nätverksinställningar eller kör `python src/kor_alla.py` lokalt.
+      **QGIS-skript** `output/gis/rutta_med_osrm.py` (beställarens önskemål 2026-10-14): ruttar `00_segment` med OSRM
+      inifrån QGIS och uppdaterar `00_stadslinjer`, `00_stadslinjer_forskjutna` (spåranalysen portad till ren
+      Python, identisk med s01), `b4_linjer_forslag`, `b4_forslag_korvagar` (delar matchas på hållplatsernas
+      koordinater; planerad väg 1b skyddas via fältet `planerad_vag_till`). Tillbaka till analyskedjan:
+      `python src/s01_vagdragning.py --fran-gis`. Testat utanför QGIS (beräkningar, mock-OSRM, nyckelmatchning,
+      tur och retur till cachen); QGIS-API-delen ej körd i QGIS här.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

@@ -360,5 +360,7 @@ Alla kartor finns som lager i `output/gis/linjenatsutredning.gpkg` (EPSG:3067) m
 | Sammanslagning av linjer | Områden utan hållplats och behövd tid per tur |
 | Bakgrund | Stadslinjerna i dag med vägdragning (förskjutna där de delar gata), hållplatser, befolkningsrutor, land |
 
-Vägdragningen i lagren följer gatunätet när den har hämtats från OSRM, annars raka streck. Fältet
-`vagdragning` anger vilket.
+Linjerna levereras som raka streck. Vägdragningen längs gatunätet hämtas genom att köra
+`output/gis/rutta_med_osrm.py` i QGIS Python-konsol på en dator med internet. Skriptet ruttar varje
+hållplatssegment med OSRM och uppdaterar linjerna i *Bakgrund* och i förslagsgrupperna, inklusive
+förskjutningen där linjer delar gata. Fältet `vagdragning` anger om en linje är ruttad.

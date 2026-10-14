@@ -5,6 +5,7 @@ och sparar projektet som linjenatsutredning.qgz bredvid GeoPackage-filen.
 Kör i QGIS: Insticksprogram > Python-konsol > Visa redigerare > Öppna skript (denna fil) > Kör skript.
 Ligger skriptet i samma mapp som linjenatsutredning.gpkg hittas filen automatiskt, annars får du välja den.
 Därefter räcker det att öppna linjenatsutredning.qgz (Projekt > Öppna).
+Vägdragning längs gatorna: kör rutta_med_osrm.py (samma mapp) – det ruttar linjerna med OSRM och uppdaterar lagren.
 """
 import os
 
@@ -74,6 +75,7 @@ GRUPPER = [
     ('Bakgrund', [L('00_hallplatser', 'Hållplatser (avgångar per vardag)', tand=False),
                   L('00_stadslinjer_forskjutna', 'Stadslinjer i dag – vägdragning, förskjutna där de delar gata'),
                   L('00_stadslinjer', 'Stadslinjer i dag – vägdragning, en geometri per linje', tand=False),
+                  L('00_segment', 'Segment hållplats–hållplats (källa: OSRM eller rak)', tand=False),
                   L('00_befolkningsrutor', 'Befolkning 2024 (1 km-rutor)', tand=False), L('00_land', 'Land')], True),
 ]
 

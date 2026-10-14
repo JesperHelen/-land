@@ -44,15 +44,28 @@ anger linjens spår (…, −1, −0,5, 0, 0,5, 1, …), och stilen förskjuter 
 ritning. Linjerna hålls därmed isär i alla skalor. Spåravståndet ändras i *Symbologi > Förskjutning*
 (uttrycket `"forskjutning" * 1.1`).
 
-## Vägdragning längs gatorna (OSRM)
+## Vägdragning längs gatorna (OSRM) – direkt i QGIS
 
-Stadslinjerna i gruppen *Bakgrund* (`00_stadslinjer_forskjutna`, `00_stadslinjer`) och förslagens nya
-delsträckor (Möckelö Strand via dagens gator, Maxinge – Bo-Bil – Bolstavägen) följer gatunätet när
-vägdragningen har hämtats från OSRM (`python src/s01_vagdragning.py`, cache i
-`data/processed/vagdragning_segment.gpkg`). OSRM kunde inte nås från analysmiljön, så i den här versionen är
-linjerna **raka streck mellan hållplatserna** (fältet `vagdragning`). Kör `python src/kor_alla.py` på en dator
-med internet för att hämta vägdragningen och skapa om alla kartor och lager. Förlängningen av Norrgårdsvägen
-(1b) är en planerad väg och ritas alltid schematiskt.
+Linjerna levereras som raka streck mellan hållplatserna, eftersom OSRM inte kunde nås från analysmiljön.
+Vägdragningen hämtas enklast i QGIS:
+
+1. Öppna QGIS Python-konsol (*Insticksprogram > Python-konsol*), klicka *Visa redigerare*, öppna
+   **`rutta_med_osrm.py`** (samma mapp som GeoPackage-filen) och kör det. Datorn behöver internetåtkomst till
+   `router.project-osrm.org` (eller egen OSRM-server, ändra `OSRM_URL` i skriptets början).
+2. Skriptet ruttar varje hållplatssegment i lagret `00_segment` (ca 130 st, ungefär ett anrop per sekund,
+   dvs. 2–3 minuter) och uppdaterar sedan:
+   - `00_stadslinjer` och `00_stadslinjer_forskjutna` i gruppen *Bakgrund*; förskjutningen där linjer delar gata
+     räknas om längs de ruttade gatorna;
+   - `b4_linjer_forslag` och `b4_forslag_korvagar`, dvs. förslagens linjer och nya delsträckor (Möckelö Strand
+     via dagens gator, Maxinge – Bo-Bil – Bolstavägen). Förlängningen av Norrgårdsvägen (1b) är en planerad väg
+     och behålls schematisk.
+3. Lagren laddas om i projektet. Fältet `vagdragning` anger OSRM, och `00_segment` visar källan, OSRM:s längd och
+   körtid per segment. En OSRM-rutt som är orimligt lång (mer än 2,5 × fågelvägen + 300 m) avvisas och behålls
+   rak (`kalla = osrm_avvisad`) för kontroll.
+
+Skriptet kan köras igen; redan ruttade segment hoppas över. Vill du att även analyserna och PNG-kartorna ska
+använda vägdragningen: `python src/s01_vagdragning.py --fran-gis` och därefter `python src/kor_alla.py --utan-osrm`
+(eller `python src/kor_alla.py` direkt på en dator med internet).
 
 ## Linjeförslagen i QGIS
 

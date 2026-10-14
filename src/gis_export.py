@@ -174,6 +174,33 @@ def bas():
     skriv(lin, '00_stadslinjer')
     stil('00_stadslinjer', 'Stadslinjer', qml(r_kategori('linje', [(l, f'Linje {l}', C.FARG_LINJE[l]) for l in C.STADSLINJER],
                                                          lambda n, f: linje(n, f, 0.7, halo=True))), True)
+    # segment hållplats–hållplats (underlag för OSRM-ruttning i QGIS, se output/gis/rutta_med_osrm.py)
+    xy_, ll_ = V.alla_xy(); fg = V.forslagsgeometri()
+    info = {}
+    if V.CACHE.exists():
+        c_ = gpd.read_file(V.CACHE, layer='segment')
+        info = {(r.from_stop, r.to_stop): (r.kalla, r.langd_m, r.tid_s) for r in c_.itertuples()}
+    rader = []
+    for (a_, b_), lns in V.segment_linjer().items():
+        k_, l_, t_ = info.get((a_, b_), ('rak', None, None))
+        rader.append({'from_stop': a_, 'to_stop': b_, 'linjer': ','.join(sorted(lns, key=lambda q: V.ORDNING.get(q, 99))),
+                      'kalla': k_, 'langd_m': l_, 'tid_s': t_, 'geometry': LineString(geo[(a_, b_)])})
+    for (a_, b_), v_ in fg.items():
+        namn_ = next(n for x, y, n in V.FORSLAG_SEGMENT if (x, y) == (a_, b_))
+        rader.append({'from_stop': a_, 'to_stop': b_, 'linjer': namn_, 'kalla': v_['kalla'], 'langd_m': v_['langd_m'],
+                      'tid_s': None if np.isnan(v_['tid_s']) else v_['tid_s'], 'geometry': LineString(v_['xy'])})
+    sgdf = gpd.GeoDataFrame(rader, crs=C.CRS_METRISK)
+    for ande, kol in (('from', 'from_stop'), ('to', 'to_stop')):
+        sgdf[f'{ande}_lon'] = sgdf[kol].map(ll_.lon).round(7); sgdf[f'{ande}_lat'] = sgdf[kol].map(ll_.lat).round(7)
+    sgdf['langd_m'] = sgdf.langd_m.astype(float).round(1); sgdf['tid_s'] = sgdf.tid_s.astype(float).round(1)
+    skriv(sgdf, '00_segment')
+    stil('00_segment', 'Segment (vägdragning)', qml(r_kategori('kalla', [('osrm', 'OSRM', '#3d4a57'), ('rak', 'Rak linje', '#c0392b'),
+                                                                    ('osrm_avvisad', 'OSRM avvisad (rak)', '#e8590c')],
+                                                         lambda n, f: linje(n, f, 0.5))), True)
+    kedje_rader = [{'linje': ln, 'kedja': ki, 'ordning': i, 'from_stop': a_, 'to_stop': b_}
+                   for ln, kl in kedjor.items() for ki, k in enumerate(kl) for i, (a_, b_) in enumerate(k)]
+    pyogrio.write_dataframe(pd.DataFrame(kedje_rader), GPKG, layer='00_linjekedjor', driver='GPKG')
+
     delar = V.forskjutna_delar()
     skriv(delar, '00_stadslinjer_forskjutna')
     stil('00_stadslinjer_forskjutna', 'Förskjutna stadslinjer',
@@ -324,6 +351,23 @@ def b4():
     stil('b4_forslag_hallplatser', 'Förslag – hållplatser (fig 4.2, 4.4, 4.6)',
          qml(r_kategori('objekt', kat, lambda n, form, f, st, k: markor(n, form, f, st, k, 0.3)),
              labeling=etiketter('"forslag" || \': \' || "namn"')), True)
+    # körvägarna som en del per hållplatssegment (kan bytas mot OSRM-rutter i QGIS, se rutta_med_osrm.py)
+    import s01_vagdragning as V
+    sg, fg = V.segmentgeometri(), V.forslagsgeometri()
+    hxy = V.alla_xy()[0]
+    MO, MX, VG, BV, BB = '9025302000066401', '9025302000031201', '9025302000063201', '9025302000063301', '9025302000003502'
+    def delar_for(r):
+        if r.forslag == '1a':
+            return [fg[(MO, 'NY_MOCKELO')]['xy']], ''
+        if r.forslag == '1b':
+            return [np.array([hxy[MO], hxy['NY_MOCKELO']])], 'NY_MOCKELO'
+        if r.objekt == 'körväg utgår':
+            return [sg.get((MX, VG), np.array([hxy[MX], hxy[VG]])), sg.get((VG, BV), np.array([hxy[VG], hxy[BV]]))], ''
+        return [fg[(MX, BB)]['xy'], fg[(BB, BV)]['xy']], ''
+    geoms, planerad = [], []
+    for r in ln.itertuples():
+        d_, p_ = delar_for(r); geoms.append(shapely.MultiLineString([LineString(x) for x in d_])); planerad.append(p_)
+    ln = gpd.GeoDataFrame(ln.drop(columns='geometry').assign(planerad_vag_till=planerad), geometry=geoms, crs=C.CRS_METRISK)
     skriv(ln, 'b4_forslag_korvagar')
     kat = [('ny körväg', 'Ny körväg', '#1c5cab', True),
            ('körväg utgår', 'Körväg som utgår', '#3d3d3a', True)]
@@ -370,36 +414,35 @@ def b4():
     import s01_vagdragning as V
     sg = V.segmentgeometri(); hxy, _ = V.hallplats_xy(); mon = V.monster_per_linje()
     fs = json.load(open(P / 'b4_forslag.json', encoding='utf-8'))['forslag']
-    def kedja(stopp, ersatt=None):
-        pts = []
-        for a, b in zip(stopp[:-1], stopp[1:]):
-            xy_ = sg.get((a, b), np.array([hxy[a], hxy[b]]))
-            pts.extend(xy_ if not pts else xy_[1:])
-        return LineString(pts)
+    def kedja(stopp):
+        """En del per hållplatssegment (så att delarna kan bytas mot OSRM-rutter i QGIS)."""
+        return shapely.MultiLineString([sg.get((a, b), np.array([hxy[a], hxy[b]])) for a, b in zip(stopp[:-1], stopp[1:])])
+    delar_ = lambda *g: shapely.MultiLineString([p for x in g for p in getattr(x, 'geoms', [x])])
     fg = V.forslagsgeometri()                        # förslagens nya delsträckor (OSRM om hämtade, annars raka)
     vm, om, nm = mon['V'][0][0], mon['Ö'][0][0], list(mon['N'][0][0])
     mo = '9025302000066401'; k = vm.index(mo); bobil_id = '9025302000003502'
-    v_1a = shapely.MultiLineString([kedja(vm[:k + 1]), LineString(fg[(mo, 'NY_MOCKELO')]['xy']),
-                                    LineString(fg[('NY_MOCKELO', mo)]['xy']), kedja(vm[k:])])
-    v_1b = shapely.MultiLineString([kedja(vm[:k + 1]), LineString([hxy[mo], fs['1b']['xy']]),     # planerad väg
-                                    LineString([fs['1b']['xy'], hxy[mo]]), kedja(vm[k:])])
+    v_1a = delar_(kedja(vm[:k + 1]), LineString(fg[(mo, 'NY_MOCKELO')]['xy']),
+                  LineString(fg[('NY_MOCKELO', mo)]['xy']), kedja(vm[k:]))
+    v_1b = delar_(kedja(vm[:k + 1]), LineString([hxy[mo], fs['1b']['xy']]),     # planerad väg (schematisk)
+                  LineString([fs['1b']['xy'], hxy[mo]]), kedja(vm[k:]))
     o_ny = kedja(om)
     iv = nm.index('9025302000063201')
-    n_ny = shapely.MultiLineString([kedja(nm[:iv]), LineString(fg[(nm[iv - 1], bobil_id)]['xy']),
-                                    LineString(fg[(bobil_id, nm[iv + 1])]['xy']), kedja(nm[iv + 1:])])
+    n_ny = delar_(kedja(nm[:iv]), LineString(fg[(nm[iv - 1], bobil_id)]['xy']),
+                  LineString(fg[(bobil_id, nm[iv + 1])]['xy']), kedja(nm[iv + 1:]))
     osrm_linjer = V.kalla_text().startswith('Linjernas')
     vag = lambda nycklar: ('OSRM' if osrm_linjer and all(fg[n]['kalla'] == 'osrm' for n in nycklar)
                            else 'delvis schematisk (raka streck)')
     rad = [('1a', 'V', 'Linje V via Möckelö Strand, dagens gator (8 av 20 turer ryms; alla turer kräver 6 bussar)',
             fs['1a']['delta_min_per_tur'], v_1a, vag([(mo, 'NY_MOCKELO'), ('NY_MOCKELO', mo)])),
            ('1b_VÖ', 'V/Ö', 'Linje V via Möckelö Strand (förlängd Norrgårdsvägen) och linje Ö via N2 – bussen växlar V ↔ Ö',
-            fs['1b']['delta_min_per_tur'], shapely.MultiLineString([*v_1b.geoms, o_ny]),
+            fs['1b']['delta_min_per_tur'], delar_(v_1b, o_ny),
             ('OSRM' if osrm_linjer else 'raka streck') + '; förlängningen schematisk (planerad väg)'),
            ('2', 'Ö', 'Linje Ö med ny hållplats N2', fs['2']['delta_min_per_tur'], o_ny,
             'OSRM' if osrm_linjer else 'raka streck'),
            ('3', 'N', 'Linje N via Bo-Bil i stället för Vikingagränd', fs['3']['delta_min_per_tur'], n_ny,
             vag([(nm[iv - 1], bobil_id), (bobil_id, nm[iv + 1])]))]
-    lg = gpd.GeoDataFrame([{'forslag': a, 'linje': b, 'beskrivning': c, 'korttid_per_tur_min': d, 'vagdragning': e}
+    lg = gpd.GeoDataFrame([{'forslag': a, 'linje': b, 'beskrivning': c, 'korttid_per_tur_min': d, 'vagdragning': e,
+                            'planerad_vag_till': 'NY_MOCKELO' if a == '1b_VÖ' else ''}
                            for a, b, c, d, _, e in rad],
                           geometry=[shapely.MultiLineString(getattr(g_, 'geoms', [g_])) for *_, g_, _ in rad], crs=C.CRS_METRISK)
     skriv(lg, 'b4_linjer_forslag')
