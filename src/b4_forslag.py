@@ -18,8 +18,9 @@ Antaganden
     ett verkligt uppehåll (+0,5 min), medan bussen i praktiken sällan stannar vid Vikingagränd (≈ 0,05
     påstigande per vardag). Netto +0,1 min per tur. Minskad väntan vid Nya Godbyvägen kan inte kvantifieras
     utan realtidsdata och ingår inte (försiktig bedömning).
-Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py. Varje förslag prövas med alla turer; om det inte
-ryms prövas genomgående linje (V/Ö) respektive vilka turer som ryms.
+Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py – omloppen följer normen att föraren byter linje
+S ↔ N och Ö ↔ V i centrum. Varje förslag prövas med alla turer; om det inte ryms prövas vilka turer som ryms,
+och om det ryms men ger fler varv utan reglering än i dag prövas en robust variant.
 Effekter
   * Täckning: delpunkter 50 m (A2) – avgångar inom 400 m före/efter, klassförändring.
   * Resenärer: korrigerad OD-matris (A1) utlagd på restidsnätet (b4_natverk.py) – berörda resor och
@@ -103,6 +104,9 @@ def bobil_delta(xy):
 
 # ====================================================================== omlopp
 def omlopp_scenarier(f, t, r, ref):
+    """Verifierar förslaget mot omloppen (normen: byte S ↔ N och Ö ↔ V, se b4_omlopp). 'alla': alla berörda turer.
+    Ryms de inte prövas turerna en i taget ('ryms'). Ryms de men ger fler varv utan reglering än i dag prövas
+    vilka turer som kan ändras utan det ('robust')."""
     linjeturer = t[t.linje == f['linje']]
     if f['typ'] == 'ny' and f['segment'][1] is None:          # Möckelö: turer som passerar vändpunkten
         berorda = linjeturer[linjeturer.monster.map(lambda m: f['segment'][0] in m)].trip_id
@@ -112,37 +116,20 @@ def omlopp_scenarier(f, t, r, ref):
     kmd = {tid: f['km_tur'] for tid in berorda}
     scen = {}
     plan, nt, ok = O.verifiera(t, d, r, km_delta=kmd, referens=ref)
-    scen['alla'] = {'plan': plan, 'nt': nt, 'ok': ok, 'turer': list(berorda), 'genomgaende': []}
-    if not ok and f['genomgaende']:
-        plan, nt, ok = O.verifiera(t, d, r, km_delta=kmd, genomgaende=f['genomgaende'], referens=ref)
-        scen['genomgaende'] = {'plan': plan, 'nt': nt, 'ok': ok, 'turer': list(berorda), 'genomgaende': f['genomgaende']}
-    if not scen['alla']['ok']:
-        valda = O.turer_som_ryms(t, list(berorda), f['delta'], r, referens=ref)
-        plan, nt, ok = O.verifiera(t, {k: f['delta'] for k in valda}, r, km_delta={k: f['km_tur'] for k in valda},
-                                   referens=ref)
-        scen['ryms'] = {'plan': plan, 'nt': nt, 'ok': ok, 'turer': valda, 'genomgaende': []}
-        if f['genomgaende']:
-            valda_g = O.turer_som_ryms(t, list(berorda), f['delta'], r, genomgaende=f['genomgaende'], referens=ref)
-            if len(valda_g) > len(valda):
-                plan, nt, ok = O.verifiera(t, {k: f['delta'] for k in valda_g}, r,
-                                           km_delta={k: f['km_tur'] for k in valda_g}, genomgaende=f['genomgaende'],
-                                           referens=ref)
-                scen['ryms_genomgaende'] = {'plan': plan, 'nt': nt, 'ok': ok, 'turer': valda_g,
-                                            'genomgaende': f['genomgaende']}
+    scen['alla'] = {'plan': plan, 'nt': nt, 'ok': ok, 'robust': O.ar_robust(nt, r), 'turer': list(berorda)}
+    for namn, robust in (('ryms', False), ('robust', True)):
+        if (namn == 'ryms' and ok) or (namn == 'robust' and (not ok or scen['alla']['robust'])):
+            continue
+        valda = O.turer_som_ryms(t, list(berorda), f['delta'], r, robust=robust, referens=ref)
+        plan, nt, ok2 = O.verifiera(t, {k: f['delta'] for k in valda}, r, km_delta={k: f['km_tur'] for k in valda},
+                                    referens=ref)
+        scen[namn] = {'plan': plan, 'nt': nt, 'ok': ok2, 'robust': O.ar_robust(nt, r), 'turer': valda}
     return scen
 
 
 def drift(scen):
-    """Driftform som ryms: alla turer; annars genomgående linje om den ger minst två turer fler än att bara
-    trafikera de turer som ryms i dagens omlopp; annars de turer som ryms."""
-    if scen['alla']['ok']:
-        return 'alla'
-    ryms = len(scen['ryms']['turer'])
-    for k in ('genomgaende', 'ryms_genomgaende'):
-        if k in scen and scen[k]['ok'] and len(scen[k]['turer']) >= ryms + 2:
-            return k
-    return 'ryms'
-
+    """Driftform: alla turer om de ryms, annars de turer som ryms."""
+    return 'alla' if scen['alla']['ok'] else 'ryms'
 
 
 # ====================================================================== täckning
@@ -243,8 +230,14 @@ def main():
     zoner = list(pd.read_csv(P / 'a1_restider_min.csv', index_col=0).index)
     mon0 = N.monster(); nat0 = N.Nat(mon0, zoner)
     bb = bobil_delta(xy)
+    import s01_vagdragning as V
+    fg = V.forslagsgeometri()
 
-    res = {'idag': nt0, 'antaganden': {'uppehall_min': UPPEHALL, 'kmh_ny_stracka': KMH_NY_STRACKA,
+    kontroll = {f'{a_}→{b_}': {'kalla': v_['kalla'], 'langd_m': round(v_['langd_m']),
+                                'tid_min': None if np.isnan(v_['tid_s']) else round(v_['tid_s'] / 60, 1)}
+                for (a_, b_), v_ in fg.items()}
+    res = {'idag': nt0, 'osrm_kontroll_nya_delstrackor': kontroll,
+           'antaganden': {'uppehall_min': UPPEHALL, 'kmh_ny_stracka': KMH_NY_STRACKA,
                                         'bobil': bb, 'pastigande_per_inv': {k: v for k, v in rate.items() if k != 'per_hpl'},
                                         'dagsfaktor': round(N.dagsfaktor(), 2)},
            'forslag': {}}
@@ -267,8 +260,8 @@ def main():
         r_hi = rate['per_hpl'].get(nara, r_ln) if nara else r_ln
         ut = {'namn': f['namn'], 'linje': f['linje'], 'delta_min_per_tur': f['delta'], 'km_per_tur': round(f['km_tur'], 2),
               'linjens_turer': alla_linjeturer, 'turer_som_trafikerar': len(trafikerar), 'driftform': val,
-              'omlopp': {k: {**s['nt'], 'ryms': bool(s['ok']), 'turer_med_andring': len(s['turer']),
-                             'genomgaende': ['/'.join(g) for g in s['genomgaende']]} for k, s in scen.items()},
+              'omlopp': {k: {**s['nt'], 'ryms': bool(s['ok']), 'robust': bool(s['robust']),
+                             'turer_med_andring': len(s['turer'])} for k, s in scen.items()},
               'tackning': tk, 'resenarer': re}
         if f['typ'] == 'ny':
             ut['nytt_pastigande_vardag'] = [round(tk['ny_tackning_inv'] * r_ln * andel, 2),
@@ -284,16 +277,29 @@ def main():
                         'avgangar': len(trafikerar), 'geometry': Point(*f['xy'])})
             if f['segment'][1] is None:
                 a = xy.loc[f['segment'][0], ['x', 'y']].to_numpy(float)
-                geo.append({'forslag': f['id'], 'objekt': 'ny körväg (schematisk)', 'namn': f['namn'], 'linje': f['linje'],
-                            'avgangar': len(trafikerar), 'geometry': LineString([a, f['xy']])})
+                ut_ = fg[(f['segment'][0], 'NY_MOCKELO')]
+                if f['id'] == '1a' and ut_['kalla'] == 'osrm':          # dagens gator: vägdragning från OSRM
+                    g_, vagd = LineString(ut_['xy']), 'OSRM'
+                else:
+                    g_, vagd = LineString([a, f['xy']]), 'schematisk' + (' (planerad väg)' if f['id'] == '1b' else '')
+                geo.append({'forslag': f['id'], 'objekt': 'ny körväg', 'vagdragning': vagd, 'namn': f['namn'],
+                            'linje': f['linje'], 'avgangar': len(trafikerar), 'geometry': g_})
         else:
             v = xy.loc[f['bort'], ['x', 'y']].to_numpy(float)
             bo = xy.loc[f['till'], ['x', 'y']].mean().to_numpy(float)
             mx = xy.loc[HPL['Maxinge'], ['x', 'y']].to_numpy(float); bv = xy.loc[HPL['Bolstavägen'], ['x', 'y']].to_numpy(float)
+            sg = V.segmentgeometri()
+            gammal = [sg.get((HPL['Maxinge'], f['bort'])), sg.get((f['bort'], HPL['Bolstavägen']))]
+            g_gammal = LineString(np.vstack([gammal[0], gammal[1][1:]])) if all(x is not None for x in gammal) \
+                else LineString([mx, v, bv])
+            ny_ = [fg[(HPL['Maxinge'], HPL['Bo-Bil B'])], fg[(HPL['Bo-Bil B'], HPL['Bolstavägen'])]]
+            g_ny = LineString(np.vstack([ny_[0]['xy'], ny_[1]['xy'][1:]]))
+            vag_ny = 'OSRM' if all(n['kalla'] == 'osrm' for n in ny_) else 'schematisk'
+            vag_gl = 'OSRM' if V.kalla_text().startswith('Linjernas') else 'schematisk'
             geo += [{'forslag': '3', 'objekt': 'hållplats utgår för linje N', 'namn': 'Vikingagränd', 'linje': 'N', 'avgangar': 0, 'geometry': Point(*v)},
                     {'forslag': '3', 'objekt': 'ny hållplats för linje N', 'namn': 'Bo-Bil', 'linje': 'N', 'avgangar': len(trafikerar), 'geometry': Point(*bo)},
-                    {'forslag': '3', 'objekt': 'körväg utgår (schematisk)', 'namn': 'Maxinge – Vikingagränd – Bolstavägen', 'linje': 'N', 'avgangar': 0, 'geometry': LineString([mx, v, bv])},
-                    {'forslag': '3', 'objekt': 'ny körväg (schematisk)', 'namn': 'Maxinge – Bo-Bil – Bolstavägen', 'linje': 'N', 'avgangar': len(trafikerar), 'geometry': LineString([mx, bo, bv])}]
+                    {'forslag': '3', 'objekt': 'körväg utgår', 'vagdragning': vag_gl, 'namn': 'Maxinge – Vikingagränd – Bolstavägen', 'linje': 'N', 'avgangar': 0, 'geometry': g_gammal},
+                    {'forslag': '3', 'objekt': 'ny körväg', 'vagdragning': vag_ny, 'namn': 'Maxinge – Bo-Bil – Bolstavägen', 'linje': 'N', 'avgangar': len(trafikerar), 'geometry': g_ny}]
         print(f"{f['id']}: Δ {f['delta']} min/tur, driftform {val}, {len(trafikerar)}/{alla_linjeturer} turer, "
               f"täckning {tk}, resenärer/vardag {re['vardag']}")
         for k, s in scen.items():

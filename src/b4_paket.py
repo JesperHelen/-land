@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
-"""B4 – Genomgående linje V/Ö, förslagspaket och systemeffekter (täckningsgrad före/efter).
+"""B4 – Förslagspaket och systemeffekter (täckningsgrad före/efter), med omlopp enligt förarnas linjebytesnorm.
 
+Omloppen följer normen att föraren byter linje i centrum Syd ↔ Norr (S ↔ N) och Öst ↔ Väst (Ö ↔ V), se
+b4_omlopp.py. Bussen som kör linje V fortsätter alltså redan i dag som linje Ö och tvärtom. Förlängs linje V
+till Möckelö Strand (1b) krymper bytet V → Ö till 0,5 min och regleringen tas vid bytet Ö → V.
 Scenarier (åtgärderna definieras i b4_forslag.forslag())
-  idag      Dagens linjenät.
-  1a        Möckelö Strand via dagens gator, alla turer (kräver fler bussar – underlag för kostnadskalkylen).
-  1a_del    1a, bara de turer som ryms i dagens omlopp.
-  1b_VÖ     Möckelö Strand via förlängd Norrgårdsvägen + genomgående linje V/Ö (sammanslagning).
-  2         N2 på linje Ö (de turer som ryms).
-  3         Linje N via Bo-Bil i stället för Vikingagränd.
-  paket_A   1b + genomgående V/Ö + 2 + 3 (ryms i dagens omlopp).
-  paket_B   1a (alla turer, fler bussar) + 2 + 3.
-För varje scenario: omlopp (fordon, omloppstid, körtid, km), täckningsgrad i Mariehamn (400 m, turtäthetsklasser,
-svag och otäckt befolkning), resenärseffekter (OD-utläggning, genomgående resor) och tillkommande påstigande.
-Genomgående V/Ö: fordonet fortsätter från linje V direkt som linje Ö (uppehåll 0,5 min i centrum, samma
-hållplatsläge) och regleringen tas efter Ö-turen. Båda linjerna behåller 30 min turintervall och pulsen.
+  idag            Dagens linjenät.
+  1a              Möckelö Strand via dagens gator, alla turer (kräver fler bussar – underlag för kostnadskalkylen).
+  1a_del          1a, bara de turer som ryms i dagens omlopp.
+  1b_VÖ           Möckelö Strand via förlängd Norrgårdsvägen (bussen växlar V ↔ Ö som i dag).
+  2               N2 på linje Ö.
+  3               Linje N via Bo-Bil i stället för Vikingagränd.
+  paket_A         1b + 2 + 3 med alla turer (ryms i dagens omlopp men ger kortare reglering kring Ö:s skolturer).
+  paket_A_robust  Som paket A, men utan omvägen till Möckelö Strand på de V-turer där varvet annars saknar
+                  minst 3 min reglering (lika robust som i dag).
+  paket_B         1a (alla turer, fler bussar) + 2 + 3.
+För varje scenario: omlopp (fordon, omloppstid, körtid, km, robusthet), täckningsgrad i Mariehamn (400 m,
+turtäthetsklasser, svag och otäckt befolkning), resenärseffekter (OD-utläggning) och tillkommande påstigande.
 Utdata: data/processed/b4_paket.json, b4_paket_omlopp.csv, b4_paket_tackning.csv.gz,
         output/kartor/b4_9_linje_vo.png, b4_10_paket_omlopp.png, b4_11_systemeffekter.png, b4_12_tackning_fore_efter.png
 """
@@ -38,17 +41,17 @@ import b4_forslag as F  # noqa: E402
 from a2_tackning import KLASSER, avgangar_inom, hallplatser_med_avgangar, klass, sammanstall  # noqa: E402
 
 P = C.PROCESSED
-VO = [('V', 'Ö')]
 SCENARIER = [
-    # id, namn, åtgärder, genomgående par, driftform
-    ('idag', 'I dag', [], [], 'alla'),
-    ('1a', '1a Möckelö Strand, dagens gator – alla turer', ['1a'], [], 'fler_bussar'),
-    ('1a_del', '1a – bara turer som ryms', ['1a'], [], 'ryms'),
-    ('1b_VÖ', '1b Möckelö Strand + genomgående V/Ö', ['1b'], VO, 'ryms'),
-    ('2', '2 N2 på linje Ö', ['2'], [], 'ryms'),
-    ('3', '3 Linje N via Bo-Bil', ['3'], [], 'ryms'),
-    ('paket_A', 'Paket A: 1b + V/Ö + 2 + 3', ['1b', '3', '2'], VO, 'ryms'),
-    ('paket_B', 'Paket B: 1a (alla turer) + 2 + 3', ['1a', '3', '2'], [], 'fler_bussar'),
+    # id, namn, åtgärder, driftform
+    ('idag', 'I dag', [], 'alla'),
+    ('1a', '1a Möckelö Strand, dagens gator – alla turer', ['1a'], 'fler_bussar'),
+    ('1a_del', '1a – bara turer som ryms', ['1a'], 'ryms'),
+    ('1b_VÖ', '1b Möckelö Strand, förlängd Norrgårdsvägen', ['1b'], 'ryms'),
+    ('2', '2 N2 på linje Ö', ['2'], 'ryms'),
+    ('3', '3 Linje N via Bo-Bil', ['3'], 'ryms'),
+    ('paket_A', 'Paket A: 1b + 2 + 3', ['1b', '3', '2'], 'ryms'),
+    ('paket_A_robust', 'Paket A robust: 1b på 15 av 20 turer + 2 + 3', ['3', '2', '1b'], 'robust'),
+    ('paket_B', 'Paket B: 1a (alla turer) + 2 + 3', ['1a', '3', '2'], 'fler_bussar'),
 ]
 FARG_VO = '#8c3b74'
 
@@ -69,20 +72,23 @@ def berorda_turer(f, t):
 
 
 # ====================================================================== omlopp
-def planera(t, r, ref, atg, ids, gen, driftform):
+def planera(t, r, ref, atg, ids, driftform):
     """Lägger på åtgärderna i tur och ordning. En åtgärd som inte ryms med alla turer får bara de turer som ryms
-    (prövas en i taget). 'fler_bussar': den första åtgärden körs med alla turer och får kräva fler fordon
-    (redovisas som merkostnad); följande åtgärder prövas mot den nya ramen."""
+    (prövas en i taget). 'robust': dessutom inte fler varv utan reglering än i dag. 'fler_bussar': den första
+    åtgärden körs med alla turer och får kräva fler fordon (redovisas som merkostnad); följande åtgärder prövas
+    mot den nya ramen."""
     delta, km, turer = {}, {}, {}
-    kw = dict(genomgaende=gen, referens=ref)
+    kw = dict(referens=ref)
+    robust = driftform == 'robust'
     for i, a in enumerate(ids):
         f = atg[a]; kand = berorda_turer(f, t)
         prov = dict(delta); [prov.__setitem__(k, prov.get(k, 0.0) + f['delta']) for k in kand]
         nt_prov = O.nyckeltal(O.bygg_omlopp(O.med_andring(t, prov), **kw))
-        ok = O.inom_ram(nt_prov, r)
+        ok = O.inom_ram(nt_prov, r, robust)
         if driftform == 'fler_bussar' and i == 0:        # första åtgärden får kräva fler bussar – ny ram
             valda = kand
-            r = {'fordon': nt_prov['fordon'], 'omloppstid_h': nt_prov['omloppstid_h']}
+            r = {'fordon': nt_prov['fordon'], 'omloppstid_h': nt_prov['omloppstid_h'],
+                 'varv_utan_reglering': nt_prov['varv_utan_reglering']}
         elif ok:
             valda = kand
         else:
@@ -91,13 +97,14 @@ def planera(t, r, ref, atg, ids, gen, driftform):
                 p2 = dict(delta)
                 for k in valda + [tid]:
                     p2[k] = p2.get(k, 0.0) + f['delta']
-                if O.inom_ram(O.nyckeltal(O.bygg_omlopp(O.med_andring(t, p2), **kw)), r):
+                if O.inom_ram(O.nyckeltal(O.bygg_omlopp(O.med_andring(t, p2), **kw)), r, robust):
                     valda.append(tid)
         for k in valda:
             delta[k] = delta.get(k, 0.0) + f['delta']; km[k] = km.get(k, 0.0) + f['km_tur']
         turer[a] = valda
-    plan, nt, ok = O.verifiera(t, delta, O.ram(t), km_delta=km, **kw)
-    return plan, nt, ok, turer
+    r0 = O.ram(t)
+    plan, nt, ok = O.verifiera(t, delta, r0, km_delta=km, **kw)
+    return plan, nt, ok, O.ar_robust(nt, r0), turer
 
 
 # ====================================================================== täckning
@@ -124,7 +131,7 @@ def hallplatser_scenario(hpl0, atg, turer, xy):
 
 
 # ====================================================================== resenärer
-def monster_scenario(mon0, atg, turer, t, gen):
+def monster_scenario(mon0, atg, turer, t, gen=()):
     """Mönster med förslagens körtider; andelen turer som trafikerar en åtgärd skalar tillägget."""
     mon = []
     for m in mon0:
@@ -174,8 +181,8 @@ def berakna():
     zoner = list(pd.read_csv(P / 'a1_restider_min.csv', index_col=0).index)
     mon0 = N.monster(); nat0 = N.Nat(mon0, zoner)
     res, planer, kl = {}, [], {}
-    for sid, namn, ids, gen, drift in SCENARIER:
-        plan, nt, ok, turer = planera(t, r, ref, atg, ids, gen, drift)
+    for sid, namn, ids, drift in SCENARIER:
+        plan, nt, ok, rob, turer = planera(t, r, ref, atg, ids, drift)
         h = hallplatser_scenario(hpl0, atg, turer, xy)
         avg, _ = avgangar_inom(pkt, h)
         k = np.array([klass(v) for v in avg]); kl[sid] = k
@@ -189,17 +196,17 @@ def berakna():
                 ny_inv = float(pkt.loc[d_ & (kl['idag'] == 0) & (k > 0), 'bef'].sum()) if 'idag' in kl else 0.0
                 nya[a] = {'avgangar': len(valda), 'ny_tackning_inv': round(ny_inv),
                           'pastigande_vardag': round(ny_inv * rate.get(f['linje'], rate['alla']), 2)}
-        rs = resenarer(nat0, monster_scenario(mon0, atg, turer, t, gen), zoner) if ids else \
+        rs = resenarer(nat0, monster_scenario(mon0, atg, turer, t), zoner) if ids else \
             {'resenarsminuter_vardag': 0.0, 'resor_langre_vardag': 0.0, 'resor_kortare_vardag': 0.0}
-        res[sid] = {'namn': namn, 'atgarder': ids, 'genomgaende': ['/'.join(g) for g in gen], 'driftform': drift,
-                    'ryms': bool(ok), 'omlopp': nt,
+        res[sid] = {'namn': namn, 'atgarder': ids, 'driftform': drift,
+                    'ryms': bool(ok), 'robust': bool(rob), 'omlopp': nt,
                     'turer_per_atgard': {a: len(v) for a, v in turer.items()},
                     'turer_per_atgard_tot': {a: len(berorda_turer(atg[a], t)) for a in turer},
                     'tackning_mariehamn': tack_mh, 'tackning_hela_omradet': tack_alla,
                     'nya_hallplatser': nya, 'resenarer': rs}
         pl = plan.drop(columns=['monster']).copy(); pl['scenario'] = sid
         planer.append(pl)
-        print(f"{sid:8s} ryms={ok} fordon={nt['fordon']} omloppstid={nt['omloppstid_h']} km={nt['km']} "
+        print(f"{sid:8s} ryms={ok} robust={rob} varv={nt['varv_utan_reglering']} fordon={nt['fordon']} omloppstid={nt['omloppstid_h']} km={nt['km']} "
               f"turer={ {a: len(v) for a, v in turer.items()} } inom400={tack_mh['inom_400m_andel']} "
               f"≥30={tack_mh['minst_30_avg_andel']} svag={tack_mh['svag_invanare']} res={rs}")
     # förändring mot i dag
@@ -247,7 +254,7 @@ def fig_linje_vo(res):
     atg, xy = atgarder()
     kedjor = linjekedjor_xy()
     fig, ax = plt.subplots(figsize=(9.0, 9.0))
-    K.ny_karta((104500, 111400, 6681700, 6688300), ax=ax, titel='Genomgående linje V/Ö med Möckelö Strand (1b) och N2 (2)')
+    K.ny_karta((104500, 111400, 6681700, 6688300), ax=ax, titel='Omloppsparet V ↔ Ö med Möckelö Strand (1b) och N2 (2)')
     K.rita_linjer(ax, lw=1.3, alpha=0.35, zorder=3, etikett=False)
     for ln in ('V', 'Ö'):
         for i, xy_ in enumerate(kedjor[ln]):
@@ -261,23 +268,28 @@ def fig_linje_vo(res):
     c = xy.loc['9025302000066202', ['x', 'y']].to_numpy(float)
     ax.scatter([c[0]], [c[1]], s=110, marker='s', color='#1f1f1e', edgecolor='white', lw=0.8, zorder=8)
     hinder = K.punkt_hinder(ax, [m[0], n2[0], c[0]], [m[1], n2[1], c[1]], px=11)
-    K.placera_etiketter(ax, [('Centrum, Nygatan\n(genomgång V → Ö)', tuple(c), 120), ('Möckelö Strand (ny)', tuple(m), 90),
+    K.placera_etiketter(ax, [('Centrum, Nygatan\n(byte V ↔ Ö)', tuple(c), 120), ('Möckelö Strand (ny)', tuple(m), 90),
                              ('N2', tuple(n2), 90)], fontsize=7, fet=True, undvik=hinder)
-    v = res['1b_VÖ']; pa = res['paket_A']
-    txt = [r'$\bf{Varv\ (2\ bussar,\ 30\ min\ turintervall\ på\ båda\ linjerna)}$',
+    pa = res['paket_A']; pr = res['paket_A_robust']
+    pl = pd.read_csv(P / 'b4_paket_omlopp.csv')
+    a_ = set(pl[(pl.scenario == 'paket_A') & (pl.linje == 'V') & (pl.delta > 0)].avg)
+    b_ = set(pl[(pl.scenario == 'paket_A_robust') & (pl.linje == 'V') & (pl.delta > 0)].avg)
+    utan = ', '.join(O.hm(x) for x in sorted(a_ - b_))
+    txt = [r'$\bf{Varv\ –\ bussen\ växlar\ V\ ↔\ Ö\ som\ i\ dag\ (2\ bussar,\ 30\ min\ intervall)}$',
            'Centrum :20 → linje V via Möckelö Strand (29,5 min)',
-           '→ Centrum :49,5 – uppehåll 0,5 min, bussen fortsätter som linje Ö',
+           '→ Centrum :49,5 – byte 0,5 min, bussen fortsätter som linje Ö',
            '→ Centrum :50 → linje Ö via N2 (23,5 min) → Centrum :13,5',
-           '→ reglering 6,5 min → linje V :20 (nästa buss 30 min senare)',
+           '→ byte med reglering 6,5 min → linje V :20',
            r'$\bf{Omlopp}$' + f"   {pa['omlopp']['fordon']} bussar som i dag, omloppstid "
            f"{'+' if pa['forandring_omlopp']['omloppstid_h'] >= 0 else ''}{sv(pa['forandring_omlopp']['omloppstid_h'] * 60, 0)} min/vardag (paket A)",
-           f"Skolturer linje Ö (13:10–15:10): reglering 1,5–2 min per varv"]
+           f"Kring Ö:s skolturer blir regleringen < 3 min per varv. Robust variant:",
+           f"Möckelö Strand trafikeras av {pr['turer_per_atgard']['1b']} av 20 V-turer (ej {utan})"]
     ax.text(0.015, 0.985, '\n'.join(txt), transform=ax.transAxes, ha='left', va='top', fontsize=7, color=K.TEXT,
             zorder=30, linespacing=1.5, bbox=dict(boxstyle='round,pad=0.55', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.95))
-    h = [Line2D([], [], color=FARG_VO, lw=3, label='Linje V/Ö (genomgående)'),
+    h = [Line2D([], [], color=FARG_VO, lw=3, label='Linje V och Ö (bussen växlar V ↔ Ö)'),
          Line2D([], [], color=FARG_VO, lw=3, ls=(0, (2.5, 1.6)), label='Förlängning till Möckelö Strand (schematisk)'),
          Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=12, label='Ny hållplats'),
-         Line2D([], [], marker='s', ls='', color='#1f1f1e', markersize=8, label='Genomgång i centrum'),
+         Line2D([], [], marker='s', ls='', color='#1f1f1e', markersize=8, label='Byte V ↔ Ö i centrum'),
          Line2D([], [], color='#9a978f', lw=1.5, label='Övriga stadslinjer')]
     lg = K.teckenforklaring(ax, h, loc='lower left', fontsize=7)
     lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
@@ -287,7 +299,8 @@ def fig_linje_vo(res):
 
 def fig_paket_omlopp(res):
     pl = pd.read_csv(P / 'b4_paket_omlopp.csv', dtype={'trip_id': str})
-    paneler = [('idag', 'I dag'), ('paket_A', 'Paket A – 1b med genomgående V/Ö + N2 + Bo-Bil'),
+    paneler = [('idag', 'I dag (bussarna växlar S ↔ N och V ↔ Ö)'), ('paket_A', 'Paket A – 1b + N2 + Bo-Bil, alla turer'),
+               ('paket_A_robust', 'Paket A robust – Möckelö Strand på 15 av 20 V-turer'),
                ('paket_B', 'Paket B – 1a med alla turer + N2 + Bo-Bil')]
     fig, axs = plt.subplots(len(paneler), 1, figsize=(12.4, 0.75 + 1.85 * len(paneler)))
     for ax, (sid, rub) in zip(axs, paneler):
@@ -299,6 +312,7 @@ def fig_paket_omlopp(res):
             rub += f" ({'ryms' if v['ryms'] else 'ryms inte'})   ·   omloppstid "
             rub += f"+{sv(dm / 60)} h/vardag" if dm >= 60 else f"{'+' if dm >= 0 else ''}{sv(dm, 0)} min/vardag"
             rub += f"   ·   {'+' if d['km'] >= 0 else ''}{sv(d['km'], 0)} km/vardag"
+            rub += f"   ·   varv < 3 min reglering: {v['omlopp']['varv_utan_reglering']} (i dag {res['idag']['omlopp']['varv_utan_reglering']})"
         O.rita_omlopp(ax, p, titel=rub, andrade=set(p.loc[p.delta != 0, 'trip_id']))
         ax.title.set_color(K.TEXT if v['ryms'] else '#c0392b')
         if v['omlopp']['fordon'] > res['idag']['omlopp']['fordon']:
@@ -307,7 +321,7 @@ def fig_paket_omlopp(res):
                     lbl.set_color('#c0392b'); lbl.set_fontweight('bold')
     fig.suptitle('Omlopp före och efter – förslagspaket', x=0.01, ha='left', fontsize=11.5, fontweight='bold')
     extra = [Patch(facecolor='white', edgecolor='#52514e', hatch='//////', label='Tillagd körtid'),
-             Line2D([], [], color='#1c5cab', lw=2.2, label='Genomgående (fortsätter som annan linje)')]
+             Line2D([], [], color='#1c5cab', lw=2.2, label='Kort byte inom linjeparet (< 3 min)')]
     O.omlopp_forklaring(fig, extra=extra, y=-0.01)
     fig.tight_layout(rect=(0, 0.04, 1, 0.975), h_pad=0.9)
     ut = C.KARTOR / 'b4_10_paket_omlopp.png'
@@ -316,15 +330,16 @@ def fig_paket_omlopp(res):
 
 
 def fig_systemeffekter(res):
-    ids = ['1a', '1a_del', '1b_VÖ', '2', '3', 'paket_A', 'paket_B']
+    ids = ['1a', '1a_del', '1b_VÖ', '2', '3', 'paket_A', 'paket_A_robust', 'paket_B']
     kort = {'1a': '1a alla turer\n(20 avg., 6 bussar)', '1a_del': '1a bara turer som ryms\n(8 avg./vardag)',
-            '1b_VÖ': '1b + genomgående V/Ö\n(20 avg./vardag)',
-            '2': '2 N2 linje Ö', '3': '3 N via Bo-Bil', 'paket_A': 'Paket A\n1b + V/Ö, 2, 3', 'paket_B': 'Paket B\n1a, 2, 3 (6 bussar)'}
+            '1b_VÖ': '1b förlängd Norrgårdsvägen\n(20 avg./vardag)',
+            '2': '2 N2 linje Ö', '3': '3 N via Bo-Bil', 'paket_A': 'Paket A\n1b, 2, 3',
+            'paket_A_robust': 'Paket A robust\n(Möckelö 15 avg./vardag)', 'paket_B': 'Paket B\n1a, 2, 3 (6 bussar)'}
     mat = [('ny_tackning', 'Får hållplats inom 400 m', '#2f9e44', 1),
            ('lyft_till_minst_30', 'Får minst 30 avgångar/vardag (hade 1–29)', '#1c5cab', 1),
            ('forlorad_tackning', 'Förlorar hållplats inom 400 m', '#c0392b', -1),
            ('samre_klass_kvar_tackning', 'Färre avgångar, har kvar hållplats', '#f28e2b', -1)]
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(13.4, 5.8), gridspec_kw={'width_ratios': [1.35, 1.0], 'wspace': 0.36})
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(14.2, 6.2), gridspec_kw={'width_ratios': [1.3, 1.1], 'wspace': 0.34})
     y = np.arange(len(ids)); hgt = 0.19
     for j, (k, lbl, f, tecken) in enumerate(mat):
         v = [tecken * res[i]['forandring_invanare_mariehamn'][k] for i in ids]
@@ -347,15 +362,16 @@ def fig_systemeffekter(res):
            ('Svag tillgänglighet (1–29 avg.)', lambda t: t['svag_andel']),
            ('Ingen hållplats inom 400 m', lambda t: 1 - t['inom_400m_andel'])]
     ax2.axis('off')
-    kol = ['idag', 'paket_A', 'paket_B']
+    kol = ['idag', 'paket_A', 'paket_A_robust', 'paket_B']
     cell = [[n] + [sv(100 * fn(res[s_]['tackning_mariehamn']), 1) + ' %' for s_ in kol] for n, fn in rad]
     cell += [['Bussar', *[str(res[s_]['omlopp']['fordon']) for s_ in kol]],
              ['Omloppstid (h/vardag)', *[sv(res[s_]['omlopp']['omloppstid_h']) for s_ in kol]],
              ['Fordonskilometer per vardag', *[sv(res[s_]['omlopp']['km'], 0) for s_ in kol]],
+             ['Varv med < 3 min reglering', *[str(res[s_]['omlopp']['varv_utan_reglering']) for s_ in kol]],
              ['Längre restid befintliga resenärer\n(resenärsminuter/vardag)', '–',
               *[sv(res[s_]['resenarer']['resenarsminuter_vardag'], 0) for s_ in kol[1:]]]]
-    tb = ax2.table(cellText=cell, colLabels=['Mariehamn (14 821 inv.)', 'I dag', 'Paket A', 'Paket B'], loc='upper left',
-                   cellLoc='right', colLoc='right', colWidths=[0.52, 0.16, 0.16, 0.16])
+    tb = ax2.table(cellText=cell, colLabels=['Mariehamn (14 821 inv.)', 'I dag', 'Paket A', 'A robust', 'Paket B'],
+                   loc='upper left', cellLoc='right', colLoc='right', colWidths=[0.44, 0.14, 0.14, 0.14, 0.14])
     tb.auto_set_font_size(False); tb.set_fontsize(7.6); tb.scale(1, 1.5)
     for (r_, c_), ce in tb.get_celld().items():
         ce.set_edgecolor('#e0ded7'); ce.set_linewidth(0.5)

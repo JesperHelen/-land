@@ -3,15 +3,40 @@
   "fordon": 5,
   "turer": 93,
   "korttid_h": 42.45,
-  "omloppstid_h": 61.38,
-  "regleringstid_h": 11.47,
-  "uppstallning_h": 7.47,
+  "omloppstid_h": 61.43,
+  "regleringstid_h": 7.95,
+  "uppstallning_h": 11.03,
   "km": 1136.5,
   "min_vandtid": 1.0,
-  "vandningar_under_rek": 7,
-  "genomgangar": 0,
+  "vandningar_under_rek": 3,
+  "varv_utan_reglering": 1,
+  "byten_enligt_norm": 75,
+  "samma_linje": 0,
+  "genomgangar": 75,
   "forsta_avg": 410.0,
   "sista_ank": 1273.0
+ },
+ "osrm_kontroll_nya_delstrackor": {
+  "9025302000066401→NY_MOCKELO": {
+   "kalla": "rak",
+   "langd_m": 718,
+   "tid_min": null
+  },
+  "NY_MOCKELO→9025302000066401": {
+   "kalla": "rak",
+   "langd_m": 718,
+   "tid_min": null
+  },
+  "9025302000031201→9025302000003502": {
+   "kalla": "rak",
+   "langd_m": 497,
+   "tid_min": null
+  },
+  "9025302000003502→9025302000063301": {
+   "kalla": "rak",
+   "langd_m": 457,
+   "tid_min": null
+  }
  },
  "antaganden": {
   "uppehall_min": 0.5,
@@ -49,54 +74,41 @@
      "fordon": 6,
      "turer": 93,
      "korttid_h": 44.62,
-     "omloppstid_h": 72.98,
-     "regleringstid_h": 17.73,
-     "uppstallning_h": 10.63,
+     "omloppstid_h": 73.0,
+     "regleringstid_h": 14.18,
+     "uppstallning_h": 14.2,
      "km": 1186.5,
      "min_vandtid": 1.0,
-     "vandningar_under_rek": 9,
-     "genomgangar": 0,
+     "vandningar_under_rek": 4,
+     "varv_utan_reglering": 1,
+     "byten_enligt_norm": 72,
+     "samma_linje": 0,
+     "genomgangar": 72,
      "forsta_avg": 410.0,
      "sista_ank": 1273.5,
      "ryms": false,
-     "turer_med_andring": 20,
-     "genomgaende": []
-    },
-    "genomgaende": {
-     "fordon": 6,
-     "turer": 93,
-     "korttid_h": 44.62,
-     "omloppstid_h": 72.98,
-     "regleringstid_h": 17.73,
-     "uppstallning_h": 10.63,
-     "km": 1186.5,
-     "min_vandtid": 1.0,
-     "vandningar_under_rek": 8,
-     "genomgangar": 14,
-     "forsta_avg": 410.0,
-     "sista_ank": 1273.5,
-     "ryms": false,
-     "turer_med_andring": 20,
-     "genomgaende": [
-      "V/Ö"
-     ]
+     "robust": true,
+     "turer_med_andring": 20
     },
     "ryms": {
      "fordon": 5,
      "turer": 93,
      "korttid_h": 43.32,
-     "omloppstid_h": 61.49,
-     "regleringstid_h": 10.82,
-     "uppstallning_h": 7.36,
+     "omloppstid_h": 61.54,
+     "regleringstid_h": 7.59,
+     "uppstallning_h": 10.63,
      "km": 1156.5,
      "min_vandtid": 1.0,
-     "vandningar_under_rek": 9,
-     "genomgangar": 0,
+     "vandningar_under_rek": 5,
+     "varv_utan_reglering": 1,
+     "byten_enligt_norm": 69,
+     "samma_linje": 0,
+     "genomgangar": 69,
      "forsta_avg": 410.0,
      "sista_ank": 1273.0,
      "ryms": true,
-     "turer_med_andring": 8,
-     "genomgaende": []
+     "robust": true,
+     "turer_med_andring": 8
     }
    },
    "tackning": {
@@ -142,79 +154,47 @@
    "km_per_tur": 0.83,
    "linjens_turer": 20,
    "turer_som_trafikerar": 20,
-   "driftform": "genomgaende",
+   "driftform": "alla",
    "omlopp": {
     "alla": {
-     "fordon": 6,
-     "turer": 93,
-     "korttid_h": 43.28,
-     "omloppstid_h": 72.73,
-     "regleringstid_h": 17.68,
-     "uppstallning_h": 11.78,
-     "km": 1153.2,
-     "min_vandtid": 1.0,
-     "vandningar_under_rek": 9,
-     "genomgangar": 0,
-     "forsta_avg": 410.0,
-     "sista_ank": 1273.0,
-     "ryms": false,
-     "turer_med_andring": 20,
-     "genomgaende": []
-    },
-    "genomgaende": {
      "fordon": 5,
      "turer": 93,
      "korttid_h": 43.28,
-     "omloppstid_h": 61.42,
-     "regleringstid_h": 10.72,
-     "uppstallning_h": 7.42,
+     "omloppstid_h": 61.48,
+     "regleringstid_h": 7.2,
+     "uppstallning_h": 10.99,
      "km": 1153.2,
      "min_vandtid": 0.5,
-     "vandningar_under_rek": 8,
-     "genomgangar": 17,
+     "vandningar_under_rek": 4,
+     "varv_utan_reglering": 8,
+     "byten_enligt_norm": 75,
+     "samma_linje": 0,
+     "genomgangar": 75,
      "forsta_avg": 410.0,
      "sista_ank": 1273.0,
      "ryms": true,
-     "turer_med_andring": 20,
-     "genomgaende": [
-      "V/Ö"
-     ]
+     "robust": false,
+     "turer_med_andring": 20
     },
-    "ryms": {
+    "robust": {
      "fordon": 5,
      "turer": 93,
-     "korttid_h": 42.87,
-     "omloppstid_h": 61.47,
-     "regleringstid_h": 11.18,
-     "uppstallning_h": 7.42,
-     "km": 1144.8,
-     "min_vandtid": 1.0,
-     "vandningar_under_rek": 9,
-     "genomgangar": 0,
-     "forsta_avg": 410.0,
-     "sista_ank": 1273.0,
-     "ryms": true,
-     "turer_med_andring": 10,
-     "genomgaende": []
-    },
-    "ryms_genomgaende": {
-     "fordon": 5,
-     "turer": 93,
-     "korttid_h": 43.28,
-     "omloppstid_h": 61.42,
-     "regleringstid_h": 10.72,
-     "uppstallning_h": 7.42,
-     "km": 1153.2,
+     "korttid_h": 43.08,
+     "omloppstid_h": 61.48,
+     "regleringstid_h": 7.41,
+     "uppstallning_h": 10.99,
+     "km": 1149.0,
      "min_vandtid": 0.5,
-     "vandningar_under_rek": 8,
-     "genomgangar": 17,
+     "vandningar_under_rek": 4,
+     "varv_utan_reglering": 1,
+     "byten_enligt_norm": 75,
+     "samma_linje": 0,
+     "genomgangar": 75,
      "forsta_avg": 410.0,
      "sista_ank": 1273.0,
      "ryms": true,
-     "turer_med_andring": 20,
-     "genomgaende": [
-      "V/Ö"
-     ]
+     "robust": true,
+     "turer_med_andring": 15
     }
    },
    "tackning": {
@@ -259,80 +239,28 @@
    "delta_min_per_tur": 0.5,
    "km_per_tur": 0.0,
    "linjens_turer": 20,
-   "turer_som_trafikerar": 19,
-   "driftform": "ryms",
+   "turer_som_trafikerar": 20,
+   "driftform": "alla",
    "omlopp": {
     "alla": {
-     "fordon": 6,
-     "turer": 93,
-     "korttid_h": 42.62,
-     "omloppstid_h": 61.38,
-     "regleringstid_h": 11.31,
-     "uppstallning_h": 7.46,
-     "km": 1136.5,
-     "min_vandtid": 1.0,
-     "vandningar_under_rek": 6,
-     "genomgangar": 0,
-     "forsta_avg": 410.0,
-     "sista_ank": 1273.0,
-     "ryms": false,
-     "turer_med_andring": 20,
-     "genomgaende": []
-    },
-    "genomgaende": {
      "fordon": 5,
      "turer": 93,
      "korttid_h": 42.62,
-     "omloppstid_h": 61.39,
-     "regleringstid_h": 11.32,
-     "uppstallning_h": 7.46,
+     "omloppstid_h": 61.44,
+     "regleringstid_h": 7.8,
+     "uppstallning_h": 11.03,
      "km": 1136.5,
      "min_vandtid": 0.5,
      "vandningar_under_rek": 3,
-     "genomgangar": 18,
+     "varv_utan_reglering": 1,
+     "byten_enligt_norm": 75,
+     "samma_linje": 0,
+     "genomgangar": 75,
      "forsta_avg": 410.0,
      "sista_ank": 1273.0,
      "ryms": true,
-     "turer_med_andring": 20,
-     "genomgaende": [
-      "Ö/V"
-     ]
-    },
-    "ryms": {
-     "fordon": 5,
-     "turer": 93,
-     "korttid_h": 42.61,
-     "omloppstid_h": 61.39,
-     "regleringstid_h": 11.32,
-     "uppstallning_h": 7.46,
-     "km": 1136.5,
-     "min_vandtid": 1.0,
-     "vandningar_under_rek": 7,
-     "genomgangar": 0,
-     "forsta_avg": 410.0,
-     "sista_ank": 1273.0,
-     "ryms": true,
-     "turer_med_andring": 19,
-     "genomgaende": []
-    },
-    "ryms_genomgaende": {
-     "fordon": 5,
-     "turer": 93,
-     "korttid_h": 42.62,
-     "omloppstid_h": 61.39,
-     "regleringstid_h": 11.32,
-     "uppstallning_h": 7.46,
-     "km": 1136.5,
-     "min_vandtid": 0.5,
-     "vandningar_under_rek": 3,
-     "genomgangar": 18,
-     "forsta_avg": 410.0,
-     "sista_ank": 1273.0,
-     "ryms": true,
-     "turer_med_andring": 20,
-     "genomgaende": [
-      "Ö/V"
-     ]
+     "robust": true,
+     "turer_med_andring": 20
     }
    },
    "tackning": {
@@ -345,26 +273,26 @@
    },
    "resenarer": {
     "FM": {
-     "resenarsminuter_h": 0.042,
-     "resor_langre_h": 0.085,
+     "resenarsminuter_h": 0.045,
+     "resor_langre_h": 0.089,
      "resor_kortare_h": 0.0,
      "resor_utan_forbindelse_h": 0.0
     },
     "EM": {
-     "resenarsminuter_h": 0.164,
-     "resor_langre_h": 0.328,
+     "resenarsminuter_h": 0.173,
+     "resor_langre_h": 0.345,
      "resor_kortare_h": 0.0,
      "resor_utan_forbindelse_h": 0.0
     },
     "vardag": {
-     "berorda_resor": 2.2,
+     "berorda_resor": 2.3,
      "resenarsminuter": 1.1,
      "resor_utan_forbindelse": 0.0
     }
    },
    "nytt_pastigande_vardag": [
-    0.37,
-    1.77
+    0.39,
+    1.87
    ],
    "xy": [
     110322.21345472928,
@@ -384,18 +312,21 @@
      "fordon": 5,
      "turer": 93,
      "korttid_h": 42.49,
-     "omloppstid_h": 61.38,
-     "regleringstid_h": 11.43,
-     "uppstallning_h": 7.47,
+     "omloppstid_h": 61.43,
+     "regleringstid_h": 7.92,
+     "uppstallning_h": 11.03,
      "km": 1127.0,
      "min_vandtid": 1.0,
-     "vandningar_under_rek": 7,
-     "genomgangar": 0,
+     "vandningar_under_rek": 3,
+     "varv_utan_reglering": 1,
+     "byten_enligt_norm": 75,
+     "samma_linje": 0,
+     "genomgangar": 75,
      "forsta_avg": 410.0,
      "sista_ank": 1273.0,
      "ryms": true,
-     "turer_med_andring": 22,
-     "genomgaende": []
+     "robust": true,
+     "turer_med_andring": 22
     }
    },
    "tackning": {

@@ -24,6 +24,7 @@ TACK = pd.read_csv(P / 'b4_tackning_forslag.csv.gz', dtype={'forslag': str})
 HPL = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0)
 OTACKT = '#b9b4a8'
 BATTRE, SAMRE, BLA = '#2f9e44', '#c0392b', '#1c5cab'
+F_HPL_MOCKELO = '9025302000066401'
 UTS = {'mockelo': (104450, 107350, 6682650, 6685750), 'n2': (109150, 111550, 6681850, 6685550),
        'bobil': (106950, 109350, 6685250, 6687550)}
 
@@ -107,10 +108,15 @@ def fig_mockelo():
     etik = hallplatser(ax, uts, ['Möckelö Strand', 'Norrgårdsvägen', 'Lönnhagsvägen', 'Sviby bro', 'Västra Möckelö vsk.'])
     nx, ny_ = f1b['xy']
     ms = HPL[HPL.namn == 'Möckelö Strand'][['x', 'y']].mean()
-    ax.plot([ms.x, nx], [ms.y, ny_], color=C.FARG_LINJE['V'], lw=2.2, ls=(0, (3, 2)), zorder=5)
+    import s01_vagdragning as V
+    fg = V.forslagsgeometri()[(F_HPL_MOCKELO, 'NY_MOCKELO')]
+    ax.plot([ms.x, nx], [ms.y, ny_], color=C.FARG_LINJE['V'], lw=2.2, ls=(0, (3, 2)), zorder=5)   # 1b (planerad väg)
+    if fg['kalla'] == 'osrm':                                                                       # 1a längs dagens gator
+        ax.plot(fg['xy'][:, 0], fg['xy'][:, 1], color=C.FARG_LINJE['V'], lw=2.2, ls=(0, (1, 1.2)), zorder=5)
     ax.add_patch(plt.Circle((nx, ny_), C.TACKNING_M, facecolor='none', edgecolor=BLA, lw=1.0, ls='--', zorder=5))
     ax.scatter([nx], [ny_], s=220, marker='*', color=BLA, edgecolor='white', lw=0.8, zorder=8)
-    ax.annotate('Schematisk körväg\n1a: dagens gator, 3 min\n1b: förlängd Norrgårdsvägen, 1 min',
+    ax.annotate(('1a: dagens gator (OSRM, prickad), 3 min\n' if fg['kalla'] == 'osrm' else
+                 'Schematisk körväg\n1a: dagens gator, 3 min\n') + '1b: förlängd Norrgårdsvägen (streckad), 1 min',
                 xy=((ms.x + nx) / 2, (ms.y + ny_) / 2), xytext=(-14, 0), textcoords='offset points', fontsize=6.8,
                 color=K.TEXT, ha='right', va='center', zorder=9, path_effects=K.HALO)
     hinder = K.punkt_hinder(ax, [nx], [ny_], px=12)
@@ -120,13 +126,14 @@ def fig_mockelo():
         r'$\bf{Körtid\ per\ tur}$' + f"   1a +{sv(f1a['delta_min_per_tur'])} min   ·   1b +{sv(f1b['delta_min_per_tur'])} min",
         r'$\bf{Omlopp\ (5\ bussar)}$',
         f"1a  alla turer kräver {o1a['alla']['fordon']} bussar; {f1a['turer_som_trafikerar']} av {f1a['linjens_turer']} turer ryms",
-        f"1b  alla turer kräver {o1b['alla']['fordon']} bussar; ryms med genomgående V/Ö",
-        f"      ({o1b['genomgaende']['turer_med_andring']} av {f1b['linjens_turer']} turer, {o1b['genomgaende']['fordon']} bussar)",
+        f"1b  alla {f1b['linjens_turer']} turer ryms ({o1b['alla']['fordon']} bussar) – bytet V → Ö blir 0,5 min,",
+        f"      reglering vid bytet Ö → V. Robust: {o1b.get('robust', o1b['alla'])['turer_med_andring']} av "
+        f"{f1b['linjens_turer']} turer (se omloppsfiguren)",
         r'$\bf{Effekt}$' + f"   +{f1b['tackning']['ny_tackning_inv']} invånare inom 400 m",
         f"Påstigande ≈ {sv(f1b['nytt_pastigande_vardag'][0])}–{sv(f1b['nytt_pastigande_vardag'][1])} per vardag (1b, sommarnivå)",
         f"Genomresande: +{sv(f1b['resenarer']['vardag']['resenarsminuter'], 0)} resenärsminuter per vardag (1b)"])
     extra = [Line2D([], [], marker='*', ls='', color=BLA, markersize=12, label='Ny hållplats (läge enligt A3)'),
-             Line2D([], [], color=C.FARG_LINJE['V'], lw=2, ls=(0, (3, 2)), label='Ny körväg linje V (schematisk)'),
+             Line2D([], [], color=C.FARG_LINJE['V'], lw=2, ls=(0, (3, 2)), label='Ny körväg linje V (1b schematisk)'),
              Patch(facecolor='none', edgecolor=BLA, ls='--', label='400 m runt ny hållplats')]
     lg = K.teckenforklaring(ax, forklaring_tackning(extra), loc='lower left', fontsize=6.8)
     lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
@@ -151,8 +158,8 @@ def fig_n2():
     infobox(ax, [
         r'$\bf{Körtid\ per\ tur}$' + f"   +{sv(f['delta_min_per_tur'])} min (ett uppehåll)",
         r'$\bf{Omlopp\ (5\ bussar)}$',
-        f"Alla {f['linjens_turer']} turer kräver {o['alla']['fordon']} bussar (08:20-turen)",
-        f"{o['ryms']['turer_med_andring']} av {f['linjens_turer']} turer ryms i dagens omlopp",
+        f"Alla {f['linjens_turer']} turer ryms ({o['alla']['fordon']} bussar)",
+        "08:20-turen: kort byte Ö → V 08:50 (0,5 min)",
         r'$\bf{Effekt}$' + f"   +{f['tackning']['ny_tackning_inv']} invånare inom 400 m",
         f"Påstigande ≈ {sv(f['nytt_pastigande_vardag'][0])}–{sv(f['nytt_pastigande_vardag'][1])} per vardag (sommarnivå)",
         f"Ombordvarande: +{sv(f['resenarer']['vardag']['resenarsminuter'], 0)} resenärsminut per vardag"], loc=(0.03, 0.975))
@@ -174,9 +181,15 @@ def fig_bobil():
     etik = hallplatser(ax, uts, ['Maxinge', 'Vikingagränd', 'Bolstavägen', 'Bo-Bil', 'Hjortronstigen', 'Lillåkersvägen'])
     g = {n: HPL[HPL.namn == n][['x', 'y']].mean() for n in ['Maxinge', 'Vikingagränd', 'Bolstavägen', 'Bo-Bil']}
     mx, vg, bv, bb = (g[k] for k in ['Maxinge', 'Vikingagränd', 'Bolstavägen', 'Bo-Bil'])
-    ax.plot([mx.x, vg.x, bv.x], [mx.y, vg.y, bv.y], color='#3d3d3a', lw=3.2, ls=(0, (1.2, 1.6)), zorder=6,
+    import s01_vagdragning as V
+    sg_ = V.segmentgeometri(); fg_ = V.forslagsgeometri()
+    MX, VG, BV, BB = '9025302000031201', '9025302000063201', '9025302000063301', '9025302000003502'
+    gl = np.vstack([sg_[(MX, VG)], sg_[(VG, BV)][1:]]) if (MX, VG) in sg_ and (VG, BV) in sg_ else \
+        np.array([[mx.x, mx.y], [vg.x, vg.y], [bv.x, bv.y]])
+    ny_xy = np.vstack([fg_[(MX, BB)]['xy'], fg_[(BB, BV)]['xy'][1:]])
+    ax.plot(gl[:, 0], gl[:, 1], color='#3d3d3a', lw=3.2, ls=(0, (1.2, 1.6)), zorder=6,
             solid_capstyle='round')
-    ax.plot([mx.x, bb.x, bv.x], [mx.y, bb.y, bv.y], color=C.FARG_LINJE['N'], lw=2.6, ls=(0, (3, 2)), zorder=6)
+    ax.plot(ny_xy[:, 0], ny_xy[:, 1], color=C.FARG_LINJE['N'], lw=2.6, ls=(0, (3, 2)), zorder=6)
     ax.scatter([vg.x], [vg.y], s=90, marker='X', color=SAMRE, edgecolor='white', lw=0.7, zorder=8)
     ax.scatter([bb.x], [bb.y], s=220, marker='*', color=BLA, edgecolor='white', lw=0.8, zorder=8)
     for p, c in [(vg, SAMRE), (bb, BLA)]:
@@ -211,13 +224,15 @@ def panel_titel(fid, k):
     n, tot = o['turer_med_andring'], f['linjens_turer']
     if k == 'alla':
         t = f"{fid} – alla {tot} turer ändrade: {o['fordon']} bussar"
-        t += '' if o['ryms'] else ' – ryms inte'
-    elif k.startswith('genomgaende') or k == 'ryms_genomgaende':
-        t = f"{fid} – {n} av {tot} turer med genomgående {'/'.join(o['genomgaende'])}: {o['fordon']} bussar – ryms"
+        t += (' – ryms' + ('' if o.get('robust', True) else ' (kort reglering kring Ö:s skolturer)')) if o['ryms'] \
+            else ' – ryms inte'
+    elif k == 'robust':
+        t = f"{fid} robust – {n} av {tot} turer ändrade: {o['fordon']} bussar – ryms"
     else:
         t = f"{fid} – {n} av {tot} turer ändrade (de som ryms): {o['fordon']} bussar – ryms"
     d = (o['omloppstid_h'] - RES['idag']['omloppstid_h']) * 60
     t += '   ·   omloppstid ' + (f"+{sv(d / 60)} h/dag" if d >= 60 else f"{'+' if d >= 0 else ''}{sv(d, 0)} min/dag")
+    t += f"   ·   varv < 3 min reglering: {o['varv_utan_reglering']} (i dag {RES['idag']['varv_utan_reglering']})"
     return t, o['ryms']
 
 
@@ -228,7 +243,8 @@ def fig_omlopp(namn, paneler, rubrik):
         pl = SCEN[SCEN.scenario == scen].copy()
         andrade = set(pl.loc[pl.delta != 0, 'trip_id'])
         if scen == 'idag':
-            titel, ok = f"I dag – {RES['idag']['fordon']} bussar, omloppstid {sv(RES['idag']['omloppstid_h'])} h", True
+            titel, ok = (f"I dag – {RES['idag']['fordon']} bussar (växlar S ↔ N och V ↔ Ö), omloppstid "
+                         f"{sv(RES['idag']['omloppstid_h'])} h", True)
         else:
             titel, ok = panel_titel(fid, k)
         O.rita_omlopp(ax, pl, titel=titel, andrade=andrade)
@@ -239,7 +255,7 @@ def fig_omlopp(namn, paneler, rubrik):
                     lbl.set_color(SAMRE); lbl.set_fontweight('bold')
     fig.suptitle(rubrik, x=0.01, ha='left', fontsize=11.5, fontweight='bold')
     extra = [Patch(facecolor='white', edgecolor='#52514e', hatch='//////', label='Tillagd körtid'),
-             Line2D([], [], color=BLA, lw=2.2, label='Genomgående (fortsätter som annan linje)')]
+             Line2D([], [], color=BLA, lw=2.2, label='Kort byte inom linjeparet (< 3 min)')]
     O.omlopp_forklaring(fig, extra=extra, y=-0.01)
     fig.tight_layout(rect=(0, 0.035, 1, 0.975), h_pad=0.9)
     ut = C.KARTOR / namn
@@ -251,9 +267,9 @@ def main():
     print(fig_mockelo()); print(fig_n2()); print(fig_bobil())
     print(fig_omlopp('b4_3_mockelo_omlopp.png',
                      [('idag', None, None), ('1a_alla', '1a', 'alla'), ('1a_ryms', '1a', 'ryms'),
-                      ('1b_alla', '1b', 'alla'), ('1b_genomgaende', '1b', 'genomgaende')],
+                      ('1b_alla', '1b', 'alla'), ('1b_robust', '1b', 'robust')],
                      'Förslag 1 Möckelö Strand – omlopp före och efter'))
-    print(fig_omlopp('b4_5_n2_omlopp.png', [('idag', None, None), ('2_alla', '2', 'alla'), ('2_ryms', '2', 'ryms')],
+    print(fig_omlopp('b4_5_n2_omlopp.png', [('idag', None, None), ('2_alla', '2', 'alla')],
                      'Förslag 2 N2 på linje Ö – omlopp före och efter'))
     print(fig_omlopp('b4_7_bobil_omlopp.png', [('idag', None, None), ('3_alla', '3', 'alla')],
                      'Förslag 3 linje N via Bo-Bil – omlopp före och efter'))

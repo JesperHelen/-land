@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-"""B4 – Sammanslagning av linjer (genomgående linjer i centrum): tidsutrymme för längre linjer utan fler bussar.
+"""B4 – Sammanslagning av linjer: tidsutrymme för längre linjer utan fler bussar.
+
+Förarna byter redan i dag linje i centrum Syd ↔ Norr (S ↔ N) och Öst ↔ Väst (Ö ↔ V) (beställarens norm, se
+b4_omlopp.py). Bussen som kört linje V fortsätter alltså som linje Ö. Analysen nedan visar hur mycket en linje
+kan förlängas om regleringen läggs vid bytet till partnerlinjen i stället för efter varje tur, och vilka resor
+som skulle slippa byte om bytet skyltas som genomgående linje (resenären sitter kvar).
 
 Princip
   * Stadslinjerna N, S, V och Ö är slingor från Centrum, Nygatan med 30 min turintervall i rusning och avgång
@@ -123,7 +128,7 @@ def omraden(prof):
     df['utrymme_idag'] = df.linje.map(utr)
     df['utrymme_genomgaende'] = df.linje.map(utr_g)
     df['bedomning'] = np.where(df.behov_min_per_tur <= df.utrymme_idag, 'Ryms i dag',
-                      np.where(df.behov_min_per_tur <= df.utrymme_genomgaende, 'Ryms med genomgående linje',
+                      np.where(df.behov_min_per_tur <= df.utrymme_genomgaende, 'Ryms med reglering hos partnerlinjen',
                                np.where(df.linje == 'J', 'Linje J (timtrafik) – prövas separat',
                                         'Kräver större omläggning')))
     return df
@@ -137,7 +142,7 @@ def figur(par, resor, omr, prof):
     ax = fig.add_subplot(gs[:, 0])
     K.ny_karta((104900, 112100, 6680300, 6688100), ax=ax, titel='Områden utan hållplats inom 400 m – behövd tid per tur')
     K.rita_linjer(ax, lw=1.9, zorder=4)
-    farg = {'Ryms i dag': '#2f9e44', 'Ryms med genomgående linje': '#1c5cab',
+    farg = {'Ryms i dag': '#2f9e44', 'Ryms med reglering hos partnerlinjen': '#1c5cab',
             'Kräver större omläggning': '#c0392b', 'Linje J (timtrafik) – prövas separat': '#7a776f'}
     for r in omr.itertuples():
         ax.scatter([r.x], [r.y], s=40 + r.inv * 0.9, marker='D', color=farg[r.bedomning], edgecolor='white',
@@ -157,11 +162,12 @@ def figur(par, resor, omr, prof):
     idag = [INTERVALL - REGLERING - prof[l]['kortid_median'] for l in LINJER]
     gen = []
     for l in LINJER:
-        d = par[(par.forlangs == l) & par.partner_klarar_reglering]
+        partner = {'N': 'S', 'S': 'N', 'V': 'Ö', 'Ö': 'V'}[l]
+        d = par[(par.forlangs == l) & (par.partner == partner) & par.partner_klarar_reglering]
         gen.append(float(d.utrymme_genomgaende.max()) if len(d) else np.nan)
-    ax2.barh(y + 0.2, idag, height=0.36, color='#b9b4a8', label=f'Egen linje (≥ {REGLERING:g} min reglering)')
+    ax2.barh(y + 0.2, idag, height=0.36, color='#b9b4a8', label=f'Reglering ≥ {REGLERING:g} min vid varje byte')
     ax2.barh(y - 0.2, gen, height=0.36, color='#1c5cab',
-             label=f'Genomgående ({GENOMGANG:g} min uppehåll, reglering i andra halvan)'.replace('.', ','))
+             label=f'Kort byte ({GENOMGANG:g} min) till partnerlinjen, reglering vid nästa byte'.replace('.', ','))
     for yy, a, b in zip(y, idag, gen):
         ax2.text(max(a, 0) + 0.1, yy + 0.2, f'{a:g}'.replace('.', ','), va='center', fontsize=7.5, color=K.TEXT)
         ax2.text(b + 0.1, yy - 0.2, f'{b:g}'.replace('.', ','), va='center', fontsize=7.5, color=K.TEXT)
@@ -182,14 +188,15 @@ def figur(par, resor, omr, prof):
     ax3.barh(np.arange(len(r)), r.direktresor_vardag, color='#7fb0ec', height=0.6)
     for i, (v, m) in enumerate(zip(r.direktresor_vardag, r.sparade_resenarsminuter_vardag)):
         ax3.text(v + 0.1, i, f'{v:.1f} resor · {m:.0f} min sparade'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
-    ax3.set_yticks(np.arange(len(r))); ax3.set_yticklabels([f'{p} genomgående' for p in r.par], fontsize=8)
+    ax3.set_yticks(np.arange(len(r)))
+    ax3.set_yticklabels([f"{p}{' (dagens par)' if p in ('N/S', 'V/Ö') else ''}" for p in r.par], fontsize=8)
     ax3.set_xlim(0, max(r.direktresor_vardag.max() * 1.6, 1))
     ax3.set_xlabel('resor per vardag som slipper byte i centrum (sommarnivå)', fontsize=7.5)
     ax3.tick_params(labelsize=7.5); ax3.grid(axis='x', color='#e6e4de', lw=0.6); ax3.set_axisbelow(True)
     for s in ['top', 'right']:
         ax3.spines[s].set_visible(False)
-    ax3.set_title('Resor som blir direkta', loc='left', fontsize=10, fontweight='bold')
-    fig.suptitle('Sammanslagning av linjer – genomgående linjer i centrum', x=0.01, ha='left', fontsize=12.5,
+    ax3.set_title('Resor som slipper byte om bytet skyltas som genomgående linje', loc='left', fontsize=10, fontweight='bold')
+    fig.suptitle('Sammanslagning av linjer – reglering hos partnerlinjen (S ↔ N, Ö ↔ V)', x=0.01, ha='left', fontsize=12.5,
                  fontweight='bold')
     ut = C.KARTOR / 'b4_8_sammanslagning.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)

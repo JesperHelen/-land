@@ -1,12 +1,13 @@
 # 5 Ekonomisk kalkyl (överslag)
 
 > **Sammanfattning.** Förslag 1a, Möckelö Strand via dagens gator, kräver en sjätte buss om alla turer
-> ska trafikera den nya hållplatsen. Driftkostnaden ökar då med cirka 217 000 euro per år (176 000–259 000).
+> ska trafikera den nya hållplatsen. Driftkostnaden ökar då med cirka 216 000 euro per år (176 000–259 000).
 > Det motsvarar cirka 1 200 euro per år för var och en av de 179 invånare som får bättre tillgänglighet.
-> Förslag 1b med genomgående linje V/Ö ger samma täckning för cirka 4 000 euro per år, enbart genom fler
-> körda kilometer. Paket A (1b, 2 och 3) är i praktiken kostnadsneutralt i drift (+2 000 euro per år).
+> Förslag 1b ger samma täckning för cirka 4 600 euro per år, enbart genom fler körda kilometer, eftersom
+> bussen redan växlar mellan linje V och Ö. Paket A (1b, 2 och 3) är i praktiken kostnadsneutralt i drift
+> (+2 300 euro per år).
 > Därtill kommer investeringar i två nya hållplatslägen och förlängningen av Norrgårdsvägen. Ur busstrafikens
-> perspektiv är vägförlängningen motiverad om den kostar mindre än 2,5–3,6 miljoner euro, vilket är
+> perspektiv är vägförlängningen motiverad om den kostar mindre än 2,4–3,6 miljoner euro, vilket är
 > nuvärdet av merkostnaden för 1a över 20 år.
 
 ## 5.1 Metod och antaganden
@@ -41,23 +42,24 @@ Kalkylen omfattar förändrad driftkostnad per år jämfört med i dag:
 
 | Förslag | Bussar | Fordonstimmar per år | Fordonskm per år | Driftkostnad per år, bas (låg–hög) | Per invånare med bättre tillgänglighet |
 |---|---|---|---|---|---|
-| 1a alla turer | +1 | +2 900 | +13 150 | +217 000 (176 000–259 000) | 1 211 €/år |
+| 1a alla turer | +1 | +2 900 | +13 150 | +216 000 (176 000–259 000) | 1 209 €/år |
 | 1a bara 8 turer | 0 | +28 | +5 650 | +6 000 | 36 €/år |
-| 1b + genomgående V/Ö | 0 | +10 | +4 400 | +4 000 (3 500–5 800) | 25 €/år |
+| 1b förlängd Norrgårdsvägen | 0 | +12 | +4 400 | +4 600 (3 600–6 000) | 26 €/år |
 | 2 N2 | 0 | +2 | 0 | ±0 | – |
 | 3 Bo-Bil | 0 | 0 | −2 500 | −2 000 | – |
-| Paket A (1b, 2, 3) | 0 | +12 | +1 900 | +2 000 (1 900–3 000) | 8 €/år |
-| Paket B (1a, 2, 3) | +1 | +2 900 | +10 700 | +215 000 (174 000–256 000) | 772 €/år |
+| Paket A (1b, 2, 3) | 0 | +12 | +1 900 | +2 300 (1 900–3 000) | 8 €/år |
+| Paket A robust (1b på 15 av 20 turer) | 0 | +12 | +850 | +1 400 (1 100–1 800) | 5 €/år |
+| Paket B (1a, 2, 3) | +1 | +2 900 | +10 700 | +214 000 (174 000–256 000) | 771 €/år |
 
 **Förslag 1a.** Merkostnaden för 1a med alla turer domineras av den sjätte bussen, cirka 60 000 euro per år,
 och dess förartimmar, cirka 145 000 euro per år. Kan operatören använda en befintlig reservbuss faller
-fordonskostnaden bort, och driftkostnaden blir cirka 157 000 euro per år. Reserven för fordonsbortfall
+fordonskostnaden bort, och driftkostnaden blir cirka 156 000 euro per år. Reserven för fordonsbortfall
 minskar då. Att bara trafikera de 8 turer som ryms kostar lite, men ger ett oregelbundet utbud som inte
 rekommenderas.
 
 **Förlängningen av Norrgårdsvägen** har inte kostnadsberäknats. Merkostnaden för 1a jämfört med 1b är
-cirka 212 000 euro per år (173 000–253 000). Med 3,5 % kalkylränta motsvarar det ett nuvärde på
-2,5–3,6 miljoner euro över 20 år. En vägförlängning som kostar mindre än så är ur busstrafikens perspektiv
+cirka 212 000 euro per år (172 000–253 000). Med 3,5 % kalkylränta motsvarar det ett nuvärde på
+2,4–3,6 miljoner euro över 20 år. En vägförlängning som kostar mindre än så är ur busstrafikens perspektiv
 billigare än att köra 1a med en extra buss. Vägen ger dessutom nytta för annan trafik.
 
 **Intäkter.** Det tillkommande påstigandet är litet i sommardata, cirka 1–4 påstigande per vardag för

@@ -325,9 +325,9 @@ def b4():
          qml(r_kategori('objekt', kat, lambda n, form, f, st, k: markor(n, form, f, st, k, 0.3)),
              labeling=etiketter('"forslag" || \': \' || "namn"')), True)
     skriv(ln, 'b4_forslag_korvagar')
-    kat = [('ny körväg (schematisk)', 'Ny körväg (schematisk)', '#1c5cab', True),
-           ('körväg utgår (schematisk)', 'Körväg som utgår (schematisk)', '#3d3d3a', True)]
-    stil('b4_forslag_korvagar', 'Förslag – körvägar (schematiska)',
+    kat = [('ny körväg', 'Ny körväg', '#1c5cab', True),
+           ('körväg utgår', 'Körväg som utgår', '#3d3d3a', True)]
+    stil('b4_forslag_korvagar', 'Förslag – körvägar',
          qml(r_kategori('objekt', kat, lambda n, f, st: linje(n, f, 0.8, streckad=st, halo=True))), True)
 
     # förändrad tillgänglighet per scenario (enskilda förslag och paket), 50 m-celler
@@ -376,25 +376,35 @@ def b4():
             xy_ = sg.get((a, b), np.array([hxy[a], hxy[b]]))
             pts.extend(xy_ if not pts else xy_[1:])
         return LineString(pts)
+    fg = V.forslagsgeometri()                        # förslagens nya delsträckor (OSRM om hämtade, annars raka)
     vm, om, nm = mon['V'][0][0], mon['Ö'][0][0], list(mon['N'][0][0])
-    mo = '9025302000066401'; k = vm.index(mo)
-    ext = LineString([hxy[mo], fs['1b']['xy']])
-    v_ny = shapely.line_merge(shapely.MultiLineString([kedja(vm[:k + 1]), ext, LineString([fs['1b']['xy'], hxy[mo]]), kedja(vm[k:])]))
+    mo = '9025302000066401'; k = vm.index(mo); bobil_id = '9025302000003502'
+    v_1a = shapely.MultiLineString([kedja(vm[:k + 1]), LineString(fg[(mo, 'NY_MOCKELO')]['xy']),
+                                    LineString(fg[('NY_MOCKELO', mo)]['xy']), kedja(vm[k:])])
+    v_1b = shapely.MultiLineString([kedja(vm[:k + 1]), LineString([hxy[mo], fs['1b']['xy']]),     # planerad väg
+                                    LineString([fs['1b']['xy'], hxy[mo]]), kedja(vm[k:])])
     o_ny = kedja(om)
-    st_ = D.gtfs()['stops'].set_index('stop_id').loc[['9025302000003501', '9025302000003502']]
-    bx, by = D.till_metrisk(st_.lon.values, st_.lat.values); bobil = np.array([bx.mean(), by.mean()])
     iv = nm.index('9025302000063201')
-    n_ny = shapely.MultiLineString([kedja(nm[:iv]), LineString([hxy[nm[iv - 1]], bobil, hxy[nm[iv + 1]]]), kedja(nm[iv + 1:])])
-    rad = [('1a', 'V', 'Linje V via Möckelö Strand, dagens gator (8 av 20 turer ryms; alla turer kräver 6 bussar)', fs['1a']['delta_min_per_tur'], v_ny),
-           ('1b_VÖ', 'V/Ö', 'Genomgående linje V/Ö via Möckelö Strand (förlängd Norrgårdsvägen) och N2', fs['1b']['delta_min_per_tur'],
-            shapely.MultiLineString([*(getattr(v_ny, 'geoms', [v_ny])), o_ny])),
-           ('2', 'Ö', 'Linje Ö med ny hållplats N2 (19 av 20 turer)', fs['2']['delta_min_per_tur'], o_ny),
-           ('3', 'N', 'Linje N via Bo-Bil i stället för Vikingagränd', fs['3']['delta_min_per_tur'], n_ny)]
-    lg = gpd.GeoDataFrame([{'forslag': a, 'linje': b, 'beskrivning': c, 'korttid_per_tur_min': d} for a, b, c, d, _ in rad],
-                          geometry=[shapely.MultiLineString(getattr(g_, 'geoms', [g_])) for *_, g_ in rad], crs=C.CRS_METRISK)
+    n_ny = shapely.MultiLineString([kedja(nm[:iv]), LineString(fg[(nm[iv - 1], bobil_id)]['xy']),
+                                    LineString(fg[(bobil_id, nm[iv + 1])]['xy']), kedja(nm[iv + 1:])])
+    osrm_linjer = V.kalla_text().startswith('Linjernas')
+    vag = lambda nycklar: ('OSRM' if osrm_linjer and all(fg[n]['kalla'] == 'osrm' for n in nycklar)
+                           else 'delvis schematisk (raka streck)')
+    rad = [('1a', 'V', 'Linje V via Möckelö Strand, dagens gator (8 av 20 turer ryms; alla turer kräver 6 bussar)',
+            fs['1a']['delta_min_per_tur'], v_1a, vag([(mo, 'NY_MOCKELO'), ('NY_MOCKELO', mo)])),
+           ('1b_VÖ', 'V/Ö', 'Linje V via Möckelö Strand (förlängd Norrgårdsvägen) och linje Ö via N2 – bussen växlar V ↔ Ö',
+            fs['1b']['delta_min_per_tur'], shapely.MultiLineString([*v_1b.geoms, o_ny]),
+            ('OSRM' if osrm_linjer else 'raka streck') + '; förlängningen schematisk (planerad väg)'),
+           ('2', 'Ö', 'Linje Ö med ny hållplats N2', fs['2']['delta_min_per_tur'], o_ny,
+            'OSRM' if osrm_linjer else 'raka streck'),
+           ('3', 'N', 'Linje N via Bo-Bil i stället för Vikingagränd', fs['3']['delta_min_per_tur'], n_ny,
+            vag([(nm[iv - 1], bobil_id), (bobil_id, nm[iv + 1])]))]
+    lg = gpd.GeoDataFrame([{'forslag': a, 'linje': b, 'beskrivning': c, 'korttid_per_tur_min': d, 'vagdragning': e}
+                           for a, b, c, d, _, e in rad],
+                          geometry=[shapely.MultiLineString(getattr(g_, 'geoms', [g_])) for *_, g_, _ in rad], crs=C.CRS_METRISK)
     skriv(lg, 'b4_linjer_forslag')
     kat = [('1a', '1a Linje V via Möckelö Strand, dagens gator', C.FARG_LINJE['V']),
-           ('1b_VÖ', '1b Genomgående linje V/Ö', '#8c3b74'),
+           ('1b_VÖ', '1b Linje V och Ö (bussen växlar V ↔ Ö)', '#8c3b74'),
            ('2', '2 Linje Ö med N2', C.FARG_LINJE['Ö']), ('3', '3 Linje N via Bo-Bil', C.FARG_LINJE['N'])]
     stil('b4_linjer_forslag', 'Linjer i förslagen', qml(r_kategori('forslag', kat, lambda n, f: linje(n, f, 1.0, halo=True))), True)
 
@@ -404,6 +414,8 @@ def b4():
     for sid, v in pk_.items():
         t_ = v['tackning_mariehamn']; fi = v['forandring_invanare_mariehamn']
         rader.append({'scenario': sid, 'namn': v['namn'], 'ryms_i_omloppen': 'Ja' if v['ryms'] else 'Nej',
+                      'robust': 'Ja' if v.get('robust', True) else 'Nej',
+                      'varv_under_3_min_reglering': v['omlopp']['varv_utan_reglering'],
                       'bussar': v['omlopp']['fordon'], 'omloppstid_h_vardag': v['omlopp']['omloppstid_h'],
                       'fordonskm_vardag': v['omlopp']['km'],
                       'andel_inom_400m': t_['inom_400m_andel'], 'andel_minst_30_avg': t_['minst_30_avg_andel'],
@@ -418,7 +430,8 @@ def b4():
     o = pd.read_csv(P / 'b4_sammanslagning_omraden.csv')
     og = gpd.GeoDataFrame(o.drop(columns=['x', 'y']), geometry=gpd.points_from_xy(o.x, o.y), crs=C.CRS_METRISK)
     skriv(og, 'b4_sammanslagning_omraden')
-    kat = [('Ryms i dag', 'Ryms i dag', '#2f9e44'), ('Ryms med genomgående linje', 'Ryms med genomgående linje', '#1c5cab'),
+    kat = [('Ryms i dag', 'Ryms i dag', '#2f9e44'),
+           ('Ryms med reglering hos partnerlinjen', 'Ryms med reglering hos partnerlinjen (S ↔ N, Ö ↔ V)', '#1c5cab'),
            ('Kräver större omläggning', 'Kräver större omläggning', '#c0392b'),
            ('Linje J (timtrafik) – prövas separat', 'Linje J (timtrafik) – prövas separat', '#7a776f')]
     stil('b4_sammanslagning_omraden', 'Behövd tid per tur (fig 4.8)',

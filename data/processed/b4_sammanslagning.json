@@ -179,7 +179,7 @@
    "behov_min_per_tur": 2.5,
    "utrymme_idag": 0.0,
    "utrymme_genomgaende": 2.5,
-   "bedomning": "Ryms med genomgående linje"
+   "bedomning": "Ryms med reglering hos partnerlinjen"
   },
   {
    "omrade": "Lillåkersvägen",
@@ -199,7 +199,7 @@
    "behov_min_per_tur": 4.9,
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 6.5,
-   "bedomning": "Ryms med genomgående linje"
+   "bedomning": "Ryms med reglering hos partnerlinjen"
   },
   {
    "omrade": "Örtvägen",
@@ -249,7 +249,7 @@
    "behov_min_per_tur": 4.1,
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 6.5,
-   "bedomning": "Ryms med genomgående linje"
+   "bedomning": "Ryms med reglering hos partnerlinjen"
   },
   {
    "omrade": "Strömsnäs",

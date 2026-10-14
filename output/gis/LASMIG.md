@@ -46,11 +46,13 @@ ritning. Linjerna hålls därmed isär i alla skalor. Spåravståndet ändras i 
 
 ## Vägdragning längs gatorna (OSRM)
 
-Linjerna och kandidatlägena för nya hållplatser följer gatunätet när vägdragningen har hämtats från OSRM
-(`python src/s01_vagdragning.py`, resultat i `data/processed/vagdragning_segment.gpkg`). OSRM kunde inte nås
-från analysmiljön, så i den här versionen är linjerna **raka streck mellan hållplatserna** (fältet
-`vagdragning` i `00_stadslinjer`). Kör `python src/kor_alla.py` på en dator med internet för att hämta
-vägdragningen och skapa om alla kartor och lager.
+Stadslinjerna i gruppen *Bakgrund* (`00_stadslinjer_forskjutna`, `00_stadslinjer`) och förslagens nya
+delsträckor (Möckelö Strand via dagens gator, Maxinge – Bo-Bil – Bolstavägen) följer gatunätet när
+vägdragningen har hämtats från OSRM (`python src/s01_vagdragning.py`, cache i
+`data/processed/vagdragning_segment.gpkg`). OSRM kunde inte nås från analysmiljön, så i den här versionen är
+linjerna **raka streck mellan hållplatserna** (fältet `vagdragning`). Kör `python src/kor_alla.py` på en dator
+med internet för att hämta vägdragningen och skapa om alla kartor och lager. Förlängningen av Norrgårdsvägen
+(1b) är en planerad väg och ritas alltid schematiskt.
 
 ## Linjeförslagen i QGIS
 

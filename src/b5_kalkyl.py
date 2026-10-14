@@ -39,12 +39,13 @@ ENHET = {   # EUR, 2026
 }
 KALKYLRANTA = 0.035
 KALKYLTID = 20
-SCEN = ['1a', '1a_del', '1b_VÖ', '2', '3', 'paket_A', 'paket_B']
+SCEN = ['1a', '1a_del', '1b_VÖ', '2', '3', 'paket_A', 'paket_A_robust', 'paket_B']
 KORT = {'1a': '1a Möckelö Strand, dagens gator – alla turer (6 bussar)',
         '1a_del': '1a – bara de 8 turer som ryms',
-        '1b_VÖ': '1b Möckelö Strand + genomgående V/Ö',
+        '1b_VÖ': '1b Möckelö Strand, förlängd Norrgårdsvägen',
         '2': '2 N2 på linje Ö', '3': '3 Linje N via Bo-Bil',
-        'paket_A': 'Paket A: 1b + V/Ö, 2, 3', 'paket_B': 'Paket B: 1a, 2, 3'}
+        'paket_A': 'Paket A: 1b, 2, 3', 'paket_A_robust': 'Paket A robust: 1b på 15 av 20 turer, 2, 3',
+        'paket_B': 'Paket B: 1a, 2, 3'}
 
 
 def lordag_km(atg_ids, atg_km):
@@ -125,8 +126,8 @@ def figur(df, res):
 
     ax2.axis('off')
     be = res['break_even_vagforlangning']
-    tkort = {'1a': '1a alla turer', '1a_del': '1a 8 turer', '1b_VÖ': '1b + V/Ö', '2': '2 N2', '3': '3 Bo-Bil',
-             'paket_A': 'Paket A', 'paket_B': 'Paket B'}
+    tkort = {'1a': '1a alla turer', '1a_del': '1a 8 turer', '1b_VÖ': '1b', '2': '2 N2', '3': '3 Bo-Bil',
+             'paket_A': 'Paket A', 'paket_A_robust': 'Paket A robust', 'paket_B': 'Paket B'}
     cell = [[tkort[s], f"{d.at[s, 'delta_fordon']:+d}", f"{d.at[s, 'delta_fordonstimmar_ar']:+,d}".replace(',', ' '),
              f"{d.at[s, 'delta_km_ar']:+,d}".replace(',', ' '), f"{d.at[s, 'investering_bas'] / 1000:,.0f}".replace(',', ' '),
              '–' if d.at[s, 'drift_per_battre_inv_bas'] is None or pd.isna(d.at[s, 'drift_per_battre_inv_bas'])

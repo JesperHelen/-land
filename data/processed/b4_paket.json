@@ -2,20 +2,23 @@
  "idag": {
   "namn": "I dag",
   "atgarder": [],
-  "genomgaende": [],
   "driftform": "alla",
   "ryms": true,
+  "robust": true,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
    "korttid_h": 42.45,
-   "omloppstid_h": 61.38,
-   "regleringstid_h": 11.47,
-   "uppstallning_h": 7.47,
+   "omloppstid_h": 61.43,
+   "regleringstid_h": 7.95,
+   "uppstallning_h": 11.03,
    "km": 1136.5,
    "min_vandtid": 1.0,
-   "vandningar_under_rek": 7,
-   "genomgangar": 0,
+   "vandningar_under_rek": 3,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
@@ -110,20 +113,23 @@
   "atgarder": [
    "1a"
   ],
-  "genomgaende": [],
   "driftform": "fler_bussar",
   "ryms": false,
+  "robust": true,
   "omlopp": {
    "fordon": 6,
    "turer": 93,
    "korttid_h": 44.62,
-   "omloppstid_h": 72.98,
-   "regleringstid_h": 17.73,
-   "uppstallning_h": 10.63,
+   "omloppstid_h": 73.0,
+   "regleringstid_h": 14.18,
+   "uppstallning_h": 14.2,
    "km": 1186.5,
    "min_vandtid": 1.0,
-   "vandningar_under_rek": 9,
-   "genomgangar": 0,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 72,
+   "samma_linje": 0,
+   "genomgangar": 72,
    "forsta_avg": 410.0,
    "sista_ank": 1273.5
   },
@@ -218,7 +224,7 @@
   },
   "forandring_omlopp": {
    "fordon": 1,
-   "omloppstid_h": 11.6,
+   "omloppstid_h": 11.57,
    "korttid_h": 2.17,
    "km": 50.0
   }
@@ -228,20 +234,23 @@
   "atgarder": [
    "1a"
   ],
-  "genomgaende": [],
   "driftform": "ryms",
   "ryms": true,
+  "robust": true,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
    "korttid_h": 43.32,
-   "omloppstid_h": 61.49,
-   "regleringstid_h": 10.82,
-   "uppstallning_h": 7.36,
+   "omloppstid_h": 61.54,
+   "regleringstid_h": 7.59,
+   "uppstallning_h": 10.63,
    "km": 1156.5,
    "min_vandtid": 1.0,
-   "vandningar_under_rek": 9,
-   "genomgangar": 0,
+   "vandningar_under_rek": 5,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 69,
+   "samma_linje": 0,
+   "genomgangar": 69,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
@@ -342,26 +351,27 @@
   }
  },
  "1b_VÖ": {
-  "namn": "1b Möckelö Strand + genomgående V/Ö",
+  "namn": "1b Möckelö Strand, förlängd Norrgårdsvägen",
   "atgarder": [
    "1b"
   ],
-  "genomgaende": [
-   "V/Ö"
-  ],
   "driftform": "ryms",
   "ryms": true,
+  "robust": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
    "korttid_h": 43.28,
-   "omloppstid_h": 61.42,
-   "regleringstid_h": 10.72,
-   "uppstallning_h": 7.42,
+   "omloppstid_h": 61.48,
+   "regleringstid_h": 7.2,
+   "uppstallning_h": 10.99,
    "km": 1153.2,
    "min_vandtid": 0.5,
-   "vandningar_under_rek": 8,
-   "genomgangar": 17,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 8,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
@@ -435,9 +445,9 @@
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 4.2,
+   "resenarsminuter_vardag": 5.3,
    "resor_langre_vardag": 2.1,
-   "resor_kortare_vardag": 0.5
+   "resor_kortare_vardag": 0.0
   },
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
@@ -456,7 +466,7 @@
   },
   "forandring_omlopp": {
    "fordon": 0,
-   "omloppstid_h": 0.04,
+   "omloppstid_h": 0.05,
    "korttid_h": 0.83,
    "km": 16.7
   }
@@ -466,25 +476,28 @@
   "atgarder": [
    "2"
   ],
-  "genomgaende": [],
   "driftform": "ryms",
   "ryms": true,
+  "robust": true,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
-   "korttid_h": 42.61,
-   "omloppstid_h": 61.39,
-   "regleringstid_h": 11.32,
-   "uppstallning_h": 7.46,
+   "korttid_h": 42.62,
+   "omloppstid_h": 61.44,
+   "regleringstid_h": 7.8,
+   "uppstallning_h": 11.03,
    "km": 1136.5,
-   "min_vandtid": 1.0,
-   "vandningar_under_rek": 7,
-   "genomgangar": 0,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 3,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
   "turer_per_atgard": {
-   "2": 19
+   "2": 20
   },
   "turer_per_atgard_tot": {
    "2": 20
@@ -547,7 +560,7 @@
   },
   "nya_hallplatser": {
    "2": {
-    "avgangar": 19,
+    "avgangar": 20,
     "ny_tackning_inv": 55,
     "pastigande_vardag": 0.39
    }
@@ -575,7 +588,7 @@
   "forandring_omlopp": {
    "fordon": 0,
    "omloppstid_h": 0.01,
-   "korttid_h": 0.16,
+   "korttid_h": 0.17,
    "km": 0.0
   }
  },
@@ -584,20 +597,23 @@
   "atgarder": [
    "3"
   ],
-  "genomgaende": [],
   "driftform": "ryms",
   "ryms": true,
+  "robust": true,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
    "korttid_h": 42.49,
-   "omloppstid_h": 61.38,
-   "regleringstid_h": 11.43,
-   "uppstallning_h": 7.47,
+   "omloppstid_h": 61.43,
+   "regleringstid_h": 7.92,
+   "uppstallning_h": 11.03,
    "km": 1127.0,
    "min_vandtid": 1.0,
-   "vandningar_under_rek": 7,
-   "genomgangar": 0,
+   "vandningar_under_rek": 3,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
@@ -692,35 +708,36 @@
   }
  },
  "paket_A": {
-  "namn": "Paket A: 1b + V/Ö + 2 + 3",
+  "namn": "Paket A: 1b + 2 + 3",
   "atgarder": [
    "1b",
    "3",
    "2"
   ],
-  "genomgaende": [
-   "V/Ö"
-  ],
   "driftform": "ryms",
   "ryms": true,
+  "robust": false,
   "omlopp": {
    "fordon": 5,
    "turer": 93,
-   "korttid_h": 43.48,
-   "omloppstid_h": 61.43,
-   "regleringstid_h": 10.54,
-   "uppstallning_h": 7.42,
+   "korttid_h": 43.49,
+   "omloppstid_h": 61.48,
+   "regleringstid_h": 7.02,
+   "uppstallning_h": 10.98,
    "km": 1143.7,
    "min_vandtid": 0.5,
-   "vandningar_under_rek": 8,
-   "genomgangar": 17,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 8,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
   "turer_per_atgard": {
    "1b": 20,
    "3": 22,
-   "2": 19
+   "2": 20
   },
   "turer_per_atgard_tot": {
    "1b": 20,
@@ -790,15 +807,15 @@
     "pastigande_vardag": 0.48
    },
    "2": {
-    "avgangar": 19,
+    "avgangar": 20,
     "ny_tackning_inv": 55,
     "pastigande_vardag": 0.39
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 7.7,
-   "resor_langre_vardag": 11.5,
-   "resor_kortare_vardag": 0.5
+   "resenarsminuter_vardag": 8.9,
+   "resor_langre_vardag": 11.6,
+   "resor_kortare_vardag": 0.0
   },
   "forandring_invanare_mariehamn": {
    "ny_tackning": 234,
@@ -818,8 +835,140 @@
   "forandring_omlopp": {
    "fordon": 0,
    "omloppstid_h": 0.05,
-   "korttid_h": 1.03,
+   "korttid_h": 1.04,
    "km": 7.2
+  }
+ },
+ "paket_A_robust": {
+  "namn": "Paket A robust: 1b på 15 av 20 turer + 2 + 3",
+  "atgarder": [
+   "3",
+   "2",
+   "1b"
+  ],
+  "driftform": "robust",
+  "ryms": true,
+  "robust": true,
+  "omlopp": {
+   "fordon": 5,
+   "turer": 93,
+   "korttid_h": 43.28,
+   "omloppstid_h": 61.48,
+   "regleringstid_h": 7.23,
+   "uppstallning_h": 10.98,
+   "km": 1139.5,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 75,
+   "samma_linje": 0,
+   "genomgangar": 75,
+   "forsta_avg": 410.0,
+   "sista_ank": 1273.0
+  },
+  "turer_per_atgard": {
+   "3": 22,
+   "2": 20,
+   "1b": 15
+  },
+  "turer_per_atgard_tot": {
+   "3": 22,
+   "2": 20,
+   "1b": 20
+  },
+  "tackning_mariehamn": {
+   "befolkning": 14821,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 2220,
+    "andel": 0.1498
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 384,
+    "andel": 0.0259
+   },
+   "Låg (15–29)": {
+    "invanare": 3937,
+    "andel": 0.2656
+   },
+   "Medel (30–59)": {
+    "invanare": 4589,
+    "andel": 0.3097
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.249
+   },
+   "inom_400m_andel": 0.8502,
+   "minst_15_avg_andel": 0.8243,
+   "minst_30_avg_andel": 0.5587,
+   "svag_andel": 0.2915,
+   "svag_invanare": 4320
+  },
+  "tackning_hela_omradet": {
+   "befolkning": 17697,
+   "Ingen hållplats inom 400 m": {
+    "invanare": 4441,
+    "andel": 0.251
+   },
+   "Mycket låg (1–14 avg/vardag)": {
+    "invanare": 507,
+    "andel": 0.0287
+   },
+   "Låg (15–29)": {
+    "invanare": 4377,
+    "andel": 0.2473
+   },
+   "Medel (30–59)": {
+    "invanare": 4681,
+    "andel": 0.2645
+   },
+   "God (≥ 60)": {
+    "invanare": 3691,
+    "andel": 0.2086
+   },
+   "inom_400m_andel": 0.749,
+   "minst_15_avg_andel": 0.7204,
+   "minst_30_avg_andel": 0.4731,
+   "svag_andel": 0.276,
+   "svag_invanare": 4884
+  },
+  "nya_hallplatser": {
+   "2": {
+    "avgangar": 20,
+    "ny_tackning_inv": 55,
+    "pastigande_vardag": 0.39
+   },
+   "1b": {
+    "avgangar": 15,
+    "ny_tackning_inv": 179,
+    "pastigande_vardag": 0.48
+   }
+  },
+  "resenarer": {
+   "resenarsminuter_vardag": 7.6,
+   "resor_langre_vardag": 11.6,
+   "resor_kortare_vardag": 0.0
+  },
+  "forandring_invanare_mariehamn": {
+   "ny_tackning": 234,
+   "lyft_till_minst_30": 44,
+   "battre_klass": 278,
+   "samre_klass": 24,
+   "forlorad_tackning": 23,
+   "samre_klass_kvar_tackning": 1
+  },
+  "forandring_mariehamn": {
+   "inom_400m_inv": 211,
+   "minst_15_inv": 211,
+   "minst_30_inv": 43,
+   "svag_inv": 167,
+   "otackt_inv": -211
+  },
+  "forandring_omlopp": {
+   "fordon": 0,
+   "omloppstid_h": 0.05,
+   "korttid_h": 0.83,
+   "km": 3.0
   }
  },
  "paket_B": {
@@ -829,27 +978,30 @@
    "3",
    "2"
   ],
-  "genomgaende": [],
   "driftform": "fler_bussar",
   "ryms": false,
+  "robust": true,
   "omlopp": {
    "fordon": 6,
    "turer": 93,
-   "korttid_h": 44.81,
-   "omloppstid_h": 72.99,
-   "regleringstid_h": 17.56,
-   "uppstallning_h": 10.62,
+   "korttid_h": 44.82,
+   "omloppstid_h": 73.01,
+   "regleringstid_h": 14.0,
+   "uppstallning_h": 14.19,
    "km": 1177.0,
-   "min_vandtid": 1.0,
-   "vandningar_under_rek": 9,
-   "genomgangar": 0,
+   "min_vandtid": 0.5,
+   "vandningar_under_rek": 4,
+   "varv_utan_reglering": 1,
+   "byten_enligt_norm": 72,
+   "samma_linje": 0,
+   "genomgangar": 72,
    "forsta_avg": 410.0,
    "sista_ank": 1273.5
   },
   "turer_per_atgard": {
    "1a": 20,
    "3": 22,
-   "2": 19
+   "2": 20
   },
   "turer_per_atgard_tot": {
    "1a": 20,
@@ -919,7 +1071,7 @@
     "pastigande_vardag": 0.48
    },
    "2": {
-    "avgangar": 19,
+    "avgangar": 20,
     "ny_tackning_inv": 55,
     "pastigande_vardag": 0.39
    }
@@ -946,8 +1098,8 @@
   },
   "forandring_omlopp": {
    "fordon": 1,
-   "omloppstid_h": 11.61,
-   "korttid_h": 2.36,
+   "omloppstid_h": 11.58,
+   "korttid_h": 2.37,
    "km": 40.5
   }
  }

@@ -2,16 +2,20 @@
 """B4 – Omloppsplan (fordonsomlopp) för stadslinjerna och verifiering av linjeförslag mot den.
 
 GTFS saknar block_id, så omloppen härleds ur tidtabellen för typvardagen:
+  * Norm (beställaren 2026-10-14): föraren byter linje vid varje vändning i centrum, i paren Syd ↔ Norr (S ↔ N)
+    och Öst ↔ Väst (Ö ↔ V), så långt tidtabellen medger. Ett fordon fortsätter därför sällan på samma linje;
+    linje J (timtrafik) kopplas där det passar. Byte inom paret får ske med kort uppehåll (≥ GENOMGANG_MIN);
+    regleringen tas då vid nästa byte i varvet.
   * Alla stadslinjeturer börjar och slutar i Centrum, Nygatan. Turerna kedjas till omlopp med minsta möjliga
     antal fordon (minimikostnadstilldelning, scipy linear_sum_assignment). Ett fordon kan ta en tur som avgår
     tidigast MIN_VANDTID efter fordonets ankomst. Bland lösningar med minsta antal fordon väljs kortast
-    omloppstid (summa över fordonen av tiden från första avgång till sista ankomst, dvs. fordonstimmar) och vid
-    lika väntan samma linje. Fordonsbehovet blir därmed det minsta som tidtabellen kräver. Uppehåll i centrum
-    ≤ 60 min redovisas som vändtid (reglering), längre uppehåll som uppställning.
+    omloppstid (summa över fordonen av tiden från första avgång till sista ankomst, dvs. fordonstimmar) och så
+    långt möjligt byte enligt normparen. Fordonsbehovet blir därmed det minsta som tidtabellen kräver. Uppehåll
+    i centrum ≤ 60 min redovisas som vändtid (reglering), längre uppehåll som uppställning.
   * Dagens minsta vändtid i tidtabellen är 1 min (bl.a. linje J 14:19 → 14:20); med 2 min krävs ett sjätte fordon.
     Kravet för förslagen sätts därför till samma nivå som i dag: vändtid ≥ 1 min.
-  * Genomgående linjer (t.ex. V/Ö): när ett fordon fortsätter direkt som en annan linje vid samma hållplatsläge
-    behövs bara ett uppehåll för av- och påstigning (≥ GENOMGANG_MIN). Regleringen tas då i andra änden av varvet.
+  * Robusthet: varje varv (två på varandra följande turer) ska ha minst REKOMMENDERAD_VANDTID reglering vid något
+    av bytena. Antalet varv utan sådan reglering redovisas; ett förslag är robust om det inte blir fler än i dag.
 Verifiering av ett förslag (ramen 'inga fler bussar')
   * Förslagets körtidsförändring läggs på berörda turer (ankomsten till centrum senareläggs, avgångstiderna –
     pulsen i centrum – ligger fast). Omloppen byggs om. Förslaget ryms om antalet fordon inte ökar och
@@ -38,10 +42,12 @@ import config as C  # noqa: E402
 import data_las as D  # noqa: E402
 
 MIN_VANDTID = 1.0              # min – dagens lägsta vändtid i tidtabellen (krav)
-GENOMGANG_MIN = 0.5            # min – uppehåll i centrum när fordonet fortsätter som annan linje (genomgående)
+GENOMGANG_MIN = 0.5            # min – kortaste uppehåll vid byte inom normparet (bussen fortsätter som partnerlinjen)
+NORMPAR = (('S', 'N'), ('N', 'S'), ('Ö', 'V'), ('V', 'Ö'))   # föraren byter Syd ↔ Norr och Öst ↔ Väst
 REKOMMENDERAD_VANDTID = 3.0    # min – robusthetsnivå (redovisas, inget krav)
 DEPA_GRANS = 60.0              # min – längre uppehåll redovisas som uppställning i stället för vändtid
-LINJEBYTE_STRAFF = 0.5         # min – svag preferens (vid lika väntan) för att fordonet fortsätter på samma linje
+SAMMA_LINJE_STRAFF = 8.0       # min – fordonet fortsätter på samma linje (undviks enligt normen; gäller ej linje J)
+ANNAT_BYTE_STRAFF = 2.0        # min – byte till en linje utanför normparet
 REFERENS_BONUS = 0.3           # min – vid lika väntan behålls dagens koppling (stabila omlopp före/efter)
 OMLOPPSTID_TOL = 10.0          # min/dag – tillåten ökning av omloppstiden (≈ 0,2 %; t.ex. att dagens sista tur blir längre)
 TEXT, TEXT2 = '#1f1f1e', '#52514e'
@@ -72,15 +78,15 @@ def turer(datum=None):
 
 
 # ====================================================================== omlopp
-def bygg_omlopp(t, min_vand=MIN_VANDTID, genomgaende=(), genomgang_min=GENOMGANG_MIN, referens=None):
-    """Kedjar turer till omlopp med minsta antal fordon. genomgaende: par (linje_a, linje_b) där fordonet får
-    fortsätta direkt från a till b med kortare uppehåll (genomgang_min). referens: mängd (trip_id, trip_id)
-    med dagens kopplingar som behålls vid lika väntan. Returnerar kopia med kolumnerna buss, nasta (index),
-    vand_efter (min), genomgang (bool)."""
+def bygg_omlopp(t, min_vand=MIN_VANDTID, par=NORMPAR, genomgang_min=GENOMGANG_MIN, referens=None, **_):
+    """Kedjar turer till omlopp med minsta antal fordon enligt normen (byte inom par, t.ex. V → Ö, får ske med
+    kort uppehåll genomgang_min). referens: mängd (trip_id, trip_id) med dagens kopplingar som behålls vid lika
+    väntan. Returnerar kopia med kolumnerna buss, nasta (index), vand_efter (min), genomgang (byte inom paret)."""
     t = t.reset_index(drop=True)
     n = len(t)
     avg, ank, lin = t.avg.to_numpy(), t.ank.to_numpy(), t.linje.to_numpy()
-    gen = set(map(tuple, genomgaende))
+    gen = set(map(tuple, par))
+    parlinjer = {a for a, _ in gen}
     ref = referens or set()
     tid = t.trip_id.to_numpy()
     K, OMOJLIG = 1e6, 1e9
@@ -93,10 +99,12 @@ def bygg_omlopp(t, min_vand=MIN_VANDTID, genomgaende=(), genomgang_min=GENOMGANG
             vant = avg[j] - ank[i]
             krav = genomgang_min if (lin[i], lin[j]) in gen else min_vand
             if vant >= krav - 1e-9:
-                if (lin[i], lin[j]) in gen or (lin[j], lin[i]) in gen:
-                    straff = -LINJEBYTE_STRAFF              # genomgående par: fordonet växlar gärna mellan linjerna
+                if (lin[i], lin[j]) in gen:
+                    straff = 0.0                             # byte enligt normen
+                elif lin[i] == lin[j]:
+                    straff = SAMMA_LINJE_STRAFF if lin[i] in parlinjer else 0.0
                 else:
-                    straff = LINJEBYTE_STRAFF if lin[i] != lin[j] else 0.0
+                    straff = ANNAT_BYTE_STRAFF
                 if (tid[i], tid[j]) in ref:
                     straff -= REFERENS_BONUS
                 kost[i, j] = vant + straff
@@ -139,8 +147,33 @@ def nyckeltal(o):
             'km': round(float(o.km.sum()), 1),
             'min_vandtid': round(float(v.min()), 1),
             'vandningar_under_rek': int((vand < REKOMMENDERAD_VANDTID - 1e-9).sum()),
+            'varv_utan_reglering': varv_utan_reglering(o),
+            'byten_enligt_norm': int(o.genomgang.sum()), 'samma_linje': samma_linje(o),
             'genomgangar': int(o.genomgang.sum()),
             'forsta_avg': round(float(o.avg.min()), 1), 'sista_ank': round(float(o.ank.max()), 1)}
+
+
+def varv_utan_reglering(o):
+    """Antal varv (två på varandra följande byten i centrum, båda ≤ 60 min) där inget byte har minst
+    REKOMMENDERAD_VANDTID reglering."""
+    n = 0
+    for _, d in o.sort_values('avg').groupby('buss'):
+        v = d.vand_efter.to_numpy()
+        for a, b in zip(v[:-1], v[1:]):
+            if np.isnan(a) or np.isnan(b) or a > DEPA_GRANS or b > DEPA_GRANS:
+                continue
+            if max(a, b) < REKOMMENDERAD_VANDTID - 1e-9:
+                n += 1
+    return n
+
+
+def samma_linje(o):
+    """Antal kopplingar (≤ 60 min) där fordonet fortsätter på samma linje (linje J undantagen)."""
+    lin = o.linje.to_numpy(); n = 0
+    for i, j in enumerate(o.nasta):
+        if j >= 0 and lin[i] == lin[j] and lin[i] != 'J' and o.vand_efter.iat[i] <= DEPA_GRANS:
+            n += 1
+    return n
 
 
 def fordon_i_trafik(o, steg=1.0):
@@ -164,9 +197,9 @@ def med_andring(t, delta):
 
 
 def ram(t):
-    """Ramen från dagens omlopp: antal fordon och omloppstid."""
+    """Ramen från dagens omlopp: antal fordon, omloppstid och antal varv utan reglering (robusthet)."""
     nt = nyckeltal(bygg_omlopp(t))
-    return {'fordon': nt['fordon'], 'omloppstid_h': nt['omloppstid_h']}
+    return {'fordon': nt['fordon'], 'omloppstid_h': nt['omloppstid_h'], 'varv_utan_reglering': nt['varv_utan_reglering']}
 
 
 def kopplingar(plan):
@@ -175,8 +208,15 @@ def kopplingar(plan):
     return {(tid[i], tid[j]) for i, j in enumerate(plan.nasta) if j >= 0}
 
 
-def inom_ram(nt, r):
-    return nt['fordon'] <= r['fordon'] and nt['omloppstid_h'] <= r['omloppstid_h'] + OMLOPPSTID_TOL / 60 + 1e-9
+def inom_ram(nt, r, robust=False):
+    ok = nt['fordon'] <= r['fordon'] and nt['omloppstid_h'] <= r['omloppstid_h'] + OMLOPPSTID_TOL / 60 + 1e-9
+    if robust:
+        ok = ok and nt['varv_utan_reglering'] <= r.get('varv_utan_reglering', 10 ** 6)
+    return ok
+
+
+def ar_robust(nt, r):
+    return nt['varv_utan_reglering'] <= r.get('varv_utan_reglering', 10 ** 6)
 
 
 def verifiera(t, delta, r, km_delta=None, **kw):
@@ -189,12 +229,15 @@ def verifiera(t, delta, r, km_delta=None, **kw):
     return plan, nt, inom_ram(nt, r)
 
 
-def turer_som_ryms(t, kandidater, d, r, **kw):
-    """Prövar turerna en i taget (tidsordning) – behåller ändringen om förslaget fortfarande ryms i ramen."""
-    valda = []
+def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, **kw):
+    """Prövar turerna en i taget (tidsordning) – behåller ändringen om förslaget fortfarande ryms i ramen
+    (robust=True: och inte ger fler varv utan reglering än i dag). bas: andra åtgärders tillägg {trip_id: min}."""
+    valda = []; bas = bas or {}
     for tid in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
-        prov = {k: d for k in valda + [tid]}
-        if inom_ram(nyckeltal(bygg_omlopp(med_andring(t, prov), **kw)), r):
+        prov = dict(bas)
+        for k in valda + [tid]:
+            prov[k] = prov.get(k, 0.0) + d
+        if inom_ram(nyckeltal(bygg_omlopp(med_andring(t, prov), **kw)), r, robust):
             valda.append(tid)
     return valda
 

@@ -27,7 +27,7 @@ def L(lager, namn=None, filter_=None, tand=True):
 # (grupp, [lager uppifrån och ned], tänd vid start); undergrupper anges som (namn, [...], tänd)
 GRUPPER = [
     ('Kap 4 Linjeförslag', [
-        ('Paket A – 1b + genomgående V/Ö, N2, Bo-Bil (rekommenderat)', [
+        ('Paket A – Möckelö Strand (1b), N2, Bo-Bil (rekommenderat)', [
             L('b4_forslag_hallplatser', 'Nya och ändrade hållplatser', '"forslag" IN (\'1b\', \'2\', \'3\')'),
             L('b4_linjer_forslag', 'Linjer i paket A', '"forslag" IN (\'1b_VÖ\', \'3\')'),
             L('b4_tackning_forandring', 'Förändrad tillgänglighet', '"scenario" = \'paket_A\''),
@@ -38,10 +38,10 @@ GRUPPER = [
             L('b4_linjer_forslag', 'Linje V via Möckelö Strand', '"forslag" = \'1a\''),
             L('b4_tackning_forandring', 'Förändrad tillgänglighet (alla turer)', '"scenario" = \'1a\''),
         ], False),
-        ('Förslag 1b – Möckelö Strand, förlängd Norrgårdsvägen + genomgående V/Ö', [
+        ('Förslag 1b – Möckelö Strand, förlängd Norrgårdsvägen', [
             L('b4_forslag_hallplatser', 'Ny hållplats', '"forslag" = \'1b\''),
             L('b4_forslag_korvagar', 'Ny körväg (schematisk)', '"forslag" = \'1b\''),
-            L('b4_linjer_forslag', 'Genomgående linje V/Ö', '"forslag" = \'1b_VÖ\''),
+            L('b4_linjer_forslag', 'Linje V och Ö (bussen växlar V ↔ Ö)', '"forslag" = \'1b_VÖ\''),
             L('b4_tackning_forandring', 'Förändrad tillgänglighet', '"scenario" = \'1b_VÖ\''),
         ], False),
         ('Förslag 2 – N2 på linje Ö', [
@@ -71,8 +71,10 @@ GRUPPER = [
     ('Kap 1 OD-matris (fig 1.2–1.5)', [L('a1_zoner_pastigande'), L('a1_omfordelning_centrum'),
                                       L('a1_od_FM_korrigerad'), L('a1_od_FM_levererad', tand=False),
                                       L('a1_od_EM_korrigerad', tand=False), L('a1_od_EM_levererad', tand=False)], False),
-    ('Bakgrund', [L('00_hallplatser', tand=False), L('00_stadslinjer_forskjutna', 'Stadslinjer i dag'),
-                  L('00_stadslinjer', tand=False), L('00_befolkningsrutor', tand=False), L('00_land')], True),
+    ('Bakgrund', [L('00_hallplatser', 'Hållplatser (avgångar per vardag)', tand=False),
+                  L('00_stadslinjer_forskjutna', 'Stadslinjer i dag – vägdragning, förskjutna där de delar gata'),
+                  L('00_stadslinjer', 'Stadslinjer i dag – vägdragning, en geometri per linje', tand=False),
+                  L('00_befolkningsrutor', 'Befolkning 2024 (1 km-rutor)', tand=False), L('00_land', 'Land')], True),
 ]
 
 projekt = QgsProject.instance()

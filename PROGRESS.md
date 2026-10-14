@@ -64,6 +64,15 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
 - [x] **PM Linjeförslag (delleverans)** – `rapport/PM_linjeforslag.md` + `.docx` (`src/pm_export.py`, kräver
       pypandoc_binary). QGIS: `oppna_i_qgis.py` bygger grupper per förslag (filter) och sparar `linjenatsutredning.qgz`;
       nya lager `b4_linjer_forslag`, `b4_tackning_scenarier`, `b4_nyckeltal_scenarier`.
+- [x] **Omlopp enligt förarnas norm** (beställaren 2026-10-14: förarna byter alltid linje, Syd ↔ Norr och
+      Öst ↔ Väst). `b4_omlopp.py`: NORMPAR (S↔N, Ö↔V), samma linje undviks (ej J), byte inom paret ≥ 0,5 min,
+      robusthet = varv utan ≥ 3 min reglering (i dag 1). Resultat: 1b ryms 20/20 (8 varv) – robust 15/20
+      (ej V 07:50, 08:50, 13:40, 14:40, 15:40); N2 20/20; paket A, paket A robust (5 bussar), paket B (6 bussar).
+      "Sammanslagning" = reglering vid bytet till partnerlinjen (bussarna växlar redan V↔Ö, S↔N).
+- [ ] **OSRM-vägdragning** – förberett: `s01_vagdragning.py` ruttar även förslagens nya delsträckor
+      (FORSLAG_SEGMENT, NY_MOCKELO) och `forslagsgeometri()` används i kartor/GIS; OSRM-körtider redovisas i
+      `b4_forslag.json` (osrm_kontroll_nya_delstrackor). Blockerat i molnmiljön (router.project-osrm.org nekas) –
+      tillåt domänen i miljöns nätverksinställningar eller kör `python src/kor_alla.py` lokalt.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

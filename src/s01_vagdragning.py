@@ -39,6 +39,10 @@ CACHE = C.PROCESSED / 'vagdragning_segment.gpkg'
 MAX_OMVAG = (2.5, 300.0)          # faktor, tillägg (m) – längre OSRM-rutt avvisas
 SAMMA_GATA_M = 15.0               # avstånd inom vilket två linjer räknas gå på samma gata
 ORDNING = {l: i for i, l in enumerate(C.STADSLINJER)}
+# Linjeförslagens nya delsträckor (kapitel 4). Ruttas också med OSRM när det går, för kartor/GIS och för att
+# kontrollera körtiderna. NY_MOCKELO = nytt hållplatsläge i Möckelö Strand (indikativt läge från A3).
+FORSLAG_SEGMENT = [('9025302000066401', 'NY_MOCKELO', 'förslag 1a'), ('NY_MOCKELO', '9025302000066401', 'förslag 1a'),
+                   ('9025302000031201', '9025302000003502', 'förslag 3'), ('9025302000003502', '9025302000063301', 'förslag 3')]
 
 
 # ====================================================================== segment och turmönster
@@ -74,6 +78,24 @@ def hallplats_xy():
     return {s: (a, b) for s, a, b in zip(g.index, x, y)}, g[['lon', 'lat']]
 
 
+def pseudohallplatser():
+    """Nya hållplatslägen utan stop_id: {id: (x, y, lon, lat)}."""
+    f = C.PROCESSED / 'a3_behov_ny_linjestrackning.csv'
+    if not f.exists():
+        return {}
+    b = pd.read_csv(f); m = b[b.narmaste_hpl == 'Möckelö Strand']
+    return {'NY_MOCKELO': tuple(float(m[k].iloc[0]) for k in ('x', 'y', 'lon', 'lat'))} if len(m) else {}
+
+
+def alla_xy():
+    """Hållplatser (GTFS) och nya hållplatslägen: ({id: (x, y)}, DataFrame lon/lat)."""
+    xy, ll = hallplats_xy()
+    xy = dict(xy); ll = ll.copy()
+    for k, (x, y, lon, lat) in pseudohallplatser().items():
+        xy[k] = (x, y); ll.loc[k] = [lon, lat]
+    return xy, ll
+
+
 # ====================================================================== OSRM
 def osrm_rutt(lonlat_a, lonlat_b, session):
     url = (f'{OSRM_URL}/route/v1/driving/{lonlat_a[0]:.6f},{lonlat_a[1]:.6f};{lonlat_b[0]:.6f},{lonlat_b[1]:.6f}'
@@ -92,8 +114,11 @@ def hamta(paus_s=1.0):
     import requests
     from pyproj import Transformer
     tr = Transformer.from_crs(C.CRS_WGS84, C.CRS_METRISK, always_xy=True)
-    xy, ll = hallplats_xy()
-    segl = segment_linjer()
+    xy, ll = alla_xy()
+    segl = {k: set(v) for k, v in segment_linjer().items()}
+    for a, b, namn in FORSLAG_SEGMENT:                      # förslagens nya delsträckor
+        if a in xy and b in xy:
+            segl.setdefault((a, b), set()).add(namn)
     cache = {}
     if CACHE.exists():
         c = gpd.read_file(CACHE, layer='segment')
@@ -102,7 +127,8 @@ def hamta(paus_s=1.0):
     s = requests.Session()
     for (a, b), linjer in sorted(segl.items()):
         rak = float(math.hypot(xy[a][0] - xy[b][0], xy[a][1] - xy[b][1]))
-        bas = {'from_stop': a, 'to_stop': b, 'linjer': ','.join(sorted(linjer, key=ORDNING.get)), 'rak_m': round(rak, 1)}
+        bas = {'from_stop': a, 'to_stop': b, 'linjer': ','.join(sorted(linjer, key=lambda l: ORDNING.get(l, 99))),
+               'rak_m': round(rak, 1)}
         if (a, b) in cache:
             r = cache[(a, b)]
             rader.append({**bas, 'kalla': 'osrm', 'langd_m': r.langd_m, 'tid_s': r.tid_s, 'geometry': r.geometry})
@@ -156,6 +182,24 @@ def segmentgeometri():
         for r in c.itertuples():
             if (r.from_stop, r.to_stop) in ut:
                 ut[(r.from_stop, r.to_stop)] = np.asarray(r.geometry.coords)
+    return ut
+
+
+def forslagsgeometri():
+    """Förslagens nya delsträckor: {(från, till): {'xy', 'kalla', 'langd_m', 'tid_s'}} – OSRM om den finns i
+    cachen, annars rak linje (kalla = 'rak')."""
+    xy, _ = alla_xy()
+    ut = {}
+    for a, b, _ in FORSLAG_SEGMENT:
+        if a in xy and b in xy:
+            ut[(a, b)] = {'xy': np.array([xy[a], xy[b]]), 'kalla': 'rak',
+                          'langd_m': float(math.hypot(xy[a][0] - xy[b][0], xy[a][1] - xy[b][1])), 'tid_s': np.nan}
+    if CACHE.exists():
+        c = gpd.read_file(CACHE, layer='segment')
+        for r in c.itertuples():
+            if (r.from_stop, r.to_stop) in ut and r.kalla == 'osrm':
+                ut[(r.from_stop, r.to_stop)] = {'xy': np.asarray(r.geometry.coords), 'kalla': 'osrm',
+                                                'langd_m': float(r.langd_m), 'tid_s': float(r.tid_s)}
     return ut
 
 

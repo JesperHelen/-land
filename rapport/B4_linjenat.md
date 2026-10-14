@@ -5,27 +5,28 @@
 > var för sig och i två paket (avsnitt 4.6). En sammanställning för beställaren finns i
 > `PM_linjeforslag.md`.
 
-> **Sammanfattning.** Stadstrafiken körs i dag med fem bussar. Marginalerna är små: kravet på minst
-> 2 minuters vändtid i centrum skulle ensamt kräva en sjätte buss. Linje V har 3 minuters vändtid och kan
-> därför inte förlängas på egen hand. Linje S och Ö har 7 minuter, och linje N har 4 minuter.
+> **Sammanfattning.** Stadstrafiken körs i dag med fem bussar. Förarna byter linje i centrum enligt en fast
+> norm: Syd ↔ Norr (S ↔ N) och Öst ↔ Väst (Ö ↔ V). Bussen som har kört linje V fortsätter alltså som linje Ö
+> och tvärtom. Marginalerna är små: med krav på 2 minuters vändtid i stället för 1 skulle det krävas en
+> sjätte buss.
 >
 > - **Möckelö Strand med dagens gatunät (1a):** omvägen tar 6,5 minuter per tur och ryms inte i omloppen.
 >   Bara 8 av 20 turer kan trafikera hållplatsen, och de går på oregelbundna tider.
 > - **Möckelö Strand med förlängd Norrgårdsvägen (1b):** omvägen tar 2,5 minuter. Förslaget ryms med alla
->   turer om linje V och Ö körs som en genomgående linje i centrum. Cirka 180 invånare får då en hållplats
->   inom 400 m.
-> - **N2 på linje Ö (2):** hållplatsen ger 55 invånare en hållplats inom 400 m. Den ryms på 19 av 20 turer;
->   undantaget är skolturen 08:20.
+>   20 turer. Bytet V → Ö blir 0,5 minut, och regleringen tas vid bytet Ö → V. Kring Ö:s skolturer blir
+>   regleringen då kortare än 3 minuter per varv. En robust variant trafikerar Möckelö Strand med 15 av 20
+>   turer. Cirka 180 invånare får en hållplats inom 400 m.
+> - **N2 på linje Ö (2):** hållplatsen ger 55 invånare en hållplats inom 400 m och ryms med alla 20 turer.
 > - **Linje N via Bo-Bil (3):** ändringen ryms och är i praktiken körtidsneutral (+0,1 min per tur). Vägen
 >   blir kortare, men Bo-Bil blir ett nytt uppehåll. Cirka 45 invånare vid Bo-Bil får minst 30 avgångar per
 >   vardag. Däremot förlorar 23 invånare vid Vikingagränd hållplatsen inom 400 m.
-> - **Paket A** (1b med genomgående V/Ö, 2 och 3) ryms med fem bussar. Det ger 278 invånare bättre och 24
->   sämre tillgänglighet. Andelen med hållplats inom 400 m ökar från 83,6 till 85,0 %.
+> - **Paket A** (1b, 2 och 3) ryms med fem bussar. Det ger 278 invånare bättre och 24 sämre tillgänglighet.
+>   Andelen med hållplats inom 400 m ökar från 83,6 till 85,0 %.
 >
-> Sammanslagning av två linjer till en genomgående linje frigör 2,5 minuter per tur för den ena linjen,
-> eftersom regleringen bara behöver tas en gång per varv. Det räcker för Möckelö Strand (1b) och för
-> Solberget med Solberget södra på linje Ö. Det räcker däremot inte för områdena kring linje N
-> (Lillåkersvägen, Örtvägen och Österkalmare).
+> Eftersom bussarna redan växlar mellan linjerna i paren räcker det att lägga regleringen vid det ena bytet
+> i varvet. Då kan den ena linjen förlängas med upp till 2,5 minuter mer per tur än i dag. Det räcker för
+> Möckelö Strand (1b) och för Solberget och Solberget södra på linje Ö. Det räcker däremot inte för
+> områdena kring linje N (Lillåkersvägen, Örtvägen och Österkalmare).
 
 ## 4.1 Ramen – dagens omlopp
 
@@ -35,12 +36,14 @@ tidtabellen för en typisk vardag (tisdag 2026-09-01):
 
 - **Turerna:** alla stadslinjeturer börjar och slutar i Centrum, Nygatan. Turerna har kedjats till omlopp
   så att antalet fordon blir det minsta som tidtabellen kräver (minimikostnadstilldelning).
+- **Norm för linjebyten:** enligt beställaren byter föraren linje vid varje vändning i centrum, Syd ↔ Norr
+  (S ↔ N) och Öst ↔ Väst (Ö ↔ V), så långt tidtabellen medger. Omloppen följer den normen, och ett fordon
+  fortsätter aldrig på samma linje. Linje J, som går en gång i timmen, kör i egen slinga.
 - **Val mellan likvärdiga lösningar:** bland lösningar med lika många fordon har den med kortast
-  omloppstid valts, och vid lika väntan samma linje. Omloppstiden är fordonstimmarna från första avgång
-  till sista ankomst.
+  omloppstid valts. Omloppstiden är fordonstimmarna från första avgång till sista ankomst.
 - **Vändtid:** ett fordon får ta nästa tur tidigast 1 minut efter ankomsten, vilket är den kortaste
-  vändtiden i dagens tidtabell. Fortsätter fordonet direkt som en annan linje (genomgående linje) räcker
-  ett uppehåll på 0,5 minut.
+  vändtiden i dagens tidtabell. Vid byte inom paret (t.ex. V → Ö) räcker 0,5 minut, eftersom regleringen
+  då kan tas vid nästa byte i varvet.
 
 Ett förslag har verifierats på följande sätt:
 
@@ -48,14 +51,13 @@ Ett förslag har verifierats på följande sätt:
    pulsen och bytesmöjligheterna behålls.
 2. Omloppen byggs om. Förslaget ryms om antalet fordon inte ökar och omloppstiden ökar med högst
    10 minuter per dag. Toleransen motsvarar att dagens sista tur kan bli något längre.
-3. Ryms inte alla turer prövas genomgående linje. Därefter prövas turerna en i taget, och det redovisas
-   hur många som ryms.
+3. Ryms inte alla turer prövas turerna en i taget, och det redovisas hur många som ryms.
+4. **Robusthet:** varje varv, dvs. två på varandra följande byten, bör ha minst 3 minuters reglering vid
+   något av bytena. Antalet varv utan sådan reglering redovisas. I dag finns ett sådant varv (linje J
+   13:17–15:20). Ger ett förslag fler sådana varv redovisas också en robust variant.
 
-Antalet vändningar under 3 minuter redovisas som mått på robusthet.
-
-**Resultat.** Dagens 93 vardagsturer kräver fem fordon (figur 4.1). Körtiden är 42,5 timmar och
-omloppstiden 61,4 timmar per vardag. Av omloppstiden är 11,5 timmar vändtid i centrum och 7,5 timmar
-uppställning mitt på dagen.
+**Resultat.** Dagens 93 vardagsturer kräver fem fordon (figur 4.1). Två bussar växlar mellan S och N, två
+mellan V och Ö, och en kör linje J. Körtiden är 42,5 timmar och omloppstiden 61,4 timmar per vardag.
 
 Linjerna N, S, V och Ö avgår från centrum i en gemensam puls (:20 och :50) med 30 minuters intervall i
 rusningstid. Linje J går ungefär en gång i timmen. Vändtiden i centrum varierar mellan linjerna:
@@ -70,16 +72,14 @@ rusningstid. Linje J går ungefär en gång i timmen. Vändtiden i centrum varie
 
 Marginalerna är små. Med 2 minuters lägsta vändtid i stället för 1 minut skulle det krävas sex fordon,
 eftersom linje J vänder på 1 minut 14:19–14:20 och 15:19–15:20 och fordonen växlar linje 08:45–08:50.
-
-Kvällstrafiken är redan i dag upplagd så att ett fordon kan växla mellan linje V och Ö och ett annat
-mellan linje N och S. V avgår :40 och Ö :10, medan N avgår :20 och S :50. De härledda omloppen använder
-dessa par på kvällen.
+Vändtiderna i tabellen är också bytestiderna i paren: efter en V-tur har bussen 3 minuter innan den
+fortsätter som Ö, och efter en Ö-tur 7 minuter innan den fortsätter som V.
 
 ![Figur 4.1](../output/kartor/b4_1_omlopp_idag.png)
 
-*Figur 4.1. Härledd omloppsplan för en typisk vardag. Varje rad är ett fordon och varje stapel en tur i
-linjens färg. Orange markering anger vändtid under 3 minuter. Det nedre diagrammet visar antalet fordon i
-trafik.*
+*Figur 4.1. Härledd omloppsplan för en typisk vardag, med förarnas norm för linjebyten (S ↔ N, V ↔ Ö).
+Varje rad är ett fordon och varje stapel en tur i linjens färg. Markeringar anger byten under 3 minuter.
+Det nedre diagrammet visar antalet fordon i trafik.*
 
 ## 4.2 Förslag 1 – linje V till ny hållplats i Möckelö Strand
 
@@ -99,9 +99,9 @@ fortsätta i en slinga utan att vända blir tillägget ungefär hälften.
 |---|---|---|
 | Körtid per tur | +6,5 min | +2,5 min |
 | Fordonskilometer per vardag | +20 km (8 turer) | +17 km (20 turer) |
-| Alla 20 turer, linje V ensam | 6 bussar – ryms inte | 6 bussar – ryms inte |
-| Alla 20 turer, genomgående V/Ö | 6 bussar – ryms inte | **5 bussar – ryms** (omloppstid +2 min/dag) |
-| Turer som ryms utan genomgående linje | 8 av 20 (oregelbundna tider) | 10 av 20 |
+| Alla 20 turer | 6 bussar – ryms inte (omloppstid +11,6 h/dag) | **5 bussar – ryms** (omloppstid +3 min/dag) |
+| Turer som ryms | 8 av 20 (oregelbundna tider) | 20 av 20 |
+| Varv med < 3 min reglering (i dag 1) | 1 | 8 – robust variant: 15 av 20 turer, 1 varv |
 | Invånare som får hållplats inom 400 m | 179 | 179 |
 | Avgångar vid nya hållplatsen | 8 per vardag | 20 per vardag |
 | Uppskattat påstigande (sommarnivå) | 0,2–0,9 per vardag | 0,5–2,2 per vardag |
@@ -110,19 +110,18 @@ fortsätta i en slinga utan att vända blir tillägget ungefär hälften.
 **Bedömning.**
 
 - **Variant 1a** ryms inte i dagens omlopp. Med alla turer krävs en sjätte buss, och omloppstiden ökar med
-  nästan 12 timmar per vardag. Omvägen på 6,5 minuter är längre än linje V:s vändtid och längre än det
-  utrymme en genomgående linje ger. De 8 turer som ryms går på oregelbundna tider och ger inte ett
-  användbart utbud.
-- **Variant 1b** ryms inte heller med linje V ensam, eftersom vändtiden på 3 minuter krymper till
-  0,5 minut. Den ryms däremot med alla turer om linje V och Ö körs som genomgående linje i centrum (figur
-  4.3). Bussen fortsätter då direkt från V till Ö efter ett kort uppehåll, och regleringen tas efter
-  Ö-turen. Där är vändtiden 7 minuter, men bara 2 minuter efter Ö:s skolturer 13:10–15:10. Båda linjerna
-  avgår från samma hållplatsläge i centrum, och kvällstrafiken växlar redan i dag mellan V och Ö.
+  nästan 12 timmar per vardag. Omvägen på 6,5 minuter är längre än bytestiden V → Ö (3 minuter) och längre
+  än det utrymme som finns om all reglering läggs vid bytet Ö → V. De 8 turer som ryms går på oregelbundna
+  tider och ger inte ett användbart utbud.
+- **Variant 1b** ryms med alla 20 turer (figur 4.3). Bussen växlar redan i dag från V till Ö. Med 1b blir
+  bytet V → Ö 0,5 minut, och regleringen, 6,5 minuter, tas vid bytet Ö → V. Kring Ö:s skolturer (07:50–08:50
+  och 13:40–15:40) blir regleringen kortare än 3 minuter per varv. I en robust variant körs omvägen inte på
+  V-turerna 07:50, 08:50, 13:40, 14:40 och 15:40. Hållplatsen får då 15 avgångar per vardag i stället för 20.
 - **Påstigande:** 1b ger cirka 180 invånare en hållplats med 20 avgångar per vardag. Det beräknade
   påstigandet är lågt i sommardata men bör vara högre under terminstid.
 
-Variant 1b med genomgående V/Ö förordas för fortsatt utredning, under förutsättning att Norrgårdsvägen
-förlängs.
+Variant 1b förordas för fortsatt utredning, under förutsättning att Norrgårdsvägen förlängs. Robustheten
+kring Ö:s skolturer bör stämmas av mot verkliga körtider innan alla turer läggs via Möckelö Strand.
 
 ![Figur 4.2](../output/kartor/b4_2_mockelo_karta.png)
 
@@ -132,8 +131,7 @@ fortfarande saknar hållplats inom 400 m. Körvägen till den nya hållplatsen �
 ![Figur 4.3](../output/kartor/b4_3_mockelo_omlopp.png)
 
 *Figur 4.3. Omlopp före och efter för förslag 1. Skrafferad del av en tur är tillagd körtid. Rubriker i rött
-anger lösningar som kräver fler bussar än i dag. Blå markering anger att fordonet fortsätter direkt som en
-annan linje.*
+anger lösningar som kräver fler bussar än i dag. Blå markering anger kort byte inom linjeparet.*
 
 ## 4.3 Förslag 2 – ny hållplats N2 på linje Ö
 
@@ -143,17 +141,15 @@ läget från kapitel 3. Bussen passerar läget i båda riktningarna. Ett uppehå
 
 **Resultat.**
 
-- **Omlopp:** av linjens 20 turer ryms 19 i dagens omlopp (figur 4.5). Undantaget är skolturen 08:20 via
-  Strandnäs skola södra. Den kommer tillbaka till centrum 08:49 och fordonet tar nästa tur 08:50, så
-  den saknar marginal. Turen kan antingen köra förbi N2, eller trafikera hållplatsen om fordonet fortsätter
-  direkt som linje V 08:50 (genomgående Ö/V).
-- **Täckning:** 55 invånare får en hållplats inom 400 m med 19–20 avgångar per vardag.
+- **Omlopp:** alla 20 turer ryms med fem bussar (figur 4.5), och förslaget är lika robust som i dag.
+  Skolturen 08:20 kommer tillbaka 08:49,5 och bussen fortsätter som linje V 08:50 efter ett kort byte.
+- **Täckning:** 55 invånare får en hållplats inom 400 m med 20 avgångar per vardag.
 - **Påstigande:** det uppskattade påstigandet är 0,4–1,8 per vardag på sommarnivå. Linje Ö har stadsnätets
   högsta påstigande per invånare.
 - **Ombordvarande:** förlusten för resenärer som redan sitter på bussen är försumbar, cirka 1
   resenärsminut per vardag.
 
-**Bedömning.** Förslaget ryms i dagens omlopp med ett undantag som kan hanteras och rekommenderas.
+**Bedömning.** Förslaget ryms i dagens omlopp och rekommenderas.
 
 ![Figur 4.4](../output/kartor/b4_4_n2_karta.png)
 
@@ -200,56 +196,55 @@ Körvägarna är schematiska.*
 
 *Figur 4.7. Omlopp före och efter för förslag 3.*
 
-## 4.5 Sammanslagning av linjer – genomgående linjer i centrum
+## 4.5 Sammanslagning av linjer – reglering vid bytet till partnerlinjen
 
-**Princip.** Varje linje har i dag en egen vändtid i centrum. Den måste rymma både regleringstid och en
-eventuell förlängning. Om två linjer A och B slås ihop till en genomgående linje fortsätter fordonet
-direkt från A till B och nästa varv från B till A. Regleringen behöver då bara tas en gång per varv:
+**Princip.** Bussarna växlar redan i dag mellan linjerna i paren S ↔ N och Ö ↔ V. Varje byte har i dag en
+egen reglering, lika med linjens vändtid. Läggs all reglering vid det ena bytet i varvet blir det andra
+bytet kort:
 
-- Linje A får ett kort uppehåll i centrum (0,5 minut) och kan förlängas med 30 − 0,5 − körtiden.
-- Linje B måste behålla minst 3 minuters reglering.
+- Linje A får ett kort byte i centrum (0,5 minut) och kan förlängas med 30 − 0,5 − körtiden.
+- Partnerlinjen B behåller minst 3 minuters reglering vid sitt byte.
 
-Med pulsen i centrum kvar ger sammanslagningen därför 2,5 minuter mer per tur än om linjen förlängs på
-egen hand, där 3 minuters reglering krävs (tabell 4.2). Släpps pulsen för den ena halvan kan hela
-överskottet för paret användas, men då försämras bytesmöjligheterna i centrum.
+Med pulsen i centrum kvar ger det 2,5 minuter mer per tur än om varje byte ska ha minst 3 minuters
+reglering (tabell 4.2). Släpps pulsen för den ena linjen kan hela parets överskott användas, men då
+försämras bytesmöjligheterna i centrum. Om bytet dessutom skyltas som en genomgående linje kan resenärerna
+sitta kvar på bussen.
 
 *Tabell 4.2. Utrymme för förlängning per tur utan fler bussar (30 minuters turintervall).*
 
-| Linje (körtid) | Egen linje, ≥ 3 min reglering | Genomgående, pulsen kvar | Bästa par utan puls |
+| Linje (körtid) | Reglering ≥ 3 min vid varje byte | Reglering vid partnerns byte, pulsen kvar | Utan puls (paret) |
 |---|---|---|---|
-| N (26 min) | 1 min | 3,5 min | 7,5 min (med S eller Ö) |
-| S (23 min) | 4 min | 6,5 min | 10,5 min (med Ö) |
-| V (27 min) | 0 min | 2,5 min | 6,5 min (med S eller Ö) |
-| Ö (23 min, skolturer 28–29) | 4 min | 6,5 min | 10,5 min (med S) |
+| N (26 min), partner S | 1 min | 3,5 min | 7,5 min |
+| S (23 min), partner N | 4 min | 6,5 min | 7,5 min |
+| V (27 min), partner Ö | 0 min | 2,5 min | 6,5 min |
+| Ö (23 min, skolturer 28–29), partner V | 4 min | 6,5 min | 6,5 min |
 
 **Behov.** Behovet har jämförts med de nio områden som enligt kapitel 3 kräver ändrad linjesträckning
 (figur 4.8). Behövd tid per tur har beräknats som två gånger avståndet till närmaste körväg × 1,3 i
 hastigheten 25 km/h plus 0,5 minuts uppehåll. För Möckelö Strand har beställarens restid för 1b använts.
 
-- **Ryms med genomgående linje:**
+- **Ryms med reglering hos partnerlinjen:**
   - Möckelö Strand (linje V, 2,5 min);
   - Solberget (linje Ö, cirka 5 min);
   - Solberget södra (linje Ö, cirka 4 min).
 - **Ryms inte:** Lillåkersvägen (6,5 min), Örtvägen (4,4 min) och Österkalmare (10 min) ligger vid linje N.
-  Deras behov är större än de 3,5 minuter som en genomgående linje ger N. Detsamma gäller Dalkullavägen på
+  Deras behov är större än de 3,5 minuter som N kan få. Detsamma gäller Dalkullavägen på
   linje V och Strömsnäs på linje Ö. Områdena norr och nordost om centrum kräver därför en större
   omläggning av linje N och Ö.
 
 Utrymmet i ett par kan bara användas en gång. Förlängs linje V till Möckelö Strand i paret V/Ö har Ö kvar
 sitt eget utrymme på 4 minuter per tur, men inte 6,5 minuter.
 
-**Resor som blir direkta.** Genomgående linjer ger också resor utan byte i centrum. Paret S/Ö ger flest
-direkta resor, cirka 2 per vardag. Övriga par ger under 1 resa per vardag. Med sommarens låga resande är
-effekten liten, men den visar vilka par som har mest gemensam efterfrågan.
-
-**Val av par.** Paren V/Ö och N/S är naturliga. Linjerna i paren avgår från samma hållplatsläge i
-centrum (V och Ö från läge 66202, N och S från läge 66201), och kvällstrafiken använder redan dessa par.
+**Resor som kan bli direkta.** Skyltas bytet som genomgående linje kan resenärerna sitta kvar. För dagens
+par ger det under 1 resa per vardag vardera (N/S och V/Ö). Paret S/Ö skulle ge flest, cirka 2 per vardag,
+men är inte ett av dagens par. Med sommarens låga resande är effekten liten. Paren avgår från samma
+hållplatsläge i centrum (V och Ö från läge 66202, N och S från läge 66201).
 
 ![Figur 4.8](../output/kartor/b4_8_sammanslagning.png)
 
 *Figur 4.8. Sammanslagning av linjer. Till vänster områden utan hållplats inom 400 m med behövd tid per
-tur. Uppe till höger tidsutrymmet per linje utan och med genomgående linje. Nere till höger resor per
-vardag som blir direkta.*
+tur. Uppe till höger tidsutrymmet per linje med reglering vid varje byte och vid partnerns byte. Nere till
+höger resor per vardag som kan bli direkta om bytet skyltas som genomgående linje.*
 
 ## 4.6 Samlad bild av de enskilda förslagen
 
@@ -258,21 +253,26 @@ vardag som blir direkta.*
 | Förslag | Körtid per tur | Ryms? | Krav för att rymmas | Ny täckning (invånare) | Övrigt |
 |---|---|---|---|---|---|
 | 1a Möckelö Strand, dagens gator | +6,5 min | Nej (6 bussar) | – (8 av 20 turer ryms) | 179 | Oregelbundet utbud |
-| 1b Möckelö Strand, förlängd Norrgårdsvägen | +2,5 min | Ja | Genomgående V/Ö | 179 | Kräver ny väg |
-| 2 N2 på linje Ö | +0,5 min | Ja, 19 av 20 turer | 08:20-turen undantas eller körs genomgående Ö/V | 55 | |
+| 1b Möckelö Strand, förlängd Norrgårdsvägen | +2,5 min | Ja, 20 av 20 | Bytet V → Ö 0,5 min; robust variant 15 av 20 | 179 | Kräver ny väg |
+| 2 N2 på linje Ö | +0,5 min | Ja, 20 av 20 | – | 55 | |
 | 3 Linje N via Bo-Bil | +0,1 min | Ja | – | 44 får ≥ 30 avg.; 23 förlorar | Jämnare körtid |
 
-### Genomgående linje V/Ö och förslagspaket
+### Omloppsparet V ↔ Ö och förslagspaket
 
-Förslag 1b har utformats som en genomgående linje V/Ö (figur 4.9). Bussen avgår :20 som linje V och kör via
-Möckelö Strand på 29,5 minuter. Efter ett uppehåll på 0,5 minut i centrum fortsätter den :50 som linje Ö
-via N2 och tar sin reglering, 6,5 minuter, efter Ö-turen. Två bussar kör varvet med 30 minuters
-förskjutning.
+Med 1b och N2 ser varvet för paret V ↔ Ö ut så här (figur 4.9):
+
+1. Bussen avgår :20 som linje V och kör via Möckelö Strand på 29,5 minuter.
+2. Efter ett byte på 0,5 minut fortsätter den :50 som linje Ö via N2.
+3. Efter Ö-turen tar bussen sin reglering, 6,5 minuter, innan nästa V-tur.
+
+Två bussar kör varvet med 30 minuters förskjutning, som i dag.
 
 Förslagen har också prövats tillsammans (figur 4.10):
 
-- **Paket A** (1b med genomgående V/Ö, 2 och 3) ryms med fem bussar. N2 trafikeras av 19 av 20 turer, och
-  omloppstiden ökar med 3 minuter per vardag.
+- **Paket A** (1b, 2 och 3, alla turer) ryms med fem bussar. Omloppstiden ökar med 3 minuter per vardag.
+  Kring Ö:s skolturer finns 8 varv med mindre än 3 minuters reglering, mot 1 i dag.
+- **Paket A robust** trafikerar Möckelö Strand med 15 av 20 V-turer. Det ryms med fem bussar och är lika
+  robust som i dag.
 - **Paket B** (1a med alla turer, 2 och 3) kräver sex bussar och 11,6 fler fordonstimmar per vardag.
 
 Båda paketen ger samma täckning i Mariehamn (figur 4.11–4.12):
@@ -283,15 +283,15 @@ Båda paketen ger samma täckning i Mariehamn (figur 4.11–4.12):
 - **Minst 30 avgångar per vardag:** 55,6 % i dag och 55,9 % med paketen.
 
 Andelen med svag tillgänglighet ökar från 28,0 till 29,1 %. Det beror på att invånare som i dag saknar
-hållplats får en med 19–20 avgångar per vardag. Kostnaderna redovisas i kapitel 5.
+hållplats får en med 15–20 avgångar per vardag. Kostnaderna redovisas i kapitel 5.
 
 ![Figur 4.9](../output/kartor/b4_9_linje_vo.png)
 
-*Figur 4.9. Genomgående linje V/Ö med Möckelö Strand (1b) och N2 (2).*
+*Figur 4.9. Omloppsparet V ↔ Ö med Möckelö Strand (1b) och N2 (2).*
 
 ![Figur 4.10](../output/kartor/b4_10_paket_omlopp.png)
 
-*Figur 4.10. Omlopp före och efter för paket A och B.*
+*Figur 4.10. Omlopp före och efter för paket A, paket A robust och paket B.*
 
 ![Figur 4.11](../output/kartor/b4_11_systemeffekter.png)
 
@@ -306,10 +306,9 @@ för paketen.*
 
 Nästa leverans ska redovisa följande:
 
-1. **Kombinerat förslag V/Ö (klart, paket A).** Genomgående V/Ö med Möckelö Strand (1b) och N2 (2) ryms.
-   Robustheten under Ö:s skolturer, där regleringen bara är 1,5–2 minuter per varv, behöver kontrolleras
-   mot verkliga körtider.
-2. **Kombinerat förslag N/S.** N/S som genomgående linje prövas tillsammans med Bo-Bil (3). Det ger
+1. **Kombinerat förslag V ↔ Ö (klart, paket A).** Möckelö Strand (1b) och N2 (2) ryms. Robustheten kring
+   Ö:s skolturer behöver kontrolleras mot verkliga körtider.
+2. **Paret N ↔ S.** Reglering vid bytet N → S prövas tillsammans med Bo-Bil (3). Det ger
    utrymme för linje N att nå Örtvägen och Lillåkersvägen, alternativt att sammanslagningen kombineras med
    indragning av hållplatser på linje S enligt kapitel 3.
 3. **Nordost.** En omläggning av linje N och Ö norr och nordost om centrum prövas för Lillåkersvägen,
@@ -322,8 +321,11 @@ Nästa leverans ska redovisa följande:
 - **Omloppen** är härledda ur tidtabellen och kan avvika från operatörens faktiska omloppsplaner. Förarnas
   raster och tjänstgöring ingår inte. Verifieringen bör stämmas av mot operatörens omloppsplaner.
 - **Körtider för nya delsträckor** bygger på beställarens restider (Möckelö Strand) och fågelvägsavstånd
-  (Bo-Bil). Linjerna ritas som raka streck mellan hållplatserna, eftersom vägdragning från OSRM inte kunde
-  hämtas i analysmiljön. Körtiderna bör kontrolleras mot gatunätet.
+  (Bo-Bil). När vägdragningen hämtas från OSRM (`python src/kor_alla.py`) ruttas även förslagens nya
+  delsträckor, och OSRM:s körtider redovisas för kontroll i `b4_forslag.json`. I den här versionen kunde OSRM
+  inte nås från analysmiljön, så linjerna är ritade som raka streck mellan hållplatserna.
+- **Normen för linjebyten** (S ↔ N, Ö ↔ V) bygger på beställarens uppgift och bör stämmas av mot
+  operatörens omloppsplaner.
 - **Påstigande och restider** bygger på sommardata (2026-05-08 – 2026-09-14) och är låga i absoluta tal.
   Effekterna bör räknas om med terminsdata.
 - **Hållplatslägena** för Möckelö Strand och N2 är indikativa. Befolkningen är jämnt fördelad inom varje
