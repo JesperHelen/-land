@@ -185,12 +185,16 @@ def fig_bobil():
     K.placera_etiketter(ax, etik, fontsize=6.8, undvik=hinder)
     a = RES['antaganden']['bobil']; t = f['tackning']
     infobox(ax, [
-        r'$\bf{Körtid\ per\ tur}$' + f"   {sv(a['delta_min'])} min (kortare väg; väntan vid Nya Godbyvägen ej medräknad)",
-        r'$\bf{Omlopp}$' + f"   ryms – alla {f['linjens_turer']} turer, {f['omlopp']['alla']['fordon']} bussar, vändtid N 4 → 4,4 min",
+        r'$\bf{Körtid\ per\ tur}$' + f"   {'+' if a['delta_min'] > 0 else ''}{sv(a['delta_min'])} min "
+        f"({sv(a['kortare_vag_min'])} kortare väg, +{sv(a['uppehall_bobil_min'])} uppehåll Bo-Bil)",
+        "väntan vid Nya Godbyvägen ej medräknad – talar för kortare tid",
+        r'$\bf{Omlopp}$' + f"   ryms – alla {f['linjens_turer']} turer, {f['omlopp']['alla']['fordon']} bussar, "
+        f"vändtid N 4 → {sv(4 - a['delta_min'])} min",
         r'$\bf{Effekt}$' + f"   Bo-Bil får linje N: {t['lyft_fran_svag_inv']} inv. lyfts ur svag tillgänglighet",
         f"Vikingagränd utgår: {t['forlorad_tackning_inv']} inv. utan hållplats inom 400 m",
         f"(påstigande Vikingagränd i dag ≈ 0,05 per vardag)",
-        f"Resenärer: {sv(f['resenarer']['vardag']['resenarsminuter'], 0)} resenärsminuter per vardag"], loc=(0.025, 0.975))
+        f"Resenärer: {'+' if f['resenarer']['vardag']['resenarsminuter'] > 0 else ''}"
+        f"{sv(f['resenarer']['vardag']['resenarsminuter'], 0)} resenärsminuter per vardag"], loc=(0.025, 0.975))
     extra = [Line2D([], [], color='#3d3d3a', lw=3, ls=(0, (1.2, 1.6)), label='Körväg som utgår (schematisk)'),
              Line2D([], [], color=C.FARG_LINJE['N'], lw=2.4, ls=(0, (3, 2)), label='Ny körväg linje N (schematisk)'),
              Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Vikingagränd – utgår för linje N'),

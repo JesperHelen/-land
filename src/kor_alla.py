@@ -10,10 +10,16 @@ from pathlib import Path
 
 SRC = Path(__file__).resolve().parent
 STEG = ['s01_vagdragning', 'a1_od_granskning', 'a1_kartor', 'a2_tackning', 'a2_kartor',
-        'a3_hallplatser', 'a3_kartor', 'b4_omlopp', 'b4_forslag', 'b4_kartor', 'b4_sammanslagning', 'gis_export']
+        'a3_hallplatser', 'a3_kartor', 'b4_omlopp', 'b4_forslag', 'b4_kartor', 'b4_sammanslagning', 'b4_paket',
+        'b5_kalkyl', 'gis_export', 'pm_export']
 
 if __name__ == '__main__':
     steg = [s for s in STEG if not ('--utan-osrm' in sys.argv and s == 's01_vagdragning')]
+    try:
+        import pypandoc  # noqa: F401  (Word-export av PM:et kräver pandoc)
+    except ImportError:
+        steg = [s for s in steg if s != 'pm_export']
+        print('pypandoc saknas – PM:et exporteras inte till Word (pip install pypandoc_binary)')
     for s in steg:
         print(f'=== {s}', flush=True)
         r = subprocess.run([sys.executable, str(SRC / f'{s}.py')], cwd=SRC.parent)

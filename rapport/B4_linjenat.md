@@ -1,8 +1,9 @@
 # 4 Justering av linjenätet
 
 > **Status.** Delleverans i Fas B. Kapitlet redovisar dagens omlopp, de tre förslag som beställaren valde
-> ut efter granskningen av Fas A (2026-10-14) och en första analys av sammanslagna linjer. Förslagen har
-> prövats var för sig. Hur de kan kombineras till tre samlade linjeförslag redovisas i nästa leverans.
+> ut efter granskningen av Fas A (2026-10-14) och en analys av sammanslagna linjer. Förslagen har prövats
+> var för sig och i två paket (avsnitt 4.6). En sammanställning för beställaren finns i
+> `PM_linjeforslag.md`.
 
 > **Sammanfattning.** Stadstrafiken körs i dag med fem bussar. Marginalerna är små: kravet på minst
 > 2 minuters vändtid i centrum skulle ensamt kräva en sjätte buss. Linje V har 3 minuters vändtid och kan
@@ -15,8 +16,11 @@
 >   inom 400 m.
 > - **N2 på linje Ö (2):** hållplatsen ger 55 invånare en hållplats inom 400 m. Den ryms på 19 av 20 turer;
 >   undantaget är skolturen 08:20.
-> - **Linje N via Bo-Bil (3):** ändringen ryms och förkortar körtiden något. Cirka 45 invånare vid Bo-Bil
->   får minst 30 avgångar per vardag. Däremot förlorar 23 invånare vid Vikingagränd hållplatsen inom 400 m.
+> - **Linje N via Bo-Bil (3):** ändringen ryms och är i praktiken körtidsneutral (+0,1 min per tur). Vägen
+>   blir kortare, men Bo-Bil blir ett nytt uppehåll. Cirka 45 invånare vid Bo-Bil får minst 30 avgångar per
+>   vardag. Däremot förlorar 23 invånare vid Vikingagränd hållplatsen inom 400 m.
+> - **Paket A** (1b med genomgående V/Ö, 2 och 3) ryms med fem bussar. Det ger 278 invånare bättre och 24
+>   sämre tillgänglighet. Andelen med hållplats inom 400 m ökar från 83,6 till 85,0 %.
 >
 > Sammanslagning av två linjer till en genomgående linje frigör 2,5 minuter per tur för den ena linjen,
 > eftersom regleringen bara behöver tas en gång per varv. Det räcker för Möckelö Strand (1b) och för
@@ -169,17 +173,19 @@ landsbygdslinjerna 2–4.
 **Resultat.**
 
 - **Körtid:** den nya körvägen är cirka 27 % kortare fågelvägen. Med dagens schemalagda tid för
-  delsträckan blir körtiden 0,4 minut kortare per tur, och fordonskilometrarna minskar med cirka 9 km per
-  vardag. Den minskade väntan vid Nya Godbyvägen ingår inte, eftersom den inte kan beräknas utan
-  realtidsdata. Den gör körtiden både kortare och jämnare.
-- **Omlopp:** förslaget ryms med alla 22 turer och fem bussar (figur 4.7). Linje N:s vändtid ökar från 4
-  till 4,4 minuter.
+  delsträckan ger det 0,4 minut kortare körtid per tur. Bo-Bil blir däremot ett verkligt uppehåll
+  (+0,5 minut), medan bussen i dag sällan stannar vid Vikingagränd. Netto blir körtiden +0,1 minut per tur,
+  dvs. i praktiken oförändrad. Fordonskilometrarna minskar med cirka 9 km per vardag. Den minskade väntan
+  vid Nya Godbyvägen ingår inte, eftersom den inte kan beräknas utan realtidsdata. Den talar för kortare och
+  jämnare körtid.
+- **Omlopp:** förslaget ryms med alla 22 turer och fem bussar (figur 4.7). Linje N:s vändtid blir 3,9
+  minuter i stället för 4.
 - **Bo-Bil:** hållplatsen får linje N:s 22 avgångar utöver landsbygdslinjernas. Cirka 45 invånare får
   därmed minst 30 avgångar per vardag i stället för 15–29.
 - **Vikingagränd:** 23 invånare förlorar hållplats inom 400 m. Påstigandet vid Vikingagränd är i dag
   cirka 0,05 per vardag, dvs. fem påstigningar under 92 vardagar, och hållplatsen bedömdes redan i
   kapitel 3 som en hållplats som bör prövas.
-- **Restid:** genomresande på linje N vinner sammantaget cirka 1 resenärsminut per vardag.
+- **Restid:** förändringen för genomresande på linje N är försumbar, cirka 2 resenärsminuter per vardag.
 
 **Bedömning.** Förslaget ryms och förbättrar körtidens tillförlitlighet. Den förlorade täckningen vid
 Vikingagränd är liten men bör vägas in. Den kan mildras om hållplatsen N3 söder om Maxinge (kapitel 3)
@@ -254,15 +260,55 @@ vardag som blir direkta.*
 | 1a Möckelö Strand, dagens gator | +6,5 min | Nej (6 bussar) | – (8 av 20 turer ryms) | 179 | Oregelbundet utbud |
 | 1b Möckelö Strand, förlängd Norrgårdsvägen | +2,5 min | Ja | Genomgående V/Ö | 179 | Kräver ny väg |
 | 2 N2 på linje Ö | +0,5 min | Ja, 19 av 20 turer | 08:20-turen undantas eller körs genomgående Ö/V | 55 | |
-| 3 Linje N via Bo-Bil | −0,4 min | Ja | – | 45 får ≥ 30 avg.; 23 förlorar | Jämnare körtid |
+| 3 Linje N via Bo-Bil | +0,1 min | Ja | – | 44 får ≥ 30 avg.; 23 förlorar | Jämnare körtid |
+
+### Genomgående linje V/Ö och förslagspaket
+
+Förslag 1b har utformats som en genomgående linje V/Ö (figur 4.9). Bussen avgår :20 som linje V och kör via
+Möckelö Strand på 29,5 minuter. Efter ett uppehåll på 0,5 minut i centrum fortsätter den :50 som linje Ö
+via N2 och tar sin reglering, 6,5 minuter, efter Ö-turen. Två bussar kör varvet med 30 minuters
+förskjutning.
+
+Förslagen har också prövats tillsammans (figur 4.10):
+
+- **Paket A** (1b med genomgående V/Ö, 2 och 3) ryms med fem bussar. N2 trafikeras av 19 av 20 turer, och
+  omloppstiden ökar med 3 minuter per vardag.
+- **Paket B** (1a med alla turer, 2 och 3) kräver sex bussar och 11,6 fler fordonstimmar per vardag.
+
+Båda paketen ger samma täckning i Mariehamn (figur 4.11–4.12):
+
+- **Bättre tillgänglighet:** 278 invånare, varav 234 får en hållplats inom 400 m.
+- **Sämre tillgänglighet:** 24 invånare, varav 23 vid Vikingagränd som förlorar sin hållplats.
+- **Hållplats inom 400 m:** 83,6 % i dag och 85,0 % med paketen.
+- **Minst 30 avgångar per vardag:** 55,6 % i dag och 55,9 % med paketen.
+
+Andelen med svag tillgänglighet ökar från 28,0 till 29,1 %. Det beror på att invånare som i dag saknar
+hållplats får en med 19–20 avgångar per vardag. Kostnaderna redovisas i kapitel 5.
+
+![Figur 4.9](../output/kartor/b4_9_linje_vo.png)
+
+*Figur 4.9. Genomgående linje V/Ö med Möckelö Strand (1b) och N2 (2).*
+
+![Figur 4.10](../output/kartor/b4_10_paket_omlopp.png)
+
+*Figur 4.10. Omlopp före och efter för paket A och B.*
+
+![Figur 4.11](../output/kartor/b4_11_systemeffekter.png)
+
+*Figur 4.11. Systemeffekter: invånare med bättre respektive sämre tillgänglighet per förslag och nyckeltal
+för paketen.*
+
+![Figur 4.12](../output/kartor/b4_12_tackning_fore_efter.png)
+
+*Figur 4.12. Turtäthet inom 400 m i dag och med paket A.*
 
 ## 4.7 Fortsatt arbete
 
 Nästa leverans ska redovisa följande:
 
-1. **Kombinerat förslag V/Ö.** Genomgående V/Ö med Möckelö Strand (1b) och N2 (2) prövas tillsammans.
-   Robustheten under Ö:s skolturer, där regleringen bara är 2 minuter per varv, behöver kontrolleras
-   särskilt.
+1. **Kombinerat förslag V/Ö (klart, paket A).** Genomgående V/Ö med Möckelö Strand (1b) och N2 (2) ryms.
+   Robustheten under Ö:s skolturer, där regleringen bara är 1,5–2 minuter per varv, behöver kontrolleras
+   mot verkliga körtider.
 2. **Kombinerat förslag N/S.** N/S som genomgående linje prövas tillsammans med Bo-Bil (3). Det ger
    utrymme för linje N att nå Örtvägen och Lillåkersvägen, alternativt att sammanslagningen kombineras med
    indragning av hållplatser på linje S enligt kapitel 3.

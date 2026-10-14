@@ -20,7 +20,9 @@
    "tid_idag_min": 1.4499999999999886,
    "faglvag_idag_m": 1298.985292635415,
    "faglvag_ny_m": 951.5005473559602,
-   "delta_min": -0.4,
+   "kortare_vag_min": -0.4,
+   "uppehall_bobil_min": 0.5,
+   "delta_min": 0.1,
    "delta_km": -0.43
   },
   "pastigande_per_inv": {
@@ -372,7 +374,7 @@
   "3": {
    "namn": "Linje N via Bo-Bil i stället för Vikingagränd",
    "linje": "N",
-   "delta_min_per_tur": -0.4,
+   "delta_min_per_tur": 0.1,
    "km_per_tur": -0.43,
    "linjens_turer": 22,
    "turer_som_trafikerar": 22,
@@ -381,9 +383,9 @@
     "alla": {
      "fordon": 5,
      "turer": 93,
-     "korttid_h": 42.3,
+     "korttid_h": 42.49,
      "omloppstid_h": 61.38,
-     "regleringstid_h": 11.61,
+     "regleringstid_h": 11.43,
      "uppstallning_h": 7.47,
      "km": 1127.0,
      "min_vandtid": 1.0,
@@ -405,20 +407,20 @@
    },
    "resenarer": {
     "FM": {
-     "resenarsminuter_h": -0.073,
-     "resor_langre_h": 0.016,
-     "resor_kortare_h": 0.347,
+     "resenarsminuter_h": 0.104,
+     "resor_langre_h": 0.363,
+     "resor_kortare_h": 0.0,
      "resor_utan_forbindelse_h": 0.0
     },
     "EM": {
-     "resenarsminuter_h": -0.166,
-     "resor_langre_h": 0.045,
-     "resor_kortare_h": 1.014,
+     "resenarsminuter_h": 0.36,
+     "resor_langre_h": 1.06,
+     "resor_kortare_h": 0.0,
      "resor_utan_forbindelse_h": 0.0
     },
     "vardag": {
      "berorda_resor": 7.4,
-     "resenarsminuter": -1.2,
+     "resenarsminuter": 2.4,
      "resor_utan_forbindelse": 0.0
     }
    }

@@ -44,14 +44,26 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         `output/kartor/b4_8_sammanslagning.png`. Genomgående linje ger +2,5 min/tur (reglering en gång per varv):
         utrymme N 3,5 / S 6,5 / V 2,5 / Ö 6,5 min (pulsen kvar). Räcker för Möckelö Strand (V), Solberget och
         Solberget södra (Ö); inte för Lillåkersvägen, Örtvägen, Österkalmare (N) → kräver större omläggning.
-  - [ ] **B4.4 Todo – sammanslagning:** pröva genomgående **V/Ö** med 1b + N2 tillsammans i omloppen (kontrollera
-        robusthet under Ö:s skolturer 13:10–15:10, reglering 2 min/varv).
+  - [x] **B4.4 Sammanslagning V/Ö + paket** (beställaren 2026-10-14: "1b – prova att slå ihop"; Bo-Bil = ett stopp
+        till) – `src/b4_paket.py` → `b4_paket.json`, `b4_paket_omlopp.csv`, `b4_paket_tackning.csv.gz`, figurer
+        `b4_9`–`b4_12`. Förslag 3 nu +0,1 min/tur (−0,4 kortare väg +0,5 uppehåll Bo-Bil), ryms (N vänder 3,9 min).
+        Genomgående V/Ö: V :20 (29,5 min) → 0,5 min → Ö :50 (23,5) → reglering 6,5 min; 2 bussar.
+        **Paket A** (1b+V/Ö, 2, 3): ryms, 5 bussar, omloppstid +3 min/vardag, +7 km/vardag, N2 19/20 turer;
+        Mariehamn inom 400 m 83,6 → 85,0 %, ≥ 30 avg 55,6 → 55,9 %, 278 inv. bättre / 24 sämre.
+        **Paket B** (1a alla turer, 2, 3): 6 bussar, +11,6 fordonstimmar/vardag. Robusthet: Ö-skolturer 13:10–15:10
+        har 1,5–2 min reglering per varv – kontrollera mot verkliga körtider.
   - [ ] **B4.5 Todo – sammanslagning:** pröva genomgående **N/S** + Bo-Bil; använd N:s 3,5 min (ev. + indragna
         hållplatser på S) mot Örtvägen/Lillåkersvägen. Pröva även varianter utan puls (N/S 7,5 min, S/Ö 10,5 min).
   - [ ] **B4.6 Todo – nordost:** omläggning av N och Ö norr/nordost (Lillåkersvägen, Örtvägen, Solberget, Österkalmare).
   - [ ] **B4.7 Tre samlade linjeförslag** verifierade mot omloppen med körtidspåverkan per förslag.
   - [ ] Stäm av härledda omlopp mot operatörens omloppsplaner (om de kan fås) och körtider för nya delsträckor.
-- [ ] B5 Grov ekonomisk kalkyl (underlag: km/omloppstid per förslag i `b4_forslag.json`)
+- [x] **B5 Grov ekonomisk kalkyl (överslag)** – `src/b5_kalkyl.py` → `b5_kalkyl.json/csv`, `output/kartor/b5_1_kalkyl.png`,
+      `rapport/B5_kalkyl.md`. Enhetskostnader (Trivector 2023, omräknade): 60 k€/fordon·år, 50 €/fordonstimme,
+      0,9 €/km (låg/hög ±), 250 vardagar/år. 1a alla turer +217 k€/år (176–259); 1b+V/Ö +4 k€/år; paket A +2 k€/år;
+      paket B +215 k€/år. Break-even Norrgårdsvägen: nuvärde 2,5–3,6 M€ (20 år, 3,5 %). Ersätt med avtalspriser.
+- [x] **PM Linjeförslag (delleverans)** – `rapport/PM_linjeforslag.md` + `.docx` (`src/pm_export.py`, kräver
+      pypandoc_binary). QGIS: `oppna_i_qgis.py` bygger grupper per förslag (filter) och sparar `linjenatsutredning.qgz`;
+      nya lager `b4_linjer_forslag`, `b4_tackning_scenarier`, `b4_nyckeltal_scenarier`.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
@@ -83,8 +95,9 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   `data/processed/vagdragning_segment.gpkg`). OSRM blockerat i molnmiljön → i nuläget raka streck (kalla='rak').
   När `router.project-osrm.org` är tillåten (eller lokalt): `python src/kor_alla.py` kör om hela kedjan
   (s01 → A1–A3 → kartor → GIS). A3:s kandidatlägen följer då gatunätet – granska om resultaten i A3.
-- **Fas B4:** körs med `python src/b4_omlopp.py && python src/b4_forslag.py && python src/b4_kartor.py &&
-  python src/b4_sammanslagning.py` (ingår i `kor_alla.py`). Förslagen definieras i `b4_forslag.forslag()`;
+- **Fas B4–B5:** körs med `python src/b4_omlopp.py && python src/b4_forslag.py && python src/b4_kartor.py &&
+  python src/b4_sammanslagning.py && python src/b4_paket.py && python src/b5_kalkyl.py && python src/gis_export.py
+  && python src/pm_export.py` (ingår i `kor_alla.py`). Förslagen definieras i `b4_forslag.forslag()`;
   tilläggstid för Möckelö = 2 × restid + 0,5 min (fram och tillbaka) – beställaren bör bekräfta tolkningen.
 - Internet: endast PyPI och repo-GitHub nås. Inga baskarte-tjänster/OSRM – kartor byggs av egna lager.
 - Python-paket utöver requirements: geopandas, shapely, pyproj, pyogrio (installeras med pip).

@@ -14,8 +14,10 @@ Antaganden
   * N2: hållplatsen ligger på återvändsgatan mot Kalmarnäs vändplan som bussen kör i båda riktningarna;
     0,5 min per tur (ett uppehåll per tur i genomsnitt).
   * Bo-Bil: körvägen Maxinge – Bo-Bil – Bolstavägen är 27 % kortare fågelvägen än Maxinge – Vikingagränd –
-    Bolstavägen. Med dagens schemalagda tid för delsträckan (1,5 min) ger det −0,4 min. Minskad väntan vid
-    Nya Godbyvägen kan inte kvantifieras utan realtidsdata och ingår inte (försiktig bedömning).
+    Bolstavägen. Med dagens schemalagda tid för delsträckan (1,5 min) ger det −0,4 min. Bo-Bil blir däremot
+    ett verkligt uppehåll (+0,5 min), medan bussen i praktiken sällan stannar vid Vikingagränd (≈ 0,05
+    påstigande per vardag). Netto +0,1 min per tur. Minskad väntan vid Nya Godbyvägen kan inte kvantifieras
+    utan realtidsdata och ingår inte (försiktig bedömning).
 Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py. Varje förslag prövas med alla turer; om det inte
 ryms prövas genomgående linje (V/Ö) respektive vilka turer som ryms.
 Effekter
@@ -93,8 +95,10 @@ def bobil_delta(xy):
     db = lambda a: float(np.hypot(*(xy.loc[a, ['x', 'y']].to_numpy() - bobil.to_numpy())))
     idag = d(HPL['Maxinge'], HPL['Vikingagränd']) + d(HPL['Vikingagränd'], HPL['Bolstavägen'])
     ny = db(HPL['Maxinge']) + db(HPL['Bolstavägen'])
+    kortare = round(float(tid_idag * (ny / idag - 1)), 1)
     return {'tid_idag_min': float(tid_idag), 'faglvag_idag_m': idag, 'faglvag_ny_m': ny,
-            'delta_min': round(float(tid_idag * (ny / idag - 1)), 1), 'delta_km': round((ny - idag) * 1.25 / 1000, 2)}
+            'kortare_vag_min': kortare, 'uppehall_bobil_min': UPPEHALL,
+            'delta_min': round(kortare + UPPEHALL, 1), 'delta_km': round((ny - idag) * 1.25 / 1000, 2)}
 
 
 # ====================================================================== omlopp

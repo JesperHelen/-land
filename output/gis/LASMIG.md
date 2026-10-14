@@ -7,8 +7,9 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 
 - **Enklast:** dra in `linjenatsutredning.gpkg` i QGIS och markera de lager du vill se. Varje lager har en
   inbäddad standardstil som laddas automatiskt, med samma färger och klasser som PNG-kartorna.
-- **Alla lager på en gång, grupperade per kapitel:** öppna QGIS Python-konsol (*Insticksprogram > Python-konsol*),
-  klicka *Visa redigerare*, öppna `oppna_i_qgis.py` och kör det.
+- **Alla lager på en gång, grupperade per kapitel och per linjeförslag:** öppna QGIS Python-konsol
+  (*Insticksprogram > Python-konsol*), klicka *Visa redigerare*, öppna `oppna_i_qgis.py` och kör det. Skriptet
+  sparar projektet som `linjenatsutredning.qgz` i samma mapp; därefter räcker det att öppna projektfilen.
 - **Alternativa stilar** (där ett lager används i flera figurer): *Lageregenskaper > Symbologi > Stil* (nederst i
   dialogen) och välj stil i listan. Stilarna finns även som `.qml`-filer i `stilar/` (*Stil > Läs in stil*).
 - **Bakgrundskarta:** lägg till t.ex. OpenStreetMap via *XYZ Tiles* i webbläsarpanelen och lägg den underst.
@@ -29,9 +30,12 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 2.3 Svag faktisk tillgänglighet | `a2_tackningsytor`, `a2_tackning_per_ruta` | *Svag faktisk tillgänglighet* / *Invånare med svag tillgänglighet per ruta* |
 | 3.1 Nya hållplatslägen | `a3_nya_hallplatser`, `a3_nya_hallplatser_400m`, `a3_behov_ny_linjestrackning`, `a3_behov_400m` | Standard |
 | 3.2 Bedömning av hållplatser | `a3_hallplatsbedomning` | Hållplatsbedömning |
-| 4.2, 4.4, 4.6 Linjeförslag 1–3 | `b4_forslag_hallplatser`, `b4_forslag_korvagar`, `b4_tackning_forandring` | Standard (filtrera på fältet `forslag`: 1a, 1b, 2, 3) |
+| 4.2, 4.4, 4.6 Linjeförslag 1–3 | `b4_forslag_hallplatser`, `b4_forslag_korvagar` (fält `forslag`: 1a, 1b, 2, 3), `b4_tackning_forandring` (fält `scenario`) | Standard |
+| 4.9 Linjerna i förslagen (bl.a. genomgående V/Ö) | `b4_linjer_forslag` (fält `forslag`: 1a, 1b_VÖ, 2, 3) | Linjer i förslagen |
+| 4.11–4.12 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` (fält `scenario`: idag, paket_A), `b4_tackning_forandring` (scenario paket_A) | Turtäthet inom 400 m |
+| Nyckeltal per scenario (bussar, omloppstid, km, täckning, kostnad) | `b4_nyckeltal_scenarier` (tabell utan geometri) | – |
 | 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |
-| 4.1, 4.3, 4.5, 4.7 Omlopp | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv` |
+| 4.1, 4.3, 4.5, 4.7, 4.10 Omlopp | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv`, `b4_paket_omlopp.csv` |
 
 ## Linjer som delar gata
 
@@ -47,6 +51,13 @@ Linjerna och kandidatlägena för nya hållplatser följer gatunätet när vägd
 från analysmiljön, så i den här versionen är linjerna **raka streck mellan hållplatserna** (fältet
 `vagdragning` i `00_stadslinjer`). Kör `python src/kor_alla.py` på en dator med internet för att hämta
 vägdragningen och skapa om alla kartor och lager.
+
+## Linjeförslagen i QGIS
+
+Skriptet lägger förslagen i gruppen *Kap 4 Linjeförslag* med en undergrupp per förslag (filter på fälten
+`forslag`/`scenario`): *Paket A* (tänd vid start), *Förslag 1a*, *1b*, *2*, *3*, *Systemeffekter* och
+*Sammanslagning av linjer*. Tänd/släck undergrupperna för att jämföra. Filtren kan ändras under
+*Lageregenskaper > Källa > Frågebyggare*. Nya körvägar är schematiska (raka) tills vägdragning finns.
 
 ## Att tänka på
 

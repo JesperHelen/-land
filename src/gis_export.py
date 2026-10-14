@@ -330,19 +330,90 @@ def b4():
     stil('b4_forslag_korvagar', 'Förslag – körvägar (schematiska)',
          qml(r_kategori('objekt', kat, lambda n, f, st: linje(n, f, 0.8, streckad=st, halo=True))), True)
 
-    t = pd.read_csv(P / 'b4_tackning_forslag.csv.gz', dtype={'forslag': str})
-    t = t[t.klass_efter != t.klass_fore].copy()
+    # förändrad tillgänglighet per scenario (enskilda förslag och paket), 50 m-celler
+    pk_ = json.load(open(P / 'b4_paket.json', encoding='utf-8'))
+    tk = pd.read_csv(P / 'b4_paket_tackning.csv.gz')
     h = C.DELRUTA_M
-    t['forandring'] = np.where(t.klass_efter > t.klass_fore, 'Bättre', 'Sämre')
-    t['geometry'] = shapely.box(t.x - h / 2, t.y - h / 2, t.x + h / 2, t.y + h / 2)
-    tg = gpd.GeoDataFrame(t[['forslag', 'forandring', 'bef', 'geometry']], crs=C.CRS_METRISK)
-    tg = tg.dissolve(by=['forslag', 'forandring'], aggfunc={'bef': 'sum'}).reset_index().rename(columns={'bef': 'invanare'})
-    tg['invanare'] = tg.invanare.round(0)
-    skriv(tg, 'b4_tackning_forandring')
-    stil('b4_tackning_forandring', 'Förändrad tillgänglighet (fig 4.2, 4.4, 4.6)',
+    geo = shapely.box(tk.x - h / 2, tk.y - h / 2, tk.x + h / 2, tk.y + h / 2)
+    delar = []
+    for sid in [k for k in pk_ if k != 'idag']:
+        d = tk[f'klass_{sid}'] != tk.klass_idag
+        if not d.any():
+            continue
+        t = gpd.GeoDataFrame({'scenario': sid, 'namn': pk_[sid]['namn'],
+                              'forandring': np.where(tk.loc[d, f'klass_{sid}'] > tk.loc[d, 'klass_idag'], 'Bättre', 'Sämre'),
+                              'invanare': tk.loc[d, 'bef'].to_numpy()}, geometry=geo[d.to_numpy()], crs=C.CRS_METRISK)
+        delar.append(t.dissolve(by=['scenario', 'namn', 'forandring'], aggfunc={'invanare': 'sum'}).reset_index())
+    tg = pd.concat(delar, ignore_index=True); tg['invanare'] = tg.invanare.round(0)
+    tg['geometry'] = [g_ if g_.geom_type == 'MultiPolygon' else shapely.MultiPolygon([g_]) for g_ in tg.geometry]
+    skriv(gpd.GeoDataFrame(tg, crs=C.CRS_METRISK), 'b4_tackning_forandring')
+    stil('b4_tackning_forandring', 'Förändrad tillgänglighet (filtrera på scenario)',
          qml(r_kategori('forandring', [('Bättre', 'Bättre (ny täckning eller fler avgångar)', '#2f9e44'),
                                        ('Sämre', 'Sämre (förlorad täckning eller färre avgångar)', '#c0392b')],
                         lambda n, f: fyll(n, f, 210)), 0.9), True)
+
+    # turtäthetsklass i dag och med paket A (fig 4.12)
+    namn = ['Ingen hållplats inom 400 m', 'Mycket låg (1–14 avg/vardag)', 'Låg (15–29)', 'Medel (30–59)', 'God (≥ 60)']
+    ts = []
+    for sid in ['idag', 'paket_A']:
+        g_ = gpd.GeoDataFrame({'scenario': sid, 'ruta_id': tk.ruta_id, 'klass_nr': tk[f'klass_{sid}'], 'invanare': tk.bef},
+                              geometry=geo, crs=C.CRS_METRISK)
+        ts.append(g_.dissolve(by=['scenario', 'ruta_id', 'klass_nr'], aggfunc={'invanare': 'sum'}).reset_index())
+    ts = pd.concat(ts, ignore_index=True)
+    ts['klass'] = ts.klass_nr.map(dict(enumerate(namn))); ts['invanare'] = ts.invanare.round(1)
+    skriv(gpd.GeoDataFrame(ts, crs=C.CRS_METRISK), 'b4_tackning_scenarier')
+    farger = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
+    stil('b4_tackning_scenarier', 'Turtäthet inom 400 m (fig 4.12)',
+         qml(r_kategori('klass', [(n, n, f) for n, f in zip(namn, farger)], lambda s_, f: fyll(s_, f)), 0.85), True)
+
+    # hela linjesträckningar per förslag (schematiska där nya delsträckor saknar vägdragning)
+    import s01_vagdragning as V
+    sg = V.segmentgeometri(); hxy, _ = V.hallplats_xy(); mon = V.monster_per_linje()
+    fs = json.load(open(P / 'b4_forslag.json', encoding='utf-8'))['forslag']
+    def kedja(stopp, ersatt=None):
+        pts = []
+        for a, b in zip(stopp[:-1], stopp[1:]):
+            xy_ = sg.get((a, b), np.array([hxy[a], hxy[b]]))
+            pts.extend(xy_ if not pts else xy_[1:])
+        return LineString(pts)
+    vm, om, nm = mon['V'][0][0], mon['Ö'][0][0], list(mon['N'][0][0])
+    mo = '9025302000066401'; k = vm.index(mo)
+    ext = LineString([hxy[mo], fs['1b']['xy']])
+    v_ny = shapely.line_merge(shapely.MultiLineString([kedja(vm[:k + 1]), ext, LineString([fs['1b']['xy'], hxy[mo]]), kedja(vm[k:])]))
+    o_ny = kedja(om)
+    st_ = D.gtfs()['stops'].set_index('stop_id').loc[['9025302000003501', '9025302000003502']]
+    bx, by = D.till_metrisk(st_.lon.values, st_.lat.values); bobil = np.array([bx.mean(), by.mean()])
+    iv = nm.index('9025302000063201')
+    n_ny = shapely.MultiLineString([kedja(nm[:iv]), LineString([hxy[nm[iv - 1]], bobil, hxy[nm[iv + 1]]]), kedja(nm[iv + 1:])])
+    rad = [('1a', 'V', 'Linje V via Möckelö Strand, dagens gator (8 av 20 turer ryms; alla turer kräver 6 bussar)', fs['1a']['delta_min_per_tur'], v_ny),
+           ('1b_VÖ', 'V/Ö', 'Genomgående linje V/Ö via Möckelö Strand (förlängd Norrgårdsvägen) och N2', fs['1b']['delta_min_per_tur'],
+            shapely.MultiLineString([*(getattr(v_ny, 'geoms', [v_ny])), o_ny])),
+           ('2', 'Ö', 'Linje Ö med ny hållplats N2 (19 av 20 turer)', fs['2']['delta_min_per_tur'], o_ny),
+           ('3', 'N', 'Linje N via Bo-Bil i stället för Vikingagränd', fs['3']['delta_min_per_tur'], n_ny)]
+    lg = gpd.GeoDataFrame([{'forslag': a, 'linje': b, 'beskrivning': c, 'korttid_per_tur_min': d} for a, b, c, d, _ in rad],
+                          geometry=[shapely.MultiLineString(getattr(g_, 'geoms', [g_])) for *_, g_ in rad], crs=C.CRS_METRISK)
+    skriv(lg, 'b4_linjer_forslag')
+    kat = [('1a', '1a Linje V via Möckelö Strand, dagens gator', C.FARG_LINJE['V']),
+           ('1b_VÖ', '1b Genomgående linje V/Ö', '#8c3b74'),
+           ('2', '2 Linje Ö med N2', C.FARG_LINJE['Ö']), ('3', '3 Linje N via Bo-Bil', C.FARG_LINJE['N'])]
+    stil('b4_linjer_forslag', 'Linjer i förslagen', qml(r_kategori('forslag', kat, lambda n, f: linje(n, f, 1.0, halo=True))), True)
+
+    # nyckeltal per scenario (tabell utan geometri)
+    kalk = pd.read_csv(P / 'b5_kalkyl.csv').set_index('scenario')
+    rader = []
+    for sid, v in pk_.items():
+        t_ = v['tackning_mariehamn']; fi = v['forandring_invanare_mariehamn']
+        rader.append({'scenario': sid, 'namn': v['namn'], 'ryms_i_omloppen': 'Ja' if v['ryms'] else 'Nej',
+                      'bussar': v['omlopp']['fordon'], 'omloppstid_h_vardag': v['omlopp']['omloppstid_h'],
+                      'fordonskm_vardag': v['omlopp']['km'],
+                      'andel_inom_400m': t_['inom_400m_andel'], 'andel_minst_30_avg': t_['minst_30_avg_andel'],
+                      'andel_svag': t_['svag_andel'], 'inv_battre': fi['battre_klass'], 'inv_samre': fi['samre_klass'],
+                      'inv_ny_tackning': fi['ny_tackning'], 'inv_forlorad_tackning': fi['forlorad_tackning'],
+                      'restid_befintliga_resenarsmin_vardag': v['resenarer']['resenarsminuter_vardag'],
+                      'driftkostnad_eur_ar_bas': int(kalk.at[sid, 'drift_ar_bas']) if sid in kalk.index else 0,
+                      'driftkostnad_eur_ar_lag': int(kalk.at[sid, 'drift_ar_låg']) if sid in kalk.index else 0,
+                      'driftkostnad_eur_ar_hog': int(kalk.at[sid, 'drift_ar_hög']) if sid in kalk.index else 0})
+    pyogrio.write_dataframe(pd.DataFrame(rader), GPKG, layer='b4_nyckeltal_scenarier', driver='GPKG')
 
     o = pd.read_csv(P / 'b4_sammanslagning_omraden.csv')
     og = gpd.GeoDataFrame(o.drop(columns=['x', 'y']), geometry=gpd.points_from_xy(o.x, o.y), crs=C.CRS_METRISK)
