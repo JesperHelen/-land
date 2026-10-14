@@ -1,0 +1,25 @@
+omrade,inv,behov_min_per_tur,variant,skift_max_min,turer_ryms,turer_ryms_robust,turer_totalt
+Lillåkersvägen,183.0,6.5,N/S,0.0,7,7,22
+Lillåkersvägen,183.0,6.5,N/S + S indragna,0.0,7,7,22
+Lillåkersvägen,183.0,6.5,N/S,2.0,7,7,22
+Lillåkersvägen,183.0,6.5,N/S + S indragna,2.0,7,7,22
+Lillåkersvägen,183.0,6.5,N/S,4.0,21,21,22
+Lillåkersvägen,183.0,6.5,N/S + S indragna,4.0,22,21,22
+Lillåkersvägen,183.0,6.5,N/S,7.0,21,21,22
+Lillåkersvägen,183.0,6.5,N/S + S indragna,7.0,22,21,22
+Örtvägen,125.0,4.4,N/S,0.0,7,7,22
+Örtvägen,125.0,4.4,N/S + S indragna,0.0,7,7,22
+Örtvägen,125.0,4.4,N/S,2.0,22,21,22
+Örtvägen,125.0,4.4,N/S + S indragna,2.0,22,22,22
+Örtvägen,125.0,4.4,N/S,4.0,22,21,22
+Örtvägen,125.0,4.4,N/S + S indragna,4.0,22,22,22
+Örtvägen,125.0,4.4,N/S,7.0,22,21,22
+Örtvägen,125.0,4.4,N/S + S indragna,7.0,22,22,22
+Österkalmare,90.0,10.3,N/S,0.0,5,5,22
+Österkalmare,90.0,10.3,N/S + S indragna,0.0,6,6,22
+Österkalmare,90.0,10.3,N/S,2.0,5,5,22
+Österkalmare,90.0,10.3,N/S + S indragna,2.0,6,6,22
+Österkalmare,90.0,10.3,N/S,4.0,5,5,22
+Österkalmare,90.0,10.3,N/S + S indragna,4.0,6,6,22
+Österkalmare,90.0,10.3,N/S,7.0,7,7,22
+Österkalmare,90.0,10.3,N/S + S indragna,7.0,20,6,22

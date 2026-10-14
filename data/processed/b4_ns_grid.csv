@@ -1,0 +1,137 @@
+variant,linje,partner,tillagg_min,skift_max_min,robust,turer_totalt,turer_ryms,skiftade_turer,bas
+N/S,N,S,0.1,0.0,False,22,22,0,
+N/S,N,S,0.1,0.0,True,22,22,0,
+N/S + S indragna,N,S,0.1,0.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,0.1,0.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,0.1,2.0,False,22,22,0,
+N/S,N,S,0.1,2.0,True,22,22,0,
+N/S + S indragna,N,S,0.1,2.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,0.1,2.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,0.1,4.0,False,22,22,0,
+N/S,N,S,0.1,4.0,True,22,22,0,
+N/S + S indragna,N,S,0.1,4.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,0.1,4.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,0.1,7.0,False,22,22,0,
+N/S,N,S,0.1,7.0,True,22,22,0,
+N/S + S indragna,N,S,0.1,7.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,0.1,7.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,3.5,0.0,False,22,22,0,
+N/S,N,S,3.5,0.0,True,22,21,0,
+N/S + S indragna,N,S,3.5,0.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,3.5,0.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,3.5,2.0,False,22,22,0,
+N/S,N,S,3.5,2.0,True,22,21,0,
+N/S + S indragna,N,S,3.5,2.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,3.5,2.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,3.5,4.0,False,22,22,0,
+N/S,N,S,3.5,4.0,True,22,21,0,
+N/S + S indragna,N,S,3.5,4.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,3.5,4.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,3.5,7.0,False,22,22,0,
+N/S,N,S,3.5,7.0,True,22,21,0,
+N/S + S indragna,N,S,3.5,7.0,False,22,22,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,3.5,7.0,True,22,22,0,S: 5 hållplatser indragna
+N/S,N,S,4.4,0.0,False,22,7,0,
+N/S,N,S,4.4,0.0,True,22,7,0,
+N/S + S indragna,N,S,4.4,0.0,False,22,7,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,4.4,0.0,True,22,7,0,S: 5 hållplatser indragna
+N/S,N,S,4.4,2.0,False,22,22,19,
+N/S,N,S,4.4,2.0,True,22,21,18,
+N/S + S indragna,N,S,4.4,2.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,4.4,2.0,True,22,22,19,S: 5 hållplatser indragna
+N/S,N,S,4.4,4.0,False,22,22,19,
+N/S,N,S,4.4,4.0,True,22,21,18,
+N/S + S indragna,N,S,4.4,4.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,4.4,4.0,True,22,22,19,S: 5 hållplatser indragna
+N/S,N,S,4.4,7.0,False,22,22,19,
+N/S,N,S,4.4,7.0,True,22,21,18,
+N/S + S indragna,N,S,4.4,7.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,4.4,7.0,True,22,22,19,S: 5 hållplatser indragna
+N/S,N,S,5.5,0.0,False,22,7,0,
+N/S,N,S,5.5,0.0,True,22,7,0,
+N/S + S indragna,N,S,5.5,0.0,False,22,7,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,5.5,0.0,True,22,7,0,S: 5 hållplatser indragna
+N/S,N,S,5.5,2.0,False,22,21,18,
+N/S,N,S,5.5,2.0,True,22,21,18,
+N/S + S indragna,N,S,5.5,2.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,5.5,2.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,5.5,4.0,False,22,21,18,
+N/S,N,S,5.5,4.0,True,22,21,18,
+N/S + S indragna,N,S,5.5,4.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,5.5,4.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,5.5,7.0,False,22,21,18,
+N/S,N,S,5.5,7.0,True,22,21,18,
+N/S + S indragna,N,S,5.5,7.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,5.5,7.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,6.5,0.0,False,22,7,0,
+N/S,N,S,6.5,0.0,True,22,7,0,
+N/S + S indragna,N,S,6.5,0.0,False,22,7,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,6.5,0.0,True,22,7,0,S: 5 hållplatser indragna
+N/S,N,S,6.5,2.0,False,22,7,0,
+N/S,N,S,6.5,2.0,True,22,7,0,
+N/S + S indragna,N,S,6.5,2.0,False,22,7,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,6.5,2.0,True,22,7,0,S: 5 hållplatser indragna
+N/S,N,S,6.5,4.0,False,22,21,18,
+N/S,N,S,6.5,4.0,True,22,21,18,
+N/S + S indragna,N,S,6.5,4.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,6.5,4.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,6.5,7.0,False,22,21,18,
+N/S,N,S,6.5,7.0,True,22,21,18,
+N/S + S indragna,N,S,6.5,7.0,False,22,22,19,S: 5 hållplatser indragna
+N/S + S indragna,N,S,6.5,7.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,7.5,0.0,False,22,7,0,
+N/S,N,S,7.5,0.0,True,22,7,0,
+N/S + S indragna,N,S,7.5,0.0,False,22,7,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,7.5,0.0,True,22,7,0,S: 5 hållplatser indragna
+N/S,N,S,7.5,2.0,False,22,7,0,
+N/S,N,S,7.5,2.0,True,22,7,0,
+N/S + S indragna,N,S,7.5,2.0,False,22,7,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,7.5,2.0,True,22,7,0,S: 5 hållplatser indragna
+N/S,N,S,7.5,4.0,False,22,20,17,
+N/S,N,S,7.5,4.0,True,22,20,17,
+N/S + S indragna,N,S,7.5,4.0,False,22,21,18,S: 5 hållplatser indragna
+N/S + S indragna,N,S,7.5,4.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,7.5,7.0,False,22,20,17,
+N/S,N,S,7.5,7.0,True,22,20,17,
+N/S + S indragna,N,S,7.5,7.0,False,22,21,18,S: 5 hållplatser indragna
+N/S + S indragna,N,S,7.5,7.0,True,22,21,18,S: 5 hållplatser indragna
+N/S,N,S,10.3,0.0,False,22,5,0,
+N/S,N,S,10.3,0.0,True,22,5,0,
+N/S + S indragna,N,S,10.3,0.0,False,22,6,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,10.3,0.0,True,22,6,0,S: 5 hållplatser indragna
+N/S,N,S,10.3,2.0,False,22,5,0,
+N/S,N,S,10.3,2.0,True,22,5,0,
+N/S + S indragna,N,S,10.3,2.0,False,22,6,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,10.3,2.0,True,22,6,0,S: 5 hållplatser indragna
+N/S,N,S,10.3,4.0,False,22,5,0,
+N/S,N,S,10.3,4.0,True,22,5,0,
+N/S + S indragna,N,S,10.3,4.0,False,22,6,0,S: 5 hållplatser indragna
+N/S + S indragna,N,S,10.3,4.0,True,22,6,0,S: 5 hållplatser indragna
+N/S,N,S,10.3,7.0,False,22,7,6,
+N/S,N,S,10.3,7.0,True,22,7,6,
+N/S + S indragna,N,S,10.3,7.0,False,22,20,17,S: 5 hållplatser indragna
+N/S + S indragna,N,S,10.3,7.0,True,22,6,0,S: 5 hållplatser indragna
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,0.0,False,22,21,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,0.0,True,22,21,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,2.0,False,22,22,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,2.0,True,22,22,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,4.0,False,22,22,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,4.0,True,22,22,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,7.0,False,22,22,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,3.5,7.0,True,22,22,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,0.0,False,22,10,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,0.0,True,22,8,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,2.0,False,22,10,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,2.0,True,22,8,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,4.0,False,22,10,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,4.0,True,22,8,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,7.0,False,22,11,1,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,6.5,7.0,True,22,8,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,0.0,False,22,6,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,0.0,True,22,6,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,2.0,False,22,6,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,2.0,True,22,6,0,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,4.0,False,22,9,5,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,4.0,True,22,8,4,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,7.0,False,22,9,5,
+"S/Ö (par S↔Ö, N↔V)",S,Ö,10.5,7.0,True,22,8,4,

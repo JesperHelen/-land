@@ -323,6 +323,37 @@ För 1a behövs en vändmöjlighet vid den nya hållplatsen.
 
 *Figur 4.9. Sammanslagning av linje V och Ö: tidsbudget per varv och antal turer som ryms per alternativ.*
 
+### 4.5.3 Genomgående N/S – Örtvägen, Lillåkersvägen och Österkalmare (B4.5)
+
+Linje N har i dag 26 min körtid och 4 min vändtid. Med genomgående N/S (bussen fortsätter N → S efter 0,5 min och
+regleringen tas vid S → N) ryms 3,5 min per tur med bevarad puls. Tabellen visar hur många av N:s 22 turer som ryms
+inom dagens fem bussar (vändtid ≥ 1 min, omloppstid + ≤ 10 min/dag) när S-turen som följer får avgå högst *skift*
+min efter pulsen. Skriptet är `src/b4_ns_sammanslagning.py`, utdata `data/processed/b4_ns_*.csv/json`.
+
+| Område (tillägg/tur) | Puls bevarad | S ≤ 2 min efter | S ≤ 4 min efter | Utan puls (≤ 7 min) |
+|---|---|---|---|---|
+| Bo-Bil (+0,1) | 22/22 | 22/22 | 22/22 | 22/22 |
+| Örtvägen (+4,4) | 7/22 | 22/22 (robust 21) | 22/22 | 22/22 |
+| Lillåkersvägen (+6,5) | 7/22 | 7/22 | 21/22 (22 med S-indragning, robust 21) | 21/22 |
+| Österkalmare (+10,3) | 5/22 | 5/22 | 5/22 | 7/22 (20 med S-indragning, robust 6) |
+
+* **Bo-Bil** (förslag 3) ryms med genomgående N/S utan skift; det krävs ingen sammanslagning.
+* **Örtvägen** ryms på alla turer om S får avgå 2 min efter pulsen (samma nivå som V/Ö i 4.5.2). Med de fem
+  indragna S-hållplatserna blir lösningen också robust (inga fler varv under 3 min reglering än i dag).
+* **Lillåkersvägen** kräver att S-avgången släpps 4 min efter pulsen. Därmed är pulsen inte bevarad och
+  bytesresor mellan S och N-linjens partner får längre väntan; effekten ingår inte i nätverksmodellen.
+* **Österkalmare** (+10,3 min) ryms inte utan fler bussar eller större omläggning (B4.6).
+* **Indragna hållplatser på S** (Gröna Udden, Torggatan, Neptunigatan, Skillnadsgatan, Hamngatan) antas spara
+  0,5 min per hållplats, ≈ 2,5 min per tur (tidtabellen saknar direkttider; antagandet bör ersättas med
+  operatörens körtider). De lyfter Örtvägen till robust och Lillåkersvägen till 22/22.
+* **S/Ö som alternativt par** (S ↔ Ö, N ↔ V) ger sämre resultat: S förlängd med 6,5 min ryms bara på 10/22 turer,
+  med 10,5 min på 6–9/22 (utan puls ≤ 7 min), eftersom Ö:s skolturer har mindre utrymme. Pulsfria N/S-varianter
+  ger alltså mer än S/Ö-par; det teoretiska utrymmet 10,5 min (S/Ö) nås inte i praktiken.
+
+Resultatet pekar mot att Örtvägen är det som ryms med genomgående N/S och S ≤ 2 min efter pulsen, medan
+Lillåkersvägen och Österkalmare hör ihop med en omläggning av N och Ö i nordost (B4.6).
+Områdespunkter med resultat finns som GeoJSON: `output/kartor/b4_ns_sammanslagning.geojson`.
+
 ## 4.6 Förslag 4 – linje V till flygplatsen
 
 **Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I förslaget kör bussen från Posten upp till
