@@ -34,7 +34,7 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 3.2 Bedömning av hållplatser | `a3_hallplatsbedomning` | Hållplatsbedömning |
 | 4.2, 4.4, 4.6 utredningsalternativ 1–3 | `b4_ua_hallplatser`, `b4_ua_korvagar` (fält `ua`: 1a, 1b, 2, 3; `objekt`: befintlig väg / planerad väg / utgår) | Standard |
 | Linjerna i UA (huvudalternativ) | `b4_ua_linjer` (fält `ua`: 1a, 1b och 4 = linje V–Ö, 2, 3) | Linjer i utredningsalternativen (huvudalternativ) |
-| 4.10 UA 4 – linje V–Ö via flygplatsen | `b4_ua_hallplatser`, `b4_ua_korvagar`, `b4_ua_linjer` (ua 4), `b4_tackning_forandring` (scenario 4_VO_sol) | Standard |
+| 4.10 UA 4 – linje V–Ö via flygplatsen | `b4_ua_hallplatser`, `b4_ua_korvagar`, `b4_ua_linjer` (ua 4), `b4_tackning_forandring` (scenario 4_VO) | Standard |
 | 4.13–4.14 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` och `b4_tackning_forandring` (fält `scenario`: idag, 1a, 1a_ryms, 1a_VO, 1b, 2, 3, 4, 4_VO, 4_VO_sol, 4_Y) | Turtäthet inom 400 m / Förändrad turtäthetsklass |
 | Nyckeltal per scenario (bussar, omloppstid, km, täckning, kostnad) | `b4_nyckeltal_scenarier` (tabell utan geometri) | – |
 | 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |
@@ -92,8 +92,8 @@ Gruppen *Kap 4 Utredningsalternativ (UA)* har en undergrupp per UA (filter på f
 
 Varje undergrupp visar **huvudalternativet**, dvs. den mest realistiska driftformen: ny hållplats, körväg, linjen
 och **förändrad turtäthet** (gröna celler = bättre, röda = sämre än i dag). I UA 1a, UA 1b och UA 4 visas linje V
-och Ö som en genomgående linje V–Ö (V och Ö sammanslagna). UA 4 visar linje V–Ö via flygplatsen med Solberget
-indragen. Tänd och släck grupperna för att jämföra.
+och Ö som en genomgående linje V–Ö (V och Ö sammanslagna, varje varv V + Ö inom timmen med minst 5 minuter i
+centrum). UA 4 visar linje V–Ö via flygplatsen; Solberget behålls. Tänd och släck grupperna för att jämföra.
 
 **Systemeffekter – huvudalternativ per UA (välj ett)** är en *exklusiv* grupp: tänd gruppen och klicka i ett
 scenario. Varje scenario visar turtäthetsklassen inom 400 m och, ovanpå, cellerna som förändras mot i dag.
@@ -104,7 +104,7 @@ i rapporten:
 - UA 1a, alla turer med dagens tidtabell;
 - UA 1a, dagens tidtabell;
 - UA 4, alla turer med dagens tidtabell;
-- UA 4 med Solberget kvar;
+- UA 4 med Solberget indragen (samma turer, större marginal);
 - UA 4Y, bara flygturerna.
 
 Förändringarna är lokala – zooma in vid Möckelö Strand, Kalmarnäs, Bo-Bil, flygplatsen eller Solberget för att se

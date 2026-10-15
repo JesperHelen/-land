@@ -97,7 +97,7 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       sammanställningar ännu; en karta per UA med det mest realistiska alternativet, rapporten tar med alla).
       `src/b4_forslag.py` → `src/b4_ua.py` (`alternativ()`, `TITEL`, huvudalternativ `huvud`), utdata `b4_ua.*`,
       GIS-lager `b4_ua_hallplatser/_korvagar/_linjer` (fält `ua`), PM → `rapport/PM_utredningsalternativ.md`.
-      Huvudalternativ: UA 1a V/Ö sammanslagna (17/20), UA 1b alla, UA 2, UA 3, UA 4 V/Ö + Solberget (20/20).
+      Huvudalternativ (före kravet nedan): UA 1a V/Ö (17/20), UA 1b alla, UA 2, UA 3, UA 4 V/Ö + Solberget (20/20).
       Uteslutna: UA 1a och UA 4 med alla turer i dagens tidtabell (6 bussar). Linjerna i UA 1a, 1b och 4 visas
       som genomgående linje V–Ö (karta `b4_10_ua4_karta.png`, QGIS). Övriga driftformer i QGIS-gruppen
       "Övriga alternativ" och i rapportens tabeller.
@@ -110,6 +110,19 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       exakta 400 m-cirklar runt hållplatserna, uppdelade per befolkningsruta (i stället för 50 m-rutor). Används i
       alla kartor (a2_1–a2_3, a3_1, b4_2, b4_4, b4_6, b4_10, b4_14) och i GIS-lagren `a2_tackningsytor`,
       `b4_tackning_scenarier` och `b4_tackning_forandring`. Invånartalen räknas oförändrat på 50 m-delpunkterna.
+- [x] **Krav för V och Ö sammanslagna** (beställaren 2026-10-15: "det enda kravet är att hela omloppen ryms inom
+      1 h med marginal i centrum på säg 5 min", och kortare restid för genomresande ska räknas med).
+      `b4_omlopp`: `MARGINAL_VARV = 5`, `varv_vo` (varv = V-tur + Ö-turen bussen fortsätter med; tid i centrum =
+      genomgång + reglering före nästa avgång), `varv_ok`, `plan_fast` (dagens omlopp fast), ny `genomgaende_ryms`
+      (varje V-tur prövas för sig, Ö ≤ 2 min efter pulsen). Kravet gäller alla driftformer för UA på linje V;
+      varv som redan i dag har < 5 min (V 07:50 + Ö 08:20, 4 min) godtas oförändrade. Robust-varianterna för V
+      (VO_robust, VO_sol_robust, 1b robust) utgår. `b4_natverk.genomgaende` lägger till mönster VÖ/ÖV utan
+      bytesstraff (≈ 0,6 resor/vardag, −1,1 resenärsmin). Resultat: **UA 1a, 1b och 4 ger alla 16/20** (ej V 07:50,
+      13:40, 14:40 – Ö:s skolturer 28–29 min – och 08:20 → linje N); minsta tid i centrum 5,5 (1a), 7,5 (1b),
+      6,0 (4); 1b alla 20 turer bara 1,5–2,5 min i skolvarven. Solberget indragen ger inga fler turer → UA 4
+      huvudalternativ utan indragning; **UA 4Y 8/8 utan Solberget indragen** (≥ 6 min). Känslighet 4: 3 min 16/20,
+      5 min 2/20 (Ö +2,5). Kostnad: 1a ★ +11,6 k€, 1b ★ +6,7 k€, 4 ★ +6,4 k€, 4Y +2,8 k€. Figurer b4_2, b4_3,
+      b4_8–b4_14, b5_1, GIS och rapporterna (B4, B5, PM) uppdaterade.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

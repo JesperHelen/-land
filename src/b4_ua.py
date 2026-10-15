@@ -39,10 +39,11 @@ Antaganden
   * Solberget indragen (linje Ö): bussen kör direkt mellan hållplatserna före och efter Solberget, med den
     kortaste tid som tidtabellen har för den direkta sträckan (1,6–2,5 min kortare per tur).
 Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py – omloppen följer normen att föraren byter linje
-S ↔ N och Ö ↔ V i centrum. Varje UA prövas med alla turer; om det inte ryms prövas vilka turer som ryms,
-och om det ryms men ger fler varv utan reglering än i dag prövas en robust variant. Ryms ett UA på linje V
-inte med alla turer prövas dessutom sammanslagning av V och Ö till genomgående linje ('VO'): bussen fortsätter
-direkt som linje Ö (0,5 min) och Ö får avgå upp till 2 min efter pulsen (b4_omlopp.genomgaende_ryms).
+S ↔ N och Ö ↔ V i centrum. Varje UA prövas med alla turer i dagens tidtabell; om det inte ryms prövas vilka
+turer som ryms, och om det ryms men ger fler varv utan reglering än i dag prövas en robust variant.
+UA på linje V prövas dessutom som genomgående linje V–Ö ('VO', V och Ö sammanslagna): dagens omlopp ligger fast,
+bussen fortsätter direkt som linje Ö (0,5 min) och Ö får avgå upp till 2 min efter pulsen. Det enda kravet är
+att varvet V + Ö ryms inom timmen med minst 5 min i centrum (beställaren 2026-10-15, b4_omlopp.genomgaende_ryms).
 Effekter
   * Täckning: delpunkter 50 m (A2) – avgångar inom 400 m före/efter, klassförändring.
   * Resenärer: korrigerad OD-matris (A1) utlagd på restidsnätet (b4_natverk.py) – berörda resor och
@@ -81,8 +82,10 @@ RESTID_FORLANGNING = 1.0       # min – förlängd Norrgårdsvägen, Möckelö 
 # Övriga driftformer redovisas i rapporten (alternativ som kräver fler bussar är uteslutna).
 TITEL = {'1a': 'UA 1a – Möckelö Strand ny via dagens vägar', '1b': 'UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen',
          '2': 'UA 2 – N2 på linje Ö', '3': 'UA 3 – Linje N via Bo-Bil', '4': 'UA 4 – Linje V–Ö via flygplatsen'}
-HUVUD_TEXT = {'1a': 'V och Ö sammanslagna (Ö ≤ 2 min efter pulsen)', '1b': 'alla turer, bytet V → Ö 0,5 min',
-              '2': 'alla turer', '3': 'alla turer', '4': 'V och Ö sammanslagna, Solberget indragen'}
+HUVUD_TEXT = {'1a': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)',
+              '1b': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)',
+              '2': 'alla turer', '3': 'alla turer',
+              '4': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)'}
 KMH_FLYG = 25.0                # km/h – medelhastighet på omvägen till flygplatsen
 FLYG_AVGANGAR = ['07:15', '11:00', '17:10']     # Finavia, avgångar från Mariehamn 2026-10-14
 FLYG_ANKOMSTER = ['10:25', '16:35']             # antagande: 35 min före avgångarna 11:00 och 17:10 (ersätts)
@@ -189,7 +192,7 @@ def alternativ():
            'delta': 2 * RESTID_BEFINTLIG_VAG + UPPEHALL,
            'km_tur': 2 * m['langd_befintlig_vag_m'] / 1000},
           {**gem, 'id': '1b', 'namn': 'Linje V till Möckelö Strand ny via förlängd Norrgårdsvägen (slinga)',
-           'titel': TITEL['1b'], 'huvud': 'alla',
+           'titel': TITEL['1b'], 'huvud': 'VO',
            'kort': '1b Möckelö Strand',
            'korvag': 'Möckelö Strand → förlängd Norrgårdsvägen → ny hållplats → befintlig väg → Norrgårdsvägen',
            'delta': RESTID_FORLANGNING + UPPEHALL + RESTID_BEFINTLIG_VAG - m['tidtabell_mockelo_norrgardsvagen_min'],
@@ -206,7 +209,7 @@ def alternativ():
     import s01_vagdragning as V
     fp = flygplatsen()
     ut.append({'id': '4', 'namn': 'Linje V till flygplatsen', 'kort': '4 V till flygplatsen', 'linje': 'V', 'typ': 'ny',
-               'titel': TITEL['4'], 'huvud': 'VO_sol',
+               'titel': TITEL['4'], 'huvud': 'VO',
                'xy': V.FLYGPLATSEN_XY, 'hpl_namn': 'Flygplatsen', 'segment': (HPL['Posten'], HPL['Källarvägen']),
                'korvag': 'Posten → flygplatsen (slinga runt terminalen) → Norra Svibyvägen → Källarvägen',
                'delta': fp['delta_min_per_tur'], 'km_tur': fp['extra_km_per_tur'], 'genomgaende': [('V', 'Ö')],
@@ -242,7 +245,8 @@ def omlopp_scenarier(f, t, r, ref):
       alla          alla berörda turer
       ryms          (om alla inte ryms) turerna prövas en i taget
       robust        (om alla ryms men ger fler varv utan reglering än i dag) turer som kan ändras utan det
-      VO, VO_robust (linje V, om alla inte ryms) V och Ö som genomgående linje, Ö upp till 2 min efter pulsen
+      VO            (linje V) genomgående linje V–Ö: varv V + Ö inom timmen med minst 5 min i centrum
+      VO_sol        (UA 4) dito med Solberget indragen; Y_VO, Y_VO_sol bara turerna för flygen
       konservativ…  (1b) känslighet med den högre körtiden delta_konservativ"""
     linjeturer = t[t.linje == f['linje']]
     if f['typ'] == 'ny' and f['segment'][1] is None:          # Möckelö: turer som passerar vändpunkten
@@ -251,47 +255,49 @@ def omlopp_scenarier(f, t, r, ref):
         berorda = list(linjeturer.trip_id)
     scen = {}
 
-    def kor(namn, valda, d, skift=None, bas=None):
+    plan0 = O.bygg_omlopp(t, referens=ref)                    # dagens omlopp – fast vid genomgående linje V–Ö
+    v_regel = f['linje'] == 'V'                                # linje V: kravet på tid i centrum per varv V + Ö
+    vv = plan0 if v_regel else None
+
+    def kor(namn, valda, d, skift=None, bas=None, vo=False):
         dd = dict(bas or {})
         for k in valda:
             dd[k] = dd.get(k, 0.0) + d
-        plan, nt, ok = O.verifiera(t, dd, r, km_delta={k: f['km_tur'] for k in valda}, skift=skift, referens=ref)
-        scen[namn] = {'plan': plan, 'nt': nt, 'ok': ok, 'robust': O.ar_robust(nt, r), 'turer': list(valda),
+        plan, nt, ok = O.verifiera(t, dd, r, km_delta={k: f['km_tur'] for k in valda}, skift=skift, referens=ref,
+                                   fast=plan0 if vo else None)
+        if v_regel and not vo:
+            ok = ok and O.varv_ok(plan, plan0)
+        rob = (nt['varv_vo_under_marginal'] <= O.nyckeltal(plan0)['varv_vo_under_marginal']) if v_regel else O.ar_robust(nt, r)
+        scen[namn] = {'plan': plan, 'nt': nt, 'ok': ok, 'robust': rob, 'turer': list(valda), 'vo': vo,
                       'skift': dict(skift or {}), 'delta': d, 'solberget': bool(bas)}
+
+    def vo(namn, kand, d, bas=None):
+        v, s_ = O.genomgaende_ryms(t, kand, d, plan0, bas=bas)
+        kor(namn, v, d, s_, bas=bas, vo=True)
 
     def pröva(prefix, d):
         p = prefix + '_' if prefix else ''
-        kor(p + 'alla' if prefix else 'alla', berorda, d)
-        bas = scen[p + 'alla' if prefix else 'alla']
+        kor(p + 'alla', berorda, d)
+        bas = scen[p + 'alla']
         if not bas['ok']:
-            kor(p + 'ryms', O.turer_som_ryms(t, berorda, d, r, referens=ref), d)
-            if f['linje'] == 'V':
-                v, s_ = O.genomgaende_ryms(t, berorda, d, r, referens=ref)
-                kor(p + 'VO', v, d, s_)
-                if not scen[p + 'VO']['robust']:
-                    v, s_ = O.genomgaende_ryms(t, berorda, d, r, robust=True, referens=ref)
-                    kor(p + 'VO_robust', v, d, s_)
-        elif not bas['robust']:
+            kor(p + 'ryms', O.turer_som_ryms(t, berorda, d, r, varv=vv, referens=ref), d)
+        elif not bas['robust'] and f['linje'] != 'V':
             kor(p + 'robust', O.turer_som_ryms(t, berorda, d, r, robust=True, referens=ref), d)
+        if f['linje'] == 'V':
+            vo(p + 'VO', berorda, d)
 
     pröva('', f['delta'])
     if f.get('delta_konservativ'):
         pröva('konservativ', f['delta_konservativ'])
-    if f.get('solberget'):                                     # V och Ö sammanslagna, Solberget indragen på linje Ö
-        sol = solberget_delta(t)
-        for namn, rob in (('VO_sol', False), ('VO_sol_robust', True)):
-            v, s_ = O.genomgaende_ryms(t, berorda, f['delta'], r, robust=rob, bas=sol, referens=ref)
-            kor(namn, v, f['delta'], s_, bas=sol)
+    if f.get('solberget'):                                     # dito med Solberget indragen på linje Ö
+        vo('VO_sol', berorda, f['delta'], solberget_delta(t))
     if f.get('flygturer'):                                     # 'Y': bara turerna för flygen
         y = list(flygturer(t))
-        kor('Y_ryms', O.turer_som_ryms(t, y, f['delta'], r, referens=ref), f['delta'])
-        v, s_ = O.genomgaende_ryms(t, y, f['delta'], r, referens=ref)
-        kor('Y_VO', v, f['delta'], s_)
-        v, s_ = O.genomgaende_ryms(t, y, f['delta'], r, robust=True, bas=solberget_delta(t), referens=ref)
-        kor('Y_VO_sol', v, f['delta'], s_, bas=solberget_delta(t))
+        kor('Y_ryms', O.turer_som_ryms(t, y, f['delta'], r, varv=vv, referens=ref), f['delta'])
+        vo('Y_VO', y, f['delta'])
+        vo('Y_VO_sol', y, f['delta'], solberget_delta(t))
     for d in f.get('kansl', []):                               # känslighet för körtiden (V och Ö sammanslagna)
-        v, s_ = O.genomgaende_ryms(t, berorda, d, r, referens=ref)
-        kor(f'kansl_{d:g}_VO', v, d, s_)
+        vo(f'kansl_{d:g}_VO', berorda, d)
     return scen
 
 
@@ -389,6 +395,15 @@ def resenarseffekt(f, zoner, mon0, nat0, andel_turer, extra=None):
     return ut
 
 
+def genomgaende_effekt(zoner, mon0, nat0):
+    """Restidsvinst när V och Ö slås ihop: resor mellan V- och Ö-området sitter kvar i centrum (inget byte)."""
+    j = N.jamfor(nat0, N.Nat(N.genomgaende(mon0, 'V', 'Ö', O.GENOMGANG_MIN), zoner)); fak = N.dagsfaktor()
+    medel = lambda k: float(np.mean([j[p][k] for p in ('FM', 'EM')])) * fak
+    return {'resor_kortare_vardag': round(medel('resor_kortare_h'), 1),
+            'resenarsminuter_vardag': round(medel('resenarsminuter_h'), 1),
+            'min_per_resa': round(medel('resenarsminuter_h') / max(medel('resor_kortare_h'), 1e-9), 1)}
+
+
 # ====================================================================== geometri
 def geometri(f, trafikerar, xy, fg, sg):
     """UA:ts objekt för kartor och GIS. Linjer som MultiLineString med en del per hållplatssegment (kan bytas
@@ -403,12 +418,9 @@ def geometri(f, trafikerar, xy, fg, sg):
         if f['id'] == '4':
             a_, b_ = fg[(HPL['Posten'], 'FLYGPLATSEN')], fg[('FLYGPLATSEN', HPL['Källarvägen'])]
             vag = {'osrm': 'OSRM', 'skiss': 'beställarens skiss'}.get(a_['kalla'], 'schematisk')
-            sl = xy.loc[HPL['Solberget'], ['x', 'y']].to_numpy(float)
             ut += [{'ua': '4', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
                     'namn': 'Posten – flygplatsen – Norra Svibyvägen', 'linje': 'V', 'avgangar': n, 'planerad_del': '',
-                    'geometry': ml(a_['xy'], b_['xy'])},
-                   {'ua': '4', 'objekt': 'hållplats dras in', 'namn': 'Solberget (linje Ö)', 'linje': 'Ö',
-                    'avgangar': 0, 'geometry': Point(*sl)}]
+                    'geometry': ml(a_['xy'], b_['xy'])}]
         elif f['linje'] == 'V':
             ni, ny = HPL['Norrgårdsvägen in'], 'NY_MOCKELO'
             bef = fg[(ni, ny)]
@@ -454,6 +466,7 @@ def main():
     rate = pastigande_per_inv(pkt)
     zoner = list(pd.read_csv(P / 'a1_restider_min.csv', index_col=0).index)
     mon0 = N.monster(); nat0 = N.Nat(mon0, zoner)
+    gen_vo = genomgaende_effekt(zoner, mon0, nat0)
     bb = bobil_delta(xy)
     import s01_vagdragning as V
     fg = V.uageometri(); sg = V.segmentgeometri()
@@ -472,7 +485,7 @@ def main():
                if 'pastigande_vardag' in bed else None}
     res_flyg = {**flygplatsen(), 'flygturer': {O.hm(tl0.at[k, 'avg']): v for k, v in
                                                sorted(flygturer(t).items(), key=lambda kv: tl0.at[kv[0], 'avg'])}}
-    res = {'idag': nt0, 'osrm_kontroll_nya_delstrackor': kontroll, 'solberget_indragen': res_sol, 'flygplatsen': res_flyg,
+    res = {'idag': nt0, 'genomgaende_vo': gen_vo, 'osrm_kontroll_nya_delstrackor': kontroll, 'solberget_indragen': res_sol, 'flygplatsen': res_flyg,
            'antaganden': {'uppehall_min': UPPEHALL, 'mockelo': mockelo(), 'max_skift_partner_min': O.MAX_SKIFT_PARTNER,
                           'bobil': bb, 'pastigande_per_inv': {k: v for k, v in rate.items() if k != 'per_hpl'},
                           'dagsfaktor': round(N.dagsfaktor(), 2)},
@@ -490,6 +503,9 @@ def main():
         tack.append(p.assign(ua=f['id']))
         andel = len(trafikerar) / max(len(scen['alla']['turer']), 1)
         re = resenarseffekt(f, zoner, mon0, nat0, andel)
+        if scen[val].get('vo'):                                # V och Ö sammanslagna: genomresande sitter kvar
+            re['genomgaende_vo'] = gen_vo
+            re['vardag_inkl_genomgaende'] = round(re['vardag']['resenarsminuter'] + gen_vo['resenarsminuter_vardag'], 1)
         r_ln = rate.get(f['linje'], rate['alla'])
         nara = None
         if f['typ'] == 'ny':
@@ -506,7 +522,11 @@ def main():
                              'turer_utan_andring': [O.hm(tl.at[x, 'avg']) for x in sorted(alla_berorda - set(s['turer']),
                                                                                           key=lambda x: tl.at[x, 'avg'])],
                              'skiftade_turer': {O.hm(tl.at[x, 'avg']): v for x, v in sorted(s['skift'].items(),
-                                                                                            key=lambda kv: tl.at[kv[0], 'avg'])}}
+                                                                                            key=lambda kv: tl.at[kv[0], 'avg'])},
+                             'genomgaende_vo': bool(s.get('vo')),
+                             'varv_centrum_min': {O.hm(tl.at[r_.trip_id, 'avg']): (None if not np.isfinite(r_.centrum_min)
+                                                                                   else round(r_.centrum_min, 1))
+                                                  for r_ in O.varv_vo(s['plan']).itertuples()}}
                          for k, s in scen.items()},
               'tackning': tk, 'resenarer': re}
         if f['typ'] == 'ny':
@@ -523,6 +543,7 @@ def main():
         for k, s in scen.items():
             print(f"   {k:22s} ryms={s['ok']} robust={s['robust']} fordon={s['nt']['fordon']} turer={len(s['turer'])} "
                   f"skift={len(s['skift'])} varv={s['nt']['varv_utan_reglering']} min_vand={s['nt']['min_vandtid']} "
+                  f"vo<5={s['nt']['varv_vo_under_marginal']} min_centrum={s['nt']['min_centrum_vo']} "
                   f"omloppstid={s['nt']['omloppstid_h']} km={s['nt']['km']}")
 
     pd.concat(planer).drop(columns=['monster']).to_csv(P / 'b4_omlopp_scenarier.csv', index=False)

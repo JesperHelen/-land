@@ -128,20 +128,24 @@ def fig_mockelo():
     hinder = K.punkt_hinder(ax, [nx], [ny_], px=12)
     K.placera_etiketter(ax, etik + [('Möckelö Strand ny', (nx, ny_), 70)], fontsize=6.8, undvik=hinder)
     o1a, o1b = f1a['omlopp'], f1b['omlopp']
-    vo, vor = o1a.get('VO', o1a['alla']), o1a.get('VO_robust', o1a.get('VO', o1a['alla']))
+    vo, vb, ba = o1a['VO'], o1b['VO'], o1b['alla']
+    M = sv(O.MARGINAL_VARV, 0)
     infobox(ax, [
         r'$\bf{Körtid\ per\ tur}$' + f"   UA 1a +{sv(f1a['delta_min_per_tur'])} min (2 + 0,5 + 2)   ·   "
         f"UA 1b +{sv(f1b['delta_min_per_tur'])} min (1 + 0,5 + 2 − 1)",
-        r'$\bf{UA\ 1a\ –\ huvudalternativ}$' + f"   V och Ö sammanslagna (Ö ≤ 2 min efter pulsen):",
-        f"      {vo['turer_med_andring']} av {f1a['linjens_turer']} turer, 5 bussar ({vor['turer_med_andring']} lika robust som i dag)",
+        r'$\bf{Krav}$' + f"   V och Ö sammanslagna: varje varv V + Ö inom timmen, minst {M} min i centrum",
+        r'$\bf{UA\ 1a\ –\ huvudalternativ}$' + f"   {vo['turer_med_andring']} av {f1a['linjens_turer']} turer, 5 bussar "
+        f"(som i dag: {', '.join(vo['turer_utan_andring'])})",
         f"      övriga: dagens tidtabell {o1a['ryms']['turer_med_andring']} av {f1a['linjens_turer']}; "
         f"alla turer {o1a['alla']['fordon']} bussar (utesluten)",
-        r'$\bf{UA\ 1b\ –\ huvudalternativ}$' + f"   alla {f1b['linjens_turer']} turer, 5 bussar – bytet V → Ö 0,5 min",
-        f"      (robust: {o1b.get('robust', o1b['alla'])['turer_med_andring']} av {f1b['linjens_turer']})",
+        r'$\bf{UA\ 1b\ –\ huvudalternativ}$' + f"   {vb['turer_med_andring']} av {f1b['linjens_turer']} turer, 5 bussar "
+        f"(som i dag: {', '.join(vb['turer_utan_andring'])})",
+        f"      alla {f1b['linjens_turer']} turer: 5 bussar men bara {sv(ba['min_centrum_vo'])} min i centrum i varven med Ö:s skolturer",
         r'$\bf{Effekt}$' + f"   +{f1b['tackning']['ny_tackning_inv']} invånare inom 400 m",
         f"Påstigande ≈ {sv(f1b['nytt_pastigande_vardag'][0])}–{sv(f1b['nytt_pastigande_vardag'][1])} per vardag (UA 1b, sommarnivå)",
-        f"Genomresande: +{sv(f1b['resenarer']['vardag']['resenarsminuter'], 0)} (UA 1b) resp. "
-        f"+{sv(f1a['resenarer']['vardag']['resenarsminuter'], 0)} (UA 1a) resenärsminuter per vardag"])
+        f"Restid: +{sv(f1b['resenarer']['vardag_inkl_genomgaende'], 0)} (UA 1b) resp. "
+        f"+{sv(f1a['resenarer']['vardag_inkl_genomgaende'], 0)} (UA 1a) resenärsminuter/vardag "
+        f"(inkl. {sv(RES['genomgaende_vo']['resenarsminuter_vardag'])} V ↔ Ö utan byte)"])
     kalla = {'osrm': 'OSRM', 'skiss': 'beställarens skiss'}.get(m['kalla_befintlig_vag'], 'schematisk')
     extra = [Line2D([], [], marker='*', ls='', color=BLA, markersize=12, label='Ny hållplats (läge enligt A3)'),
              Line2D([], [], color=fv, lw=2.4, label=f'Befintlig väg till ny hållplats ({kalla})'),
@@ -251,24 +255,33 @@ def _panel_titel(fid, k):
              + (', Solberget indragen' if 'sol' in k else '') + f": {o['fordon']} bussar – " + ('ryms' if o['ryms'] else 'ryms inte'))
         d = (o['omloppstid_h'] - RES['idag']['omloppstid_h']) * 60
         t += '   ·   omloppstid ' + f"{'+' if d >= 0 else ''}{sv(d, 0)} min/dag"
-        t += f"   ·   varv < 3 min reglering: {o['varv_utan_reglering']} (i dag {RES['idag']['varv_utan_reglering']})"
+        t += varv_text(f, o)
         return t, o['ryms']
     if k == 'alla':
         t = f"{fid} – alla {tot} turer ändrade: {o['fordon']} bussar"
-        t += (' – ryms' + ('' if o.get('robust', True) else ' (kort reglering kring Ö:s skolturer)')) if o['ryms'] \
-            else ' – ryms inte'
+        if o['fordon'] > RES['idag']['fordon']:
+            t += ' – ryms inte'
+        elif not o['ryms']:
+            t += f" – ryms inte: varv med Ö:s skolturer får {sv(o['min_centrum_vo'])} min i centrum"
+        else:
+            t += ' – ryms'
     elif k == 'robust':
         t = f"{fid} robust – {n} av {tot} turer ändrade: {o['fordon']} bussar – ryms"
     elif k.startswith('VO'):
-        t = (f"{fid} V och Ö sammanslagna{', Solberget indragen' if 'sol' in k else ''}"
-             f"{' (robust)' if k.endswith('robust') else ''} – {n} av {tot} turer ändrade, "
+        t = (f"{fid} V och Ö sammanslagna{', Solberget indragen' if 'sol' in k else ''} – {n} av {tot} turer ändrade, "
              f"{len(o['skiftade_turer'])} Ö-turer avgår ≤ 2 min senare: {o['fordon']} bussar – ryms")
     else:
-        t = f"{fid} – {n} av {tot} turer ändrade (de som ryms): {o['fordon']} bussar – ryms"
+        t = f"{fid} dagens tidtabell – {n} av {tot} turer ändrade (de som ryms): {o['fordon']} bussar – ryms"
     d = (o['omloppstid_h'] - RES['idag']['omloppstid_h']) * 60
     t += '   ·   omloppstid ' + (f"+{sv(d / 60)} h/dag" if d >= 60 else f"{'+' if d >= 0 else ''}{sv(d, 0)} min/dag")
-    t += f"   ·   varv < 3 min reglering: {o['varv_utan_reglering']} (i dag {RES['idag']['varv_utan_reglering']})"
-    return t, o['ryms']
+    return t + varv_text(f, o), o['ryms']
+
+
+def varv_text(f, o):
+    if f['linje'] == 'V':
+        return (f"   ·   varv V + Ö < {sv(O.MARGINAL_VARV, 0)} min i centrum: {o['varv_vo_under_marginal']} "
+                f"(i dag {RES['idag']['varv_vo_under_marginal']})")
+    return f"   ·   varv < 3 min reglering: {o['varv_utan_reglering']} (i dag {RES['idag']['varv_utan_reglering']})"
 
 
 def fig_omlopp(namn, paneler, rubrik):
@@ -304,7 +317,7 @@ def main():
     print(fig_mockelo()); print(fig_n2()); print(fig_bobil())
     print(fig_omlopp('b4_3_mockelo_omlopp.png',
                      [('idag', None, None), ('1a_alla', '1a', 'alla'), ('1a_ryms', '1a', 'ryms'), ('1a_VO', '1a', 'VO'),
-                      ('1b_alla', '1b', 'alla'), ('1b_robust', '1b', 'robust')],
+                      ('1b_alla', '1b', 'alla'), ('1b_VO', '1b', 'VO')],
                      'UA 1a och UA 1b Möckelö Strand ny – omlopp före och efter (★ = huvudalternativ)'))
     print(fig_omlopp('b4_5_n2_omlopp.png', [('idag', None, None), ('2_alla', '2', 'alla')],
                      'UA 2 N2 på linje Ö – omlopp före och efter'))
@@ -312,7 +325,7 @@ def main():
                      'UA 3 linje N via Bo-Bil – omlopp före och efter'))
     print(fig_omlopp('b4_12_flygplatsen_omlopp.png',
                      [('idag', None, None), ('4_alla', '4', 'alla'), ('4_ryms', '4', 'ryms'), ('4_VO', '4', 'VO'),
-                      ('4_VO_sol', '4', 'VO_sol'), ('4_Y_VO_sol', '4', 'Y_VO_sol')],
+                      ('4_VO_sol', '4', 'VO_sol'), ('4_Y_VO', '4', 'Y_VO')],
                      'UA 4 linje V–Ö via flygplatsen – omlopp före och efter (★ = huvudalternativ)'))
 
 

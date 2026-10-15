@@ -22,9 +22,12 @@ Verifiering av ett UA (ramen 'inga fler bussar')
     omloppstiden (fordonstimmar) inte ökar mer än OMLOPPSTID_TOL.
   * Ryms inte alla turer prövas turerna en i taget i tidsordning; redovisas hur många som ryms.
   * Robusthet redovisas som antal vändningar under REKOMMENDERAD_VANDTID och total regleringstid.
-  * Genomgående linje (sammanslagning av normparet, t.ex. V → Ö): bussen fortsätter direkt som partnerlinjen
-    efter GENOMGANG_MIN, och partnerlinjens avgång får skjutas högst MAX_SKIFT_PARTNER min efter pulsen
-    (genomgaende_ryms). Regleringen tas då vid bytet tillbaka (Ö → V).
+  * Genomgående linje V–Ö (V och Ö sammanslagna, beställaren 2026-10-15): dagens omlopp ligger fast, så att
+    varje V-tur fortsätter som den Ö-tur som samma buss kör i dag (plan_fast). Bussen fortsätter direkt som Ö
+    efter GENOMGANG_MIN, och Ö:s avgång får skjutas högst MAX_SKIFT_PARTNER min efter pulsen. Det enda kravet
+    är att hela varvet V + Ö ryms inom timmen med minst MARGINAL_VARV min i centrum (genomgången V → Ö plus
+    uppehållet före bussens nästa avgång), se varv_vo och genomgaende_ryms. Varv som redan i dag har mindre
+    marginal (V 07:50 + Ö:s skoltur 08:20, 4 min) godtas oförändrade.
 Utdata: data/processed/b4_omlopp_idag.csv, b4_omlopp_nyckeltal.json, output/kartor/b4_1_omlopp_idag.png
 """
 import json
@@ -54,6 +57,7 @@ ANNAT_BYTE_STRAFF = 2.0        # min – byte till en linje utanför normparet
 REFERENS_BONUS = 0.3           # min – vid lika väntan behålls dagens koppling (stabila omlopp före/efter)
 OMLOPPSTID_TOL = 10.0          # min/dag – tillåten ökning av omloppstiden (≈ 0,2 %; t.ex. att dagens sista tur blir längre)
 MAX_SKIFT_PARTNER = 2.0        # min – vid genomgående linje får partnerlinjen avgå högst så mycket efter pulsen
+MARGINAL_VARV = 5.0            # min – genomgående linje V–Ö: minsta tid i centrum per varv V + Ö (beställaren)
 TEXT, TEXT2 = '#1f1f1e', '#52514e'
 
 
@@ -152,6 +156,8 @@ def nyckeltal(o):
             'min_vandtid': round(float(v.min()), 1),
             'vandningar_under_rek': int((vand < REKOMMENDERAD_VANDTID - 1e-9).sum()),
             'varv_utan_reglering': varv_utan_reglering(o),
+            'varv_vo_under_marginal': int((varv_vo(o).centrum_min < MARGINAL_VARV - 1e-9).sum()),
+            'min_centrum_vo': round(float(varv_vo(o).centrum_min.min()), 1),
             'byten_enligt_norm': int(o.genomgang.sum()), 'samma_linje': samma_linje(o),
             'genomgangar': int(o.genomgang.sum()),
             'forsta_avg': round(float(o.avg.min()), 1), 'sista_ank': round(float(o.ank.max()), 1)}
@@ -169,6 +175,34 @@ def varv_utan_reglering(o):
             if max(a, b) < REKOMMENDERAD_VANDTID - 1e-9:
                 n += 1
     return n
+
+
+def varv_vo(o, linje='V', partner='Ö'):
+    """Varv på linje V–Ö: varje V-tur och den tur som bussen fortsätter med. Tid i centrum = uppehållet efter
+    V-turen (genomgång till Ö) + uppehållet efter Ö-turen till bussens nästa avgång. Slutar bussen eller ställs
+    upp (> DEPA_GRANS) räknas den delen som obegränsad. Fortsätter bussen med en annan linje än Ö är varvet bara
+    V-turen och tiden i centrum uppehållet efter den."""
+    p = o.reset_index(drop=True)
+    lin, nx, v = p.linje.to_numpy(), p.nasta.to_numpy(), p.vand_efter.to_numpy()
+    ut = []
+    for i in np.where(lin == linje)[0]:
+        j = nx[i]
+        if j < 0 or v[i] > DEPA_GRANS:
+            ut.append((p.trip_id.iat[i], p.avg.iat[i], p.kortid.iat[i], None, None, np.nan, np.inf))
+            continue
+        c = v[i]
+        if lin[j] == partner:
+            c += v[j] if (nx[j] >= 0 and v[j] <= DEPA_GRANS) else np.inf
+        ut.append((p.trip_id.iat[i], p.avg.iat[i], p.kortid.iat[i], p.trip_id.iat[j], lin[j], p.kortid.iat[j], c))
+    return pd.DataFrame(ut, columns=['trip_id', 'avg', 'kortid', 'foljer', 'foljer_linje', 'foljer_kortid',
+                                     'centrum_min'])
+
+
+def varv_ok(o, idag, marginal=MARGINAL_VARV):
+    """Varje varv V–Ö har minst marginal min i centrum, eller (varv som redan i dag har mindre) minst som i dag."""
+    a = varv_vo(o).set_index('trip_id').centrum_min
+    b = varv_vo(idag).set_index('trip_id').centrum_min.reindex(a.index)
+    return bool((a >= np.minimum(marginal, b) - 1e-9).all())
 
 
 def samma_linje(o):
@@ -226,55 +260,78 @@ def ar_robust(nt, r):
     return nt['varv_utan_reglering'] <= r.get('varv_utan_reglering', 10 ** 6)
 
 
-def verifiera(t, delta, r, km_delta=None, skift=None, **kw):
-    """Bygger omlopp med UA:ts körtider. Returnerar (plan, nyckeltal, ryms inom ramen)."""
+def plan_fast(plan0, tt):
+    """Dagens omlopp (samma kedjor, plan0 från bygg_omlopp(t)) med ändrade tider tt (med_andring(t, …))."""
+    assert (plan0.trip_id.to_numpy() == tt.trip_id.to_numpy()).all()
+    p = plan0.copy()
+    for c in ('avg', 'ank', 'kortid', 'km', 'delta', 'skift'):
+        if c in tt:
+            p[c] = tt[c].to_numpy()
+    avg, ank, nx = p.avg.to_numpy(), p.ank.to_numpy(), p.nasta.to_numpy()
+    p['vand_efter'] = [avg[j] - ank[i] if j >= 0 else np.nan for i, j in enumerate(nx)]
+    return p
+
+
+def verifiera(t, delta, r, km_delta=None, skift=None, fast=None, **kw):
+    """Bygger omlopp med UA:ts körtider. Returnerar (plan, nyckeltal, ryms inom ramen).
+    fast: dagens plan – genomgående linje V–Ö med dagens kedjor; ryms = kravet på tid i centrum per varv."""
     tt = med_andring(t, delta, skift)
     if km_delta:
         tt['km'] = tt.km + tt.trip_id.map(km_delta).fillna(0.0)
+    if fast is not None:
+        plan = plan_fast(fast, tt)
+        nt = nyckeltal(plan)
+        return plan, nt, bool(nt['fordon'] <= r['fordon'] and np.nanmin(plan.vand_efter) >= GENOMGANG_MIN - 1e-9
+                              and varv_ok(plan, fast))
     plan = bygg_omlopp(tt, **kw)
     nt = nyckeltal(plan)
     return plan, nt, inom_ram(nt, r)
 
 
-def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, **kw):
+def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, varv=None, **kw):
     """Prövar turerna en i taget (tidsordning) – behåller ändringen om UA:t fortfarande ryms i ramen
-    (robust=True: och inte ger fler varv utan reglering än i dag). bas: andra åtgärders tillägg {trip_id: min}."""
+    (robust=True: och inte ger fler varv utan reglering än i dag; varv = dagens plan: och varje varv V + Ö har
+    minst MARGINAL_VARV min i centrum). bas: andra åtgärders tillägg {trip_id: min}."""
     valda = []; bas = bas or {}
     for tid in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
         prov = dict(bas)
         for k in valda + [tid]:
             prov[k] = prov.get(k, 0.0) + d
-        if inom_ram(nyckeltal(bygg_omlopp(med_andring(t, prov), **kw)), r, robust):
+        p = bygg_omlopp(med_andring(t, prov), **kw)
+        if inom_ram(nyckeltal(p), r, robust) and (varv is None or varv_ok(p, varv)):
             valda.append(tid)
     return valda
 
 
-def genomgaende_ryms(t, kandidater, d, r, partner='Ö', max_skift=MAX_SKIFT_PARTNER, robust=False, bas=None, **kw):
-    """Genomgående linje: turerna prövas en i taget (tidsordning). Hinner bussen inte till partnerlinjens tur som
-    följer i omloppet skjuts den turens avgång (högst max_skift min efter dagens) så att bytet blir GENOMGANG_MIN;
-    går det inte prövas turen utan skift (omloppen byggs om). bas: andra ändringar {trip_id: min} (t.ex. kortare
-    körtid för partnerlinjen). Returnerar (valda turer, {trip_id: skift})."""
-    valda, skift, bas = [], {}, dict(bas or {})
-    plan = bygg_omlopp(med_andring(t, bas), **kw)
-    for tid in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
-        d2 = dict(bas)
-        for k in valda + [tid]:
-            d2[k] = d2.get(k, 0.0) + d
-        tt = med_andring(t, d2, skift).set_index('trip_id')
-        i = plan.index[plan.trip_id == tid][0]; j = plan.nasta.iat[i]
-        forsok = []
-        if j >= 0 and tt.at[plan.trip_id.iat[j], 'linje'] == partner:
-            nx = plan.trip_id.iat[j]
-            behov = tt.at[tid, 'ank'] + GENOMGANG_MIN - tt.at[nx, 'avg']
-            if 0 < behov and skift.get(nx, 0.0) + behov <= max_skift + 1e-9:
-                forsok.append({**skift, nx: skift.get(nx, 0.0) + behov})
-        forsok.append(dict(skift))
-        for s_ in forsok:
-            p2 = bygg_omlopp(med_andring(t, d2, s_), **kw)
-            if inom_ram(nyckeltal(p2), r, robust):
-                valda.append(tid); skift = s_; plan = p2
-                break
-    return valda, {k: round(v, 2) for k, v in skift.items() if v > 0}
+def genomgaende_ryms(t, kandidater, d, plan0, partner='Ö', max_skift=MAX_SKIFT_PARTNER, bas=None,
+                     marginal=MARGINAL_VARV):
+    """Genomgående linje V–Ö med dagens omlopp (plan0 = bygg_omlopp(t)): V-turen får UA:ts tillägg d om varvet
+    (V-turen + Ö-turen som bussen fortsätter med) fortfarande har minst marginal min i centrum. Ö avgår då
+    direkt efter V (GENOMGANG_MIN), högst max_skift min efter pulsen. bas: andra ändringar {trip_id: min} (t.ex.
+    kortare körtid för Ö). Varven är oberoende av varandra, så turerna prövas var för sig.
+    Returnerar (valda turer, {trip_id: skift})."""
+    bas = dict(bas or {})
+    p0 = plan0.reset_index(drop=True)
+    tid, lin, nx = p0.trip_id.to_numpy(), p0.linje.to_numpy(), p0.nasta.to_numpy()
+    pos = {k: i for i, k in enumerate(tid)}
+    t0 = plan_fast(p0, med_andring(t, bas))
+    idag = varv_vo(plan_fast(p0, med_andring(t, {}))).set_index('trip_id').centrum_min
+    valda, skift = [], {}
+    for k in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
+        i = pos[k]; j = nx[i]
+        dd = {**bas, k: bas.get(k, 0.0) + d}
+        s_ = {}
+        if j >= 0 and lin[j] == partner and t0.vand_efter.iat[i] <= DEPA_GRANS:
+            behov = t0.ank.iat[i] + d + GENOMGANG_MIN - t0.avg.iat[j]
+            if behov > max_skift + 1e-9:
+                continue
+            if behov > 0:
+                s_ = {tid[j]: round(behov, 2)}
+        p = plan_fast(p0, med_andring(t, dd, s_))
+        c = varv_vo(p).set_index('trip_id').centrum_min
+        if c[k] >= min(marginal, idag[k]) - 1e-9 and np.nanmin(p.vand_efter) >= GENOMGANG_MIN - 1e-9:
+            valda.append(k); skift.update(s_)
+    return valda, skift
 
 
 # ====================================================================== figurer

@@ -2,7 +2,9 @@
  "parametrar": {
   "intervall": 30.0,
   "genomgang_min": 0.5,
-  "reglering_min": 3.0
+  "reglering_min": 3.0,
+  "marginal_varv_min": 5.0,
+  "max_skift_min": 2.0
  },
  "par": [
   {
@@ -12,8 +14,9 @@
    "t_partner": 23.0,
    "vandtid_idag": 4.0,
    "utrymme_idag": 1.0,
+   "utrymme_varv": 6.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_utan_puls": 7.5,
+   "utrymme_skift": 5.5,
    "partner_klarar_reglering": true
   },
   {
@@ -23,8 +26,9 @@
    "t_partner": 27.0,
    "vandtid_idag": 4.0,
    "utrymme_idag": 1.0,
-   "utrymme_genomgaende": 3.5,
-   "utrymme_utan_puls": 3.5,
+   "utrymme_varv": 2.0,
+   "utrymme_genomgaende": 2.0,
+   "utrymme_skift": 2.0,
    "partner_klarar_reglering": true
   },
   {
@@ -34,8 +38,9 @@
    "t_partner": 23.0,
    "vandtid_idag": 4.0,
    "utrymme_idag": 1.0,
+   "utrymme_varv": 6.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_utan_puls": 7.5,
+   "utrymme_skift": 5.5,
    "partner_klarar_reglering": true
   },
   {
@@ -45,8 +50,9 @@
    "t_partner": 26.0,
    "vandtid_idag": 7.0,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_utan_puls": 7.5,
+   "utrymme_varv": 6.0,
+   "utrymme_genomgaende": 6.0,
+   "utrymme_skift": 6.0,
    "partner_klarar_reglering": true
   },
   {
@@ -56,8 +62,9 @@
    "t_partner": 27.0,
    "vandtid_idag": 7.0,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_utan_puls": 6.5,
+   "utrymme_varv": 5.0,
+   "utrymme_genomgaende": 5.0,
+   "utrymme_skift": 5.0,
    "partner_klarar_reglering": true
   },
   {
@@ -67,8 +74,9 @@
    "t_partner": 23.0,
    "vandtid_idag": 7.0,
    "utrymme_idag": 4.0,
+   "utrymme_varv": 9.0,
    "utrymme_genomgaende": 6.5,
-   "utrymme_utan_puls": 10.5,
+   "utrymme_skift": 8.5,
    "partner_klarar_reglering": true
   },
   {
@@ -78,8 +86,9 @@
    "t_partner": 26.0,
    "vandtid_idag": 3.0,
    "utrymme_idag": 0.0,
-   "utrymme_genomgaende": 2.5,
-   "utrymme_utan_puls": 3.5,
+   "utrymme_varv": 2.0,
+   "utrymme_genomgaende": 2.0,
+   "utrymme_skift": 2.0,
    "partner_klarar_reglering": true
   },
   {
@@ -89,8 +98,9 @@
    "t_partner": 23.0,
    "vandtid_idag": 3.0,
    "utrymme_idag": 0.0,
+   "utrymme_varv": 5.0,
    "utrymme_genomgaende": 2.5,
-   "utrymme_utan_puls": 6.5,
+   "utrymme_skift": 4.5,
    "partner_klarar_reglering": true
   },
   {
@@ -100,8 +110,9 @@
    "t_partner": 23.0,
    "vandtid_idag": 3.0,
    "utrymme_idag": 0.0,
+   "utrymme_varv": 5.0,
    "utrymme_genomgaende": 2.5,
-   "utrymme_utan_puls": 6.5,
+   "utrymme_skift": 4.5,
    "partner_klarar_reglering": true
   },
   {
@@ -111,8 +122,9 @@
    "t_partner": 26.0,
    "vandtid_idag": 7.0,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_utan_puls": 7.5,
+   "utrymme_varv": 6.0,
+   "utrymme_genomgaende": 6.0,
+   "utrymme_skift": 6.0,
    "partner_klarar_reglering": true
   },
   {
@@ -122,8 +134,9 @@
    "t_partner": 23.0,
    "vandtid_idag": 7.0,
    "utrymme_idag": 4.0,
+   "utrymme_varv": 9.0,
    "utrymme_genomgaende": 6.5,
-   "utrymme_utan_puls": 10.5,
+   "utrymme_skift": 8.5,
    "partner_klarar_reglering": true
   },
   {
@@ -133,8 +146,9 @@
    "t_partner": 27.0,
    "vandtid_idag": 7.0,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_utan_puls": 6.5,
+   "utrymme_varv": 5.0,
+   "utrymme_genomgaende": 5.0,
+   "utrymme_skift": 5.0,
    "partner_klarar_reglering": true
   }
  ],
@@ -200,9 +214,9 @@
    "avstand_m": 711,
    "behov_min_per_tur": 4.9,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_skift": 6.5,
-   "bedomning": "Ryms med reglering hos partnerlinjen"
+   "utrymme_genomgaende": 5.0,
+   "utrymme_skift": 5.0,
+   "bedomning": "Ryms som genomgående linje (Ö i pulsen)"
   },
   {
    "omrade": "Örtvägen",
@@ -255,9 +269,9 @@
    "avstand_m": 582,
    "behov_min_per_tur": 4.1,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_skift": 6.5,
-   "bedomning": "Ryms med reglering hos partnerlinjen"
+   "utrymme_genomgaende": 5.0,
+   "utrymme_skift": 5.0,
+   "bedomning": "Ryms som genomgående linje (Ö i pulsen)"
   },
   {
    "omrade": "Strömsnäs",
@@ -266,8 +280,8 @@
    "avstand_m": 1557,
    "behov_min_per_tur": 10.2,
    "utrymme_idag": 4.0,
-   "utrymme_genomgaende": 6.5,
-   "utrymme_skift": 6.5,
+   "utrymme_genomgaende": 5.0,
+   "utrymme_skift": 5.0,
    "bedomning": "Kräver större omläggning"
   }
  ]

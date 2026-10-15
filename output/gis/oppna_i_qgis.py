@@ -52,13 +52,13 @@ GRUPPER = [
         G('UA 1a – Möckelö Strand ny via dagens vägar (V och Ö sammanslagna)', [
             L('b4_ua_hallplatser', 'Ny hållplats', u_('1a')),
             L('b4_ua_korvagar', 'Körväg: befintlig väg fram och tillbaka (2 + 2 min)', u_('1a')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet (17 av 20 turer)', sc('1a_VO')),
+            L('b4_tackning_forandring', 'Förändrad turtäthet (16 av 20 turer)', sc('1a_VO')),
             L('b4_ua_linjer', 'Linje V–Ö (V och Ö sammanslagna)', u_('1a')),
         ], True),
-        G('UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (slinga)', [
+        G('UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (slinga, V och Ö sammanslagna)', [
             L('b4_ua_hallplatser', 'Ny hållplats', u_('1b')),
             L('b4_ua_korvagar', 'Körväg: förlängningen (planerad, 1 min) och befintlig väg tillbaka (2 min)', u_('1b')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet (alla 20 turer)', sc('1b')),
+            L('b4_tackning_forandring', 'Förändrad turtäthet (16 av 20 turer)', sc('1b')),
             L('b4_ua_linjer', 'Linje V–Ö (bussen fortsätter V → Ö efter 0,5 min)', u_('1b')),
         ]),
         G('UA 2 – N2 på linje Ö', [
@@ -72,26 +72,26 @@ GRUPPER = [
             L('b4_tackning_forandring', 'Förändrad turtäthet', sc('3')),
             L('b4_ua_linjer', 'Linje N via Bo-Bil', u_('3')),
         ]),
-        G('UA 4 – Linje V–Ö via flygplatsen (V och Ö sammanslagna, Solberget indragen)', [
-            L('b4_ua_hallplatser', 'Hållplats vid terminalen och Solberget (dras in)', u_('4')),
+        G('UA 4 – Linje V–Ö via flygplatsen (V och Ö sammanslagna)', [
+            L('b4_ua_hallplatser', 'Ny hållplats vid terminalen', u_('4')),
             L('b4_ua_korvagar', 'Körväg Posten – flygplatsen – Norra Svibyvägen', u_('4')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet (flygplatsen och Solberget)', sc('4_VO_sol')),
-            L('b4_ua_linjer', 'Linje V–Ö via flygplatsen, utan Solberget', u_('4')),
+            L('b4_tackning_forandring', 'Förändrad turtäthet (16 av 20 turer)', sc('4_VO')),
+            L('b4_ua_linjer', 'Linje V–Ö via flygplatsen', u_('4')),
         ]),
         G('Systemeffekter – turtäthet inom 400 m, huvudalternativ per UA (välj ett)', [
             systemeffekt('idag', 'I dag'),
-            systemeffekt('1a_VO', 'UA 1a – V och Ö sammanslagna (17 av 20 turer)', True),
-            systemeffekt('1b', 'UA 1b – förlängd Norrgårdsvägen (20 av 20 turer)'),
+            systemeffekt('1a_VO', 'UA 1a – V och Ö sammanslagna (16 av 20 turer)', True),
+            systemeffekt('1b', 'UA 1b – förlängd Norrgårdsvägen, V och Ö sammanslagna (16 av 20 turer)'),
             systemeffekt('2', 'UA 2 – N2 på linje Ö'),
             systemeffekt('3', 'UA 3 – Linje N via Bo-Bil'),
-            systemeffekt('4_VO_sol', 'UA 4 – V och Ö sammanslagna, Solberget indragen (20 av 20)'),
+            systemeffekt('4_VO', 'UA 4 – V och Ö sammanslagna (16 av 20 turer)'),
         ], False, exklusiv=True),
         G('Övriga alternativ (redovisas i rapporten, välj ett)', [
             systemeffekt('1a', 'UA 1a alla turer, dagens tidtabell – utesluten (6 bussar)'),
-            systemeffekt('1a_ryms', 'UA 1a dagens tidtabell (9 av 20 turer)'),
+            systemeffekt('1a_ryms', 'UA 1a dagens tidtabell (8 av 20 turer)'),
             systemeffekt('4', 'UA 4 alla turer, dagens tidtabell – utesluten (6 bussar)'),
-            systemeffekt('4_VO', 'UA 4 V och Ö sammanslagna, Solberget kvar (19 av 20 turer)'),
-            systemeffekt('4_Y', 'UA 4Y bara flygturerna (8), V och Ö sammanslagna, Solberget indragen'),
+            systemeffekt('4_VO_sol', 'UA 4 V och Ö sammanslagna, Solberget indragen (16 av 20 turer)'),
+            systemeffekt('4_Y', 'UA 4Y bara flygturerna (8 av 8), V och Ö sammanslagna'),
         ], False, exklusiv=True),
         G('Sammanslagning av linjer (fig 4.8)', [L('b4_sammanslagning_omraden', 'Områden – behövd tid per tur')]),
         L('b4_nyckeltal_scenarier', 'Nyckeltal per UA och driftform (tabell)'),

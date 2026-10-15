@@ -423,25 +423,23 @@ def b4():
     osrm = V.kalla_text().startswith('Linjernas')
     vag = lambda nycklar: ('OSRM' if osrm and all(fg[n]['kalla'] == 'osrm' for n in nycklar) else
                            'delvis schematisk (raka streck)' if not osrm else 'delvis schematisk')
-    sol = '9025302000062201'
-    om_sol = [x for x in om if x != sol]                     # Ö utan Solberget (UA 4)
-    o_sol = kedja(om_sol)
-    o1, o4 = fs['1a']['omlopp']['VO'], fs['4']['omlopp']['VO_sol']
+    o1, o1b, o4 = fs['1a']['omlopp']['VO'], fs['1b']['omlopp']['VO'], fs['4']['omlopp']['VO']
+    krav = 'varje varv V + Ö inom timmen med minst 5 min i centrum'
     # bara huvudalternativet per UA (det som visas på kartan); övriga driftformer redovisas i rapporten
-    rad = [('1a', 'V–Ö', fs['1a']['titel'], f"Huvudalternativ: V och Ö sammanslagna till genomgående linje, Ö ≤ 2 min efter "
-            f"pulsen; {o1['turer_med_andring']} av 20 V-turer via Möckelö Strand ny (+{fs['1a']['delta_min_per_tur']:g} min/tur)"
+    rad = [('1a', 'V–Ö', fs['1a']['titel'], f"Huvudalternativ: V och Ö sammanslagna till genomgående linje ({krav}); "
+            f"{o1['turer_med_andring']} av 20 V-turer via Möckelö Strand ny (+{fs['1a']['delta_min_per_tur']:g} min/tur)"
             .replace('.', ','), fs['1a']['delta_min_per_tur'], v_1a + o_, vag([(ni, ny), (ny, ni)]), ''),
-           ('1b', 'V–Ö', fs['1b']['titel'], f"Huvudalternativ: alla 20 turer via förlängd Norrgårdsvägen (slinga, "
-            f"+{fs['1b']['delta_min_per_tur']:g} min/tur); bussen fortsätter V → Ö efter 0,5 min".replace('.', ','),
+           ('1b', 'V–Ö', fs['1b']['titel'], f"Huvudalternativ: V och Ö sammanslagna ({krav}); {o1b['turer_med_andring']} av 20 "
+            f"V-turer via förlängd Norrgårdsvägen (slinga, +{fs['1b']['delta_min_per_tur']:g} min/tur)".replace('.', ','),
             fs['1b']['delta_min_per_tur'], v_1b + o_, vag([(ny, ni)]) + '; förlängningen schematisk (planerad väg)',
             '>'.join(V.PLANERAD_VAG)),
            ('2', 'Ö', fs['2']['titel'], 'Huvudalternativ: alla 20 turer', fs['2']['delta_min_per_tur'], o_,
             'OSRM' if osrm else 'raka streck', ''),
            ('3', 'N', fs['3']['titel'], 'Huvudalternativ: alla 22 turer', fs['3']['delta_min_per_tur'], n_ny,
             vag([(nm[iv - 1], bobil_id), (bobil_id, nm[iv + 1])]), ''),
-           ('4', 'V–Ö', fs['4']['titel'], f"Huvudalternativ: V och Ö sammanslagna, Solberget indragen; "
+           ('4', 'V–Ö', fs['4']['titel'], f"Huvudalternativ: V och Ö sammanslagna ({krav}); "
             f"{o4['turer_med_andring']} av 20 V-turer via flygplatsen (+{fs['4']['delta_min_per_tur']:g} min/tur); "
-            "UA 4Y: bara de 8 flygturerna".replace('.', ','), fs['4']['delta_min_per_tur'], v_4 + o_sol,
+            "UA 4Y: bara de 8 flygturerna".replace('.', ','), fs['4']['delta_min_per_tur'], v_4 + o_,
             vag([(po, 'FLYGPLATSEN'), ('FLYGPLATSEN', ka)]), '')]
     lg = gpd.GeoDataFrame([{'ua': a, 'linje': b, 'ua_titel': c, 'beskrivning': d, 'korttid_per_tur_min': e,
                             'vagdragning': g_, 'planerad_del': pdel} for a, b, c, d, e, _, g_, pdel in rad],
@@ -452,7 +450,7 @@ def b4():
     kat = [('1a', 'UA 1a – linje V–Ö via Möckelö Strand ny, dagens vägar', vo),
            ('1b', 'UA 1b – linje V–Ö via förlängd Norrgårdsvägen', vo),
            ('2', 'UA 2 – linje Ö med N2', C.FARG_LINJE['Ö']), ('3', 'UA 3 – linje N via Bo-Bil', C.FARG_LINJE['N']),
-           ('4', 'UA 4 – linje V–Ö via flygplatsen, utan Solberget', vo)]
+           ('4', 'UA 4 – linje V–Ö via flygplatsen', vo)]
     stil('b4_ua_linjer', 'Linjer i utredningsalternativen (huvudalternativ)',
          qml(r_kategori('ua', kat, lambda n, f: linje(n, f, 1.0, halo=True))), True)
 
@@ -463,17 +461,18 @@ def b4():
         t_ = v['tackning_mariehamn']; fi = v['forandring_invanare_mariehamn']
         rader.append({'scenario': sid, 'namn': v['namn'], 'ryms_i_omloppen': 'Ja' if v['ryms'] else 'Nej',
                       'robust': 'Ja' if v.get('robust', True) else 'Nej',
-                      'huvudalternativ': 'Ja' if sid in ('1a_VO', '1b', '2', '3', '4_VO_sol') else 'Nej',
+                      'huvudalternativ': 'Ja' if sid in ('1a_VO', '1b', '2', '3', '4_VO') else 'Nej',
                       'utesluten': 'Ja (kräver fler bussar)' if v['omlopp']['fordon'] > se['idag']['omlopp']['fordon'] else 'Nej',
                       'turer_via_ua': v['turer'], 'turer_totalt': v['turer_tot'],
                       'turer_som_avgar_senare': v['skiftade_turer'],
                       'varv_under_3_min_reglering': v['omlopp']['varv_utan_reglering'],
+                      'varv_vo_under_5_min_i_centrum': v['omlopp']['varv_vo_under_marginal'],
                       'bussar': v['omlopp']['fordon'], 'omloppstid_h_vardag': v['omlopp']['omloppstid_h'],
                       'fordonskm_vardag': v['omlopp']['km'],
                       'andel_inom_400m': t_['inom_400m_andel'], 'andel_minst_30_avg': t_['minst_30_avg_andel'],
                       'andel_svag': t_['svag_andel'], 'inv_battre': fi['battre_klass'], 'inv_samre': fi['samre_klass'],
                       'inv_ny_tackning': fi['ny_tackning'], 'inv_forlorad_tackning': fi['forlorad_tackning'],
-                      'restid_befintliga_resenarsmin_vardag': v['resenarer']['resenarsminuter_vardag'],
+                      'restid_resenarsmin_vardag_inkl_genomgaende': v['resenarer']['resenarsminuter_vardag'],
                       'driftkostnad_eur_ar_bas': int(kalk.at[sid, 'drift_ar_bas']) if sid in kalk.index else 0,
                       'driftkostnad_eur_ar_lag': int(kalk.at[sid, 'drift_ar_låg']) if sid in kalk.index else 0,
                       'driftkostnad_eur_ar_hog': int(kalk.at[sid, 'drift_ar_hög']) if sid in kalk.index else 0})

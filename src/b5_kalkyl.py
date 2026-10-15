@@ -50,12 +50,12 @@ def kort(sid, v):
     return {'1a': f"UA 1a dagens vägar – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
             '1a_ryms': f'UA 1a dagens vägar – dagens tidtabell ({n} av {tot} turer)',
             '1a_VO': f'UA 1a ★ dagens vägar – V och Ö sammanslagna ({n} av {tot} turer)',
-            '1b': f'UA 1b ★ förlängd Norrgårdsvägen – alla {tot} turer', '2': 'UA 2 ★ N2 på linje Ö',
-            '3': 'UA 3 ★ Linje N via Bo-Bil',
+            '1b': f'UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna ({n} av {tot} turer)',
+            '2': 'UA 2 ★ N2 på linje Ö', '3': 'UA 3 ★ Linje N via Bo-Bil',
             '4': f"UA 4 flygplatsen – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
-            '4_VO': f'UA 4 flygplatsen – V och Ö sammanslagna ({n} av {tot} turer)',
-            '4_VO_sol': f'UA 4 ★ flygplatsen – dito + Solberget indragen ({n} av {tot})',
-            '4_Y': f'UA 4Y flygturerna ({n} av {tot}), dito'}[sid]
+            '4_VO': f'UA 4 ★ flygplatsen – V och Ö sammanslagna ({n} av {tot} turer)',
+            '4_VO_sol': f'UA 4 flygplatsen – dito + Solberget indragen ({n} av {tot})',
+            '4_Y': f'UA 4Y flygturerna ({n} av {tot}), V och Ö sammanslagna'}[sid]
 
 
 def main():
@@ -94,6 +94,7 @@ def main():
                                              'nuvarde_eur': round(diff[n] * an)} for n in NIVAER},
            'break_even_vagforlangning_vo': {n: {'merkostnad_1a_VO_jfr_1b_per_ar': round(diff_vo[n]),
                                                 'nuvarde_eur': round(diff_vo[n] * an)} for n in NIVAER}}
+    res['turer_1b'] = f"{se['1b']['turer']} av {se['1b']['turer_tot']}"
     df.to_csv(P / 'b5_kalkyl.csv', index=False)
     with open(P / 'b5_kalkyl.json', 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1, default=float)
@@ -134,9 +135,9 @@ def figur(df, res):
 
     ax2.axis('off')
     be = res['break_even_vagforlangning']
-    tkort = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ V + Ö', '1b': 'UA 1b ★',
-             '2': 'UA 2 ★ N2', '3': 'UA 3 ★ Bo-Bil', '4': 'UA 4 alla turer', '4_VO': 'UA 4 V + Ö',
-             '4_VO_sol': 'UA 4 ★ V + Ö, Solberget', '4_Y': 'UA 4Y flygturerna'}
+    tkort = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ V + Ö', '1b': 'UA 1b ★ V + Ö',
+             '2': 'UA 2 ★ N2', '3': 'UA 3 ★ Bo-Bil', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ V + Ö',
+             '4_VO_sol': 'UA 4 V + Ö, Solberget', '4_Y': 'UA 4Y flygturerna'}
     cell = [[tkort[s], f"{d.at[s, 'delta_fordon']:+d}", f"{d.at[s, 'delta_fordonstimmar_ar']:+,d}".replace(',', ' '),
              f"{d.at[s, 'delta_km_ar']:+,d}".replace(',', ' '), f"{d.at[s, 'investering_bas'] / 1000:,.0f}".replace(',', ' '),
              '–' if d.at[s, 'drift_per_battre_inv_bas'] is None or pd.isna(d.at[s, 'drift_per_battre_inv_bas'])
@@ -159,7 +160,8 @@ def figur(df, res):
            f"{dec(be['låg']['nuvarde_eur'] / 1e6)}–{dec(be['hög']['nuvarde_eur'] / 1e6)} M€\n"
            f"över {KALKYLTID} år ({dec(KALKYLRANTA * 100)} % kalkylränta).\n"
            f"Mot UA 1a med V och Ö sammanslagna (inga fler bussar): {bv['bas']['merkostnad_1a_VO_jfr_1b_per_ar'] / 1000:+.0f} k€ "
-           f"per år – vägen\nmotiveras då av robusthet, kortare restid och de sista turerna, inte av driftkostnaden.")
+           f"per år – vägen\nmotiveras då av större marginal i centrum, kortare restid och att Ö kan gå i pulsen,\n"
+           f"inte av driftkostnaden (båda ger {res['turer_1b']} turer).")
     ax2.text(0.0, 0.02, txt, transform=ax2.transAxes, fontsize=7.6, color=K.TEXT, va='bottom',
              linespacing=1.5, bbox=dict(boxstyle='round,pad=0.5', facecolor='#f7f6f2', edgecolor='#d6d5d0', lw=0.6))
     ax2.set_title('Nyckeltal per UA och driftform', loc='left', fontsize=10, fontweight='bold')

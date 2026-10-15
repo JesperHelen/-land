@@ -1,11 +1,11 @@
 scenario,namn,delta_fordon,delta_fordonstimmar_ar,delta_km_ar,nya_hallplatser,ny_tackning_inv,battre_inv,fordon_låg,tid_låg,km_låg,drift_ar_låg,investering_låg,fordon_bas,tid_bas,km_bas,drift_ar_bas,investering_bas,fordon_hög,tid_hög,km_hög,drift_ar_hög,investering_hög,drift_per_battre_inv_bas
 1a,"UA 1a dagens vägar – alla turer (6 bussar, utesluten)",1,2860,14280,1,179,179,45000,120120,9996,175116,8000,60000,143000,12852,215852,15000,75000,165880,17136,258016,30000,1206
-1a_ryms,UA 1a dagens vägar – dagens tidtabell (9 av 20 turer),0,38,6417,1,179,179,0,1575,4492,6067,8000,0,1875,5775,7650,15000,0,2175,7700,9875,30000,43
-1a_VO,UA 1a ★ dagens vägar – V och Ö sammanslagna (17 av 20 turer),0,28,12124,1,179,179,0,1155,8487,9642,8000,0,1375,10912,12287,15000,0,1595,14549,16144,30000,69
-1b,UA 1b ★ förlängd Norrgårdsvägen – alla 20 turer,0,12,8388,1,179,179,0,525,5872,6397,8000,0,625,7550,8175,15000,0,725,10066,10791,30000,46
+1a_ryms,UA 1a dagens vägar – dagens tidtabell (8 av 20 turer),0,38,5707,1,179,179,0,1575,3995,5570,8000,0,1875,5136,7011,15000,0,2175,6848,9023,30000,39
+1a_VO,UA 1a ★ dagens vägar – V och Ö sammanslagna (16 av 20 turer),0,28,11414,1,179,179,0,1155,7990,9145,8000,0,1375,10272,11647,15000,0,1595,13696,15291,30000,65
+1b,UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna (16 av 20 turer),0,12,6706,1,179,179,0,525,4694,5219,8000,0,625,6035,6660,15000,0,725,8047,8772,30000,37
 2,UA 2 ★ N2 på linje Ö,0,2,0,1,55,55,0,105,0,105,8000,0,125,0,125,15000,0,145,0,145,30000,2
 3,UA 3 ★ Linje N via Bo-Bil,0,0,-2487,0,0,44,0,0,-1741,-1741,0,0,0,-2238,-2238,0,0,0,-2984,-2984,0,-51
 4,"UA 4 flygplatsen – alla turer (6 bussar, utesluten)",1,2850,7259,1,20,20,45000,119700,5081,169781,8000,60000,142500,6533,209033,15000,75000,165300,8711,249011,30000,10452
-4_VO,UA 4 flygplatsen – V och Ö sammanslagna (19 av 20 turer),0,22,6891,1,20,20,0,945,4824,5769,8000,0,1125,6202,7327,15000,0,1305,8269,9574,30000,366
-4_VO_sol,UA 4 ★ flygplatsen – dito + Solberget indragen (20 av 20),0,12,7259,1,20,20,0,525,5081,5606,8000,0,625,6533,7158,15000,0,725,8711,9436,30000,358
-4_Y,"UA 4Y flygturerna (8 av 8), dito",0,-10,3109,1,20,20,0,-420,2176,1756,8000,0,-500,2798,2298,15000,0,-580,3731,3151,30000,115
+4_VO,UA 4 ★ flygplatsen – V och Ö sammanslagna (16 av 20 turer),0,22,5812,1,20,20,0,945,4068,5013,8000,0,1125,5231,6356,15000,0,1305,6974,8279,30000,318
+4_VO_sol,UA 4 flygplatsen – dito + Solberget indragen (16 av 20),0,12,5812,1,20,20,0,525,4068,4593,8000,0,625,5231,5856,15000,0,725,6974,7699,30000,293
+4_Y,"UA 4Y flygturerna (8 av 8), V och Ö sammanslagna",0,0,3109,1,20,20,0,0,2176,2176,8000,0,0,2798,2798,15000,0,0,3731,3731,30000,140

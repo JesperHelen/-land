@@ -116,6 +116,19 @@ class Nat:
         return self._nodkarta[v]
 
 
+def genomgaende(mon, x='V', y='Ö', uppehall=0.5):
+    """Lägger till genomgående mönster x→y och y→x (linjerna sammanslagna): resenären sitter kvar i centrum i
+    stället för att byta (inget bytesstraff, uppehåll 0,5 min). Används linjens vanligaste mönster."""
+    hx = max([m for m in mon if m['linje'] == x], key=lambda m: len(m['turer']))
+    hy = max([m for m in mon if m['linje'] == y], key=lambda m: len(m['turer']))
+    ut = list(mon)
+    for a_, b_ in ((hx, hy), (hy, hx)):
+        akt = np.concatenate([a_['akt'], b_['akt']]); akt[len(a_['akt'])] += uppehall
+        ut.append({'linje': a_['linje'] + b_['linje'], 'stopp': a_['stopp'] + b_['stopp'][1:],
+                   'zoner': a_['zoner'] + b_['zoner'][1:], 'akt': akt, 'turer': []})
+    return ut
+
+
 def od_matris(per):
     return pd.read_csv(C.PROCESSED / f'a1_od_{per}_korrigerad_matris.csv', index_col=0)
 
