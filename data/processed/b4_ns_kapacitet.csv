@@ -1,0 +1,201 @@
+par,forlangd_linje,tillagg_min,indragning,puls,turer,turer_tot
+N/S,N,0.0,utan indragning,med puls,22,22
+N/S,N,0.0,utan indragning,utan puls,22,22
+N/S,N,0.0,S 1 min kortare,med puls,22,22
+N/S,N,0.0,S 1 min kortare,utan puls,22,22
+N/S,N,0.5,utan indragning,med puls,22,22
+N/S,N,0.5,utan indragning,utan puls,22,22
+N/S,N,0.5,S 1 min kortare,med puls,22,22
+N/S,N,0.5,S 1 min kortare,utan puls,22,22
+N/S,N,1.0,utan indragning,med puls,22,22
+N/S,N,1.0,utan indragning,utan puls,22,22
+N/S,N,1.0,S 1 min kortare,med puls,22,22
+N/S,N,1.0,S 1 min kortare,utan puls,22,22
+N/S,N,1.5,utan indragning,med puls,21,22
+N/S,N,1.5,utan indragning,utan puls,21,22
+N/S,N,1.5,S 1 min kortare,med puls,22,22
+N/S,N,1.5,S 1 min kortare,utan puls,22,22
+N/S,N,2.0,utan indragning,med puls,21,22
+N/S,N,2.0,utan indragning,utan puls,21,22
+N/S,N,2.0,S 1 min kortare,med puls,22,22
+N/S,N,2.0,S 1 min kortare,utan puls,22,22
+N/S,N,2.5,utan indragning,med puls,21,22
+N/S,N,2.5,utan indragning,utan puls,21,22
+N/S,N,2.5,S 1 min kortare,med puls,21,22
+N/S,N,2.5,S 1 min kortare,utan puls,21,22
+N/S,N,3.0,utan indragning,med puls,21,22
+N/S,N,3.0,utan indragning,utan puls,21,22
+N/S,N,3.0,S 1 min kortare,med puls,21,22
+N/S,N,3.0,S 1 min kortare,utan puls,21,22
+N/S,N,3.5,utan indragning,med puls,21,22
+N/S,N,3.5,utan indragning,utan puls,21,22
+N/S,N,3.5,S 1 min kortare,med puls,21,22
+N/S,N,3.5,S 1 min kortare,utan puls,21,22
+N/S,N,4.0,utan indragning,med puls,3,22
+N/S,N,4.0,utan indragning,utan puls,21,22
+N/S,N,4.0,S 1 min kortare,med puls,3,22
+N/S,N,4.0,S 1 min kortare,utan puls,21,22
+N/S,N,4.5,utan indragning,med puls,3,22
+N/S,N,4.5,utan indragning,utan puls,21,22
+N/S,N,4.5,S 1 min kortare,med puls,3,22
+N/S,N,4.5,S 1 min kortare,utan puls,21,22
+N/S,N,5.0,utan indragning,med puls,3,22
+N/S,N,5.0,utan indragning,utan puls,21,22
+N/S,N,5.0,S 1 min kortare,med puls,3,22
+N/S,N,5.0,S 1 min kortare,utan puls,21,22
+N/S,N,5.5,utan indragning,med puls,3,22
+N/S,N,5.5,utan indragning,utan puls,21,22
+N/S,N,5.5,S 1 min kortare,med puls,3,22
+N/S,N,5.5,S 1 min kortare,utan puls,21,22
+N/S,N,6.0,utan indragning,med puls,3,22
+N/S,N,6.0,utan indragning,utan puls,21,22
+N/S,N,6.0,S 1 min kortare,med puls,3,22
+N/S,N,6.0,S 1 min kortare,utan puls,21,22
+N/S,N,6.5,utan indragning,med puls,3,22
+N/S,N,6.5,utan indragning,utan puls,4,22
+N/S,N,6.5,S 1 min kortare,med puls,3,22
+N/S,N,6.5,S 1 min kortare,utan puls,21,22
+N/S,N,7.0,utan indragning,med puls,3,22
+N/S,N,7.0,utan indragning,utan puls,4,22
+N/S,N,7.0,S 1 min kortare,med puls,3,22
+N/S,N,7.0,S 1 min kortare,utan puls,21,22
+N/S,N,7.5,utan indragning,med puls,3,22
+N/S,N,7.5,utan indragning,utan puls,4,22
+N/S,N,7.5,S 1 min kortare,med puls,3,22
+N/S,N,7.5,S 1 min kortare,utan puls,4,22
+N/S,N,8.0,utan indragning,med puls,3,22
+N/S,N,8.0,utan indragning,utan puls,4,22
+N/S,N,8.0,S 1 min kortare,med puls,3,22
+N/S,N,8.0,S 1 min kortare,utan puls,4,22
+N/S,N,8.5,utan indragning,med puls,3,22
+N/S,N,8.5,utan indragning,utan puls,4,22
+N/S,N,8.5,S 1 min kortare,med puls,3,22
+N/S,N,8.5,S 1 min kortare,utan puls,4,22
+N/S,N,9.0,utan indragning,med puls,3,22
+N/S,N,9.0,utan indragning,utan puls,4,22
+N/S,N,9.0,S 1 min kortare,med puls,3,22
+N/S,N,9.0,S 1 min kortare,utan puls,4,22
+N/S,N,9.5,utan indragning,med puls,3,22
+N/S,N,9.5,utan indragning,utan puls,4,22
+N/S,N,9.5,S 1 min kortare,med puls,3,22
+N/S,N,9.5,S 1 min kortare,utan puls,4,22
+N/S,N,10.0,utan indragning,med puls,3,22
+N/S,N,10.0,utan indragning,utan puls,4,22
+N/S,N,10.0,S 1 min kortare,med puls,3,22
+N/S,N,10.0,S 1 min kortare,utan puls,4,22
+N/S,N,10.5,utan indragning,med puls,3,22
+N/S,N,10.5,utan indragning,utan puls,4,22
+N/S,N,10.5,S 1 min kortare,med puls,3,22
+N/S,N,10.5,S 1 min kortare,utan puls,4,22
+N/S,N,11.0,utan indragning,med puls,3,22
+N/S,N,11.0,utan indragning,utan puls,4,22
+N/S,N,11.0,S 1 min kortare,med puls,3,22
+N/S,N,11.0,S 1 min kortare,utan puls,4,22
+N/S,N,11.5,utan indragning,med puls,3,22
+N/S,N,11.5,utan indragning,utan puls,4,22
+N/S,N,11.5,S 1 min kortare,med puls,3,22
+N/S,N,11.5,S 1 min kortare,utan puls,4,22
+N/S,N,12.0,utan indragning,med puls,3,22
+N/S,N,12.0,utan indragning,utan puls,4,22
+N/S,N,12.0,S 1 min kortare,med puls,3,22
+N/S,N,12.0,S 1 min kortare,utan puls,4,22
+S/Ö,Ö,0.0,utan indragning,utan puls,20,20
+S/Ö,Ö,0.0,Solberget indragen,utan puls,20,20
+N/V,V,0.0,utan indragning,utan puls,20,20
+V/Ö,V,0.0,utan indragning,utan puls,20,20
+S/Ö,Ö,0.5,utan indragning,utan puls,18,20
+S/Ö,Ö,0.5,Solberget indragen,utan puls,20,20
+N/V,V,0.5,utan indragning,utan puls,9,20
+V/Ö,V,0.5,utan indragning,utan puls,16,20
+S/Ö,Ö,1.0,utan indragning,utan puls,18,20
+S/Ö,Ö,1.0,Solberget indragen,utan puls,20,20
+N/V,V,1.0,utan indragning,utan puls,9,20
+V/Ö,V,1.0,utan indragning,utan puls,16,20
+S/Ö,Ö,1.5,utan indragning,utan puls,18,20
+S/Ö,Ö,1.5,Solberget indragen,utan puls,20,20
+N/V,V,1.5,utan indragning,utan puls,9,20
+V/Ö,V,1.5,utan indragning,utan puls,16,20
+S/Ö,Ö,2.0,utan indragning,utan puls,18,20
+S/Ö,Ö,2.0,Solberget indragen,utan puls,20,20
+N/V,V,2.0,utan indragning,utan puls,9,20
+V/Ö,V,2.0,utan indragning,utan puls,16,20
+S/Ö,Ö,2.5,utan indragning,utan puls,11,20
+S/Ö,Ö,2.5,Solberget indragen,utan puls,18,20
+N/V,V,2.5,utan indragning,utan puls,5,20
+V/Ö,V,2.5,utan indragning,utan puls,16,20
+S/Ö,Ö,3.0,utan indragning,utan puls,11,20
+S/Ö,Ö,3.0,Solberget indragen,utan puls,18,20
+N/V,V,3.0,utan indragning,utan puls,5,20
+V/Ö,V,3.0,utan indragning,utan puls,16,20
+S/Ö,Ö,3.5,utan indragning,utan puls,10,20
+S/Ö,Ö,3.5,Solberget indragen,utan puls,18,20
+N/V,V,3.5,utan indragning,utan puls,5,20
+V/Ö,V,3.5,utan indragning,utan puls,16,20
+S/Ö,Ö,4.0,utan indragning,utan puls,10,20
+S/Ö,Ö,4.0,Solberget indragen,utan puls,18,20
+N/V,V,4.0,utan indragning,utan puls,5,20
+V/Ö,V,4.0,utan indragning,utan puls,16,20
+S/Ö,Ö,4.5,utan indragning,utan puls,9,20
+S/Ö,Ö,4.5,Solberget indragen,utan puls,11,20
+N/V,V,4.5,utan indragning,utan puls,4,20
+V/Ö,V,4.5,utan indragning,utan puls,16,20
+S/Ö,Ö,5.0,utan indragning,utan puls,9,20
+S/Ö,Ö,5.0,Solberget indragen,utan puls,11,20
+N/V,V,5.0,utan indragning,utan puls,4,20
+V/Ö,V,5.0,utan indragning,utan puls,16,20
+S/Ö,Ö,5.5,utan indragning,utan puls,8,20
+S/Ö,Ö,5.5,Solberget indragen,utan puls,10,20
+N/V,V,5.5,utan indragning,utan puls,4,20
+V/Ö,V,5.5,utan indragning,utan puls,6,20
+S/Ö,Ö,6.0,utan indragning,utan puls,8,20
+S/Ö,Ö,6.0,Solberget indragen,utan puls,10,20
+N/V,V,6.0,utan indragning,utan puls,4,20
+V/Ö,V,6.0,utan indragning,utan puls,6,20
+S/Ö,Ö,6.5,utan indragning,utan puls,8,20
+S/Ö,Ö,6.5,Solberget indragen,utan puls,9,20
+N/V,V,6.5,utan indragning,utan puls,4,20
+V/Ö,V,6.5,utan indragning,utan puls,6,20
+S/Ö,Ö,7.0,utan indragning,utan puls,8,20
+S/Ö,Ö,7.0,Solberget indragen,utan puls,8,20
+N/V,V,7.0,utan indragning,utan puls,4,20
+V/Ö,V,7.0,utan indragning,utan puls,6,20
+S/Ö,Ö,7.5,utan indragning,utan puls,8,20
+S/Ö,Ö,7.5,Solberget indragen,utan puls,8,20
+N/V,V,7.5,utan indragning,utan puls,4,20
+V/Ö,V,7.5,utan indragning,utan puls,6,20
+S/Ö,Ö,8.0,utan indragning,utan puls,8,20
+S/Ö,Ö,8.0,Solberget indragen,utan puls,8,20
+N/V,V,8.0,utan indragning,utan puls,4,20
+V/Ö,V,8.0,utan indragning,utan puls,6,20
+S/Ö,Ö,8.5,utan indragning,utan puls,8,20
+S/Ö,Ö,8.5,Solberget indragen,utan puls,8,20
+N/V,V,8.5,utan indragning,utan puls,4,20
+V/Ö,V,8.5,utan indragning,utan puls,4,20
+S/Ö,Ö,9.0,utan indragning,utan puls,8,20
+S/Ö,Ö,9.0,Solberget indragen,utan puls,8,20
+N/V,V,9.0,utan indragning,utan puls,4,20
+V/Ö,V,9.0,utan indragning,utan puls,4,20
+S/Ö,Ö,9.5,utan indragning,utan puls,5,20
+S/Ö,Ö,9.5,Solberget indragen,utan puls,8,20
+N/V,V,9.5,utan indragning,utan puls,4,20
+V/Ö,V,9.5,utan indragning,utan puls,4,20
+S/Ö,Ö,10.0,utan indragning,utan puls,5,20
+S/Ö,Ö,10.0,Solberget indragen,utan puls,8,20
+N/V,V,10.0,utan indragning,utan puls,4,20
+V/Ö,V,10.0,utan indragning,utan puls,4,20
+S/Ö,Ö,10.5,utan indragning,utan puls,5,20
+S/Ö,Ö,10.5,Solberget indragen,utan puls,8,20
+N/V,V,10.5,utan indragning,utan puls,4,20
+V/Ö,V,10.5,utan indragning,utan puls,4,20
+S/Ö,Ö,11.0,utan indragning,utan puls,5,20
+S/Ö,Ö,11.0,Solberget indragen,utan puls,8,20
+N/V,V,11.0,utan indragning,utan puls,4,20
+V/Ö,V,11.0,utan indragning,utan puls,4,20
+S/Ö,Ö,11.5,utan indragning,utan puls,5,20
+S/Ö,Ö,11.5,Solberget indragen,utan puls,5,20
+N/V,V,11.5,utan indragning,utan puls,4,20
+V/Ö,V,11.5,utan indragning,utan puls,4,20
+S/Ö,Ö,12.0,utan indragning,utan puls,5,20
+S/Ö,Ö,12.0,Solberget indragen,utan puls,5,20
+N/V,V,12.0,utan indragning,utan puls,4,20
+V/Ö,V,12.0,utan indragning,utan puls,4,20

@@ -1,0 +1,63 @@
+id,namn,grupp,linje,partner,puls,tillagg_min,turer,turer_tot,min_centrum,max_skift_min,skiftade_turer,fordon
+N_ortvagen,N–S: Örtvägen,N/S,N,S,med puls,4.4,3,22,36.6,0.0,0,5
+N_ortvagen,N–S: Örtvägen,N/S,N,S,utan puls,4.4,21,22,6.6,0.9,18,5
+N_ortvagen_bobil,N–S: Örtvägen + Bo-Bil,N/S,N,S,med puls,4.5,3,22,36.5,0.0,0,5
+N_ortvagen_bobil,N–S: Örtvägen + Bo-Bil,N/S,N,S,utan puls,4.5,21,22,6.5,1.0,18,5
+N_ortvagen_bobil_s0.5,N–S: Örtvägen + Bo-Bil + S 0.5 min kortare,N/S,N,S,med puls,4.5,3,22,37.0,0.0,0,5
+N_ortvagen_bobil_s0.5,N–S: Örtvägen + Bo-Bil + S 0.5 min kortare,N/S,N,S,utan puls,4.5,21,22,7.0,1.0,18,5
+N_ortvagen_bobil_s1,N–S: Örtvägen + Bo-Bil + S 1 min kortare,N/S,N,S,med puls,4.5,3,22,37.5,0.0,0,5
+N_ortvagen_bobil_s1,N–S: Örtvägen + Bo-Bil + S 1 min kortare,N/S,N,S,utan puls,4.5,21,22,7.5,1.0,18,5
+N_ortvagen_bobil_s2,N–S: Örtvägen + Bo-Bil + S 2 min kortare,N/S,N,S,med puls,4.5,3,22,38.5,0.0,0,5
+N_ortvagen_bobil_s2,N–S: Örtvägen + Bo-Bil + S 2 min kortare,N/S,N,S,utan puls,4.5,21,22,8.5,1.0,18,5
+N_lillaker,N–S: Lillåkersvägen,N/S,N,S,med puls,6.5,3,22,34.5,0.0,0,5
+N_lillaker,N–S: Lillåkersvägen,N/S,N,S,utan puls,6.5,4,22,34.5,3.0,1,5
+N_lillaker_bobil,N–S: Lillåkersvägen + Bo-Bil,N/S,N,S,med puls,6.6,3,22,34.4,0.0,0,5
+N_lillaker_bobil,N–S: Lillåkersvägen + Bo-Bil,N/S,N,S,utan puls,6.6,4,22,34.4,3.1,1,5
+N_lillaker_bobil_s0.5,N–S: Lillåkersvägen + Bo-Bil + S 0.5 min kortare,N/S,N,S,med puls,6.6,3,22,34.9,0.0,0,5
+N_lillaker_bobil_s0.5,N–S: Lillåkersvägen + Bo-Bil + S 0.5 min kortare,N/S,N,S,utan puls,6.6,4,22,34.9,3.1,1,5
+N_lillaker_bobil_s1,N–S: Lillåkersvägen + Bo-Bil + S 1 min kortare,N/S,N,S,med puls,6.6,3,22,35.4,0.0,0,5
+N_lillaker_bobil_s1,N–S: Lillåkersvägen + Bo-Bil + S 1 min kortare,N/S,N,S,utan puls,6.6,21,22,5.4,3.1,18,5
+N_lillaker_bobil_s2,N–S: Lillåkersvägen + Bo-Bil + S 2 min kortare,N/S,N,S,med puls,6.6,3,22,36.4,0.0,0,5
+N_lillaker_bobil_s2,N–S: Lillåkersvägen + Bo-Bil + S 2 min kortare,N/S,N,S,utan puls,6.6,21,22,6.4,3.1,18,5
+N_osterkalmare,N–S: Österkalmare,N/S,N,S,med puls,10.3,3,22,30.7,0.0,0,5
+N_osterkalmare,N–S: Österkalmare,N/S,N,S,utan puls,10.3,4,22,30.7,6.8,1,5
+N_osterkalmare_bobil,N–S: Österkalmare + Bo-Bil,N/S,N,S,med puls,10.4,3,22,30.6,0.0,0,5
+N_osterkalmare_bobil,N–S: Österkalmare + Bo-Bil,N/S,N,S,utan puls,10.4,4,22,30.6,6.9,1,5
+N_osterkalmare_bobil_s0.5,N–S: Österkalmare + Bo-Bil + S 0.5 min kortare,N/S,N,S,med puls,10.4,3,22,31.1,0.0,0,5
+N_osterkalmare_bobil_s0.5,N–S: Österkalmare + Bo-Bil + S 0.5 min kortare,N/S,N,S,utan puls,10.4,4,22,31.1,6.9,1,5
+N_osterkalmare_bobil_s1,N–S: Österkalmare + Bo-Bil + S 1 min kortare,N/S,N,S,med puls,10.4,3,22,31.6,0.0,0,5
+N_osterkalmare_bobil_s1,N–S: Österkalmare + Bo-Bil + S 1 min kortare,N/S,N,S,utan puls,10.4,4,22,31.6,6.9,1,5
+N_osterkalmare_bobil_s2,N–S: Österkalmare + Bo-Bil + S 2 min kortare,N/S,N,S,med puls,10.4,3,22,32.6,0.0,0,5
+N_osterkalmare_bobil_s2,N–S: Österkalmare + Bo-Bil + S 2 min kortare,N/S,N,S,utan puls,10.4,4,22,32.6,6.9,1,5
+N_bobil,N–S: Bo-Bil (UA 3),N/S,N,S,med puls,0.1,22,22,5.9,0.0,0,5
+N_bobil,N–S: Bo-Bil (UA 3),N/S,N,S,utan puls,0.1,22,22,5.9,0.0,0,5
+O_stromsnas_VO,Ö–V (dagens par): Strömsnäs,Ö/V,Ö,V,med puls,10.2,2,20,inf,0.0,0,5
+O_stromsnas_VO,Ö–V (dagens par): Strömsnäs,Ö/V,Ö,V,utan puls,10.2,4,20,inf,3.7,2,5
+O_stromsnas_SO,Ö–S (S↔Ö): Strömsnäs,Ö/S,Ö,S,med puls,10.2,5,20,8.8,0.0,0,5
+O_stromsnas_SO,Ö–S (S↔Ö): Strömsnäs,Ö/S,Ö,S,utan puls,10.2,5,20,8.8,0.0,0,5
+O_stromsnas_SO_sol,"Ö–S (S↔Ö): Strömsnäs, Solberget indragen",Ö/S,Ö,S,med puls,10.2,5,20,11.1,0.0,0,5
+O_stromsnas_SO_sol,"Ö–S (S↔Ö): Strömsnäs, Solberget indragen",Ö/S,Ö,S,utan puls,10.2,8,20,5.9,1.6,3,5
+O_solberget_VO,Ö–V (dagens par): Solberget,Ö/V,Ö,V,med puls,4.9,16,20,5.1,0.0,0,5
+O_solberget_VO,Ö–V (dagens par): Solberget,Ö/V,Ö,V,utan puls,4.9,16,20,5.1,0.0,0,5
+O_solberget_SO,Ö–S (S↔Ö): Solberget,Ö/S,Ö,S,med puls,4.9,9,20,5.1,0.0,0,5
+O_solberget_SO,Ö–S (S↔Ö): Solberget,Ö/S,Ö,S,utan puls,4.9,9,20,5.1,0.0,0,5
+O_solberget_SO_sol,"Ö–S (S↔Ö): Solberget, Solberget indragen",Ö/S,Ö,S,med puls,4.9,10,20,6.2,0.0,0,5
+O_solberget_SO_sol,"Ö–S (S↔Ö): Solberget, Solberget indragen",Ö/S,Ö,S,utan puls,4.9,11,20,5.2,2.2,1,5
+O_solberget_s_VO,Ö–V (dagens par): Solberget södra,Ö/V,Ö,V,med puls,4.1,16,20,5.9,0.0,0,5
+O_solberget_s_VO,Ö–V (dagens par): Solberget södra,Ö/V,Ö,V,utan puls,4.1,16,20,5.9,0.0,0,5
+O_solberget_s_SO,Ö–S (S↔Ö): Solberget södra,Ö/S,Ö,S,med puls,4.1,9,20,5.9,0.0,0,5
+O_solberget_s_SO,Ö–S (S↔Ö): Solberget södra,Ö/S,Ö,S,utan puls,4.1,9,20,5.9,0.0,0,5
+O_solberget_s_SO_sol,"Ö–S (S↔Ö): Solberget södra, Solberget indragen",Ö/S,Ö,S,med puls,4.1,17,20,5.4,0.0,0,5
+O_solberget_s_SO_sol,"Ö–S (S↔Ö): Solberget södra, Solberget indragen",Ö/S,Ö,S,utan puls,4.1,18,20,5.4,1.4,1,5
+V_UA1a_VN,V–N (N↔V): UA 1a,V/N,V,N,med puls,4.5,3,20,inf,0.0,0,5
+V_UA1a_VN,V–N (N↔V): UA 1a,V/N,V,N,utan puls,4.5,4,20,inf,2.0,1,5
+V_UA1a_VO,V–Ö (dagens par): UA 1a,V/Ö,V,Ö,med puls,4.5,2,20,inf,0.0,0,5
+V_UA1a_VO,V–Ö (dagens par): UA 1a,V/Ö,V,Ö,utan puls,4.5,16,20,5.5,2.0,14,5
+V_UA1b_VN,V–N (N↔V): UA 1b,V/N,V,N,med puls,2.5,5,20,6.5,0.0,0,5
+V_UA1b_VN,V–N (N↔V): UA 1b,V/N,V,N,utan puls,2.5,5,20,6.5,0.0,0,5
+V_UA1b_VO,V–Ö (dagens par): UA 1b,V/Ö,V,Ö,med puls,2.5,16,20,7.5,0.0,0,5
+V_UA1b_VO,V–Ö (dagens par): UA 1b,V/Ö,V,Ö,utan puls,2.5,16,20,7.5,0.0,0,5
+V_UA4_VN,V–N (N↔V): UA 4,V/N,V,N,med puls,4.0,4,20,5.0,0.0,0,5
+V_UA4_VN,V–N (N↔V): UA 4,V/N,V,N,utan puls,4.0,5,20,5.0,1.5,1,5
+V_UA4_VO,V–Ö (dagens par): UA 4,V/Ö,V,Ö,med puls,4.0,2,20,inf,0.0,0,5
+V_UA4_VO,V–Ö (dagens par): UA 4,V/Ö,V,Ö,utan puls,4.0,16,20,6.0,1.5,14,5

@@ -492,6 +492,14 @@ def b4():
 
 
 # ====================================================================== stiltabell
+def b45():
+    """B4.5: områden i nordost/öst med antal turer som ryms som genomgående linje (N–S, Ö–S)."""
+    g = gpd.read_file(P / 'b4_ns_omraden.gpkg', layer='omraden')
+    skriv(g, 'b4_ns_omraden')
+    stil('b4_ns_omraden', 'B4.5 Omläggningsområden (fig 4.16)', qml(r_enkel(markor('0', 'diamond', '#e0a800', 3.8, '#ffffff', 0.3)),
+         labeling=etiketter('"omrade" || \' +\' || "behov_min_per_tur" || \' min\'')), True)
+
+
 def skriv_stilar():
     """Skriver stilarna till GeoPackage-tabellen layer_styles (läses av QGIS) och som .qml-filer."""
     STILAR.mkdir(parents=True, exist_ok=True)
@@ -519,7 +527,7 @@ def main():
     UT.mkdir(parents=True, exist_ok=True)
     if GPKG.exists():
         GPKG.unlink()
-    bas(); a1(); a2(); a3(); b4()
+    bas(); a1(); a2(); a3(); b4(); b45()
     skriv_stilar()
     # GDAL skriver GeoPackage i WAL-läge. Med WAL kan QGIS inte öppna flera lager ur filen samtidigt i vissa miljöer
     # (bl.a. synkade mappar som OneDrive och nätverksdiskar): 'unable to open database file' och tomma/osynliga lager.

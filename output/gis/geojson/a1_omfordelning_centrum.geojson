@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "a1_omfordelning_centrum",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Kyrkan", "resor_h_FM": 0.0015041210021593001, "resor_h_EM": 0.012098493189558, "resor_h_FM_EM": 0.013602614191717299 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.936185, 60.097365 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Mariehamn, Bussplan", "resor_h_FM": 0.17384334908083149, "resor_h_EM": 0.072634396561836803, "resor_h_FM_EM": 0.24647774564266828 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.942343, 60.102057 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Polishuset", "resor_h_FM": 0.060467251854202202, "resor_h_EM": 0.068094746776722004, "resor_h_FM_EM": 0.12856199863092421 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.94257, 60.102482 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Skillnadsgatan vsk.", "resor_h_FM": 8.6314860324641647e-05, "resor_h_EM": 0.0030382063982885002, "resor_h_FM_EM": 0.0031245212586131416 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.939914, 60.09303 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Strandgränd", "resor_h_FM": 0.041571235649763998, "resor_h_EM": 0.022698248925574, "resor_h_FM_EM": 0.064269484575338001 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.942099, 60.104447 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Torget", "resor_h_FM": 0.1208731255487852, "resor_h_EM": 0.41768348690176171, "resor_h_FM_EM": 0.53855661245054687 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.942512, 60.097605 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Ukrainaplatsen", "resor_h_FM": 0.0015041210021593001, "resor_h_EM": 0.00093065332227359999, "resor_h_FM_EM": 0.0024347743244329 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.93084, 60.096662 ] ] } },
+{ "type": "Feature", "properties": { "fran": "Centrum, Nygatan", "till": "Ålandsplan", "resor_h_FM": 0.19976352985435589, "resor_h_EM": 0.087316441117189697, "resor_h_FM_EM": 0.28707997097154558 }, "geometry": { "type": "LineString", "coordinates": [ [ 19.941426, 60.100122 ], [ 19.937223, 60.104026 ] ] } }
+]
+}

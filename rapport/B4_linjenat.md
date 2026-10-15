@@ -363,6 +363,52 @@ För 1a behövs en vändmöjlighet vid den nya hållplatsen.
 *Figur 4.9. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter,
 och antal turer som ryms per alternativ.*
 
+### 4.5.3 N och S sammanslagna – Örtvägen, Lillåkersvägen och Österkalmare
+
+**Metod.** Samma krav som för V och Ö: dagens omlopp ligger fast, bussen fortsätter från N som S efter 0,5 minut,
+och varje varv N + S ska rymmas inom timmen med minst 5 minuter i centrum. Varje N-tur prövas för sig. Tillägget per
+tur är den tid områdena behöver enligt tabell 4.5.1 (Örtvägen 4,4, Lillåkersvägen 6,5, Österkalmare 10,3 minuter), med
+0,1 minut extra om Bo-Bil (UA 3) ingår. S startar när N har kommit tillbaka. Beräkningen finns i `src/b4_ns.py`
+och redovisas i `b4_ns_scenarier.csv`, `b4_ns_kapacitet.csv` och figur 4.16.
+
+**Resultat.** Dagens varv N + S har 11 minuter i centrum (26 + 23 min körtid), så varje N-tur kan förlängas med
+högst 6 minuter. Varvet 07:50 har 6 minuter i centrum och ryms därför inte med ett tillägg över 1 minut.
+
+| Område (inv. som får hållplats inom 400 m) | Tillägg/tur | S i pulsen | S får starta senare | S 1 min kortare |
+|---|---|---|---|---|
+| Bo-Bil (UA 3) | 0,1 min | 22 av 22 | 22 av 22 | – |
+| Örtvägen (151) | 4,4 min (4,5 med Bo-Bil) | 3 av 22 | 21 av 22 (S ≤ 1,0 min efter pulsen) | 21 av 22 |
+| Lillåkersvägen (95) | 6,5 min (6,6 med Bo-Bil) | 3 av 22 | 4 av 22 | 21 av 22 (S ≤ 3,1 min efter pulsen) |
+| Österkalmare (57) | 10,3 min (10,4 med Bo-Bil) | 3 av 22 | 4 av 22 | 4 av 22 (även med S 2 min kortare) |
+
+- **Örtvägen** ryms med N och S sammanslagna, men bara om S får avgå upp till 1 minut efter pulsen. I pulsen ryms
+  tillägget 3,5 minuter.
+- **Lillåkersvägen** överskrider utrymmet med 0,5–0,6 minuter. Det ryms först om körtiden på S blir minst
+  cirka 0,6 minuter kortare, och S får då avgå upp till 3 minuter efter pulsen. De fem indragningskandidaterna på S
+  (Hamngatan, Neptunigatan, Skillnadsgatan, Torggatan, Gröna Udden) har ingen direkt tidtabellstid att räkna av, och
+  deras påstigande är 0,01–0,05 per vardag. Tidsvinsten kan därför inte visas ur tidtabellen och redovisas som
+  känslighet. Ett bättre underlag är en provkörning.
+- **Österkalmare** kräver mer än hela utrymmet och kräver en större omläggning.
+- **Bo-Bil** kan kombineras med alla alternativen och påverkar inte vilka turer som ryms.
+
+**Annat par: S ↔ Ö och N ↔ V (utan puls i dagens par).** Ett omlopp med bytena S ↔ Ö och N ↔ V ryms med fem
+bussar. Ö får då 9 minuters utrymme, men V får bara 2 minuter. Konsekvenser:
+
+- Strömsnäs (10,2 minuter) ryms bara på 8 av 20 Ö-turer och bara om Solberget dras in.
+- Solberget södra ryms på 18 av 20 turer om Solberget dras in, men dessa områden ryms redan med dagens par (16 av 20).
+- UA 1a, 1b och 4 på linje V ryms bara på 4–5 av 20 turer, mot 16 av 20 med paret V ↔ Ö.
+
+Det alternativa paret försämrar alltså utredningsalternativen på linje V mer än det förbättrar Ö.
+Normparen S ↔ N och Ö ↔ V bör behållas.
+
+**Täckning.** Med hållplats vid områdets indikativa läge får 151 invånare (Örtvägen), 95 (Lillåkersvägen) och 57
+(Österkalmare) en hållplats inom 400 m där de i dag saknar den (`b4_ns.json`, `tackning_alla_turer`).
+
+**Slutsats.** Med N och S sammanslagna går Örtvägen att nå utan fler bussar om S får avgå upp till en minut efter
+pulsen. Lillåkersvägen kräver dessutom en kortare körtid på S. Österkalmare kräver en större omläggning (B4.6).
+
+![Figur 4.16 – N–S genomgående](../output/kartor/b4_16_ns.png)
+
 ## 4.6 UA 4 – Linje V–Ö via flygplatsen
 
 **Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
@@ -559,9 +605,9 @@ Nästa leverans ska redovisa följande:
 1. **V och Ö sammanslagna.** Pröva tidtabellen mot verkliga körtider, särskilt Ö:s skolturer, som avgör vilka
    V-turer som ryms. Pröva Ö:s senare start (0–2 minuter efter pulsen) mot bytena i centrum, och undersök vändmöjligheten
    vid den nya hållplatsen (1a).
-2. **Paret N ↔ S.** Reglering vid bytet N → S, med S som startar senare än pulsen, ger utrymme för linje N
-   att nå Örtvägen. Pröva det tillsammans med Bo-Bil (3), alternativt i kombination med indragning av
-   hållplatser på linje S enligt kapitel 3.
+2. **Paret N ↔ S.** Prövat i avsnitt 4.5.3: Örtvägen ryms (21 av 22 turer) om S får avgå upp till 1 minut efter pulsen,
+   Lillåkersvägen först om S blir cirka 0,6 minuter kortare. Provkör S utan Hamngatan, Neptunigatan, Skillnadsgatan,
+   Torggatan och Gröna Udden för att få fram tidsvinsten.
 3. **Nordost.** En omläggning av linje N och Ö norr och nordost om centrum prövas för Lillåkersvägen,
    Solberget och Österkalmare, med och utan bibehållen puls.
 4. **Dalkullavägen** på linje V ryms enligt screeningen i vanliga varv om Ö avgår efter pulsen, men konkurrerar
