@@ -122,7 +122,7 @@ def fig_mockelo():
                 xy=tuple(pl.mean(axis=0)), xytext=(-10, 0), textcoords='offset points', fontsize=6.8,
                 color=K.TEXT, ha='right', va='center', zorder=9, path_effects=K.HALO)
     kb = bef[int(len(bef) * 0.55)]
-    ax.annotate(f"Befintlig väg ({sv(m['restid_befintlig_vag_min'], 0)} min):\nUA 1a fram och tillbaka,\nUA 1b tillbaka (slinga)",
+    ax.annotate(f"Befintlig väg, bl.a. Möckelövägen ({sv(m['restid_befintlig_vag_min'], 0)} min):\nUA 1a fram och tillbaka,\nUA 1b tillbaka (slinga)",
                 xy=tuple(kb), xytext=(10, 0), textcoords='offset points', fontsize=6.8,
                 color=K.TEXT, ha='left', va='center', zorder=9, path_effects=K.HALO)
     hinder = K.punkt_hinder(ax, [nx], [ny_], px=12)

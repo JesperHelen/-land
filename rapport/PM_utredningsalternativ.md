@@ -150,7 +150,9 @@ kör, plus den befintliga vägen.
 - **1b – förlängd Norrgårdsvägen:** bussen kör en slinga – Möckelö Strand → förlängningen (1 minut) → den nya
   hållplatsen (0,5 minut) → den befintliga vägen (2 minuter) → Norrgårdsvägen. Sträckan Möckelö Strand →
   Norrgårdsvägen (1 minut) körs inte längre. Tillägget blir 1 + 0,5 + 2 − 1 = **2,5 minuter per tur** och 1,6 km.
-  Som känslighet har 3,5 minuter prövats, om tidtabellens minut inte kan räknas av.
+  Som känslighet har 3,5 minuter prövats, om tidtabellens minut inte kan räknas av. Bussen kör alltså rakt
+  fram från Möckelö Strand på den nya vägen till den nya hållplatsen och tillbaka på befintlig väg, bl.a.
+  Möckelövägen, i stället för att vända (beställarens skiss 2026-10-15).
 
 **Omlopp.**
 
@@ -160,6 +162,8 @@ kör, plus den befintliga vägen.
 - **1b med V och Ö sammanslagna:** 16 av 20 turer ryms med fem bussar. V-turen kommer tillbaka en halv minut
   före Ö:s avgång, så Ö kan behålla pulsen, och varven har minst 7,5 minuter i centrum. Med alla 20 turer får
   varven med Ö:s skolturer bara 1,5–2,5 minuter i centrum. Med 3,5 minuter i stället för 2,5 ryms också 16 av 20.
+  Dras Solberget in på Ö:s skolturer 14:10 och 15:10 ryms 18 av 20 turer, men varven får då 4,8 minuter i
+  centrum (55,2 minuter), strax under kravet.
 
 **Effekter.** 179 invånare får en hållplats inom 400 m med 16 avgångar per vardag. Påstigandet uppskattas
 till 0,4–1,8 per vardag på sommarnivå. Restiden för befintliga resenärer ökar netto med cirka 3 (1b) respektive

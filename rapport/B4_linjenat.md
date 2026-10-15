@@ -137,7 +137,9 @@ kör) plus den befintliga vägen (2 min). Två varianter har prövats:
   hållplatsen (0,5 min) → den befintliga vägen (2 min) → Norrgårdsvägen. Sträckan Möckelö Strand →
   Norrgårdsvägen (1 min enligt tidtabellen) körs inte längre. Tillägget blir 1 + 0,5 + 2 − 1 = **2,5 minuter
   per tur** och 1,6 km per tur. Som känslighet har 3,5 minuter prövats, om tidtabellens minut inte kan
-  räknas av.
+  räknas av. Bussen kör alltså rakt fram från Möckelö Strand på den nya vägen till den nya hållplatsen och
+  tillbaka till Norrgårdsvägen på befintlig väg, bl.a. Möckelövägen, i stället för att vända. Det motsvarar
+  beställarens skiss 2026-10-15 (slingan 3 min, minus 1 min som inte körs tillbaka, plus 0,5 min uppehåll).
 
 *Tabell 4.1. UA 1a och UA 1b – effekter och verifiering mot dagens omlopp (★ = huvudalternativ).*
 
@@ -173,6 +175,9 @@ V och Ö som slipper bytet (cirka 1 resenärsminut per vardag).
 - **Samma fyra turer kör som i dag i båda varianterna.** V 07:50, 13:40 och 14:40 följs av Ö:s skolturer
   (28–29 minuter). De varven har redan i dag bara 4–5 minuter i centrum. V 08:20 fortsätter som linje N 08:50
   och har 5 minuter.
+- **UA 1b med Solberget indraget på Ö:s skolturer 14:10 och 15:10:** då ryms även V 13:40 och 14:40, alltså 18
+  av 20 turer. Varven blir dock 55,2 minuter, dvs. 4,8 minuter i centrum, strax under kravet på 5 minuter.
+  Med "säg 5 minuter" som riktvärde är det en möjlig variant att pröva mot verkliga körtider.
 - **Effekt:** båda varianterna ger 179 invånare en hållplats inom 400 m med 16 avgångar per vardag. Det
   beräknade påstigandet är lågt i sommardata men bör vara högre under terminstid.
 
