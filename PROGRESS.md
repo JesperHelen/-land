@@ -62,8 +62,14 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         från flyget 10–40 min efter antagen ankomst 10:25/16:35): 8/8 med V/Ö, lika robust med Solberget indragen.
         Känslighet 5 min → 8/20. Solberget indragen: 42 inv. förlorar hpl inom 400 m, ≈ 1,9 påstigande/vardag.
         Figurer b4_10–b4_12. **Ankomsttider antagna – hämta verkliga.**
-  - [ ] **B4.5 Todo – sammanslagning:** pröva genomgående **N/S** + Bo-Bil; använd N:s 3,5 min (ev. + indragna
-        hållplatser på S) mot Örtvägen/Lillåkersvägen. Pröva även varianter utan puls (N/S 7,5 min, S/Ö 10,5 min).
+  - [x] **B4.5 Sammanslagning N/S + Bo-Bil + varianter utan puls** – `src/b4_ns.py` → `b4_ns.json`, `b4_ns_scenarier.csv`,
+        `b4_ns_kapacitet.csv`, `b4_ns_omraden.gpkg`, figur `b4_16_ns.png`, rapport 4.5.3. Genomgående N–S: 11 min i centrum
+        → N kan förlängas ≤ 6 min. Örtvägen (4,4) ryms 21/22 turer om S får avgå ≤ 1 min efter pulsen (i pulsen 3,5 min);
+        Lillåkersvägen (6,5) först med S ≈ 0,6 min kortare (21/22, S ≤ 3 min efter pulsen); Österkalmare (10,3) ryms ej.
+        Bo-Bil (+0,1) ryms alltid. Annat par S↔Ö/N↔V (5 bussar): Ö 9 min, V bara 2 min → UA 1a/1b/4 ryms på 4–5/20 – behåll normparen.
+        S-indragningarnas tidsvinst kan ej visas ur tidtabellen (känslighet 0,5–2 min) – provkörning behövs.
+        **Alla kartlager som GeoJSON** (beställaren 2026-10-15): `src/geojson_export.py` → `output/gis/geojson/*.geojson`
+        (EPSG:4326, ur gpkg efter `gis_export.py`; ingår i `kor_alla.py`).
   - [ ] **B4.6 Todo – nordost:** omläggning av N och Ö norr/nordost (Lillåkersvägen, Örtvägen, Solberget, Österkalmare).
   - [ ] **B4.7 Tre samlade utredningsalternativ** verifierade mot omloppen med körtidspåverkan per UA.
   - [ ] Stäm av härledda omlopp mot operatörens omloppsplaner (om de kan fås) och körtider för nya delsträckor.
