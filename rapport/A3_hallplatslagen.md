@@ -6,7 +6,7 @@
 > Läget N5 innebär i praktiken att linje V och Ö också stannar vid Klintvägen. Huvuddelen av den otäckta
 > befolkningen, cirka 2 000 invånare, bor dock mer än 400 m från stadslinjernas körvägar. Den kan bara nås med
 > ändrad linjesträckning. Nio sådana områden med sammanlagt cirka 1 130 invånare har identifierats, de största
-> vid Möckelö Strand, Lillåkersvägen och Solberget–Örtvägen. De utgör underlag för linjeförslagen i kapitel 4.
+> vid Möckelö Strand, Lillåkersvägen och Solberget–Örtvägen. De utgör underlag för utredningsalternativen (UA) i kapitel 4.
 > Sex hållplatser bedöms som kandidater för indragning: Torggatan, Gröna Udden, Neptunigatan, Skillnadsgatan
 > och Hamngatan på linje S samt Åbrinken på linje V. De har högst fem påstigningar under 92 vardagar, avståndet
 > mellan kvarvarande grannhållplatser blir högst 600 m och ingen invånare förlorar hållplats inom 400 m.

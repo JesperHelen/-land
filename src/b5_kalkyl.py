@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""B5 – Grov ekonomisk kalkyl (överslag) för linjeförslagen.
+"""B5 – Grov ekonomisk kalkyl (överslag) för utredningsalternativen.
 
 Driftkostnad per år = Δfordon × fordonskostnad + Δfordonstimmar × timkostnad + Δfordonskm × km-kostnad.
   * Δfordon, Δomloppstid (fordonstimmar) och Δkm per vardag kommer från omloppsverifieringen
-    (b4_systemeffekter.json). Varje förslag kalkyleras för sig.
+    (b4_systemeffekter.json). Varje UA kalkyleras för sig.
   * Årsvolym: VARDAGAR vardagar med samma tidtabell som typvardagen. Lördagstrafiken (5 turer per linje N, S, V
     och Ö enligt GTFS) påverkas bara genom km. GTFS-underlaget täcker hösten 2026; helårsvolymen är ett antagande.
   * Enhetskostnader (EUR, prisnivå 2026, tre nivåer): orienterande värden från Trivector (2023), Trafikeringskostnader
@@ -47,24 +47,25 @@ SCEN = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y'
 
 def kort(sid, v):
     n, tot = v['turer'], v['turer_tot']
-    return {'1a': f"1a dagens vägar – alla turer ({v['omlopp']['fordon']} bussar)",
-            '1a_ryms': f'1a dagens vägar – dagens tidtabell ({n} av {tot} turer)',
-            '1a_VO': f'1a dagens vägar – V och Ö sammanslagna ({n} av {tot} turer)',
-            '1b': f'1b förlängd Norrgårdsvägen – alla {tot} turer', '2': '2 N2 på linje Ö', '3': '3 Linje N via Bo-Bil',
-            '4': f"4 flygplatsen – alla turer ({v['omlopp']['fordon']} bussar)",
-            '4_VO': f'4 flygplatsen – V och Ö sammanslagna ({n} av {tot} turer)',
-            '4_VO_sol': f'4 flygplatsen – dito + Solberget indragen ({n} av {tot})',
-            '4_Y': f'4Y flygplatsen – flygturerna ({n} av {tot}), dito'}[sid]
+    return {'1a': f"UA 1a dagens vägar – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
+            '1a_ryms': f'UA 1a dagens vägar – dagens tidtabell ({n} av {tot} turer)',
+            '1a_VO': f'UA 1a ★ dagens vägar – V och Ö sammanslagna ({n} av {tot} turer)',
+            '1b': f'UA 1b ★ förlängd Norrgårdsvägen – alla {tot} turer', '2': 'UA 2 ★ N2 på linje Ö',
+            '3': 'UA 3 ★ Linje N via Bo-Bil',
+            '4': f"UA 4 flygplatsen – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
+            '4_VO': f'UA 4 flygplatsen – V och Ö sammanslagna ({n} av {tot} turer)',
+            '4_VO_sol': f'UA 4 ★ flygplatsen – dito + Solberget indragen ({n} av {tot})',
+            '4_Y': f'UA 4Y flygturerna ({n} av {tot}), dito'}[sid]
 
 
 def main():
     se = json.load(open(P / 'b4_systemeffekter.json', encoding='utf-8'))
-    forslag = json.load(open(P / 'b4_forslag.json', encoding='utf-8'))['forslag']
+    uas = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['ua']
     rader, res = [], {}
     for sid in SCEN:
-        v = se[sid]; d = v['forandring_omlopp']; fid = v['forslag']
+        v = se[sid]; d = v['forandring_omlopp']; fid = v['ua']
         andel = v['turer'] / max(v['turer_tot'], 1)
-        km_ar = d['km'] * VARDAGAR + LORDAGSTURER * forslag[fid]['km_per_tur'] * andel * LORDAGAR
+        km_ar = d['km'] * VARDAGAR + LORDAGSTURER * uas[fid]['km_per_tur'] * andel * LORDAGAR
         h_ar = d['omloppstid_h'] * VARDAGAR
         nya = 1 if fid in ('1a', '1b', '2', '4') else 0
         r = {'scenario': sid, 'namn': kort(sid, v), 'delta_fordon': d['fordon'], 'delta_fordonstimmar_ar': round(h_ar),
@@ -133,15 +134,15 @@ def figur(df, res):
 
     ax2.axis('off')
     be = res['break_even_vagforlangning']
-    tkort = {'1a': '1a alla turer', '1a_ryms': '1a dagens tidtabell', '1a_VO': '1a V + Ö sammansl.', '1b': '1b',
-             '2': '2 N2', '3': '3 Bo-Bil', '4': '4 alla turer', '4_VO': '4 V + Ö sammansl.',
-             '4_VO_sol': '4 dito + Solberget', '4_Y': '4Y flygturerna'}
+    tkort = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ V + Ö', '1b': 'UA 1b ★',
+             '2': 'UA 2 ★ N2', '3': 'UA 3 ★ Bo-Bil', '4': 'UA 4 alla turer', '4_VO': 'UA 4 V + Ö',
+             '4_VO_sol': 'UA 4 ★ V + Ö, Solberget', '4_Y': 'UA 4Y flygturerna'}
     cell = [[tkort[s], f"{d.at[s, 'delta_fordon']:+d}", f"{d.at[s, 'delta_fordonstimmar_ar']:+,d}".replace(',', ' '),
              f"{d.at[s, 'delta_km_ar']:+,d}".replace(',', ' '), f"{d.at[s, 'investering_bas'] / 1000:,.0f}".replace(',', ' '),
              '–' if d.at[s, 'drift_per_battre_inv_bas'] is None or pd.isna(d.at[s, 'drift_per_battre_inv_bas'])
              else f"{d.at[s, 'drift_per_battre_inv_bas']:,.0f}".replace(',', ' ')] for s in SCEN]
     cell = [[r[0]] + [c.replace('-', '−') for c in r[1:]] for r in cell]
-    tb = ax2.table(cellText=cell, colLabels=['Förslag', 'Bussar', 'Fordons-\ntimmar/år', 'Fordons-\nkm/år',
+    tb = ax2.table(cellText=cell, colLabels=['UA', 'Bussar', 'Fordons-\ntimmar/år', 'Fordons-\nkm/år',
                                              'Hållplats\nk€', 'Drift €/år\nper inv. som\nfår det bättre'],
                    loc='upper left', cellLoc='right', colLoc='right', colWidths=[0.25, 0.09, 0.15, 0.15, 0.12, 0.22])
     tb.auto_set_font_size(False); tb.set_fontsize(7.2); tb.scale(1, 1.55)
@@ -153,16 +154,16 @@ def figur(df, res):
             ce.set_facecolor('#f1efe9'); ce.get_text().set_fontweight('bold'); ce.set_height(ce.get_height() * 2.1)
     dec = lambda x: f'{x:.1f}'.replace('.', ',')
     bv = res['break_even_vagforlangning_vo']
-    txt = (r'$\bf{Break\text{-}even\ för\ förlängd\ Norrgårdsvägen\ (1b)}$' + '\n'
-           f"Mot 1a med en extra buss: {be['bas']['merkostnad_1a_jfr_1b_per_ar'] / 1000:.0f} k€ per år (bas), nuvärde "
+    txt = (r'$\bf{Break\text{-}even\ för\ förlängd\ Norrgårdsvägen\ (UA\ 1b)}$' + '\n'
+           f"Mot UA 1a med en extra buss: {be['bas']['merkostnad_1a_jfr_1b_per_ar'] / 1000:.0f} k€ per år (bas), nuvärde "
            f"{dec(be['låg']['nuvarde_eur'] / 1e6)}–{dec(be['hög']['nuvarde_eur'] / 1e6)} M€\n"
            f"över {KALKYLTID} år ({dec(KALKYLRANTA * 100)} % kalkylränta).\n"
-           f"Mot 1a med V och Ö sammanslagna (inga fler bussar): {bv['bas']['merkostnad_1a_VO_jfr_1b_per_ar'] / 1000:+.0f} k€ "
+           f"Mot UA 1a med V och Ö sammanslagna (inga fler bussar): {bv['bas']['merkostnad_1a_VO_jfr_1b_per_ar'] / 1000:+.0f} k€ "
            f"per år – vägen\nmotiveras då av robusthet, kortare restid och de sista turerna, inte av driftkostnaden.")
     ax2.text(0.0, 0.02, txt, transform=ax2.transAxes, fontsize=7.6, color=K.TEXT, va='bottom',
              linespacing=1.5, bbox=dict(boxstyle='round,pad=0.5', facecolor='#f7f6f2', edgecolor='#d6d5d0', lw=0.6))
-    ax2.set_title('Nyckeltal per förslag', loc='left', fontsize=10, fontweight='bold')
-    fig.suptitle('Överslagskalkyl – förändrad driftkostnad per år (EUR, prisnivå 2026)', x=0.01, ha='left',
+    ax2.set_title('Nyckeltal per UA och driftform', loc='left', fontsize=10, fontweight='bold')
+    fig.suptitle('Överslagskalkyl per UA – förändrad driftkostnad per år (EUR, prisnivå 2026; ★ = huvudalternativ)', x=0.01, ha='left',
                  fontsize=12, fontweight='bold')
     ut = C.KARTOR / 'b5_1_kalkyl.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)

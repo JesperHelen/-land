@@ -1,56 +1,55 @@
-# PM – Linjeförslag för Mariehamns stadstrafik
+# PM – Utredningsalternativ (UA) för Mariehamns stadstrafik
 
 **Uppdrag:** Linjenätsutredning för busslinjerna i Mariehamn
-**Datum:** 2026-10-14
+**Datum:** 2026-10-15
 **Status:** Arbetsmaterial, Fas B (delleverans). Underlag till PM:ets kapitel 4 och 5.
 
 ## Sammanfattning
 
-PM:et redovisar fem linjeförslag. Förslagen har prövats **var för sig**:
+PM:et redovisar fem utredningsalternativ (UA). Varje UA prövas **för sig** mot ramen för uppdraget: inga fler
+bussar och samma omloppstid som i dag. Omloppen följer förarnas norm att byta linje i centrum, Syd ↔ Norr
+(S ↔ N) och Öst ↔ Väst (Ö ↔ V).
 
-- **1a:** linje V till en ny hållplats i Möckelö Strand via dagens vägar;
-- **1b:** samma hållplats via en förlängd Norrgårdsvägen;
-- **2:** en ny hållplats N2 på linje Ö;
-- **3:** linje N via Bo-Bil i stället för Vikingagränd;
-- **4:** linje V till flygplatsen.
+Varje UA har prövats i flera driftformer:
 
-Varje förslag har prövats mot ramen för uppdraget: inga fler bussar och samma omloppstid som i dag.
-Omloppen följer förarnas norm att byta linje i centrum, Syd ↔ Norr (S ↔ N) och Öst ↔ Väst (Ö ↔ V).
+- **Uteslutna:** driftformer som kräver fler bussar.
+- **Huvudalternativ (★):** den mest realistiska driftformen. Den visas på kartorna.
+- **Övriga driftformer:** redovisas i tabellerna.
 
-Stadstrafiken körs i dag med fem bussar. Marginalerna är små: efter en V-tur har bussen 3 minuter innan den
-fortsätter som linje Ö, och efter en Ö-tur 7 minuter. En V-tur kan därför inte förlängas utan åtgärder. Bussen
-som kör linje V fortsätter redan i dag som linje Ö, så de två linjerna kan slås ihop till en genomgående linje.
-Bussen fortsätter då efter en halv minut, och Ö får avgå upp till 2 minuter efter pulsen. Det frigör 4,5 minuter
-per V-tur i rusningstid.
+Kombinationer av UA prövas i ett senare skede.
 
-- **1a (dagens vägar, +4,5 min per tur):** med dagens tidtabell ryms 9 av 20 turer; alla turer kräver en sjätte
-  buss (cirka 216 000 euro per år). Med V och Ö sammanslagna ryms **17 av 20 turer med fem bussar**, för cirka
-  12 000 euro per år. Möckelö Strand ny kan alltså trafikeras redan med dagens vägar.
-- **1b (förlängd Norrgårdsvägen, +2,5 min per tur):** bussen kör en slinga – förlängningen till den nya
-  hållplatsen (1 minut) och den befintliga vägen tillbaka till Norrgårdsvägen (2 minuter). Alla 20 turer ryms,
-  för cirka 8 000 euro per år.
-- **2 (N2 på linje Ö):** ryms med alla 20 turer. 55 invånare får en hållplats inom 400 m.
-- **3 (linje N via Bo-Bil):** körtidsneutralt och ryms. 44 invånare får minst 30 avgångar per vardag, medan
-  23 invånare vid Vikingagränd förlorar hållplatsen inom 400 m.
-- **4 (flygplatsen, +4 min per tur):**
-  - **dagens tidtabell:** alla turer kräver en sjätte buss;
-  - **V och Ö sammanslagna:** 19 av 20 turer ryms;
-  - **Solberget indragen på linje Ö dessutom:** alla 20 turer ryms;
-  - **Y-versionen**, bara de 8 V-turer som behövs för flygen 11:00 och 17:10: ryms helt, och lika robust som
-    i dag, med V och Ö sammanslagna och Solberget indragen.
+Stadstrafiken körs i dag med fem bussar. Efter en V-tur har bussen 3 minuter innan den fortsätter som linje Ö,
+och efter en Ö-tur 7 minuter. Linje V kan därför inte förlängas utan att V och Ö slås ihop till en genomgående
+linje V–Ö. Bussen fortsätter då efter en halv minut, och Ö får avgå upp till 2 minuter efter pulsen. Det frigör
+4,5 minuter per V-tur i rusningstid.
 
-  Indragningen av Solberget innebär att 42 invånare förlorar sin hållplats inom 400 m.
+| UA | Huvudalternativ (★) | Ryms (5 bussar) | Effekt | Driftkostnad per år | Utesluten driftform |
+|---|---|---|---|---|---|
+| **UA 1a – Möckelö Strand ny via dagens vägar** (+4,5 min/tur) | V och Ö sammanslagna | 17 av 20 turer | 179 inv. får hållplats | +12 000 € | Alla turer med dagens tidtabell (6 bussar, +216 000 €) |
+| **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen** (+2,5 min/tur) | Alla turer, slinga, bussen fortsätter V → Ö efter 0,5 min | 20 av 20 | 179 inv. får hållplats | +8 000 € (+ väg) | – |
+| **UA 2 – N2 på linje Ö** (+0,5 min/tur) | Alla turer | 20 av 20 | 55 inv. får hållplats | ±0 € | – |
+| **UA 3 – Linje N via Bo-Bil** (+0,1 min/tur) | Alla turer | 22 av 22 | 44 inv. får ≥ 30 avg.; 23 förlorar (Vikingagränd) | −2 000 € | – |
+| **UA 4 – Linje V–Ö via flygplatsen** (+4 min/tur) | V och Ö sammanslagna, Solberget indragen | 20 av 20 | 20 inv. får hållplats; 42 förlorar (Solberget) | +7 000 € | Bara förlängning av V (6 bussar, +209 000 €) |
 
-Med Möckelö Strand ny (1a eller 1b) ökar andelen invånare i Mariehamn med hållplats inom 400 m från 83,6 till
-84,8 %. Förslag 1 och 4 förlänger båda linje V och konkurrerar om samma tidsutrymme. Utan fler bussar kan de
-därför inte genomföras samtidigt i samma omlopp, om inte 1b med förlängd Norrgårdsvägen väljs.
+**Övriga driftformer:**
+
+- **UA 1a med dagens tidtabell:** 9 av 20 turer.
+- **UA 4 med V och Ö sammanslagna men Solberget kvar:** 19 av 20 turer.
+- **UA 4Y:** bara de 8 V-turer som behövs för flygen 11:00 och 17:10. Den ryms med samma linje V–Ö och är lika
+  robust som i dag, för cirka 2 300 euro per år.
+
+**Effekt på täckningen.** Med Möckelö Strand ny ökar andelen invånare i Mariehamn med hållplats inom 400 m från
+83,6 till 84,8 %.
+
+**UA 1a och UA 4** förlänger båda linje V och använder samma tidsutrymme. Utan fler bussar kan de inte båda
+genomföras, om inte UA 1b med förlängd Norrgårdsvägen väljs.
 
 ## 1 Bakgrund och uppdrag
 
 I Fas A granskades och korrigerades OD-matrisen, och täckningsgraden analyserades med hänsyn till
 turtätheten. Där identifierades också nya hållplatslägen och områden som bara kan nås med ändrad
 linjesträckning. Efter granskningen den 14 oktober 2026 bad beställaren om en utredning av de enskilda
-effekterna av följande förslag:
+effekterna av följande utredningsalternativ (UA):
 
 1. **Möckelö Strand.** Linje V till en ny hållplats i Möckelö Strand, via dagens vägar (1a) och via en
    förlängning av Norrgårdsvägen till Hamnskärsvägen (1b). Beställarens restider: den befintliga vägen från
@@ -59,25 +58,25 @@ effekterna av följande förslag:
 3. **Bo-Bil.** Linje N stannar vid Bo-Bil i stället för vid Vikingagränd, så att bussen inte behöver vänta vid
    Nya Godbyvägen för att komma till Maxinge.
 4. **Flygplatsen.** Linje V följer vägen från Posten upp till flygterminalen. Det ska prövas med V och Ö
-   sammanslagna, med hållplatsen Solberget indragen och som en Y-version med bara de turer som behövs för flygen.
+   sammanslagna, med hållplatsen Solberget indragen och som en UA 4Y med bara de turer som behövs för flygen.
 
 Dessutom skulle möjligheten att slå ihop linjer prövas, särskilt om sammanslagning av V och Ö gör att den nya
 hållplatsen i Möckelö Strand kan trafikeras redan med dagens vägar. För 1a skulle en överslagskalkyl göras.
-Systemeffekterna skulle redovisas för alla förslag.
+Systemeffekterna skulle redovisas för alla UA.
 
 ## 2 Förutsättningar
 
 ### 2.1 Ramen – inga fler bussar
 
-Förslagen får inte kräva fler bussar. Linjenätet ska rymmas inom dagens omloppsplaner, med samma antal
-fordon och samma omloppstid. Varje förslag har verifierats mot detta:
+Utredningsalternativen får inte kräva fler bussar. Linjenätet ska rymmas inom dagens omloppsplaner, med samma antal
+fordon och samma omloppstid. Varje UA har verifierats mot detta:
 
-- förslagets körtidsförändring läggs på berörda turer;
+- alternativets körtidsförändring läggs på berörda turer;
 - avgångstiderna från centrum ligger fast, så att pulsen och bytena behålls. Undantaget är sammanslagning av V
   och Ö, där Ö får avgå upp till 2 minuter efter pulsen;
 - omloppen byggs om med minsta möjliga antal fordon och enligt förarnas norm för linjebyten;
-- förslaget ryms om antalet bussar inte ökar och omloppstiden ökar med högst 10 minuter per vardag;
-- förslaget är robust om det inte ger fler varv med mindre än 3 minuters reglering än i dag. Ett varv är två
+- alternativet ryms om antalet bussar inte ökar och omloppstiden ökar med högst 10 minuter per vardag;
+- alternativet är robust om det inte ger fler varv med mindre än 3 minuters reglering än i dag. Ett varv är två
   på varandra följande byten.
 
 ### 2.2 Dagens omlopp
@@ -110,19 +109,19 @@ vardag, tisdag 2026-09-01, med förarnas norm för linjebyten (figur 1):
   Strand ny och vägen till flygplatsen). Förlängningen av Norrgårdsvägen är schematisk. Linjernas vägdragning
   längs gatunätet (OSRM) kunde inte hämtas i analysmiljön men kan hämtas i QGIS (bilaga).
 
-## 3 Förslagen
+## 3 Utredningsalternativen
 
-*Tabell 1. Förslagen var för sig – verifiering mot dagens omlopp och effekter.*
+*Tabell 1. Utredningsalternativen var för sig – alla driftformer, verifiering mot dagens omlopp och effekter.*
 
-| Förslag | Körtid per tur | Ryms i dagens omlopp (5 bussar) | Invånare med bättre / sämre tillgänglighet | Driftkostnad per år (bas) |
+| UA | Körtid per tur | Ryms i dagens omlopp (5 bussar) | Invånare med bättre / sämre tillgänglighet | Driftkostnad per år (bas) |
 |---|---|---|---|---|
-| 1a Möckelö Strand ny, dagens vägar | +4,5 min | Dagens tidtabell: 9 av 20. V och Ö sammanslagna: **17 av 20**. Alla turer: 6 bussar. | 179 / 0 | +8 000 € / **+12 000 €** / +216 000 € |
-| 1b Möckelö Strand ny, förlängd Norrgårdsvägen | +2,5 min | Ja, 20 av 20. Robust: 15 av 20. | 179 / 0 | +8 000 € |
-| 2 N2 på linje Ö | +0,5 min | Ja, 20 av 20 | 55 / 0 | ±0 € |
-| 3 Linje N via Bo-Bil | +0,1 min | Ja, 22 av 22 | 44 / 24 | −2 000 € |
-| 4 Linje V till flygplatsen | +4 min | Dagens tidtabell: 10 av 20. V och Ö sammanslagna: 19 av 20; + Solberget indragen: 20 av 20. Y: 8 av 8. Alla turer: 6 bussar. | 20 / 0 (med Solberget indragen 20 / 49) | +7 000 € (Y: +2 300 €; alla turer: +209 000 €) |
+| UA 1a – Möckelö Strand ny via dagens vägar | +4,5 min | **★ V och Ö sammanslagna: 17 av 20.** Dagens tidtabell: 9 av 20. Alla turer: 6 bussar (utesluten). | 179 / 0 | **★ +12 000 €** (dagens tidtabell +8 000 €; utesluten +216 000 €) |
+| UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen | +2,5 min | **★ Alla 20 av 20.** Robust: 15 av 20. | 179 / 0 | ★ +8 000 € |
+| UA 2 – N2 på linje Ö | +0,5 min | ★ Alla 20 av 20 | 55 / 0 | ±0 € |
+| UA 3 – Linje N via Bo-Bil | +0,1 min | ★ Alla 22 av 22 | 44 / 24 | −2 000 € |
+| UA 4 – Linje V–Ö via flygplatsen | +4 min | **★ V och Ö sammanslagna + Solberget indragen: 20 av 20.** Utan Solberget indragen: 19 av 20. UA 4Y: 8 av 8. Dagens tidtabell: 10 av 20. Alla turer: 6 bussar (utesluten). | 20 / 49 (Solberget kvar: 20 / 0) | **★ +7 000 €** (UA 4Y +2 300 €; utesluten +209 000 €) |
 
-### 3.1 Förslag 1 – linje V till ny hållplats i Möckelö Strand
+### 3.1 UA 1a och UA 1b – Möckelö Strand ny
 
 **Utformning.** Linje V vänder i dag vid hållplatsen Möckelö Strand: bussen kör Norrgårdsvägen → Möckelö
 Strand → Norrgårdsvägen. Den nya hållplatsen, *Möckelö Strand ny*, placeras cirka 700 m söder om dagens
@@ -152,14 +151,14 @@ kör, plus den befintliga vägen.
 till 0,5–2 per vardag på sommarnivå. Genomresande på linje V får längre restid, cirka 5–8 resenärsminuter per
 vardag.
 
-![Förslag 1, Möckelö Strand](../output/kartor/b4_2_mockelo_karta.png)
+![UA 1, Möckelö Strand](../output/kartor/b4_2_mockelo_karta.png)
 
-*Figur 2. Förslag 1. Grönt anger invånare som får hållplats inom 400 m. Den befintliga vägen är ritad efter
+*Figur 2. UA 1a och UA 1b – huvudalternativen; linje V visas som del av linje V–Ö. Grönt anger invånare som får hållplats inom 400 m. Den befintliga vägen är ritad efter
 beställarens skiss och förlängningen (streckad) är schematisk.*
 
-![Förslag 1, omlopp](../output/kartor/b4_3_mockelo_omlopp.png)
+![UA 1, omlopp](../output/kartor/b4_3_mockelo_omlopp.png)
 
-*Figur 3. Omlopp före och efter för förslag 1. Skrafferad del av en tur är tillagd körtid, och prickad ram
+*Figur 3. Omlopp före och efter för UA 1a och UA 1b, alla driftformer (★ = huvudalternativ). Skrafferad del av en tur är tillagd körtid, och prickad ram
 anger att turen avgår senare än i dag. Röd rubrik anger att lösningen kräver fler bussar.*
 
 ### 3.2 Sammanslagning av V och Ö – Möckelö Strand ny redan med dagens vägar?
@@ -197,12 +196,12 @@ kvar på bussen.
 
 *Figur 4. Sammanslagning av linje V och Ö: tidsbudget per varv och antal turer som ryms per alternativ.*
 
-### 3.3 Förslag 2 – ny hållplats N2 på linje Ö
+### 3.3 UA 2 – N2 på linje Ö
 
 **Utformning.** Hållplatsen N2 placeras på sträckan Österkullagatan – Kalmarnäs vändplan, som bussen kör i
 båda riktningarna. Ett uppehåll per tur i genomsnitt (0,5 minut) har antagits.
 
-**Omlopp.** Alla 20 turer ryms, och förslaget är lika robust som i dag (figur 6).
+**Omlopp.** Alla 20 turer ryms, och alternativet är lika robust som i dag (figur 6).
 
 **Effekter.**
 
@@ -210,15 +209,15 @@ båda riktningarna. Ett uppehåll per tur i genomsnitt (0,5 minut) har antagits.
 - **Påstigande:** uppskattas till 0,4–1,9 per vardag på sommarnivå.
 - **Ombordvarande:** förlusten för dem som redan sitter på bussen är försumbar.
 
-![Förslag 2, N2](../output/kartor/b4_4_n2_karta.png)
+![UA 2, N2](../output/kartor/b4_4_n2_karta.png)
 
-*Figur 5. Förslag 2, ny hållplats N2 på linje Ö.*
+*Figur 5. UA 2, ny hållplats N2 på linje Ö.*
 
-![Förslag 2, omlopp](../output/kartor/b4_5_n2_omlopp.png)
+![UA 2, omlopp](../output/kartor/b4_5_n2_omlopp.png)
 
-*Figur 6. Omlopp före och efter för förslag 2.*
+*Figur 6. Omlopp före och efter för UA 2.*
 
-### 3.4 Förslag 3 – linje N via Bo-Bil i stället för Vikingagränd
+### 3.4 UA 3 – Linje N via Bo-Bil
 
 **Utformning.** Linje N kör Maxinge – Bo-Bil – Bolstavägen i stället för Maxinge – Vikingagränd –
 Bolstavägen (figur 7).
@@ -232,7 +231,7 @@ Bolstavägen (figur 7).
 Den minskade väntan vid Nya Godbyvägen ingår inte, eftersom den inte kan beräknas utan realtidsdata. Den talar
 för en kortare och framför allt jämnare körtid.
 
-**Omlopp.** Förslaget ryms med alla 22 turer.
+**Omlopp.** Alternativet ryms med alla 22 turer.
 
 **Effekter.**
 
@@ -241,13 +240,13 @@ för en kortare och framför allt jämnare körtid.
 - **Vikingagränd:** 23 invånare förlorar hållplats inom 400 m.
 - **Fordonskilometer:** minskar med cirka 9 km per vardag.
 
-![Förslag 3, Bo-Bil](../output/kartor/b4_6_bobil_karta.png)
+![UA 3, Bo-Bil](../output/kartor/b4_6_bobil_karta.png)
 
-*Figur 7. Förslag 3. Grönt anger bättre och rött sämre tillgänglighet.*
+*Figur 7. UA 3. Grönt anger bättre och rött sämre tillgänglighet.*
 
-### 3.5 Förslag 4 – linje V till flygplatsen
+### 3.5 UA 4 – Linje V–Ö via flygplatsen
 
-**Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I förslaget kör bussen från Posten upp till
+**Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
 flygterminalen, runt terminalen och tillbaka till Norra Svibyvägen, och därefter vidare mot Källarvägen som i
 dag (figur 8).
 
@@ -256,9 +255,9 @@ dag (figur 8).
   tur** (känslighet 3–5 minuter).
 - **Vid flygplatsen:** bussen är där cirka 16 minuter efter avgången från centrum.
 
-**Flygen och Y-versionen.** Enligt Finavia avgår flyg 07:15 (Arlanda), 11:00 (Åbo) och 17:10 (Arlanda).
+**Flygen och UA 4Y.** Enligt Finavia avgår flyg 07:15 (Arlanda), 11:00 (Åbo) och 17:10 (Arlanda).
 Ankomsttiderna fanns inte i underlaget. Det har antagits att samma flygplan landar 35 minuter före
-avgångarna 11:00 och 17:10. Y-versionen kör till flygplatsen bara på de V-turer som behövs för flygen:
+avgångarna 11:00 och 17:10. UA 4Y kör till flygplatsen bara på de V-turer som behövs för flygen:
 
 - **till flyget**, vid flygplatsen 2 timmar till 30 minuter före avgång: 08:50, 09:20, 09:50, 15:10, 15:40
   och 16:10;
@@ -268,7 +267,7 @@ avgångarna 11:00 och 17:10. Y-versionen kör till flygplatsen bara på de V-tur
 **Solberget.** Hållplatsen Solberget på linje Ö ligger på en omväg. Dras den in sparas 1,6–2,5 minuter per
 Ö-tur, vilket ger mer tid i varven med Ö:s skolturer.
 
-*Tabell 2. Förslag 4 – varianter (fem bussar om inget annat anges).*
+*Tabell 2. UA 4 – alla driftformer (fem bussar om inget annat anges; ★ = huvudalternativ).*
 
 | Variant | Turer via flygplatsen | Varv < 3 min reglering (i dag 1) | Driftkostnad per år |
 |---|---|---|---|
@@ -288,30 +287,36 @@ avgångarna 11:00 och 17:10. Y-versionen kör till flygplatsen bara på de V-tur
 - **Solberget:** med Solberget indragen förlorar 42 invånare sin hållplats inom 400 m. Hållplatsen har cirka
   2 påstigande per vardag på sommarnivå.
 
-**Bedömning.** Linje V till flygplatsen kan inte köras med dagens tidtabell utan en sjätte buss, vilket
-bekräftar att omloppen annars spricker. Med V och Ö sammanslagna ryms nästan alla turer. Y-versionen med de
-8 flygturerna ryms helt och är lika robust som i dag, om Solberget samtidigt dras in. Resultatet är känsligt
+**Bedömning.**
+
+- **Utesluten:** att bara förlänga linje V till flygplatsen. Omloppen spricker, och en sjätte buss krävs.
+- **Det enda rimliga är en genomgående linje V–Ö.**
+- **Huvudalternativ ★:** linje V–Ö via flygplatsen med Solberget indragen. Alla 20 turer ryms med fem bussar;
+  se figur 8, som bara visar huvudalternativet.
+- **UA 4Y:** samma linje men bara de 8 flygturerna. Den ryms och är lika robust som i dag.
+
+**Känslighet.** Resultatet är känsligt
 för omvägens körtid: med 5 minuter i stället för 4 ryms bara 8 turer. Körtiden och flygens ankomsttider bör
 därför kontrolleras.
 
-![Förslag 4, flygplatsen](../output/kartor/b4_10_flygplatsen_karta.png)
+![UA 4, flygplatsen](../output/kartor/b4_10_ua4_karta.png)
 
-*Figur 8. Förslag 4, linje V till flygplatsen.*
+*Figur 8. UA 4 – huvudalternativet: linje V–Ö (V och Ö sammanslagna) via flygplatsen, Solberget indragen.*
 
-![Förslag 4, tidsbudget](../output/kartor/b4_11_flygplatsen_vo.png)
+![UA 4, tidsbudget](../output/kartor/b4_11_flygplatsen_vo.png)
 
-*Figur 9. Förslag 4: tidsbudget per varv V → Ö → V och antal turer som ryms per variant.*
+*Figur 9. UA 4: tidsbudget per varv V → Ö → V och antal turer som ryms per variant.*
 
-![Förslag 4, omlopp](../output/kartor/b4_12_flygplatsen_omlopp.png)
+![UA 4, omlopp](../output/kartor/b4_12_flygplatsen_omlopp.png)
 
-*Figur 10. Omlopp före och efter för förslag 4.*
+*Figur 10. Omlopp före och efter för UA 4, alla driftformer (★ = huvudalternativ).*
 
 ## 4 Systemeffekter
 
-Systemeffekterna redovisas för varje förslag för sig (figur 11 och 12). Täckningen gäller invånarna i
+Systemeffekterna redovisas för varje UA för sig (figur 11 och 12). Täckningen gäller invånarna i
 Mariehamn (14 821).
 
-*Tabell 3. Systemeffekter i Mariehamn, i dag och med varje förslag för sig.*
+*Tabell 3. Systemeffekter i Mariehamn, i dag och med varje UA för sig.*
 
 | | I dag | 1a V och Ö sammanslagna | 1b | 2 N2 | 3 Bo-Bil | 4 V och Ö sammanslagna | 4Y flygturerna, Solberget indragen |
 |---|---|---|---|---|---|---|---|
@@ -332,11 +337,11 @@ tillgänglighet*, vilket är en förbättring. Förändringarna är lokala och s
 
 ![Systemeffekter](../output/kartor/b4_13_systemeffekter.png)
 
-*Figur 11. Invånare med bättre respektive sämre tillgänglighet och nyckeltal för varje förslag för sig.*
+*Figur 11. Invånare med bättre respektive sämre tillgänglighet och nyckeltal för varje UA för sig.*
 
 ![Täckning före och efter](../output/kartor/b4_14_tackning_fore_efter.png)
 
-*Figur 12. Turtäthet inom 400 m i dag och med förslaget, inzoomat per förslag. Grön ram anger bättre och röd
+*Figur 12. Turtäthet inom 400 m i dag och med alternativet, inzoomat per UA. Grön ram anger bättre och röd
 ram sämre klass än i dag.*
 
 ## 5 Överslagskalkyl
@@ -353,18 +358,18 @@ med avtalspriserna i landskapsregeringens trafikavtal. Beräkningen bygger på 2
 
 *Tabell 4. Förändrad driftkostnad per år jämfört med i dag (euro, prisnivå 2026).*
 
-| Förslag | Bussar | Fordonstimmar per år | Fordonskm per år | Driftkostnad per år, bas (låg–hög) |
+| UA | Bussar | Fordonstimmar per år | Fordonskm per år | Driftkostnad per år, bas (låg–hög) |
 |---|---|---|---|---|
-| 1a alla turer | +1 | +2 860 | +14 300 | **+216 000** (175 000–258 000) |
-| 1a dagens tidtabell (9 av 20 turer) | 0 | +38 | +6 400 | +7 700 |
-| 1a V och Ö sammanslagna (17 av 20 turer) | 0 | +28 | +12 100 | +12 300 (9 600–16 100) |
-| 1b förlängd Norrgårdsvägen | 0 | +12 | +8 400 | +8 200 (6 400–10 800) |
-| 2 N2 | 0 | +2 | 0 | ±0 |
-| 3 Bo-Bil | 0 | 0 | −2 500 | −2 200 |
-| 4 flygplatsen, alla turer | +1 | +2 850 | +7 300 | **+209 000** (170 000–249 000) |
-| 4 V och Ö sammanslagna (19 av 20 turer) | 0 | +22 | +6 900 | +7 300 (5 800–9 600) |
-| 4 dito + Solberget indragen (20 av 20) | 0 | +12 | +7 300 | +7 200 (5 600–9 400) |
-| 4Y flygturerna (8 av 8), dito | 0 | −10 | +3 100 | +2 300 (1 800–3 200) |
+| UA 1a alla turer – utesluten | +1 | +2 860 | +14 300 | **+216 000** (175 000–258 000) |
+| UA 1a dagens tidtabell (9 av 20 turer) | 0 | +38 | +6 400 | +7 700 |
+| UA 1a ★ V och Ö sammanslagna (17 av 20 turer) | 0 | +28 | +12 100 | +12 300 (9 600–16 100) |
+| UA 1b ★ förlängd Norrgårdsvägen | 0 | +12 | +8 400 | +8 200 (6 400–10 800) |
+| UA 2 ★ N2 | 0 | +2 | 0 | ±0 |
+| UA 3 ★ Bo-Bil | 0 | 0 | −2 500 | −2 200 |
+| UA 4 flygplatsen, alla turer – utesluten | +1 | +2 850 | +7 300 | **+209 000** (170 000–249 000) |
+| UA 4 V och Ö sammanslagna (19 av 20 turer) | 0 | +22 | +6 900 | +7 300 (5 800–9 600) |
+| UA 4 ★ dito + Solberget indragen (20 av 20) | 0 | +12 | +7 300 | +7 200 (5 600–9 400) |
+| UA 4Y flygturerna (8 av 8), dito | 0 | −10 | +3 100 | +2 300 (1 800–3 200) |
 
 **Investeringar.** Nya hållplatslägen kostar cirka 8 000–30 000 euro styck beroende på utrustning. Därtill
 kommer för 1a en vändmöjlighet vid den nya hållplatsen, och för 1b förlängningen av Norrgårdsvägen. Ingen av
@@ -386,7 +391,7 @@ Vägen ger dessutom nytta för annan trafik.
 
 ![Överslagskalkyl](../output/kartor/b5_1_kalkyl.png)
 
-*Figur 13. Förändrad driftkostnad per år per förslag (bas; strecken anger låg–hög).*
+*Figur 13. Förändrad driftkostnad per år per UA (bas; strecken anger låg–hög).*
 
 ## 6 Slutsatser
 
@@ -394,16 +399,19 @@ Vägen ger dessutom nytta för annan trafik.
    Eftersom bussarna redan växlar i paren S ↔ N och V ↔ Ö kan paren slås ihop till genomgående linjer. Då läggs
    regleringen vid det ena bytet, och om partnerlinjen får avgå upp till 2 minuter efter pulsen frigörs upp
    till 4,5 minuter per V-tur.
-2. **Möckelö Strand ny** kan trafikeras redan med dagens vägar om V och Ö slås ihop: 17 av 20 turer, fem bussar,
-   cirka 12 000 euro per år. Med förlängd Norrgårdsvägen (1b) ryms alla 20 turer och Ö behåller pulsen. 1a
-   med alla turer och dagens tidtabell kräver en sjätte buss.
-3. **N2 på linje Ö** ryms med alla turer och ger 55 invånare en hållplats.
-4. **Linje N via Bo-Bil** ryms och är körtidsneutral. Förlusten vid Vikingagränd (23 invånare) bör vägas in, och
+2. **UA 1a – Möckelö Strand ny via dagens vägar.** Huvudalternativet slår ihop V och Ö och ger 17 av 20 turer
+   med fem bussar, för cirka 12 000 euro per år. Möckelö Strand ny kan alltså trafikeras redan med dagens vägar.
+   Alla turer med dagens tidtabell kräver en sjätte buss och är utesluten.
+3. **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen.** Alla 20 turer ryms, och Ö behåller pulsen. UA 1b
+   förutsätter att vägen byggs.
+4. **UA 2 – N2 på linje Ö** ryms med alla turer och ger 55 invånare en hållplats.
+5. **UA 3 – Linje N via Bo-Bil** ryms och är körtidsneutral. Förlusten vid Vikingagränd (23 invånare) bör vägas in, och
    den kan mildras med hållplatsen N3 söder om Maxinge från kapitel 3.
-5. **Linje V till flygplatsen** kräver en sjätte buss med dagens tidtabell. Med V och Ö sammanslagna ryms
-   19–20 av 20 turer. Y-versionen med de 8 flygturerna ryms helt och lika robust som i dag, om Solberget dras in.
-6. **Förslag 1 och 4** förlänger båda linje V och kan inte båda rymmas i samma omlopp utan fler bussar, om
-   inte 1b med förlängd Norrgårdsvägen väljs. Valet mellan dem är beställarens.
+6. **UA 4 – Linje V–Ö via flygplatsen.** Att bara förlänga V är uteslutet, eftersom det kräver en sjätte buss.
+   Det enda rimliga är en genomgående linje V–Ö. Huvudalternativet, med Solberget indragen, ger alla 20 turer med
+   fem bussar. UA 4Y med de 8 flygturerna ryms och är lika robust som i dag.
+7. **UA 1a och UA 4** förlänger båda linje V och kan inte båda rymmas utan fler bussar, om inte UA 1b väljs.
+   Kombinationer av UA prövas i ett senare skede.
 
 ## 7 Osäkerheter och fortsatt arbete
 
@@ -411,8 +419,8 @@ Vägen ger dessutom nytta för annan trafik.
   och operatörens faktiska omloppsplaner ingår inte och behöver stämmas av.
 - **Restiderna** för Möckelö Strand bygger på beställarens uppgifter. Körtiden till flygplatsen är beräknad ur
   beställarens skiss med 25 km/h. Körtiderna vid Bo-Bil bygger på fågelvägsavstånd.
-- **Flygens ankomsttider** är antagna och ska ersättas med de verkliga tiderna. Y-versionens turer väljs då om
-  automatiskt (`FLYG_ANKOMSTER` i `src/b4_forslag.py`).
+- **Flygens ankomsttider** är antagna och ska ersättas med de verkliga tiderna. UA 4Ys turer väljs då om
+  automatiskt (`FLYG_ANKOMSTER` i `src/b4_ua.py`).
 - **Ö efter pulsen:** sammanslagning av V och Ö förutsätter att en upp till 2 minuter senare avgång för Ö godtas.
   Effekten på bytesresor ingår inte i nätverksmodellen.
 - **Vägdragningen** längs gatunätet (OSRM) kunde inte hämtas i analysmiljön. Den hämtas i QGIS med
@@ -428,16 +436,17 @@ Vägen ger dessutom nytta för annan trafik.
 Alla kartor finns som lager i `output/gis/linjenatsutredning.gpkg` (EPSG:3067) med inbäddade stilar.
 
 1. Öppna **`output/gis/linjenatsutredning.qgz`** (*Projekt > Öppna*). Projektet öppnas inzoomat på Mariehamn,
-   med en grupp per förslag. Använd inte en äldre sparad projektfil.
+   med en grupp per UA. Använd inte en äldre sparad projektfil.
 2. Alternativt: kör `output/gis/oppna_i_qgis.py` i QGIS Python-konsol i ett nytt, tomt projekt.
 
 | Grupp i QGIS | Innehåll |
 |---|---|
-| Förslag 1a, 1b, 2, 3, 4 | Ny hållplats, körväg, linjen efter förslaget och förändrad turtäthet (grönt bättre, rött sämre) |
-| Systemeffekter (välj ett scenario) | Turtäthet inom 400 m och förändring mot i dag för varje scenario: i dag, 1a (tre driftformer), 1b, 2, 3, 4 (fyra varianter). Gruppen är exklusiv: ett scenario i taget |
+| UA 1a, 1b, 2, 3, 4 | Huvudalternativet per UA: ny hållplats, körväg, linjen (V–Ö som en genomgående linje i UA 1a, 1b och 4) och förändrad turtäthet (grönt bättre, rött sämre) |
+| Systemeffekter – huvudalternativ per UA | Turtäthet inom 400 m och förändring mot i dag för i dag och huvudalternativen. Gruppen är exklusiv: ett scenario i taget |
+| Övriga alternativ | Övriga driftformer, bl.a. de uteslutna som kräver fler bussar (redovisas i rapporten). Exklusiv grupp |
 | Sammanslagning av linjer | Områden utan hållplats och behövd tid per tur |
 | Bakgrund | Stadslinjerna i dag (förskjutna där de delar gata), hållplatser, via-punkter för OSRM, befolkningsrutor, land |
-| Nyckeltal per scenario | Tabell med bussar, omloppstid, km, täckning och driftkostnad |
+| Nyckeltal per UA och driftform | Tabell med bussar, omloppstid, km, täckning, driftkostnad, huvudalternativ och utesluten |
 
 Förändringarna är lokala. Zooma in vid Möckelö Strand, Kalmarnäs, Bo-Bil, flygplatsen eller Solberget för att
 se dem.

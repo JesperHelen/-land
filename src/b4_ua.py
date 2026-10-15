@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""B4 – Enskilda linjeförslag: individuella effekter och verifiering mot dagens omlopp.
+"""B4 – Enskilda utredningsalternativ: individuella effekter och verifiering mot dagens omlopp.
 
-Förslag (beställarens urval efter granskningen av Fas A, 2026-10-14)
+UA (beställarens urval efter granskningen av Fas A, 2026-10-14)
   1a  Linje V till ny hållplats i Möckelö Strand via dagens gatunät (restid 3 min från hpl Möckelö Strand).
   1b  Som 1a men med Norrgårdsvägen förlängd till Hamnskärsvägen (restid 1 min till hållplatsen).
   2   Ny hållplats N2 på linje Ö (mellan Österkullagatan och Kalmarnäs vändplan, läge enligt A3).
@@ -39,8 +39,8 @@ Antaganden
   * Solberget indragen (linje Ö): bussen kör direkt mellan hållplatserna före och efter Solberget, med den
     kortaste tid som tidtabellen har för den direkta sträckan (1,6–2,5 min kortare per tur).
 Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py – omloppen följer normen att föraren byter linje
-S ↔ N och Ö ↔ V i centrum. Varje förslag prövas med alla turer; om det inte ryms prövas vilka turer som ryms,
-och om det ryms men ger fler varv utan reglering än i dag prövas en robust variant. Ryms ett förslag på linje V
+S ↔ N och Ö ↔ V i centrum. Varje UA prövas med alla turer; om det inte ryms prövas vilka turer som ryms,
+och om det ryms men ger fler varv utan reglering än i dag prövas en robust variant. Ryms ett UA på linje V
 inte med alla turer prövas dessutom sammanslagning av V och Ö till genomgående linje ('VO'): bussen fortsätter
 direkt som linje Ö (0,5 min) och Ö får avgå upp till 2 min efter pulsen (b4_omlopp.genomgaende_ryms).
 Effekter
@@ -48,7 +48,7 @@ Effekter
   * Resenärer: korrigerad OD-matris (A1) utlagd på restidsnätet (b4_natverk.py) – berörda resor och
     resenärsminuter; omräknat till vardag med kvoten påstigande/vardag ÷ OD-resor/h.
   * Tillkommande påstigande: påstigande per invånare inom 400 m vid linjens bostadshållplatser (sommardata).
-Utdata: data/processed/b4_forslag.json, b4_omlopp_scenarier.csv, b4_tackning_forslag.csv.gz, b4_forslag.gpkg
+Utdata: data/processed/b4_ua.json, b4_omlopp_scenarier.csv, b4_tackning_ua.csv.gz, b4_ua.gpkg
 """
 import json
 import sys
@@ -77,6 +77,12 @@ HPL = {'Möckelö Strand': '9025302000066401', 'Norrgårdsvägen ut': '902530200
 UPPEHALL = 0.5
 RESTID_BEFINTLIG_VAG = 2.0     # min – befintlig väg Norrgårdsvägen ↔ ny hållplats Möckelö Strand (beställaren)
 RESTID_FORLANGNING = 1.0       # min – förlängd Norrgårdsvägen, Möckelö Strand → ny hållplats (beställaren)
+# Utredningsalternativ (UA): titel och huvudalternativ = den mest realistiska driftformen, som visas på kartan.
+# Övriga driftformer redovisas i rapporten (alternativ som kräver fler bussar är uteslutna).
+TITEL = {'1a': 'UA 1a – Möckelö Strand ny via dagens vägar', '1b': 'UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen',
+         '2': 'UA 2 – N2 på linje Ö', '3': 'UA 3 – Linje N via Bo-Bil', '4': 'UA 4 – Linje V–Ö via flygplatsen'}
+HUVUD_TEXT = {'1a': 'V och Ö sammanslagna (Ö ≤ 2 min efter pulsen)', '1b': 'alla turer, bytet V → Ö 0,5 min',
+              '2': 'alla turer', '3': 'alla turer', '4': 'V och Ö sammanslagna, Solberget indragen'}
 KMH_FLYG = 25.0                # km/h – medelhastighet på omvägen till flygplatsen
 FLYG_AVGANGAR = ['07:15', '11:00', '17:10']     # Finavia, avgångar från Mariehamn 2026-10-14
 FLYG_ANKOMSTER = ['10:25', '16:35']             # antagande: 35 min före avgångarna 11:00 och 17:10 (ersätts)
@@ -94,12 +100,12 @@ def _a3():
 
 @lru_cache(maxsize=1)
 def mockelo():
-    """Tider och längder för Möckelö Strand-förslagen (1a, 1b)."""
+    """Tider och längder för Möckelö Strand-utredningsalternativen (1a, 1b)."""
     import s01_vagdragning as V
     t = O.turer(); v = t[t.linje == 'V'].iloc[0]
     g = D.gtfs()['stop_times']; st = g[g.trip_id == v.trip_id].set_index('stop_id')
     tillbaka = float(st.loc[HPL['Norrgårdsvägen in'], 't_arr'] - st.loc[HPL['Möckelö Strand'], 't_dep'])
-    fg = V.forslagsgeometri(); sg = V.segmentgeometri()
+    fg = V.uageometri(); sg = V.segmentgeometri()
     bef = fg[('NY_MOCKELO', HPL['Norrgårdsvägen in'])]
     return {'restid_befintlig_vag_min': RESTID_BEFINTLIG_VAG, 'restid_forlangning_min': RESTID_FORLANGNING,
             'tidtabell_mockelo_norrgardsvagen_min': round(tillbaka, 2),
@@ -115,9 +121,9 @@ def hhmm(x):
 
 @lru_cache(maxsize=1)
 def flygplatsen():
-    """Tider och längder för förslag 4 och när V-turerna är vid flygplatsen."""
+    """Tider och längder för UA 4 och när V-turerna är vid flygplatsen."""
     import s01_vagdragning as V
-    fg = V.forslagsgeometri(); sg = V.segmentgeometri()
+    fg = V.uageometri(); sg = V.segmentgeometri()
     ut_ = fg[(HPL['Posten'], 'FLYGPLATSEN')]; ti_ = fg[('FLYGPLATSEN', HPL['Källarvägen'])]
     idag = V.langd(sg[(HPL['Posten'], HPL['Källarvägen'])])
     extra = ut_['langd_m'] + ti_['langd_m'] - idag
@@ -172,30 +178,35 @@ def solberget_delta(t):
     return ut
 
 
-def forslag():
+def alternativ():
     mockelo_, n2 = _a3()
     m = mockelo()
     gem = {'linje': 'V', 'typ': 'ny', 'xy': mockelo_, 'hpl_namn': 'Möckelö Strand ny',
            'segment': (HPL['Möckelö Strand'], None), 'genomgaende': [('V', 'Ö')]}
     ut = [{**gem, 'id': '1a', 'namn': 'Linje V till Möckelö Strand ny via dagens vägar', 'kort': '1a Möckelö Strand',
+           'titel': TITEL['1a'], 'huvud': 'VO',
            'korvag': 'Norrgårdsvägen → befintlig väg → ny hållplats → samma väg tillbaka (efter Möckelö Strand som i dag)',
            'delta': 2 * RESTID_BEFINTLIG_VAG + UPPEHALL,
            'km_tur': 2 * m['langd_befintlig_vag_m'] / 1000},
           {**gem, 'id': '1b', 'namn': 'Linje V till Möckelö Strand ny via förlängd Norrgårdsvägen (slinga)',
+           'titel': TITEL['1b'], 'huvud': 'alla',
            'kort': '1b Möckelö Strand',
            'korvag': 'Möckelö Strand → förlängd Norrgårdsvägen → ny hållplats → befintlig väg → Norrgårdsvägen',
            'delta': RESTID_FORLANGNING + UPPEHALL + RESTID_BEFINTLIG_VAG - m['tidtabell_mockelo_norrgardsvagen_min'],
            'delta_konservativ': RESTID_FORLANGNING + UPPEHALL + RESTID_BEFINTLIG_VAG,
            'km_tur': (m['langd_forlangning_m'] + m['langd_befintlig_vag_m'] - m['langd_mockelo_norrgardsvagen_m']) / 1000}]
     ut.append({'id': '2', 'namn': 'Ny hållplats N2 på linje Ö', 'kort': '2 N2 linje Ö', 'linje': 'Ö', 'typ': 'ny',
+               'titel': TITEL['2'], 'huvud': 'alla',
                'xy': n2, 'hpl_namn': 'N2', 'segment': (HPL['Österkullagatan'], HPL['Kalmarnäs vändplan']),
                'delta': UPPEHALL, 'km_tur': 0.0, 'genomgaende': [('Ö', 'V')]})
     ut.append({'id': '3', 'namn': 'Linje N via Bo-Bil i stället för Vikingagränd', 'kort': '3 N via Bo-Bil',
+               'titel': TITEL['3'], 'huvud': 'alla',
                'linje': 'N', 'typ': 'byt', 'bort': HPL['Vikingagränd'], 'till': [HPL['Bo-Bil A'], HPL['Bo-Bil B']],
                'delta': None, 'km_tur': None, 'genomgaende': []})
     import s01_vagdragning as V
     fp = flygplatsen()
     ut.append({'id': '4', 'namn': 'Linje V till flygplatsen', 'kort': '4 V till flygplatsen', 'linje': 'V', 'typ': 'ny',
+               'titel': TITEL['4'], 'huvud': 'VO_sol',
                'xy': V.FLYGPLATSEN_XY, 'hpl_namn': 'Flygplatsen', 'segment': (HPL['Posten'], HPL['Källarvägen']),
                'korvag': 'Posten → flygplatsen (slinga runt terminalen) → Norra Svibyvägen → Källarvägen',
                'delta': fp['delta_min_per_tur'], 'km_tur': fp['extra_km_per_tur'], 'genomgaende': [('V', 'Ö')],
@@ -227,7 +238,7 @@ def bobil_delta(xy):
 
 # ====================================================================== omlopp
 def omlopp_scenarier(f, t, r, ref):
-    """Verifierar förslaget mot omloppen (normen: byte S ↔ N och Ö ↔ V, se b4_omlopp).
+    """Verifierar UA:t mot omloppen (normen: byte S ↔ N och Ö ↔ V, se b4_omlopp).
       alla          alla berörda turer
       ryms          (om alla inte ryms) turerna prövas en i taget
       robust        (om alla ryms men ger fler varv utan reglering än i dag) turer som kan ändras utan det
@@ -284,8 +295,11 @@ def omlopp_scenarier(f, t, r, ref):
     return scen
 
 
-def drift(scen):
-    """Driftform: alla turer om de ryms, annars genomgående V/Ö om det prövats, annars de turer som ryms."""
+def drift(f, scen):
+    """Huvudalternativ (den mest realistiska driftformen, f['huvud']); annars alla turer om de ryms, annars
+    genomgående V/Ö om det prövats, annars de turer som ryms."""
+    if f.get('huvud') in scen and scen[f['huvud']]['ok']:
+        return f['huvud']
     return 'alla' if scen['alla']['ok'] else ('VO' if 'VO' in scen else 'ryms')
 
 
@@ -377,37 +391,37 @@ def resenarseffekt(f, zoner, mon0, nat0, andel_turer, extra=None):
 
 # ====================================================================== geometri
 def geometri(f, trafikerar, xy, fg, sg):
-    """Förslagets objekt för kartor och GIS. Linjer som MultiLineString med en del per hållplatssegment (kan bytas
+    """UA:ts objekt för kartor och GIS. Linjer som MultiLineString med en del per hållplatssegment (kan bytas
     mot OSRM-rutter i QGIS, rutta_med_osrm.py); planerad_del = 'från>till' för en väg som inte finns i dag."""
     import shapely
     import s01_vagdragning as V
     ml = lambda *d: shapely.MultiLineString([LineString(x) for x in d])
     n = len(trafikerar)
     if f['typ'] == 'ny':
-        ut = [{'forslag': f['id'], 'objekt': 'ny hållplats', 'namn': f['hpl_namn'], 'linje': f['linje'], 'avgangar': n,
+        ut = [{'ua': f['id'], 'objekt': 'ny hållplats', 'namn': f['hpl_namn'], 'linje': f['linje'], 'avgangar': n,
                'geometry': Point(*f['xy'])}]
         if f['id'] == '4':
             a_, b_ = fg[(HPL['Posten'], 'FLYGPLATSEN')], fg[('FLYGPLATSEN', HPL['Källarvägen'])]
             vag = {'osrm': 'OSRM', 'skiss': 'beställarens skiss'}.get(a_['kalla'], 'schematisk')
             sl = xy.loc[HPL['Solberget'], ['x', 'y']].to_numpy(float)
-            ut += [{'forslag': '4', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
+            ut += [{'ua': '4', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
                     'namn': 'Posten – flygplatsen – Norra Svibyvägen', 'linje': 'V', 'avgangar': n, 'planerad_del': '',
                     'geometry': ml(a_['xy'], b_['xy'])},
-                   {'forslag': '4', 'objekt': 'hållplats dras in (variant)', 'namn': 'Solberget (linje Ö)', 'linje': 'Ö',
+                   {'ua': '4', 'objekt': 'hållplats dras in', 'namn': 'Solberget (linje Ö)', 'linje': 'Ö',
                     'avgangar': 0, 'geometry': Point(*sl)}]
         elif f['linje'] == 'V':
             ni, ny = HPL['Norrgårdsvägen in'], 'NY_MOCKELO'
             bef = fg[(ni, ny)]
             vag = {'osrm': 'OSRM', 'skiss': 'beställarens skiss'}.get(bef['kalla'], 'schematisk')
             if f['id'] == '1a':
-                ut.append({'forslag': '1a', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
+                ut.append({'ua': '1a', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
                            'namn': 'Norrgårdsvägen – Möckelö Strand ny, fram och tillbaka (2 min)', 'linje': 'V',
                            'avgangar': n, 'planerad_del': '', 'geometry': ml(bef['xy'], fg[(ny, ni)]['xy'])})
             else:
-                ut.append({'forslag': '1b', 'objekt': 'ny körväg, planerad väg', 'vagdragning': 'schematisk (planerad väg)',
+                ut.append({'ua': '1b', 'objekt': 'ny körväg, planerad väg', 'vagdragning': 'schematisk (planerad väg)',
                            'namn': 'Förlängd Norrgårdsvägen: Möckelö Strand – Möckelö Strand ny (1 min)', 'linje': 'V',
                            'avgangar': n, 'planerad_del': '>'.join(V.PLANERAD_VAG), 'geometry': ml(V.planerad_vag())})
-                ut.append({'forslag': '1b', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
+                ut.append({'ua': '1b', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag,
                            'namn': 'Möckelö Strand ny – Norrgårdsvägen (2 min)', 'linje': 'V', 'avgangar': n,
                            'planerad_del': '', 'geometry': ml(fg[(ny, ni)]['xy'])})
         return ut
@@ -419,13 +433,13 @@ def geometri(f, trafikerar, xy, fg, sg):
     ny_ = [fg[(mx, bb)], fg[(bb, bv)]]
     vag_ny = 'OSRM' if all(x['kalla'] == 'osrm' for x in ny_) else 'schematisk'
     vag_gl = 'OSRM' if V.kalla_text().startswith('Linjernas') else 'schematisk'
-    return [{'forslag': '3', 'objekt': 'hållplats utgår för linje N', 'namn': 'Vikingagränd', 'linje': 'N', 'avgangar': 0,
+    return [{'ua': '3', 'objekt': 'hållplats utgår för linje N', 'namn': 'Vikingagränd', 'linje': 'N', 'avgangar': 0,
              'geometry': Point(*v)},
-            {'forslag': '3', 'objekt': 'ny hållplats för linje N', 'namn': 'Bo-Bil', 'linje': 'N', 'avgangar': n,
+            {'ua': '3', 'objekt': 'ny hållplats för linje N', 'namn': 'Bo-Bil', 'linje': 'N', 'avgangar': n,
              'geometry': Point(*bo)},
-            {'forslag': '3', 'objekt': 'körväg utgår', 'vagdragning': vag_gl, 'namn': 'Maxinge – Vikingagränd – Bolstavägen',
+            {'ua': '3', 'objekt': 'körväg utgår', 'vagdragning': vag_gl, 'namn': 'Maxinge – Vikingagränd – Bolstavägen',
              'linje': 'N', 'avgangar': 0, 'planerad_del': '', 'geometry': g_gammal},
-            {'forslag': '3', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag_ny, 'namn': 'Maxinge – Bo-Bil – Bolstavägen',
+            {'ua': '3', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag_ny, 'namn': 'Maxinge – Bo-Bil – Bolstavägen',
              'linje': 'N', 'avgangar': n, 'planerad_del': '', 'geometry': ml(ny_[0]['xy'], ny_[1]['xy'])}]
 
 
@@ -442,7 +456,7 @@ def main():
     mon0 = N.monster(); nat0 = N.Nat(mon0, zoner)
     bb = bobil_delta(xy)
     import s01_vagdragning as V
-    fg = V.forslagsgeometri(); sg = V.segmentgeometri()
+    fg = V.uageometri(); sg = V.segmentgeometri()
 
     kontroll = {f'{a_}→{b_}': {'kalla': v_['kalla'], 'langd_m': round(v_['langd_m']),
                                 'tid_min': None if np.isnan(v_['tid_s']) else round(v_['tid_s'] / 60, 1)}
@@ -462,18 +476,18 @@ def main():
            'antaganden': {'uppehall_min': UPPEHALL, 'mockelo': mockelo(), 'max_skift_partner_min': O.MAX_SKIFT_PARTNER,
                           'bobil': bb, 'pastigande_per_inv': {k: v for k, v in rate.items() if k != 'per_hpl'},
                           'dagsfaktor': round(N.dagsfaktor(), 2)},
-           'forslag': {}}
+           'ua': {}}
     tl = t.set_index('trip_id')
     planer, tack, geo = [plan0.assign(scenario='idag', delta=0.0, skift=0.0)], [], []
-    for f in forslag():
+    for f in alternativ():
         if f['typ'] == 'byt':
             f['delta'], f['km_tur'] = bb['delta_min'], bb['delta_km']
         scen = omlopp_scenarier(f, t, r, ref)
-        val = drift(scen)
+        val = drift(f, scen)
         trafikerar = scen[val]['turer']
         alla_linjeturer = int((t.linje == f['linje']).sum())
         tk, p = tackning(pkt, hpl0, f, trafikerar, xy)
-        tack.append(p.assign(forslag=f['id']))
+        tack.append(p.assign(ua=f['id']))
         andel = len(trafikerar) / max(len(scen['alla']['turer']), 1)
         re = resenarseffekt(f, zoner, mon0, nat0, andel)
         r_ln = rate.get(f['linje'], rate['alla'])
@@ -482,7 +496,8 @@ def main():
             nara = {'1a': 'Möckelö Strand', '1b': 'Möckelö Strand', '2': 'Kalmarnäs vändplan'}.get(f['id'])
         r_hi = rate['per_hpl'].get(nara, r_ln) if nara else r_ln
         alla_berorda = set(scen['alla']['turer'])
-        ut = {'namn': f['namn'], 'linje': f['linje'], 'korvag': f.get('korvag', ''),
+        ut = {'namn': f['namn'], 'titel': f['titel'], 'huvudalternativ': val, 'huvud_text': HUVUD_TEXT[f['id']],
+              'linje': f['linje'], 'korvag': f.get('korvag', ''),
               'delta_min_per_tur': round(f['delta'], 2), 'km_per_tur': round(f['km_tur'], 2),
               'delta_konservativ_min_per_tur': f.get('delta_konservativ'),
               'linjens_turer': alla_linjeturer, 'turer_som_trafikerar': len(trafikerar), 'driftform': val,
@@ -498,7 +513,7 @@ def main():
             ut['nytt_pastigande_vardag'] = [round(tk['ny_tackning_inv'] * r_ln * andel, 2),
                                             round(tk['ny_tackning_inv'] * max(r_hi, r_ln) * andel, 2)]
             ut['xy'] = list(map(float, f['xy']))
-        res['forslag'][f['id']] = ut
+        res['ua'][f['id']] = ut
         for k, s in scen.items():
             pl = s['plan'].copy(); pl['scenario'] = f"{f['id']}_{k}"
             planer.append(pl)
@@ -511,9 +526,9 @@ def main():
                   f"omloppstid={s['nt']['omloppstid_h']} km={s['nt']['km']}")
 
     pd.concat(planer).drop(columns=['monster']).to_csv(P / 'b4_omlopp_scenarier.csv', index=False)
-    pd.concat(tack).round({'x': 1, 'y': 1, 'bef': 5}).to_csv(P / 'b4_tackning_forslag.csv.gz', index=False)
-    gpd.GeoDataFrame(geo, crs=C.CRS_METRISK).to_file(P / 'b4_forslag.gpkg', layer='forslag', driver='GPKG')
-    with open(P / 'b4_forslag.json', 'w', encoding='utf-8') as fh:
+    pd.concat(tack).round({'x': 1, 'y': 1, 'bef': 5}).to_csv(P / 'b4_tackning_ua.csv.gz', index=False)
+    gpd.GeoDataFrame(geo, crs=C.CRS_METRISK).to_file(P / 'b4_ua.gpkg', layer='ua', driver='GPKG')
+    with open(P / 'b4_ua.json', 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1, default=float)
 
 

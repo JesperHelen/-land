@@ -1,25 +1,24 @@
 # 5 Ekonomisk kalkyl (överslag)
 
-> **Sammanfattning.** Förslagen har kalkylerats var för sig.
+> **Sammanfattning.** Varje utredningsalternativ (UA) har kalkylerats för sig, i alla driftformer
+> (★ = huvudalternativ).
 >
-> - **1a med alla turer:** en ny hållplats i Möckelö Strand via dagens vägar kräver en sjätte buss. Driftkostnaden
->   ökar då med cirka 216 000 euro per år (175 000–258 000).
-> - **1a med V och Ö sammanslagna:** bussen fortsätter direkt från linje V till linje Ö, och Ö avgår upp till
->   2 minuter efter pulsen. Då trafikerar 17 av 20 turer hållplatsen med dagens fem bussar, för cirka
->   12 000 euro per år (10 000–16 000).
-> - **1b:** med förlängd Norrgårdsvägen trafikerar alla 20 turer hållplatsen, för cirka 8 000 euro per år
->   (6 000–11 000).
-> - **2 (N2):** praktiskt taget kostnadsneutralt.
-> - **3 (Bo-Bil):** sparar cirka 2 000 euro per år.
-> - **4 (flygplatsen):**
->   - med alla turer krävs en sjätte buss, cirka 209 000 euro per år;
->   - med V och Ö sammanslagna (19–20 av 20 turer) cirka 7 000 euro per år;
->   - Y-versionen med de 8 flygturerna cirka 2 300 euro per år.
+> - **UA 1a – Möckelö Strand ny via dagens vägar:**
+>   - ★ med V och Ö sammanslagna (17 av 20 turer, fem bussar): cirka 12 000 euro per år (10 000–16 000);
+>   - alla turer med dagens tidtabell kräver en sjätte buss, cirka 216 000 euro per år, och är utesluten.
+> - **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen ★:** alla 20 turer, cirka 8 000 euro per år
+>   (6 000–11 000), utöver vägen.
+> - **UA 2 – N2 på linje Ö ★:** praktiskt taget kostnadsneutralt.
+> - **UA 3 – Linje N via Bo-Bil ★:** sparar cirka 2 000 euro per år.
+> - **UA 4 – Linje V–Ö via flygplatsen:**
+>   - ★ V och Ö sammanslagna med Solberget indragen (20 av 20 turer): cirka 7 000 euro per år;
+>   - UA 4Y med de 8 flygturerna: cirka 2 300 euro per år;
+>   - bara förlängning av V kräver en sjätte buss, cirka 209 000 euro per år, och är utesluten.
 >
-> Ur busstrafikens perspektiv är vägförlängningen motiverad om den kostar mindre än 2,4–3,5 miljoner euro, om
-> alternativet är 1a med en extra buss. Jämfört med 1a med V och Ö sammanslagna blir driftbesparingen bara
-> cirka 4 000 euro per år. Vägen motiveras då av robusthet, kortare restid och de sista tre turerna, inte av
-> busstrafikens driftkostnad.
+> Förlängningen av Norrgårdsvägen (UA 1b) är motiverad ur busstrafikens perspektiv om den kostar mindre än
+> 2,4–3,5 miljoner euro, om jämförelsen är UA 1a med en extra buss. Mot huvudalternativet för UA 1a är
+> driftbesparingen bara cirka 4 000 euro per år. Vägen motiveras då av robusthet, kortare restid och de sista
+> tre turerna, inte av busstrafikens driftkostnad.
 
 ## 5.1 Metod och antaganden
 
@@ -52,30 +51,30 @@ Kalkylen omfattar förändrad driftkostnad per år jämfört med i dag:
 
 ## 5.2 Resultat
 
-*Tabell 5.1. Förändrad driftkostnad per år jämfört med i dag (euro, prisnivå 2026). Varje förslag för sig.*
+*Tabell 5.1. Förändrad driftkostnad per år jämfört med i dag (euro, prisnivå 2026). Varje UA för sig.*
 
-| Förslag | Bussar | Fordonstimmar per år | Fordonskm per år | Driftkostnad per år, bas (låg–hög) | Per invånare med bättre tillgänglighet |
+| UA | Bussar | Fordonstimmar per år | Fordonskm per år | Driftkostnad per år, bas (låg–hög) | Per invånare med bättre tillgänglighet |
 |---|---|---|---|---|---|
-| 1a dagens vägar, alla 20 turer | +1 | +2 860 | +14 300 | +216 000 (175 000–258 000) | 1 206 €/år |
-| 1a dagens vägar, dagens tidtabell (9 av 20 turer) | 0 | +38 | +6 400 | +7 700 (6 100–9 900) | 43 €/år |
-| 1a dagens vägar, V och Ö sammanslagna (17 av 20 turer) | 0 | +28 | +12 100 | +12 300 (9 600–16 100) | 69 €/år |
-| 1b förlängd Norrgårdsvägen, slinga (20 av 20 turer) | 0 | +12 | +8 400 | +8 200 (6 400–10 800) | 46 €/år |
-| 2 N2 på linje Ö | 0 | +2 | 0 | ±0 | – |
-| 3 Linje N via Bo-Bil | 0 | 0 | −2 500 | −2 200 | – |
-| 4 flygplatsen, alla 20 turer | +1 | +2 850 | +7 300 | +209 000 (170 000–249 000) | 10 452 €/år |
-| 4 flygplatsen, V och Ö sammanslagna (19 av 20 turer) | 0 | +22 | +6 900 | +7 300 (5 800–9 600) | 366 €/år |
-| 4 flygplatsen, dito + Solberget indragen (20 av 20) | 0 | +12 | +7 300 | +7 200 (5 600–9 400) | 358 €/år |
-| 4Y flygturerna (8 av 8), dito | 0 | −10 | +3 100 | +2 300 (1 800–3 200) | 115 €/år |
+| UA 1a dagens vägar, alla 20 turer – utesluten | +1 | +2 860 | +14 300 | +216 000 (175 000–258 000) | 1 206 €/år |
+| UA 1a dagens vägar, dagens tidtabell (9 av 20 turer) | 0 | +38 | +6 400 | +7 700 (6 100–9 900) | 43 €/år |
+| UA 1a ★ dagens vägar, V och Ö sammanslagna (17 av 20 turer) | 0 | +28 | +12 100 | +12 300 (9 600–16 100) | 69 €/år |
+| UA 1b ★ förlängd Norrgårdsvägen, slinga (20 av 20 turer) | 0 | +12 | +8 400 | +8 200 (6 400–10 800) | 46 €/år |
+| UA 2 ★ N2 på linje Ö | 0 | +2 | 0 | ±0 | – |
+| UA 3 ★ Linje N via Bo-Bil | 0 | 0 | −2 500 | −2 200 | – |
+| UA 4 flygplatsen, alla 20 turer – utesluten | +1 | +2 850 | +7 300 | +209 000 (170 000–249 000) | 10 452 €/år |
+| UA 4 flygplatsen, V och Ö sammanslagna (19 av 20 turer) | 0 | +22 | +6 900 | +7 300 (5 800–9 600) | 366 €/år |
+| UA 4 ★ flygplatsen, dito + Solberget indragen (20 av 20) | 0 | +12 | +7 300 | +7 200 (5 600–9 400) | 358 €/år |
+| UA 4Y flygturerna (8 av 8), dito | 0 | −10 | +3 100 | +2 300 (1 800–3 200) | 115 €/år |
 
-Kostnaden per invånare med bättre tillgänglighet är inte rättvisande för förslag 4. Nyttan gäller främst
+Kostnaden per invånare med bättre tillgänglighet är inte rättvisande för UA 4. Nyttan gäller främst
 flygresenärer, som inte finns i OD-matrisen.
 
-**Förslag 1a med alla turer.** Merkostnaden domineras av den sjätte bussen, cirka 60 000 euro per år, och
+**UA 1a med alla turer.** Merkostnaden domineras av den sjätte bussen, cirka 60 000 euro per år, och
 dess förartimmar, cirka 143 000 euro per år. Kan operatören använda en befintlig reservbuss faller
 fordonskostnaden bort, och driftkostnaden blir cirka 156 000 euro per år. Reserven för fordonsbortfall
 minskar då.
 
-**Förslag 1a med V och Ö sammanslagna.** Bussen fortsätter direkt som linje Ö efter en halv minut, och 14
+**UA 1a med V och Ö sammanslagna.** Bussen fortsätter direkt som linje Ö efter en halv minut, och 14
 Ö-turer avgår upp till 2 minuter efter pulsen (avsnitt 4.5). Kostnaden är nästan bara körda kilometer
 (omvägen är 2,7 km per tur). Antalet bussar och fordonstimmar är i praktiken oförändrat.
 
@@ -97,7 +96,7 @@ hållplatsen i Möckelö Strand. Biljettintäkterna påverkar därför inte bed�
 
 ![Figur 5.1](../output/kartor/b5_1_kalkyl.png)
 
-*Figur 5.1. Förändrad driftkostnad per år per förslag (bas; strecken anger låg–hög) och nyckeltal.*
+*Figur 5.1. Förändrad driftkostnad per år per UA (bas; strecken anger låg–hög) och nyckeltal.*
 
 ## 5.3 Osäkerheter
 

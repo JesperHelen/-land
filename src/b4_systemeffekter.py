@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""B4 – Systemeffekter av de enskilda linjeförslagen (täckningsgrad före/efter, omlopp, resenärer) och
+"""B4 – Systemeffekter av de enskilda utredningsalternativen (täckningsgrad före/efter, omlopp, resenärer) och
 sammanslagning av linje V och Ö.
 
-Förslagen redovisas var för sig (inga paket). Omloppen följer normen att föraren byter linje i centrum Syd ↔ Norr
-(S ↔ N) och Öst ↔ Väst (Ö ↔ V), se b4_omlopp.py. Scenarier (driftformerna kommer från b4_forslag.omlopp_scenarier):
+Utredningsalternativen redovisas var för sig. Omloppen följer normen att föraren byter linje i centrum Syd ↔ Norr
+(S ↔ N) och Öst ↔ Väst (Ö ↔ V), se b4_omlopp.py. Scenarier (driftformerna kommer från b4_ua.omlopp_scenarier):
   idag      Dagens linjenät.
   1a        Möckelö Strand ny via dagens vägar (+4,5 min/tur), alla turer – kräver fler bussar (kostnadsunderlag).
   1a_ryms   1a med dagens tidtabell, bara de turer som ryms i omloppen.
@@ -38,11 +38,11 @@ import data_las as D  # noqa: E402
 import kartlib as K  # noqa: E402
 import b4_omlopp as O  # noqa: E402
 import b4_natverk as N  # noqa: E402
-import b4_forslag as F  # noqa: E402
+import b4_ua as F  # noqa: E402
 from a2_tackning import KLASSER, avgangar_inom, hallplatser_med_avgangar, klass, sammanstall  # noqa: E402
 
 P = C.PROCESSED
-# id, förslag, driftform (nyckel i b4_forslag.omlopp_scenarier)
+# id, UA, driftform (nyckel i b4_ua.omlopp_scenarier)
 SCENARIER = [('idag', None, None), ('1a', '1a', 'alla'), ('1a_ryms', '1a', 'ryms'), ('1a_VO', '1a', 'VO'),
              ('1b', '1b', 'alla'), ('2', '2', 'alla'), ('3', '3', 'alla'),
              ('4', '4', 'alla'), ('4_VO', '4', 'VO'), ('4_VO_sol', '4', 'VO_sol'), ('4_Y', '4', 'Y_VO_sol')]
@@ -51,7 +51,7 @@ BATTRE, SAMRE = '#2f9e44', '#c0392b'
 
 def atgarder():
     xy = F.stopp_xy()
-    ut = {f['id']: f for f in F.forslag()}
+    ut = {f['id']: f for f in F.alternativ()}
     bb = F.bobil_delta(xy)
     ut['3']['delta'], ut['3']['km_tur'] = bb['delta_min'], bb['delta_km']
     ut['sol'] = {'id': 'sol', 'typ': 'indrag', 'linje': 'Ö', 'bort': F.HPL['Solberget'], 'till': [], 'delta': None}
@@ -65,28 +65,32 @@ def berorda_turer(f, t):
     return list(lt.sort_values('avg').trip_id)
 
 
+UTESLUTEN = ('1a', '4')        # driftformer som kräver fler bussar – uteslutna, redovisas bara i rapporten
+HUVUD = {'1a_VO': '1a', '1b': '1b', '2': '2', '3': '3', '4_VO_sol': '4'}   # huvudalternativ per UA (kartan)
+
+
 def namn(sid, v):
-    n, tot = v.get('turer', 0), v.get('turer_tot', 0)
+    n, tot, b = v.get('turer', 0), v.get('turer_tot', 0), v['omlopp']['fordon']
     return {'idag': 'I dag',
-            '1a': f"1a Möckelö Strand ny via dagens vägar – alla {tot} turer ({v['omlopp']['fordon']} bussar)",
-            '1a_ryms': f"1a – dagens tidtabell, {n} av {tot} turer",
-            '1a_VO': f"1a – V och Ö sammanslagna (Ö ≤ 2 min efter pulsen), {n} av {tot} turer",
-            '1b': f"1b Möckelö Strand ny via förlängd Norrgårdsvägen – alla {tot} turer",
-            '2': '2 N2 på linje Ö', '3': '3 Linje N via Bo-Bil',
-            '4': f"4 Linje V till flygplatsen – alla {tot} turer ({v['omlopp']['fordon']} bussar)",
-            '4_VO': f"4 – V och Ö sammanslagna, {n} av {tot} turer",
-            '4_VO_sol': f"4 – V och Ö sammanslagna, Solberget indragen, {n} av {tot} turer",
-            '4_Y': f"4Y – bara turerna för flygen ({n} av {tot}), V och Ö sammanslagna, Solberget indragen"}[sid]
+            '1a': f"UA 1a Möckelö Strand ny via dagens vägar – alla {tot} turer, dagens tidtabell ({b} bussar, utesluten)",
+            '1a_ryms': f"UA 1a – dagens tidtabell, {n} av {tot} turer",
+            '1a_VO': f"UA 1a – V och Ö sammanslagna (Ö ≤ 2 min efter pulsen), {n} av {tot} turer (huvudalternativ)",
+            '1b': f"UA 1b Möckelö Strand ny via förlängd Norrgårdsvägen – alla {tot} turer (huvudalternativ)",
+            '2': 'UA 2 N2 på linje Ö (huvudalternativ)', '3': 'UA 3 Linje N via Bo-Bil (huvudalternativ)',
+            '4': f"UA 4 Linje V till flygplatsen – alla {tot} turer, dagens tidtabell ({b} bussar, utesluten)",
+            '4_VO': f"UA 4 – V och Ö sammanslagna, {n} av {tot} turer",
+            '4_VO_sol': f"UA 4 – V och Ö sammanslagna, Solberget indragen, {n} av {tot} turer (huvudalternativ)",
+            '4_Y': f"UA 4Y – bara turerna för flygen ({n} av {tot}), V och Ö sammanslagna, Solberget indragen"}[sid]
 
 
 def kort(sid, v):
-    n, tot = v.get('turer', 0), v.get('turer_tot', 0)
-    return {'idag': 'I dag', '1a': f"1a alla turer\n({v['omlopp']['fordon']} bussar)",
-            '1a_ryms': f"1a dagens tidtabell\n({n} av {tot} turer)",
-            '1a_VO': f"1a V och Ö samman-\nslagna ({n} av {tot} turer)",
-            '1b': f"1b förlängd Norr-\ngårdsvägen ({n} av {tot})", '2': '2 N2 linje Ö', '3': '3 N via Bo-Bil',
-            '4': f"4 flygplatsen alla\nturer ({v['omlopp']['fordon']} bussar)", '4_VO': f"4 V och Ö samman-\nslagna ({n} av {tot} turer)",
-            '4_VO_sol': f"4 dito + Solberget\nindragen ({n} av {tot})", '4_Y': f"4Y flygturerna\n({n} av {tot}), dito"}[sid]
+    n, tot, b = v.get('turer', 0), v.get('turer_tot', 0), v['omlopp']['fordon']
+    return {'idag': 'I dag', '1a': f"UA 1a alla turer\n({b} bussar – utesluten)",
+            '1a_ryms': f"UA 1a dagens tidtabell\n({n} av {tot} turer)",
+            '1a_VO': f"UA 1a ★ V och Ö samman-\nslagna ({n} av {tot} turer)",
+            '1b': f"UA 1b ★ förlängd Norr-\ngårdsvägen ({n} av {tot})", '2': 'UA 2 ★ N2 linje Ö', '3': 'UA 3 ★ N via Bo-Bil',
+            '4': f"UA 4 alla turer\n({b} bussar – utesluten)", '4_VO': f"UA 4 V och Ö samman-\nslagna ({n} av {tot} turer)",
+            '4_VO_sol': f"UA 4 ★ dito + Solberget\nindragen ({n} av {tot})", '4_Y': f"UA 4Y flygturerna\n({n} av {tot}), dito"}[sid]
 
 
 # ====================================================================== täckning
@@ -114,7 +118,7 @@ def hallplatser_scenario(hpl0, atg, turer, xy):
 
 # ====================================================================== resenärer
 def monster_scenario(mon0, atg, turer, t, gen=()):
-    """Mönster med förslagens körtider; andelen turer som trafikerar en åtgärd skalar tillägget."""
+    """Mönster med UA:ns körtider; andelen turer som trafikerar en åtgärd skalar tillägget."""
     mon = []
     for m in mon0:
         m = dict(m); m['akt'] = m['akt'].copy(); s = list(m['stopp'])
@@ -195,7 +199,7 @@ def berakna():
         gen = [('V', 'Ö')] if k and 'VO' in k else []
         rs = resenarer(nat0, monster_scenario(mon0, atg, turer, t, gen), zoner) if turer else \
             {'resenarsminuter_vardag': 0.0, 'resor_langre_vardag': 0.0, 'resor_kortare_vardag': 0.0}
-        v = {'forslag': fid, 'driftform': k, 'ryms': bool(ok), 'robust': bool(rob),
+        v = {'ua': fid, 'driftform': k, 'ryms': bool(ok), 'robust': bool(rob),
              'fler_bussar': bool(nt['fordon'] > r['fordon']), 'omlopp': nt,
              'turer': len(turer.get(fid, [])),
              'turer_tot': (len(F.flygturer(t)) if k.startswith('Y') else len(berorda_turer(atg[fid], t))) if fid else 0,
@@ -246,8 +250,8 @@ def sv(x, d=1):
 def tidsbudget(fid='1a'):
     """Varv V → Ö → V (60 min) i rusning och i varv med Ö:s skoltur: körtider och byten per alternativ."""
     prof = json.load(open(P / 'b4_omlopp_nyckeltal.json', encoding='utf-8'))['linjer']
-    res_f = json.load(open(P / 'b4_forslag.json', encoding='utf-8'))
-    fs = res_f['forslag']
+    res_f = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
+    fs = res_f['ua']
     tv, to = prof['V']['kortid_median'], prof['Ö']['kortid_median']
     pl = pd.read_csv(P / 'b4_omlopp_idag.csv')
     skol = float(pl[(pl.linje == 'Ö') & pl.avg.between(13 * 60, 16 * 60)].kortid.max())   # eftermiddagens skolturer
@@ -256,22 +260,22 @@ def tidsbudget(fid='1a'):
     if fid == '1a':
         d1a, d1b = fs['1a']['delta_min_per_tur'], fs['1b']['delta_min_per_tur']
         return rader + [
-            (f'1b +{sv(d1b)} min – rusning', tv + d1b, to, 0.0), (f'1b +{sv(d1b)} min – varv med Ö-skoltur', tv + d1b, skol, 0.0),
-            (f'1a +{sv(d1a)} min – dagens tidtabell', tv + d1a, to, 0.0),
-            (f'1a +{sv(d1a)} min – V och Ö sammanslagna, Ö ≤ {sv(sk, 0)} min efter pulsen', tv + d1a, to, sk),
-            (f'1a +{sv(d1a)} min – sammanslagna, varv med Ö-skoltur', tv + d1a, skol, sk)]
+            (f'UA 1b +{sv(d1b)} min – rusning', tv + d1b, to, 0.0), (f'UA 1b +{sv(d1b)} min – varv med Ö-skoltur', tv + d1b, skol, 0.0),
+            (f'UA 1a +{sv(d1a)} min – dagens tidtabell', tv + d1a, to, 0.0),
+            (f'UA 1a +{sv(d1a)} min – V och Ö sammanslagna, Ö ≤ {sv(sk, 0)} min efter pulsen', tv + d1a, to, sk),
+            (f'UA 1a +{sv(d1a)} min – sammanslagna, varv med Ö-skoltur', tv + d1a, skol, sk)]
     d4 = fs['4']['delta_min_per_tur']
     sol = np.mean([v for k, v in res_f['solberget_indragen']['besparing_min_per_tur'].items() if k in ('13:10', '14:10', '15:10')])
     return rader + [
-        (f'4 +{sv(d4)} min – dagens tidtabell', tv + d4, to, 0.0),
-        (f'4 +{sv(d4)} min – V och Ö sammanslagna, Ö ≤ {sv(sk, 0)} min efter pulsen', tv + d4, to, sk),
-        (f'4 +{sv(d4)} min – sammanslagna, varv med Ö-skoltur', tv + d4, skol, sk),
-        (f'4 +{sv(d4)} min – sammanslagna, Solberget indragen (Ö −{sv(sol)} min), skoltur', tv + d4, skol - sol, sk),
-        (f'4 +{sv(d4 + 1)} min (känslighet) – sammanslagna, rusning', tv + d4 + 1, to, sk)]
+        (f'UA 4 +{sv(d4)} min – dagens tidtabell', tv + d4, to, 0.0),
+        (f'UA 4 +{sv(d4)} min – V och Ö sammanslagna, Ö ≤ {sv(sk, 0)} min efter pulsen', tv + d4, to, sk),
+        (f'UA 4 +{sv(d4)} min – sammanslagna, varv med Ö-skoltur', tv + d4, skol, sk),
+        (f'UA 4 +{sv(d4)} min – sammanslagna, Solberget indragen (Ö −{sv(sol)} min), skoltur', tv + d4, skol - sol, sk),
+        (f'UA 4 +{sv(d4 + 1)} min (känslighet) – sammanslagna, rusning', tv + d4 + 1, to, sk)]
 
 
 def fig_vo(res, fid='1a'):
-    fs = json.load(open(P / 'b4_forslag.json', encoding='utf-8'))['forslag']
+    fs = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['ua']
     rader = tidsbudget(fid)
     fig = plt.figure(figsize=(14.2, 6.4 if fid == '1a' else 7.0))
     gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1.1], wspace=0.04, left=0.01, right=0.99, top=0.86, bottom=0.17)
@@ -325,19 +329,19 @@ def fig_vo(res, fid='1a'):
     tot = fs[fid]['linjens_turer']
     if fid == '1a':
         b = fs['1b']['omlopp']
-        rad = [('1a dagens tidtabell', o['ryms'], tot), ('1a V och Ö sammanslagna', o['VO'], tot),
-               ('   … lika robust som i dag', o.get('VO_robust', o['VO']), tot), ('1a alla turer', o['alla'], tot),
-               ('1b (+2,5 min)', b['alla'], tot), ('   … lika robust som i dag', b.get('robust', b['alla']), tot),
-               ('1b känslighet +3,5 min', b['konservativ_ryms'], tot), ('   … V och Ö sammanslagna', b['konservativ_VO'], tot)]
+        rad = [('UA 1a dagens tidtabell', o['ryms'], tot), ('UA 1a ★ V och Ö sammanslagna', o['VO'], tot),
+               ('   … lika robust som i dag', o.get('VO_robust', o['VO']), tot), ('UA 1a alla turer (utesluten)', o['alla'], tot),
+               ('UA 1b ★ (+2,5 min)', b['alla'], tot), ('   … lika robust som i dag', b.get('robust', b['alla']), tot),
+               ('UA 1b känslighet +3,5 min', b['konservativ_ryms'], tot), ('   … V och Ö sammanslagna', b['konservativ_VO'], tot)]
         rubrik2, ny = 'Möckelö Strand ny utan fler bussar', 'ny hållplats'
     else:
-        ny_ = len(json.load(open(P / 'b4_forslag.json', encoding='utf-8'))['flygplatsen']['flygturer'])
+        ny_ = len(json.load(open(P / 'b4_ua.json', encoding='utf-8'))['flygplatsen']['flygturer'])
         d4 = fs['4']['delta_min_per_tur']
-        rad = [('4 dagens tidtabell', o['ryms'], tot), ('4 V och Ö sammanslagna', o['VO'], tot),
+        rad = [('UA 4 dagens tidtabell', o['ryms'], tot), ('UA 4 V och Ö sammanslagna', o['VO'], tot),
                ('   … lika robust som i dag', o.get('VO_robust', o['VO']), tot),
-               ('4 dito + Solberget indragen', o['VO_sol'], tot), ('   … lika robust som i dag', o['VO_sol_robust'], tot),
-               ('4 alla turer', o['alla'], tot), ('4Y flygturerna, dagens tidtabell', o['Y_ryms'], ny_),
-               ('4Y V och Ö sammanslagna', o['Y_VO'], ny_), ('4Y dito + Solberget (robust)', o['Y_VO_sol'], ny_)]
+               ('UA 4 ★ dito + Solberget indragen', o['VO_sol'], tot), ('   … lika robust som i dag', o['VO_sol_robust'], tot),
+               ('UA 4 alla turer (utesluten)', o['alla'], tot), ('UA 4Y flygturerna, dagens tidtabell', o['Y_ryms'], ny_),
+               ('UA 4Y V och Ö sammanslagna', o['Y_VO'], ny_), ('UA 4Y dito + Solberget (robust)', o['Y_VO_sol'], ny_)]
         rad += [(f'Känslighet {sv(float(k.split("_")[1]))} min, sammanslagna', o[k], tot)
                 for k in o if k.startswith('kansl_')]
         rubrik2, ny = 'Flygplatsen utan fler bussar', 'flygplatsen'
@@ -346,7 +350,7 @@ def fig_vo(res, fid='1a'):
             for r in rad]
     if fid != '1a':                                    # Y: turer utanför flygturerna räknas inte som "som i dag"
         for c, r in zip(cell, rad):
-            if r[0].startswith('4Y'):
+            if r[0].startswith('UA 4Y'):
                 c[4] = '–'
     tb = ax2.table(cellText=cell, colLabels=['Alternativ', f'Turer via\n{ny}', 'Bussar', 'Varv < 3 min\nreglering',
                                              'V-turer som\nkör som i dag'],
@@ -366,8 +370,9 @@ def fig_vo(res, fid='1a'):
              transform=ax2.transAxes, fontsize=7.2,
              color=K.TEXT, va='bottom', linespacing=1.5)
     ax2.set_title(rubrik2, loc='left', fontsize=10, fontweight='bold')
-    fig.suptitle('Sammanslagning av linje V och Ö – ' + ('ryms Möckelö Strand ny via dagens vägar?' if fid == '1a'
-                 else 'ryms linje V till flygplatsen?'), x=0.01, ha='left', fontsize=12.5, fontweight='bold')
+    fig.suptitle(('UA 1a – sammanslagning av linje V och Ö: ryms Möckelö Strand ny via dagens vägar?' if fid == '1a'
+                  else 'UA 4 – sammanslagning av linje V och Ö: ryms linje V–Ö via flygplatsen?'), x=0.01, ha='left',
+                 fontsize=12.5, fontweight='bold')
     ut = C.KARTOR / ('b4_9_sammanslagning_vo.png' if fid == '1a' else 'b4_11_flygplatsen_vo.png')
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
@@ -399,7 +404,8 @@ def fig_systemeffekter(res):
     for s_ in ['top', 'right']:
         ax.spines[s_].set_visible(False)
     ax.legend(loc='lower right', ncol=2, fontsize=7.3, frameon=True, facecolor='white', edgecolor='#e0ded7')
-    ax.set_title('Vem får bättre och sämre tillgänglighet? (varje förslag för sig)', loc='left', fontsize=10, fontweight='bold')
+    ax.set_title('Vem får bättre och sämre tillgänglighet? (varje UA för sig, ★ = huvudalternativ)', loc='left', fontsize=10,
+                 fontweight='bold')
     rad = [('Hållplats inom 400 m', lambda t: t['inom_400m_andel']),
            ('Minst 15 avgångar/vardag', lambda t: t['minst_15_avg_andel']),
            ('Minst 30 avgångar/vardag', lambda t: t['minst_30_avg_andel']),
@@ -408,16 +414,16 @@ def fig_systemeffekter(res):
     ax2 = fig.add_subplot(gs[1]); ax2.axis('off')
     kol = ['idag'] + IDS
     cell = [[n] + [sv(100 * fn(res[s_]['tackning_mariehamn']), 1) + ' %' for s_ in kol] for n, fn in rad]
-    cell += [['Turer via förslaget', '–', *[f"{res[s_]['turer']} av {res[s_]['turer_tot']}" for s_ in IDS]],
+    cell += [['Turer via den nya sträckan', '–', *[f"{res[s_]['turer']} av {res[s_]['turer_tot']}" for s_ in IDS]],
              ['Bussar', *[str(res[s_]['omlopp']['fordon']) for s_ in kol]],
              ['Omloppstid (h/vardag)', *[sv(res[s_]['omlopp']['omloppstid_h']) for s_ in kol]],
              ['Fordonskm per vardag', *[sv(res[s_]['omlopp']['km'], 0) for s_ in kol]],
              ['Varv med < 3 min reglering', *[str(res[s_]['omlopp']['varv_utan_reglering']) for s_ in kol]],
              ['Restid befintliga resenärer\n(resenärsminuter/vardag)', '–',
               *[sv(res[s_]['resenarer']['resenarsminuter_vardag'], 0) for s_ in kol[1:]]]]
-    rub = ['Mariehamn (14 821 inv.)', 'I dag', '1a\nalla turer', '1a\ndagens\ntidtabell', '1a\nV + Ö\nsamman-\nslagna',
-           '1b', '2\nN2', '3\nBo-Bil', '4\nflyg-\nplatsen,\nalla turer', '4\nV + Ö\nsamman-\nslagna',
-           '4\ndito +\nSolberget\nindragen', '4Y\nflyg-\nturerna']
+    rub = ['Mariehamn (14 821 inv.)', 'I dag', 'UA 1a\nalla turer\n(utesluten)', 'UA 1a\ndagens\ntidtabell',
+           'UA 1a ★\nV + Ö\nsamman-\nslagna', 'UA 1b ★', 'UA 2 ★\nN2', 'UA 3 ★\nBo-Bil', 'UA 4\nalla turer\n(utesluten)',
+           'UA 4\nV + Ö\nsamman-\nslagna', 'UA 4 ★\ndito +\nSolberget\nindragen', 'UA 4Y\nflyg-\nturerna']
     tb = ax2.table(cellText=cell, colLabels=rub, loc='upper left', cellLoc='right', colLoc='center',
                    colWidths=[0.175] + [0.075] * len(kol))
     tb.auto_set_font_size(False); tb.set_fontsize(7.4); tb.scale(1, 1.55)
@@ -433,20 +439,20 @@ def fig_systemeffekter(res):
             ce.set_height(ce.get_height() * 1.6)
         if r_ == rad_bussar and c_ > 0 and cell[r_ - 1][c_] != cell[r_ - 1][1]:
             ce.get_text().set_color(SAMRE); ce.get_text().set_fontweight('bold')
-    ax2.set_title('Nyckeltal – i dag och med varje förslag för sig (förslag 1a och 4 i flera driftformer)', loc='left',
+    ax2.set_title('Nyckeltal – i dag och med varje UA för sig (★ = huvudalternativ; UA 1a och 4 i flera driftformer)', loc='left',
                   fontsize=10, fontweight='bold')
-    fig.suptitle('Systemeffekter av linjeförslagen – täckningsgrad och turtäthet i Mariehamn', x=0.01, ha='left',
+    fig.suptitle('Systemeffekter av utredningsalternativen – täckningsgrad och turtäthet i Mariehamn', x=0.01, ha='left',
                  fontsize=12, fontweight='bold')
     ut = C.KARTOR / 'b4_13_systemeffekter.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 
-def rita_forslag(ax, fid):
-    """Förslagets nya/ändrade körvägar och hållplatser (b4_forslag.gpkg) ovanpå kartan."""
+def rita_ua(ax, fid):
+    """UA:ts nya/ändrade körvägar och hållplatser (b4_ua.gpkg) ovanpå kartan."""
     import geopandas as gpd
-    g = gpd.read_file(P / 'b4_forslag.gpkg', layer='forslag')
-    g = g[g.forslag == fid]
+    g = gpd.read_file(P / 'b4_ua.gpkg', layer='ua')
+    g = g[g.ua == fid]
     for r in g[g.geom_type.isin(['LineString', 'MultiLineString'])].itertuples():
         f = C.FARG_LINJE.get(r.linje, '#1f1f1e')
         stil = dict(color='#3d3d3a', lw=2.4, ls=(0, (1, 1.4))) if r.objekt == 'körväg utgår' else \
@@ -461,25 +467,103 @@ def rita_forslag(ax, fid):
                    color=SAMRE if utgar else '#1c5cab', edgecolor='white', lw=0.8, zorder=8)
 
 
+FARG_VO = '#8c3b74'
+
+
+def vo_kedjor(fid='4'):
+    """Den genomgående linjen V–Ö i huvudalternativet: [(N,2)-arrayer] för V (med UA:ts omväg) och Ö."""
+    import s01_vagdragning as V
+    sg = V.segmentgeometri(); fg = V.uageometri(); hxy = V.alla_xy()[0]; mon = V.monster_per_linje()
+    dt = F.direkttider()
+    seg = lambda a, b: sg.get((a, b), np.array([hxy[a], hxy[b]]))
+    kedja = lambda stopp: [seg(a, b) for a, b in zip(stopp[:-1], stopp[1:])]
+    vm, om = list(mon['V'][0][0]), list(mon['Ö'][0][0])
+    if fid == '4':
+        po, ka = F.HPL['Posten'], F.HPL['Källarvägen']
+        ip = vm.index(po)
+        v_ = kedja(vm[:ip + 1]) + [fg[(po, 'FLYGPLATSEN')]['xy'], fg[('FLYGPLATSEN', ka)]['xy']] + kedja(vm[ip + 1:])
+        om = [x for x in om if x != F.HPL['Solberget']]          # Solberget indragen
+    else:
+        v_ = kedja(vm)
+    return v_ + kedja(om)
+
+
+def fig_ua4_karta(res):
+    """UA 4 – huvudalternativet: linje V–Ö (V och Ö sammanslagna) via flygplatsen, Solberget indragen."""
+    import geopandas as gpd
+    fs = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
+    f = fs['ua']['4']; o = f['omlopp']; fp = fs['flygplatsen']; so = fs['solberget_indragen']
+    v = res['4_VO_sol']; fi = v['forandring_invanare_mariehamn']
+    tk = pd.read_csv(P / 'b4_systemeffekter_tackning.csv.gz')
+    uts = (104900, 111700, 6682000, 6689300)
+    fig, ax = plt.subplots(figsize=(10.2, 10.6))
+    K.ny_karta(uts, ax=ax, titel='UA 4 – Linje V–Ö via flygplatsen (huvudalternativ: V och Ö sammanslagna, Solberget indragen)')
+    h = C.DELRUTA_M
+    for m, c in (((tk['klass_4_VO_sol'] > tk.klass_idag), BATTRE), ((tk['klass_4_VO_sol'] < tk.klass_idag), SAMRE)):
+        d = tk[m]
+        for x, y in zip(d.x, d.y):
+            ax.add_patch(Rectangle((x - h / 2, y - h / 2), h, h, facecolor=to_rgba(c, 0.75), edgecolor='none', zorder=2))
+    D.befolkning().boundary.plot(ax=ax, color='#b9b4a8', linewidth=0.35, alpha=0.8, zorder=1.5)
+    K.rita_linjer(ax, lw=1.3, alpha=0.35, zorder=3, etikett=False)
+    for xy_ in vo_kedjor('4'):
+        ax.plot(xy_[:, 0], xy_[:, 1], color=FARG_VO, lw=3.0, zorder=5, solid_capstyle='round',
+                path_effects=[K.pe.Stroke(linewidth=4.8, foreground='white'), K.pe.Normal()])
+    g = gpd.read_file(P / 'b4_ua.gpkg', layer='ua'); g = g[g.ua == '4']
+    fl = g[g.objekt == 'ny hållplats'].geometry.iloc[0]; sl = g[g.objekt == 'hållplats dras in'].geometry.iloc[0]
+    xy = F.stopp_xy(); c = xy.loc['9025302000066202', ['x', 'y']].to_numpy(float)
+    ax.scatter([fl.x], [fl.y], s=260, marker='*', color='#1c5cab', edgecolor='white', lw=0.8, zorder=8)
+    ax.scatter([sl.x], [sl.y], s=110, marker='X', color=SAMRE, edgecolor='white', lw=0.8, zorder=8)
+    ax.scatter([c[0]], [c[1]], s=110, marker='s', color='#1f1f1e', edgecolor='white', lw=0.8, zorder=8)
+    hinder = K.punkt_hinder(ax, [fl.x, sl.x, c[0]], [fl.y, sl.y, c[1]], px=12)
+    K.placera_etiketter(ax, [('Flygplatsen (ny hållplats)', (fl.x, fl.y), 90), ('Solberget (dras in)', (sl.x, sl.y), 90),
+                             ('Centrum, Nygatan – bussen fortsätter\nV → Ö efter 0,5 min (genomgående)', tuple(c), 120)],
+                        fontsize=7, fet=True, undvik=hinder)
+    ny = len(fp['flygturer'])
+    txt = [r'$\bf{Huvudalternativ}$' + '   V och Ö körs som en genomgående linje via flygplatsen;',
+           f"Ö avgår högst 2 min efter pulsen och Solberget dras in (Ö 1,6–2,5 min kortare)",
+           f"Omväg +{sv(f['delta_min_per_tur'])} min/tur (+{sv(f['km_per_tur'], 2)} km). "
+           f"{o['VO_sol']['turer_med_andring']} av {f['linjens_turer']} turer via flygplatsen, 5 bussar "
+           f"({o['VO_sol_robust']['turer_med_andring']} lika robust som i dag)",
+           r'$\bf{UA\ 4Y}$' + f"   bara de {ny} turerna för flygen ({', '.join(fp['flygturer'])}):",
+           f"ryms med samma linje, lika robust som i dag",
+           r'$\bf{Uteslutet}$' + f"   bara förlängning av V (dagens tidtabell): alla turer kräver {o['alla']['fordon']} bussar",
+           r'$\bf{Effekt}$' + f"   +{fi['ny_tackning']} inv. vid flygplatsen får hållplats inom 400 m;",
+           f"{so['tackning']['forlorad_tackning_inv']} inv. vid Solberget förlorar sin (≈ {sv(so['pastigande_vardag'])} påstigande/vardag)"]
+    ax.text(0.015, 0.985, '\n'.join(txt), transform=ax.transAxes, ha='left', va='top', fontsize=7.2,
+            color=K.TEXT, zorder=30, linespacing=1.5,
+            bbox=dict(boxstyle='round,pad=0.55', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.95))
+    hnd = [Line2D([], [], color=FARG_VO, lw=3, label='Linje V–Ö (V och Ö sammanslagna, genomgående i centrum)'),
+           Line2D([], [], color='#9a978f', lw=1.5, label='Övriga stadslinjer'),
+           Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=12, label='Ny hållplats vid flygterminalen'),
+           Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Hållplats som dras in (Solberget)'),
+           Line2D([], [], marker='s', ls='', color='#1f1f1e', markersize=8, label='Byte V ↔ Ö i centrum'),
+           Patch(facecolor=to_rgba(BATTRE, 0.75), label='Bättre turtäthetsklass än i dag'),
+           Patch(facecolor=to_rgba(SAMRE, 0.75), label='Sämre turtäthetsklass än i dag')]
+    lg = K.teckenforklaring(ax, hnd, loc='lower left', fontsize=7)
+    lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
+    K.ram(ax)
+    return K.spara(fig, 'b4_10_ua4_karta.png')
+
+
 def fig_tackning_fore_efter(res):
-    """Turtäthet inom 400 m före och efter, inzoomat per förslag (rader) – förbättrade/försämrade celler markerade."""
+    """Turtäthet inom 400 m före och efter, inzoomat per UA (rader) – förbättrade/försämrade celler markerade."""
     tk = pd.read_csv(P / 'b4_systemeffekter_tackning.csv.gz')
     farg = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
     h = C.DELRUTA_M
     rb = tk.groupby('ruta_id').bef.sum(); alfa = (0.35 + 0.65 * np.sqrt(tk.ruta_id.map(rb) / rb.max())).to_numpy()
     x0, y0 = tk.x.min() - h / 2, tk.y.min() - h / 2
     ix = ((tk.x - x0) // h).astype(int).to_numpy(); iy = ((tk.y - y0) // h).astype(int).to_numpy()
-    rader = [('1b', 'Förslag 1 Möckelö Strand ny', (104650, 107050, 6682750, 6685150),
-              '1a med V och Ö sammanslagna ger samma klass (17 avgångar);\n1a med dagens tidtabell 9 avgångar (klass 1–14).'),
-             ('2', 'Förslag 2 N2 på linje Ö', (109250, 111650, 6682050, 6684450), ''),
-             ('3', 'Förslag 3 linje N via Bo-Bil', (106950, 109350, 6685150, 6687550), ''),
-             ('4_VO_sol', 'Förslag 4 flygplatsen', (105500, 107900, 6685100, 6687500),
-              'Gäller alla varianter av förslag 4 (antal avgångar\nvid flygplatsen: 19–20, Y-versionen 8).'),
-             ('4_VO_sol', 'Förslag 4 Solberget indragen (variant)', (109000, 111400, 6683600, 6686000),
-              'Solberget dras in i varianterna med Solberget indragen\noch i Y-versionen.')]
+    rader = [('1b', 'UA 1a och 1b Möckelö Strand ny', (104650, 107050, 6682750, 6685150),
+              'UA 1a med V och Ö sammanslagna ger samma klass (17 avgångar);\nUA 1a med dagens tidtabell 9 avgångar (klass 1–14).'),
+             ('2', 'UA 2 N2 på linje Ö', (109250, 111650, 6682050, 6684450), ''),
+             ('3', 'UA 3 linje N via Bo-Bil', (106950, 109350, 6685150, 6687550), ''),
+             ('4_VO_sol', 'UA 4 flygplatsen', (105500, 107900, 6685100, 6687500),
+              'Huvudalternativet: V och Ö sammanslagna, Solberget\nindragen (20 avgångar vid flygplatsen, UA 4Y 8).'),
+             ('4_VO_sol', 'UA 4 Solberget indragen', (109000, 111400, 6683600, 6686000),
+              'Solberget dras in i huvudalternativet och i UA 4Y.')]
     fig, axs = plt.subplots(len(rader), 2, figsize=(11.6, 5.4 * len(rader)))
     for (sid, rub, uts, fot), (a0, a1) in zip(rader, axs):
-        for ax, s_, t_ in [(a0, 'idag', f'{rub} – i dag'), (a1, sid, f'{rub} – med förslaget')]:
+        for ax, s_, t_ in [(a0, 'idag', f'{rub} – i dag'), (a1, sid, f'{rub} – med huvudalternativet')]:
             K.ny_karta(uts, ax=ax, titel=t_)
             img = np.zeros((iy.max() + 1, ix.max() + 1, 4))
             rgba = np.array([to_rgba(farg[int(k)]) for k in tk[f'klass_{s_}']]); rgba[:, 3] = alfa
@@ -494,7 +578,7 @@ def fig_tackning_fore_efter(res):
             ax.set_xlim(uts[0], uts[1]); ax.set_ylim(uts[2], uts[3]); ax.set_xlabel(''); ax.set_ylabel('')
             K.rita_linjer(ax, lw=1.6, alpha=0.9, zorder=4, etikett=False)
             if s_ != 'idag':
-                rita_forslag(ax, sid.split('_')[0])
+                rita_ua(ax, sid.split('_')[0])
             if s_ != 'idag':
                 v = res[s_]; fi = v['forandring_invanare_mariehamn']; t0, t1 = res['idag']['tackning_mariehamn'], v['tackning_mariehamn']
                 txt = [f"Bättre: {fi['battre_klass']} inv. (varav ny hållplats inom 400 m: {fi['ny_tackning']})",
@@ -517,7 +601,7 @@ def fig_tackning_fore_efter(res):
             Line2D([], [], color='#3d3d3a', lw=2, ls=(0, (1, 1.4)), label='Körväg som utgår')]
     hnd += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
     fig.legend(handles=hnd, loc='lower center', ncol=6, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.012))
-    fig.suptitle('Turtäthet inom 400 m (avgångar per vardag) – före och efter, per förslag', x=0.01, ha='left',
+    fig.suptitle('Turtäthet inom 400 m (avgångar per vardag) – före och efter, huvudalternativet per UA', x=0.01, ha='left',
                  fontsize=12, fontweight='bold')
     fig.tight_layout(rect=(0, 0.035, 1, 0.985))
     ut = C.KARTOR / 'b4_14_tackning_fore_efter.png'
@@ -526,13 +610,11 @@ def fig_tackning_fore_efter(res):
 
 
 def main():
-    for f in ['b4_paket.json', 'b4_paket_omlopp.csv', 'b4_paket_tackning.csv.gz']:          # utgångna (paket)
-        (P / f).unlink(missing_ok=True)
-    for f in ['b4_9_linje_vo.png', 'b4_10_paket_omlopp.png', 'b4_11_systemeffekter.png', 'b4_12_tackning_fore_efter.png',
-              'b4_10_systemeffekter.png', 'b4_11_tackning_fore_efter.png', 'b4_13_flygplatsen_vo.png']:
+    for f in ['b4_10_systemeffekter.png', 'b4_11_tackning_fore_efter.png', 'b4_13_flygplatsen_vo.png',   # utgångna
+              'b4_10_flygplatsen_karta.png']:
         (C.KARTOR / f).unlink(missing_ok=True)
     res = berakna()
-    for f in (fig_vo, lambda r: fig_vo(r, '4'), fig_systemeffekter, fig_tackning_fore_efter):
+    for f in (fig_vo, lambda r: fig_vo(r, '4'), fig_ua4_karta, fig_systemeffekter, fig_tackning_fore_efter):
         print(f(res))
 
 

@@ -2,7 +2,7 @@
 """Steg 0: Extrahera kustlinje/landmask för Åland ur GSHHG (full upplösning).
 
 Källa: GSHHG – Global Self-consistent, Hierarchical, High-resolution Geography (Wessel & Smith), nivå 1 (land)
-och 2 (sjöar), full upplösning, distribuerad via PyPI-paketet ``basemap-data-hires`` (LGPL). Kustlinjen används
+och 2 (sjöar), full upplösning, distribuerad via PyPI-distributionen ``basemap-data-hires`` (LGPL). Kustlinjen används
 som landmask (befolkningen i en 1 km-ruta antas bo på rutans landdel) och som kartbakgrund.
 
 Kör:  python src/s00_kustlinje.py [sökväg/till/basemap_data_hires-*.whl]

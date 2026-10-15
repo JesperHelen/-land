@@ -1,6 +1,6 @@
 {
  "idag": {
-  "forslag": null,
+  "ua": null,
   "driftform": null,
   "ryms": true,
   "robust": true,
@@ -113,7 +113,7 @@
   }
  },
  "1a": {
-  "forslag": "1a",
+  "ua": "1a",
   "driftform": "alla",
   "ryms": false,
   "robust": true,
@@ -207,8 +207,8 @@
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.0
   },
-  "namn": "1a Möckelö Strand ny via dagens vägar – alla 20 turer (6 bussar)",
-  "kort": "1a alla turer\n(6 bussar)",
+  "namn": "UA 1a Möckelö Strand ny via dagens vägar – alla 20 turer, dagens tidtabell (6 bussar, utesluten)",
+  "kort": "UA 1a alla turer\n(6 bussar – utesluten)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -232,7 +232,7 @@
   }
  },
  "1a_ryms": {
-  "forslag": "1a",
+  "ua": "1a",
   "driftform": "ryms",
   "ryms": true,
   "robust": true,
@@ -326,8 +326,8 @@
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.0
   },
-  "namn": "1a – dagens tidtabell, 9 av 20 turer",
-  "kort": "1a dagens tidtabell\n(9 av 20 turer)",
+  "namn": "UA 1a – dagens tidtabell, 9 av 20 turer",
+  "kort": "UA 1a dagens tidtabell\n(9 av 20 turer)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -351,7 +351,7 @@
   }
  },
  "1a_VO": {
-  "forslag": "1a",
+  "ua": "1a",
   "driftform": "VO",
   "ryms": true,
   "robust": false,
@@ -445,8 +445,8 @@
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.5
   },
-  "namn": "1a – V och Ö sammanslagna (Ö ≤ 2 min efter pulsen), 17 av 20 turer",
-  "kort": "1a V och Ö samman-\nslagna (17 av 20 turer)",
+  "namn": "UA 1a – V och Ö sammanslagna (Ö ≤ 2 min efter pulsen), 17 av 20 turer (huvudalternativ)",
+  "kort": "UA 1a ★ V och Ö samman-\nslagna (17 av 20 turer)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -470,7 +470,7 @@
   }
  },
  "1b": {
-  "forslag": "1b",
+  "ua": "1b",
   "driftform": "alla",
   "ryms": true,
   "robust": false,
@@ -564,8 +564,8 @@
    "resor_langre_vardag": 2.1,
    "resor_kortare_vardag": 0.0
   },
-  "namn": "1b Möckelö Strand ny via förlängd Norrgårdsvägen – alla 20 turer",
-  "kort": "1b förlängd Norr-\ngårdsvägen (20 av 20)",
+  "namn": "UA 1b Möckelö Strand ny via förlängd Norrgårdsvägen – alla 20 turer (huvudalternativ)",
+  "kort": "UA 1b ★ förlängd Norr-\ngårdsvägen (20 av 20)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -589,7 +589,7 @@
   }
  },
  "2": {
-  "forslag": "2",
+  "ua": "2",
   "driftform": "alla",
   "ryms": true,
   "robust": true,
@@ -683,8 +683,8 @@
    "resor_langre_vardag": 2.3,
    "resor_kortare_vardag": 0.0
   },
-  "namn": "2 N2 på linje Ö",
-  "kort": "2 N2 linje Ö",
+  "namn": "UA 2 N2 på linje Ö (huvudalternativ)",
+  "kort": "UA 2 ★ N2 linje Ö",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 55,
    "lyft_till_minst_30": 0,
@@ -708,7 +708,7 @@
   }
  },
  "3": {
-  "forslag": "3",
+  "ua": "3",
   "driftform": "alla",
   "ryms": true,
   "robust": true,
@@ -796,8 +796,8 @@
    "resor_langre_vardag": 7.4,
    "resor_kortare_vardag": 0.0
   },
-  "namn": "3 Linje N via Bo-Bil",
-  "kort": "3 N via Bo-Bil",
+  "namn": "UA 3 Linje N via Bo-Bil (huvudalternativ)",
+  "kort": "UA 3 ★ N via Bo-Bil",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 0,
    "lyft_till_minst_30": 44,
@@ -821,7 +821,7 @@
   }
  },
  "4": {
-  "forslag": "4",
+  "ua": "4",
   "driftform": "alla",
   "ryms": false,
   "robust": true,
@@ -915,8 +915,8 @@
    "resor_langre_vardag": 2.9,
    "resor_kortare_vardag": 0.0
   },
-  "namn": "4 Linje V till flygplatsen – alla 20 turer (6 bussar)",
-  "kort": "4 flygplatsen alla\nturer (6 bussar)",
+  "namn": "UA 4 Linje V till flygplatsen – alla 20 turer, dagens tidtabell (6 bussar, utesluten)",
+  "kort": "UA 4 alla turer\n(6 bussar – utesluten)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 20,
    "lyft_till_minst_30": 0,
@@ -940,7 +940,7 @@
   }
  },
  "4_VO": {
-  "forslag": "4",
+  "ua": "4",
   "driftform": "VO",
   "ryms": true,
   "robust": false,
@@ -1034,8 +1034,8 @@
    "resor_langre_vardag": 2.9,
    "resor_kortare_vardag": 0.5
   },
-  "namn": "4 – V och Ö sammanslagna, 19 av 20 turer",
-  "kort": "4 V och Ö samman-\nslagna (19 av 20 turer)",
+  "namn": "UA 4 – V och Ö sammanslagna, 19 av 20 turer",
+  "kort": "UA 4 V och Ö samman-\nslagna (19 av 20 turer)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 20,
    "lyft_till_minst_30": 0,
@@ -1059,7 +1059,7 @@
   }
  },
  "4_VO_sol": {
-  "forslag": "4",
+  "ua": "4",
   "driftform": "VO_sol",
   "ryms": true,
   "robust": false,
@@ -1153,8 +1153,8 @@
    "resor_langre_vardag": 2.9,
    "resor_kortare_vardag": 12.2
   },
-  "namn": "4 – V och Ö sammanslagna, Solberget indragen, 20 av 20 turer",
-  "kort": "4 dito + Solberget\nindragen (20 av 20)",
+  "namn": "UA 4 – V och Ö sammanslagna, Solberget indragen, 20 av 20 turer (huvudalternativ)",
+  "kort": "UA 4 ★ dito + Solberget\nindragen (20 av 20)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 20,
    "lyft_till_minst_30": 0,
@@ -1178,7 +1178,7 @@
   }
  },
  "4_Y": {
-  "forslag": "4",
+  "ua": "4",
   "driftform": "Y_VO_sol",
   "ryms": true,
   "robust": true,
@@ -1272,8 +1272,8 @@
    "resor_langre_vardag": 2.8,
    "resor_kortare_vardag": 12.3
   },
-  "namn": "4Y – bara turerna för flygen (8 av 8), V och Ö sammanslagna, Solberget indragen",
-  "kort": "4Y flygturerna\n(8 av 8), dito",
+  "namn": "UA 4Y – bara turerna för flygen (8 av 8), V och Ö sammanslagna, Solberget indragen",
+  "kort": "UA 4Y flygturerna\n(8 av 8), dito",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 20,
    "lyft_till_minst_30": 0,

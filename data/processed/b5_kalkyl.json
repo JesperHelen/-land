@@ -32,7 +32,7 @@
  "scenarier": [
   {
    "scenario": "1a",
-   "namn": "1a dagens vägar – alla turer (6 bussar)",
+   "namn": "UA 1a dagens vägar – alla turer (6 bussar, utesluten)",
    "delta_fordon": 1,
    "delta_fordonstimmar_ar": 2860,
    "delta_km_ar": 14280,
@@ -58,7 +58,7 @@
   },
   {
    "scenario": "1a_ryms",
-   "namn": "1a dagens vägar – dagens tidtabell (9 av 20 turer)",
+   "namn": "UA 1a dagens vägar – dagens tidtabell (9 av 20 turer)",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 38,
    "delta_km_ar": 6417,
@@ -84,7 +84,7 @@
   },
   {
    "scenario": "1a_VO",
-   "namn": "1a dagens vägar – V och Ö sammanslagna (17 av 20 turer)",
+   "namn": "UA 1a ★ dagens vägar – V och Ö sammanslagna (17 av 20 turer)",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 28,
    "delta_km_ar": 12124,
@@ -110,7 +110,7 @@
   },
   {
    "scenario": "1b",
-   "namn": "1b förlängd Norrgårdsvägen – alla 20 turer",
+   "namn": "UA 1b ★ förlängd Norrgårdsvägen – alla 20 turer",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 12,
    "delta_km_ar": 8388,
@@ -136,7 +136,7 @@
   },
   {
    "scenario": "2",
-   "namn": "2 N2 på linje Ö",
+   "namn": "UA 2 ★ N2 på linje Ö",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 2,
    "delta_km_ar": 0,
@@ -162,7 +162,7 @@
   },
   {
    "scenario": "3",
-   "namn": "3 Linje N via Bo-Bil",
+   "namn": "UA 3 ★ Linje N via Bo-Bil",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 0,
    "delta_km_ar": -2487,
@@ -188,7 +188,7 @@
   },
   {
    "scenario": "4",
-   "namn": "4 flygplatsen – alla turer (6 bussar)",
+   "namn": "UA 4 flygplatsen – alla turer (6 bussar, utesluten)",
    "delta_fordon": 1,
    "delta_fordonstimmar_ar": 2850,
    "delta_km_ar": 7259,
@@ -214,7 +214,7 @@
   },
   {
    "scenario": "4_VO",
-   "namn": "4 flygplatsen – V och Ö sammanslagna (19 av 20 turer)",
+   "namn": "UA 4 flygplatsen – V och Ö sammanslagna (19 av 20 turer)",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 22,
    "delta_km_ar": 6891,
@@ -240,7 +240,7 @@
   },
   {
    "scenario": "4_VO_sol",
-   "namn": "4 flygplatsen – dito + Solberget indragen (20 av 20)",
+   "namn": "UA 4 ★ flygplatsen – dito + Solberget indragen (20 av 20)",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 12,
    "delta_km_ar": 7259,
@@ -266,7 +266,7 @@
   },
   {
    "scenario": "4_Y",
-   "namn": "4Y flygplatsen – flygturerna (8 av 8), dito",
+   "namn": "UA 4Y flygturerna (8 av 8), dito",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": -10,
    "delta_km_ar": 3109,

@@ -9,7 +9,7 @@
 > motsvarar 20 % av stadslinjernas påstigningar. Dessutom räknar modellen 2 % av resorna mellan hållplatsområden
 > som bara förbinds med gång som bussresor. Efter korrigering, med samma gravitationsmodell och parametrar som
 > tidigare, går 63 % av resorna till eller från Centrum, Nygatan. Den korrigerade matrisen omfattar 92
-> hållplatsområden och 10,4 (FM) respektive 9,7 (EM) resor per timme. Den används som grund för linjeförslagen
+> hållplatsområden och 10,4 (FM) respektive 9,7 (EM) resor per timme. Den används som grund för utredningsalternativen
 > i kapitel 4.
 
 ## 1.1 Underlag och ursprunglig metod

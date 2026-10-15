@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""B4 – Omloppsplan (fordonsomlopp) för stadslinjerna och verifiering av linjeförslag mot den.
+"""B4 – Omloppsplan (fordonsomlopp) för stadslinjerna och verifiering av utredningsalternativ mot den.
 
 GTFS saknar block_id, så omloppen härleds ur tidtabellen för typvardagen:
   * Norm (beställaren 2026-10-14): föraren byter linje vid varje vändning i centrum, i paren Syd ↔ Norr (S ↔ N)
@@ -13,12 +13,12 @@ GTFS saknar block_id, så omloppen härleds ur tidtabellen för typvardagen:
     långt möjligt byte enligt normparen. Fordonsbehovet blir därmed det minsta som tidtabellen kräver. Uppehåll
     i centrum ≤ 60 min redovisas som vändtid (reglering), längre uppehåll som uppställning.
   * Dagens minsta vändtid i tidtabellen är 1 min (bl.a. linje J 14:19 → 14:20); med 2 min krävs ett sjätte fordon.
-    Kravet för förslagen sätts därför till samma nivå som i dag: vändtid ≥ 1 min.
+    Kravet för utredningsalternativen sätts därför till samma nivå som i dag: vändtid ≥ 1 min.
   * Robusthet: varje varv (två på varandra följande turer) ska ha minst REKOMMENDERAD_VANDTID reglering vid något
-    av bytena. Antalet varv utan sådan reglering redovisas; ett förslag är robust om det inte blir fler än i dag.
-Verifiering av ett förslag (ramen 'inga fler bussar')
-  * Förslagets körtidsförändring läggs på berörda turer (ankomsten till centrum senareläggs, avgångstiderna –
-    pulsen i centrum – ligger fast). Omloppen byggs om. Förslaget ryms om antalet fordon inte ökar och
+    av bytena. Antalet varv utan sådan reglering redovisas; ett UA är robust om det inte blir fler än i dag.
+Verifiering av ett UA (ramen 'inga fler bussar')
+  * UA:ts körtidsförändring läggs på berörda turer (ankomsten till centrum senareläggs, avgångstiderna –
+    pulsen i centrum – ligger fast). Omloppen byggs om. UA:t ryms om antalet fordon inte ökar och
     omloppstiden (fordonstimmar) inte ökar mer än OMLOPPSTID_TOL.
   * Ryms inte alla turer prövas turerna en i taget i tidsordning; redovisas hur många som ryms.
   * Robusthet redovisas som antal vändningar under REKOMMENDERAD_VANDTID och total regleringstid.
@@ -227,7 +227,7 @@ def ar_robust(nt, r):
 
 
 def verifiera(t, delta, r, km_delta=None, skift=None, **kw):
-    """Bygger omlopp med förslagets körtider. Returnerar (plan, nyckeltal, ryms inom ramen)."""
+    """Bygger omlopp med UA:ts körtider. Returnerar (plan, nyckeltal, ryms inom ramen)."""
     tt = med_andring(t, delta, skift)
     if km_delta:
         tt['km'] = tt.km + tt.trip_id.map(km_delta).fillna(0.0)
@@ -237,7 +237,7 @@ def verifiera(t, delta, r, km_delta=None, skift=None, **kw):
 
 
 def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, **kw):
-    """Prövar turerna en i taget (tidsordning) – behåller ändringen om förslaget fortfarande ryms i ramen
+    """Prövar turerna en i taget (tidsordning) – behåller ändringen om UA:t fortfarande ryms i ramen
     (robust=True: och inte ger fler varv utan reglering än i dag). bas: andra åtgärders tillägg {trip_id: min}."""
     valda = []; bas = bas or {}
     for tid in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
@@ -362,7 +362,7 @@ def fig_idag(t, plan):
 
 # ====================================================================== huvudflöde
 def linjeprofil(t, plan):
-    """Körtid och vändtid per linje i rusning (06–09, 15–18) – underlag för förslag och sammanslagning."""
+    """Körtid och vändtid per linje i rusning (06–09, 15–18) – underlag för UA och sammanslagning."""
     r = plan[plan.avg.between(6 * 60, 18 * 60)]
     ut = {}
     for ln, d in r.groupby('linje'):

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Lägger in PM:ets kartlager i QGIS, grupperade per kapitel och per linjeförslag, med sparade stilar,
+"""Lägger in PM:ets kartlager i QGIS, grupperade per kapitel och per utredningsalternativ, med sparade stilar,
 och sparar projektet som linjenatsutredning.qgz bredvid GeoPackage-filen.
 
 Kör i QGIS: Insticksprogram > Python-konsol > Visa redigerare > Öppna skript (denna fil) > Kör skript.
 Ligger skriptet i samma mapp som linjenatsutredning.gpkg hittas filen automatiskt, annars får du välja den.
 Därefter räcker det att öppna linjenatsutredning.qgz (Projekt > Öppna). Har du en äldre linjenatsutredning.qgz:
 öppna den inte – kör skriptet i ett nytt, tomt projekt så skrivs den över med de aktuella lagren.
-Gruppen 'Systemeffekter' är exklusiv: bara ett scenario visas i taget (klicka i det du vill se).
+Varje utredningsalternativ (UA) har en grupp med huvudalternativet. Grupperna 'Systemeffekter' och 'Övriga
+alternativ' är exklusiva: bara ett scenario visas i taget (klicka i det du vill se).
 Vägdragning längs gatorna: kör rutta_med_osrm.py (samma mapp) – det ruttar linjerna med OSRM och uppdaterar lagren.
 """
 import os
@@ -32,65 +33,68 @@ def G(namn, poster, tand=False, exklusiv=False):
     return {'grupp': namn, 'poster': poster, 'tand': tand, 'exklusiv': exklusiv}
 
 
-f_ = lambda fid: f'"forslag" = \'{fid}\''
+u_ = lambda uid: f'"ua" = \'{uid}\''
 sc = lambda sid: f'"scenario" = \'{sid}\''
 
 
 def systemeffekt(sid, rubrik, tand=False):
-    """Förändrad turtäthet (grön/röd) ovanpå turtätheten med förslaget, för ett scenario."""
+    """Förändrad turtäthet (grön/röd) ovanpå turtätheten med UA:t, för ett scenario."""
     lag = [] if sid == 'idag' else [L('b4_tackning_forandring', 'Förändring mot i dag (grön bättre, röd sämre)', sc(sid))]
-    return G(rubrik, lag + [L('b4_tackning_scenarier', 'Turtäthet inom 400 m' + ('' if sid == 'idag' else ' med förslaget'),
+    return G(rubrik, lag + [L('b4_tackning_scenarier', 'Turtäthet inom 400 m' + ('' if sid == 'idag' else ' med UA:t'),
                               sc(sid))], tand)
 
 
 # (grupp, [lager och undergrupper uppifrån och ned], tänd vid start)
+# En grupp per utredningsalternativ (UA) med huvudalternativet – det mest realistiska. Övriga driftformer
+# (bl.a. uteslutna som kräver fler bussar) finns i gruppen "Övriga alternativ" och redovisas i rapporten.
 GRUPPER = [
-    ('Kap 4 Linjeförslag (var för sig)', [
-        G('Förslag 1a – Möckelö Strand ny via dagens vägar (+4,5 min/tur)', [
-            L('b4_forslag_hallplatser', 'Ny hållplats', f_('1a')),
-            L('b4_forslag_korvagar', 'Körväg: befintlig väg fram och tillbaka (2 + 2 min)', f_('1a')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet – V och Ö sammanslagna (17 av 20 turer)', sc('1a_VO')),
-            L('b4_linjer_forslag', 'Linje V med 1a', f_('1a')),
-            L('b4_linjer_forslag', 'Linje V och Ö som genomgående linje (sammanslagna)', f_('1a_VO'), False),
+    ('Kap 4 Utredningsalternativ (UA)', [
+        G('UA 1a – Möckelö Strand ny via dagens vägar (V och Ö sammanslagna)', [
+            L('b4_ua_hallplatser', 'Ny hållplats', u_('1a')),
+            L('b4_ua_korvagar', 'Körväg: befintlig väg fram och tillbaka (2 + 2 min)', u_('1a')),
+            L('b4_tackning_forandring', 'Förändrad turtäthet (17 av 20 turer)', sc('1a_VO')),
+            L('b4_ua_linjer', 'Linje V–Ö (V och Ö sammanslagna)', u_('1a')),
         ], True),
-        G('Förslag 1b – Möckelö Strand ny via förlängd Norrgårdsvägen, slinga (+2,5 min/tur)', [
-            L('b4_forslag_hallplatser', 'Ny hållplats', f_('1b')),
-            L('b4_forslag_korvagar', 'Körväg: förlängningen (planerad, 1 min) och befintlig väg tillbaka (2 min)', f_('1b')),
+        G('UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (slinga)', [
+            L('b4_ua_hallplatser', 'Ny hållplats', u_('1b')),
+            L('b4_ua_korvagar', 'Körväg: förlängningen (planerad, 1 min) och befintlig väg tillbaka (2 min)', u_('1b')),
             L('b4_tackning_forandring', 'Förändrad turtäthet (alla 20 turer)', sc('1b')),
-            L('b4_linjer_forslag', 'Linje V med 1b', f_('1b')),
+            L('b4_ua_linjer', 'Linje V–Ö (bussen fortsätter V → Ö efter 0,5 min)', u_('1b')),
         ]),
-        G('Förslag 2 – N2 på linje Ö', [
-            L('b4_forslag_hallplatser', 'Ny hållplats N2', f_('2')),
+        G('UA 2 – N2 på linje Ö', [
+            L('b4_ua_hallplatser', 'Ny hållplats N2', u_('2')),
             L('b4_tackning_forandring', 'Förändrad turtäthet', sc('2')),
-            L('b4_linjer_forslag', 'Linje Ö', f_('2')),
+            L('b4_ua_linjer', 'Linje Ö', u_('2')),
         ]),
-        G('Förslag 3 – linje N via Bo-Bil', [
-            L('b4_forslag_hallplatser', 'Bo-Bil (ny) och Vikingagränd (utgår)', f_('3')),
-            L('b4_forslag_korvagar', 'Körväg som utgår och ny körväg', f_('3')),
+        G('UA 3 – Linje N via Bo-Bil', [
+            L('b4_ua_hallplatser', 'Bo-Bil (ny) och Vikingagränd (utgår)', u_('3')),
+            L('b4_ua_korvagar', 'Körväg som utgår och ny körväg', u_('3')),
             L('b4_tackning_forandring', 'Förändrad turtäthet', sc('3')),
-            L('b4_linjer_forslag', 'Linje N via Bo-Bil', f_('3')),
+            L('b4_ua_linjer', 'Linje N via Bo-Bil', u_('3')),
         ]),
-        G('Förslag 4 – linje V till flygplatsen (+4 min/tur)', [
-            L('b4_forslag_hallplatser', 'Hållplats vid terminalen och Solberget (dras in i en variant)', f_('4')),
-            L('b4_forslag_korvagar', 'Körväg Posten – flygplatsen – Norra Svibyvägen', f_('4')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet – V och Ö sammanslagna, Solberget indragen', sc('4_VO_sol')),
-            L('b4_linjer_forslag', 'Linje V via flygplatsen', f_('4')),
+        G('UA 4 – Linje V–Ö via flygplatsen (V och Ö sammanslagna, Solberget indragen)', [
+            L('b4_ua_hallplatser', 'Hållplats vid terminalen och Solberget (dras in)', u_('4')),
+            L('b4_ua_korvagar', 'Körväg Posten – flygplatsen – Norra Svibyvägen', u_('4')),
+            L('b4_tackning_forandring', 'Förändrad turtäthet (flygplatsen och Solberget)', sc('4_VO_sol')),
+            L('b4_ua_linjer', 'Linje V–Ö via flygplatsen, utan Solberget', u_('4')),
         ]),
-        G('Systemeffekter – turtäthet inom 400 m per scenario (välj ett)', [
+        G('Systemeffekter – turtäthet inom 400 m, huvudalternativ per UA (välj ett)', [
             systemeffekt('idag', 'I dag'),
-            systemeffekt('1a', '1a alla turer (kräver 6 bussar)'),
-            systemeffekt('1a_ryms', '1a med dagens tidtabell (9 av 20 turer)'),
-            systemeffekt('1a_VO', '1a med V och Ö sammanslagna (17 av 20 turer)', True),
-            systemeffekt('1b', '1b förlängd Norrgårdsvägen (20 av 20 turer)'),
-            systemeffekt('2', '2 N2 på linje Ö'),
-            systemeffekt('3', '3 Linje N via Bo-Bil'),
-            systemeffekt('4', '4 flygplatsen alla turer (kräver 6 bussar)'),
-            systemeffekt('4_VO', '4 flygplatsen, V och Ö sammanslagna (19 av 20 turer)'),
-            systemeffekt('4_VO_sol', '4 flygplatsen, sammanslagna + Solberget indragen (20 av 20)'),
-            systemeffekt('4_Y', '4Y flygturerna (8), sammanslagna + Solberget indragen'),
+            systemeffekt('1a_VO', 'UA 1a – V och Ö sammanslagna (17 av 20 turer)', True),
+            systemeffekt('1b', 'UA 1b – förlängd Norrgårdsvägen (20 av 20 turer)'),
+            systemeffekt('2', 'UA 2 – N2 på linje Ö'),
+            systemeffekt('3', 'UA 3 – Linje N via Bo-Bil'),
+            systemeffekt('4_VO_sol', 'UA 4 – V och Ö sammanslagna, Solberget indragen (20 av 20)'),
+        ], False, exklusiv=True),
+        G('Övriga alternativ (redovisas i rapporten, välj ett)', [
+            systemeffekt('1a', 'UA 1a alla turer, dagens tidtabell – utesluten (6 bussar)'),
+            systemeffekt('1a_ryms', 'UA 1a dagens tidtabell (9 av 20 turer)'),
+            systemeffekt('4', 'UA 4 alla turer, dagens tidtabell – utesluten (6 bussar)'),
+            systemeffekt('4_VO', 'UA 4 V och Ö sammanslagna, Solberget kvar (19 av 20 turer)'),
+            systemeffekt('4_Y', 'UA 4Y bara flygturerna (8), V och Ö sammanslagna, Solberget indragen'),
         ], False, exklusiv=True),
         G('Sammanslagning av linjer (fig 4.8)', [L('b4_sammanslagning_omraden', 'Områden – behövd tid per tur')]),
-        L('b4_nyckeltal_scenarier', 'Nyckeltal per scenario (tabell)'),
+        L('b4_nyckeltal_scenarier', 'Nyckeltal per UA och driftform (tabell)'),
     ], True),
     ('Kap 3 Hållplatslägen (fig 3.1–3.2)', [L(n) for n in ['a3_nya_hallplatser', 'a3_behov_ny_linjestrackning',
                                                          'a3_hallplatsbedomning', 'a3_nya_hallplatser_400m',

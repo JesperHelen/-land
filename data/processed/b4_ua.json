@@ -141,9 +141,12 @@
   },
   "dagsfaktor": 10.43
  },
- "forslag": {
+ "ua": {
   "1a": {
    "namn": "Linje V till Möckelö Strand ny via dagens vägar",
+   "titel": "UA 1a – Möckelö Strand ny via dagens vägar",
+   "huvudalternativ": "VO",
+   "huvud_text": "V och Ö sammanslagna (Ö ≤ 2 min efter pulsen)",
    "linje": "V",
    "korvag": "Norrgårdsvägen → befintlig väg → ny hållplats → samma väg tillbaka (efter Möckelö Strand som i dag)",
    "delta_min_per_tur": 4.5,
@@ -333,6 +336,9 @@
   },
   "1b": {
    "namn": "Linje V till Möckelö Strand ny via förlängd Norrgårdsvägen (slinga)",
+   "titel": "UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen",
+   "huvudalternativ": "alla",
+   "huvud_text": "alla turer, bytet V → Ö 0,5 min",
    "linje": "V",
    "korvag": "Möckelö Strand → förlängd Norrgårdsvägen → ny hållplats → befintlig väg → Norrgårdsvägen",
    "delta_min_per_tur": 2.5,
@@ -572,6 +578,9 @@
   },
   "2": {
    "namn": "Ny hållplats N2 på linje Ö",
+   "titel": "UA 2 – N2 på linje Ö",
+   "huvudalternativ": "alla",
+   "huvud_text": "alla turer",
    "linje": "Ö",
    "korvag": "",
    "delta_min_per_tur": 0.5,
@@ -643,6 +652,9 @@
   },
   "3": {
    "namn": "Linje N via Bo-Bil i stället för Vikingagränd",
+   "titel": "UA 3 – Linje N via Bo-Bil",
+   "huvudalternativ": "alla",
+   "huvud_text": "alla turer",
    "linje": "N",
    "korvag": "",
    "delta_min_per_tur": 0.1,
@@ -705,14 +717,17 @@
   },
   "4": {
    "namn": "Linje V till flygplatsen",
+   "titel": "UA 4 – Linje V–Ö via flygplatsen",
+   "huvudalternativ": "VO_sol",
+   "huvud_text": "V och Ö sammanslagna, Solberget indragen",
    "linje": "V",
    "korvag": "Posten → flygplatsen (slinga runt terminalen) → Norra Svibyvägen → Källarvägen",
    "delta_min_per_tur": 4.0,
    "km_per_tur": 1.38,
    "delta_konservativ_min_per_tur": null,
    "linjens_turer": 20,
-   "turer_som_trafikerar": 19,
-   "driftform": "VO",
+   "turer_som_trafikerar": 20,
+   "driftform": "VO_sol",
    "omlopp": {
     "alla": {
      "fordon": 6,
@@ -1151,20 +1166,20 @@
    },
    "resenarer": {
     "FM": {
-     "resenarsminuter_h": 1.869,
-     "resor_langre_h": 0.467,
+     "resenarsminuter_h": 1.968,
+     "resor_langre_h": 0.492,
      "resor_kortare_h": 0.0,
      "resor_utan_forbindelse_h": 0.0
     },
     "EM": {
-     "resenarsminuter_h": 0.242,
-     "resor_langre_h": 0.068,
+     "resenarsminuter_h": 0.255,
+     "resor_langre_h": 0.071,
      "resor_kortare_h": 0.0,
      "resor_utan_forbindelse_h": 0.0
     },
     "vardag": {
-     "berorda_resor": 2.8,
-     "resenarsminuter": 11.0,
+     "berorda_resor": 2.9,
+     "resenarsminuter": 11.6,
      "resor_utan_forbindelse": 0.0
     }
    },

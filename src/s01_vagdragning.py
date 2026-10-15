@@ -40,15 +40,15 @@ CACHE = C.PROCESSED / 'vagdragning_segment.gpkg'
 MAX_OMVAG = (2.5, 300.0)          # faktor, tillägg (m) – längre OSRM-rutt avvisas
 SAMMA_GATA_M = 15.0               # avstånd inom vilket två linjer räknas gå på samma gata
 ORDNING = {l: i for i, l in enumerate(C.STADSLINJER)}
-# Linjeförslagens nya delsträckor (kapitel 4). Ruttas också med OSRM när det går, för kartor/GIS och för att
+# Utredningsalternativens nya delsträckor (kapitel 4). Ruttas också med OSRM när det går, för kartor/GIS och för att
 # kontrollera körtiderna. NY_MOCKELO = nytt hållplatsläge i Möckelö Strand (indikativt läge från A3).
 # Norrgårdsvägen (9025302000067701) ↔ NY_MOCKELO går på befintlig väg (beställarens skiss 2026-10-14, 2 min):
-# förslag 1a kör den fram och tillbaka, förslag 1b kör den tillbaka från den nya hållplatsen (slinga).
-# FLYGPLATSEN = hållplats vid flygterminalen (förslag 4): Posten → flygplatsen → Källarvägen (beställarens skiss).
-FORSLAG_SEGMENT = [('9025302000067701', 'NY_MOCKELO', 'förslag 1a'), ('NY_MOCKELO', '9025302000067701', 'förslag 1a, 1b'),
-                   ('9025302000031201', '9025302000003502', 'förslag 3'), ('9025302000003502', '9025302000063301', 'förslag 3'),
-                   ('9025302000035802', 'FLYGPLATSEN', 'förslag 4'), ('FLYGPLATSEN', '9025302000025902', 'förslag 4')]
-# Förslag 1b: Norrgårdsvägen förlängd från Möckelö Strand till den nya hållplatsen (planerad väg, 1 min). Vägen finns
+# UA 1a kör den fram och tillbaka, UA 1b kör den tillbaka från den nya hållplatsen (slinga).
+# FLYGPLATSEN = hållplats vid flygterminalen (UA 4): Posten → flygplatsen → Källarvägen (beställarens skiss).
+UA_SEGMENT = [('9025302000067701', 'NY_MOCKELO', 'UA 1a'), ('NY_MOCKELO', '9025302000067701', 'UA 1a, 1b'),
+                   ('9025302000031201', '9025302000003502', 'UA 3'), ('9025302000003502', '9025302000063301', 'UA 3'),
+                   ('9025302000035802', 'FLYGPLATSEN', 'UA 4'), ('FLYGPLATSEN', '9025302000025902', 'UA 4')]
+# UA 1b: Norrgårdsvägen förlängd från Möckelö Strand till den nya hållplatsen (planerad väg, 1 min). Vägen finns
 # inte i dag och ruttas därför inte; den ritas schematiskt (rak linje).
 PLANERAD_VAG = ('9025302000066401', 'NY_MOCKELO')
 # Befintlig väg Norrgårdsvägen → nytt hållplatsläge, digitaliserad ur beställarens skiss (EPSG:3067, ≈ 10 m noggrannhet).
@@ -57,7 +57,7 @@ SKISS_NORRGARDSVAGEN_NY_MOCKELO = [
     (105734, 6684367), (105742, 6684258), (105760, 6684159), (105797, 6684060), (105849, 6683964), (105904, 6683891),
     (105956, 6683837), (106003, 6683782), (106038, 6683723), (106058, 6683672), (106061, 6683632), (106046, 6683596),
     (105999, 6683556), (105914, 6683511), (105812, 6683477), (105715, 6683459)]
-# Förslag 4: hållplats vid flygterminalen och körvägen Posten → terminalen (slinga runt terminalen) → tillbaka till
+# UA 4: hållplats vid flygterminalen och körvägen Posten → terminalen (slinga runt terminalen) → tillbaka till
 # Norra Svibyvägen, digitaliserad ur beställarens skiss (2026-10-14). Skalan (≈ 1,19 m/px) är bestämd så att
 # terminalen hamnar ≈ 390 m öster om banans mittlinje (banändarna 60,1144/19,8914 och 60,1300/19,9049).
 # Osäkerhet i läget ≈ ± 25 %. Ersätts av OSRM-rutten när den hämtats.
@@ -169,7 +169,7 @@ def via_text(punkter):
 
 
 def skiss(a, b):
-    """Skissad geometri för ett förslagssegment ((N,2)-array) eller None."""
+    """Skissad geometri för ett UA-segment ((N,2)-array) eller None."""
     xy, _ = alla_xy()
     if a not in xy or b not in xy:
         return None
@@ -185,7 +185,7 @@ def skiss(a, b):
 
 
 def planerad_vag():
-    """Förslag 1b:s planerade väg (förlängd Norrgårdsvägen) som (2,2)-array."""
+    """UA 1b:s planerade väg (förlängd Norrgårdsvägen) som (2,2)-array."""
     xy, _ = alla_xy()
     a, b = PLANERAD_VAG
     return np.array([xy[a], xy[b]], float)
@@ -216,7 +216,7 @@ def hamta(paus_s=1.0):
     tr = Transformer.from_crs(C.CRS_WGS84, C.CRS_METRISK, always_xy=True)
     xy, ll = alla_xy()
     segl = {k: set(v) for k, v in segment_linjer().items()}
-    for a, b, namn in FORSLAG_SEGMENT:                      # förslagens nya delsträckor
+    for a, b, namn in UA_SEGMENT:                      # UA:ns nya delsträckor
         if a in xy and b in xy:
             segl.setdefault((a, b), set()).add(namn)
     via = via_per_segment({k: (xy[k[0]], xy[k[1]]) for k in segl}, VIA_PUNKTER)
@@ -293,12 +293,12 @@ def segmentgeometri():
     return ut
 
 
-def forslagsgeometri():
-    """Förslagens nya delsträckor: {(från, till): {'xy', 'kalla', 'langd_m', 'tid_s'}} – OSRM om den finns i
+def uageometri():
+    """Utredningsalternativens nya delsträckor: {(från, till): {'xy', 'kalla', 'langd_m', 'tid_s'}} – OSRM om den finns i
     cachen, annars beställarens skiss (kalla = 'skiss') eller rak linje (kalla = 'rak')."""
     xy, _ = alla_xy()
     ut = {}
-    for a, b, _ in FORSLAG_SEGMENT:
+    for a, b, _ in UA_SEGMENT:
         if a in xy and b in xy:
             sk = skiss(a, b)
             p = sk if sk is not None else np.array([xy[a], xy[b]])

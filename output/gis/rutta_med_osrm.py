@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Ruttar stadslinjerna och linjeförslagen längs gatunätet med OSRM – direkt i QGIS.
+"""Ruttar stadslinjerna och utredningsalternativen längs gatunätet med OSRM – direkt i QGIS.
 
 Kör i QGIS: Insticksprogram > Python-konsol > Visa redigerare > Öppna skript (denna fil) > Kör skript.
 Ligger skriptet i samma mapp som linjenatsutredning.gpkg hittas filen automatiskt, annars får du välja den.
@@ -12,8 +12,8 @@ Skriptet
      via-punkter ("gömda stopp") i lagret 00_viapunkter tvingar rutten över punkten där OSRM:s snabbaste väg
      inte är bussens väg (se nedan) – segment med via-punkter ruttas om varje gång;
   2. skriver vägdragningen till 00_segment (kalla = 'osrm', langd_m, tid_s);
-  3. byter ut de raka delarna i 00_stadslinjer, b4_linjer_forslag och b4_forslag_korvagar mot de ruttade
-     (planerade vägar, t.ex. Norrgårdsvägens förlängning i förslag 1b, behålls schematiska);
+  3. byter ut de raka delarna i 00_stadslinjer, b4_ua_linjer och b4_ua_korvagar mot de ruttade
+     (planerade vägar, t.ex. Norrgårdsvägens förlängning i UA 1b, behålls schematiska);
   4. räknar om 00_stadslinjer_forskjutna, så att linjer som delar gata får egna spår även längs de ruttade gatorna;
   5. laddar om lagren i projektet.
 Skriptet kan köras igen; redan ruttade segment hoppas över (sätt RUTTA_OM_ALLA = True för att rutta om).
@@ -38,7 +38,7 @@ MAX_OMVAG = (2.5, 300.0)                       # faktor, tillägg (m) – längr
 SAMMA_GATA_M = 15.0                            # linjer inom detta avstånd och parallella räknas gå på samma gata
 STEG_M = 6.0                                   # samplingssteg för förskjutningen (m)
 ORDNING = {l: i for i, l in enumerate(['J', 'N', 'S', 'V', 'Ö'])}
-LINJELAGER = ['00_stadslinjer', 'b4_linjer_forslag', 'b4_forslag_korvagar']
+LINJELAGER = ['00_stadslinjer', 'b4_ua_linjer', 'b4_ua_korvagar']
 TVILLING_M = 100.0                             # motsatt riktning: hållplatserna inom detta avstånd (m)
 VIA_STANDARD = [                               # EPSG:3067 – samma som VIA_PUNKTER i src/s01_vagdragning.py
     {'from_stop': '9025302000029202', 'to_stop': '9025302000067702', 'x': 106101.0, 'y': 6684603.0,

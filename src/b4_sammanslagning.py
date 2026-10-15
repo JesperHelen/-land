@@ -19,14 +19,14 @@ Princip
   * Genomgående resor: korrigerad OD-matris (A1) utlagd på nätet med de sammanslagna linjerna – resor som slipper
     byte i centrum och sparade resenärsminuter (b4_natverk.py).
   * Körtiden är medianen för rusningsturerna. Linje Ö:s skolturer (08:20, 08:45, 13:10–15:10 via Strandnäs skola
-    södra) är 5–6 min längre och har därför mindre utrymme – se omloppsverifieringen för enskilda förslag.
+    södra) är 5–6 min längre och har därför mindre utrymme – se omloppsverifieringen för enskilda UA.
   * Partnerlinjen kan dessutom avgå upp till MAX_SKIFT (2 min) efter pulsen, om den har reglering kvar efter
     bytet tillbaka (≥ REGLERING). Det ger ytterligare min(MAX_SKIFT, 30 − t_B − REGLERING) min per tur
     ('utrymme_skift'). För V/Ö: V kan förlängas 2,5 + 2 = 4,5 min i rusning (prövat tur för tur i
-    b4_forslag/b4_omlopp.genomgaende_ryms).
+    b4_ua/b4_omlopp.genomgaende_ryms).
   * Nåbarhet för områden som i dag saknar hållplats inom 400 m (A3, behov av ändrad linjesträckning): behövd
     tilläggstid per tur = 2 × avstånd till närmaste körväg × 1,3 (omvägsfaktor) / 25 km/h + 0,5 min uppehåll.
-    För Möckelö Strand används beställarens restider via dagens vägar (förslag 1a: 2 + 0,5 + 2 min).
+    För Möckelö Strand används beställarens restider via dagens vägar (UA 1a: 2 + 0,5 + 2 min).
 Utdata: data/processed/b4_sammanslagning_par.csv, b4_sammanslagning_omraden.csv, b4_sammanslagning.json,
         output/kartor/b4_8_sammanslagning.png
 """
@@ -132,8 +132,8 @@ def omraden(prof):
                         bast = (d, l)
         d, l = bast
         behov_min = 2 * d * OMVAG / 1000 / KMH * 60 + 0.5
-        if r.narmaste_hpl == 'Möckelö Strand':           # förslag 1a (dagens vägar, beställarens restider)
-            import b4_forslag as F
+        if r.narmaste_hpl == 'Möckelö Strand':           # UA 1a (dagens vägar, beställarens restider)
+            import b4_ua as F
             behov_min = 2 * F.RESTID_BEFINTLIG_VAG + F.UPPEHALL
         rader.append({'omrade': r.narmaste_hpl, 'inv': r.inv, 'x': r.x, 'y': r.y, 'linje': l, 'avstand_m': round(d),
                       'behov_min_per_tur': round(behov_min, 1)})

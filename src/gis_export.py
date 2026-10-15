@@ -175,7 +175,7 @@ def bas():
     stil('00_stadslinjer', 'Stadslinjer', qml(r_kategori('linje', [(l, f'Linje {l}', C.FARG_LINJE[l]) for l in C.STADSLINJER],
                                                          lambda n, f: linje(n, f, 0.7, halo=True))), True)
     # segment hållplats–hållplats (underlag för OSRM-ruttning i QGIS, se output/gis/rutta_med_osrm.py)
-    xy_, ll_ = V.alla_xy(); fg = V.forslagsgeometri()
+    xy_, ll_ = V.alla_xy(); fg = V.uageometri()
     info = {}
     if V.CACHE.exists():
         c_ = gpd.read_file(V.CACHE, layer='segment')
@@ -186,7 +186,7 @@ def bas():
         rader.append({'from_stop': a_, 'to_stop': b_, 'linjer': ','.join(sorted(lns, key=lambda q: V.ORDNING.get(q, 99))),
                       'kalla': k_, 'langd_m': l_, 'tid_s': t_, 'geometry': LineString(geo[(a_, b_)])})
     for (a_, b_), v_ in fg.items():
-        namn_ = next(n for x, y, n in V.FORSLAG_SEGMENT if (x, y) == (a_, b_))
+        namn_ = next(n for x, y, n in V.UA_SEGMENT if (x, y) == (a_, b_))
         rader.append({'from_stop': a_, 'to_stop': b_, 'linjer': namn_, 'kalla': v_['kalla'], 'langd_m': v_['langd_m'],
                       'tid_s': None if np.isnan(v_['tid_s']) else v_['tid_s'], 'geometry': LineString(v_['xy'])})
     sgdf = gpd.GeoDataFrame(rader, crs=C.CRS_METRISK)
@@ -348,23 +348,23 @@ def a3():
 
 
 def b4():
-    g = gpd.read_file(P / 'b4_forslag.gpkg', layer='forslag')
+    g = gpd.read_file(P / 'b4_ua.gpkg', layer='ua')
     pk = g[g.geom_type == 'Point'].copy(); ln = g[g.geom_type != 'Point'].copy()
-    skriv(pk.drop(columns=[c for c in ('vagdragning', 'planerad_del') if c in pk]), 'b4_forslag_hallplatser')
+    skriv(pk.drop(columns=[c for c in ('vagdragning', 'planerad_del') if c in pk]), 'b4_ua_hallplatser')
     kat = [('ny hållplats', 'Ny hållplats', 'star', '#1c5cab', 5.0, '#ffffff'),
            ('ny hållplats för linje N', 'Hållplats som linje N börjar trafikera', 'star', '#1c5cab', 5.0, '#ffffff'),
            ('hållplats utgår för linje N', 'Hållplats som linje N slutar trafikera', 'cross_fill', '#c0392b', 3.4, '#ffffff'),
-           ('hållplats dras in (variant)', 'Hållplats som dras in (variant)', 'cross_fill', '#c0392b', 3.4, '#ffffff')]
-    stil('b4_forslag_hallplatser', 'Förslag – hållplatser (fig 4.2, 4.4, 4.6)',
+           ('hållplats dras in', 'Hållplats som dras in', 'cross_fill', '#c0392b', 3.4, '#ffffff')]
+    stil('b4_ua_hallplatser', 'UA – hållplatser',
          qml(r_kategori('objekt', kat, lambda n, form, f, st, k: markor(n, form, f, st, k, 0.3)),
-             labeling=etiketter('"forslag" || \': \' || "namn"')), True)
+             labeling=etiketter('"ua" || \': \' || "namn"')), True)
     # körvägarna har en del per hållplatssegment (kan bytas mot OSRM-rutter i QGIS, se rutta_med_osrm.py)
     ln['geometry'] = [x if x.geom_type == 'MultiLineString' else shapely.MultiLineString([x]) for x in ln.geometry]
-    skriv(gpd.GeoDataFrame(ln, crs=C.CRS_METRISK), 'b4_forslag_korvagar')
+    skriv(gpd.GeoDataFrame(ln, crs=C.CRS_METRISK), 'b4_ua_korvagar')
     kat = [('ny körväg, befintlig väg', 'Ny körväg (befintlig väg)', '#1c5cab', False),
            ('ny körväg, planerad väg', 'Ny körväg (planerad väg, finns inte i dag)', '#1c5cab', True),
            ('körväg utgår', 'Körväg som utgår', '#3d3d3a', True)]
-    stil('b4_forslag_korvagar', 'Förslag – körvägar',
+    stil('b4_ua_korvagar', 'UA – körvägar',
          qml(r_kategori('objekt', kat, lambda n, f, st: linje(n, f, 1.0, streckad=st, halo=True))), True)
 
     # systemeffekter: turtäthetsklass per scenario och förändring mot i dag, 50 m-celler (fig 4.10–4.11)
@@ -403,13 +403,13 @@ def b4():
     stil('b4_tackning_scenarier', 'Turtäthet inom 400 m (filtrera på scenario)',
          qml(r_kategori('klass', [(n, n, f) for n, f in zip(namn, farger)], lambda s_, f: fyll(s_, f)), 0.75), True)
 
-    # hela linjesträckningar per förslag (en del per hållplatssegment)
+    # hela linjesträckningar per UA (en del per hållplatssegment)
     import s01_vagdragning as V
     sg = V.segmentgeometri(); hxy = V.alla_xy()[0]; mon = V.monster_per_linje()
-    fs = json.load(open(P / 'b4_forslag.json', encoding='utf-8'))['forslag']
+    fs = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['ua']
     def kedja(stopp):
         return [sg.get((a, b), np.array([hxy[a], hxy[b]])) for a, b in zip(stopp[:-1], stopp[1:])]
-    fg = V.forslagsgeometri()
+    fg = V.uageometri()
     vm, om, nm = list(mon['V'][0][0]), list(mon['Ö'][0][0]), list(mon['N'][0][0])
     ms, ni, ny = '9025302000066401', '9025302000067701', 'NY_MOCKELO'
     k = vm.index(ms); assert vm[k + 1] == ni
@@ -424,33 +424,38 @@ def b4():
     osrm = V.kalla_text().startswith('Linjernas')
     vag = lambda nycklar: ('OSRM' if osrm and all(fg[n]['kalla'] == 'osrm' for n in nycklar) else
                            'delvis schematisk (raka streck)' if not osrm else 'delvis schematisk')
-    a1, o1 = fs['1a']['omlopp'], fs['1a']['omlopp'].get('VO', {})
-    rad = [('1a', 'V', f"Linje V via Möckelö Strand ny, dagens vägar (+{fs['1a']['delta_min_per_tur']:g} min/tur; "
-            f"dagens tidtabell {a1['ryms']['turer_med_andring']} av 20 turer)".replace('.', ','),
-            fs['1a']['delta_min_per_tur'], v_1a, vag([(ni, ny), (ny, ni)]), ''),
-           ('1a_VO', 'V+Ö', f"Linje V (1a) och Ö som genomgående linje – {o1.get('turer_med_andring', 0)} av 20 V-turer via "
-            "Möckelö Strand ny, Ö avgår upp till 2 min efter pulsen", fs['1a']['delta_min_per_tur'], v_1a + o_,
-            vag([(ni, ny), (ny, ni)]), ''),
-           ('1b', 'V', f"Linje V via förlängd Norrgårdsvägen och Möckelö Strand ny, slinga (+{fs['1b']['delta_min_per_tur']:g} "
-            "min/tur; alla turer)".replace('.', ','), fs['1b']['delta_min_per_tur'], v_1b,
-            vag([(ny, ni)]) + '; förlängningen schematisk (planerad väg)', '>'.join(V.PLANERAD_VAG)),
-           ('2', 'Ö', 'Linje Ö med ny hållplats N2', fs['2']['delta_min_per_tur'], o_, 'OSRM' if osrm else 'raka streck', ''),
-           ('3', 'N', 'Linje N via Bo-Bil i stället för Vikingagränd', fs['3']['delta_min_per_tur'], n_ny,
+    sol = '9025302000062201'
+    om_sol = [x for x in om if x != sol]                     # Ö utan Solberget (UA 4)
+    o_sol = kedja(om_sol)
+    o1, o4 = fs['1a']['omlopp']['VO'], fs['4']['omlopp']['VO_sol']
+    # bara huvudalternativet per UA (det som visas på kartan); övriga driftformer redovisas i rapporten
+    rad = [('1a', 'V–Ö', fs['1a']['titel'], f"Huvudalternativ: V och Ö sammanslagna till genomgående linje, Ö ≤ 2 min efter "
+            f"pulsen; {o1['turer_med_andring']} av 20 V-turer via Möckelö Strand ny (+{fs['1a']['delta_min_per_tur']:g} min/tur)"
+            .replace('.', ','), fs['1a']['delta_min_per_tur'], v_1a + o_, vag([(ni, ny), (ny, ni)]), ''),
+           ('1b', 'V–Ö', fs['1b']['titel'], f"Huvudalternativ: alla 20 turer via förlängd Norrgårdsvägen (slinga, "
+            f"+{fs['1b']['delta_min_per_tur']:g} min/tur); bussen fortsätter V → Ö efter 0,5 min".replace('.', ','),
+            fs['1b']['delta_min_per_tur'], v_1b + o_, vag([(ny, ni)]) + '; förlängningen schematisk (planerad väg)',
+            '>'.join(V.PLANERAD_VAG)),
+           ('2', 'Ö', fs['2']['titel'], 'Huvudalternativ: alla 20 turer', fs['2']['delta_min_per_tur'], o_,
+            'OSRM' if osrm else 'raka streck', ''),
+           ('3', 'N', fs['3']['titel'], 'Huvudalternativ: alla 22 turer', fs['3']['delta_min_per_tur'], n_ny,
             vag([(nm[iv - 1], bobil_id), (bobil_id, nm[iv + 1])]), ''),
-           ('4', 'V', f"Linje V via flygplatsen (+{fs['4']['delta_min_per_tur']:g} min/tur; V och Ö sammanslagna "
-            f"{fs['4']['omlopp']['VO']['turer_med_andring']} av 20 turer, Y-versionen 8 flygturer)".replace('.', ','),
-            fs['4']['delta_min_per_tur'], v_4, vag([(po, 'FLYGPLATSEN'), ('FLYGPLATSEN', ka)]), '')]
-    lg = gpd.GeoDataFrame([{'forslag': a, 'linje': b, 'beskrivning': c, 'korttid_per_tur_min': d, 'vagdragning': e,
-                            'planerad_del': pdel} for a, b, c, d, _, e, pdel in rad],
-                          geometry=[shapely.MultiLineString([LineString(x) for x in delar_]) for *_, delar_, _, _ in rad],
+           ('4', 'V–Ö', fs['4']['titel'], f"Huvudalternativ: V och Ö sammanslagna, Solberget indragen; "
+            f"{o4['turer_med_andring']} av 20 V-turer via flygplatsen (+{fs['4']['delta_min_per_tur']:g} min/tur); "
+            "UA 4Y: bara de 8 flygturerna".replace('.', ','), fs['4']['delta_min_per_tur'], v_4 + o_sol,
+            vag([(po, 'FLYGPLATSEN'), ('FLYGPLATSEN', ka)]), '')]
+    lg = gpd.GeoDataFrame([{'ua': a, 'linje': b, 'ua_titel': c, 'beskrivning': d, 'korttid_per_tur_min': e,
+                            'vagdragning': g_, 'planerad_del': pdel} for a, b, c, d, e, _, g_, pdel in rad],
+                          geometry=[shapely.MultiLineString([LineString(x) for x in r_[5]]) for r_ in rad],
                           crs=C.CRS_METRISK)
-    skriv(lg, 'b4_linjer_forslag')
-    kat = [('1a', '1a Linje V via Möckelö Strand ny, dagens vägar', C.FARG_LINJE['V']),
-           ('1a_VO', '1a med V och Ö sammanslagna (genomgående linje)', '#8c3b74'),
-           ('1b', '1b Linje V via förlängd Norrgårdsvägen (slinga)', C.FARG_LINJE['V']),
-           ('2', '2 Linje Ö med N2', C.FARG_LINJE['Ö']), ('3', '3 Linje N via Bo-Bil', C.FARG_LINJE['N']),
-           ('4', '4 Linje V via flygplatsen', C.FARG_LINJE['V'])]
-    stil('b4_linjer_forslag', 'Linjer i förslagen', qml(r_kategori('forslag', kat, lambda n, f: linje(n, f, 1.0, halo=True))), True)
+    skriv(lg, 'b4_ua_linjer')
+    vo = '#8c3b74'
+    kat = [('1a', 'UA 1a – linje V–Ö via Möckelö Strand ny, dagens vägar', vo),
+           ('1b', 'UA 1b – linje V–Ö via förlängd Norrgårdsvägen', vo),
+           ('2', 'UA 2 – linje Ö med N2', C.FARG_LINJE['Ö']), ('3', 'UA 3 – linje N via Bo-Bil', C.FARG_LINJE['N']),
+           ('4', 'UA 4 – linje V–Ö via flygplatsen, utan Solberget', vo)]
+    stil('b4_ua_linjer', 'Linjer i utredningsalternativen (huvudalternativ)',
+         qml(r_kategori('ua', kat, lambda n, f: linje(n, f, 1.0, halo=True))), True)
 
     # nyckeltal per scenario (tabell utan geometri)
     kalk = pd.read_csv(P / 'b5_kalkyl.csv').set_index('scenario')
@@ -459,7 +464,9 @@ def b4():
         t_ = v['tackning_mariehamn']; fi = v['forandring_invanare_mariehamn']
         rader.append({'scenario': sid, 'namn': v['namn'], 'ryms_i_omloppen': 'Ja' if v['ryms'] else 'Nej',
                       'robust': 'Ja' if v.get('robust', True) else 'Nej',
-                      'turer_via_forslaget': v['turer'], 'turer_totalt': v['turer_tot'],
+                      'huvudalternativ': 'Ja' if sid in ('1a_VO', '1b', '2', '3', '4_VO_sol') else 'Nej',
+                      'utesluten': 'Ja (kräver fler bussar)' if v['omlopp']['fordon'] > se['idag']['omlopp']['fordon'] else 'Nej',
+                      'turer_via_ua': v['turer'], 'turer_totalt': v['turer_tot'],
                       'turer_som_avgar_senare': v['skiftade_turer'],
                       'varv_under_3_min_reglering': v['omlopp']['varv_utan_reglering'],
                       'bussar': v['omlopp']['fordon'], 'omloppstid_h_vardag': v['omlopp']['omloppstid_h'],
