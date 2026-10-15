@@ -14,9 +14,9 @@
 > **Sammanfattning.** Stadstrafiken körs i dag med fem bussar. Förarna byter linje i centrum enligt en fast
 > norm: Syd ↔ Norr (S ↔ N) och Öst ↔ Väst (Ö ↔ V). Bussen som har kört linje V fortsätter alltså som linje Ö
 > och tvärtom. Linje V kan inte förlängas utan att V och Ö slås ihop till en genomgående linje V–Ö. Bussen
-> fortsätter då som Ö efter en halv minut, och resenärer mellan V och Ö kan sitta kvar. Det enda kravet är att
-> varje varv V + Ö ryms inom timmen med minst 5 minuter i centrum. Ö kan då behöva avgå upp till 2 minuter
-> efter pulsen.
+> fortsätter då som Ö efter en halv minut, och resenärer mellan V och Ö kan sitta kvar. Ö startar när V har
+> kommit tillbaka. Det enda kravet är att varje varv V + Ö ryms inom 55 minuter, dvs. minst 5 minuter i
+> centrum, och helst inom 50 minuter. I huvudalternativen startar Ö 0–2 minuter efter pulsen.
 >
 > | UA | Huvudalternativ (★) | Turer | Bussar | Uteslutet |
 > |---|---|---|---|---|
@@ -80,9 +80,9 @@ Ett UA har verifierats på följande sätt:
 3. Ryms inte alla turer prövas turerna en i taget, och det redovisas hur många som ryms.
 4. **Sammanslagning (UA på linje V):** V och Ö slås ihop till en genomgående linje (avsnitt 4.5). Dagens omlopp
    ligger fast, så att varje V-tur fortsätter som den Ö-tur som samma buss kör i dag. Bussen fortsätter efter
-   0,5 minut, och Ö:s avgång får skjutas upp till 2 minuter efter pulsen. Övriga avgångstider ligger fast.
-5. **Kravet för linje V–Ö (beställaren 2026-10-15):** varje varv, dvs. V-turen, Ö-turen och tiden i centrum,
-   ska rymmas inom timmen med minst 5 minuter i centrum. Tiden i centrum är genomgången V → Ö plus regleringen
+   0,5 minut, och Ö flyttas så att den startar när V har kommit tillbaka. Övriga avgångstider ligger fast.
+5. **Kravet för linje V–Ö (beställaren 2026-10-15):** varje varv, dvs. V-turen och Ö-turen, ska rymmas inom
+   55 minuter, så att det blir minst 5 minuter i centrum per timme, och helst inom 50 minuter. Tiden i centrum är genomgången V → Ö plus regleringen
    före bussens nästa avgång. Kravet tillämpas på alla driftformer för UA på linje V, även med dagens tidtabell.
    Varv som redan i dag har mindre marginal godtas oförändrade. Det gäller V 07:50 följd av Ö:s skoltur 08:20,
    som i dag har 4 minuter.
@@ -268,19 +268,19 @@ lika med linjens vändtid. Slås paret ihop till en genomgående linje fortsätt
 med minst 5 minuter i centrum. Utrymmet för att förlänga A blir då det minsta av två tal:
 
 - **varvet inom timmen:** 60 − 5 − körtiden för A − körtiden för B;
-- **pulsen:** 30 − 0,5 − körtiden för A om B ska avgå i pulsen, eller 2 minuter mer om B får avgå upp till
-  2 minuter efter pulsen.
+- **pulsen:** 30 − 0,5 − körtiden för A, om B ska avgå i pulsen. Flyttas B så att den startar när A har
+  kommit tillbaka gäller bara varvet.
 
 Om bytet skyltas som genomgående linje kan resenärerna dessutom sitta kvar på bussen.
 
 *Tabell 4.2. Utrymme för förlängning per tur utan fler bussar (30 minuters turintervall, vanligt varv).*
 
-| Linje (körtid) | Reglering ≥ 3 min vid varje byte | Genomgående, partnern i pulsen | … partnern ≤ 2 min efter pulsen | Gräns: varvet inom timmen |
-|---|---|---|---|---|
-| N (26 min), partner S | 1 min | 3,5 min | 5,5 min | 6 min |
-| S (23 min), partner N | 4 min | 6 min | 6 min | 6 min |
-| V (27 min), partner Ö | 0 min | 2,5 min | 4,5 min | 5 min |
-| Ö (23 min, skolturer 28–29), partner V | 4 min | 5 min | 5 min | 5 min |
+| Linje (körtid) | Reglering ≥ 3 min vid varje byte | Genomgående, partnern i pulsen | Genomgående, partnern startar senare (varvet ≤ 55 min) |
+|---|---|---|---|
+| N (26 min), partner S | 1 min | 3,5 min | 6 min |
+| S (23 min), partner N | 4 min | 6 min | 6 min |
+| V (27 min), partner Ö | 0 min | 2,5 min | 5 min |
+| Ö (23 min, skolturer 28–29), partner V | 4 min | 5 min | 5 min |
 
 I varven med Ö:s skolturer finns inget utrymme alls för linje V: 27 + 28 minuter lämnar bara 5 minuter i
 centrum, vilket är kravet.
@@ -292,7 +292,7 @@ hastigheten 25 km/h plus 0,5 minuts uppehåll. För Möckelö Strand har bestäl
 
 - **Ryms som genomgående linje med Ö i pulsen:** Solberget (linje Ö, cirka 5 min) och Solberget södra
   (linje Ö, cirka 4 min).
-- **Ryms om partnerlinjen dessutom avgår upp till 2 minuter efter pulsen:**
+- **Ryms om partnerlinjen startar senare än pulsen:**
   - Möckelö Strand (linje V, 4,5 min, se avsnitt 4.5.2);
   - Örtvägen (linje N, 4,4 min);
   - Dalkullavägen (linje V, 4,4 min).
@@ -411,8 +411,44 @@ varvet V + Ö.
 - **UA 4Y:** alla 8 flygturer ryms med V och Ö sammanslagna, utan att Solberget dras in. Varven med flygturerna
   har minst 6 minuter i centrum, och 7 Ö-turer avgår 1,5 minut efter pulsen. De varv som har mindre än 5 minuter
   (Ö:s skoltur 08:20 före V 08:50) är oförändrade mot i dag.
-- **Känslighet:** med 3 minuters omväg ryms samma 16 turer. Med 5 minuter skulle Ö behöva avgå 2,5 minuter efter
-  pulsen, vilket är mer än de 2 minuter som har tillåtits, och bara 2 turer ryms.
+- **Känslighet:** med 3–5 minuters omväg ryms samma 16 turer, vid 5 minuter med exakt 5 minuter i centrum. Med
+  5,5–7 minuter behöver Solberget dras in på en del Ö-turer (se känsligheten nedan).
+
+**Känslighet – omvägens körtid och Solberget på utvalda turer (figur 4.15).** Omvägens körtid är osäker,
+eftersom körvägen är uppskattad ur en skiss. Ö startar när V har kommit tillbaka, och fyra driftformer har prövats
+för omvägar på 3–8 minuter:
+
+- **A:** varvet V + Ö ≤ 55 minuter (kravet), Solberget kvar. Det är huvudalternativet.
+- **B:** som A, men Solberget dras in på de Ö-turer där varvet annars inte ryms. Det gäller bara den Ö-tur som
+  följer en V-tur via flygplatsen.
+- **C:** varvet ≤ 50 minuter (helst), Solberget kvar.
+- **D:** som C, men Solberget dras in där det behövs.
+
+*Tabell 4.5. UA 4 – turer via flygplatsen per omväg och driftform (alla V-turer / UA 4Y), fem bussar.*
+
+| Omväg per tur | A ≤ 55 min | B ≤ 55 min, Solberget där det behövs | C ≤ 50 min | D ≤ 50 min, Solberget där det behövs |
+|---|---|---|---|---|
+| 3 min | 16 / 8 | 16 / 8 | 6 / 2 | 6 / 2 |
+| 4 min (beräknad) | **16 / 8** | 16 / 8 | 4 / 2 | 6 / 2 |
+| 5 min | 16 / 8 (Ö startar 2,5 min efter pulsen) | 16 / 8 | 4 / 2 | 4 / 2 |
+| 5,5–7 min | 6 / 2 | **16 / 8** – Solberget indraget på 10 / 6 Ö-turer, Ö startar 3–4,5 min efter pulsen | 4 / 2 | 4 / 2 |
+| 7,5–8 min | 6 / 2 | 6 / 2 | 4 / 2 | 4 / 2 |
+
+- **Upp till 5 minuters omväg** ryms 16 av 20 turer (UA 4Y 8 av 8) utan att Solberget dras in. Vid 5 minuter
+  startar Ö 2,5 minuter efter pulsen och varven har exakt 5 minuter i centrum.
+- **Med 5,5–7 minuters omväg** behövs Solberget. Dras hållplatsen in på de Ö-turer som följer en V-tur via
+  flygplatsen ryms fortfarande 16 av 20 turer (UA 4Y 8 av 8). Det gäller 10 Ö-turer (UA 4Y: 6, kring flygen),
+  och Ö-turen blir då 1,6–2,5 minuter kortare. Ö startar 3–4,5 minuter efter pulsen.
+- **Solberget i B:** hållplatsen behålls med 10 av 20 avgångar (alla turer) eller 14 av 20 (UA 4Y). Ingen förlorar
+  hållplatsen inom 400 m, men 49 invånare får lägre turtäthet. Det berör cirka 0,9 respektive 0,6 påstigande
+  per vardag (sommarnivå).
+- **Över 7 minuter** ryms bara de V-turer som följs av uppställning eller dagens slut, och Ö:s korta
+  eftermiddagsturer (13:40 och 14:40).
+- **Helst ≤ 50 minuter (C och D)** nås bara i varv där Ö-turen är kort (13:40 och 14:40, 20 minuter) eller
+  bussen ställs upp efteråt. Dagens vanliga varv ligger redan på exakt 50 minuter.
+
+Körtiden till terminalen bör därför mätas. Blir den högst 5 minuter behövs ingen indragning. Blir den
+5,5–7 minuter är det rimligt att dra in Solberget bara på de Ö-turer som följer flygturerna (UA 4Y: 6 turer).
 
 **Effekter.**
 
@@ -451,6 +487,12 @@ Körvägen är ritad efter beställarens skiss. Kartan visar bara huvudalternati
 ryms per variant.*
 
 ![Figur 4.12](../output/kartor/b4_12_flygplatsen_omlopp.png)
+
+![Figur 4.15](../output/kartor/b4_15_ua4_kanslighet.png)
+
+*Figur 4.15. UA 4 – känslighet: turer via flygplatsen per omväg och driftform (A–D), för alla V-turer och för
+UA 4Y. "Ö startar +x min" anger hur långt efter pulsen Ö startar; "Solberget dras in" anger antalet Ö-turer där
+hållplatsen dras in (Ö-turen blir då kortare).*
 
 *Figur 4.12. Omlopp före och efter för UA 4, alla driftformer (★ = huvudalternativ). Skrafferad del är tillagd körtid, svart prickad ram anger att
 turen avgår senare än i dag och prickad ram i linjens färg efter en Ö-tur anger kortare körtid (Solberget
@@ -510,9 +552,9 @@ röd ram sämre klass än i dag.*
 Nästa leverans ska redovisa följande:
 
 1. **V och Ö sammanslagna.** Pröva tidtabellen mot verkliga körtider, särskilt Ö:s skolturer, som avgör vilka
-   V-turer som ryms. Pröva Ö upp till 2 minuter efter pulsen mot bytena i centrum, och undersök vändmöjligheten
+   V-turer som ryms. Pröva Ö:s senare start (0–2 minuter efter pulsen) mot bytena i centrum, och undersök vändmöjligheten
    vid den nya hållplatsen (1a).
-2. **Paret N ↔ S.** Reglering vid bytet N → S, med S upp till 2 minuter efter pulsen, ger utrymme för linje N
+2. **Paret N ↔ S.** Reglering vid bytet N → S, med S som startar senare än pulsen, ger utrymme för linje N
    att nå Örtvägen. Pröva det tillsammans med Bo-Bil (3), alternativt i kombination med indragning av
    hållplatser på linje S enligt kapitel 3.
 3. **Nordost.** En omläggning av linje N och Ö norr och nordost om centrum prövas för Lillåkersvägen,
@@ -520,7 +562,7 @@ Nästa leverans ska redovisa följande:
 4. **Dalkullavägen** på linje V ryms enligt screeningen i vanliga varv om Ö avgår efter pulsen, men konkurrerar
    om samma utrymme som Möckelö Strand och flygplatsen.
 5. **Flygplatsen.** Hämta flygens ankomsttider och kontrollera körtiden Posten – terminalen (OSRM eller
-   provkörning). Pröva också en extra morgontur för 07:15-flyget och vändmöjligheten vid terminalen.
+   provkörning). Den avgör om Solberget behöver dras in på flygturerna (tabell 4.5). Pröva också en extra morgontur för 07:15-flyget och vändmöjligheten vid terminalen.
 
 ## 4.9 Osäkerheter
 
@@ -538,9 +580,10 @@ Nästa leverans ska redovisa följande:
   flygens ankomsttider är antagna.
 - **Ö efter pulsen (1a och 4 med V och Ö sammanslagna)** förutsätter att resenärer som byter till Ö kan vänta
   1,5–2 minuter längre. Effekten på bytesresor ingår inte i nätverksmodellen.
-- **Kravet 5 minuter i centrum per varv** är beställarens riktvärde. Resultatet ändras inte om kravet ligger
-  mellan 3 och 5,5 minuter: varven med Ö:s skolturer får 0,5–2,5 minuter och de ändrade varven minst
-  5,5 minuter.
+- **Kravet på varvet** (≤ 55 minuter, helst ≤ 50) är beställarens riktvärde. Antalet turer ändras inte om
+  marginalen ligger mellan 3 och 5,5 minuter: varven med Ö:s skolturer får 0,5–2,5 minuter och de ändrade
+  varven minst 5,5 minuter. Nivån 50 minuter (10 minuter i centrum) nås inte med någon av förlängningarna av V,
+  eftersom dagens vanliga varv redan ligger på exakt 50 minuter.
 - **Normen för linjebyten** (S ↔ N, Ö ↔ V) bygger på beställarens uppgift och bör stämmas av mot
   operatörens omloppsplaner.
 - **Påstigande och restider** bygger på sommardata (2026-05-08 – 2026-09-14) och är låga i absoluta tal.

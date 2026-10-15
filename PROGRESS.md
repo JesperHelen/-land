@@ -123,6 +123,16 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       huvudalternativ utan indragning; **UA 4Y 8/8 utan Solberget indragen** (≥ 6 min). Känslighet 4: 3 min 16/20,
       5 min 2/20 (Ö +2,5). Kostnad: 1a ★ +11,6 k€, 1b ★ +6,7 k€, 4 ★ +6,4 k€, 4Y +2,8 k€. Figurer b4_2, b4_3,
       b4_8–b4_14, b5_1, GIS och rapporterna (B4, B5, PM) uppdaterade.
+- [x] **UA 4 känslighet – Solberget på utvalda turer** (beställaren 2026-10-15): `b4_omlopp.genomgaende_ryms(sol=…)`
+      drar in Solberget på enskilda Ö-turer där varvet annars inte ryms; `b4_ua.kanslighet_ua4` →
+      `b4_kanslighet_ua4.csv`, `b4_ua.json` (ua.4.kanslighet_solberget), figur `b4_15_ua4_kanslighet.png`, tabell 4.5.
+      (Första versionen med Ö ≤ 2/3 min efter pulsen ersatt enligt nästa punkt.)
+- [x] **Ö startar när V har kommit tillbaka** (beställaren 2026-10-15: "flytta Ö så att den startar senare, det
+      viktiga är att de får plats inom 55 minuter, helst 50"). `MAX_SKIFT_PARTNER = None` (ingen gräns efter
+      pulsen), `MARGINAL_VARV_ONSKAD = 10`. Huvudresultaten oförändrade (16/20, 4Y 8/8). Känsligheten för UA 4
+      omgjord: A/B ≤ 55 min med Solberget kvar/vid behov, C/D ≤ 50 min; omväg 3–8 min. ≤ 5 min: 16/20 utan
+      indragning; 5,5–7 min: 16/20 med Solberget indraget på 10 Ö-turer (4Y: 6); 50 min nås inte. Omloppsfiguren
+      ritar inte längre kortare Ö-turer som en prickad förlängning (såg ut som längre körtid).
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

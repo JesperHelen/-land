@@ -268,8 +268,10 @@ def _panel_titel(fid, k):
     elif k == 'robust':
         t = f"{fid} robust – {n} av {tot} turer ändrade: {o['fordon']} bussar – ryms"
     elif k.startswith('VO'):
+        sk = max(o['skiftade_turer'].values()) if o['skiftade_turer'] else 0
         t = (f"{fid} V och Ö sammanslagna{', Solberget indragen' if 'sol' in k else ''} – {n} av {tot} turer ändrade, "
-             f"{len(o['skiftade_turer'])} Ö-turer avgår ≤ 2 min senare: {o['fordon']} bussar – ryms")
+             + (f"{len(o['skiftade_turer'])} Ö-turer startar {sv(sk)} min senare" if sk else 'Ö i pulsen')
+             + f": {o['fordon']} bussar – ryms")
     else:
         t = f"{fid} dagens tidtabell – {n} av {tot} turer ändrade (de som ryms): {o['fordon']} bussar – ryms"
     d = (o['omloppstid_h'] - RES['idag']['omloppstid_h']) * 60
@@ -306,6 +308,9 @@ def fig_omlopp(namn, paneler, rubrik):
              Line2D([], [], color=BLA, lw=2.2, label='Kort byte inom linjeparet (< 3 min)')]
     if any(SCEN.loc[SCEN.scenario == p[0], 'skift'].fillna(0).gt(0).any() for p in paneler):
         extra.append(Patch(facecolor='none', edgecolor='#1f1f1e', ls=(0, (1, 1)), label='Avgår senare än i dag'))
+    if any(SCEN.loc[SCEN.scenario == p[0], 'delta'].fillna(0).lt(0).any() for p in paneler):
+        extra.append(Line2D([], [], color='#1f1f1e', lw=0.9, marker='|', ls='', markersize=8,
+                            label='Kortare Ö-tur (Solberget indragen)'))
     O.omlopp_forklaring(fig, extra=extra, y=-0.01)
     fig.tight_layout(rect=(0, 0.035, 1, 0.975), h_pad=0.9)
     ut = C.KARTOR / namn

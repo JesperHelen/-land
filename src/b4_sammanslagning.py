@@ -19,9 +19,9 @@ Princip
     byte i centrum och sparade resenärsminuter (b4_natverk.py).
   * Körtiden är medianen för rusningsturerna. Linje Ö:s skolturer (08:20, 08:45, 13:10–15:10 via Strandnäs skola
     södra) är 5–6 min längre och har därför mindre utrymme – se omloppsverifieringen för enskilda UA.
-  * Partnerlinjen kan dessutom avgå upp till MAX_SKIFT (2 min) efter pulsen ('utrymme_skift'):
-    min(60 − MARGINAL − t_A − t_B, 30 − GENOMGANG + MAX_SKIFT − t_A). För V/Ö: V kan förlängas 4,5 min i vanliga
-    varv men inte alls i varven med Ö:s skolturer (prövat tur för tur i b4_ua/b4_omlopp.genomgaende_ryms).
+  * Partnerlinjen kan dessutom flyttas så att den startar när A har kommit tillbaka ('utrymme_skift', ingen
+    gräns efter pulsen): 60 − MARGINAL − t_A − t_B. För V/Ö: V kan förlängas 5 min i vanliga varv men inte alls
+    i varven med Ö:s skolturer (prövat tur för tur i b4_ua/b4_omlopp.genomgaende_ryms).
   * Nåbarhet för områden som i dag saknar hållplats inom 400 m (A3, behov av ändrad linjesträckning): behövd
     tilläggstid per tur = 2 × avstånd till närmaste körväg × 1,3 (omvägsfaktor) / 25 km/h + 0,5 min uppehåll.
     För Möckelö Strand används beställarens restider via dagens vägar (UA 1a: 2 + 0,5 + 2 min).
@@ -51,7 +51,6 @@ INTERVALL = 30.0
 GENOMGANG = O.GENOMGANG_MIN          # 0,5 min – samma som i omloppsverifieringen
 REGLERING = O.REKOMMENDERAD_VANDTID  # 3 min – reglering vid varje byte (som i dag)
 MARGINAL = O.MARGINAL_VARV           # 5 min – tid i centrum per varv A + B vid genomgående linje
-MAX_SKIFT = O.MAX_SKIFT_PARTNER      # 2 min – partnerlinjen får avgå så mycket efter pulsen
 PARTNER = {'N': 'S', 'S': 'N', 'V': 'Ö', 'Ö': 'V'}
 OMVAG = 1.3
 KMH = 25.0
@@ -70,7 +69,7 @@ def par_tabell(prof):
         rader.append({'forlangs': a, 'partner': b, 't_forlangs': ta, 't_partner': tb,
                       'vandtid_idag': INTERVALL - ta, 'utrymme_idag': idag, 'utrymme_varv': varv,
                       'utrymme_genomgaende': min(varv, INTERVALL - GENOMGANG - ta),
-                      'utrymme_skift': min(varv, INTERVALL - GENOMGANG + MAX_SKIFT - ta),
+                      'utrymme_skift': varv,
                       'partner_klarar_reglering': varv >= 0})
     return pd.DataFrame(rader)
 
@@ -93,14 +92,15 @@ def genomgaende_resor():
     return pd.DataFrame(ut)
 
 
-SKIFT_TEXT = f'Ryms om partnerlinjen dessutom avgår ≤ {MAX_SKIFT:g} min efter pulsen'
+SKIFT_TEXT = 'Ryms om partnerlinjen startar senare än pulsen'
 
 
-def utrymme(prof, l, skift_=0.0):
+def utrymme(prof, l, flytta=False):
     """Förlängning per tur av linje l som genomgående med partnerlinjen: varvet inom timmen med minst MARGINAL min
-    i centrum, partnerlinjen högst skift_ min efter pulsen."""
+    i centrum; partnerlinjen i pulsen, eller (flytta=True) flyttad så att den startar när l har kommit tillbaka."""
     ta, tb = prof[l]['kortid_median'], prof[PARTNER[l]]['kortid_median']
-    return float(min(2 * INTERVALL - MARGINAL - ta - tb, INTERVALL - GENOMGANG + skift_ - ta))
+    varv = 2 * INTERVALL - MARGINAL - ta - tb
+    return float(varv if flytta else min(varv, INTERVALL - GENOMGANG - ta))
 
 
 def omraden(prof):
@@ -135,7 +135,7 @@ def omraden(prof):
     df = pd.DataFrame(rader)
     utr = {l: (INTERVALL - REGLERING - prof[l]['kortid_median'] if l in LINJER else np.nan) for l in C.STADSLINJER}
     utr_g = {l: utrymme(prof, l) if l in LINJER else np.nan for l in C.STADSLINJER}
-    utr_s = {l: utrymme(prof, l, MAX_SKIFT) if l in LINJER else np.nan for l in C.STADSLINJER}
+    utr_s = {l: utrymme(prof, l, True) if l in LINJER else np.nan for l in C.STADSLINJER}
     df['utrymme_idag'] = df.linje.map(utr)
     df['utrymme_genomgaende'] = df.linje.map(utr_g)
     df['utrymme_skift'] = df.linje.map(utr_s)
@@ -174,12 +174,12 @@ def figur(par, resor, omr, prof):
     y = np.arange(len(LINJER))
     idag = [INTERVALL - REGLERING - prof[l]['kortid_median'] for l in LINJER]
     gen = [utrymme(prof, l) for l in LINJER]
-    sk = [utrymme(prof, l, MAX_SKIFT) for l in LINJER]
+    sk = [utrymme(prof, l, True) for l in LINJER]
     ax2.barh(y + 0.27, idag, height=0.25, color='#b9b4a8', label=f'Reglering ≥ {REGLERING:g} min vid varje byte')
     ax2.barh(y, gen, height=0.25, color='#1c5cab',
              label=f'Genomgående med partnerlinjen: varvet inom timmen, ≥ {MARGINAL:g} min i centrum')
     ax2.barh(y - 0.27, sk, height=0.25, color='#159a9c',
-             label=f'… och partnerlinjen avgår ≤ {MAX_SKIFT:g} min efter pulsen')
+             label='… och partnerlinjen startar när linjen har kommit tillbaka (senare än pulsen)')
     for yy, a, b, c in zip(y, idag, gen, sk):
         ax2.text(max(a, 0) + 0.1, yy + 0.27, f'{a:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
         ax2.text(b + 0.1, yy, f'{b:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
@@ -224,7 +224,7 @@ def main():
     par.to_csv(P / 'b4_sammanslagning_par.csv', index=False)
     omr.to_csv(P / 'b4_sammanslagning_omraden.csv', index=False)
     res = {'parametrar': {'intervall': INTERVALL, 'genomgang_min': GENOMGANG, 'reglering_min': REGLERING,
-                          'marginal_varv_min': MARGINAL, 'max_skift_min': MAX_SKIFT},
+                          'marginal_varv_min': MARGINAL, 'max_skift_min': None},
            'par': par.round(2).to_dict('records'), 'genomgaende_resor': resor.to_dict('records'),
            'omraden': omr.drop(columns=['x', 'y']).round(1).to_dict('records')}
     with open(P / 'b4_sammanslagning.json', 'w', encoding='utf-8') as fh:

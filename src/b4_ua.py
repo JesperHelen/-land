@@ -42,8 +42,9 @@ Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py – omloppen följer nor
 S ↔ N och Ö ↔ V i centrum. Varje UA prövas med alla turer i dagens tidtabell; om det inte ryms prövas vilka
 turer som ryms, och om det ryms men ger fler varv utan reglering än i dag prövas en robust variant.
 UA på linje V prövas dessutom som genomgående linje V–Ö ('VO', V och Ö sammanslagna): dagens omlopp ligger fast,
-bussen fortsätter direkt som linje Ö (0,5 min) och Ö får avgå upp till 2 min efter pulsen. Det enda kravet är
-att varvet V + Ö ryms inom timmen med minst 5 min i centrum (beställaren 2026-10-15, b4_omlopp.genomgaende_ryms).
+bussen fortsätter direkt som linje Ö (0,5 min) och Ö startar när V har kommit tillbaka. Det enda kravet är att
+varvet V + Ö ryms inom 55 min, dvs. minst 5 min i centrum, helst inom 50 min (beställaren 2026-10-15,
+b4_omlopp.genomgaende_ryms).
 Effekter
   * Täckning: delpunkter 50 m (A2) – avgångar inom 400 m före/efter, klassförändring.
   * Resenärer: korrigerad OD-matris (A1) utlagd på restidsnätet (b4_natverk.py) – berörda resor och
@@ -309,6 +310,54 @@ def drift(f, scen):
     return 'alla' if scen['alla']['ok'] else ('VO' if 'VO' in scen else 'ryms')
 
 
+KANSL_OMVAG = [3.0, 4.0, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0]      # min/tur – omvägen till flygplatsen (känslighet)
+KANSL_POLICY = [('A', 'Varvet V + Ö ≤ 55 min (krav), Solberget kvar', O.MARGINAL_VARV, False),
+                ('B', 'Varvet V + Ö ≤ 55 min (krav), Solberget indragen där det behövs', O.MARGINAL_VARV, True),
+                ('C', 'Varvet V + Ö ≤ 50 min (helst), Solberget kvar', O.MARGINAL_VARV_ONSKAD, False),
+                ('D', 'Varvet V + Ö ≤ 50 min (helst), Solberget indragen där det behövs', O.MARGINAL_VARV_ONSKAD, True)]
+
+
+def kanslighet_ua4(t, plan0, pkt, hpl0, xy, pastigande_solberget):
+    """UA 4 (V och Ö sammanslagna): känslighet för omvägens körtid, kravet på varvet (≤ 55 min, helst ≤ 50) och
+    indragning av Solberget bara på de Ö-turer där varvet annars inte ryms. Ö startar när V har kommit tillbaka.
+    Alla V-turer och UA 4Y (flygturerna)."""
+    sol = solberget_delta(t); tl = t.set_index('trip_id')
+    urval = [('alla', list(t[t.linje == 'V'].trip_id)), ('Y', list(flygturer(t)))]
+    f_sol = {'typ': 'byt', 'linje': 'Ö', 'bort': HPL['Solberget'], 'till': []}
+    tack = {}
+    rader = []
+    for u, kand in urval:
+        for d in KANSL_OMVAG:
+            for pid, txt, marg, med_sol in KANSL_POLICY:
+                v, sk, utan = O.genomgaende_ryms(t, kand, d, plan0, marginal=marg, sol=sol if med_sol else None,
+                                                 detalj=True)
+                dd = {k: d for k in v}
+                for j in utan:
+                    dd[j] = dd.get(j, 0.0) + sol[j]
+                p = O.plan_fast(plan0.reset_index(drop=True), O.med_andring(t, dd, sk))
+                c = O.varv_vo(p).set_index('trip_id').centrum_min.reindex(v)
+                c = c[np.isfinite(c)]
+                sena = [sk.get(j, 0.0) + (sol[j] if j in utan else 0.0) for j in set(sk) | set(utan)]
+                key = tuple(sorted(utan))
+                if utan and key not in tack:
+                    tack[key] = tackning(pkt, hpl0, f_sol, list(utan), xy)[0]
+                tk = tack.get(key, {})
+                rader.append({'urval': u, 'omvag_min': d, 'policy': pid, 'policy_text': txt, 'marginal_min': marg,
+                              'turer': len(v), 'turer_tot': len(kand),
+                              'turer_som_i_dag': [O.hm(tl.at[x, 'avg']) for x in sorted(set(kand) - set(v),
+                                                                                      key=lambda x: tl.at[x, 'avg'])],
+                              'o_turer_utan_solberget': [O.hm(tl.at[x, 'avg']) for x in sorted(utan, key=lambda x: tl.at[x, 'avg'])],
+                              'solberget_avgangar': int((t.linje == 'Ö').sum()) - len(utan),
+                              'o_max_efter_pulsen_min': round(max(sk.values()), 1) if sk else 0.0,
+                              'o_max_senare_i_centrum_min': round(max(sena), 1) if sena else 0.0,
+                              'min_centrum_min': round(float(c.min()), 1) if len(c) else None,
+                              'solberget_samre_klass_inv': tk.get('samre_klass_inv', 0),
+                              'solberget_utan_hallplats_inv': tk.get('forlorad_tackning_inv', 0),
+                              'solberget_berorda_pastigande_vardag': round(pastigande_solberget * len(utan) /
+                                                                           int((t.linje == 'Ö').sum()), 2)})
+    return rader
+
+
 # ====================================================================== täckning
 def tackning(pkt, hpl0, f, turer_som_trafikerar, xy):
     h = hpl0.copy()
@@ -546,6 +595,15 @@ def main():
                   f"vo<5={s['nt']['varv_vo_under_marginal']} min_centrum={s['nt']['min_centrum_vo']} "
                   f"omloppstid={s['nt']['omloppstid_h']} km={s['nt']['km']}")
 
+    kansl = kanslighet_ua4(t, O.bygg_omlopp(t, referens=ref), pkt, hpl0, xy, res_sol['pastigande_vardag'] or 0.0)
+    res['ua']['4']['kanslighet_solberget'] = kansl
+    pd.DataFrame(kansl).assign(**{k: lambda d_, k=k: d_[k].map(', '.join) for k in ('turer_som_i_dag', 'o_turer_utan_solberget')}) \
+        .to_csv(P / 'b4_kanslighet_ua4.csv', index=False)
+    for r_ in kansl:
+        print(f"   känslighet {r_['urval']:4s} {r_['omvag_min']:.1f} {r_['policy']}: {r_['turer']:2d}/{r_['turer_tot']} "
+              f"Ö utan Solberget {len(r_['o_turer_utan_solberget']):2d}  Ö efter pulsen ≤ {r_['o_max_efter_pulsen_min']} "
+              f"senare i centrum ≤ {r_['o_max_senare_i_centrum_min']}  centrum ≥ {r_['min_centrum_min']}  "
+              f"Solberget sämre {r_['solberget_samre_klass_inv']} utan {r_['solberget_utan_hallplats_inv']}")
     pd.concat(planer).drop(columns=['monster']).to_csv(P / 'b4_omlopp_scenarier.csv', index=False)
     pd.concat(tack).round({'x': 1, 'y': 1, 'bef': 5}).to_csv(P / 'b4_tackning_ua.csv.gz', index=False)
     gpd.GeoDataFrame(geo, crs=C.CRS_METRISK).to_file(P / 'b4_ua.gpkg', layer='ua', driver='GPKG')

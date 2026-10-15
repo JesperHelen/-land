@@ -24,9 +24,10 @@ Verifiering av ett UA (ramen 'inga fler bussar')
   * Robusthet redovisas som antal vändningar under REKOMMENDERAD_VANDTID och total regleringstid.
   * Genomgående linje V–Ö (V och Ö sammanslagna, beställaren 2026-10-15): dagens omlopp ligger fast, så att
     varje V-tur fortsätter som den Ö-tur som samma buss kör i dag (plan_fast). Bussen fortsätter direkt som Ö
-    efter GENOMGANG_MIN, och Ö:s avgång får skjutas högst MAX_SKIFT_PARTNER min efter pulsen. Det enda kravet
-    är att hela varvet V + Ö ryms inom timmen med minst MARGINAL_VARV min i centrum (genomgången V → Ö plus
-    uppehållet före bussens nästa avgång), se varv_vo och genomgaende_ryms. Varv som redan i dag har mindre
+    efter GENOMGANG_MIN; Ö flyttas så att den startar när V har kommit tillbaka (ingen gräns efter pulsen,
+    MAX_SKIFT_PARTNER = None). Det enda kravet är att hela varvet V + Ö ryms inom 55 min, dvs. minst
+    MARGINAL_VARV = 5 min i centrum (genomgången V → Ö plus uppehållet före bussens nästa avgång), helst inom
+    50 min (MARGINAL_VARV_ONSKAD = 10 min), se varv_vo och genomgaende_ryms. Varv som redan i dag har mindre
     marginal (V 07:50 + Ö:s skoltur 08:20, 4 min) godtas oförändrade.
 Utdata: data/processed/b4_omlopp_idag.csv, b4_omlopp_nyckeltal.json, output/kartor/b4_1_omlopp_idag.png
 """
@@ -56,8 +57,9 @@ SAMMA_LINJE_STRAFF = 8.0       # min – fordonet fortsätter på samma linje (u
 ANNAT_BYTE_STRAFF = 2.0        # min – byte till en linje utanför normparet
 REFERENS_BONUS = 0.3           # min – vid lika väntan behålls dagens koppling (stabila omlopp före/efter)
 OMLOPPSTID_TOL = 10.0          # min/dag – tillåten ökning av omloppstiden (≈ 0,2 %; t.ex. att dagens sista tur blir längre)
-MAX_SKIFT_PARTNER = 2.0        # min – vid genomgående linje får partnerlinjen avgå högst så mycket efter pulsen
-MARGINAL_VARV = 5.0            # min – genomgående linje V–Ö: minsta tid i centrum per varv V + Ö (beställaren)
+MAX_SKIFT_PARTNER = None       # genomgående linje: Ö startar när V har kommit tillbaka (ingen gräns, beställaren 2026-10-15)
+MARGINAL_VARV = 5.0            # min – genomgående linje V–Ö: minst så mycket i centrum per varv (varvet ≤ 55 min, krav)
+MARGINAL_VARV_ONSKAD = 10.0    # min – helst så mycket (varvet ≤ 50 min)
 TEXT, TEXT2 = '#1f1f1e', '#52514e'
 
 
@@ -157,6 +159,7 @@ def nyckeltal(o):
             'vandningar_under_rek': int((vand < REKOMMENDERAD_VANDTID - 1e-9).sum()),
             'varv_utan_reglering': varv_utan_reglering(o),
             'varv_vo_under_marginal': int((varv_vo(o).centrum_min < MARGINAL_VARV - 1e-9).sum()),
+            'varv_vo_under_onskad': int((varv_vo(o).centrum_min < MARGINAL_VARV_ONSKAD - 1e-9).sum()),
             'min_centrum_vo': round(float(varv_vo(o).centrum_min.min()), 1),
             'byten_enligt_norm': int(o.genomgang.sum()), 'samma_linje': samma_linje(o),
             'genomgangar': int(o.genomgang.sum()),
@@ -304,34 +307,47 @@ def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, varv=None, **kw)
 
 
 def genomgaende_ryms(t, kandidater, d, plan0, partner='Ö', max_skift=MAX_SKIFT_PARTNER, bas=None,
-                     marginal=MARGINAL_VARV):
+                     marginal=MARGINAL_VARV, sol=None, sol_over=None, detalj=False):
     """Genomgående linje V–Ö med dagens omlopp (plan0 = bygg_omlopp(t)): V-turen får UA:ts tillägg d om varvet
-    (V-turen + Ö-turen som bussen fortsätter med) fortfarande har minst marginal min i centrum. Ö avgår då
-    direkt efter V (GENOMGANG_MIN), högst max_skift min efter pulsen. bas: andra ändringar {trip_id: min} (t.ex.
-    kortare körtid för Ö). Varven är oberoende av varandra, så turerna prövas var för sig.
-    Returnerar (valda turer, {trip_id: skift})."""
-    bas = dict(bas or {})
+    (V-turen + Ö-turen som bussen fortsätter med) fortfarande har minst marginal min i centrum. Ö startar då
+    direkt efter V (GENOMGANG_MIN); max_skift (None = ingen gräns) begränsar hur sent efter pulsen. bas: andra
+    ändringar {trip_id: min} (t.ex. kortare körtid för Ö). Varven är oberoende av varandra, så turerna prövas
+    var för sig. sol: {trip_id: −min} – en hållplats (Solberget) kan dras in på enskilda Ö-turer: på Ö-turen
+    efter en ändrad V-tur om varvet annars inte ryms (eller, om sol_over anges, om Ö startar mer än sol_over min
+    efter pulsen). Returnerar (valda turer, {trip_id: skift}) och med detalj=True även Ö-turerna utan hållplatsen."""
+    bas, sol = dict(bas or {}), dict(sol or {})
     p0 = plan0.reset_index(drop=True)
     tid, lin, nx = p0.trip_id.to_numpy(), p0.linje.to_numpy(), p0.nasta.to_numpy()
     pos = {k: i for i, k in enumerate(tid)}
     t0 = plan_fast(p0, med_andring(t, bas))
     idag = varv_vo(plan_fast(p0, med_andring(t, {}))).set_index('trip_id').centrum_min
-    valda, skift = [], {}
+    valda, skift, utan = [], {}, []
     for k in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
         i = pos[k]; j = nx[i]
-        dd = {**bas, k: bas.get(k, 0.0) + d}
-        s_ = {}
-        if j >= 0 and lin[j] == partner and t0.vand_efter.iat[i] <= DEPA_GRANS:
+        s_, behov = {}, 0.0
+        genom = j >= 0 and lin[j] == partner and t0.vand_efter.iat[i] <= DEPA_GRANS
+        if genom:
             behov = t0.ank.iat[i] + d + GENOMGANG_MIN - t0.avg.iat[j]
-            if behov > max_skift + 1e-9:
+            if max_skift is not None and behov > max_skift + 1e-9:
                 continue
             if behov > 0:
                 s_ = {tid[j]: round(behov, 2)}
-        p = plan_fast(p0, med_andring(t, dd, s_))
-        c = varv_vo(p).set_index('trip_id').centrum_min
-        if c[k] >= min(marginal, idag[k]) - 1e-9 and np.nanmin(p.vand_efter) >= GENOMGANG_MIN - 1e-9:
-            valda.append(k); skift.update(s_)
-    return valda, skift
+        if genom and tid[j] in sol:
+            val = [True] if sol_over is not None and behov > sol_over + 1e-9 else [False, True]
+        else:
+            val = [False]
+        for indrag in val:
+            dd = {**bas, k: bas.get(k, 0.0) + d}
+            if indrag:
+                dd[tid[j]] = dd.get(tid[j], 0.0) + sol[tid[j]]
+            p = plan_fast(p0, med_andring(t, dd, s_))
+            c = varv_vo(p).set_index('trip_id').centrum_min
+            if c[k] >= min(marginal, idag[k]) - 1e-9 and np.nanmin(p.vand_efter) >= GENOMGANG_MIN - 1e-9:
+                valda.append(k); skift.update(s_)
+                if indrag:
+                    utan.append(tid[j])
+                break
+    return (valda, skift, utan) if detalj else (valda, skift)
 
 
 # ====================================================================== figurer
@@ -352,8 +368,8 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
         if d > 0:
             ax.add_patch(Rectangle((r.ank - d, y - 0.34), d, 0.68, facecolor='white', edgecolor=f, hatch='//////',
                                    lw=0.6, zorder=3))
-        elif d < 0:
-            ax.add_patch(Rectangle((r.ank, y - 0.34), -d, 0.68, facecolor='none', edgecolor=f, ls=':', lw=0.6, zorder=3))
+        elif d < 0:                                                # kortare körtid: tunn markering vid den nya ankomsten
+            ax.plot([r.ank, r.ank], [y - 0.34, y + 0.34], color='#1f1f1e', lw=0.9, zorder=4)
         sk = getattr(r, 'skift', 0.0)
         if sk > 0:                                                 # avgår senare än i dag
             ax.add_patch(Rectangle((r.avg - sk, y - 0.34), sk, 0.68, facecolor='none', edgecolor='#1f1f1e', ls=(0, (1, 1)),

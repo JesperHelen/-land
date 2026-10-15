@@ -21,8 +21,8 @@ Kombinationer av UA prövas i ett senare skede.
 Stadstrafiken körs i dag med fem bussar. Efter en V-tur har bussen 3 minuter innan den fortsätter som linje Ö,
 och efter en Ö-tur 7 minuter. Linje V kan därför inte förlängas utan att V och Ö slås ihop till en genomgående
 linje V–Ö. Bussen fortsätter då efter en halv minut, och resenärer mellan V och Ö kan sitta kvar. Det enda kravet
-(beställaren 2026-10-15) är att varje varv V + Ö ryms inom timmen med minst 5 minuter i centrum. Ö kan då behöva
-avgå upp till 2 minuter efter pulsen.
+(beställaren 2026-10-15) är att varje varv V + Ö ryms inom 55 minuter, dvs. minst 5 minuter i centrum, och helst
+inom 50 minuter. Ö startar när V har kommit tillbaka, i huvudalternativen 0–2 minuter efter pulsen.
 
 | UA | Huvudalternativ (★) | Ryms (5 bussar) | Effekt | Driftkostnad per år | Utesluten driftform |
 |---|---|---|---|---|---|
@@ -82,12 +82,12 @@ fordon och samma omloppstid. Varje UA har verifierats mot detta:
 
 - alternativets körtidsförändring läggs på berörda turer;
 - avgångstiderna från centrum ligger fast, så att pulsen och bytena behålls. Undantaget är sammanslagning av V
-  och Ö, där Ö får avgå upp till 2 minuter efter pulsen;
+  och Ö, där Ö startar när V har kommit tillbaka;
 - omloppen byggs om med minsta möjliga antal fordon och enligt förarnas norm för linjebyten;
 - alternativet ryms om antalet bussar inte ökar och omloppstiden ökar med högst 10 minuter per vardag;
 - **UA på linje V (V och Ö sammanslagna):** dagens omlopp ligger fast, så att varje V-tur fortsätter som den
-  Ö-tur som samma buss kör i dag. Det enda kravet är att varje varv – V-turen, Ö-turen och tiden i centrum –
-  ryms inom timmen med minst 5 minuter i centrum. Varv som redan i dag har mindre marginal godtas oförändrade
+  Ö-tur som samma buss kör i dag. Det enda kravet är att varje varv V + Ö ryms inom 55 minuter, dvs. minst
+  5 minuter i centrum, och helst inom 50 minuter. Varv som redan i dag har mindre marginal godtas oförändrade
   (V 07:50 följd av Ö:s skoltur 08:20 har i dag 4 minuter);
 - **UA 2 och 3:** alternativet är robust om det inte ger fler varv med mindre än 3 minuters reglering än i dag.
 
@@ -323,8 +323,23 @@ avgångarna 11:00 och 17:10. UA 4Y kör till flygplatsen bara på de V-turer som
   se figur 8, som bara visar huvudalternativet.
 - **UA 4Y:** samma linje men bara de 8 flygturerna. Alla 8 ryms, och Solberget behålls.
 
-**Känslighet.** Med 3 minuters omväg ryms samma 16 turer. Med 5 minuter skulle Ö behöva avgå 2,5 minuter efter
-pulsen, och bara 2 turer ryms. Körtiden och flygens ankomsttider bör därför kontrolleras.
+**Känslighet – omvägens körtid och Solberget på utvalda turer (figur 9b).** Ö startar när V har kommit tillbaka.
+Upp till 5 minuters omväg ryms 16 av 20 turer (UA 4Y 8 av 8) utan att Solberget dras in; vid 5 minuter med
+exakt 5 minuter i centrum. Med 5,5–7 minuters omväg ryms varvet bara om Solberget dras in på de Ö-turer som följer
+en V-tur via flygplatsen. Då ryms fortfarande 16 av 20 turer (UA 4Y 8 av 8). Det gäller 10 Ö-turer (UA 4Y 6),
+som blir 1,6–2,5 minuter kortare. Solberget behåller 10 respektive 14 av 20 avgångar, ingen förlorar hållplatsen,
+men 49 invånare får lägre turtäthet. Över 7 minuter ryms nästan inga turer.
+
+Nivån 50 minuter per varv nås inte med omvägen, eftersom dagens vanliga varv redan ligger på exakt 50 minuter.
+
+Körtiden till terminalen bör därför mätas: blir den högst 5 minuter behövs ingen indragning, och blir den
+5,5–7 minuter är det rimligt att dra in Solberget bara på de Ö-turer som följer flygturerna.
+
+![UA 4, känslighet](../output/kartor/b4_15_ua4_kanslighet.png)
+
+*Figur 9b. UA 4 – känslighet: turer via flygplatsen per omväg och driftform. A: varvet ≤ 55 minuter (krav),
+Solberget kvar. B: dito, Solberget indraget där det behövs. C: varvet ≤ 50 minuter (helst), Solberget kvar.
+D: dito, Solberget indraget där det behövs.*
 
 ![UA 4, flygplatsen](../output/kartor/b4_10_ua4_karta.png)
 
@@ -455,8 +470,8 @@ Vägen ger dessutom nytta för annan trafik.
   beställarens skiss med 25 km/h. Körtiderna vid Bo-Bil bygger på fågelvägsavstånd.
 - **Flygens ankomsttider** är antagna och ska ersättas med de verkliga tiderna. UA 4Ys turer väljs då om
   automatiskt (`FLYG_ANKOMSTER` i `src/b4_ua.py`).
-- **Ö efter pulsen:** sammanslagning av V och Ö förutsätter att en upp till 2 minuter senare avgång för Ö godtas
-  (1a och 4). Effekten på bytesresor ingår inte i nätverksmodellen.
+- **Ö efter pulsen:** sammanslagning av V och Ö förutsätter att Ö kan starta 1,5–2 minuter efter pulsen (1a och
+  4). Effekten på bytesresor ingår inte i nätverksmodellen.
 - **Kravet 5 minuter i centrum per varv** är beställarens riktvärde. Resultatet ändras inte om kravet ligger
   mellan 3 och 5,5 minuter.
 - **Ö:s skolturer** avgör vilka V-turer som ryms. Deras verkliga körtider bör kontrolleras.

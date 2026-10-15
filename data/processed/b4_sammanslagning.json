@@ -4,7 +4,7 @@
   "genomgang_min": 0.5,
   "reglering_min": 3.0,
   "marginal_varv_min": 5.0,
-  "max_skift_min": 2.0
+  "max_skift_min": null
  },
  "par": [
   {
@@ -16,7 +16,7 @@
    "utrymme_idag": 1.0,
    "utrymme_varv": 6.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_skift": 5.5,
+   "utrymme_skift": 6.0,
    "partner_klarar_reglering": true
   },
   {
@@ -40,7 +40,7 @@
    "utrymme_idag": 1.0,
    "utrymme_varv": 6.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_skift": 5.5,
+   "utrymme_skift": 6.0,
    "partner_klarar_reglering": true
   },
   {
@@ -76,7 +76,7 @@
    "utrymme_idag": 4.0,
    "utrymme_varv": 9.0,
    "utrymme_genomgaende": 6.5,
-   "utrymme_skift": 8.5,
+   "utrymme_skift": 9.0,
    "partner_klarar_reglering": true
   },
   {
@@ -100,7 +100,7 @@
    "utrymme_idag": 0.0,
    "utrymme_varv": 5.0,
    "utrymme_genomgaende": 2.5,
-   "utrymme_skift": 4.5,
+   "utrymme_skift": 5.0,
    "partner_klarar_reglering": true
   },
   {
@@ -112,7 +112,7 @@
    "utrymme_idag": 0.0,
    "utrymme_varv": 5.0,
    "utrymme_genomgaende": 2.5,
-   "utrymme_skift": 4.5,
+   "utrymme_skift": 5.0,
    "partner_klarar_reglering": true
   },
   {
@@ -136,7 +136,7 @@
    "utrymme_idag": 4.0,
    "utrymme_varv": 9.0,
    "utrymme_genomgaende": 6.5,
-   "utrymme_skift": 8.5,
+   "utrymme_skift": 9.0,
    "partner_klarar_reglering": true
   },
   {
@@ -193,8 +193,8 @@
    "behov_min_per_tur": 4.5,
    "utrymme_idag": 0.0,
    "utrymme_genomgaende": 2.5,
-   "utrymme_skift": 4.5,
-   "bedomning": "Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen"
+   "utrymme_skift": 5.0,
+   "bedomning": "Ryms om partnerlinjen startar senare än pulsen"
   },
   {
    "omrade": "Lillåkersvägen",
@@ -204,7 +204,7 @@
    "behov_min_per_tur": 6.5,
    "utrymme_idag": 1.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_skift": 5.5,
+   "utrymme_skift": 6.0,
    "bedomning": "Kräver större omläggning"
   },
   {
@@ -226,8 +226,8 @@
    "behov_min_per_tur": 4.4,
    "utrymme_idag": 1.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_skift": 5.5,
-   "bedomning": "Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen"
+   "utrymme_skift": 6.0,
+   "bedomning": "Ryms om partnerlinjen startar senare än pulsen"
   },
   {
    "omrade": "Dalkullavägen",
@@ -237,8 +237,8 @@
    "behov_min_per_tur": 4.4,
    "utrymme_idag": 0.0,
    "utrymme_genomgaende": 2.5,
-   "utrymme_skift": 4.5,
-   "bedomning": "Ryms om partnerlinjen dessutom avgår ≤ 2 min efter pulsen"
+   "utrymme_skift": 5.0,
+   "bedomning": "Ryms om partnerlinjen startar senare än pulsen"
   },
   {
    "omrade": "Österkalmare",
@@ -248,7 +248,7 @@
    "behov_min_per_tur": 10.3,
    "utrymme_idag": 1.0,
    "utrymme_genomgaende": 3.5,
-   "utrymme_skift": 5.5,
+   "utrymme_skift": 6.0,
    "bedomning": "Kräver större omläggning"
   },
   {

@@ -251,14 +251,14 @@ def sv(x, d=1):
 
 def tidsbudget(fid='1a'):
     """Varv V + Ö (60 min) i vanliga varv och i varv med Ö:s skoltur: (rubrik, körtid V, körtid Ö, tillåten
-    förskjutning av Ö efter pulsen). Sammanslagna V och Ö: Ö får avgå upp till MAX_SKIFT_PARTNER min senare."""
+    förskjutning av Ö efter pulsen). Sammanslagna V och Ö: Ö startar när V har kommit tillbaka (ingen gräns)."""
     prof = json.load(open(P / 'b4_omlopp_nyckeltal.json', encoding='utf-8'))['linjer']
     res_f = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
     fs = res_f['ua']
     tv, to = prof['V']['kortid_median'], prof['Ö']['kortid_median']
     pl = pd.read_csv(P / 'b4_omlopp_idag.csv')
     skol = float(pl[(pl.linje == 'Ö') & pl.avg.between(13 * 60, 16 * 60)].kortid.max())   # eftermiddagens skolturer
-    sk = O.MAX_SKIFT_PARTNER
+    sk = float('inf') if O.MAX_SKIFT_PARTNER is None else O.MAX_SKIFT_PARTNER
     rader = [('I dag – vanligt varv', tv, to, 0.0), (f'I dag – varv med Ö:s skoltur ({skol:.0f} min)', tv, skol, 0.0)]
     if fid == '1a':
         d1a, d1b = fs['1a']['delta_min_per_tur'], fs['1b']['delta_min_per_tur']
@@ -275,7 +275,9 @@ def tidsbudget(fid='1a'):
         (f'UA 4 +{sv(d4)} min – V och Ö sammanslagna', tv + d4, to, sk),
         (f'UA 4 +{sv(d4)} min – sammanslagna, varv med Ö-skoltur', tv + d4, skol, sk),
         (f'UA 4 +{sv(d4)} min – dito, Solberget indragen (Ö −{sv(sol)} min)', tv + d4, skol - sol, sk),
-        (f'UA 4 +{sv(d4 + 1)} min (känslighet) – sammanslagna', tv + d4 + 1, to, sk)]
+        (f'UA 4 +{sv(d4 + 1)} min (känslighet) – sammanslagna', tv + d4 + 1, to, sk),
+        (f'UA 4 +{sv(d4 + 2)} min (känslighet) – sammanslagna', tv + d4 + 2, to, sk),
+        (f'UA 4 +{sv(d4 + 2)} min (känslighet) – dito, Solberget indragen', tv + d4 + 2, to - sol, sk)]
 
 
 def centrum_andrade(o):
@@ -308,7 +310,7 @@ def fig_vo(res, fid='1a'):
             v_ = o_avg - tv
             ax.add_patch(Rectangle((tv, y - 0.2), v_, 0.4, facecolor='#b9b4a8', zorder=3))
         ax.add_patch(Rectangle((o_avg, y - 0.32), to, 0.64, facecolor=fo, edgecolor='white', lw=0.6, zorder=3, alpha=0.95))
-        ax.text(o_avg + to / 2, y, f'Ö {sv(to, 0)}' + (f' (+{sv(o_avg - 30)})' if o_avg > 30 else ''), ha='center',
+        ax.text(o_avg + to / 2, y, f'Ö {sv(to, 0)}' + (f', start +{sv(o_avg - 30)}' if o_avg > 30 else ''), ha='center',
                 va='center', fontsize=7.5, color='white', fontweight='bold', zorder=4)
         rest = 60.0 - (o_avg + to)
         if rest > 0:
@@ -320,8 +322,8 @@ def fig_vo(res, fid='1a'):
         ryms = not konflikt and centrum >= M - 1e-9
         ax.text(-1.0, y, rub, ha='right', va='center', fontsize=8, color=K.TEXT)
         ax.text(65.0, y, f'{sv(centrum)} min', ha='left', va='center', fontsize=8, color=K.TEXT)
-        ax.text(74.5, y, ('i dag' if idag else 'ryms' if ryms else
-                          f'ryms inte (Ö +{sv(behov)})' if konflikt and sk > 0 else 'hinner inte' if konflikt else 'ryms inte'),
+        ax.text(74.5, y, ('i dag' if idag else ('ryms – helst-nivån' if centrum >= O.MARGINAL_VARV_ONSKAD - 1e-9 else 'ryms')
+                          if ryms else 'hinner inte' if konflikt else 'ryms inte'),
                 ha='left', va='center', fontsize=8, color=K.TEXT2 if idag else (BATTRE if ryms else SAMRE),
                 fontweight='normal' if idag else 'bold')
     for x_, lbl in [(0, ':20\nV avgår'), (30, ':50 pulsen\nÖ avgår i dag'), (60, ':20\nnästa V')]:
@@ -330,7 +332,8 @@ def fig_vo(res, fid='1a'):
     ax.text(65.0, len(rader) - 0.2, 'Tid i\ncentrum', ha='left', va='bottom', fontsize=7, color=K.TEXT2)
     ax.set_xlim(-46, 92); ax.set_ylim(-0.7, len(rader) + 0.7)
     ax.axis('off')
-    ax.set_title(f'Tidsbudget per varv V + Ö på 60 min – kravet: minst {sv(M, 0)} min i centrum (genomgång + reglering)',
+    ax.set_title(f'Tidsbudget per varv V + Ö – kravet: varvet ≤ {sv(60 - M, 0)} min, dvs. minst {sv(M, 0)} min i centrum '
+                 f'(helst ≤ {sv(60 - O.MARGINAL_VARV_ONSKAD, 0)} min)',
                  loc='left', fontsize=10, fontweight='bold')
     h = [Patch(facecolor=fv, label='Linje V (körtid, min)'), Patch(facecolor=fo, label='Linje Ö'),
          Patch(facecolor='#b9b4a8', label='Tid i centrum'),
@@ -375,8 +378,9 @@ def fig_vo(res, fid='1a'):
             ce.set_facecolor('#f1efe9'); ce.get_text().set_fontweight('bold'); ce.set_height(ce.get_height() * 1.5)
         elif not rad[r_ - 1][1]['ryms']:
             ce.get_text().set_color(SAMRE)
-    ax2.text(0.0, 0.06, f"Minsta tid i centrum bland varven där V-turen ändras; kravet är minst {sv(M, 0)} min "
-             "(röd text: uppfylls inte\neller kräver fler bussar). I dag har varvet V 07:50 + Ö 08:20 (skoltur 29 min) 4 min.\n"
+    ax2.text(0.0, 0.06, f"Minsta tid i centrum bland varven där V-turen ändras; kravet är minst {sv(M, 0)} min, helst "
+             f"{sv(O.MARGINAL_VARV_ONSKAD, 0)}\n(röd text: uppfylls inte eller kräver fler bussar). Ö startar när V har kommit "
+             "tillbaka. I dag har varvet\nV 07:50 + Ö 08:20 (skoltur 29 min) 4 min.\n"
              "De V-turer som inte ryms följs av Ö:s skolturer (28–29 min) eller fortsätter som linje N (V 08:20).\n"
              + ("Turer utan ändring kör till Möckelö Strand som i dag." if fid == '1a' else
                 "Turer utan ändring kör som i dag (utan flygplatsen). Y: 8 turer kring flygen 11:00 och 17:10\n"
@@ -557,7 +561,7 @@ def fig_ua4_karta(res):
     ny = len(fp['flygturer']); vo, vs, y_ = o['VO'], o['VO_sol'], o['Y_VO']
     M = sv(O.MARGINAL_VARV, 0)
     txt = [r'$\bf{Huvudalternativ}$' + '   V och Ö körs som en genomgående linje via flygplatsen;',
-           f"varje varv V + Ö ryms inom timmen med minst {M} min i centrum, Ö avgår högst 2 min efter pulsen",
+           f"varje varv V + Ö ryms inom 55 min (minst {M} min i centrum); Ö startar när V har kommit tillbaka",
            f"Omväg +{sv(f['delta_min_per_tur'])} min/tur (+{sv(f['km_per_tur'], 2)} km). "
            f"{vo['turer_med_andring']} av {f['linjens_turer']} turer via flygplatsen, 5 bussar; "
            f"som i dag: {', '.join(vo['turer_utan_andring'])}",
@@ -635,12 +639,77 @@ def fig_tackning_fore_efter(res):
     return ut
 
 
+def fig_kanslighet_ua4():
+    """UA 4: känslighet för omvägens körtid, hur sent Ö får avgå och indragning av Solberget där det behövs.
+    Värmetabell: antal turer via flygplatsen per policy (rader) och omväg (kolumner), alla V-turer och UA 4Y."""
+    fs = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
+    k = pd.DataFrame(fs['ua']['4']['kanslighet_solberget'])
+    bas = fs['ua']['4']['delta_min_per_tur']
+    ramp = ['#cde2fb', '#b7d3f6', '#9ec5f4', '#86b6ef', '#6da7ec', '#5598e7', '#3987e5', '#2a78d6', '#256abf', '#1c5cab']
+    pol = [('A', 'A  Varvet ≤ 55 min (krav),\nSolberget kvar'), ('B', 'B  Varvet ≤ 55 min (krav),\nSolberget indragen där det behövs'),
+           ('C', 'C  Varvet ≤ 50 min (helst),\nSolberget kvar'), ('D', 'D  Varvet ≤ 50 min (helst),\nSolberget indragen där det behövs')]
+    om = sorted(k.omvag_min.unique())
+    fig, axs = plt.subplots(2, 1, figsize=(13.6, 9.6), gridspec_kw={'hspace': 0.42})
+    for ax, (u, rub) in zip(axs, [('alla', 'Alla 20 V-turer'), ('Y', 'UA 4Y – de 8 flygturerna')]):
+        d = k[k.urval == u]
+        tot = int(d.turer_tot.iloc[0])
+        for yi, (pid, _) in enumerate(pol):
+            for xi, o in enumerate(om):
+                r = d[(d.policy == pid) & (d.omvag_min == o)].iloc[0]
+                andel = r.turer / tot
+                f = ramp[min(int(round(andel * (len(ramp) - 1))), len(ramp) - 1)]
+                ax.add_patch(Rectangle((xi + 0.03, yi + 0.03), 0.94, 0.94, facecolor=f, edgecolor='white', lw=2))
+                ink = 'white' if andel > 0.55 else K.TEXT
+                ax.text(xi + 0.5, yi + 0.40, f"{r.turer} av {tot}", ha='center', va='center', fontsize=10.5,
+                        fontweight='bold', color=ink)
+                fot = []
+                if r.o_max_efter_pulsen_min > 0:
+                    fot.append(f"Ö startar +{sv(r.o_max_efter_pulsen_min)} min")
+                n_sol = len(r.o_turer_utan_solberget)
+                if n_sol:
+                    fot.append(f"Solberget dras in: {n_sol}")
+                if fot:
+                    ax.text(xi + 0.5, yi + 0.70, '\n'.join(fot), ha='center', va='center', fontsize=6.3, color=ink,
+                            linespacing=1.25)
+        xb = om.index(bas)
+        ax.add_patch(Rectangle((xb, 0), 1, len(pol), facecolor='none', edgecolor=K.TEXT, lw=1.6, zorder=5))
+        ax.text(xb + 0.5, -0.08, 'beräknad omväg', ha='center', va='bottom', fontsize=7, color=K.TEXT)
+        ax.set_xlim(0, len(om)); ax.set_ylim(len(pol), -0.45)
+        ax.set_xticks([i + 0.5 for i in range(len(om))]); ax.set_xticklabels([f'{sv(o, 1).replace(",0", "")} min' for o in om], fontsize=8)
+        ax.xaxis.tick_bottom(); ax.tick_params(length=0)
+        ax.set_yticks([i + 0.5 for i in range(len(pol))])
+        ax.set_yticklabels([t_ for _, t_ in pol], fontsize=8)
+        for s_ in ax.spines.values():
+            s_.set_visible(False)
+        ax.set_xlabel('omvägen till flygplatsen per tur', fontsize=8, color=K.TEXT2)
+        ax.set_title(rub, loc='left', fontsize=10, fontweight='bold')
+    d6 = k[(k.urval == 'alla') & (k.omvag_min == 6.0)].set_index('policy')
+    y6 = k[(k.urval == 'Y') & (k.omvag_min == 6.0)].set_index('policy')
+    txt = ("Turer via flygplatsen med fem bussar. Ö startar när V har kommit tillbaka; \"Ö startar +x min\" = så mycket "
+           f"efter pulsen. Krav: varvet V + Ö ≤ {sv(60 - O.MARGINAL_VARV, 0)} min (minst {sv(O.MARGINAL_VARV, 0)} min i "
+           f"centrum); helst ≤ {sv(60 - O.MARGINAL_VARV_ONSKAD, 0)} min.\n"
+           "\"Solberget dras in\": antal Ö-turer där Solberget dras in – bara på den Ö-tur som följer en V-tur via "
+           "flygplatsen och bara om varvet annars inte ryms. Ö-turen blir då 1,6–2,5 min kortare.\n"
+           f"Exempel 6 min omväg (B): Solberget behåller {d6.at['B', 'solberget_avgangar']} (alla turer) respektive "
+           f"{y6.at['B', 'solberget_avgangar']} (UA 4Y) av 20 avgångar; {d6.at['B', 'solberget_samre_klass_inv']} invånare "
+           "får lägre turtäthetsklass, ingen förlorar hållplatsen inom 400 m. "
+           "De turer som alltid ryms följs av uppställning eller dagens slut (V 09:50, 10:20, 17:10, 20:40).")
+    fig.text(0.01, 0.075, txt, fontsize=7.4, color=K.TEXT, va='top', linespacing=1.5)
+    fig.suptitle('UA 4 – känslighet: omvägens körtid, kravet på varvet och Solberget indraget där det behövs',
+                 x=0.01, ha='left', fontsize=12, fontweight='bold')
+    fig.subplots_adjust(left=0.2, right=0.995, top=0.91, bottom=0.14)
+    ut = C.KARTOR / 'b4_15_ua4_kanslighet.png'
+    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    return ut
+
+
 def main():
     for f in ['b4_10_systemeffekter.png', 'b4_11_tackning_fore_efter.png', 'b4_13_flygplatsen_vo.png',   # utgångna
               'b4_10_flygplatsen_karta.png']:
         (C.KARTOR / f).unlink(missing_ok=True)
     res = berakna()
-    for f in (fig_vo, lambda r: fig_vo(r, '4'), fig_ua4_karta, fig_systemeffekter, fig_tackning_fore_efter):
+    for f in (fig_vo, lambda r: fig_vo(r, '4'), fig_ua4_karta, fig_systemeffekter, fig_tackning_fore_efter,
+              lambda r: fig_kanslighet_ua4()):
         print(f(res))
 
 
