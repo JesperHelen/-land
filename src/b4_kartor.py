@@ -19,8 +19,6 @@ import b4_omlopp as O  # noqa: E402
 P = C.PROCESSED
 RES = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
 SCEN = pd.read_csv(P / 'b4_omlopp_scenarier.csv', dtype={'trip_id': str})
-PKT = pd.read_csv(P / 'a2_delpunkter.csv.gz')
-TACK = pd.read_csv(P / 'b4_tackning_ua.csv.gz', dtype={'ua': str})
 HPL = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0)
 OTACKT = '#b9b4a8'
 BATTRE, SAMRE, BLA = '#2f9e44', '#c0392b', '#1c5cab'
@@ -34,36 +32,19 @@ def sv(x, d=1):
 
 
 # ====================================================================== kartor
-def raster(ax, p, farger, h=C.DELRUTA_M):
-    x0, y0 = p.x.min() - h / 2, p.y.min() - h / 2
-    ix = ((p.x - x0) // h).astype(int).to_numpy(); iy = ((p.y - y0) // h).astype(int).to_numpy()
-    img = np.zeros((iy.max() + 1, ix.max() + 1, 4))
-    img[iy, ix] = farger
-    ax.imshow(img, origin='lower', extent=(x0, x0 + img.shape[1] * h, y0, y0 + img.shape[0] * h),
-              interpolation='nearest', zorder=1)
-
-
-def tackningslager(ax, fid, uts):
-    """Otäckt befolkning efter UA:t (grå) och förändrade delpunkter (grön = bättre, röd = sämre)."""
-    x0, x1, y0, y1 = uts
-    p = PKT[PKT.x.between(x0 - 100, x1 + 100) & PKT.y.between(y0 - 100, y1 + 100)].copy()
-    t = TACK[TACK.ua == fid].set_index(['x', 'y'])
-    p = p.set_index(['x', 'y'])
-    p['klass_efter'] = p.klass
-    gem = p.index.intersection(t.index)
-    p.loc[gem, 'klass_efter'] = t.loc[gem, 'klass_efter']
-    p = p.reset_index()
-    rb = PKT.groupby('ruta_id').bef.sum(); tmax = rb.max()
-    tat = p.ruta_id.map(rb)
-    alfa = (0.30 + 0.55 * np.sqrt(tat / tmax)).to_numpy()
-    rgba = np.zeros((len(p), 4))
-    otackt = (p.klass_efter == 0).to_numpy()
-    rgba[otackt] = to_rgba(OTACKT); rgba[otackt, 3] = alfa[otackt]
-    bat, sam = p.klass_efter > p.klass, p.klass_efter < p.klass
-    # grön/röd bara i bebodda rutor; tätheten styr inte färgen här (förändringen ska synas)
-    rgba[bat.to_numpy()] = to_rgba(BATTRE, 0.85); rgba[sam.to_numpy()] = to_rgba(SAMRE, 0.85)
-    raster(ax, p, rgba)
-    return {'battre': float(p.loc[bat, 'bef'].sum()), 'samre': float(p.loc[sam, 'bef'].sum())}
+def tackningslager(ax, sid, uts=None):
+    """Huvudalternativets täckning – exakta 400 m-cirklar (tackningsytor.py): befolkning som fortfarande saknar
+    hållplats inom 400 m (grå) och ytor med bättre (grön) respektive sämre (röd) turtäthetsklass än i dag."""
+    import geopandas as gpd
+    import tackningsytor as T
+    g = gpd.read_file(P / 'b4_systemeffekter_ytor.gpkg', layer='ytor')
+    o = g[g[f'klass_{sid}'] == 0].dissolve(by='ruta_id', as_index=False)
+    rgba = np.array([to_rgba(OTACKT)] * len(o)); rgba[:, 3] = T.tathet_alfa(o.ruta_id, 0.30, 0.55)
+    o.plot(ax=ax, color=rgba, linewidth=0, zorder=1)
+    f = T.forandring(g, sid)
+    for r in f.itertuples():
+        c = BATTRE if r.forandring == 'Bättre' else SAMRE
+        f[f.forandring == r.forandring].plot(ax=ax, facecolor=to_rgba(c, 0.8), edgecolor=c, linewidth=0.8, zorder=1.5)
 
 
 def bakgrund(ax, uts, titel):

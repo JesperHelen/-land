@@ -130,6 +130,11 @@ def main():
     b = b.merge(agg, left_on='ruta_id', right_index=True, how='left')
     b.to_file(P / 'a2_tackning_rutor.gpkg', driver='GPKG')
     alla.drop(columns='turer').to_csv(P / 'a2_hallplatser_avgangar.csv')
+    # täckningsytor som vektorer (exakta 400 m-cirklar) för kartor och GIS
+    import tackningsytor as T
+    f = P / 'a2_tackningsytor.gpkg'
+    f.unlink(missing_ok=True)
+    T.ytor({'idag': alla}).to_file(f, layer='ytor', driver='GPKG')
     with open(P / 'a2_sammanfattning.json', 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1)
     print(json.dumps(res, ensure_ascii=False, indent=1))

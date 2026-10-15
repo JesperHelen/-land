@@ -22,6 +22,9 @@ Den här analysen kompletterar måttet med antalet avgångar som finns att nå i
   stadslinjerna J, N, S, Ö, V och landsbygdslinjerna 1–6. För varje delpunkt räknas antalet *unika turer* som
   avgår från någon hållplats inom 400 m. En tur som passerar flera närliggande hållplatser räknas en gång, och
   avstigning vid slutstation räknas inte som avgång.
+- **Kartor.** Täckningsytorna i kartorna och i GIS-lagren ritas som exakta cirklar med radien 400 m runt
+  hållplatserna, uppdelade efter befolkningsrutorna. Varje yta får antal avgångar och klass med samma regel som
+  delpunkterna. Antalet invånare per yta hämtas från delpunkterna och påverkas därmed inte av ritsättet.
 - **Klassning.** Antal avgångar per vardag inom 400 m. Stadslinjerna trafikerar cirka 07–20:30 med 20–22 turer
   per linje (linje J 9 turer), och klassgränserna har satts utifrån det:
 
@@ -112,6 +115,7 @@ hållplats inom 400 m (grå). Siffrorna anger berörda invånare per 1 km-ruta.*
 - **Tidtabell.** Utbudet avser en typisk vardag under hösten 2026 (terminstid) och kan skilja sig från
   sommartidtabellen under mätperioden för påstigandedata.
 
-**Filer.** Delpunkter med klass: `data/processed/a2_delpunkter.csv.gz`. Per 1 km-ruta (GIS):
+**Filer.** Delpunkter med klass: `data/processed/a2_delpunkter.csv.gz`. Täckningsytor (exakta 400 m-cirklar):
+`a2_tackningsytor.gpkg`, skapade av `src/tackningsytor.py`. Per 1 km-ruta (GIS):
 `a2_tackning_rutor.gpkg`. Avgångar per hållplatsläge: `a2_hallplatser_avgangar.csv`. Nyckeltal:
 `a2_sammanfattning.json`. Skript: `src/a2_tackning.py` och `src/a2_kartor.py`.

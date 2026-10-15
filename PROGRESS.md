@@ -106,6 +106,10 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       kontrollerar nu att inga lager har tomma geometrier. (2) GeoPackage levereras i journalläge DELETE (inte WAL).
       (3) Systemeffekter för alla scenarier, exklusiv grupp, förändringslager i varje UAsgrupp.
       (4) `linjenatsutredning.qgz` levereras färdig (relativa sökvägar).
+- [x] **Täckningsytor som runda cirklar** (beställaren: "pixelcirklar"): `src/tackningsytor.py` ritar ytorna med
+      exakta 400 m-cirklar runt hållplatserna, uppdelade per befolkningsruta (i stället för 50 m-rutor). Används i
+      alla kartor (a2_1–a2_3, a3_1, b4_2, b4_4, b4_6, b4_10, b4_14) och i GIS-lagren `a2_tackningsytor`,
+      `b4_tackning_scenarier` och `b4_tackning_forandring`. Invånartalen räknas oförändrat på 50 m-delpunkterna.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

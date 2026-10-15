@@ -27,9 +27,7 @@ BLA, ORANGE = '#1c5cab', '#e8590c'
 def fig_nya():
     fig, ax = K.ny_karta('tatort', titel='Förslag på nya hållplatslägen', figsize=(7.2, 10.2))
     farg = {0: '#a8a49a', 1: SVAGFARG[1], 2: SVAGFARG[2], 3: (1, 1, 1, 0), 4: (1, 1, 1, 0)}
-    raster(ax, lambda k: farg[k], 'klass')
-    for im in ax.get_images():
-        im.set_alpha(0.55)
+    raster(ax, lambda k: farg[k], 'klass', skala=0.55)
     rutnat(ax)
     K.rita_linjer(ax, alpha=0.75, lw=1.4, zorder=3)
     s = hpl[hpl.linjer.str.contains('|'.join(C.STADSLINJER))]
@@ -47,7 +45,8 @@ def fig_nya():
     h = [Line2D([], [], marker='*', ls='', color=BLA, markersize=12, label='Nytt läge längs dagens linje (N1–N5)'),
          Line2D([], [], marker='D', ls='', color=ORANGE, markersize=7, label='Nytt läge som kräver ändrad linjesträckning'),
          Patch(facecolor='none', edgecolor='#52514e', ls='--', label='400 m runt nytt läge'),
-         Patch(facecolor=SVAGFARG[2], alpha=0.55, label='Svag tillgänglighet i dag (1–29 avg)'),
+         Patch(facecolor=SVAGFARG[1], alpha=0.55, label='Mycket låg turtäthet i dag (1–14 avg/vardag)'),
+         Patch(facecolor=SVAGFARG[2], alpha=0.55, label='Låg turtäthet i dag (15–29 avg/vardag)'),
          Patch(facecolor='#a8a49a', alpha=0.55, label='Ingen hållplats inom 400 m i dag')]
     h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
     lg = K.teckenforklaring(ax, h, loc='lower left', fontsize=7)

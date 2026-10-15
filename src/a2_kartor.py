@@ -24,18 +24,16 @@ KLASSFARG = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']     # ingen 
 SVAGFARG = {1: '#c0392b', 2: '#f28e2b'}
 
 
-def raster(ax, varde_till_farg, kol, h=C.DELRUTA_M):
-    """Ritar delpunkterna som 50 m-raster. Opacitet efter rutans befolkningstäthet (där folk faktiskt bor)."""
-    tat = pkt.groupby('ruta_id').bef.transform('sum')
-    alpha = 0.30 + 0.70 * np.sqrt(tat / tat.max())
-    x0, y0 = pkt.x.min() - h / 2, pkt.y.min() - h / 2
-    ix = ((pkt.x - x0) // h).astype(int); iy = ((pkt.y - y0) // h).astype(int)
-    img = np.zeros((iy.max() + 1, ix.max() + 1, 4))
-    rgba = np.array([to_rgba(varde_till_farg(v)) for v in pkt[kol]])
-    rgba[:, 3] = alpha
-    img[iy, ix] = rgba
-    ax.imshow(img, origin='lower', extent=(x0, x0 + img.shape[1] * h, y0, y0 + img.shape[0] * h),
-              interpolation='nearest', zorder=1)
+def raster(ax, varde_till_farg, kol='klass', skala=1.0):
+    """Ritar täckningsytorna (exakta 400 m-cirklar runt hållplatserna, se tackningsytor.py) i klassens färg.
+    Opacitet efter rutans befolkningstäthet (där folk faktiskt bor); skala multiplicerar opaciteten."""
+    import geopandas as gpd
+    import tackningsytor as T
+    y = gpd.read_file(P / 'a2_tackningsytor.gpkg', layer='ytor')
+    y = y.dissolve(by=['ruta_id', 'klass_idag'], as_index=False)
+    rgba = np.array([to_rgba(varde_till_farg(int(v))) for v in y.klass_idag])
+    rgba[:, 3] = rgba[:, 3] * T.tathet_alfa(y.ruta_id) * skala
+    y.plot(ax=ax, color=rgba, linewidth=0, zorder=1)
 
 
 def rutnat(ax):

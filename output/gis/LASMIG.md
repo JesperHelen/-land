@@ -128,9 +128,10 @@ fälten `huvudalternativ` och `utesluten`. Filtren kan ändras under *Lageregens
 - **OD-bågarna** är ritade som bågar från ursprung till destination, som böjer åt höger i färdriktningen. Fältet
   `i_karta` anger de flöden som tillsammans står för 85 % av resorna, dvs. de som visas i PM:ets figurer. Lagren
   innehåller alla flöden ≥ 0,001 resor/h.
-- **`a2_tackningsytor`** är befolkningsrutornas landdel uppdelad efter tillgänglighetsklass (50 m upplösning).
-  Fältet `invanare` anger beräknat antal invånare i ytan, med antagandet att befolkningen är jämnt fördelad
-  inom 1 km-rutan.
+- **`a2_tackningsytor`** och **`b4_tackning_scenarier`** är befolkningsrutornas landdel uppdelad efter
+  tillgänglighetsklass. Gränserna är exakta 400 m-cirklar runt hållplatserna (inte rutor), så ytorna blir runda
+  även i stor skala. Fältet `invanare` anger beräknat antal invånare i ytan, med antagandet att befolkningen är
+  jämnt fördelad inom 1 km-rutan. `b4_tackning_forandring` är de delar av cirklarna där klassen ändras mot i dag.
 - **Indikativa hållplatslägen** i `a3_behov_ny_linjestrackning` är befolkningsviktade tyngdpunkter och ska
   anpassas till gatunätet.
 - Lagren skapas om med `python src/gis_export.py` efter att analysstegen har körts.

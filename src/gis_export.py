@@ -270,16 +270,14 @@ def a1():
 
 def a2():
     pkt = pd.read_csv(P / 'a2_delpunkter.csv.gz')
-    h = C.DELRUTA_M
     namn = ['Ingen hållplats inom 400 m', 'Mycket låg (1–14 avg/vardag)', 'Låg (15–29)', 'Medel (30–59)', 'God (≥ 60)']
-    pkt['geometry'] = shapely.box(pkt.x - h / 2, pkt.y - h / 2, pkt.x + h / 2, pkt.y + h / 2)
-    g = gpd.GeoDataFrame(pkt[['ruta_id', 'klass', 'bef', 'geometry']], crs=C.CRS_METRISK)
-    y = g.dissolve(by=['ruta_id', 'klass'], aggfunc={'bef': 'sum'}).reset_index()
-    y['klass_nr'] = y.klass.astype(int)
+    import tackningsytor as T                 # exakta 400 m-cirklar runt hållplatserna (inte 50 m-raster)
+    yt = gpd.read_file(P / 'a2_tackningsytor.gpkg', layer='ytor')
+    y = T.per_klass(yt, 'idag', pkt, 'klass')
     y['klass'] = y.klass_nr.map(dict(enumerate(namn)))
     y['inom_400m'] = np.where(y.klass_nr > 0, 'Ja', 'Nej')
     y['svag_tillg'] = y.klass_nr.map({0: 'Ingen hållplats inom 400 m', 1: 'Mycket låg (1–14)', 2: 'Låg (15–29)'}).fillna('Minst 30 avgångar')
-    y = y.rename(columns={'bef': 'invanare'}).round({'invanare': 1})
+    y = y.round({'invanare': 1})
     skriv(y[['ruta_id', 'klass_nr', 'klass', 'inom_400m', 'svag_tillg', 'invanare', 'geometry']], 'a2_tackningsytor')
     farger = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
     stil('a2_tackningsytor', 'Turtäthet inom 400 m (fig 2.1 höger, 2.2)',
@@ -367,24 +365,25 @@ def b4():
     stil('b4_ua_korvagar', 'UA – körvägar',
          qml(r_kategori('objekt', kat, lambda n, f, st: linje(n, f, 1.0, streckad=st, halo=True))), True)
 
-    # systemeffekter: turtäthetsklass per scenario och förändring mot i dag, 50 m-celler (fig 4.10–4.11)
+    # systemeffekter: turtäthetsklass per scenario och förändring mot i dag – exakta 400 m-cirklar (tackningsytor.py)
+    import tackningsytor as T
     se = json.load(open(P / 'b4_systemeffekter.json', encoding='utf-8'))
     tk = pd.read_csv(P / 'b4_systemeffekter_tackning.csv.gz')
-    h = C.DELRUTA_M
-    geo = np.asarray(shapely.box(tk.x - h / 2, tk.y - h / 2, tk.x + h / 2, tk.y + h / 2))   # numpy: inga indexproblem
-    mp = lambda gs: [g_ if g_.geom_type == 'MultiPolygon' else shapely.MultiPolygon([g_]) for g_ in gs]
+    yt = gpd.read_file(P / 'b4_systemeffekter_ytor.gpkg', layer='ytor')
+    mp = lambda gs: [g_ if g_.geom_type == 'MultiPolygon' else shapely.MultiPolygon(
+        [q for q in shapely.get_parts(g_) if q.geom_type == 'Polygon']) for g_ in gs]
     delar = []
     for sid in [k for k in se if k != 'idag']:
-        d = tk[f'klass_{sid}'] != tk.klass_idag
-        if not d.any():
+        f = T.forandring(yt, sid)
+        if f.empty:
             continue
-        t = gpd.GeoDataFrame({'scenario': sid, 'namn': se[sid]['namn'],
-                              'forandring': np.where(tk.loc[d, f'klass_{sid}'] > tk.loc[d, 'klass_idag'], 'Bättre', 'Sämre'),
-                              'invanare': tk.loc[d, 'bef'].to_numpy()}, geometry=geo[d.to_numpy()], crs=C.CRS_METRISK)
-        delar.append(t.dissolve(by=['scenario', 'namn', 'forandring'], aggfunc={'invanare': 'sum'}).reset_index())
-    tg = pd.concat(delar, ignore_index=True); tg['invanare'] = tg.invanare.round(0)
+        d = tk[f'klass_{sid}'] != tk.klass_idag
+        inv = tk[d].groupby(np.where(tk.loc[d, f'klass_{sid}'] > tk.loc[d, 'klass_idag'], 'Bättre', 'Sämre')).bef.sum()
+        f['scenario'] = sid; f['namn'] = se[sid]['namn']; f['invanare'] = f.forandring.map(inv).fillna(0).round(0)
+        delar.append(f[['scenario', 'namn', 'forandring', 'invanare', 'geometry']])
+    tg = pd.concat(delar, ignore_index=True)
     tg['geometry'] = mp(tg.geometry)
-    skriv(gpd.GeoDataFrame(tg, crs=C.CRS_METRISK), 'b4_tackning_forandring')
+    skriv(gpd.GeoDataFrame(tg, geometry='geometry', crs=C.CRS_METRISK), 'b4_tackning_forandring')
     stil('b4_tackning_forandring', 'Förändrad turtäthetsklass (filtrera på scenario)',
          qml(r_kategori('forandring', [('Bättre', 'Bättre än i dag (ny hållplats inom 400 m eller fler avgångar)', '#2f9e44'),
                                        ('Sämre', 'Sämre än i dag (ingen hållplats inom 400 m eller färre avgångar)', '#c0392b')],
@@ -392,13 +391,13 @@ def b4():
     namn = ['Ingen hållplats inom 400 m', 'Mycket låg (1–14 avg/vardag)', 'Låg (15–29)', 'Medel (30–59)', 'God (≥ 60)']
     ts = []
     for sid in se:
-        g_ = gpd.GeoDataFrame({'scenario': sid, 'namn': se[sid]['namn'], 'ruta_id': tk.ruta_id,
-                               'klass_nr': tk[f'klass_{sid}'], 'invanare': tk.bef}, geometry=geo, crs=C.CRS_METRISK)
-        ts.append(g_.dissolve(by=['scenario', 'namn', 'ruta_id', 'klass_nr'], aggfunc={'invanare': 'sum'}).reset_index())
+        y_ = T.per_klass(yt, sid, tk, f'klass_{sid}')
+        y_['scenario'] = sid; y_['namn'] = se[sid]['namn']
+        ts.append(y_)
     ts = pd.concat(ts, ignore_index=True)
     ts['klass'] = ts.klass_nr.map(dict(enumerate(namn))); ts['invanare'] = ts.invanare.round(1)
-    ts['geometry'] = mp(ts.geometry)
-    skriv(gpd.GeoDataFrame(ts, crs=C.CRS_METRISK), 'b4_tackning_scenarier')
+    ts = ts[['scenario', 'namn', 'ruta_id', 'klass_nr', 'klass', 'invanare', 'geometry']]
+    skriv(gpd.GeoDataFrame(ts, geometry='geometry', crs=C.CRS_METRISK), 'b4_tackning_scenarier')
     farger = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
     stil('b4_tackning_scenarier', 'Turtäthet inom 400 m (filtrera på scenario)',
          qml(r_kategori('klass', [(n, n, f) for n, f in zip(namn, farger)], lambda s_, f: fyll(s_, f)), 0.75), True)

@@ -23,6 +23,7 @@ Utdata: data/processed/b4_systemeffekter.json, b4_systemeffekter_omlopp.csv, b4_
 """
 import json
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -172,7 +173,7 @@ def berakna():
     rate = F.pastigande_per_inv(pkt)
     zoner = list(pd.read_csv(P / 'a1_restider_min.csv', index_col=0).index)
     mon0 = N.monster(); nat0 = N.Nat(mon0, zoner)
-    res, planer, kl, scen_f = {}, [], {}, {}
+    res, planer, kl, scen_f, hpl_scen = {}, [], {}, {}, {}
     for sid, fid, k in SCENARIER:
         if fid is None:
             plan, nt, ok, rob, turer, skift = O.verifiera(t, {}, r, referens=ref) + (True, {}, {})
@@ -184,6 +185,7 @@ def berakna():
             if s_.get('solberget'):
                 turer['sol'] = list(t[t.linje == 'Ö'].trip_id)
         h = hallplatser_scenario(hpl0, atg, turer, xy)
+        hpl_scen[sid] = h
         avg, _ = avgangar_inom(pkt, h)
         k_ = np.array([klass(v) for v in avg]); kl[sid] = k_
         p = pkt.assign(k=k_)
@@ -233,6 +235,10 @@ def berakna():
         v['forandring_omlopp'] = {k: round(v['omlopp'][k] - bas['omlopp'][k], 2)
                                   for k in ('fordon', 'omloppstid_h', 'korttid_h', 'km')}
     pd.concat(planer).to_csv(P / 'b4_systemeffekter_omlopp.csv', index=False)
+    import tackningsytor as T                       # täckningsytor som vektorer (exakta 400 m-cirklar) för kartor/GIS
+    f = P / 'b4_systemeffekter_ytor.gpkg'
+    f.unlink(missing_ok=True)
+    T.ytor(hpl_scen).to_file(f, layer='ytor', driver='GPKG')
     tk = pkt[['x', 'y', 'bef', 'ruta_id', 'mariehamn']].copy()
     for sid, k_ in kl.items():
         tk[f'klass_{sid}'] = k_
@@ -468,6 +474,32 @@ def rita_ua(ax, fid):
 
 
 FARG_VO = '#8c3b74'
+KLASSFARG = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
+
+
+@lru_cache(maxsize=1)
+def ytor_alla():
+    import geopandas as gpd
+    return gpd.read_file(P / 'b4_systemeffekter_ytor.gpkg', layer='ytor')
+
+
+def rita_klasser(ax, sid, skala=1.0):
+    """Turtäthetsklass inom 400 m för ett scenario – exakta 400 m-cirklar (tackningsytor.py)."""
+    import tackningsytor as T
+    y = ytor_alla().dissolve(by=['ruta_id', f'klass_{sid}'], as_index=False)
+    rgba = np.array([to_rgba(KLASSFARG[int(k)]) for k in y[f'klass_{sid}']])
+    rgba[:, 3] = T.tathet_alfa(y.ruta_id, 0.35, 0.65) * skala
+    y.plot(ax=ax, color=rgba, linewidth=0, zorder=1)
+
+
+def rita_forandring(ax, sid, fyll=0.75, kant=0.0, zorder=2):
+    """Ytor där klassen är bättre (grön) respektive sämre (röd) än i dag."""
+    import tackningsytor as T
+    f = T.forandring(ytor_alla(), sid)
+    for r in f.itertuples():
+        c = BATTRE if r.forandring == 'Bättre' else SAMRE
+        gpd_ = f[f.forandring == r.forandring]
+        gpd_.plot(ax=ax, facecolor=to_rgba(c, fyll), edgecolor=c if kant else 'none', linewidth=kant, zorder=zorder)
 
 
 def vo_kedjor(fid='4'):
@@ -494,15 +526,10 @@ def fig_ua4_karta(res):
     fs = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
     f = fs['ua']['4']; o = f['omlopp']; fp = fs['flygplatsen']; so = fs['solberget_indragen']
     v = res['4_VO_sol']; fi = v['forandring_invanare_mariehamn']
-    tk = pd.read_csv(P / 'b4_systemeffekter_tackning.csv.gz')
     uts = (104900, 111700, 6682000, 6689300)
     fig, ax = plt.subplots(figsize=(10.2, 10.6))
     K.ny_karta(uts, ax=ax, titel='UA 4 – Linje V–Ö via flygplatsen (huvudalternativ: V och Ö sammanslagna, Solberget indragen)')
-    h = C.DELRUTA_M
-    for m, c in (((tk['klass_4_VO_sol'] > tk.klass_idag), BATTRE), ((tk['klass_4_VO_sol'] < tk.klass_idag), SAMRE)):
-        d = tk[m]
-        for x, y in zip(d.x, d.y):
-            ax.add_patch(Rectangle((x - h / 2, y - h / 2), h, h, facecolor=to_rgba(c, 0.75), edgecolor='none', zorder=2))
+    rita_forandring(ax, '4_VO_sol', fyll=0.6, kant=1.0)
     D.befolkning().boundary.plot(ax=ax, color='#b9b4a8', linewidth=0.35, alpha=0.8, zorder=1.5)
     K.rita_linjer(ax, lw=1.3, alpha=0.35, zorder=3, etikett=False)
     for xy_ in vo_kedjor('4'):
@@ -547,12 +574,7 @@ def fig_ua4_karta(res):
 
 def fig_tackning_fore_efter(res):
     """Turtäthet inom 400 m före och efter, inzoomat per UA (rader) – förbättrade/försämrade celler markerade."""
-    tk = pd.read_csv(P / 'b4_systemeffekter_tackning.csv.gz')
-    farg = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
-    h = C.DELRUTA_M
-    rb = tk.groupby('ruta_id').bef.sum(); alfa = (0.35 + 0.65 * np.sqrt(tk.ruta_id.map(rb) / rb.max())).to_numpy()
-    x0, y0 = tk.x.min() - h / 2, tk.y.min() - h / 2
-    ix = ((tk.x - x0) // h).astype(int).to_numpy(); iy = ((tk.y - y0) // h).astype(int).to_numpy()
+    farg = KLASSFARG
     rader = [('1b', 'UA 1a och 1b Möckelö Strand ny', (104650, 107050, 6682750, 6685150),
               'UA 1a med V och Ö sammanslagna ger samma klass (17 avgångar);\nUA 1a med dagens tidtabell 9 avgångar (klass 1–14).'),
              ('2', 'UA 2 N2 på linje Ö', (109250, 111650, 6682050, 6684450), ''),
@@ -565,15 +587,9 @@ def fig_tackning_fore_efter(res):
     for (sid, rub, uts, fot), (a0, a1) in zip(rader, axs):
         for ax, s_, t_ in [(a0, 'idag', f'{rub} – i dag'), (a1, sid, f'{rub} – med huvudalternativet')]:
             K.ny_karta(uts, ax=ax, titel=t_)
-            img = np.zeros((iy.max() + 1, ix.max() + 1, 4))
-            rgba = np.array([to_rgba(farg[int(k)]) for k in tk[f'klass_{s_}']]); rgba[:, 3] = alfa
-            img[iy, ix] = rgba
-            ax.imshow(img, origin='lower', extent=(x0, x0 + img.shape[1] * h, y0, y0 + img.shape[0] * h),
-                      interpolation='nearest', zorder=1)
+            rita_klasser(ax, s_)
             if s_ != 'idag':
-                for m, c in (((tk[f'klass_{s_}'] > tk.klass_idag), BATTRE), ((tk[f'klass_{s_}'] < tk.klass_idag), SAMRE)):
-                    d = tk[m]
-                    ax.scatter(d.x, d.y, s=9, marker='s', facecolor='none', edgecolor=c, lw=0.9, zorder=3)
+                rita_forandring(ax, s_, fyll=0.25, kant=1.4, zorder=3)
             D.befolkning().boundary.plot(ax=ax, color='white', linewidth=0.35, alpha=0.8, zorder=2)
             ax.set_xlim(uts[0], uts[1]); ax.set_ylim(uts[2], uts[3]); ax.set_xlabel(''); ax.set_ylabel('')
             K.rita_linjer(ax, lw=1.6, alpha=0.9, zorder=4, etikett=False)

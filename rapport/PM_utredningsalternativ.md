@@ -100,7 +100,8 @@ vardag, tisdag 2026-09-01, med förarnas norm för linjebyten (figur 1):
 ### 2.3 Data och metod i korthet
 
 - **Täckning:** befolkningen 2024 i 1 km-rutor har fördelats på 50 m-delpunkter på land. För varje delpunkt
-  har antalet avgångar per vardag inom 400 m räknats.
+  har antalet avgångar per vardag inom 400 m räknats. Kartornas täckningsytor är exakta 400 m-cirklar runt
+  hållplatserna.
 - **Svag tillgänglighet:** hållplats inom 400 m men färre än 30 avgångar per vardag.
 - **Resenärseffekter:** den korrigerade OD-matrisen har lagts ut på ett restidsnät byggt på GTFS. Det
   tillkommande påstigandet har uppskattats med påstigande per invånare vid linjens bostadshållplatser.
