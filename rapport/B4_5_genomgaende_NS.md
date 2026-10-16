@@ -11,16 +11,15 @@ sammanslagning, sammanslagning med Bo-Bil i stället för Vikingagränd (UA 3), 
 på linje S, samt båda tillsammans.
 
 ## Resultat
-**Tidsutrymme (analytiskt, medianköridtid N 26 min, S 23 min).**
+**Tidsutrymme (analytiskt, mediankörtid N 26 min, S 23 min).**
 
 | Par | Pulsen kvar, marginal 5 min | Partnern startar senare, 5 min | Utan puls, marginal 3,5 min |
 |---|---|---|---|
 | N → S | 3,5 min | 6,0 min | 7,5 min |
 | S → Ö | 6,5 min | 9,0 min | 10,5 min |
 
-**Tidsutrymme per N-tur (omloppsverifierat).** Sammanslagning ger 6,0 min på 18 av 22 N-turer (partnerlinje S
-startar då upp till 2,5 min efter pulsen); 07:50-turen har bara 1,0 min eftersom varvet redan i dag har 6 min i
-centrum, och tre turer (09:50, 17:50, 20:20) samt 13:20 har obegränsat utrymme eftersom bussen därefter ställs upp
+**Tidsutrymme per N-tur (omloppsverifierat).** Sammanslagning ger 6,0 min på 17 av 22 N-turer; 07:50-turen har bara 1,0 min eftersom varvet redan i dag har 6 min i
+centrum, och turerna 09:50, 17:50 och 20:20 samt 13:20 (fyra turer) har obegränsat utrymme eftersom bussen därefter ställs upp
 (redovisas som sökgränsen 12 min). Bo-Bil ger inget utrymme (nettoeffekt +0,1 min: 0,4 min kortare väg men 0,5 min
 uppehåll) och sänker utrymmet till 5,9 min. Indragning av de fem kandidaterna på S (Gröna Udden, Torggatan,
 Neptunigatan, Skillnadsgatan, Hamngatan; **antagande 0,25 min per hållplats**, dvs. 1,25 min per tur) ökar utrymmet till 7,1–7,2 min.
