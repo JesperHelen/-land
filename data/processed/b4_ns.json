@@ -1,0 +1,131 @@
+{
+ "parametrar": {
+  "marginal_varv_min": 5.0,
+  "bobil_delta_min": 0.1,
+  "tid_per_indragen_hpl_min": 0.25,
+  "s_kandidater": [
+   "Gröna Udden",
+   "Torggatan",
+   "Neptunigatan",
+   "Skillnadsgatan",
+   "Hamngatan"
+  ],
+  "sparad_tid_S_per_tur_min": [
+   1.25
+  ]
+ },
+ "screening": [
+  {
+   "par": "N→S",
+   "t_a": 26.0,
+   "t_b": 23.0,
+   "puls_5": 3.5,
+   "utan_puls_5": 6.0,
+   "puls_3_5": 3.5,
+   "utan_puls_3_5": 7.5
+  },
+  {
+   "par": "S→N",
+   "t_a": 23.0,
+   "t_b": 26.0,
+   "puls_5": 6.0,
+   "utan_puls_5": 6.0,
+   "puls_3_5": 6.5,
+   "utan_puls_3_5": 7.5
+  },
+  {
+   "par": "S→Ö",
+   "t_a": 23.0,
+   "t_b": 23.0,
+   "puls_5": 6.5,
+   "utan_puls_5": 9.0,
+   "puls_3_5": 6.5,
+   "utan_puls_3_5": 10.5
+  },
+  {
+   "par": "Ö→S",
+   "t_a": 23.0,
+   "t_b": 23.0,
+   "puls_5": 6.5,
+   "utan_puls_5": 9.0,
+   "puls_3_5": 6.5,
+   "utan_puls_3_5": 10.5
+  },
+  {
+   "par": "V→Ö",
+   "t_a": 27.0,
+   "t_b": 23.0,
+   "puls_5": 2.5,
+   "utan_puls_5": 5.0,
+   "puls_3_5": 2.5,
+   "utan_puls_3_5": 6.5
+  },
+  {
+   "par": "Ö→V",
+   "t_a": 23.0,
+   "t_b": 27.0,
+   "puls_5": 5.0,
+   "utan_puls_5": 5.0,
+   "puls_3_5": 6.5,
+   "utan_puls_3_5": 6.5
+  }
+ ],
+ "max_forlangning_N": {
+  "sammanslagning": {
+   "min": 1.0,
+   "median": 6.0,
+   "max": 12.0,
+   "turer_utan_utrymme": 0
+  },
+  "bobil": {
+   "min": 0.9,
+   "median": 5.9,
+   "max": 12.0,
+   "turer_utan_utrymme": 0
+  },
+  "indragning_S": {
+   "min": 2.2,
+   "median": 7.2,
+   "max": 12.0,
+   "turer_utan_utrymme": 0
+  },
+  "bobil_och_indragning_S": {
+   "min": 2.1,
+   "median": 7.1,
+   "max": 12.0,
+   "turer_utan_utrymme": 0
+  }
+ },
+ "omraden": [
+  {
+   "omrade": "Örtvägen",
+   "inv": 125.0,
+   "behov_min_per_tur": 4.4,
+   "turer_totalt": 22,
+   "turer_sammanslagning": 21,
+   "turer_bobil": 21,
+   "turer_indragning_S": 21,
+   "turer_bobil_och_indragning_S": 21
+  },
+  {
+   "omrade": "Lillåkersvägen",
+   "inv": 183.0,
+   "behov_min_per_tur": 6.5,
+   "turer_totalt": 22,
+   "turer_sammanslagning": 4,
+   "turer_bobil": 4,
+   "turer_indragning_S": 21,
+   "turer_bobil_och_indragning_S": 21
+  },
+  {
+   "omrade": "Österkalmare",
+   "inv": 90.0,
+   "behov_min_per_tur": 10.3,
+   "turer_totalt": 22,
+   "turer_sammanslagning": 4,
+   "turer_bobil": 4,
+   "turer_indragning_S": 4,
+   "turer_bobil_och_indragning_S": 4
+  }
+ ]
+}

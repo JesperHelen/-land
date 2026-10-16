@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "b4_ns_omraden",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "omrade": "Örtvägen", "inv": 125.0, "behov_min_per_tur": 4.4, "turer_totalt": 22, "turer_sammanslagning": 21, "turer_bobil": 21, "turer_indragning_S": 21, "turer_bobil_och_indragning_S": 21 }, "geometry": { "type": "Point", "coordinates": [ 19.968296007671245, 60.121718024638788 ] } },
+{ "type": "Feature", "properties": { "omrade": "Lillåkersvägen", "inv": 183.0, "behov_min_per_tur": 6.5, "turer_totalt": 22, "turer_sammanslagning": 4, "turer_bobil": 4, "turer_indragning_S": 21, "turer_bobil_och_indragning_S": 21 }, "geometry": { "type": "Point", "coordinates": [ 19.962942815186498, 60.128029052696427 ] } },
+{ "type": "Feature", "properties": { "omrade": "Österkalmare", "inv": 90.0, "behov_min_per_tur": 10.3, "turer_totalt": 22, "turer_sammanslagning": 4, "turer_bobil": 4, "turer_indragning_S": 4, "turer_bobil_och_indragning_S": 4 }, "geometry": { "type": "Point", "coordinates": [ 19.978150039235832, 60.129290573654096 ] } }
+]
+}

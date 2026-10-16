@@ -62,8 +62,12 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         från flyget 10–40 min efter antagen ankomst 10:25/16:35): 8/8 med V/Ö, lika robust med Solberget indragen.
         Känslighet 5 min → 8/20. Solberget indragen: 42 inv. förlorar hpl inom 400 m, ≈ 1,9 påstigande/vardag.
         Figurer b4_10–b4_12. **Ankomsttider antagna – hämta verkliga.**
-  - [ ] **B4.5 Todo – sammanslagning:** pröva genomgående **N/S** + Bo-Bil; använd N:s 3,5 min (ev. + indragna
-        hållplatser på S) mot Örtvägen/Lillåkersvägen. Pröva även varianter utan puls (N/S 7,5 min, S/Ö 10,5 min).
+  - [x] **B4.5 Sammanslagning N/S** – `src/b4_ns.py` → `b4_ns.json`, `b4_ns_turer.csv`, `b4_ns_omraden.geojson`,
+        `output/kartor/b4_16_ns.png`, `rapport/B4_5_genomgaende_NS.md`. N/S genomgående (varv ≤ 55 min): 6,0 min
+        utrymme på de flesta N-turer. Örtvägen (4,4) ryms på 21/22 turer; Lillåkersvägen (6,5) bara 4/22, men 21/22
+        med 5 indragna S-hållplatser (antagande 0,25 min/hpl); Österkalmare (10,3) ryms ej. Bo-Bil ger +0,1 min
+        (inget utrymme). Utan puls (marginal 3,5): N/S 7,5, S/Ö 10,5 min – endast analytiskt.
+        `b4_omlopp.genomgaende_ryms` har ny parameter `linje` (normpar N/S).
   - [ ] **B4.6 Todo – nordost:** omläggning av N och Ö norr/nordost (Lillåkersvägen, Örtvägen, Solberget, Österkalmare).
   - [ ] **B4.7 Tre samlade utredningsalternativ** verifierade mot omloppen med körtidspåverkan per UA.
   - [ ] Stäm av härledda omlopp mot operatörens omloppsplaner (om de kan fås) och körtider för nya delsträckor.
@@ -133,6 +137,9 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       omgjord: A/B ≤ 55 min med Solberget kvar/vid behov, C/D ≤ 50 min; omväg 3–8 min. ≤ 5 min: 16/20 utan
       indragning; 5,5–7 min: 16/20 med Solberget indraget på 10 Ö-turer (4Y: 6); 50 min nås inte. Omloppsfiguren
       ritar inte längre kortare Ö-turer som en prickad förlängning (såg ut som längre körtid).
+- [x] **Kartor som GeoJSON** (beställaren 2026-10-16): `gis_export.geojson()` skriver varje GIS-lager till
+      `output/gis/geojson/<lager>.geojson` (WGS84) vid varje körning, för omritning i QGIS. Nya analyser ska lägga
+      sina kartlager i `gis_export`.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

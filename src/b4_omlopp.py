@@ -307,20 +307,20 @@ def turer_som_ryms(t, kandidater, d, r, robust=False, bas=None, varv=None, **kw)
 
 
 def genomgaende_ryms(t, kandidater, d, plan0, partner='Ö', max_skift=MAX_SKIFT_PARTNER, bas=None,
-                     marginal=MARGINAL_VARV, sol=None, sol_over=None, detalj=False):
+                     marginal=MARGINAL_VARV, sol=None, sol_over=None, detalj=False, linje='V'):
     """Genomgående linje V–Ö med dagens omlopp (plan0 = bygg_omlopp(t)): V-turen får UA:ts tillägg d om varvet
     (V-turen + Ö-turen som bussen fortsätter med) fortfarande har minst marginal min i centrum. Ö startar då
     direkt efter V (GENOMGANG_MIN); max_skift (None = ingen gräns) begränsar hur sent efter pulsen. bas: andra
     ändringar {trip_id: min} (t.ex. kortare körtid för Ö). Varven är oberoende av varandra, så turerna prövas
     var för sig. sol: {trip_id: −min} – en hållplats (Solberget) kan dras in på enskilda Ö-turer: på Ö-turen
     efter en ändrad V-tur om varvet annars inte ryms (eller, om sol_over anges, om Ö startar mer än sol_over min
-    efter pulsen). Returnerar (valda turer, {trip_id: skift}) och med detalj=True även Ö-turerna utan hållplatsen."""
+    efter pulsen). linje/partner: normparet (V/Ö, N/S, …). Returnerar (valda turer, {trip_id: skift}) och med detalj=True även Ö-turerna utan hållplatsen."""
     bas, sol = dict(bas or {}), dict(sol or {})
     p0 = plan0.reset_index(drop=True)
     tid, lin, nx = p0.trip_id.to_numpy(), p0.linje.to_numpy(), p0.nasta.to_numpy()
     pos = {k: i for i, k in enumerate(tid)}
     t0 = plan_fast(p0, med_andring(t, bas))
-    idag = varv_vo(plan_fast(p0, med_andring(t, {}))).set_index('trip_id').centrum_min
+    idag = varv_vo(plan_fast(p0, med_andring(t, {})), linje, partner).set_index('trip_id').centrum_min
     valda, skift, utan = [], {}, []
     for k in t[t.trip_id.isin(kandidater)].sort_values('avg').trip_id:
         i = pos[k]; j = nx[i]
@@ -341,7 +341,7 @@ def genomgaende_ryms(t, kandidater, d, plan0, partner='Ö', max_skift=MAX_SKIFT_
             if indrag:
                 dd[tid[j]] = dd.get(tid[j], 0.0) + sol[tid[j]]
             p = plan_fast(p0, med_andring(t, dd, s_))
-            c = varv_vo(p).set_index('trip_id').centrum_min
+            c = varv_vo(p, linje, partner).set_index('trip_id').centrum_min
             if c[k] >= min(marginal, idag[k]) - 1e-9 and np.nanmin(p.vand_efter) >= GENOMGANG_MIN - 1e-9:
                 valda.append(k); skift.update(s_)
                 if indrag:

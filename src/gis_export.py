@@ -515,11 +515,24 @@ def skriv_stilar():
     pyogrio.write_dataframe(df, GPKG, layer='layer_styles', driver='GPKG', layer_options={'FID': 'id'})
 
 
+def geojson():
+    """Alla lager även som GeoJSON (WGS84, en fil per lager) i output/gis/geojson/ – för att göra om kartorna i QGIS."""
+    ut = UT / 'geojson'
+    ut.mkdir(exist_ok=True)
+    for f in ut.glob('*.geojson'):
+        f.unlink()
+    for n, t in pyogrio.list_layers(GPKG):
+        if t:
+            gpd.read_file(GPKG, layer=n).to_crs(C.CRS_WGS84).to_file(ut / f'{n}.geojson', driver='GeoJSON')
+
+
 def main():
     UT.mkdir(parents=True, exist_ok=True)
     if GPKG.exists():
         GPKG.unlink()
     bas(); a1(); a2(); a3(); b4()
+    if (P / 'b4_ns_omraden.geojson').exists():                 # B4.5 – nordostområden, genomgående N/S
+        skriv(gpd.read_file(P / 'b4_ns_omraden.geojson'), 'b4_ns_omraden')
     skriv_stilar()
     # GDAL skriver GeoPackage i WAL-läge. Med WAL kan QGIS inte öppna flera lager ur filen samtidigt i vissa miljöer
     # (bl.a. synkade mappar som OneDrive och nätverksdiskar): 'unable to open database file' och tomma/osynliga lager.
@@ -531,6 +544,7 @@ def main():
             g = gpd.read_file(GPKG, layer=n)
             tomma = int((g.geometry.isna() | g.is_empty | ((g.area == 0) & g.geom_type.str.contains('Polygon'))).sum())
             assert tomma == 0, f'{n}: {tomma} tomma geometrier'
+    geojson()
     lager = pyogrio.list_layers(GPKG)
     print(f'{GPKG} – {len(lager)} lager, {len(STYLES)} stilar')
     for n, t in lager:
