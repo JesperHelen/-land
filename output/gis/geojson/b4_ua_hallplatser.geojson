@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "b4_ua_hallplatser",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "ua": "1a", "objekt": "ny hållplats", "namn": "Möckelö Strand ny", "linje": "V", "avgangar": 16 }, "geometry": { "type": "Point", "coordinates": [ 19.899836501642412, 60.096796826107301 ] } },
+{ "type": "Feature", "properties": { "ua": "1b", "objekt": "ny hållplats", "namn": "Möckelö Strand ny", "linje": "V", "avgangar": 16 }, "geometry": { "type": "Point", "coordinates": [ 19.899836501642412, 60.096796826107301 ] } },
+{ "type": "Feature", "properties": { "ua": "2", "objekt": "ny hållplats", "namn": "N2", "linje": "Ö", "avgangar": 20 }, "geometry": { "type": "Point", "coordinates": [ 19.983769734934761, 60.099803656808561 ] } },
+{ "type": "Feature", "properties": { "ua": "3", "objekt": "hållplats utgår för linje N", "namn": "Vikingagränd", "linje": "N", "avgangar": 0 }, "geometry": { "type": "Point", "coordinates": [ 19.93595, 60.122784 ] } },
+{ "type": "Feature", "properties": { "ua": "3", "objekt": "ny hållplats för linje N", "namn": "Bo-Bil", "linje": "N", "avgangar": 22 }, "geometry": { "type": "Point", "coordinates": [ 19.942240000592776, 60.127861500176053 ] } },
+{ "type": "Feature", "properties": { "ua": "4", "objekt": "ny hållplats", "namn": "Flygplatsen", "linje": "V", "avgangar": 16 }, "geometry": { "type": "Point", "coordinates": [ 19.908540125245281, 60.125480045447034 ] } }
+]
+}

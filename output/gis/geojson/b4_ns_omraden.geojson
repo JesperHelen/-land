@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "b4_ns_omraden",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "omrade": "Örtvägen", "inv": 125.0, "med_bobil": false, "behov_min_per_tur": 4.4, "puls": 3, "puls +indr.": 3, "högst 2 min efter pulsen": 21, "högst 2 min efter pulsen +indr.": 21, "utan puls": 21, "utan puls +indr.": 21 }, "geometry": { "type": "Point", "coordinates": [ 19.968296007671245, 60.121718024638788 ] } },
+{ "type": "Feature", "properties": { "omrade": "Örtvägen", "inv": 125.0, "med_bobil": true, "behov_min_per_tur": 4.5, "puls": 3, "puls +indr.": 3, "högst 2 min efter pulsen": 21, "högst 2 min efter pulsen +indr.": 21, "utan puls": 21, "utan puls +indr.": 21 }, "geometry": { "type": "Point", "coordinates": [ 19.968296007671245, 60.121718024638788 ] } },
+{ "type": "Feature", "properties": { "omrade": "Lillåkersvägen", "inv": 183.0, "med_bobil": false, "behov_min_per_tur": 6.5, "puls": 3, "puls +indr.": 3, "högst 2 min efter pulsen": 3, "högst 2 min efter pulsen +indr.": 3, "utan puls": 4, "utan puls +indr.": 21 }, "geometry": { "type": "Point", "coordinates": [ 19.962942815186498, 60.128029052696427 ] } },
+{ "type": "Feature", "properties": { "omrade": "Lillåkersvägen", "inv": 183.0, "med_bobil": true, "behov_min_per_tur": 6.6, "puls": 3, "puls +indr.": 3, "högst 2 min efter pulsen": 3, "högst 2 min efter pulsen +indr.": 3, "utan puls": 4, "utan puls +indr.": 21 }, "geometry": { "type": "Point", "coordinates": [ 19.962942815186498, 60.128029052696427 ] } },
+{ "type": "Feature", "properties": { "omrade": "Österkalmare", "inv": 90.0, "med_bobil": false, "behov_min_per_tur": 10.3, "puls": 3, "puls +indr.": 3, "högst 2 min efter pulsen": 3, "högst 2 min efter pulsen +indr.": 3, "utan puls": 4, "utan puls +indr.": 4 }, "geometry": { "type": "Point", "coordinates": [ 19.978150039235828, 60.129290573654096 ] } },
+{ "type": "Feature", "properties": { "omrade": "Österkalmare", "inv": 90.0, "med_bobil": true, "behov_min_per_tur": 10.4, "puls": 3, "puls +indr.": 3, "högst 2 min efter pulsen": 3, "högst 2 min efter pulsen +indr.": 3, "utan puls": 4, "utan puls +indr.": 4 }, "geometry": { "type": "Point", "coordinates": [ 19.978150039235828, 60.129290573654096 ] } }
+]
+}

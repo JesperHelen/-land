@@ -365,6 +365,9 @@ def b4():
     stil('b4_ua_korvagar', 'UA – körvägar',
          qml(r_kategori('objekt', kat, lambda n, f, st: linje(n, f, 1.0, streckad=st, halo=True))), True)
 
+    ns = gpd.read_file(P / 'b4_ns.gpkg', layer='omraden')
+    skriv(ns, 'b4_ns_omraden')
+
     # systemeffekter: turtäthetsklass per scenario och förändring mot i dag – exakta 400 m-cirklar (tackningsytor.py)
     import tackningsytor as T
     se = json.load(open(P / 'b4_systemeffekter.json', encoding='utf-8'))
@@ -515,6 +518,21 @@ def skriv_stilar():
     pyogrio.write_dataframe(df, GPKG, layer='layer_styles', driver='GPKG', layer_options={'FID': 'id'})
 
 
+def geojson_export():
+    """Alla lager även som GeoJSON (WGS 84) i output/gis/geojson/ – kartorna kan byggas om i QGIS utan GeoPackage."""
+    ut = UT / 'geojson'
+    ut.mkdir(exist_ok=True)
+    for f in ut.glob('*.geojson'):
+        f.unlink()
+    for n, t in pyogrio.list_layers(GPKG):
+        if n == 'layer_styles' or not t:
+            continue
+        g = gpd.read_file(GPKG, layer=n)
+        if g.geometry.isna().all():
+            continue
+        g.to_crs(4326).to_file(ut / f'{n}.geojson', driver='GeoJSON')
+
+
 def main():
     UT.mkdir(parents=True, exist_ok=True)
     if GPKG.exists():
@@ -532,6 +550,7 @@ def main():
             tomma = int((g.geometry.isna() | g.is_empty | ((g.area == 0) & g.geom_type.str.contains('Polygon'))).sum())
             assert tomma == 0, f'{n}: {tomma} tomma geometrier'
     lager = pyogrio.list_layers(GPKG)
+    geojson_export()
     print(f'{GPKG} – {len(lager)} lager, {len(STYLES)} stilar')
     for n, t in lager:
         print(f'  {n:32s} {t}')

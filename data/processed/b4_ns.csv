@@ -1,0 +1,97 @@
+tillagg,min_per_tur,marginal_min,policy,indragning_S,n_turer,av,varav_med_indragning,max_skift_S_min
+basfall (genomgående N–S utan förlängning),0.0,5.0,puls,False,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,5.0,puls,True,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,5.0,högst 2 min efter pulsen,False,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,5.0,högst 2 min efter pulsen,True,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,5.0,utan puls,False,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,5.0,utan puls,True,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,3.5,puls,False,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,3.5,puls,True,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,3.5,högst 2 min efter pulsen,False,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,3.5,högst 2 min efter pulsen,True,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,3.5,utan puls,False,22,22,0,0.0
+basfall (genomgående N–S utan förlängning),0.0,3.5,utan puls,True,22,22,0,0.0
+Bo-Bil (UA 3),0.1,5.0,puls,False,22,22,0,0.0
+Bo-Bil (UA 3),0.1,5.0,puls,True,22,22,0,0.0
+Bo-Bil (UA 3),0.1,5.0,högst 2 min efter pulsen,False,22,22,0,0.0
+Bo-Bil (UA 3),0.1,5.0,högst 2 min efter pulsen,True,22,22,0,0.0
+Bo-Bil (UA 3),0.1,5.0,utan puls,False,22,22,0,0.0
+Bo-Bil (UA 3),0.1,5.0,utan puls,True,22,22,0,0.0
+Bo-Bil (UA 3),0.1,3.5,puls,False,22,22,0,0.0
+Bo-Bil (UA 3),0.1,3.5,puls,True,22,22,0,0.0
+Bo-Bil (UA 3),0.1,3.5,högst 2 min efter pulsen,False,22,22,0,0.0
+Bo-Bil (UA 3),0.1,3.5,högst 2 min efter pulsen,True,22,22,0,0.0
+Bo-Bil (UA 3),0.1,3.5,utan puls,False,22,22,0,0.0
+Bo-Bil (UA 3),0.1,3.5,utan puls,True,22,22,0,0.0
+Örtvägen,4.4,5.0,puls,False,3,22,0,0.0
+Örtvägen,4.4,5.0,puls,True,3,22,0,0.0
+Örtvägen,4.4,5.0,högst 2 min efter pulsen,False,21,22,0,0.9
+Örtvägen,4.4,5.0,högst 2 min efter pulsen,True,21,22,0,0.9
+Örtvägen,4.4,5.0,utan puls,False,21,22,0,0.9
+Örtvägen,4.4,5.0,utan puls,True,21,22,0,0.9
+Örtvägen,4.4,3.5,puls,False,3,22,0,0.0
+Örtvägen,4.4,3.5,puls,True,3,22,0,0.0
+Örtvägen,4.4,3.5,högst 2 min efter pulsen,False,21,22,0,0.9
+Örtvägen,4.4,3.5,högst 2 min efter pulsen,True,22,22,1,0.9
+Örtvägen,4.4,3.5,utan puls,False,21,22,0,0.9
+Örtvägen,4.4,3.5,utan puls,True,22,22,1,0.9
+Lillåkersvägen,6.5,5.0,puls,False,3,22,0,0.0
+Lillåkersvägen,6.5,5.0,puls,True,3,22,0,0.0
+Lillåkersvägen,6.5,5.0,högst 2 min efter pulsen,False,3,22,0,0.0
+Lillåkersvägen,6.5,5.0,högst 2 min efter pulsen,True,3,22,0,0.0
+Lillåkersvägen,6.5,5.0,utan puls,False,4,22,0,3.0
+Lillåkersvägen,6.5,5.0,utan puls,True,21,22,17,3.0
+Lillåkersvägen,6.5,3.5,puls,False,3,22,0,0.0
+Lillåkersvägen,6.5,3.5,puls,True,3,22,0,0.0
+Lillåkersvägen,6.5,3.5,högst 2 min efter pulsen,False,3,22,0,0.0
+Lillåkersvägen,6.5,3.5,högst 2 min efter pulsen,True,3,22,0,0.0
+Lillåkersvägen,6.5,3.5,utan puls,False,21,22,0,3.0
+Lillåkersvägen,6.5,3.5,utan puls,True,21,22,0,3.0
+Österkalmare,10.3,5.0,puls,False,3,22,0,0.0
+Österkalmare,10.3,5.0,puls,True,3,22,0,0.0
+Österkalmare,10.3,5.0,högst 2 min efter pulsen,False,3,22,0,0.0
+Österkalmare,10.3,5.0,högst 2 min efter pulsen,True,3,22,0,0.0
+Österkalmare,10.3,5.0,utan puls,False,4,22,0,6.8
+Österkalmare,10.3,5.0,utan puls,True,4,22,0,6.8
+Österkalmare,10.3,3.5,puls,False,3,22,0,0.0
+Österkalmare,10.3,3.5,puls,True,3,22,0,0.0
+Österkalmare,10.3,3.5,högst 2 min efter pulsen,False,3,22,0,0.0
+Österkalmare,10.3,3.5,högst 2 min efter pulsen,True,3,22,0,0.0
+Österkalmare,10.3,3.5,utan puls,False,4,22,0,6.8
+Österkalmare,10.3,3.5,utan puls,True,4,22,0,6.8
+Örtvägen + Bo-Bil,4.5,5.0,puls,False,3,22,0,0.0
+Örtvägen + Bo-Bil,4.5,5.0,puls,True,3,22,0,0.0
+Örtvägen + Bo-Bil,4.5,5.0,högst 2 min efter pulsen,False,21,22,0,1.0
+Örtvägen + Bo-Bil,4.5,5.0,högst 2 min efter pulsen,True,21,22,0,1.0
+Örtvägen + Bo-Bil,4.5,5.0,utan puls,False,21,22,0,1.0
+Örtvägen + Bo-Bil,4.5,5.0,utan puls,True,21,22,0,1.0
+Örtvägen + Bo-Bil,4.5,3.5,puls,False,3,22,0,0.0
+Örtvägen + Bo-Bil,4.5,3.5,puls,True,3,22,0,0.0
+Örtvägen + Bo-Bil,4.5,3.5,högst 2 min efter pulsen,False,21,22,0,1.0
+Örtvägen + Bo-Bil,4.5,3.5,högst 2 min efter pulsen,True,22,22,1,1.0
+Örtvägen + Bo-Bil,4.5,3.5,utan puls,False,21,22,0,1.0
+Örtvägen + Bo-Bil,4.5,3.5,utan puls,True,22,22,1,1.0
+Lillåkersvägen + Bo-Bil,6.6,5.0,puls,False,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,5.0,puls,True,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,5.0,högst 2 min efter pulsen,False,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,5.0,högst 2 min efter pulsen,True,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,5.0,utan puls,False,4,22,0,3.1
+Lillåkersvägen + Bo-Bil,6.6,5.0,utan puls,True,21,22,17,3.1
+Lillåkersvägen + Bo-Bil,6.6,3.5,puls,False,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,3.5,puls,True,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,3.5,högst 2 min efter pulsen,False,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,3.5,högst 2 min efter pulsen,True,3,22,0,0.0
+Lillåkersvägen + Bo-Bil,6.6,3.5,utan puls,False,21,22,0,3.1
+Lillåkersvägen + Bo-Bil,6.6,3.5,utan puls,True,21,22,0,3.1
+Österkalmare + Bo-Bil,10.4,5.0,puls,False,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,5.0,puls,True,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,5.0,högst 2 min efter pulsen,False,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,5.0,högst 2 min efter pulsen,True,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,5.0,utan puls,False,4,22,0,6.9
+Österkalmare + Bo-Bil,10.4,5.0,utan puls,True,4,22,0,6.9
+Österkalmare + Bo-Bil,10.4,3.5,puls,False,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,3.5,puls,True,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,3.5,högst 2 min efter pulsen,False,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,3.5,högst 2 min efter pulsen,True,3,22,0,0.0
+Österkalmare + Bo-Bil,10.4,3.5,utan puls,False,4,22,0,6.9
+Österkalmare + Bo-Bil,10.4,3.5,utan puls,True,4,22,0,6.9

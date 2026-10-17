@@ -1,0 +1,1306 @@
+{
+ "parametrar": {
+  "marginal_krav_min": 5.0,
+  "marginal_kanslighet_min": 3.5,
+  "genomgang_min": 0.5,
+  "n_turer_N": 22,
+  "bobil_delta_min": 0.1,
+  "tillagg_min_per_tur": {
+   "Bo-Bil (UA 3)": 0.1,
+   "Örtvägen": 4.4,
+   "Lillåkersvägen": 6.5,
+   "Österkalmare": 10.3,
+   "Örtvägen + Bo-Bil": 4.5,
+   "Lillåkersvägen + Bo-Bil": 6.6,
+   "Österkalmare + Bo-Bil": 10.4
+  },
+  "indragna_hpl_S": [
+   "Gröna Udden",
+   "Torggatan",
+   "Neptunigatan",
+   "Skillnadsgatan",
+   "Hamngatan"
+  ],
+  "indragning_S_min_per_tur": {
+   "06:50": -2.5,
+   "07:20": -2.5,
+   "07:50": -2.5,
+   "08:20": -2.5,
+   "08:50": -2.5,
+   "09:20": -2.5,
+   "09:50": -2.5,
+   "10:50": -2.5,
+   "11:50": -2.5,
+   "12:50": -2.5,
+   "13:50": -2.5,
+   "14:20": -2.5,
+   "14:50": -2.5,
+   "15:20": -2.5,
+   "15:50": -2.5,
+   "16:20": -2.5,
+   "16:50": -2.5,
+   "17:20": -2.5,
+   "17:50": -2.5,
+   "18:50": -2.5,
+   "19:50": -2.5,
+   "20:50": -2.5
+  }
+ },
+ "dagens_varv_NS": [
+  {
+   "avg": "06:50",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "07:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "07:50",
+   "foljer": "S",
+   "centrum_min": 6.0
+  },
+  {
+   "avg": "08:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "08:50",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "09:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "09:50",
+   "foljer": NaN,
+   "centrum_min": Infinity
+  },
+  {
+   "avg": "10:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "11:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "12:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "13:20",
+   "foljer": "S",
+   "centrum_min": 41.0
+  },
+  {
+   "avg": "14:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "14:50",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "15:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "15:50",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "16:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "16:50",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "17:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "17:50",
+   "foljer": NaN,
+   "centrum_min": Infinity
+  },
+  {
+   "avg": "18:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "19:20",
+   "foljer": "S",
+   "centrum_min": 11.0
+  },
+  {
+   "avg": "20:20",
+   "foljer": "S",
+   "centrum_min": Infinity
+  }
+ ],
+ "dagens_fordon": 5,
+ "utrymme_utan_puls_vanligt_varv_min": {
+  "5.0": {
+   "N/S": 6.0,
+   "S/N": 6.0,
+   "S/Ö": 9.0
+  },
+  "3.5": {
+   "N/S": 7.5,
+   "S/N": 7.5,
+   "S/Ö": 10.5
+  }
+ },
+ "scenarier": [
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "basfall (genomgående N–S utan förlängning)",
+   "min_per_tur": 0.0,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Bo-Bil (UA 3)",
+   "min_per_tur": 0.1,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 1,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Örtvägen",
+   "min_per_tur": 4.4,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 1,
+   "max_skift_S_min": 0.9
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 3.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 17,
+   "max_skift_S_min": 3.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 3.0
+  },
+  {
+   "tillagg": "Lillåkersvägen",
+   "min_per_tur": 6.5,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 3.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.8
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.8
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.8
+  },
+  {
+   "tillagg": "Österkalmare",
+   "min_per_tur": 10.3,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.8
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 1,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Örtvägen + Bo-Bil",
+   "min_per_tur": 4.5,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 22,
+   "av": 22,
+   "varav_med_indragning": 1,
+   "max_skift_S_min": 1.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 3.1
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 17,
+   "max_skift_S_min": 3.1
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 3.1
+  },
+  {
+   "tillagg": "Lillåkersvägen + Bo-Bil",
+   "min_per_tur": 6.6,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 21,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 3.1
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 5.0,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 5.0,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.9
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 5.0,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.9
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 3.5,
+   "policy": "puls",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": false,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 3.5,
+   "policy": "högst 2 min efter pulsen",
+   "indragning_S": true,
+   "n_turer": 3,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 0.0
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": false,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.9
+  },
+  {
+   "tillagg": "Österkalmare + Bo-Bil",
+   "min_per_tur": 10.4,
+   "marginal_min": 3.5,
+   "policy": "utan puls",
+   "indragning_S": true,
+   "n_turer": 4,
+   "av": 22,
+   "varav_med_indragning": 0,
+   "max_skift_S_min": 6.9
+  }
+ ],
+ "omraden": [
+  {
+   "omrade": "Örtvägen",
+   "inv": 125.0,
+   "med_bobil": false,
+   "behov_min_per_tur": 4.4,
+   "puls": 3,
+   "puls +indr.": 3,
+   "högst 2 min efter pulsen": 21,
+   "högst 2 min efter pulsen +indr.": 21,
+   "utan puls": 21,
+   "utan puls +indr.": 21
+  },
+  {
+   "omrade": "Örtvägen",
+   "inv": 125.0,
+   "med_bobil": true,
+   "behov_min_per_tur": 4.5,
+   "puls": 3,
+   "puls +indr.": 3,
+   "högst 2 min efter pulsen": 21,
+   "högst 2 min efter pulsen +indr.": 21,
+   "utan puls": 21,
+   "utan puls +indr.": 21
+  },
+  {
+   "omrade": "Lillåkersvägen",
+   "inv": 183.0,
+   "med_bobil": false,
+   "behov_min_per_tur": 6.5,
+   "puls": 3,
+   "puls +indr.": 3,
+   "högst 2 min efter pulsen": 3,
+   "högst 2 min efter pulsen +indr.": 3,
+   "utan puls": 4,
+   "utan puls +indr.": 21
+  },
+  {
+   "omrade": "Lillåkersvägen",
+   "inv": 183.0,
+   "med_bobil": true,
+   "behov_min_per_tur": 6.6,
+   "puls": 3,
+   "puls +indr.": 3,
+   "högst 2 min efter pulsen": 3,
+   "högst 2 min efter pulsen +indr.": 3,
+   "utan puls": 4,
+   "utan puls +indr.": 21
+  },
+  {
+   "omrade": "Österkalmare",
+   "inv": 90.0,
+   "med_bobil": false,
+   "behov_min_per_tur": 10.3,
+   "puls": 3,
+   "puls +indr.": 3,
+   "högst 2 min efter pulsen": 3,
+   "högst 2 min efter pulsen +indr.": 3,
+   "utan puls": 4,
+   "utan puls +indr.": 4
+  },
+  {
+   "omrade": "Österkalmare",
+   "inv": 90.0,
+   "med_bobil": true,
+   "behov_min_per_tur": 10.4,
+   "puls": 3,
+   "puls +indr.": 3,
+   "högst 2 min efter pulsen": 3,
+   "högst 2 min efter pulsen +indr.": 3,
+   "utan puls": 4,
+   "utan puls +indr.": 4
+  }
+ ]
+}

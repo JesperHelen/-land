@@ -363,6 +363,34 @@ För 1a behövs en vändmöjlighet vid den nya hållplatsen.
 *Figur 4.9. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter,
 och antal turer som ryms per alternativ.*
 
+### 4.5.3 N och S sammanslagna – Bo-Bil och förlängning mot nordost
+
+**Metod.** Samma krav som för V–Ö (avsnitt 4.5.1): varje varv, en N-tur följd av den S-tur som bussen fortsätter
+med, ska rymmas inom timmen med minst 5 minuter i centrum. Dagens omlopp ligger fast, så antalet bussar och
+omloppstiden är oförändrade. S startar direkt efter N (0,5 minuter) när det behövs. Tre villkor för S:s starttid
+prövas: i pulsen, högst 2 minuter efter pulsen och utan puls (S startar när N har kommit tillbaka). Tilläggstiderna
+är UA 3 (Bo-Bil, +0,1 minut per tur) samt behovet i A3-områdena Örtvägen (+4,4), Lillåkersvägen (+6,5) och
+Österkalmare (+10,3 minuter per tur). Resultat: `data/processed/b4_ns.csv`, `b4_ns_turer.csv`, `b4_ns.json`,
+figur 4.16 (`output/kartor/b4_16_ns.png`) och GIS-lagret `b4_ns_omraden` (även som GeoJSON).
+
+**Resultat.**
+
+- **Dagens varv N + S** har 11 minuter i centrum (4 efter N, 7 efter S). Kravet på 5 minuter ger därför ett
+  utrymme på 6 minuter per tur (7,5 minuter om kravet sänks till 3,5 minuter).
+- **Genomgående N–S utan förlängning** ryms på alla 22 N-turer, med och utan puls.
+- **Bo-Bil (UA 3)** ryms på alla 22 turer, även som genomgående linje.
+- **Örtvägen (+4,4 minuter)** ryms på 21 av 22 turer om S får starta högst 1 minut efter pulsen. Med S i pulsen
+  ryms bara 3 turer, eftersom regleringen efter N i dag bara är 4 minuter. Bo-Bil ändrar inte resultatet.
+- **Lillåkersvägen (+6,5 minuter)** överskrider utrymmet på 6 minuter. Utan puls ryms 4 av 22 turer. Om 2,5
+  minuter sparas på S genom att A3:s fem indragningskandidater dras in (antagande 0,5 minut per hållplats) ryms
+  21 av 22 turer, men då startar S upp till 3 minuter efter pulsen. Med kravet 3,5 minuter i centrum ryms 21 av 22
+  utan indragning.
+- **Österkalmare (+10,3 minuter)** ryms inte (4 av 22 turer). Området kräver en större omläggning (B4.6).
+
+**Slutsats.** Örtvägen kan nås med genomgående N–S utan fler bussar, förutsatt att S får avgå upp till 1 minut efter
+pulsen. Lillåkersvägen kräver både indragna hållplatser på S och en S-start utan puls, eller ett lägre krav på tid
+i centrum. Besparingen från indragningen är antagen och ska kontrolleras mot verkliga körtider.
+
 ## 4.6 UA 4 – Linje V–Ö via flygplatsen
 
 **Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
