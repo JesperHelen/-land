@@ -491,6 +491,23 @@ def b4():
              labeling=etiketter('"omrade" || \' +\' || format_number("behov_min_per_tur", 1) || \' min/tur (linje \' || "linje" || \')\'')), True)
 
 
+def b4_ns():
+    """B4.5: genomgående linje N–S, områden i nordost och S-hållplatser som kan dras in (src/b4_ns.py)."""
+    for namn in ('linjer', 'omraden', 'sandragna_hpl'):
+        skriv(gpd.read_file(P / 'b4_ns.gpkg', layer=namn), f'b4_ns_{namn}')
+
+
+def geojson_export():
+    """Alla geometrilager även som GeoJSON (WGS84) i output/gis/geojson/ – öppnas direkt i QGIS."""
+    ut = UT / 'geojson'; ut.mkdir(exist_ok=True)
+    for f in ut.glob('*.geojson'):
+        if not f.name.startswith('b4_ns_'):
+            f.unlink()
+    for n, t in pyogrio.list_layers(GPKG):
+        if t and n != 'layer_styles':
+            gpd.read_file(GPKG, layer=n).to_crs(4326).to_file(ut / f'{n}.geojson', driver='GeoJSON')
+
+
 # ====================================================================== stiltabell
 def skriv_stilar():
     """Skriver stilarna till GeoPackage-tabellen layer_styles (läses av QGIS) och som .qml-filer."""
@@ -519,7 +536,7 @@ def main():
     UT.mkdir(parents=True, exist_ok=True)
     if GPKG.exists():
         GPKG.unlink()
-    bas(); a1(); a2(); a3(); b4()
+    bas(); a1(); a2(); a3(); b4(); b4_ns()
     skriv_stilar()
     # GDAL skriver GeoPackage i WAL-läge. Med WAL kan QGIS inte öppna flera lager ur filen samtidigt i vissa miljöer
     # (bl.a. synkade mappar som OneDrive och nätverksdiskar): 'unable to open database file' och tomma/osynliga lager.
@@ -531,6 +548,7 @@ def main():
             g = gpd.read_file(GPKG, layer=n)
             tomma = int((g.geometry.isna() | g.is_empty | ((g.area == 0) & g.geom_type.str.contains('Polygon'))).sum())
             assert tomma == 0, f'{n}: {tomma} tomma geometrier'
+    geojson_export()
     lager = pyogrio.list_layers(GPKG)
     print(f'{GPKG} – {len(lager)} lager, {len(STYLES)} stilar')
     for n, t in lager:

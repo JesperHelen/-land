@@ -62,8 +62,11 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         från flyget 10–40 min efter antagen ankomst 10:25/16:35): 8/8 med V/Ö, lika robust med Solberget indragen.
         Känslighet 5 min → 8/20. Solberget indragen: 42 inv. förlorar hpl inom 400 m, ≈ 1,9 påstigande/vardag.
         Figurer b4_10–b4_12. **Ankomsttider antagna – hämta verkliga.**
-  - [ ] **B4.5 Todo – sammanslagning:** pröva genomgående **N/S** + Bo-Bil; använd N:s 3,5 min (ev. + indragna
-        hållplatser på S) mot Örtvägen/Lillåkersvägen. Pröva även varianter utan puls (N/S 7,5 min, S/Ö 10,5 min).
+  - [x] **B4.5 Sammanslagning N/S + Bo-Bil** (2026-10-18) – `src/b4_ns.py` → `b4_ns.json`, `b4_ns_scenarier.csv`, `b4_ns_kurva.csv`,
+        `b4_ns.gpkg`, figurer `b4_16`, `b4_17`, rapport avsnitt 4.5.3. Bo-Bil + N–S ryms 22/22 (≥ 5,9 min i centrum).
+        Örtvägen (+4,5) ryms 21/22 om S avgår ≤ 1 min efter pulsen; Lillåkersvägen (+6,6) kräver S utan puls + indragning av
+        5 S-hållplatser (21/22, 3 inv. förlorar hpl); Österkalmare ryms ej (→ B4.6). N ensam 7/22. S/Ö utan puls: bara
+        9/20 kopplingar, Strömsnäs 8/20 → inte huvudspår. Varianter utan puls vid marginal 3,5: N/S 7,5, S/Ö 10,5 (5 min: 6,0/9,0).
   - [ ] **B4.6 Todo – nordost:** omläggning av N och Ö norr/nordost (Lillåkersvägen, Örtvägen, Solberget, Österkalmare).
   - [ ] **B4.7 Tre samlade utredningsalternativ** verifierade mot omloppen med körtidspåverkan per UA.
   - [ ] Stäm av härledda omlopp mot operatörens omloppsplaner (om de kan fås) och körtider för nya delsträckor.
@@ -170,5 +173,7 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   `b4_ua.alternativ()`; restider Möckelö enligt beställaren (befintlig väg 2 min, förlängning 1 min).
 - **Test av QGIS-filerna:** `apt-get install python3-qgis qgis-providers` och kör med `/usr/bin/python3.12`,
   `QT_QPA_PLATFORM=offscreen` och `OGR_SQLITE_JOURNAL=DELETE` (molnmiljön klarar inte SQLite-WAL i QGIS).
+- **Alla kartor sparas även som GeoJSON/GeoPackage för QGIS** (beställaren 2026-10-18): `gis_export.py` skriver varje lager till
+  `output/gis/geojson/*.geojson` (WGS84); nya steg ska lägga sina lager i `gis_export` (se `b4_ns()`). Python: `/usr/bin/python3` (3.13).
 - Internet: endast PyPI och repo-GitHub nås. Inga baskarte-tjänster/OSRM – kartor byggs av egna lager.
 - Python-bibliotek utöver requirements: geopandas, shapely, pyproj, pyogrio (installeras med pip).

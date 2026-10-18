@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "a3_nya_hallplatser",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "nr": 1, "linjer": "J", "avgangar_vardag": 9, "ny_tackning_inv": 61, "lyft_fran_svag_inv": 3, "nytta_inv": 64, "lon": 19.95304351687793, "lat": 60.071440977655762, "narmaste_befintliga": "Lervik", "avst_narmaste_m": 401.0, "id": "N1" }, "geometry": { "type": "Point", "coordinates": [ 19.95304351687793, 60.071440977655755 ] } },
+{ "type": "Feature", "properties": { "nr": 2, "linjer": "Ö", "avgangar_vardag": 20, "ny_tackning_inv": 55, "lyft_fran_svag_inv": 0, "nytta_inv": 55, "lon": 19.983769734934761, "lat": 60.099803656808561, "narmaste_befintliga": "Kalmarnäs vändplan", "avst_narmaste_m": 777.0, "id": "N2" }, "geometry": { "type": "Point", "coordinates": [ 19.983769734934761, 60.099803656808561 ] } },
+{ "type": "Feature", "properties": { "nr": 3, "linjer": "N", "avgangar_vardag": 22, "ny_tackning_inv": 17, "lyft_fran_svag_inv": 24, "nytta_inv": 41, "lon": 19.93420028577151, "lat": 60.126521934773073, "narmaste_befintliga": "Maxinge", "avst_narmaste_m": 376.0, "id": "N3" }, "geometry": { "type": "Point", "coordinates": [ 19.93420028577151, 60.126521934773073 ] } },
+{ "type": "Feature", "properties": { "nr": 4, "linjer": "Ö", "avgangar_vardag": 16, "ny_tackning_inv": 3, "lyft_fran_svag_inv": 33, "nytta_inv": 36, "lon": 19.946480307653413, "lat": 60.111239711760085, "narmaste_befintliga": "Musikinstitutet", "avst_narmaste_m": 339.0, "id": "N4" }, "geometry": { "type": "Point", "coordinates": [ 19.946480307653413, 60.111239711760085 ] } },
+{ "type": "Feature", "properties": { "nr": 5, "linjer": "V,Ö", "avgangar_vardag": 40, "ny_tackning_inv": 0, "lyft_fran_svag_inv": 35, "nytta_inv": 35, "lon": 19.931456996292439, "lat": 60.108644005818576, "narmaste_befintliga": "Klintvägen", "avst_narmaste_m": 154.0, "id": "N5" }, "geometry": { "type": "Point", "coordinates": [ 19.931456996292439, 60.108644005818576 ] } }
+]
+}

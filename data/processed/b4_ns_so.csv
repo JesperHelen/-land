@@ -1,0 +1,19 @@
+omrade,behov_min_per_tur,policy,marginal_min,turer,turer_tot,s_senare_max_min
+Solberget,4.9,puls,3.5,10,20,0.0
+Solberget,4.9,puls,5.0,9,20,0.0
+Solberget,4.9,fri,3.5,10,20,0.0
+Solberget,4.9,fri,5.0,9,20,0.0
+Solberget,4.9,fri_s,3.5,11,20,4.4
+Solberget,4.9,fri_s,5.0,11,20,4.4
+Solberget södra,4.1,puls,3.5,10,20,0.0
+Solberget södra,4.1,puls,5.0,9,20,0.0
+Solberget södra,4.1,fri,3.5,11,20,3.6
+Solberget södra,4.1,fri,5.0,9,20,0.0
+Solberget södra,4.1,fri_s,3.5,11,20,3.6
+Solberget södra,4.1,fri_s,5.0,11,20,3.6
+Strömsnäs,10.2,puls,3.5,4,20,0.0
+Strömsnäs,10.2,puls,5.0,4,20,0.0
+Strömsnäs,10.2,fri,3.5,8,20,3.7
+Strömsnäs,10.2,fri,5.0,4,20,0.0
+Strömsnäs,10.2,fri_s,3.5,8,20,3.7
+Strömsnäs,10.2,fri_s,5.0,8,20,3.7

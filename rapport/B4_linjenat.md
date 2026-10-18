@@ -363,6 +363,58 @@ För 1a behövs en vändmöjlighet vid den nya hållplatsen.
 *Figur 4.9. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter,
 och antal turer som ryms per alternativ.*
 
+### 4.5.3 N och S sammanslagna – Bo-Bil, Örtvägen och Lillåkersvägen
+
+Paret N ↔ S prövas på samma sätt som V och Ö (avsnitt 4.5.2): dagens omlopp ligger fast, varje N-tur följer med
+den S-tur som bussen kör i dag (21 av 22 N-turer fortsätter som S), och kravet är att varvet N + S ryms inom
+timmen med minst 5 minuter i centrum. Bo-Bil (UA 3, +0,1 minut per tur) ingår i alla scenarier. S prövas i tre
+former: avgång högst 2 minuter efter pulsen, start när N har kommit tillbaka (utan puls), och dessutom med de
+fem hållplatser på linje S som kapitel 3 pekar ut som kandidater för indragning (Gröna Udden, Torggatan,
+Neptunigatan, Skillnadsgatan, Hamngatan; 0,5 minut kortare körtid per indragen hållplats och tur, högst 2,5
+minuter). Som jämförelse prövas N utan sammanslagning.
+
+*Tabell 4.6. Antal av 22 N-turer som ryms utan fler bussar.*
+
+| Område (linje N) | Tillägg per tur inkl. Bo-Bil | N ensam | N–S, S i pulsen (≤ 2 min senare) | N–S, utan puls | N–S, utan puls + S-indragning | Ny täckning (inv.) |
+|---|---|---|---|---|---|---|
+| Endast Bo-Bil | 0,1 min | 22 | 22 | 22 | 22 | – |
+| Örtvägen | 4,5 min | 7 | **21** | 21 | 21 | 151 |
+| Lillåkersvägen | 6,6 min | 7 | 3 | 4 | **21** | 95 |
+| Österkalmare | 10,4 min | 5 | 3 | 4 | 4 | 57 |
+
+- **Bo-Bil med genomgående N–S** ryms på alla 22 turer och ger minst 5,9 minuter i centrum, med S i pulsen.
+- **Örtvägen** ryms inte inom N:s eget utrymme (3,5 minuter med puls; N ensam 7 av 22 turer), men med N och S
+  sammanslagna räcker det att S avgår högst 1 minut efter pulsen: 21 av 22 turer (inte 07:50), minst 6,5
+  minuter i centrum. Med S-indragning blir marginalen 9 minuter.
+- **Lillåkersvägen** överskrider varvets utrymme (6,0 minuter utan puls) och ryms först när S-hållplatserna dras
+  in: 21 av 22 turer, S avgår som mest 3,1 minuter efter pulsen, minst 6,9 minuter i centrum. Indragningen
+  innebär att 3 invånare förlorar hållplats inom 400 m och 3 får sämre turtäthetsklass (A2-delpunkter).
+- **Österkalmare** kräver en större omläggning (B4.6). Utan puls och med 5 minuters marginal är N:s största
+  tillägg 6,0 minuter (7,5 minuter med 3,5 minuters marginal, beställarens överslag); S-indragningen lägger
+  till upp till 2,5 minuter.
+- **Kostnad.** Alla scenarier som ryms ger oförändrat antal bussar (5). Driftkostnaden ökar med omvägens
+  fordonskilometer: ≈ 7 k€/år (Örtvägen) respektive ≈ 12 k€/år (Lillåkersvägen), bas enligt B5.
+- **Resenärer.** Genomgående N–S ger 0,8 resor per vardag utan byte (S/Ö: 1,8).
+
+**Utan puls, S/Ö.** Med S och Ö som par (och N ↔ V) bildas bara 9 av 20 Ö → S-kopplingar, eftersom Ö och V
+avgår vid delvis andra minuter än S och N (:10/:40 mot :20/:50). Ö:s områden ryms därför bara på hälften av
+turerna: Solberget (4,9 min) 9–11 av 20, Strömsnäs (10,2 min) 4–8 av 20, och 11 respektive 8 med S-indragning.
+Teoretiskt utrymme för S/Ö är 9 minuter (10,5 med 3,5 minuters marginal, som i beställarens överslag), men normparet V ↔ Ö bryts och N ↔ V får bara 2 minuter. S/Ö bedöms därför inte som
+huvudspår; Strömsnäs hör till B4.6.
+
+![Figur 4.16](../output/kartor/b4_16_ns_karta.png)
+
+*Figur 4.16. Genomgående linje N–S: områden i nordost och S-hållplatser som kan dras in (vänster), antal N-turer
+som ryms per tillägg och driftform (höger).*
+
+![Figur 4.17](../output/kartor/b4_17_ns_omlopp.png)
+
+*Figur 4.17. Omlopp före och efter: Bo-Bil + Örtvägen (S startar när N kommit tillbaka) samt Bo-Bil +
+Lillåkersvägen (med S-indragning). Skrafferat fält är tilläggstiden.*
+
+Kartlager för QGIS: `b4_ns_linjer`, `b4_ns_omraden`, `b4_ns_sandragna_hpl` (GeoPackage) samt
+`output/gis/geojson/b4_ns_*.geojson`. Underlag: `data/processed/b4_ns.json`, `b4_ns_scenarier.csv`, `b4_ns_kurva.csv`.
+
 ## 4.6 UA 4 – Linje V–Ö via flygplatsen
 
 **Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
