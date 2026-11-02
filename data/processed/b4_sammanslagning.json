@@ -155,33 +155,33 @@
  "genomgaende_resor": [
   {
    "par": "N/S",
-   "direktresor_vardag": 0.8,
-   "sparade_resenarsminuter_vardag": 0.8
+   "direktresor_vardag": 2.6,
+   "sparade_resenarsminuter_vardag": 3.3
   },
   {
    "par": "N/V",
-   "direktresor_vardag": 0.5,
+   "direktresor_vardag": 0.6,
    "sparade_resenarsminuter_vardag": 0.5
   },
   {
    "par": "N/Ö",
-   "direktresor_vardag": 0.8,
-   "sparade_resenarsminuter_vardag": 0.9
+   "direktresor_vardag": 1.7,
+   "sparade_resenarsminuter_vardag": 2.1
   },
   {
    "par": "S/V",
-   "direktresor_vardag": 0.6,
-   "sparade_resenarsminuter_vardag": 0.8
+   "direktresor_vardag": 1.3,
+   "sparade_resenarsminuter_vardag": 2.4
   },
   {
    "par": "S/Ö",
-   "direktresor_vardag": 1.8,
-   "sparade_resenarsminuter_vardag": 2.6
+   "direktresor_vardag": 6.8,
+   "sparade_resenarsminuter_vardag": 10.0
   },
   {
    "par": "V/Ö",
-   "direktresor_vardag": 0.6,
-   "sparade_resenarsminuter_vardag": 1.1
+   "direktresor_vardag": 1.5,
+   "sparade_resenarsminuter_vardag": 3.4
   }
  ],
  "omraden": [

@@ -142,7 +142,7 @@ def fig_mockelo():
         f"(som i dag: {', '.join(vb['turer_utan_andring'])})",
         f"      alla {f1b['linjens_turer']} turer: 5 bussar men bara {sv(ba['min_centrum_vo'])} min i centrum i varven med Ö:s skolturer",
         r'$\bf{Effekt}$' + f"   +{f1b['tackning']['ny_tackning_inv']} invånare inom 400 m",
-        f"Påstigande ≈ {sv(f1b['nytt_pastigande_vardag'][0])}–{sv(f1b['nytt_pastigande_vardag'][1])} per vardag (UA 1b, sommarnivå)",
+        f"Påstigande ≈ {sv(f1b['nytt_pastigande_vardag'][0])}–{sv(f1b['nytt_pastigande_vardag'][1])} per vardag (UA 1b, höst 2026)",
         f"Restid: +{sv(f1b['resenarer']['vardag_inkl_genomgaende'], 0)} (UA 1b) resp. "
         f"+{sv(f1a['resenarer']['vardag_inkl_genomgaende'], 0)} (UA 1a) resenärsminuter/vardag "
         f"(inkl. {sv(RES['genomgaende_vo']['resenarsminuter_vardag'])} V ↔ Ö utan byte)"])
@@ -178,7 +178,7 @@ def fig_n2():
         f"Alla {f['linjens_turer']} turer ryms ({o['alla']['fordon']} bussar)",
         "08:20-turen: kort byte Ö → V 08:50 (0,5 min)",
         r'$\bf{Effekt}$' + f"   +{f['tackning']['ny_tackning_inv']} invånare inom 400 m",
-        f"Påstigande ≈ {sv(f['nytt_pastigande_vardag'][0])}–{sv(f['nytt_pastigande_vardag'][1])} per vardag (sommarnivå)",
+        f"Påstigande ≈ {sv(f['nytt_pastigande_vardag'][0])}–{sv(f['nytt_pastigande_vardag'][1])} per vardag (höst 2026)",
         f"Ombordvarande: +{sv(f['resenarer']['vardag']['resenarsminuter'], 0)} resenärsminut per vardag"], loc=(0.03, 0.975))
     extra = [Line2D([], [], marker='*', ls='', color=BLA, markersize=12, label='Ny hållplats N2 (läge enligt A3)'),
              Patch(facecolor='none', edgecolor=BLA, ls='--', label='400 m runt N2')]

@@ -7,10 +7,16 @@
 > befolkningen, cirka 2 000 invånare, bor dock mer än 400 m från stadslinjernas körvägar. Den kan bara nås med
 > ändrad linjesträckning. Nio sådana områden med sammanlagt cirka 1 130 invånare har identifierats, de största
 > vid Möckelö Strand, Lillåkersvägen och Solberget–Örtvägen. De utgör underlag för utredningsalternativen (UA) i kapitel 4.
-> Sex hållplatser bedöms som kandidater för indragning: Torggatan, Gröna Udden, Neptunigatan, Skillnadsgatan
-> och Hamngatan på linje S samt Åbrinken på linje V. De har högst fem påstigningar under 92 vardagar, avståndet
-> mellan kvarvarande grannhållplatser blir högst 600 m och ingen invånare förlorar hållplats inom 400 m.
-> Ytterligare 13 hållplatser bör prövas, bland annat skolhållplatser som ska bedömas med data från terminstid.
+> Med den tvättade påstigandedatan från hösten 2026 bedöms elva hållplatser som kandidater för indragning:
+>
+> - **linje S:** Torggatan, Stadshuset, Hamngatan, Skillnadsgatan, Östra Esplanadgatan, Neptunigatan och Gröna Udden;
+> - **linje N:** Elverksgatan och Idrottsgården;
+> - **linje V:** Åbrinken;
+> - **linjerna V och Ö:** Savoy.
+>
+> De har högst 0,1 påstigande per vardag, avståndet mellan kvarvarande grannhållplatser blir högst 600 m och
+> högst nio invånare förlorar hållplats inom 400 m. Sex av dem ligger inom 800 m från Centrum, Nygatan.
+> Ytterligare sex hållplatser bör prövas.
 
 ## 3.1 Metod
 
@@ -36,8 +42,10 @@ anpassas till gatunätet vid den fortsatta utformningen.
 **Överflödiga hållplatser.** Stadslinjernas 91 hållplatsområden har prövats en i taget, med lägst påstigande
 först, mot tre kriterier:
 
-1. *Lågt påstigande* (nödvändigt villkor): färre än 0,1 påstigande per vardag på stadslinjerna, dvs. färre än
-   cirka nio påstigningar under mätperiodens 92 vardagar.
+1. *Lågt påstigande* (nödvändigt villkor): högst 0,1 påstigande per vardag på stadslinjerna, dvs. i
+   genomsnitt högst en påstigning varannan vecka. Påstigandet är hämtat ur den tvättade höstdatan för linjerna
+   N, S, V och Ö (kapitel 1). Hållplatser som inte finns i den har inga påstigningar. För linje J används
+   sommardatan.
 2. *Tät placering*: avståndet mellan de kvarvarande grannhållplatserna på linjen blir högst 600 m efter
    indragning.
 3. *Liten unik täckning*: färre än 25 invånare förlorar busshållplats inom 400 m. Hållplatser som även
@@ -49,10 +57,12 @@ som uppfyller ett av de övriga kriterierna *bör prövas*. Följande hållplats
 prövas*:
 
 - centrumhållplatsen och vändplatser;
-- hållplatser i startsegmentet, vars påstigande är underskattat på grund av registreringsfelet i kapitel 1;
-- skol- och säsongshållplatser, eftersom mätperioden omfattar sommarlovet.
+- hållplatser som bara trafikeras av linje J och ligger i startsegmentet, vars påstigande i sommardatan är
+  underskattat på grund av registreringsfelet i kapitel 1;
+- skol- och säsongshållplatser som bara trafikeras av linje J, eftersom sommardatan omfattar sommarlovet.
 
-Fem hållplatser i 2026 års tidtabell saknar påstigningsdata och har inte bedömts.
+Höstdatan avser terminstid och har inte registreringsfelet. Undantagen gäller därför inte hållplatser på
+linjerna N, S, V och Ö.
 
 ## 3.2 Nya hållplatslägen
 
@@ -103,44 +113,64 @@ lång omväg inom ramen för dagens fordonsresurser.
 
 ## 3.4 Överflödiga hållplatser
 
-*Tabell 3.3. Kandidater för indragning.*
+*Tabell 3.3. Kandidater för indragning (påstigande per vardag, höst 2026).*
 
-| Hållplats | Linje | Påstigande, 92 vardagar | Avstånd mellan kvarvarande grannar | Invånare som förlorar hållplats inom 400 m |
+| Hållplats | Linje | Påstigande per vardag | Avstånd mellan kvarvarande grannar | Invånare som förlorar hållplats inom 400 m |
 |---|---|---:|---:|---:|
-| Torggatan | S | 1 | 315 m | 0 |
-| Gröna Udden | S | 1 | 542 m | 2 |
-| Neptunigatan | S | 2 | 475 m | 0 |
-| Åbrinken | V | 2 | 430 m | 0 |
-| Skillnadsgatan | S | 3 | 599 m | 0 |
-| Hamngatan | S | 5 | 465 m | 1 |
+| Torggatan | S | 0 | 565 m | 0 |
+| Stadshuset | S | 0 | 453 m | 0 |
+| Skillnadsgatan | S | 0 | 599 m | 0 |
+| Östra Esplanadgatan | S | 0 | 275 m | 0 |
+| Neptunigatan | S | 0 | 475 m | 0 |
+| Gröna Udden | S | 0 | 542 m | 2 |
+| Hamngatan | S | 0,09 | 465 m | 1 |
+| Åbrinken | V | 0 | 430 m | 0 |
+| Savoy | V, Ö | 0 | 465 m | 0 |
+| Elverksgatan | N | 0,09 | 354 m | 0 |
+| Idrottsgården | N | 0,06 | 498 m | 9 |
 
-Fem av sex kandidater ligger på linje S, vars slinga genom centrum och södra Mariehamn har tät
-hållplatsplacering. Med antagandet 20–30 sekunder per hållplatsangöring bedöms indragningen förkorta linje S:s
-körtid med upp till cirka 2 minuter och linje V:s med upp till en halv minut per tur. Besparingen är en övre
-gräns, eftersom bussen redan i dag sällan stannar vid hållplatser utan resande, men tidtabellen kan
-kortas med motsvarande marginal. Det kan ge utrymme att förlänga eller räta ut linjer inom dagens omlopp
-(kapitel 4).
+Sju av de elva kandidaterna ligger på linje S, vars slinga genom centrum och södra Mariehamn har tät
+hållplatsplacering. Sex av kandidaterna ligger inom 800 m från Centrum, Nygatan: Savoy (150 m), Östra
+Esplanadgatan (390 m), Stadshuset (580 m), Idrottsgården (580 m), Torggatan (750 m) och Skillnadsgatan (790 m).
+Där är avståndet till centrum och andra hållplatser kort. Med antagandet
+20–30 sekunder per hållplatsangöring kan indragningen förkorta linje S:s körtid med upp till cirka 3 minuter
+per tur. För linjerna N och V blir det upp till 1 minut. Besparingen är en övre gräns, eftersom bussen
+redan i dag sällan stannar vid hållplatser utan resande, men tidtabellen kan kortas med motsvarande marginal.
+Det kan ge utrymme att förlänga eller räta ut linjer inom dagens omlopp (kapitel 4).
 
-Ytterligare 13 hållplatser *bör prövas*. GE-huset, Matrosgatan och Juseliusvägen har lika få
-påstigningar, men en indragning skulle ge luckor på 750–1 100 m. Yrkesgymnasiet, Idrottsgården och Hotell &
-Restaurangskolan är skolhållplatser som ska bedömas med data från terminstid. Skillnadsgatan vsk. ligger i
-linjernas startsegment, där påstigandet är underskattat. Övriga är Källarvägen, Kasbrinken, Hjortronstigen,
-Vikingagränd, Räddningsverket och Norrgårdsvägen.
+Jämfört med sommardatan har följande ändrats:
+
+- **Nya kandidater:** Stadshuset, Östra Esplanadgatan och Elverksgatan saknade tidigare påstigningsdata.
+  Savoy hade några påstigningar under sommaren men inga i höstdatan.
+- **Skolhållplats utan undantag:** Idrottsgården klassades tidigare som skolhållplats som skulle bedömas med
+  data från terminstid. Den har 0,06 påstigande per vardag även under terminstid.
+- **Behålls nu:** Matrosgatan, Källarvägen, Hjortronstigen, Räddningsverket, Norrgårdsvägen, Parkgatan,
+  Yrkesgymnasiet och Hotell & Restaurangskolan har tillräckligt många påstigningar i höstdatan.
+
+Sex hållplatser *bör prövas*. De har lika få påstigningar, men en indragning skulle ge luckor på 730–1 050 m:
+
+- Juseliusvägen (S), där 15 invånare förlorar hållplats;
+- Åsvägen och Kasbrinken (V), där 17 invånare förlorar hållplats vid Kasbrinken;
+- Vikingagränd (N), där 23 invånare förlorar hållplats;
+- GE-huset (J);
+- Skillnadsgatan vsk. (J, S).
 
 ![Figur 3.2](../output/kartor/a3_2_hallplatsbedomning.png)
 
-*Figur 3.2. Bedömning av stadslinjernas hållplatser. Siffran inom parentes anger påstigande under
-mätperiodens 92 vardagar.*
+*Figur 3.2. Bedömning av stadslinjernas hållplatser. Siffran inom parentes anger påstigande per vardag
+(höst 2026; linje J sommar).*
 
 ## 3.5 Osäkerheter
 
 - **Underlagets upplösning.** Befolkningen är fördelad jämnt inom 1 km-rutor och körvägarna är förenklade till
   raka linjer mellan hållplatser. Nyttan per läge är därför ungefärlig, och lägena ska justeras mot gatunät,
   bebyggelse och trafiksäkerhet innan de fastställs.
-- **Påstigandet är mätt under sommaren.** Indragning bör inte beslutas förrän påstigandet har kontrollerats
-  med data från terminstid och registreringsfelet vid centrum har åtgärdats.
-- **Hållplatser utan påstigningsdata.** Fem hållplatser i 2026 års tidtabell (Parkgatan, Stadshuset, Östra
-  Esplanadgatan, Elverksgatan och Åsvägen) saknar påstigningsdata. De bör bedömas när data finns.
+- **Påstigandet avser hösten 2026.** Höstdatan är tvättad och avser terminstid, men en hållplats kan ha
+  annan funktion än påstigning, till exempel som avstigningshållplats eller för enstaka resenärer med särskilda
+  behov. Avstigande ingår inte i underlaget. Indragning bör därför stämmas av med operatören och berörda
+  innan beslut.
+- **Linje J** bedöms med sommardatan, som har registreringsfelet i kapitel 1. GE-huset och Skillnadsgatan vsk.
+  bör bedömas på nytt när linje J finns i den tvättade datan.
 
 **Filer.** `data/processed/a3_nya_hallplatser.csv`, `a3_behov_ny_linjestrackning.csv` och
 `a3_hallplatsbedomning.csv`, samt `a3_hallplatsforslag.gpkg` (lager för nya lägen, behov av ändrad

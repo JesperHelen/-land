@@ -66,7 +66,8 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         hållplatser på S) mot Örtvägen/Lillåkersvägen. Pröva även varianter utan puls (N/S 7,5 min, S/Ö 10,5 min).
   - [ ] **B4.6 Todo – nordost:** omläggning av N och Ö norr/nordost (Lillåkersvägen, Örtvägen, Solberget, Österkalmare).
   - [ ] **B4.7 Tre samlade utredningsalternativ** verifierade mot omloppen med körtidspåverkan per UA.
-  - [ ] Stäm av härledda omlopp mot operatörens omloppsplaner (om de kan fås) och körtider för nya delsträckor.
+  - [x] Stäm av härledda omlopp mot operatörens omloppsplaner – operatörens omlopp används sedan 2026-11-02.
+  - [ ] Körtider för nya delsträckor (OSRM eller provkörning).
 - [x] **B5 Grov ekonomisk kalkyl (överslag)** – `src/b5_kalkyl.py` → `b5_kalkyl.json/csv`, `output/kartor/b5_1_kalkyl.png`,
       `rapport/B5_kalkyl.md`. Enhetskostnader (Trivector 2023, omräknade): 60 k€/fordon·år, 50 €/fordonstimme,
       0,9 €/km (låg/hög ±), 250 vardagar/år. Per UA: 1a alla turer +216 k€/år; 1a dagens tidtabell +8 k€;
@@ -133,6 +134,25 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       omgjord: A/B ≤ 55 min med Solberget kvar/vid behov, C/D ≤ 50 min; omväg 3–8 min. ≤ 5 min: 16/20 utan
       indragning; 5,5–7 min: 16/20 med Solberget indraget på 10 Ö-turer (4Y: 6); 50 min nås inte. Omloppsfiguren
       ritar inte längre kortare Ö-turer som en prickad förlängning (såg ut som längre körtid).
+- [x] **Ny tvättad påstigandedata, hösten 2026** (beställaren 2026-11-02: den tidigare datan hade många fel; gör
+      om analysen på samma sätt). `data/raw/Databas_vardag_host.xlsx` (medelpåstigande per vardag per tur och
+      hållplats, linjerna N, S, V, Ö; 82 turer; med operatörens omlopp 204–209). `config.PASTIGANDE_XLSX`,
+      `LINJER_NY_DATA`; `data_las.pastigande()` matchar tur-ID mot GTFS och hållplats via namn; linje J ur Radata.
+      - **A1:** kontroll K1/K2 (`a1_kontroll_host.csv`): 93–98 % av centrumpåstigningarna på turens första
+        hållplats (landsbygd 95–99 %, sommar 0 %), startsegment N 0,24 / S 0,21 (kontroll 0,30) → registreringsfelet
+        borta, ingen centrumkorrigering (S4 skulle flytta bara 6–8 %). 321 påstigande/vardag (≈ 3 × sommaren).
+        OD 31,7 / 29,6 resor/h, 66 % via centrum (sommar korrigerad 63 %). Gamla S4-matrisen sparad som
+        `a1_od_*_sommar.csv`. Rapport A1 omskriven (sommardatan som bakgrund), figurer a1_1, a1_3–a1_5.
+      - **A3:** 11 kandidater för indragning (S: Torggatan, Stadshuset, Hamngatan, Skillnadsgatan, Östra
+        Esplanadgatan, Neptunigatan, Gröna Udden; N: Elverksgatan, Idrottsgården; V: Åbrinken; V/Ö: Savoy), 6 bör
+        prövas. Sommarundantagen gäller bara hållplatser utan linje i höstdatan (J).
+      - **B4:** dagens omlopp = operatörens (`b4_omlopp.omlopp_operator`, `b4_omlopp_operator.csv`, figur b4_1).
+        Avvikelser mot härledda: V 08:20 → Ö 08:45 utan uppehåll, V 10:20 → S 10:50 efter 3 min; 6 omlopp i trafik
+        16:40–16:43 (ramen 5 fordon). `vand_ok` jämför vändtid per tur mot i dag. **UA 1a, 1b och 4: 15/20**
+        (ej V 07:50, 08:20, 10:20, 13:40, 14:40); **16/20 med S 10:50 i omlopp 204** (`FLYTTA_JUST`, scenario
+        `VO_just`); **UA 4Y 7/8** (8/8 med S 10:50 flyttad); 4 + Solberget 16/20. Solberget ≈ 16 påstigande/vardag.
+        Restid 1a +23, 1b +11, 4 +25 resenärsmin/vardag. Kostnad 1a ★ +10,9 k€, 1b ★ +6,2 k€, 4 ★ +6,0 k€,
+        4Y +2,5 k€. Rapporter A1, A3, B4, B5, PM, GIS (lager `a1_od_*_host`, `_sommar`) uppdaterade.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
@@ -140,15 +160,16 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
    som basfall? Korrigerad matris (63 % av resorna via centrum) blir underlag för B4–B5.
 2. **Svag faktisk tillgänglighet (A2):** gränsen sattes till < 30 avgångar per vardag (sämre än halvtimmestrafik).
 3. **Hållplatskriterier (A3):** lågt påstigande < 0,1/vardag, lucka efter indragning ≤ 600 m, < 25 inv. förlorar
-   täckning. Påstigandet är sommardata – indragning föreslås först efter kontroll med terminsdata.
+   täckning. Påstigandet är sedan 2026-11-02 den tvättade höstdatan (terminstid); linje J fortfarande sommardata.
 4. ~~**Fas B, utredningsalternativ:**~~ (beställaren valde UA 2026-10-14, se Fas B) – utgå från områdena i `a3_behov_ny_linjestrackning.csv` (norr/nordost mellan linje N
    och Ö, Möckelö Strand, Dalkullavägen) och körtidsutrymmet från indragna hållplatser på linje S/V.
-   Omloppsverifiering kräver omloppsdata (block) – GTFS saknar block_id; härleds ur tidtabellen i B4.
+   Omloppsverifiering: GTFS saknar block_id; operatörens omlopp finns i den tvättade höstdatan (från 2026-11-02).
 
 ## Underlag (inventerat i A0)
 | Underlag | Fil | Kommentar |
 |---|---|---|
-| Påstigandedata | `Analys_resemönster.xlsx` (flik Radata) | Valideringar per tur/hållplats/biljettyp, 2026-05-08 – 2026-09-14 (121 dagar, 92 vardagar). Sommarperiod. |
+| Påstigandedata, höst (tvättad) | `data/raw/Databas_vardag_host.xlsx` | Medelpåstigande per vardag per tur och hållplats, linjerna N, S, V, Ö, med operatörens omlopp. Underlag från 2026-11-02. |
+| Påstigandedata, sommar | `Analys_resemönster.xlsx` (flik Radata) | Valideringar per tur/hållplats/biljettyp, 2026-05-08 – 2026-09-14 (121 dagar, 92 vardagar). Används nu bara för linje J och som jämförelse. |
 | OD-matris FM/EM | `data/raw/Analys_resemonster_OD.xlsx` | Dubbelt begränsad gravitationsmodell (β = 0,1), 83 hållplatsområden. Kopierad hit från uppladdad fil. |
 | GTFS | `gtfs_latest/` | Ålands landskapsregering, giltig fr.o.m. 2026-08-18. Stadslinjer J, N, S, Ö, V (route_id 11–15). Saknar shapes.txt. |
 | Befolkning | `Befolkning/Befolk_2024.shp` | 154 rutor 1×1 km, EPSG:3067, 17 697 invånare. |

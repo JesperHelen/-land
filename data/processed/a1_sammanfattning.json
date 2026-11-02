@@ -220,5 +220,91 @@
    "Ålandsplan"
   ]
  },
+ "host": {
+  "kalla": "Databas vardag höst 2026 (tvättad), linjerna N, S, V och Ö; linje J ur sommardatan",
+  "pastigande_vardag": 320.948723317745,
+  "pastigande_vardag_per_linje": {
+   "J": 21.5,
+   "N": 103.86,
+   "S": 73.84,
+   "V": 30.0,
+   "Ö": 91.74
+  },
+  "pastigande_vardag_per_linje_period": {
+   "J_EM": 7.98,
+   "J_FM": 9.37,
+   "N_EM": 29.61,
+   "N_FM": 19.86,
+   "S_EM": 18.93,
+   "S_FM": 25.83,
+   "V_EM": 8.33,
+   "V_FM": 7.14,
+   "Ö_EM": 24.08,
+   "Ö_FM": 33.03
+  },
+  "sommar_pastigande_vardag_per_linje": {
+   "J": 21.5,
+   "N": 32.97,
+   "S": 20.64,
+   "V": 8.91,
+   "Ö": 20.61
+  },
+  "turer_med_data": 82,
+  "kontroll": [
+   {
+    "linje": "N",
+    "pastigande_vardag": 103.857,
+    "centrum_forsta_hpl_andel": 0.934,
+    "kvot_FM": 0.626,
+    "kvot_EM": 0.194,
+    "kvot_dygn": 0.239
+   },
+   {
+    "linje": "S",
+    "pastigande_vardag": 73.844,
+    "centrum_forsta_hpl_andel": 0.928,
+    "kvot_FM": 0.0,
+    "kvot_EM": 0.24,
+    "kvot_dygn": 0.205
+   },
+   {
+    "linje": "V",
+    "pastigande_vardag": 30.003,
+    "centrum_forsta_hpl_andel": 0.927,
+    "kvot_FM": 0.0,
+    "kvot_EM": 0.043,
+    "kvot_dygn": 0.024
+   },
+   {
+    "linje": "Ö",
+    "pastigande_vardag": 91.744,
+    "centrum_forsta_hpl_andel": 0.976,
+    "kvot_FM": 0.0,
+    "kvot_EM": 0.0,
+    "kvot_dygn": 0.0
+   }
+  ],
+  "nyckeltal": {
+   "FM": {
+    "resor_h": 31.74052795031055,
+    "andel_O_centrum": 0.19451757325512412,
+    "andel_D_centrum": 0.46331559636550845,
+    "andel_resor_via_centrum": 0.6578331696206325,
+    "andel_gangpar": 0.0
+   },
+   "EM": {
+    "resor_h": 29.64526870070349,
+    "andel_O_centrum": 0.46331559636550845,
+    "andel_D_centrum": 0.19451757325512412,
+    "andel_resor_via_centrum": 0.6578331696206325,
+    "andel_gangpar": 0.0
+   }
+  },
+  "andel_centrum_om_s4_tillampades": {
+   "FM": 0.07730254403002892,
+   "EM": 0.05907277834803864
+  }
+ },
+ "pastigande_vardag": 320.948723317745,
  "bussbyte_centrum_andel_av_centrum": 0.022039298990971852
 }

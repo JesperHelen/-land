@@ -84,55 +84,55 @@
   },
   {
    "scenario": "1a_VO",
-   "namn": "UA 1a ★ dagens vägar – V och Ö sammanslagna (16 av 20 turer)",
+   "namn": "UA 1a ★ dagens vägar – V och Ö sammanslagna (15 av 20 turer)",
    "delta_fordon": 0,
-   "delta_fordonstimmar_ar": 28,
-   "delta_km_ar": 11414,
+   "delta_fordonstimmar_ar": 25,
+   "delta_km_ar": 10703,
    "nya_hallplatser": 1,
    "ny_tackning_inv": 179,
    "battre_inv": 179,
    "fordon_låg": 0,
-   "tid_låg": 1155,
-   "km_låg": 7990,
-   "drift_ar_låg": 9145,
+   "tid_låg": 1050,
+   "km_låg": 7492,
+   "drift_ar_låg": 8542,
    "investering_låg": 8000,
    "fordon_bas": 0,
-   "tid_bas": 1375,
-   "km_bas": 10272,
-   "drift_ar_bas": 11647,
+   "tid_bas": 1250,
+   "km_bas": 9633,
+   "drift_ar_bas": 10883,
    "investering_bas": 15000,
    "fordon_hög": 0,
-   "tid_hög": 1595,
-   "km_hög": 13696,
-   "drift_ar_hög": 15291,
+   "tid_hög": 1450,
+   "km_hög": 12844,
+   "drift_ar_hög": 14294,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 65
+   "drift_per_battre_inv_bas": 61
   },
   {
    "scenario": "1b",
-   "namn": "UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna (16 av 20 turer)",
+   "namn": "UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna (15 av 20 turer)",
    "delta_fordon": 0,
-   "delta_fordonstimmar_ar": 12,
-   "delta_km_ar": 6706,
+   "delta_fordonstimmar_ar": 10,
+   "delta_km_ar": 6285,
    "nya_hallplatser": 1,
    "ny_tackning_inv": 179,
    "battre_inv": 179,
    "fordon_låg": 0,
-   "tid_låg": 525,
-   "km_låg": 4694,
-   "drift_ar_låg": 5219,
+   "tid_låg": 420,
+   "km_låg": 4400,
+   "drift_ar_låg": 4820,
    "investering_låg": 8000,
    "fordon_bas": 0,
-   "tid_bas": 625,
-   "km_bas": 6035,
-   "drift_ar_bas": 6660,
+   "tid_bas": 500,
+   "km_bas": 5657,
+   "drift_ar_bas": 6157,
    "investering_bas": 15000,
    "fordon_hög": 0,
-   "tid_hög": 725,
-   "km_hög": 8047,
-   "drift_ar_hög": 8772,
+   "tid_hög": 580,
+   "km_hög": 7542,
+   "drift_ar_hög": 8122,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 37
+   "drift_per_battre_inv_bas": 34
   },
   {
    "scenario": "2",
@@ -214,29 +214,29 @@
   },
   {
    "scenario": "4_VO",
-   "namn": "UA 4 ★ flygplatsen – V och Ö sammanslagna (16 av 20 turer)",
+   "namn": "UA 4 ★ flygplatsen – V och Ö sammanslagna (15 av 20 turer)",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 22,
-   "delta_km_ar": 5812,
+   "delta_km_ar": 5444,
    "nya_hallplatser": 1,
    "ny_tackning_inv": 20,
    "battre_inv": 20,
    "fordon_låg": 0,
    "tid_låg": 945,
-   "km_låg": 4068,
-   "drift_ar_låg": 5013,
+   "km_låg": 3811,
+   "drift_ar_låg": 4756,
    "investering_låg": 8000,
    "fordon_bas": 0,
    "tid_bas": 1125,
-   "km_bas": 5231,
-   "drift_ar_bas": 6356,
+   "km_bas": 4900,
+   "drift_ar_bas": 6025,
    "investering_bas": 15000,
    "fordon_hög": 0,
    "tid_hög": 1305,
-   "km_hög": 6974,
-   "drift_ar_hög": 8279,
+   "km_hög": 6533,
+   "drift_ar_hög": 7838,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 318
+   "drift_per_battre_inv_bas": 301
   },
   {
    "scenario": "4_VO_sol",
@@ -266,58 +266,58 @@
   },
   {
    "scenario": "4_Y",
-   "namn": "UA 4Y flygturerna (8 av 8), V och Ö sammanslagna",
+   "namn": "UA 4Y flygturerna (7 av 8), V och Ö sammanslagna",
    "delta_fordon": 0,
    "delta_fordonstimmar_ar": 0,
-   "delta_km_ar": 3109,
+   "delta_km_ar": 2739,
    "nya_hallplatser": 1,
    "ny_tackning_inv": 20,
    "battre_inv": 20,
    "fordon_låg": 0,
    "tid_låg": 0,
-   "km_låg": 2176,
-   "drift_ar_låg": 2176,
+   "km_låg": 1917,
+   "drift_ar_låg": 1917,
    "investering_låg": 8000,
    "fordon_bas": 0,
    "tid_bas": 0,
-   "km_bas": 2798,
-   "drift_ar_bas": 2798,
+   "km_bas": 2465,
+   "drift_ar_bas": 2465,
    "investering_bas": 15000,
    "fordon_hög": 0,
    "tid_hög": 0,
-   "km_hög": 3731,
-   "drift_ar_hög": 3731,
+   "km_hög": 3287,
+   "drift_ar_hög": 3287,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 140
+   "drift_per_battre_inv_bas": 123
   }
  ],
  "break_even_vagforlangning": {
   "låg": {
-   "merkostnad_1a_jfr_1b_per_ar": 169897,
-   "nuvarde_eur": 2414645
+   "merkostnad_1a_jfr_1b_per_ar": 170296,
+   "nuvarde_eur": 2420315
   },
   "bas": {
-   "merkostnad_1a_jfr_1b_per_ar": 209192,
-   "nuvarde_eur": 2973121
+   "merkostnad_1a_jfr_1b_per_ar": 209695,
+   "nuvarde_eur": 2980270
   },
   "hög": {
-   "merkostnad_1a_jfr_1b_per_ar": 249244,
-   "nuvarde_eur": 3542356
+   "merkostnad_1a_jfr_1b_per_ar": 249894,
+   "nuvarde_eur": 3551594
   }
  },
  "break_even_vagforlangning_vo": {
   "låg": {
-   "merkostnad_1a_VO_jfr_1b_per_ar": 3926,
-   "nuvarde_eur": 55798
+   "merkostnad_1a_VO_jfr_1b_per_ar": 3722,
+   "nuvarde_eur": 52899
   },
   "bas": {
-   "merkostnad_1a_VO_jfr_1b_per_ar": 4987,
-   "nuvarde_eur": 70877
+   "merkostnad_1a_VO_jfr_1b_per_ar": 4726,
+   "nuvarde_eur": 67168
   },
   "hög": {
-   "merkostnad_1a_VO_jfr_1b_per_ar": 6519,
-   "nuvarde_eur": 92651
+   "merkostnad_1a_VO_jfr_1b_per_ar": 6172,
+   "nuvarde_eur": 87719
   }
  },
- "turer_1b": "16 av 20"
+ "turer_1b": "15 av 20"
 }

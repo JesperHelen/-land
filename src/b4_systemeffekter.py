@@ -345,19 +345,20 @@ def fig_vo(res, fid='1a'):
     tot = fs[fid]['linjens_turer']
     if fid == '1a':
         b = fs['1b']['omlopp']
-        rad = [('UA 1a ★ V och Ö sammanslagna', o['VO'], tot), ('UA 1a dagens tidtabell', o['ryms'], tot),
-               ('UA 1a alla turer (utesluten)', o['alla'], tot),
-               ('UA 1b ★ V och Ö sammanslagna', b['VO'], tot), ('UA 1b alla turer', b['alla'], tot),
+        rad = [('UA 1a ★ V och Ö sammanslagna', o['VO'], tot), ('UA 1a dito, S 10:50 i omlopp 204', o['VO_just'], tot),
+               ('UA 1a dagens tidtabell', o['ryms'], tot), ('UA 1a alla turer (utesluten)', o['alla'], tot),
+               ('UA 1b ★ V och Ö sammanslagna', b['VO'], tot), ('UA 1b dito, S 10:50 i omlopp 204', b['VO_just'], tot),
+               ('UA 1b alla turer', b['alla'], tot),
                ('UA 1b känslighet +3,5 min', b['konservativ_VO'], tot)]
         rubrik2, ny = 'Möckelö Strand ny utan fler bussar', 'ny hållplats'
     else:
         ny_ = len(json.load(open(P / 'b4_ua.json', encoding='utf-8'))['flygplatsen']['flygturer'])
-        rad = [('UA 4 ★ V och Ö sammanslagna', o['VO'], tot), ('UA 4 dito + Solberget indragen', o['VO_sol'], tot),
+        rad = [('UA 4 ★ V och Ö sammanslagna', o['VO'], tot), ('UA 4 dito, S 10:50 i omlopp 204', o['VO_just'], tot),
+               ('UA 4 dito + Solberget indragen', o['VO_sol'], tot),
                ('UA 4 dagens tidtabell', o['ryms'], tot), ('UA 4 alla turer (utesluten)', o['alla'], tot),
-               ('UA 4Y V och Ö sammanslagna', o['Y_VO'], ny_), ('UA 4Y dito + Solberget indragen', o['Y_VO_sol'], ny_),
+               ('UA 4Y V och Ö sammanslagna', o['Y_VO'], ny_), ('UA 4Y dito, S 10:50 i omlopp 204', o['Y_VO_just'], ny_),
+               ('UA 4Y dito + Solberget indragen', o['Y_VO_sol'], ny_),
                ('UA 4Y dagens tidtabell', o['Y_ryms'], ny_)]
-        rad += [(f'Känslighet {sv(float(k.split("_")[1]), 0)} min, sammanslagna', o[k], tot)
-                for k in o if k.startswith('kansl_')]
         rubrik2, ny = 'Flygplatsen utan fler bussar', 'flygplatsen'
     def cmin(r):
         c = centrum_andrade(r[1])
@@ -380,8 +381,9 @@ def fig_vo(res, fid='1a'):
             ce.get_text().set_color(SAMRE)
     ax2.text(0.0, 0.06, f"Minsta tid i centrum bland varven där V-turen ändras; kravet är minst {sv(M, 0)} min, helst "
              f"{sv(O.MARGINAL_VARV_ONSKAD, 0)}\n(röd text: uppfylls inte eller kräver fler bussar). Ö startar när V har kommit "
-             "tillbaka. I dag har varvet\nV 07:50 + Ö 08:20 (skoltur 29 min) 4 min.\n"
-             "De V-turer som inte ryms följs av Ö:s skolturer (28–29 min) eller fortsätter som linje N (V 08:20).\n"
+             "tillbaka. I dag (operatörens omlopp) har varvet\nV 07:50 + Ö 08:20 (skoltur 29 min) 4 min, och V 08:20 vänder "
+             "direkt till Ö 08:45.\nDe V-turer som inte ryms följs av Ö:s skolturer (28–29 min), vänder direkt (V 08:20)\n"
+             "eller fortsätter som linje S (V 10:20). Med S 10:50 i omlopp 204 (står i centrum 10:16–11:20) ryms V 10:20.\n"
              + ("Turer utan ändring kör till Möckelö Strand som i dag." if fid == '1a' else
                 "Turer utan ändring kör som i dag (utan flygplatsen). Y: 8 turer kring flygen 11:00 och 17:10\n"
                 "(ankomsttider antagna). 07:15-flyget nås inte (första V-turen 07:36)."),
@@ -693,7 +695,8 @@ def fig_kanslighet_ua4():
            f"Exempel 6 min omväg (B): Solberget behåller {d6.at['B', 'solberget_avgangar']} (alla turer) respektive "
            f"{y6.at['B', 'solberget_avgangar']} (UA 4Y) av 20 avgångar; {d6.at['B', 'solberget_samre_klass_inv']} invånare "
            "får lägre turtäthetsklass, ingen förlorar hållplatsen inom 400 m. "
-           "De turer som alltid ryms följs av uppställning eller dagens slut (V 09:50, 10:20, 17:10, 20:40).")
+           "\nDe 6 turer som ryms även med 7,5–8 min omväg har i dag 13–20 min i centrum per varv (V 13:10, 14:10, 15:40) eller följs "
+           "av uppställning eller dagens slut (V 09:50, 17:10, 20:40).")
     fig.text(0.01, 0.075, txt, fontsize=7.4, color=K.TEXT, va='top', linespacing=1.5)
     fig.suptitle('UA 4 – känslighet: omvägens körtid, kravet på varvet och Solberget indraget där det behövs',
                  x=0.01, ha='left', fontsize=12, fontweight='bold')

@@ -49,30 +49,37 @@ def cirkel_forklaring(ax, vmax, rmax, varden, enhet, farg='#3987e5', kant='#184f
 
 # ---------------------------------------------------------------- figur 1: registreringsdiagnos (diagram)
 def fig_registrering():
+    """Vänster: andel av påstigningarna vid ändhållplatsen som registreras på turens första hållplats – sommardatan
+    (stads- och landsbygdslinjer) och den tvättade höstdatan. Höger: startsegmentets kvot mot kontrollgruppen."""
     d1 = pd.read_csv(P / 'a1_d1_registreringsposition.csv')
     R = pd.read_csv(P / 'a1_d2_benchmark_landsbygd.csv')
     o = pd.read_csv(P / 'a1_d2_startsegment_stad.csv')
-    fig, (a, b) = plt.subplots(1, 2, figsize=(10, 4.3), gridspec_kw={'width_ratios': [1.15, 1]})
-    d1 = d1.sort_values(['grupp', 'linje'], ascending=[True, True]).reset_index(drop=True)
-    y = np.arange(len(d1))[::-1]
-    a.barh(y, d1.andel_forsta_hpl * 100, color='#59A14F', height=0.62, label='Registrerad som turens första hållplats')
-    a.barh(y, d1.andel_sista_hpl * 100, left=d1.andel_forsta_hpl * 100, color='#E15759', height=0.62,
-           label='Registrerad som turens sista hållplats')
-    a.set_yticks(y, [f"{'Stadslinje' if g == 'Stadslinje' else 'Landsbygd'} {l}" for g, l in zip(d1.grupp, d1.linje)])
-    a.set_xlim(0, 100); a.set_xlabel('Andel av påstigningarna vid ändhållplatsen (%)')
-    a.set_title('Registrering av påstigning vid ändhållplatsen', loc='left', fontsize=10)
-    a.legend(loc='upper center', bbox_to_anchor=(0.45, -0.13), ncol=2, fontsize=7, frameon=False)
+    kh = pd.read_csv(P / 'a1_kontroll_host.csv')
+    fig, (a, b) = plt.subplots(1, 2, figsize=(10.6, 4.6), gridspec_kw={'width_ratios': [1.1, 1]})
+    d1 = d1.sort_values(['grupp', 'linje']).reset_index(drop=True)
+    rad = [(f"Landsbygd {r.linje}", r.andel_forsta_hpl, '#7a776f') for r in d1[d1.grupp != 'Stadslinje'].itertuples()]
+    rad += [(f"Linje {r.linje} – sommar", r.andel_forsta_hpl, '#E15759') for r in d1[d1.grupp == 'Stadslinje'].itertuples()]
+    rad += [(f"Linje {r.linje} – höst (tvättad)", r.centrum_forsta_hpl_andel, '#59A14F') for r in kh.itertuples()]
+    y = np.arange(len(rad))[::-1]
+    a.barh(y, [100 * v for _, v, _ in rad], color=[f for _, _, f in rad], height=0.62)
+    for yy, (_, v, _) in zip(y, rad):
+        a.text(100 * v + 1.5, yy, f'{100 * v:.0f} %', va='center', fontsize=6.6, color=K.TEXT)
+    a.set_yticks(y, [n for n, _, _ in rad], fontsize=7.2)
+    a.set_xlim(0, 112); a.set_xlabel('Andel registrerad som turens första hållplats (%)')
+    a.set_title('Påstigning vid ändhållplatsen: registrerad på rätt tur?', loc='left', fontsize=10)
     for sp in ['top', 'right']:
         a.spines[sp].set_visible(False)
-    oo = o[(o.k_hpl == 3) & o.period.isin(['FM', 'EM'])]
-    lin = ['Landsbygd\n(kontroll)'] + list(C.STADSLINJER)
-    x = np.arange(len(lin)); w = 0.36
-    for k, (per, f) in enumerate([('FM', '#4E79A7'), ('EM', '#F28E2B')]):
-        vals = [float(R[(R.k_hpl == 3) & (R.period == per)].R.iat[0])] + \
-               [float(oo[(oo.linje == l) & (oo.period == per)].kvot_obs.iat[0]) if l in set(oo.linje) else 0 for l in C.STADSLINJER]
-        b.bar(x + (k - 0.5) * w, vals, width=w, color=f, label=per)
-    b.set_xticks(x, [l if '\n' in l else f'Linje {l}' for l in lin])
-    b.set_ylabel('Påstigande startsegment / ändhållplats')
+    oo = o[(o.k_hpl == 3) & (o.period == 'dygn')]
+    lin = [l for l in C.STADSLINJER if l in set(kh.linje)]
+    x = np.arange(len(lin) + 1); w = 0.38
+    rb = float(R[(R.k_hpl == 3) & (R.period == 'dygn')].R.iat[0])
+    b.bar(0, rb, width=w, color='#7a776f', label='Kontrollgrupp (landsbygd)')
+    b.bar(x[1:] - w / 2, [float(oo[oo.linje == l].kvot_obs.iat[0]) if l in set(oo.linje) else 0 for l in lin], width=w,
+          color='#E15759', label='Sommar')
+    b.bar(x[1:] + w / 2, [float(kh[kh.linje == l].kvot_dygn.iat[0]) for l in lin], width=w, color='#59A14F',
+          label='Höst (tvättad)')
+    b.set_xticks(x, ['Landsbygd\n(kontroll)'] + [f'Linje {l}' for l in lin])
+    b.set_ylabel('Påstigande startsegment / ändhållplats (dygn)')
     b.set_title('Påstigande på de 3 första hållplatserna efter\nändhållplatsen, i förhållande till ändhållplatsen', loc='left', fontsize=10)
     b.legend(fontsize=7, frameon=False)
     for sp in ['top', 'right']:
@@ -107,20 +114,20 @@ def fig_omfordelning():
 
 # ---------------------------------------------------------------- figur 3: påstigande före/efter (karta)
 def fig_pastigande():
-    fore = zon['O_FM_orig'] + zon['O_EM_orig']
-    efter = zon['O_FM_korr'] + zon['O_EM_korr']
+    fore = zon['O_FM_korr'] + zon['O_EM_korr']
+    efter = zon['O_FM_host'] + zon['O_EM_host']
     vmax = max(fore.max(), efter.max())
     fig, axs = plt.subplots(1, 2, figsize=(10.4, 10.2))
-    for ax, v, t in [(axs[0], fore, 'Ursprungligt underlag'), (axs[1], efter, 'Korrigerat underlag')]:
+    for ax, v, t in [(axs[0], fore, 'Sommardata (korrigerad)'), (axs[1], efter, 'Höstdata (tvättad)')]:
         K.ny_karta('tatort', ax=ax, titel=t)
         K.rita_linjer(ax, alpha=0.45, lw=1.3, zorder=3)
         cirklar(ax, v, vmax, 520, etiketter=8)
-        cirkel_forklaring(ax, vmax, 520, [5, 2, 0.5], 'resor/h, FM + EM', loc=(0.06, 0.09))
+        cirkel_forklaring(ax, vmax, 520, [10, 4, 1], 'resor/h, FM + EM', loc=(0.06, 0.09))
         K.ram(ax)
-    axs[0].text(0.02, 0.975, 'Linje Ö ingår ej (filterfel)', transform=axs[0].transAxes, fontsize=7.5, va='top',
-                color='#c0392b', path_effects=K.HALO)
-    axs[1].text(0.02, 0.975, 'Linje Ö ingår, centrumöverskott omfördelat', transform=axs[1].transAxes, fontsize=7.5,
-                va='top', color='#1c5cab', path_effects=K.HALO)
+    axs[0].text(0.02, 0.975, f'Maj–sep 2026: {fore.sum():.1f} resor/h (FM + EM)'.replace('.', ','),
+                transform=axs[0].transAxes, fontsize=7.5, va='top', color=K.TEXT, path_effects=K.HALO)
+    axs[1].text(0.02, 0.975, f'Höst 2026: {efter.sum():.1f} resor/h (FM + EM); linje J ur sommardatan'.replace('.', ','),
+                transform=axs[1].transAxes, fontsize=7.5, va='top', color='#1c5cab', path_effects=K.HALO)
     fig.tight_layout()
     return K.spara(fig, 'a1_3_pastigande_fore_efter.png')
 
@@ -133,13 +140,13 @@ def urval(L, andel=0.85, maxn=260):
 
 
 def fig_od(per):
-    lev = pd.read_csv(P / f'a1_od_{per}_levererad.csv')
+    lev = pd.read_csv(P / f'a1_od_{per}_sommar.csv')
     kor = pd.read_csv(P / f'a1_od_{per}_korrigerad.csv')
     A, B = urval(lev), urval(kor)
     vmax = max(A.resor.max(), B.resor.max())
     namn = {'FM': 'förmiddag 06–09', 'EM': 'eftermiddag 15–18'}[per]
     fig, axs = plt.subplots(1, 2, figsize=(10.4, 10.2))
-    for ax, L, full, t in [(axs[0], A, lev, 'Levererad OD-matris'), (axs[1], B, kor, 'Korrigerad OD-matris')]:
+    for ax, L, full, t in [(axs[0], A, lev, 'OD-matris sommar (korrigerad)'), (axs[1], B, kor, 'OD-matris höst (tvättad data)')]:
         K.ny_karta('tatort', ax=ax, titel=f'{t}, {namn}')
         tot = full.resor_h.sum()
         odsum = full.groupby('fran').resor_h.sum().add(full.groupby('till').resor_h.sum(), fill_value=0)

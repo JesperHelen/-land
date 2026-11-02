@@ -7,6 +7,7 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 5,
    "turer": 93,
    "korttid_h": 42.45,
    "omloppstid_h": 61.43,
@@ -123,6 +124,7 @@
   "fler_bussar": true,
   "omlopp": {
    "fordon": 6,
+   "fordon_samtidigt": 6,
    "turer": 93,
    "korttid_h": 43.95,
    "omloppstid_h": 72.87,
@@ -205,12 +207,12 @@
    "1a": {
     "avgangar": 20,
     "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
+    "pastigande_vardag": 1.84
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 9.6,
-   "resor_langre_vardag": 2.1,
+   "resenarsminuter_vardag": 35.0,
+   "resor_langre_vardag": 7.8,
    "resor_kortare_vardag": 0.0
   },
   "namn": "UA 1a Möckelö Strand ny via dagens vägar – alla 20 turer, dagens tidtabell (6 bussar, utesluten)",
@@ -245,6 +247,7 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 5,
    "turer": 93,
    "korttid_h": 43.05,
    "omloppstid_h": 61.58,
@@ -327,12 +330,12 @@
    "1a": {
     "avgangar": 8,
     "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
+    "pastigande_vardag": 1.84
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 3.8,
-   "resor_langre_vardag": 2.1,
+   "resenarsminuter_vardag": 14.0,
+   "resor_langre_vardag": 7.8,
    "resor_kortare_vardag": 0.0
   },
   "namn": "UA 1a – dagens tidtabell, 8 av 20 turer",
@@ -367,25 +370,26 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 6,
    "turer": 93,
-   "korttid_h": 43.65,
-   "omloppstid_h": 61.54,
+   "korttid_h": 43.58,
+   "omloppstid_h": 61.53,
    "regleringstid_h": 6.97,
-   "uppstallning_h": 10.93,
-   "km": 1179.9,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 3,
+   "uppstallning_h": 11.0,
+   "km": 1177.2,
+   "min_vandtid": 0.0,
+   "vandningar_under_rek": 2,
    "varv_utan_reglering": 3,
-   "varv_vo_under_marginal": 1,
+   "varv_vo_under_marginal": 2,
    "varv_vo_under_onskad": 16,
-   "min_centrum_vo": 4.0,
-   "byten_enligt_norm": 75,
+   "min_centrum_vo": 3.0,
+   "byten_enligt_norm": 71,
    "samma_linje": 0,
-   "genomgangar": 75,
+   "genomgangar": 71,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer": 16,
+  "turer": 15,
   "turer_tot": 20,
   "solberget_indragen": false,
   "skiftade_turer": 14,
@@ -447,18 +451,18 @@
   },
   "nya_hallplatser": {
    "1a": {
-    "avgangar": 16,
+    "avgangar": 15,
     "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
+    "pastigande_vardag": 1.84
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 6.6,
-   "resor_langre_vardag": 2.1,
-   "resor_kortare_vardag": 0.5
+   "resenarsminuter_vardag": 22.8,
+   "resor_langre_vardag": 7.6,
+   "resor_kortare_vardag": 1.0
   },
-  "namn": "UA 1a – V och Ö sammanslagna, 16 av 20 turer (huvudalternativ)",
-  "kort": "UA 1a ★ V och Ö samman-\nslagna (16 av 20 turer)",
+  "namn": "UA 1a – V och Ö sammanslagna, 15 av 20 turer (huvudalternativ)",
+  "kort": "UA 1a ★ V och Ö samman-\nslagna (15 av 20 turer)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -476,9 +480,9 @@
   },
   "forandring_omlopp": {
    "fordon": 0,
-   "omloppstid_h": 0.11,
-   "korttid_h": 1.2,
-   "km": 43.4
+   "omloppstid_h": 0.1,
+   "korttid_h": 1.13,
+   "km": 40.7
   }
  },
  "1b": {
@@ -489,25 +493,26 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 6,
    "turer": 93,
-   "korttid_h": 43.12,
-   "omloppstid_h": 61.48,
+   "korttid_h": 43.08,
+   "omloppstid_h": 61.47,
    "regleringstid_h": 7.37,
-   "uppstallning_h": 10.99,
-   "km": 1162.0,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 3,
+   "uppstallning_h": 11.03,
+   "km": 1160.4,
+   "min_vandtid": 0.0,
+   "vandningar_under_rek": 2,
    "varv_utan_reglering": 3,
-   "varv_vo_under_marginal": 1,
+   "varv_vo_under_marginal": 2,
    "varv_vo_under_onskad": 14,
-   "min_centrum_vo": 4.0,
-   "byten_enligt_norm": 75,
+   "min_centrum_vo": 3.0,
+   "byten_enligt_norm": 71,
    "samma_linje": 0,
-   "genomgangar": 75,
+   "genomgangar": 71,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer": 16,
+  "turer": 15,
   "turer_tot": 20,
   "solberget_indragen": false,
   "skiftade_turer": 0,
@@ -569,18 +574,18 @@
   },
   "nya_hallplatser": {
    "1b": {
-    "avgangar": 16,
+    "avgangar": 15,
     "ny_tackning_inv": 179,
-    "pastigande_vardag": 0.48
+    "pastigande_vardag": 1.84
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 3.1,
-   "resor_langre_vardag": 2.1,
-   "resor_kortare_vardag": 0.5
+   "resenarsminuter_vardag": 11.2,
+   "resor_langre_vardag": 7.5,
+   "resor_kortare_vardag": 1.1
   },
-  "namn": "UA 1b Möckelö Strand ny via förlängd Norrgårdsvägen – V och Ö sammanslagna, 16 av 20 turer (huvudalternativ)",
-  "kort": "UA 1b ★ förlängd Norr-\ngårdsvägen, V + Ö (16 av 20)",
+  "namn": "UA 1b Möckelö Strand ny via förlängd Norrgårdsvägen – V och Ö sammanslagna, 15 av 20 turer (huvudalternativ)",
+  "kort": "UA 1b ★ förlängd Norr-\ngårdsvägen, V + Ö (15 av 20)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 179,
    "lyft_till_minst_30": 0,
@@ -598,9 +603,9 @@
   },
   "forandring_omlopp": {
    "fordon": 0,
-   "omloppstid_h": 0.05,
-   "korttid_h": 0.67,
-   "km": 25.5
+   "omloppstid_h": 0.04,
+   "korttid_h": 0.63,
+   "km": 23.9
   }
  },
  "2": {
@@ -611,6 +616,7 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 5,
    "turer": 93,
    "korttid_h": 42.62,
    "omloppstid_h": 61.44,
@@ -693,12 +699,12 @@
    "2": {
     "avgangar": 20,
     "ny_tackning_inv": 55,
-    "pastigande_vardag": 0.39
+    "pastigande_vardag": 2.09
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 1.1,
-   "resor_langre_vardag": 2.3,
+   "resenarsminuter_vardag": 7.5,
+   "resor_langre_vardag": 15.0,
    "resor_kortare_vardag": 0.0
   },
   "namn": "UA 2 N2 på linje Ö (huvudalternativ)",
@@ -733,6 +739,7 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 5,
    "turer": 93,
    "korttid_h": 42.49,
    "omloppstid_h": 61.43,
@@ -813,8 +820,8 @@
   },
   "nya_hallplatser": {},
   "resenarer": {
-   "resenarsminuter_vardag": 2.4,
-   "resor_langre_vardag": 7.4,
+   "resenarsminuter_vardag": 9.2,
+   "resor_langre_vardag": 26.6,
    "resor_kortare_vardag": 0.0
   },
   "namn": "UA 3 Linje N via Bo-Bil (huvudalternativ)",
@@ -849,6 +856,7 @@
   "fler_bussar": true,
   "omlopp": {
    "fordon": 6,
+   "fordon_samtidigt": 6,
    "turer": 93,
    "korttid_h": 43.78,
    "omloppstid_h": 72.83,
@@ -931,12 +939,12 @@
    "4": {
     "avgangar": 20,
     "ny_tackning_inv": 20,
-    "pastigande_vardag": 0.05
+    "pastigande_vardag": 0.2
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 11.6,
-   "resor_langre_vardag": 2.9,
+   "resenarsminuter_vardag": 38.2,
+   "resor_langre_vardag": 9.7,
    "resor_kortare_vardag": 0.0
   },
   "namn": "UA 4 Linje V till flygplatsen – alla 20 turer, dagens tidtabell (6 bussar, utesluten)",
@@ -971,25 +979,26 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 6,
    "turer": 93,
-   "korttid_h": 43.52,
+   "korttid_h": 43.45,
    "omloppstid_h": 61.52,
    "regleringstid_h": 7.07,
-   "uppstallning_h": 10.94,
-   "km": 1158.6,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 3,
+   "uppstallning_h": 11.01,
+   "km": 1157.2,
+   "min_vandtid": 0.0,
+   "vandningar_under_rek": 2,
    "varv_utan_reglering": 3,
-   "varv_vo_under_marginal": 1,
+   "varv_vo_under_marginal": 2,
    "varv_vo_under_onskad": 16,
-   "min_centrum_vo": 4.0,
-   "byten_enligt_norm": 75,
+   "min_centrum_vo": 3.0,
+   "byten_enligt_norm": 71,
    "samma_linje": 0,
-   "genomgangar": 75,
+   "genomgangar": 71,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer": 16,
+  "turer": 15,
   "turer_tot": 20,
   "solberget_indragen": false,
   "skiftade_turer": 14,
@@ -1051,18 +1060,18 @@
   },
   "nya_hallplatser": {
    "4": {
-    "avgangar": 16,
+    "avgangar": 15,
     "ny_tackning_inv": 20,
-    "pastigande_vardag": 0.05
+    "pastigande_vardag": 0.2
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 8.2,
-   "resor_langre_vardag": 2.9,
-   "resor_kortare_vardag": 0.5
+   "resenarsminuter_vardag": 25.5,
+   "resor_langre_vardag": 9.5,
+   "resor_kortare_vardag": 0.9
   },
-  "namn": "UA 4 Linje V–Ö via flygplatsen – V och Ö sammanslagna, 16 av 20 turer (huvudalternativ)",
-  "kort": "UA 4 ★ V och Ö samman-\nslagna (16 av 20 turer)",
+  "namn": "UA 4 Linje V–Ö via flygplatsen – V och Ö sammanslagna, 15 av 20 turer (huvudalternativ)",
+  "kort": "UA 4 ★ V och Ö samman-\nslagna (15 av 20 turer)",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 20,
    "lyft_till_minst_30": 0,
@@ -1081,8 +1090,8 @@
   "forandring_omlopp": {
    "fordon": 0,
    "omloppstid_h": 0.09,
-   "korttid_h": 1.07,
-   "km": 22.1
+   "korttid_h": 1.0,
+   "km": 20.7
   }
  },
  "4_VO_sol": {
@@ -1093,28 +1102,29 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 6,
    "turer": 93,
    "korttid_h": 42.77,
    "omloppstid_h": 61.48,
-   "regleringstid_h": 7.74,
-   "uppstallning_h": 10.98,
+   "regleringstid_h": 7.68,
+   "uppstallning_h": 11.04,
    "km": 1158.6,
    "min_vandtid": 0.5,
-   "vandningar_under_rek": 3,
+   "vandningar_under_rek": 2,
    "varv_utan_reglering": 1,
-   "varv_vo_under_marginal": 0,
+   "varv_vo_under_marginal": 1,
    "varv_vo_under_onskad": 14,
-   "min_centrum_vo": 5.0,
-   "byten_enligt_norm": 75,
+   "min_centrum_vo": 3.0,
+   "byten_enligt_norm": 71,
    "samma_linje": 0,
-   "genomgangar": 75,
+   "genomgangar": 71,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
   "turer": 16,
   "turer_tot": 20,
   "solberget_indragen": true,
-  "skiftade_turer": 14,
+  "skiftade_turer": 15,
   "tackning_mariehamn": {
    "befolkning": 14821,
    "Ingen hållplats inom 400 m": {
@@ -1175,13 +1185,13 @@
    "4": {
     "avgangar": 16,
     "ny_tackning_inv": 20,
-    "pastigande_vardag": 0.05
+    "pastigande_vardag": 0.2
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 0.0,
-   "resor_langre_vardag": 2.9,
-   "resor_kortare_vardag": 12.2
+   "resenarsminuter_vardag": -28.2,
+   "resor_langre_vardag": 9.4,
+   "resor_kortare_vardag": 81.2
   },
   "namn": "UA 4 – dito med Solberget indragen, 16 av 20 turer",
   "kort": "UA 4 dito + Solberget\nindragen (16 av 20)",
@@ -1215,25 +1225,26 @@
   "fler_bussar": false,
   "omlopp": {
    "fordon": 5,
+   "fordon_samtidigt": 6,
    "turer": 93,
-   "korttid_h": 42.98,
+   "korttid_h": 42.92,
    "omloppstid_h": 61.43,
    "regleringstid_h": 7.51,
-   "uppstallning_h": 10.94,
-   "km": 1147.5,
-   "min_vandtid": 0.5,
-   "vandningar_under_rek": 3,
+   "uppstallning_h": 11.01,
+   "km": 1146.2,
+   "min_vandtid": 0.0,
+   "vandningar_under_rek": 2,
    "varv_utan_reglering": 3,
-   "varv_vo_under_marginal": 1,
+   "varv_vo_under_marginal": 2,
    "varv_vo_under_onskad": 10,
-   "min_centrum_vo": 4.0,
-   "byten_enligt_norm": 75,
+   "min_centrum_vo": 3.0,
+   "byten_enligt_norm": 71,
    "samma_linje": 0,
-   "genomgangar": 75,
+   "genomgangar": 71,
    "forsta_avg": 410.0,
    "sista_ank": 1273.0
   },
-  "turer": 8,
+  "turer": 7,
   "turer_tot": 8,
   "solberget_indragen": false,
   "skiftade_turer": 7,
@@ -1295,18 +1306,18 @@
   },
   "nya_hallplatser": {
    "4": {
-    "avgangar": 8,
+    "avgangar": 7,
     "ny_tackning_inv": 20,
-    "pastigande_vardag": 0.05
+    "pastigande_vardag": 0.2
    }
   },
   "resenarer": {
-   "resenarsminuter_vardag": 3.6,
-   "resor_langre_vardag": 2.8,
-   "resor_kortare_vardag": 0.6
+   "resenarsminuter_vardag": 10.2,
+   "resor_langre_vardag": 8.9,
+   "resor_kortare_vardag": 1.5
   },
-  "namn": "UA 4Y – bara turerna för flygen (8 av 8), V och Ö sammanslagna",
-  "kort": "UA 4Y flygturerna\n(8 av 8), V + Ö",
+  "namn": "UA 4Y – bara turerna för flygen (7 av 8), V och Ö sammanslagna",
+  "kort": "UA 4Y flygturerna\n(7 av 8), V + Ö",
   "forandring_invanare_mariehamn": {
    "ny_tackning": 20,
    "lyft_till_minst_30": 0,
@@ -1325,8 +1336,8 @@
   "forandring_omlopp": {
    "fordon": 0,
    "omloppstid_h": 0.0,
-   "korttid_h": 0.53,
-   "km": 11.0
+   "korttid_h": 0.47,
+   "km": 9.7
   }
  }
 }

@@ -13,12 +13,13 @@ Nya hållplatser
     och redovisas som behov av ändrad linjesträckning (indata till kapitel 4).
   * För områden utom räckhåll redovisas ett indikativt hållplatsläge (befolkningsviktad tyngdpunkt).
 Överflödiga hållplatser (stadslinjernas hållplatsområden) – prövas en i taget, lägst påstigande först:
-  * Lågt påstigande (nödvändigt villkor): < 0,1 påstigande per vardag på stadslinjerna (92 vardagar).
+  * Lågt påstigande (nödvändigt villkor): < 0,1 påstigande per vardag på stadslinjerna (tvättad höstdata för
+    N, S, V och Ö; sommardata för linje J, data_las.pastigande).
   * Tät placering: avståndet mellan kvarvarande grannhållplatser på linjen blir högst 600 m efter indragning.
   * Liten unik täckning: < 25 invånare saknar annan busshållplats inom 400 m efter indragning.
   * Alla tre = kandidat för indragning; lågt påstigande + ett av de andra = bör prövas.
-  * Undantag: centrum, vändplatser, hållplatser i startsegmentet (påstigandet underskattat, se kap. 1) och
-    skol-/säsongshållplatser (mätperioden är sommar) blir högst 'bör prövas'.
+  * Undantag: centrum och vändplatser. Hållplatser som bara har sommardata (linje J) och ligger i startsegmentet
+    (påstigandet underskattat, se kap. 1) eller är skol-/säsongshållplatser blir högst 'bör prövas'.
 Utdata: data/processed/a3_*.csv/.gpkg/.json
 """
 import json
@@ -35,7 +36,6 @@ from scipy.spatial import cKDTree
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import config as C  # noqa: E402
 import data_las as D  # noqa: E402
-from a1_od_granskning import vardagsurval  # noqa: E402
 from a2_tackning import hallplatser_med_avgangar  # noqa: E402
 import s01_vagdragning as V  # noqa: E402
 
@@ -182,14 +182,10 @@ def main():
 
     # ---------------- överflödiga hållplatser (sekventiell prövning)
     om = D.hallplatsomraden()
-    s = vardagsurval(C.STADSLINJER)
-    past = s.groupby('omrade').P.sum() / C.ANTAL_VARDAGAR
+    s = D.pastigande()
+    past = s.groupby('omrade').P.sum()                       # påstigande per vardag (höst; linje J sommar)
     har_data = set(s.omrade)
     omr_av = {sid: om['omrade'].get(sid, g.loc[sid, 'stop_name']) for sid in hpl_xy}
-    try:
-        startseg = set(z for v in json.load(open(P / 'a1_sammanfattning.json'))['startsegment_bas'].values() for z in v)
-    except Exception:
-        startseg = set()
     sekvenser = [[(omr_av.get(sid), hpl_xy[sid]) for sid in m['monster'] if sid in hpl_xy] for m in monster]
     linjer_omr, xy_omr = {}, {}
     for m in monster:
@@ -199,6 +195,13 @@ def main():
                 xy_omr.setdefault(omr_av.get(sid), []).append(hpl_xy[sid])
     alla_omr = np.array([omr_av.get(sid) for sid in alla.index])
     stad_omr = set(linjer_omr)
+    # bara sommardata: hållplatser som inte trafikeras av någon linje i höstdatan (i praktiken bara linje J)
+    bara_sommar = {z for z, l in linjer_omr.items() if not (l & set(C.LINJER_NY_DATA))}
+    try:
+        startseg = set(z for v in json.load(open(P / 'a1_sammanfattning.json'))['startsegment_bas'].values() for z in v) \
+            & bara_sommar
+    except Exception:
+        startseg = set()
 
     def lucka(z, borttagna):
         """Största avstånd mellan kvarvarande grannar runt z (på alla mönster där z ingår)."""
@@ -233,11 +236,11 @@ def main():
         L = lucka(z, borttagna); U = unik_tackning(z, borttagna)
         k2, k3 = L <= MAX_LUCKA_M, U < UNIK_MAX
         undantag = z == C.CENTRUM or 'vändplan' in z.lower()
-        sasong = any(w in z.lower() for w in SASONG)
+        sasong = any(w in z.lower() for w in SASONG) and z in bara_sommar
         if undantag:
             bed = 'Undantas (ändhållplats/vändplats)'
-        elif z not in har_data:
-            bed = 'Saknar påstigningsdata'
+        elif z not in har_data and not (linjer_omr.get(z, set()) & set(C.LINJER_NY_DATA)):
+            bed = 'Saknar påstigningsdata'            # höstdatan saknar rader för hållplatser utan påstigande (= 0)
         elif lag and k2 and k3 and not (z in startseg or sasong):
             bed = 'Kandidat för indragning'; borttagna.add(z)
         elif lag and (k2 or k3):

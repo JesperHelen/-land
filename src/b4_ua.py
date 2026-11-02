@@ -49,7 +49,7 @@ Effekter
   * Täckning: delpunkter 50 m (A2) – avgångar inom 400 m före/efter, klassförändring.
   * Resenärer: korrigerad OD-matris (A1) utlagd på restidsnätet (b4_natverk.py) – berörda resor och
     resenärsminuter; omräknat till vardag med kvoten påstigande/vardag ÷ OD-resor/h.
-  * Tillkommande påstigande: påstigande per invånare inom 400 m vid linjens bostadshållplatser (sommardata).
+  * Tillkommande påstigande: påstigande per invånare inom 400 m vid linjens bostadshållplatser (tvättad höstdata 2026).
 Utdata: data/processed/b4_ua.json, b4_omlopp_scenarier.csv, b4_tackning_ua.csv.gz, b4_ua.gpkg
 """
 import json
@@ -256,25 +256,29 @@ def omlopp_scenarier(f, t, r, ref):
         berorda = list(linjeturer.trip_id)
     scen = {}
 
-    plan0 = O.bygg_omlopp(t, referens=ref)                    # dagens omlopp – fast vid genomgående linje V–Ö
+    plan0 = O.omlopp_operator(t)                              # dagens omlopp (operatörens) – fast vid linje V–Ö
+    plan_j = O.omlopp_operator(t, flytta=FLYTTA_JUST)          # variant: S 10:50 i omlopp 204 i stället för 209
     v_regel = f['linje'] == 'V'                                # linje V: kravet på tid i centrum per varv V + Ö
-    vv = plan0 if v_regel else None
+    vv = O.bygg_omlopp(t, referens=ref) if v_regel else None
 
-    def kor(namn, valda, d, skift=None, bas=None, vo=False):
+    def kor(namn, valda, d, skift=None, bas=None, vo=False, fast=None):
         dd = dict(bas or {})
         for k in valda:
             dd[k] = dd.get(k, 0.0) + d
+        fast = fast if fast is not None else (plan0 if vo else None)
         plan, nt, ok = O.verifiera(t, dd, r, km_delta={k: f['km_tur'] for k in valda}, skift=skift, referens=ref,
-                                   fast=plan0 if vo else None)
+                                   fast=fast)
         if v_regel and not vo:
-            ok = ok and O.varv_ok(plan, plan0)
-        rob = (nt['varv_vo_under_marginal'] <= O.nyckeltal(plan0)['varv_vo_under_marginal']) if v_regel else O.ar_robust(nt, r)
+            ok = ok and O.varv_ok(plan, vv)
+        rob = (nt['varv_vo_under_marginal'] <= O.nyckeltal(fast if fast is not None else vv)['varv_vo_under_marginal']) \
+            if v_regel else O.ar_robust(nt, r)
         scen[namn] = {'plan': plan, 'nt': nt, 'ok': ok, 'robust': rob, 'turer': list(valda), 'vo': vo,
                       'skift': dict(skift or {}), 'delta': d, 'solberget': bool(bas)}
 
-    def vo(namn, kand, d, bas=None):
-        v, s_ = O.genomgaende_ryms(t, kand, d, plan0, bas=bas)
-        kor(namn, v, d, s_, bas=bas, vo=True)
+    def vo(namn, kand, d, bas=None, plan=None):
+        plan = plan0 if plan is None else plan
+        v, s_ = O.genomgaende_ryms(t, kand, d, plan, bas=bas)
+        kor(namn, v, d, s_, bas=bas, vo=True, fast=plan)
 
     def pröva(prefix, d):
         p = prefix + '_' if prefix else ''
@@ -286,6 +290,8 @@ def omlopp_scenarier(f, t, r, ref):
             kor(p + 'robust', O.turer_som_ryms(t, berorda, d, r, robust=True, referens=ref), d)
         if f['linje'] == 'V':
             vo(p + 'VO', berorda, d)
+            if not prefix:
+                vo('VO_just', berorda, d, plan=plan_j)
 
     pröva('', f['delta'])
     if f.get('delta_konservativ'):
@@ -296,6 +302,7 @@ def omlopp_scenarier(f, t, r, ref):
         y = list(flygturer(t))
         kor('Y_ryms', O.turer_som_ryms(t, y, f['delta'], r, varv=vv, referens=ref), f['delta'])
         vo('Y_VO', y, f['delta'])
+        vo('Y_VO_just', y, f['delta'], plan=plan_j)
         vo('Y_VO_sol', y, f['delta'], solberget_delta(t))
     for d in f.get('kansl', []):                               # känslighet för körtiden (V och Ö sammanslagna)
         vo(f'kansl_{d:g}_VO', berorda, d)
@@ -310,6 +317,7 @@ def drift(f, scen):
     return 'alla' if scen['alla']['ok'] else ('VO' if 'VO' in scen else 'ryms')
 
 
+FLYTTA_JUST = {'1000000250': '204'}   # S 10:50 körs av omlopp 204 (står i centrum 10:16–11:20) i stället för 209
 KANSL_OMVAG = [3.0, 4.0, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0]      # min/tur – omvägen till flygplatsen (känslighet)
 KANSL_POLICY = [('A', 'Varvet V + Ö ≤ 55 min (krav), Solberget kvar', O.MARGINAL_VARV, False),
                 ('B', 'Varvet V + Ö ≤ 55 min (krav), Solberget indragen där det behövs', O.MARGINAL_VARV, True),
@@ -595,7 +603,7 @@ def main():
                   f"vo<5={s['nt']['varv_vo_under_marginal']} min_centrum={s['nt']['min_centrum_vo']} "
                   f"omloppstid={s['nt']['omloppstid_h']} km={s['nt']['km']}")
 
-    kansl = kanslighet_ua4(t, O.bygg_omlopp(t, referens=ref), pkt, hpl0, xy, res_sol['pastigande_vardag'] or 0.0)
+    kansl = kanslighet_ua4(t, O.omlopp_operator(t), pkt, hpl0, xy, res_sol['pastigande_vardag'] or 0.0)
     res['ua']['4']['kanslighet_solberget'] = kansl
     pd.DataFrame(kansl).assign(**{k: lambda d_, k=k: d_[k].map(', '.join) for k in ('turer_som_i_dag', 'o_turer_utan_solberget')}) \
         .to_csv(P / 'b4_kanslighet_ua4.csv', index=False)

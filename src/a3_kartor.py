@@ -75,12 +75,12 @@ def fig_bedomning():
                                        ls='--', zorder=7))
             d = d[~(d.x.between(cx0, cx1) & d.y.between(cy0, cy1))]
         hinder = K.punkt_hinder(ax, bed.x, bed.y, px=5)
-        K.placera_etiketter(ax, [(f"{r.omrade} ({r.pastigande_vardag * C.ANTAL_VARDAGAR:.0f})", (r.x, r.y), 35)
+        K.placera_etiketter(ax, [(f"{r.omrade} ({r.pastigande_vardag:.2f})".replace('.', ','), (r.x, r.y), 35)
                                  for r in d.itertuples()], fontsize=6.4, undvik=hinder)
         K.ram(ax)
     h = [Line2D([], [], ls='', label=k, markersize=8 if k != 'Behålls' else 5, marker=v['marker'],
                 markerfacecolor=v['facecolor'], markeredgecolor=v['edgecolor']) for k, v in stil.items()]
-    h += [Line2D([], [], ls='', label='(n) = påstigande under 92 vardagar')]
+    h += [Line2D([], [], ls='', label='(n) = påstigande per vardag (höst 2026)')]
     lg = K.teckenforklaring(axs[1], h, loc='lower left', fontsize=7)
     lg.set_bbox_to_anchor((1.02, 0.0), transform=axs[1].transAxes)
     fig.suptitle('Bedömning av befintliga hållplatser (stadslinjer)', x=0.01, ha='left', fontsize=12, fontweight='bold')

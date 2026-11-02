@@ -137,7 +137,7 @@ def dagsfaktor():
     """Påstigande per vardag / medel av FM- och EM-matrisens resor per timme (omräkning timme -> vardag)."""
     import json
     r = json.load(open(C.PROCESSED / 'a1_sammanfattning.json', encoding='utf-8'))
-    per_dag = r['D3']['pastigande_vardag_med_O'] / C.ANTAL_VARDAGAR
+    per_dag = r['pastigande_vardag'] if 'pastigande_vardag' in r else r['D3']['pastigande_vardag_med_O'] / C.ANTAL_VARDAGAR
     h = np.mean([od_matris(p).to_numpy().sum() for p in ('FM', 'EM')])
     return per_dag / h
 

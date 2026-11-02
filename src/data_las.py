@@ -48,6 +48,54 @@ def period(tid_min):
     return None
 
 
+# ------------------------------------------------------------------ tvättad påstigandedata (höst)
+def _norm(n):
+    return ' '.join(str(n).lower().replace('.', ' ').split())
+
+
+@lru_cache(maxsize=1)
+def pastigande():
+    """Påstigande per tur och hållplats, medel per vardag. Linjerna N, S, V och Ö ur den tvättade höstdatan
+    (Databas vardag höst: Trip ID, Linje, Avgång, Omlopp, Sekvens, Hållplats, På). Linje J saknas där och tas
+    ur den tidigare sommardatan (Radata, produktfilter, summa / ANTAL_VARDAGAR).
+    Kolumner: linje, trip_id (GTFS), omlopp, sekvens, stop_id, hallplats, omrade, tid_min (turens avgång),
+    period (FM/EM/None), P (påstigande per vardag), kalla."""
+    n = pd.read_excel(C.PASTIGANDE_XLSX, sheet_name='Databas')
+    g = gtfs(); st = g['stop_times']; namn = g['stops'].set_index('stop_id').stop_name
+    ids = set(st.trip_id)
+    n['trip_id'] = n['Trip ID'].map(lambda i: str(i) if str(i) in ids else str(1000000000 + int(i)))
+    s = st[st.trip_id.isin(n.trip_id)][['trip_id', 'seq', 'stop_id']].copy()
+    s['nn'] = s.stop_id.map(namn).map(_norm)
+    per_tur = {k: d for k, d in s.groupby('trip_id')}
+    stop = []
+    for r in n.itertuples():
+        d = per_tur.get(r.trip_id)
+        kand = d[d.nn == _norm(r.Hållplats)] if d is not None else None
+        if kand is None or kand.empty:
+            stop.append(None)
+        else:                                          # samma namn kan förekomma två gånger (slinga): närmast sekvensen
+            stop.append(kand.iloc[(kand.seq - r.Sekvens).abs().argmin()].stop_id)
+    n['stop_id'] = stop
+    om = hallplatsomraden()
+    tid = n.Avgång.map(lambda v: v.hour * 60 + v.minute if hasattr(v, 'hour') else _gtfs_min(str(v)))
+    ny = pd.DataFrame({'linje': n.Linje, 'trip_id': n.trip_id, 'omlopp': n.Omlopp, 'sekvens': n.Sekvens,
+                       'stop_id': n.stop_id, 'hallplats': n.Hållplats,
+                       'omrade': n.stop_id.map(om['omrade']).fillna(n.Hållplats), 'tid_min': tid,
+                       'P': n.På.astype(float), 'kalla': 'höst 2026 (tvättad)'})
+    r = radata()
+    j = r[r.linje.isin([l for l in C.STADSLINJER if l not in C.LINJER_NY_DATA]) & r.vardag
+          & r['Product Type'].astype(str).isin(produktfilter())]
+    j = j.groupby(['linje', 'Trip ID', 'Stop Sequence', 'Stop ID', 'Stop Name'], as_index=False) \
+         .agg(P=('P', 'sum'), tid_min=('tid_min', 'first'))
+    gl = pd.DataFrame({'linje': j.linje, 'trip_id': j['Trip ID'], 'omlopp': np.nan, 'sekvens': j['Stop Sequence'],
+                       'stop_id': j['Stop ID'], 'hallplats': j['Stop Name'],
+                       'omrade': j['Stop ID'].map(om['omrade']).fillna(j['Stop Name']), 'tid_min': j.tid_min,
+                       'P': j.P / C.ANTAL_VARDAGAR, 'kalla': 'sommar 2026 (Radata)'})
+    ut = pd.concat([ny, gl], ignore_index=True)
+    ut['period'] = ut.tid_min.map(period)
+    return ut
+
+
 # ------------------------------------------------------------------ hållplatser / hållplatsområden
 @lru_cache(maxsize=1)
 def hallplatsomraden():

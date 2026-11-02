@@ -24,9 +24,9 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | Bakgrund i alla kartor | `00_land`, `00_stadslinjer_forskjutna`, `00_hallplatser`, `00_befolkningsrutor` | Standard |
 | (Linjerna utan förskjutning, en geometri per linje) | `00_stadslinjer` | Standard |
 | 1.2 Omfördelning av centrumpåstigningar | `a1_omfordelning_centrum` | Flyttade påstigningar |
-| 1.3 Påstigande före/efter korrigering | `a1_zoner_pastigande` | *Påstigande ursprungligt* / *Påstigande korrigerat* |
-| 1.4 OD-flöden FM | `a1_od_FM_levererad`, `a1_od_FM_korrigerad` | Standard (bredd och färg efter resor/h) |
-| 1.5 OD-flöden EM | `a1_od_EM_levererad`, `a1_od_EM_korrigerad` | Standard |
+| 1.3 Påstigande sommar/höst | `a1_zoner_pastigande` | *Påstigande höst, tvättad data* (standard) / *Påstigande sommar, korrigerat* / *Påstigande sommar, ursprungligt* |
+| 1.4 OD-flöden FM | `a1_od_FM_host`, `a1_od_FM_sommar`, `a1_od_FM_levererad` | Standard (bredd och färg efter resor/h) |
+| 1.5 OD-flöden EM | `a1_od_EM_host`, `a1_od_EM_sommar`, `a1_od_EM_levererad` | Standard |
 | 2.1 Täckning 400 m och turtäthet | `a2_tackningsytor` | *Täckning 400 m* (vänster) / *Turtäthet inom 400 m* (höger) |
 | 2.2 Turtäthet Mariehamn | `a2_tackningsytor`, `00_hallplatser` | Turtäthet inom 400 m |
 | 2.3 Svag faktisk tillgänglighet | `a2_tackningsytor`, `a2_tackning_per_ruta` | *Svag faktisk tillgänglighet* / *Invånare med svag tillgänglighet per ruta* |

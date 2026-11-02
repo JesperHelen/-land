@@ -11,7 +11,14 @@ Korrigering (stegvis, samma gravitationsmodell och parametrar som den ursprungli
   S1  Återskapad matris med ursprunglig metod (validering mot levererad matris)
   S2  + linje Ö inkluderad
   S3  + gångpar exkluderade (resan kräver ingen buss)
-  S4  + centrumöverskottet omfördelat till startsegmentets hållplatser  => korrigerad matris
+  S4  + centrumöverskottet omfördelat till startsegmentets hållplatser  => korrigerad sommarmatris
+Ny tvättad data (höst 2026, beställaren 2026-11-02; data_las.pastigande)
+  K1  Registrering vid ändhållplatsen: andel av centrumpåstigningarna på turens första hållplats
+  K2  Startsegmentet: påstigande på de 3 första hållplatserna efter centrum / centrum, mot kontrollgruppen
+  H   OD-matris med samma gravitationsmodell, linje Ö och gångpar exkluderade. Linjerna N, S, V och Ö ur
+      höstdatan utan centrumkorrigering (registreringen är rättad i datan). Linje J saknas i höstdatan och tas
+      ur sommardatan med centrumkorrigeringen S4  => OD-matrisen som används i kapitel 4
+      (a1_od_{FM,EM}_korrigerad*.csv; sommarmatrisen sparas som a1_od_{FM,EM}_sommar*.csv).
 Utdata: data/processed/a1_*.csv/json, output/kartor/a1_*.png
 """
 import json
@@ -271,6 +278,32 @@ def langt(M, namn='resor_h'):
     return L[L[namn] > 1e-9]
 
 
+# ====================================================================== ny tvättad data (höst)
+def host_urval():
+    """Höstdatan (N, S, V, Ö) i samma form som vardagsurval: linje, Trip ID, Stop Sequence, omrade, period, P
+    (påstigande per vardag)."""
+    p = D.pastigande()
+    h = p[p.linje.isin(C.LINJER_NY_DATA)]
+    return pd.DataFrame({'linje': h.linje, 'Trip ID': h.trip_id, 'Stop Sequence': h.sekvens, 'omrade': h.omrade,
+                         'period': h.period, 'P': h.P, 'omlopp': h.omlopp})
+
+
+def kontroll_host(h, R, k=BAS_K):
+    """K1 och K2 för höstdatan per linje: andel av centrumpåstigningarna på turens första hållplats, och kvoten
+    påstigande på startsegmentet / centrum (jämförs med kontrollgruppen R)."""
+    obs, seg = stad_startsegment_observerat(h, k)
+    rader = []
+    for ln, d in h.groupby('linje'):
+        c = d[d.omrade == C.CENTRUM]
+        rad = {'linje': ln, 'pastigande_vardag': float(d.P.sum()),
+               'centrum_forsta_hpl_andel': float(c.loc[c['Stop Sequence'] == 1, 'P'].sum() / c.P.sum()) if c.P.sum() else np.nan}
+        for per in ['FM', 'EM', 'dygn']:
+            o = obs[(obs.linje == ln) & (obs.period == per)]
+            rad[f'kvot_{per}'] = float(o.kvot_obs.iat[0]) if len(o) else np.nan
+        rader.append(rad)
+    return pd.DataFrame(rader), seg
+
+
 # ====================================================================== huvudflöde
 def main():
     P = C.PROCESSED
@@ -331,8 +364,8 @@ def main():
                                    'max_abs_avvikelse': float(np.abs(a - b).max()),
                                    'medelrestid_lev_min': float((lev.loc[gem, gem].to_numpy() * c0.loc[gem, gem].to_numpy()).sum() / lev.loc[gem, gem].to_numpy().sum())}
         langt(lev).to_csv(P / f'a1_od_{per}_levererad.csv', index=False)
-        langt(s4).to_csv(P / f'a1_od_{per}_korrigerad.csv', index=False)
-        s4.round(6).to_csv(P / f'a1_od_{per}_korrigerad_matris.csv')
+        langt(s4).to_csv(P / f'a1_od_{per}_sommar.csv', index=False)
+        s4.round(6).to_csv(P / f'a1_od_{per}_sommar_matris.csv')
     res['steg'] = steg
     # ---------------- sammanställningar
     bas_R = R[(R.k_hpl == BAS_K)].set_index('period').R.to_dict()
@@ -349,6 +382,46 @@ def main():
         zon[f'O_{per}_orig'] = O[('utan_O', per)].reindex(zon.index).fillna(0)
         zon[f'O_{per}_medO'] = O[('med_O', per)].reindex(zon.index).fillna(0)
         zon[f'O_{per}_korr'] = O_korr[per].reindex(zon.index).fillna(0)
+    # ---------------- ny tvättad data (höst): kontroll och OD-matris
+    host = host_urval()
+    k_host, seg_h = kontroll_host(host, R)
+    k_host.to_csv(P / 'a1_kontroll_host.csv', index=False)
+    stad_J = vardagsurval([l for l in C.STADSLINJER if l not in C.LINJER_NY_DATA])     # linje J: sommardata
+    flytt_J, _, _ = centrumkorrigering(stad_J, R, BAS_K)
+    O_host, mat_host = {}, {}
+    for per in ['FM', 'EM']:
+        o = host[host.period == per].groupby('omrade').P.sum() / C.TIMMAR_PER_PERIOD
+        oj = o_per_omrade(stad_J, per)
+        f = flytt_J[flytt_J.period == per] if len(flytt_J) else flytt_J
+        if len(f):
+            oj[C.CENTRUM] = oj.get(C.CENTRUM, 0.0) - f.resor_h.sum()
+            for z, v in f.groupby('till_omrade').resor_h.sum().items():
+                oj[z] = oj.get(z, 0.0) + v
+        O_host[per] = o.add(oj, fill_value=0.0)
+    for per in ['FM', 'EM']:
+        m = gravitation(O_host[per], O_host[spegel[per]], c1, tillaten=~g1)
+        mat_host[per] = m
+        langt(m).to_csv(P / f'a1_od_{per}_korrigerad.csv', index=False)
+        m.round(6).to_csv(P / f'a1_od_{per}_korrigerad_matris.csv')
+    p_all = D.pastigande()
+    res['host'] = {
+        'kalla': 'Databas vardag höst 2026 (tvättad), linjerna N, S, V och Ö; linje J ur sommardatan',
+        'pastigande_vardag': float(p_all.P.sum()),
+        'pastigande_vardag_per_linje': {k: round(float(v), 2) for k, v in p_all.groupby('linje').P.sum().items()},
+        'pastigande_vardag_per_linje_period': {f'{a}_{b}': round(float(v), 2) for (a, b), v in
+                                               p_all.groupby(['linje', 'period']).P.sum().items()},
+        'sommar_pastigande_vardag_per_linje': {k: round(float(v) / C.ANTAL_VARDAGAR, 2) for k, v in
+                                               stad.groupby('linje').P.sum().items()},
+        'turer_med_data': int(host['Trip ID'].nunique()),
+        'kontroll': k_host.round(3).to_dict('records'),
+        'nyckeltal': {per: nyckeltal(mat_host[per], g1) for per in ['FM', 'EM']}}
+    f_om, _, _ = centrumkorrigering(host, R, BAS_K)                    # känslighet: om S4 ändå tillämpades
+    bc_h = host[(host.omrade == C.CENTRUM) & host.period.isin(['FM', 'EM'])].groupby('period').P.sum()
+    res['host']['andel_centrum_om_s4_tillampades'] = {
+        per: float(f_om[f_om.period == per].pastigande.sum() / bc_h[per]) if len(f_om) else 0.0 for per in ['FM', 'EM']}
+    res['pastigande_vardag'] = res['host']['pastigande_vardag']
+    for per in ['FM', 'EM']:
+        zon[f'O_{per}_host'] = O_host[per].reindex(zon.index).fillna(0)
     zon.to_csv(P / 'a1_zoner_pastigande.csv')
     bb = stad[stad['Product Type'] == 'Bussbyte 2h']
     res['bussbyte_centrum_andel_av_centrum'] = float(bb.loc[bb.omrade == C.CENTRUM, 'P'].sum() / stad.loc[stad.omrade == C.CENTRUM, 'P'].sum())
@@ -358,6 +431,9 @@ def main():
     for per in ['FM', 'EM']:
         print(per); print(pd.DataFrame({k: v for k, v in steg[per].items() if k != 'validering'}).T.round(3).to_string())
         print('  validering:', {k: round(v, 4) for k, v in steg[per]['validering'].items()})
+    print('Höstdata:', json.dumps({k: res['host'][k] for k in ['pastigande_vardag', 'pastigande_vardag_per_linje', 'nyckeltal']},
+                                  ensure_ascii=False, default=float))
+    print(k_host.round(3).to_string())
 
 
 if __name__ == '__main__':

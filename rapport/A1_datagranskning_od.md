@@ -1,145 +1,141 @@
-# 1 Granskning och korrigering av OD-matrisen
+# 1 Granskning av påstigandedata och OD-matrisen
 
-> **Sammanfattning.** Den levererade OD-matrisen överskattar Centrum, Nygatan. I den går 79 % av alla resor
-> till eller från centrumhållplatsen. Granskningen visar tre felkällor. Den viktigaste är att stadslinjernas
-> valideringssystem registrerar påstigningar vid ändhållplatsen på *föregående turs sista hållplats*. Det gäller
-> även påstigningar som i själva verket sker på de första hållplatserna efter avgång. Med landsbygdslinjerna som
-> kontrollgrupp bedöms 21 % (FM) respektive 15 % (EM) av centrumhållplatsens påstigningar vara felregistrerade
-> (känslighetsintervall 10–21 %). Därutöver saknas linje Ö helt i underlaget på grund av ett filterfel, vilket
-> motsvarar 20 % av stadslinjernas påstigningar. Dessutom räknar modellen 2 % av resorna mellan hållplatsområden
-> som bara förbinds med gång som bussresor. Efter korrigering, med samma gravitationsmodell och parametrar som
-> tidigare, går 63 % av resorna till eller från Centrum, Nygatan. Den korrigerade matrisen omfattar 92
-> hållplatsområden och 10,4 (FM) respektive 9,7 (EM) resor per timme. Den används som grund för utredningsalternativen
-> i kapitel 4.
+> **Sammanfattning.** Utredningen bygger på tvättad påstigandedata för vardagar hösten 2026, med linjerna N, S, V
+> och Ö. Den ersätter den tidigare sommardatan (maj–september 2026), som hade flera fel. Linje J finns inte i
+> höstdatan och hämtas därför ur sommardatan, med samma korrigering som tidigare.
+>
+> - **Registreringsfelet är borta.** 93–98 % av påstigningarna vid Centrum, Nygatan registreras på turens första
+>   hållplats. Det är i nivå med landsbygdslinjerna (95–99 %); i sommardatan var andelen 0 %.
+> - **Startsegmentet:** hållplatserna närmast efter centrum har 0,24 (N) respektive 0,21 (S) gånger så många
+>   påstigningar som centrumhållplatsen. Det ligger nära kontrollgruppens 0,30, och i sommardatan var kvoten
+>   0,02–0,14. Någon centrumkorrigering görs därför inte för höstdatan.
+> - **Resandet:** cirka 321 påstigande per vardag, varav 21,5 på linje J. Det är ungefär tre gånger
+>   sommarnivån, eftersom mätperioden ligger under terminstid.
+> - **OD-matrisen:** framtagen med samma gravitationsmodell som tidigare. Den ger 31,7 (FM) respektive 29,6
+>   (EM) resor per timme, och 66 % av resorna går till eller från Centrum, Nygatan (sommardata efter korrigering:
+>   63 %). Matrisen används som grund för utredningsalternativen i kapitel 4.
+>
+> Granskningen av sommardatan redovisas i avsnitt 1.3 som bakgrund. Där var stadslinjernas påstigningar vid
+> ändhållplatsen knutna till fel tur, linje Ö saknades och gångpar räknades som bussresor.
 
-## 1.1 Underlag och ursprunglig metod
+## 1.1 Underlag och metod
 
-Underlaget utgörs av valideringsdata (flik *Radata* i `Analys_resemönster.xlsx`). Den innehåller antal
-påstigningar per tur, hållplatsläge och biljettyp under perioden 8 maj – 14 september 2026. Den ursprungliga
-OD-matrisen (`Analys_resemonster_OD.xlsx`) är framtagen med en dubbelt begränsad gravitationsmodell:
+**Tvättad höstdata.** Underlaget är `data/raw/Databas_vardag_host.xlsx`. Det anger medelpåstigande per vardag
+för varje tur och hållplats, med tur-ID, linje, avgångstid, omlopp och hållplatsens sekvens i turen. Det
+omfattar 82 turer på linjerna N, S, V och Ö. Turerna knyts till GTFS-tidtabellen via tur-ID och hållplatserna
+via namn. Hållplatser utan påstigande saknas i underlaget och räknas som noll. Omloppskolumnen ger operatörens
+omlopp, som används i omloppsverifieringen i kapitel 4.
 
-- **Ursprung (O):** påstigande per hållplatsområde och timme, vardagar, FM 06–09 respektive EM 15–18
-  (92 vardagar, 3 timmar per period).
+**Sommardata.** Valideringsdata från 8 maj till 14 september 2026 (flik *Radata* i `Analys_resemönster.xlsx`).
+Den används nu bara för linje J och som jämförelse.
+
+**OD-modellen** är densamma som i den ursprungliga OD-matrisen (`Analys_resemonster_OD.xlsx`), en dubbelt
+begränsad gravitationsmodell:
+
+- **Ursprung (O):** påstigande per hållplatsområde och timme, vardagar, FM 06–09 respektive EM 15–18. En tur
+  räknas till perioden efter sin avgångstid.
 - **Destination (D):** speglade påstigningar, dvs. D under FM = påstigande under EM i samma område (och omvänt),
   skalat så att ΣD = ΣO.
 - **Motstånd:** f(c) = exp(−0,1·c), där c är kortaste schemalagda restid i linjenätet inklusive 5 minuters
-  bytesstraff och gång upp till 400 m mellan hållplatsområden.
+  bytesstraff och gång upp till 400 m mellan hållplatsområden. Par som bara förbinds med gång räknas inte som
+  bussresor.
 
 Metoden har återskapats i `src/a1_od_granskning.py`, med restider beräknade ur GTFS för en representativ vardag.
 Den återskapade matrisen överensstämmer med den levererade, med korrelationen 0,998 (FM) respektive 0,999 (EM)
-cell för cell. Korrigeringarna nedan kan därmed tillskrivas felkällorna och inte skillnader i metod.
+cell för cell.
 
-## 1.2 Felanalys
+## 1.2 Kontroll av den tvättade höstdatan
+
+Höstdatan har kontrollerats med samma två test som avslöjade felet i sommardatan (avsnitt 1.3):
+
+- **K1:** hur stor andel av påstigningarna vid ändhållplatsen som registreras på turens första hållplats.
+- **K2:** kvoten mellan påstigande på de tre första hållplatserna efter centrum (inom 800 m) och påstigande
+  vid centrum, jämförd med landsbygdslinjerna.
+
+*Tabell 1.1. Kontroll av höstdatan per linje (vardag).*
+
+| Linje | Påstigande per vardag, höst (sommar) | K1: vid centrum på turens första hållplats | K2: startsegment / centrum (dygn) |
+|---|---:|---:|---:|
+| N | 103,9 (33,0) | 93 % | 0,24 |
+| S | 73,8 (20,6) | 93 % | 0,21 |
+| V | 30,0 (8,9) | 93 % | 0,02 |
+| Ö | 91,7 (20,6) | 98 % | – (inget startsegment) |
+| J (sommardata) | 21,5 | 0 % | 0,04 |
+| Kontrollgrupp, landsbygdslinjerna 1–5 | | 95–99 % | 0,30 |
+
+Påstigningarna vid centrum registreras nu på rätt tur (figur 1.1, vänster), och linjerna N och S har ett
+startsegment i nivå med kontrollgruppen (figur 1.1, höger). Linje V har låg kvot, men linjen har bara
+30 påstigande per vardag. Underlaget räcker inte för att avgöra om den låga kvoten beror på registreringen, och
+K1 är i nivå med kontrollgruppen. Linje Ö lämnar centrumområdet direkt och har inget startsegment inom 800 m.
+
+Om korrigeringsmetoden från sommardatan (steg S4) ändå tillämpades skulle 8 % (FM) respektive 6 % (EM) av
+centrums påstigningar flyttas. I sommardatan var andelen 21 % respektive 15 %. Skillnaden ligger inom vad som
+kan förklaras av slumpvariation och verkliga skillnader mellan linjerna. **Ingen centrumkorrigering görs
+därför för höstdatan.** Linje J, som bara finns i sommardatan, korrigeras som tidigare.
+
+![Figur 1.1](../output/kartor/a1_1_registreringsdiagnos.png)
+
+*Figur 1.1. Vänster: andel av påstigningarna vid ändhållplatsen som registreras på turens första hållplats;
+landsbygdslinjerna, stadslinjerna i sommardatan och i den tvättade höstdatan. Höger: påstigande på de tre
+första hållplatserna efter ändhållplatsen i förhållande till påstigande vid ändhållplatsen.*
+
+## 1.3 Granskning av sommardatan (bakgrund)
+
+Avsnittet beskriver felen i den tidigare sommardatan och hur de korrigerades. Den korrigerade sommarmatrisen
+redovisas som jämförelse i avsnitt 1.4.
 
 ### Registrering av påstigning vid ändhållplatsen
 
 Samtliga stadslinjer (J, N, S, Ö och V) är slinglinjer som både startar och slutar vid Centrum, Nygatan.
-Ingen av stadslinjernas påstigningar vid centrumhållplatsen är registrerad som turens första hållplats.
-90–100 % är registrerade som turens *sista* hållplats, dvs. på den tur som just har avslutats (figur 1.1, vänster).
-Landsbygdslinjerna 1–5, som utgår från Mariehamn, Bussplan, registrerar däremot 94–99 % av sina
-terminalpåstigningar på turens första hållplats. Mönstret visar att valideringsutrustningen på stadslinjerna
-fortsätter att peka på föregående tur och dess sista hållplats tills den nya turen har startats i systemet.
+I sommardatan var ingen av stadslinjernas påstigningar vid centrumhållplatsen registrerad som turens första
+hållplats. 90–100 % var registrerade som turens *sista* hållplats, dvs. på den tur som just hade avslutats.
+Landsbygdslinjerna 1–5, som utgår från Mariehamn, Bussplan, registrerar däremot 95–99 % av sina
+terminalpåstigningar på turens första hållplats. Valideringsutrustningen på stadslinjerna fortsatte alltså att
+peka på föregående tur och dess sista hållplats tills den nya turen hade startats i systemet. Valideringar på
+de första hållplatserna efter avgång hamnade därmed felaktigt på Centrum, Nygatan.
 
-Valideringar som görs medan bussen står vid centrumhållplatsen får därmed rätt hållplats, men knyts till
-fel tur. Valideringar som görs på de första hållplatserna efter avgång, innan systemet har bytt tur, hamnar
-däremot felaktigt på Centrum, Nygatan.
-
-![Figur 1.1](../output/kartor/a1_1_registreringsdiagnos.png)
-
-*Figur 1.1. Vänster: på vilken position i turen påstigningar vid ändhållplatsen registreras. Höger: påstigande
-på de tre första hållplatserna efter ändhållplatsen i förhållande till påstigande vid ändhållplatsen.*
-
-### Underskott på hållplatserna närmast efter centrum
-
-Om påstigningar efter avgång registreras på centrumhållplatsen bör hållplatserna i turens början ha
-påfallande få påstigningar. Det bekräftas av data. Landsbygdslinjerna registrerar på sina tre första
-hållplatser efter terminalen i centrala Mariehamn (Torget, GE-huset, Savoy m.fl.) 41 % (FM) respektive 28 % (EM)
-så många påstigningar som vid terminalen. Motsvarande kvot för stadslinjerna är 0–14 %: linje V 1 %,
-linje S 2 %, linje J 4 % och linje N 14 % räknat över dygnet (figur 1.1, höger). Linje S har under hela
-mätperioden inte registrerat en enda påstigning på de två första hållplatserna efter centrum. Det är inte
-rimligt för hållplatser i stadskärnan.
+Det bekräftades av ett påfallande underskott på hållplatserna närmast efter centrum. Landsbygdslinjerna
+registrerar på sina tre första hållplatser efter terminalen 41 % (FM) respektive 28 % (EM) så många
+påstigningar som vid terminalen. Motsvarande kvot för stadslinjerna var 0–14 % över dygnet. Linje S hade under
+hela mätperioden inte en enda registrerad påstigning på de två första hållplatserna efter centrum.
 
 ### Övriga brister
 
-- **Linje Ö saknas i underlaget.** Filterfliken anger linjen ”E”, som inte finns i datan, i stället för ”Ö”.
-  Linje Ö (Kalmarnäs/Solberget) har 1 896 påstigningar under mätperiodens vardagar, vilket motsvarar 20 % av
-  stadslinjernas påstigningar. Hållplatsområdena längs linjen, bland annat Strandnäs skola södra, saknas
-  därmed helt i matrisen.
-- **Gångpar räknas som bussresor.** Hållplatsområden inom 400 m kopplas i restidsmatrisen med gång. Par där
-  den snabbaste förbindelsen är ren gång får därför mycket kort restid och hög attraktion i modellen, trots
-  att resan inte kräver buss. Det gäller 2,1 % (FM) respektive 2,0 % (EM) av resorna i den levererade matrisen.
+- **Linje Ö saknades i underlaget.** Filterfliken angav linjen ”E”, som inte finns i datan, i stället för ”Ö”.
+  Linje Ö har 20 % av stadslinjernas påstigningar i sommardatan.
+- **Gångpar räknades som bussresor.** Hållplatsområden inom 400 m kopplas i restidsmatrisen med gång. Par där
+  den snabbaste förbindelsen är ren gång fick därför hög attraktion i modellen, trots att resan inte kräver
+  buss. Det gällde 2,1 % (FM) respektive 2,0 % (EM) av resorna i den levererade matrisen.
 - **Dubbelräkning i hållplatssammanställningen.** Flikarna *Hallplatsomraden* i `Analys_resemönster.xlsx`
-  redovisar exakt dubbla värden. 16-siffriga hållplats-ID tolkas som tal med 15 siffrors precision, så att
-  samtliga lägen på samma hållplats matchas. OD-flikarna använder textnycklar och påverkas inte, men
-  sammanställningen bör inte användas direkt.
-- **Byten.** Biljettypen *Bussbyte 2h* står för 2,2 % av påstigningarna vid centrumhållplatsen. Byten med
-  periodkort kan inte identifieras i underlaget. Byten räknas därför, liksom i den ursprungliga matrisen,
-  som nya resor från bytespunkten. Effekten bedöms som liten och korrigeras inte.
+  redovisar exakt dubbla värden, eftersom 16-siffriga hållplats-ID tolkas som tal med 15 siffrors precision.
+  OD-flikarna påverkas inte.
+- **Byten.** Biljettypen *Bussbyte 2h* står för 2,2 % av påstigningarna vid centrumhållplatsen. Byten räknas,
+  liksom i den ursprungliga matrisen, som nya resor från bytespunkten.
 
-## 1.3 Kvantifiering av felet
+### Kvantifiering och korrigering
 
-Överskottet vid centrumhållplatsen skattas per linje och period med landsbygdslinjernas kvot R som referens.
-R är kvoten mellan påstigande i startsegmentet och påstigande vid terminalen. Om registreringen vore korrekt
-skulle stadslinjens påstigningar vid centrum, B<sub>C</sub>, och i startsegmentet, B<sub>S</sub>, fördela sig
-i samma proportion:
+Överskottet vid centrumhållplatsen skattades per linje och period med landsbygdslinjernas kvot R som referens:
 
 - verkligt antal vid centrum = (B<sub>C</sub> + B<sub>S</sub>) / (1 + R)
 - överskott E = max(0, B<sub>C</sub> − (B<sub>C</sub> + B<sub>S</sub>) / (1 + R))
 
-Startsegmentet definieras som de tre första hållplatserna efter ändhållplatsen som ligger inom 800 m från
-den, dvs. i centrala Mariehamn. Som känslighetsanalys prövas två och fyra hållplatser.
+B<sub>C</sub> är stadslinjens påstigningar vid centrum och B<sub>S</sub> påstigningarna i startsegmentet, dvs. de
+tre första hållplatserna efter ändhållplatsen inom 800 m. Som känslighetsanalys prövades två och fyra hållplatser.
+
+*Tabell 1.2. Bedömt felregistrerade påstigningar vid centrum i sommardatan.*
 
 | | FM 06–09 | EM 15–18 |
 |---|---:|---:|
 | Påstigande vid Centrum, Nygatan (vardagar, mätperioden) | 804 | 1 267 |
-| Andel av stadslinjernas påstigande i perioden | 28 % | 47 % |
 | Referenskvot R, landsbygdslinjer (3 hållplatser) | 0,41 | 0,28 |
 | **Bedömt felregistrerade påstigningar vid centrum** | **166 (21 %)** | **189 (15 %)** |
 | Känslighetsintervall (2–4 hållplatser) | 18–21 % | 10–16 % |
-| Andel av samtliga påstigningar i perioden | 5,8 % | 7,1 % |
 
-Linje Ö lämnar centrumområdet direkt och har inget startsegment inom 800 m. Linjens första hållplats efter
-centrum (Strandnäs skola södra) registrerar dessutom 35 % av linjens påstigningar. Det visar att turbytet
-sker i tid, och ingen korrigering görs för linje Ö.
+Korrigeringen gjordes i fyra steg (tabell 1.3). Linje Ö lades till (S2), gångpar exkluderades (S3) och
+överskottet flyttades från Centrum, Nygatan till startsegmentets hållplatsområden på respektive linje (S4,
+figur 1.2). Fördelningen gjordes proportionellt mot samtliga busslinjers påstigande på dessa hållplatser.
 
-## 1.4 Korrigeringsmetod och antaganden
-
-Korrigeringen görs i fyra steg. Varje stegs effekt redovisas i tabell 1.2.
-
-1. **Återskapad matris (S1).** Ursprunglig metod och samma urval, som kontroll.
-2. **Linje Ö inkluderas (S2).** Hållplatsområdena längs linje Ö läggs till, och restidsmatrisen räknas om för
-   hela stadslinjenätet.
-3. **Gångpar exkluderas (S3).** OD-par vars snabbaste förbindelse inte använder buss sätts till noll, på samma
-   sätt som inomzonsresor.
-4. **Centrumöverskottet omfördelas (S4).** Det skattade överskottet E flyttas från Centrum, Nygatan till
-   startsegmentets hållplatsområden på respektive linje. Fördelningen sker proportionellt mot det
-   påstigandemönster som samtliga busslinjer har på dessa hållplatser i samma period. Påstigningar på en turs
-   första hållplats räknas inte med, så att terminaleffekten vid Mariehamn, Bussplan inte styr fördelningen
-   (figur 1.2). Destinationerna speglas från den korrigerade motsatta perioden. Därefter fördelas resorna med
-   samma gravitationsmodell. De flyttade resornas destinationer följer därmed övriga hållplatsers OD-mönster.
-
-**Antaganden.**
-
-- **Fungerande registrering:** landsbygdslinjernas fördelning mellan terminal och startsegment speglar hur
-  påstigningarna fördelar sig i centrala Mariehamn när registreringen fungerar.
-- **Felets utbredning:** felregistreringen gäller påstigningar i centrumområdet (inom 800 m). Påstigningar
-  längre ut på linjerna registreras korrekt, vilket stöds av att påstigningarna längs linjerna i övrigt är
-  rimligt fördelade.
-- **Vikter för omfördelningen:** samtliga busslinjers påstigande på en hållplats är ett rimligt mått på
-  hållplatsens relativa efterfrågan.
-- **Oförändrade modellparametrar:** β = 0,1, bytesstraff 5 min och gång 400 m behålls. Den
-  speglingsprincip för destinationer som den ursprungliga matrisen bygger på behålls också.
-- **Sommarperiod:** mätperioden omfattar skolornas sommarlov. Nivåerna är därför lägre än under
-  terminstid, medan mönstret antas vara representativt.
-
-![Figur 1.2](../output/kartor/a1_2_omfordelning_centrum.png)
-
-*Figur 1.2. Felregistrerade påstigningar som flyttats från Centrum, Nygatan till hållplatserna i linjernas
-startsegment (FM + EM, resor per timme).*
-
-## 1.5 Resultat
-
-*Tabell 1.2. Stegvis korrigering av OD-matrisen.*
+*Tabell 1.3. Stegvis korrigering av OD-matrisen ur sommardatan.*
 
 | Steg | Resor/h FM | Resor/h EM | Andel resor till/från centrum | Andel gångpar |
 |---|---:|---:|---:|---:|
@@ -147,19 +143,39 @@ startsegment (FM + EM, resor per timme).*
 | S1 Återskapad (kontroll) | 8,4 | 7,6 | 79 % | 1,8 % |
 | S2 + linje Ö | 10,4 | 9,7 | 75 % | 1,2 % |
 | S3 + gångpar exkluderade | 10,4 | 9,7 | 75 % | 0 % |
-| **S4 + centrumkorrigering (korrigerad matris)** | **10,4** | **9,7** | **63 %** | **0 %** |
+| S4 + centrumkorrigering | 10,4 | 9,7 | 63 % | 0 % |
 
-Korrigeringen minskar andelen resor till eller från Centrum, Nygatan med 16 procentenheter. Av dessa beror
-cirka 4 procentenheter på att linje Ö nu ingår och cirka 12 procentenheter på felregistreringen. Under FM
-minskar centrumhållplatsens andel av destinationerna från 51 % till 40 %, och under EM minskar dess andel
-av ursprungen i motsvarande grad. Resorna flyttas framför allt till Torget, Ålandsplan, Mariehamn, Bussplan
-och Polishuset (figur 1.3). Matrisen får därtill ett nytt resandestråk österut längs linje Ö, med
-Strandnäs skola södra, Solberget och Kalmarnäs (figur 1.4 och 1.5).
+![Figur 1.2](../output/kartor/a1_2_omfordelning_centrum.png)
+
+*Figur 1.2. Sommardatan: felregistrerade påstigningar som flyttats från Centrum, Nygatan till hållplatserna i
+linjernas startsegment (FM + EM, resor per timme).*
+
+## 1.4 Resultat: OD-matrisen ur höstdatan
+
+*Tabell 1.4. OD-matrisen ur höstdatan jämförd med den korrigerade sommarmatrisen.*
+
+| | Resor/h FM | Resor/h EM | Andel resor till/från centrum | Påstigande per vardag |
+|---|---:|---:|---:|---:|
+| Sommardata, korrigerad (S4) | 10,4 | 9,7 | 63 % | 104 |
+| **Höstdata, tvättad (används i kapitel 4)** | **31,7** | **29,6** | **66 %** | **321** |
+
+Resandet under hösten är ungefär tre gånger så stort som under sommaren. Ökningen är störst på linje Ö
+(4,5 gånger), som trafikerar Strandnäs skola, och minst på linje N (3,1 gånger). Centrum, Nygatan har 37 % av påstigningarna på
+linjerna N, S, V och Ö. Övriga större hållplatser är Strandnäs skola södra (28 påstigande per vardag),
+Maxinge (19), Solberget (16), Hindersbölevägen (12), Kalmarnäs vändplan (10) och Ytternäs skola (10)
+(figur 1.3).
+
+Andelen resor via centrum, 66 %, ligger nära den korrigerade sommarmatrisen (63 %). Korrigeringen av
+sommardatan gav alltså en rimlig bild av resmönstret, medan nivåerna var låga. De största OD-flödena under FM
+går från Solberget (2,3 resor per timme), Ytternäs skola (1,6), Kalmarnäs vändplan (1,5) och Doppingvägen (1,1)
+till centrum, och från centrum till Strandnäs skola södra (1,4) och Maxinge (1,2). Under EM går flödena i
+motsatt riktning (figur 1.4 och 1.5). Mellan Solberget och Strandnäs skola södra går 0,7–0,8 resor per timme
+utan att passera centrum.
 
 ![Figur 1.3](../output/kartor/a1_3_pastigande_fore_efter.png)
 
-*Figur 1.3. Påstigande per hållplatsområde (FM + EM, resor per timme) i ursprungligt respektive korrigerat
-underlag.*
+*Figur 1.3. Påstigande per hållplatsområde (FM + EM, resor per timme) i den korrigerade sommardatan respektive
+den tvättade höstdatan.*
 
 ![Figur 1.4](../output/kartor/a1_4_od_FM_fore_efter.png)
 
@@ -170,21 +186,21 @@ och böjer åt höger i färdriktningen. Bredd och färg anger antal resor.*
 
 *Figur 1.5. Största OD-flödena (85 % av resorna), eftermiddag 15–18.*
 
-## 1.6 Osäkerheter och rekommendation
+## 1.5 Osäkerheter och rekommendation
 
-Den korrigerade matrisen bedöms ge en betydligt riktigare bild av resmönstret än den levererade, men den
-vilar på ett antagande om felregistreringens omfattning. Beroende på period och hur startsegmentet avgränsas
-bedöms 10–21 % av centrums påstigningar vara felregistrerade, mot 15–21 % i basfallet. Variationen påverkar
-inte slutsatserna: andelen resor till eller från centrum hamnar i samtliga fall väsentligt under den
-levererade matrisens 79 %. Det väsentliga för linjeplaneringen är att resandet i centrumområdet är fördelat på flera hållplatser och att
-linje Ö:s resande ingår.
+- **Linje J** finns bara i sommardatan, korrigerad för registreringsfelet. Linjens resande under terminstid är
+  därför sannolikt underskattat. Linje J berörs inte av utredningsalternativen i kapitel 4.
+- **Sommar och höst:** skillnaden i nivå beror främst på att höstdatan avser terminstid. Höstdatan bedöms
+  därför vara mest representativ för en typvardag.
+- **Speglade destinationer:** modellen antar att resor under FM speglar resor under EM. Det är rimligt för
+  arbets- och skolresor men osäkert för andra ärenden.
+- **Byten:** byten i centrum räknas som nya resor från bytespunkten, liksom i den ursprungliga matrisen.
 
-Det rekommenderas att Ålandstrafiken och AxBuss ser över turbytet i valideringsutrustningen på stadslinjerna,
-så att nya turer startas innan avgång från Centrum, Nygatan. En kortare kontrollmätning, till exempel
-manuell räkning av påstigande på Torget, Polishuset och Ålandsplan under en vecka, kan verifiera
-korrigeringen. Inför en slutlig matris bör även data från terminstid användas.
+Turbytet i valideringsutrustningen fungerar i den tvättade höstdatan. Det rekommenderas att Ålandstrafiken
+behåller tvättningen, eller kontrollerar turbytet, även framöver. Linje J bör läggas till i den tvättade datan.
 
-**Filer.** Korrigerad matris: `data/processed/a1_od_FM_korrigerad.csv` och `a1_od_EM_korrigerad.csv`
-(långt format) samt `..._matris.csv`. Påstigande per hållplatsområde: `a1_zoner_pastigande.csv`.
-Restider: `a1_restider_min.csv`. Nyckeltal: `a1_sammanfattning.json`. Skript: `src/a1_od_granskning.py`
-och `src/a1_kartor.py`.
+**Filer.** OD-matrisen ur höstdatan: `data/processed/a1_od_FM_korrigerad.csv` och `a1_od_EM_korrigerad.csv`
+(långt format) samt `..._matris.csv`. Den korrigerade sommarmatrisen: `a1_od_FM_sommar.csv` och
+`a1_od_EM_sommar.csv`. Kontroll av höstdatan: `a1_kontroll_host.csv`. Påstigande per hållplatsområde:
+`a1_zoner_pastigande.csv`. Restider: `a1_restider_min.csv`. Nyckeltal: `a1_sammanfattning.json`. Skript:
+`src/a1_od_granskning.py`, `src/data_las.py` och `src/a1_kartor.py`.

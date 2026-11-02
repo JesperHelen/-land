@@ -6,6 +6,7 @@ ROT = Path(__file__).resolve().parents[1]
 
 # --- Indata (rådata, ändras inte) ---
 RADATA_XLSX = ROT / 'Analys_resemönster.xlsx'          # påstigandedata (Radata) + hållplatsregister
+PASTIGANDE_XLSX = ROT / 'data' / 'raw' / 'Databas_vardag_host.xlsx'   # tvättad påstigandedata, vardag höst 2026 (N, S, V, Ö)
 OD_XLSX = ROT / 'data' / 'raw' / 'Analys_resemonster_OD.xlsx'   # tidigare framtagen OD-matris (FM/EM)
 GTFS_DIR = ROT / 'gtfs_latest'                           # GTFS, Ålands landskapsregering (fr.o.m. 2026-08-18)
 BEFOLKNING_SHP = ROT / 'Befolkning' / 'Befolk_2024.shp'  # befolkning 2024, rutor 1000×1000 m
@@ -32,6 +33,7 @@ FM = (6, 9)          # förmiddagsrusning 06–09
 EM = (15, 18)        # eftermiddagsrusning 15–18
 TIMMAR_PER_PERIOD = 3
 ANTAL_VARDAGAR = 92  # nämnare i ursprunglig analys (Filter!E35), mätperiod 2026-05-08 – 2026-09-14
+LINJER_NY_DATA = ['N', 'S', 'V', 'Ö']   # linjer i den tvättade höstdatan; linje J finns bara i den tidigare sommardatan
 
 # --- Gravitationsmodell (samma parametrar som ursprunglig OD-matris) ---
 BETA = 0.1                 # restidskänslighet (1/min), f(c) = exp(-β·c)

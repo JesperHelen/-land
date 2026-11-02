@@ -204,7 +204,7 @@ def figur(par, resor, omr, prof):
     ax3.set_yticks(np.arange(len(r)))
     ax3.set_yticklabels([f"{p}{' (dagens par)' if p in ('N/S', 'V/Ö') else ''}" for p in r.par], fontsize=8)
     ax3.set_xlim(0, max(r.direktresor_vardag.max() * 1.6, 1))
-    ax3.set_xlabel('resor per vardag som slipper byte i centrum (sommarnivå)', fontsize=7.5)
+    ax3.set_xlabel('resor per vardag som slipper byte i centrum (höst 2026)', fontsize=7.5)
     ax3.tick_params(labelsize=7.5); ax3.grid(axis='x', color='#e6e4de', lw=0.6); ax3.set_axisbelow(True)
     for s in ['top', 'right']:
         ax3.spines[s].set_visible(False)

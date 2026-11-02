@@ -225,13 +225,16 @@ def a1():
     zon = pd.read_csv(P / 'a1_zoner_pastigande.csv', index_col=0)
     zon['sum_orig'] = zon.O_FM_orig + zon.O_EM_orig
     zon['sum_korr'] = zon.O_FM_korr + zon.O_EM_korr
+    zon['sum_host'] = zon.O_FM_host + zon.O_EM_host          # tvättad höstdata (N, S, V, Ö) + linje J sommar
     zg = gpd.GeoDataFrame(zon.reset_index().drop(columns=['x', 'y']), geometry=gpd.points_from_xy(zon.x, zon.y), crs=C.CRS_METRISK)
     skriv(zg, 'a1_zoner_pastigande')
     kl = lambda a: [(0, 0.1, '< 0,1 resor/h', 1.2), (0.1, 0.3, '0,1–0,3', 2.0), (0.3, 1, '0,3–1', 3.0), (1, 3, '1–3', 4.6), (3, 99, '≥ 3', 7.0)]
     sym = lambda n, s: markor(n, 'circle', '#3987e5', s, '#184f95', 0.3, alpha=200)
-    stil('a1_zoner_pastigande', 'Påstigande korrigerat (fig 1.3 höger)', qml(r_klassad('sum_korr', kl(0), sym, '"sum_korr"'),
-         labeling=etiketter('if("sum_korr" >= 1, "omrade", \'\')')), True)
-    stil('a1_zoner_pastigande', 'Påstigande ursprungligt (fig 1.3 vänster)', qml(r_klassad('sum_orig', kl(0), sym, '"sum_orig"'),
+    stil('a1_zoner_pastigande', 'Påstigande höst, tvättad data (fig 1.3 höger)', qml(r_klassad('sum_host', kl(0), sym, '"sum_host"'),
+         labeling=etiketter('if("sum_host" >= 1, "omrade", \'\')')), True)
+    stil('a1_zoner_pastigande', 'Påstigande sommar, korrigerat (fig 1.3 vänster)', qml(r_klassad('sum_korr', kl(0), sym, '"sum_korr"'),
+         labeling=etiketter('if("sum_korr" >= 1, "omrade", \'\')')))
+    stil('a1_zoner_pastigande', 'Påstigande sommar, ursprungligt', qml(r_klassad('sum_orig', kl(0), sym, '"sum_orig"'),
          labeling=etiketter('if("sum_orig" >= 1, "omrade", \'\')')))
 
     pos = {z: np.array([r.x, r.y]) for z, r in zon.iterrows()}
@@ -251,8 +254,9 @@ def a1():
     kl = [(0, 0.01, '< 0,01 resor/h', blå[0], 0.15), (0.01, 0.05, '0,01–0,05', blå[1], 0.3), (0.05, 0.1, '0,05–0,1', blå[2], 0.6),
           (0.1, 0.25, '0,1–0,25', blå[3], 1.1), (0.25, 99, '≥ 0,25', blå[4], 1.9)]
     for per, fig in [('FM', '1.4'), ('EM', '1.5')]:
-        for typ in ['levererad', 'korrigerad']:
-            L = pd.read_csv(P / f'a1_od_{per}_{typ}.csv')
+        for typ, fil, txt in [('host', 'korrigerad', 'höst, tvättad data'), ('sommar', 'sommar', 'sommar, korrigerad'),
+                              ('levererad', 'levererad', 'sommar, levererad')]:
+            L = pd.read_csv(P / f'a1_od_{per}_{fil}.csv')
             L = L[(L.fran != L.till) & L.fran.isin(pos) & L.till.isin(pos)].sort_values('resor_h', ascending=False)
             L['andel_kum'] = (L.resor_h.cumsum() / L.resor_h.sum()).round(4)
             L['i_karta'] = L.andel_kum <= 0.85
@@ -264,7 +268,7 @@ def a1():
                 geoms.append(LineString(B))
             namn = f'a1_od_{per}_{typ}'
             skriv(gpd.GeoDataFrame(L.round({'resor_h': 5}), geometry=geoms, crs=C.CRS_METRISK), namn)
-            stil(namn, f'OD-flöden {per} {typ} (fig {fig})',
+            stil(namn, f'OD-flöden {per} {txt} (fig {fig})',
                  qml(r_klassad('resor_h', kl, lambda n, fa, w: linje(n, fa, w, pil=True), '"resor_h"')), True)
 
 
@@ -329,7 +333,6 @@ def a3():
     stil('a3_behov_400m', '400 m runt indikativa lägen', qml(r_enkel(fyll('0', '#e8590c', 25, 'dash', '#e8590c', 0.3))), True)
 
     o = pd.read_csv(P / 'a3_hallplatsbedomning.csv')
-    o['pastigande_92_vardagar'] = (o.pastigande_vardag * C.ANTAL_VARDAGAR).round(0)
     og = gpd.GeoDataFrame(o.drop(columns=['x', 'y']), geometry=gpd.points_from_xy(o.x, o.y), crs=C.CRS_METRISK)
     for k in ['lagt_pastigande', 'lucka_ok', 'liten_unik_tackning']:
         og[k] = og[k].astype(bool)
@@ -342,7 +345,7 @@ def a3():
     stil('a3_hallplatsbedomning', 'Hållplatsbedömning (fig 3.2)',
          qml(r_kategori('bedomning', kat, lambda n, form, f, s, k: markor(n, form, f, s, k, 0.3)),
              labeling=etiketter('if("bedomning" IN (\'Kandidat för indragning\', \'Bör prövas\'), '
-                                '"omrade" || \' (\' || "pastigande_92_vardagar" || \')\', \'\')')), True)
+                                '"omrade" || \' (\' || format_number("pastigande_vardag", 2) || \')\', \'\')')), True)
 
 
 def b4():
