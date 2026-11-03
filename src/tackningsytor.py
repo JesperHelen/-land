@@ -95,3 +95,34 @@ def tathet_alfa(ruta_id, lo=0.30, hi=0.70):
     b = D.befolkning().set_index('ruta_id').Tot_bef
     t = pd.Series(ruta_id).map(b).fillna(0).to_numpy()
     return lo + hi * np.sqrt(t / b.max())
+
+
+# ------------------------------------------------------------------ effekt: avgångar × befolkning
+EFFEKT_CELL = 50.0          # m, samma som delpunkterna
+EFFEKT_SIGMA = 150.0        # m, utjämning (gauss) så att effekten blir en sammanhängande yta
+
+
+def effektyta(tk, sid, bas='idag', cell=EFFEKT_CELL, sigma_m=EFFEKT_SIGMA):
+    """Effekt = förändrat antal avgångar per vardag inom 400 m × befolkning, per delpunkt (50 m), summerad på ett
+    rutnät och utjämnad med en gaussisk kärna (summan bevaras). tk: delpunkter med x, y, bef, avg_<sid>.
+    Returnerar (gx, gy, E): cellcentrum i x och y och E = invånare × avgångar per vardag och hektar."""
+    from scipy.ndimage import gaussian_filter
+    x, y = tk.x.to_numpy(float), tk.y.to_numpy(float)
+    e = tk.bef.to_numpy(float) * (tk[f'avg_{sid}'] - tk[f'avg_{bas}']).to_numpy(float)
+    x0, y0 = x.min() - 20 * cell, y.min() - 20 * cell
+    i = np.round((x - x0) / cell).astype(int); j = np.round((y - y0) / cell).astype(int)
+    E = np.zeros((j.max() + 21, i.max() + 21))
+    np.add.at(E, (j, i), e)
+    if sigma_m:
+        E = gaussian_filter(E, sigma_m / cell, mode='constant', truncate=3.0)
+    E *= 10000.0 / cell ** 2
+    return x0 + np.arange(E.shape[1]) * cell, y0 + np.arange(E.shape[0]) * cell, E
+
+
+def effekt_mesh(tk, sid, grans=0.05, **kw):
+    """Effektytan som rutnät (50 m-rutor) för GIS: rutor där |effekt| ≥ grans (invånare × avgångar per ha)."""
+    gx, gy, E = effektyta(tk, sid, **kw)
+    jj, ii = np.where(np.abs(E) >= grans)
+    h = EFFEKT_CELL / 2
+    geom = shapely.box(gx[ii] - h, gy[jj] - h, gx[ii] + h, gy[jj] + h)
+    return gpd.GeoDataFrame({'effekt_ha': E[jj, ii]}, geometry=geom, crs=C.CRS_METRISK)

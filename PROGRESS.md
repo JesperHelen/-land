@@ -166,6 +166,15 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         N 16:50, S 17:20, N 17:50 → omlopp 204. Högst 5 bussar samtidigt. V 10:20 fortsätter inte längre som S →
         **UA 1a, 1b och 4: 16/20, UA 4Y 8/8, 4 + Solberget 17/20**; varianten S 10:50 utgår. Figur b4_1 utan den
         streckade linjen, omloppen i nummerordning. Kostnad 1a ★ +12,0 k€, 1b ★ +6,5 k€, 4 ★ +6,7 k€, 4Y +3,0 k€.
+- [x] **Effekt som vinnare/förlorare-yta** (beställaren 2026-11-03, exempelkarta "påverkan-yta"): effekt =
+      (avgångar efter − i dag inom 400 m) × befolkning per 50 m-punkt, gaussisk utjämning 150 m
+      (`tackningsytor.effektyta`, `effekt_mesh`). GIS: `b4_effekt` (rutnät, sammanslaget per klass, grönt/rött) och
+      `b4_hallplatser_frekvens` (avgångar i dag → efter, % i sju klasser), i varje UA-grupp. Figur b4_16 omgjord till
+      effektkarta med hållplatserna i %. Data: `b4_systemeffekter_hallplatser.csv`, `avg_<scenario>` i
+      `b4_systemeffekter_tackning.csv.gz`.
+- [ ] **OSRM-vägdragning i kartor** (beställaren 2026-11-03: linjerna och UA längs vägarna). Blockerat: proxyn
+      nekar router.project-osrm.org (403). Kräver att domänen tillåts i miljöns nätverksinställningar, eller att
+      `rutta_med_osrm.py` körs i QGIS och GeoPackage-filen skickas tillbaka (`s01_vagdragning.py --fran-gis`).
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

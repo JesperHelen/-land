@@ -571,9 +571,14 @@ Mariehamn (14 821). UA 4 redovisas i tabell 4.4.
 Restiden för UA 1a och 1b med V och Ö sammanslagna är netto, efter vinsten för resor mellan V och Ö som slipper
 bytet. Det varv som redan i dag har under 5 minuter i centrum är V 07:50 med Ö:s skoltur 08:20 (4 minuter).
 
-**Fler och färre avgångar.** Turtäthetsklassen visar bara när invånarna byter klass. Därför redovisas också
-hur antalet avgångar per vardag inom 400 m ändras för varje invånare, viktat med befolkningen i rutorna
-(figur 4.16). Antalet avgångar är antalet unika turer som stannar inom 400 m.
+**Effekt: fler och färre avgångar × befolkning.** Turtäthetsklassen visar bara när invånarna byter klass.
+Därför redovisas också effekten, dvs. hur antalet avgångar per vardag inom 400 m ändras för varje invånare:
+
+> effekt = (avgångar efter − avgångar i dag) × invånare
+
+Effekten räknas per 50 m-punkt och läggs ut som en utjämnad yta (gaussisk utjämning, 150 m), så att man ser
+var vinnarna (grönt) och förlorarna (rött) bor. Hållplatserna färgas efter hur mycket antalet avgångar ändras i
+procent (figur 4.16). Antalet avgångar är antalet unika turer som stannar inom 400 m.
 
 - **Fler avgångar:** i UA 1a och 1b får 179 invånare vid Möckelö Strand ny 16 avgångar mer per vardag. I UA 2
   får 55 invånare vid N2 20 mer, och i UA 4 får 20 invånare vid flygplatsen 16 mer (UA 4Y 8 mer).
@@ -582,14 +587,19 @@ hur antalet avgångar per vardag inom 400 m ändras för varje invånare, viktat
 - **Solberget indragen (variant av UA 4):** 49 invånare får 20 avgångar färre, mot 20 invånare med 17 fler vid
   flygplatsen. Nettot blir negativt (−633 invånare × avgångar per vardag).
 
-I QGIS finns förändringen som lagret `b4_avgangar_forandring` i gruppen för varje UA, med grönt för fler och
-rött för färre avgångar och etiketter med antal avgångar och invånare.
+I QGIS finns effekten i gruppen för varje UA:
+
+- `b4_effekt`: effektytan som rutnät, grönt för vinnare och rött för förlorare, i invånare × avgångar per
+  vardag och hektar;
+- `b4_hallplatser_frekvens`: hållplatserna efter förändrat antal avgångar i procent, med etiketter som
+  "Vikingagränd 22 → 0";
+- `b4_avgangar_forandring`: de exakta 400 m-ytorna med antal avgångar och invånare (släckt från början).
 
 ![Figur 4.16](../output/kartor/b4_16_avgangar_forandring.png)
 
-*Figur 4.16. Fler (grönt) och färre (rött) avgångar per vardag inom 400 m per UA, med antal invånare. Ljusare
-färg anger rutor med färre invånare. Till höger nere: invånare i Mariehamn som får fler respektive färre
-avgångar.*
+*Figur 4.16. Effekt per UA: förändrat antal avgångar inom 400 m × befolkning, utjämnad yta (grönt vinnare,
+rött förlorare), och hållplatserna efter förändrat antal avgångar i procent. Till höger nere: invånare i
+Mariehamn som får fler respektive färre avgångar.*
 
 Förändringarna är lokala och syns bara i de berörda områdena (figur 4.14):
 

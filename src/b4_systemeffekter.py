@@ -254,6 +254,17 @@ def berakna():
         tk[f'klass_{sid}'] = k_
         tk[f'avg_{sid}'] = av[sid].round(0).astype(int)
     tk.round({'bef': 5}).to_csv(P / 'b4_systemeffekter_tackning.csv.gz', index=False)
+    # avgångar per hållplats och scenario (för hållplatsernas förändring i procent)
+    ids = sorted(set().union(*[set(h.index) for h in hpl_scen.values()]))
+    hp = pd.DataFrame(index=pd.Index(ids, name='stop_id'))
+    for sid, h in hpl_scen.items():
+        hp[f'avg_{sid}'] = h.avgangar.reindex(ids).fillna(0).astype(int)
+        for k in ('x', 'y', 'namn', 'linjer'):
+            if k not in hp:
+                hp[k] = h[k].reindex(ids)
+            else:
+                hp[k] = hp[k].fillna(h[k].reindex(ids))
+    hp.to_csv(P / 'b4_systemeffekter_hallplatser.csv')
     with open(P / 'b4_systemeffekter.json', 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1, default=float)
     return res
@@ -679,6 +690,47 @@ def rita_delta(ax, sid, zorder=2):
     y.plot(ax=ax, color=rgba, edgecolor=[delta_farg(v) for v in y.delta], linewidth=0.8, zorder=zorder)
 
 
+HPL_KLASSER = [('Utgår (−100 %)', '#d7191c'), ('−99 till −50 %', '#f46d43'), ('−49 till −1 %', '#fdae61'),
+               ('0 %', '#ffffbf'), ('1 till 49 %', '#d9ef8b'), ('50 till 99 %', '#91cf60'),
+               ('+100 % eller mer / ny hållplats', '#1a9850')]
+
+
+def hpl_klass(a0, a1):
+    if a0 == 0:
+        return 6
+    p_ = 100.0 * (a1 - a0) / a0
+    return 0 if a1 == 0 else 1 if p_ <= -50 else 2 if p_ < 0 else 3 if p_ == 0 else 4 if p_ < 50 else 5 if p_ < 100 else 6
+
+
+@lru_cache(maxsize=1)
+def tackning_punkter():
+    return pd.read_csv(P / 'b4_systemeffekter_tackning.csv.gz')
+
+
+def rita_effekt(ax, sid, L=30.0, zorder=2):
+    """Effekt = förändrat antal avgångar inom 400 m × befolkning, utjämnad yta (grönt vinnare, rött förlorare);
+    opaciteten ökar med effektens storlek."""
+    import tackningsytor as T
+    from matplotlib import cm
+    gx, gy, E = T.effektyta(tackning_punkter(), sid)
+    c = plt.get_cmap('RdYlGn')(np.clip(0.5 + E / (2 * L), 0, 1))
+    c[..., 3] = np.clip(np.abs(E) / 6.0, 0, 1) * 0.85
+    h = T.EFFEKT_CELL / 2
+    ax.imshow(c, origin='lower', extent=(gx[0] - h, gx[-1] + h, gy[0] - h, gy[-1] + h), interpolation='bilinear',
+              zorder=zorder)
+
+
+def rita_hpl_frekvens(ax, sid, zorder=7):
+    """Hållplatser färgade efter förändrat antal avgångar per vardag (%)."""
+    hp = pd.read_csv(P / 'b4_systemeffekter_hallplatser.csv')
+    d = hp[(hp[f'avg_{sid}'] > 0) | (hp.avg_idag > 0)]
+    k = np.array([hpl_klass(a0, a1) for a0, a1 in zip(d.avg_idag, d[f'avg_{sid}'])])
+    for kk in sorted(set(k), key=lambda v: v == 3, reverse=True):
+        m = k == kk
+        ax.scatter(d.x[m], d.y[m], s=34 if kk != 3 else 22, color=HPL_KLASSER[kk][1], edgecolor='white' if kk != 3 else '#8a877e',
+                   linewidth=0.8, zorder=zorder + (kk != 3))
+
+
 def fig_avgangar_forandring(res):
     """Fler och färre avgångar per vardag inom 400 m per UA (huvudalternativen och Solberget indraget),
     viktat med befolkningen, och en sammanställning av invånare som får fler respektive färre avgångar."""
@@ -705,9 +757,10 @@ def fig_avgangar_forandring(res):
         ax = fig.add_subplot(gs[n_ // 3, n_ % 3])
         K.ny_karta(uts, ax=ax, titel=rub)
         D.befolkning().boundary.plot(ax=ax, color='#b9b4a8', linewidth=0.4, alpha=0.8, zorder=1)
-        rita_delta(ax, sid)
+        rita_effekt(ax, sid)
         ax.set_xlim(uts[0], uts[1]); ax.set_ylim(uts[2], uts[3]); ax.set_xlabel(''); ax.set_ylabel('')
         K.rita_linjer(ax, lw=1.4, alpha=0.85, zorder=4, etikett=False)
+        rita_hpl_frekvens(ax, sid)
         if fid == 'sol':
             rita_ua(ax, '4')
             xs, ys = hxy[F.HPL['Solberget']]
@@ -719,7 +772,8 @@ def fig_avgangar_forandring(res):
         f = res[sid]['forandring_avgangar_mariehamn']
         txt = [f"Fler avgångar: {f['inv_fler']} inv." + (f" (+{f['max_fler']} per vardag)" if f['inv_fler'] else ''),
                f"Färre avgångar: {f['inv_farre']} inv." + (f" ({f['max_farre']} per vardag)".replace('-', '−')
-                                                          if f['inv_farre'] else '')]
+                                                          if f['inv_farre'] else ''),
+               f"Effekt netto: {f['invavg_netto']:+,d} inv. × avgångar".replace(',', ' ').replace('-', '−')]
         ax.text(0.02, 0.98, '\n'.join(txt), transform=ax.transAxes, ha='left', va='top', fontsize=7.4, color=K.TEXT,
                 zorder=30, linespacing=1.5,
                 bbox=dict(boxstyle='round,pad=0.45', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.95))
@@ -747,15 +801,22 @@ def fig_avgangar_forandring(res):
     for s_ in ['top', 'right']:
         ax.spines[s_].set_visible(False)
     ax.set_title('Invånare med färre (rött) och fler (grönt) avgångar', loc='left', fontsize=9.5, fontweight='bold')
-    hnd = [Patch(facecolor=f, edgecolor=f, label=l + ' avgångar per vardag') for _, _, l, f in DELTA_KLASSER]
-    hnd += [Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=11, label='Ny hållplats'),
+    from matplotlib import cm
+    rg = plt.get_cmap('RdYlGn')
+    hnd = [Patch(facecolor=rg(v), alpha=0.85, label=l) for v, l in
+           [(0.0, 'Effekt: förlorare (färre avgångar × invånare)'), (0.3, ''), (0.7, ''),
+            (1.0, 'Effekt: vinnare (fler avgångar × invånare)')] if l]
+    hnd += [Line2D([], [], marker='o', ls='', color=f, markeredgecolor='white' if i != 3 else '#8a877e',
+                   markersize=7, label=f'Hållplats: {l}') for i, (l, f) in enumerate(HPL_KLASSER)]
+    hnd += [Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=11, label='Ny hållplats (UA)'),
             Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Hållplats utgår för linjen')]
-    fig.legend(handles=hnd, loc='lower center', ncol=4, fontsize=7.4, frameon=False, bbox_to_anchor=(0.5, 0.0))
-    fig.text(0.99, -0.012, 'Underlag: Ålandstrafiken (GTFS, påstigandedata), befolkningsrutor 2024, kust GSHHG. Antal '
-             'avgångar = unika turer som stannar inom 400 m; invånare i Mariehamn.', ha='right', fontsize=6.4,
-             color=K.TEXT2)
-    fig.suptitle('Fler och färre avgångar per vardag inom 400 m – huvudalternativet per UA (ljusare färg = färre '
-                 'invånare i rutan)', x=0.01, ha='left', fontsize=12, fontweight='bold')
+    fig.legend(handles=hnd, loc='lower center', ncol=4, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.01))
+    fig.text(0.99, -0.035, 'Underlag: Ålandstrafiken (GTFS, påstigandedata), befolkningsrutor 2024, kust GSHHG. Effekt = '
+             '(avgångar efter − i dag) × invånare per 50 m-punkt, utjämnad (gauss, 150 m). Antal avgångar = unika turer som '
+             'stannar inom 400 m; invånare i Mariehamn. Linjerna ritade som raka streck mellan hållplatserna.',
+             ha='right', fontsize=6.2, color=K.TEXT2)
+    fig.suptitle('Effekt per UA: förändrat antal avgångar inom 400 m × befolkning (grönt vinnare, rött förlorare)',
+                 x=0.01, ha='left', fontsize=12, fontweight='bold')
     ut = C.KARTOR / 'b4_16_avgangar_forandring.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut

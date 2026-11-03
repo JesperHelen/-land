@@ -35,7 +35,8 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 4.2, 4.4, 4.6 utredningsalternativ 1–3 | `b4_ua_hallplatser`, `b4_ua_korvagar` (fält `ua`: 1a, 1b, 2, 3; `objekt`: befintlig väg / planerad väg / utgår) | Standard |
 | Linjerna i UA (huvudalternativ) | `b4_ua_linjer` (fält `ua`: 1a, 1b och 4 = linje V–Ö, 2, 3) | Linjer i utredningsalternativen (huvudalternativ) |
 | 4.10 UA 4 – linje V–Ö via flygplatsen | `b4_ua_hallplatser`, `b4_ua_korvagar`, `b4_ua_linjer` (ua 4), `b4_tackning_forandring` (scenario 4_VO) | Standard |
-| 4.16 Fler och färre avgångar per vardag inom 400 m | `b4_avgangar_forandring` (fält `scenario`; `delta_avgangar`, `invanare`, `invanare_mariehamn`, `invanare_per_km2`, `etikett`) | Grönt fler, rött färre avgångar (sex klasser), etikett med avgångar och invånare |
+| 4.16 Effekt: avgångar × befolkning (vinnare/förlorare) | `b4_effekt` (fält `scenario`, `klass`, `effekt_min`/`effekt_max` i invånare × avgångar per vardag och ha) och `b4_hallplatser_frekvens` (fält `scenario`, `avgangar_idag`, `avgangar_efter`, `andring_pct`, `klass`) | Grönt vinnare, rött förlorare (tio klasser); hållplatser −100 % till +100 % |
+| 4.16 Fler och färre avgångar per vardag inom 400 m (exakta ytor) | `b4_avgangar_forandring` (fält `scenario`; `delta_avgangar`, `invanare`, `invanare_mariehamn`, `invanare_per_km2`, `etikett`) | Grönt fler, rött färre avgångar (sex klasser), etikett med avgångar och invånare |
 | 4.13–4.14 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` och `b4_tackning_forandring` (fält `scenario`: idag, 1a, 1a_ryms, 1a_VO, 1b, 2, 3, 4, 4_VO, 4_VO_sol, 4_Y) | Turtäthet inom 400 m / Förändrad turtäthetsklass |
 | Nyckeltal per scenario (bussar, omloppstid, km, täckning, kostnad) | `b4_nyckeltal_scenarier` (tabell utan geometri) | – |
 | 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |

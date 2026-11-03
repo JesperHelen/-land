@@ -408,10 +408,12 @@ bytet (cirka 3 resenärsminuter per vardag). Med höstens resande, cirka tre gå
 större än i den tidigare versionen, men högst cirka 3 minuter per berörd resa i huvudalternativen. Det varv som i
 dag har under 5 minuter i centrum är V 07:50 med Ö:s skoltur 08:20; sammanslagningen lägger inte till några.
 
-**Fler och färre avgångar.** Bara UA 3 ger någon färre avgångar: 24 invånare vid Vikingagränd får 22 avgångar
+**Effekt: fler och färre avgångar × befolkning.** Effekten är förändrat antal avgångar per vardag inom 400 m
+gånger antalet invånare, utlagd som en utjämnad yta där grönt är vinnare och rött förlorare (figur 12b).
+Hållplatserna färgas efter förändrat antal avgångar i procent. Bara UA 3 ger någon färre avgångar: 24 invånare vid Vikingagränd får 22 avgångar
 färre per vardag, medan 44 invånare vid Bo-Bil får 22 fler. Om Solberget dras in på alla Ö-turer (variant av
 UA 4) får 49 invånare 20 avgångar färre, mot 20 invånare med 17 fler vid flygplatsen, och nettot blir negativt.
-I QGIS visas förändringen i lagret `b4_avgangar_forandring` (grönt fler, rött färre) i gruppen för varje UA.
+I QGIS visas effektytan i lagret `b4_effekt` och hållplatserna i `b4_hallplatser_frekvens`, i gruppen för varje UA.
 
 Andelen med svag tillgänglighet ökar med Möckelö Strand ny. Det beror på att invånare som i dag saknar
 hållplats får en med 16 avgångar per vardag: de flyttar från gruppen *ingen hållplats* till *svag
@@ -429,8 +431,8 @@ ram sämre klass än i dag.*
 
 ![Fler och färre avgångar](../output/kartor/b4_16_avgangar_forandring.png)
 
-*Figur 12b. Fler (grönt) och färre (rött) avgångar per vardag inom 400 m per UA, med antal invånare. Ljusare
-färg anger rutor med färre invånare.*
+*Figur 12b. Effekt per UA: förändrat antal avgångar inom 400 m × befolkning (grönt vinnare, rött förlorare),
+och hållplatserna efter förändrat antal avgångar i procent.*
 
 ## 5 Överslagskalkyl
 

@@ -439,6 +439,64 @@ def b4():
     stil('b4_avgangar_forandring', 'Fler (grönt) och färre (rött) avgångar per vardag inom 400 m',
          qml(r_klassad('delta_avgangar', kl_d, lambda n, f: fyll(n, f, 170, 'solid', f, 0.5)),
              labeling=etiketter('if("invanare" >= 1, "etikett", \'\')', storlek=8, placering=1)), True)
+    # effekt = förändrat antal avgångar inom 400 m × befolkning, utjämnad yta på 50 m-rutnät (vinnare/förlorare)
+    em = []
+    for sid in [k for k in se if k != 'idag']:
+        m_ = T.effekt_mesh(tk, sid)
+        if m_.empty:
+            continue
+        m_['scenario'] = sid; m_['namn'] = se[sid]['namn']
+        em.append(m_)
+    em = pd.concat(em, ignore_index=True)
+    kl_e = [(-9999, -20, '≤ −20 (förlorare)', '#a50026', 230), (-20, -10, '−20 till −10', '#d73027', 215),
+            (-10, -3, '−10 till −3', '#f46d43', 195), (-3, -0.5, '−3 till −0,5', '#fdae61', 165),
+            (-0.5, 0, '−0,5 till 0', '#fee08b', 110), (0, 0.5, '0 till 0,5', '#d9ef8b', 110),
+            (0.5, 3, '0,5 till 3', '#a6d96a', 165), (3, 10, '3 till 10', '#66bd63', 195),
+            (10, 20, '10 till 20', '#1a9850', 215), (20, 9999, '≥ 20 (vinnare)', '#006837', 230)]
+    gr = [lo for lo, *_ in kl_e[1:]]
+    em['klass_nr'] = np.digitize(em.effekt_ha, gr)                 # 0 … 9 enligt kl_e
+    # rutorna slås ihop per scenario och klass (inga skarvar mellan rutorna, men rutnätets form behålls)
+    eg = em.dissolve(by=['scenario', 'klass_nr'], as_index=False,
+                     aggfunc={'namn': 'first', 'effekt_ha': ['min', 'max', 'mean']})
+    eg.columns = ['_'.join(c).strip('_') if isinstance(c, tuple) else c for c in eg.columns]
+    eg = eg.rename(columns={'namn_first': 'namn', 'effekt_ha_min': 'effekt_min', 'effekt_ha_max': 'effekt_max',
+                            'effekt_ha_mean': 'effekt_medel'})
+    eg['klass'] = eg.klass_nr.map({i: k[2] for i, k in enumerate(kl_e)})
+    eg['effekt_mitt'] = eg.klass_nr.map({i: (max(k[0], -40) + min(k[1], 60)) / 2 for i, k in enumerate(kl_e)})
+    eg[['effekt_min', 'effekt_max', 'effekt_medel']] = eg[['effekt_min', 'effekt_max', 'effekt_medel']].round(2)
+    eg['geometry'] = mp(eg.geometry)
+    skriv(gpd.GeoDataFrame(eg[['scenario', 'namn', 'klass_nr', 'klass', 'effekt_mitt', 'effekt_min', 'effekt_max',
+                               'effekt_medel', 'geometry']], geometry='geometry', crs=C.CRS_METRISK), 'b4_effekt')
+    stil('b4_effekt', 'Effekt: avgångar × befolkning per hektar (grönt vinnare, rött förlorare)',
+         qml(r_klassad('effekt_mitt', kl_e, lambda n, f, a: fyll(n, f, a))), True)
+
+    # hållplatser: förändrat antal avgångar per vardag i procent
+    hp = pd.read_csv(P / 'b4_systemeffekter_hallplatser.csv')
+    hl = []
+    kl_h = [('Utgår (−100 %)', '#d7191c'), ('−99 % till −50 %', '#f46d43'), ('−49 % till −1 %', '#fdae61'),
+            ('0 %', '#ffffbf'), ('1 % till 49 %', '#d9ef8b'), ('50 % till 99 %', '#91cf60'),
+            ('+100 % eller mer / ny hållplats', '#1a9850')]
+    def hklass(a0, a1):
+        if a0 == 0:
+            return kl_h[6][0]
+        p_ = 100.0 * (a1 - a0) / a0
+        return (kl_h[0][0] if a1 == 0 else kl_h[1][0] if p_ <= -50 else kl_h[2][0] if p_ < 0 else kl_h[3][0]
+                if p_ == 0 else kl_h[4][0] if p_ < 50 else kl_h[5][0] if p_ < 100 else kl_h[6][0])
+    for sid in [k for k in se if k != 'idag']:
+        d = hp[(hp[f'avg_{sid}'] > 0) | (hp.avg_idag > 0)]
+        hl.append(pd.DataFrame({'scenario': sid, 'namn_scenario': se[sid]['namn'], 'stop_id': d.stop_id, 'hallplats': d.namn,
+                                'linjer': d.linjer, 'avgangar_idag': d.avg_idag, 'avgangar_efter': d[f'avg_{sid}'],
+                                'andring_pct': np.where(d.avg_idag > 0, (100.0 * (d[f'avg_{sid}'] - d.avg_idag)
+                                                                         / d.avg_idag.where(d.avg_idag > 0, 1)).round(0), 100.0),
+                                'klass': [hklass(a0, a1) for a0, a1 in zip(d.avg_idag, d[f'avg_{sid}'])],
+                                'x': d.x, 'y': d.y}))
+    hl = pd.concat(hl, ignore_index=True)
+    skriv(gpd.GeoDataFrame(hl.drop(columns=['x', 'y']), geometry=gpd.points_from_xy(hl.x, hl.y), crs=C.CRS_METRISK),
+          'b4_hallplatser_frekvens')
+    stil('b4_hallplatser_frekvens', 'Hållplatser – förändrat antal avgångar per vardag (%)',
+         qml(r_kategori('klass', [(k, k, f) for k, f in kl_h], lambda n, f: markor(n, 'circle', f, 2.6, '#ffffff', 0.4)),
+             labeling=etiketter('if("klass" <> \'0 %\', "hallplats" || \' \' || "avgangar_idag" || \' → \' || "avgangar_efter", \'\')',
+                                storlek=7)), True)
     namn = ['Ingen hållplats inom 400 m', 'Mycket låg (1–14 avg/vardag)', 'Låg (15–29)', 'Medel (30–59)', 'God (≥ 60)']
     ts = []
     for sid in se:
