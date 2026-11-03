@@ -11,6 +11,7 @@ Kör efter analysstegen:  python src/gis_export.py
 """
 import datetime
 import json
+import re
 import math
 import sqlite3
 import sys
@@ -623,6 +624,7 @@ def skriv_stilar():
                       'update_time': nu})
         bas = namn.split(' (')[0].replace(' ', '_').replace('/', '-')
         bas = bas.translate(str.maketrans('åäöÅÄÖ–', 'aaoAAO-')).encode('ascii', 'ignore').decode()
+        bas = re.sub(r'_+', '_', re.sub(r'[^A-Za-z0-9_-]', '_', bas)).strip('_')   # giltigt filnamn även i Windows
         fil = f"{lager}__{bas}.qml"
         (STILAR / fil).write_text(xml, encoding='utf-8')
     df = pd.DataFrame(rader)
