@@ -172,6 +172,10 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       `b4_hallplatser_frekvens` (avgångar i dag → efter, % i sju klasser), i varje UA-grupp. Figur b4_16 omgjord till
       effektkarta med hållplatserna i %. Data: `b4_systemeffekter_hallplatser.csv`, `avg_<scenario>` i
       `b4_systemeffekter_tackning.csv.gz`.
+- [x] **Kvällens omlopp sammanslagna med dagens** (beställaren 2026-11-03): `OPERATOR_SLA_IHOP` – omlopp 206
+      (S/N från 16:50) körs av 205 och 207 (V/Ö från 16:40) av 208. Fyra omlopp + J = 5 bussar, omloppstid 61,4 h.
+      Antal turer oförändrat (16/20, 4Y 8/8, Solberget 17/20). Kostnad 1a ★ +11,6 k€, 1b ★ +6,7 k€, 4 ★ +6,4 k€,
+      4Y +2,8 k€. Känslighet UA 4: 5,5–7 min → Solberget på 10 / 6 Ö-turer; över 7 min 6 / 2 turer.
 - [ ] **OSRM-vägdragning i kartor** (beställaren 2026-11-03: linjerna och UA längs vägarna). Blockerat: proxyn
       nekar router.project-osrm.org (403). Kräver att domänen tillåts i miljöns nätverksinställningar, eller att
       `rutta_med_osrm.py` körs i QGIS och GeoPackage-filen skickas tillbaka (`s01_vagdragning.py --fran-gis`).

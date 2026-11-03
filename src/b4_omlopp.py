@@ -148,6 +148,8 @@ def bygg_omlopp(t, min_vand=MIN_VANDTID, par=NORMPAR, genomgang_min=GENOMGANG_MI
 #   N 16:50, S 17:20, N 17:50 (i datan 208) hör till omlopp 204.
 OPERATOR_RATTELSE = {'1000000761': '205', '1000000251': '205', '120010': '205', '1000000250': '205',
                      '120017': '204', '130018': '204', '120019': '204'}
+#   kvällens omlopp körs vidare av dagens: 206 (S/N från 16:50) av omlopp 205 och 207 (V/Ö från 16:40) av omlopp 208.
+OPERATOR_SLA_IHOP = {'206': '205', '207': '208'}
 
 
 def omlopp_operator(t, flytta=None):
@@ -163,6 +165,7 @@ def omlopp_operator(t, flytta=None):
     o[t.linje == 'J'] = 'J'
     for tid, k in OPERATOR_RATTELSE.items():
         o[t.trip_id == tid] = k
+    o = o.replace(OPERATOR_SLA_IHOP)
     for i in np.where(o.isna())[0]:
         kand = []
         for k in o.dropna().unique():
