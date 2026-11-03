@@ -24,9 +24,9 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | Bakgrund i alla kartor | `00_land`, `00_stadslinjer_forskjutna`, `00_hallplatser`, `00_befolkningsrutor` | Standard |
 | (Linjerna utan förskjutning, en geometri per linje) | `00_stadslinjer` | Standard |
 | 1.2 Omfördelning av centrumpåstigningar | `a1_omfordelning_centrum` | Flyttade påstigningar |
-| 1.3 Påstigande sommar/höst | `a1_zoner_pastigande` | *Påstigande höst, tvättad data* (standard) / *Påstigande sommar, korrigerat* / *Påstigande sommar, ursprungligt* |
-| 1.4 OD-flöden FM | `a1_od_FM_host`, `a1_od_FM_sommar`, `a1_od_FM_levererad` | Standard (bredd och färg efter resor/h) |
-| 1.5 OD-flöden EM | `a1_od_EM_host`, `a1_od_EM_sommar`, `a1_od_EM_levererad` | Standard |
+| 1.3 Påstigande sommar/höst | `a1_zoner_pastigande` | *Påstigande höst, tvättad data* (standard) / *Påstigande sommar, ursprungligt* / *Påstigande sommar, korrigerat* (tidigare version) |
+| 1.4 OD-flöden FM | `a1_od_FM_host` (filter `"i_karta" = 1` = 85 % av resorna); `a1_od_FM_sommar` och `a1_od_FM_levererad` som bakgrund | Böjda pilar i färdriktningen, med pilspets mitt på bågen och vid målet; bredd och färg efter resor/h |
+| 1.5 OD-flöden EM | `a1_od_EM_host` (som ovan) | Som ovan |
 | 2.1 Täckning 400 m och turtäthet | `a2_tackningsytor` | *Täckning 400 m* (vänster) / *Turtäthet inom 400 m* (höger) |
 | 2.2 Turtäthet Mariehamn | `a2_tackningsytor`, `00_hallplatser` | Turtäthet inom 400 m |
 | 2.3 Svag faktisk tillgänglighet | `a2_tackningsytor`, `a2_tackning_per_ruta` | *Svag faktisk tillgänglighet* / *Invånare med svag tillgänglighet per ruta* |
@@ -35,6 +35,7 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 4.2, 4.4, 4.6 utredningsalternativ 1–3 | `b4_ua_hallplatser`, `b4_ua_korvagar` (fält `ua`: 1a, 1b, 2, 3; `objekt`: befintlig väg / planerad väg / utgår) | Standard |
 | Linjerna i UA (huvudalternativ) | `b4_ua_linjer` (fält `ua`: 1a, 1b och 4 = linje V–Ö, 2, 3) | Linjer i utredningsalternativen (huvudalternativ) |
 | 4.10 UA 4 – linje V–Ö via flygplatsen | `b4_ua_hallplatser`, `b4_ua_korvagar`, `b4_ua_linjer` (ua 4), `b4_tackning_forandring` (scenario 4_VO) | Standard |
+| 4.16 Fler och färre avgångar per vardag inom 400 m | `b4_avgangar_forandring` (fält `scenario`; `delta_avgangar`, `invanare`, `invanare_mariehamn`, `invanare_per_km2`, `etikett`) | Grönt fler, rött färre avgångar (sex klasser), etikett med avgångar och invånare |
 | 4.13–4.14 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` och `b4_tackning_forandring` (fält `scenario`: idag, 1a, 1a_ryms, 1a_VO, 1b, 2, 3, 4, 4_VO, 4_VO_sol, 4_Y) | Turtäthet inom 400 m / Förändrad turtäthetsklass |
 | Nyckeltal per scenario (bussar, omloppstid, km, täckning, kostnad) | `b4_nyckeltal_scenarier` (tabell utan geometri) | – |
 | 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |
@@ -131,7 +132,8 @@ fälten `huvudalternativ` och `utesluten`. Filtren kan ändras under *Lageregens
 - **`a2_tackningsytor`** och **`b4_tackning_scenarier`** är befolkningsrutornas landdel uppdelad efter
   tillgänglighetsklass. Gränserna är exakta 400 m-cirklar runt hållplatserna (inte rutor), så ytorna blir runda
   även i stor skala. Fältet `invanare` anger beräknat antal invånare i ytan, med antagandet att befolkningen är
-  jämnt fördelad inom 1 km-rutan. `b4_tackning_forandring` är de delar av cirklarna där klassen ändras mot i dag.
+  jämnt fördelad inom 1 km-rutan. `b4_tackning_forandring` är de delar av cirklarna där klassen ändras mot i dag,
+och `b4_avgangar_forandring` de delar där antalet avgångar per vardag inom 400 m ändras (med antal invånare).
 - **Indikativa hållplatslägen** i `a3_behov_ny_linjestrackning` är befolkningsviktade tyngdpunkter och ska
   anpassas till gatunätet.
 - Lagren skapas om med `python src/gis_export.py` efter att analysstegen har körts.

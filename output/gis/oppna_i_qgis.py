@@ -39,7 +39,9 @@ sc = lambda sid: f'"scenario" = \'{sid}\''
 
 def systemeffekt(sid, rubrik, tand=False):
     """Förändrad turtäthet (grön/röd) ovanpå turtätheten med UA:t, för ett scenario."""
-    lag = [] if sid == 'idag' else [L('b4_tackning_forandring', 'Förändring mot i dag (grön bättre, röd sämre)', sc(sid))]
+    lag = [] if sid == 'idag' else [
+        L('b4_avgangar_forandring', 'Fler (grönt) och färre (rött) avgångar per vardag inom 400 m', sc(sid)),
+        L('b4_tackning_forandring', 'Förändrad turtäthetsklass (grön bättre, röd sämre)', sc(sid), tand=False)]
     return G(rubrik, lag + [L('b4_tackning_scenarier', 'Turtäthet inom 400 m' + ('' if sid == 'idag' else ' med UA:t'),
                               sc(sid))], tand)
 
@@ -52,30 +54,35 @@ GRUPPER = [
         G('UA 1a – Möckelö Strand ny via dagens vägar (V och Ö sammanslagna)', [
             L('b4_ua_hallplatser', 'Ny hållplats', u_('1a')),
             L('b4_ua_korvagar', 'Körväg: befintlig väg fram och tillbaka (2 + 2 min)', u_('1a')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet (15 av 20 turer)', sc('1a_VO')),
+            L('b4_avgangar_forandring', 'Fler avgångar per vardag inom 400 m (15 av 20 turer; grönt fler, rött färre)', sc('1a_VO')),
+            L('b4_tackning_forandring', 'Förändrad turtäthetsklass', sc('1a_VO'), tand=False),
             L('b4_ua_linjer', 'Linje V–Ö (V och Ö sammanslagna)', u_('1a')),
         ], True),
         G('UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (slinga, V och Ö sammanslagna)', [
             L('b4_ua_hallplatser', 'Ny hållplats', u_('1b')),
             L('b4_ua_korvagar', 'Körväg: förlängningen (planerad, 1 min) och befintlig väg tillbaka (2 min)', u_('1b')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet (15 av 20 turer)', sc('1b')),
+            L('b4_avgangar_forandring', 'Fler avgångar per vardag inom 400 m (15 av 20 turer; grönt fler, rött färre)', sc('1b')),
+            L('b4_tackning_forandring', 'Förändrad turtäthetsklass', sc('1b'), tand=False),
             L('b4_ua_linjer', 'Linje V–Ö (bussen fortsätter V → Ö efter 0,5 min)', u_('1b')),
         ]),
         G('UA 2 – N2 på linje Ö', [
             L('b4_ua_hallplatser', 'Ny hållplats N2', u_('2')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet', sc('2')),
+            L('b4_avgangar_forandring', 'Fler (grönt) och färre (rött) avgångar per vardag inom 400 m', sc('2')),
+            L('b4_tackning_forandring', 'Förändrad turtäthetsklass', sc('2'), tand=False),
             L('b4_ua_linjer', 'Linje Ö', u_('2')),
         ]),
         G('UA 3 – Linje N via Bo-Bil', [
             L('b4_ua_hallplatser', 'Bo-Bil (ny) och Vikingagränd (utgår)', u_('3')),
             L('b4_ua_korvagar', 'Körväg som utgår och ny körväg', u_('3')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet', sc('3')),
+            L('b4_avgangar_forandring', 'Fler (grönt) och färre (rött) avgångar per vardag inom 400 m', sc('3')),
+            L('b4_tackning_forandring', 'Förändrad turtäthetsklass', sc('3'), tand=False),
             L('b4_ua_linjer', 'Linje N via Bo-Bil', u_('3')),
         ]),
         G('UA 4 – Linje V–Ö via flygplatsen (V och Ö sammanslagna)', [
             L('b4_ua_hallplatser', 'Ny hållplats vid terminalen', u_('4')),
             L('b4_ua_korvagar', 'Körväg Posten – flygplatsen – Norra Svibyvägen', u_('4')),
-            L('b4_tackning_forandring', 'Förändrad turtäthet (15 av 20 turer)', sc('4_VO')),
+            L('b4_avgangar_forandring', 'Fler avgångar per vardag inom 400 m (15 av 20 turer; grönt fler, rött färre)', sc('4_VO')),
+            L('b4_tackning_forandring', 'Förändrad turtäthetsklass', sc('4_VO'), tand=False),
             L('b4_ua_linjer', 'Linje V–Ö via flygplatsen', u_('4')),
         ]),
         G('Systemeffekter – turtäthet inom 400 m, huvudalternativ per UA (välj ett)', [
@@ -101,9 +108,12 @@ GRUPPER = [
                                                          'a3_behov_400m']], False),
     ('Kap 2 Täckning och turtäthet (fig 2.1–2.3)', [L('a2_tackning_per_ruta'), L('a2_tackningsytor')], False),
     ('Kap 1 OD-matris (fig 1.2–1.5)', [L('a1_zoner_pastigande'), L('a1_omfordelning_centrum'),
-                                      L('a1_od_FM_host'), L('a1_od_FM_sommar', tand=False), L('a1_od_FM_levererad', tand=False),
-                                      L('a1_od_EM_host', tand=False), L('a1_od_EM_sommar', tand=False),
-                                      L('a1_od_EM_levererad', tand=False)], False),
+                                      L('a1_od_FM_host', 'OD-flöden FM 06–09 (85 % av resorna, pilar i färdriktningen)', '"i_karta" = 1'),
+                                      L('a1_od_EM_host', 'OD-flöden EM 15–18 (85 % av resorna, pilar i färdriktningen)', '"i_karta" = 1', tand=False),
+                                      L('a1_od_FM_host', 'OD-flöden FM 06–09, alla par', tand=False),
+                                      L('a1_od_EM_host', 'OD-flöden EM 15–18, alla par', tand=False),
+                                      L('a1_od_FM_sommar', tand=False), L('a1_od_EM_sommar', tand=False),
+                                      L('a1_od_FM_levererad', tand=False), L('a1_od_EM_levererad', tand=False)], False),
     ('Bakgrund', [L('00_hallplatser', 'Hållplatser (avgångar per vardag)', tand=False),
                   L('00_viapunkter', 'Via-punkter för OSRM ("gömda stopp", redigerbara)', tand=False),
                   L('00_stadslinjer_forskjutna', 'Stadslinjer i dag – vägdragning, förskjutna där de delar gata'),

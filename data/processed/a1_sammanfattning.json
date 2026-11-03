@@ -286,17 +286,17 @@
   ],
   "nyckeltal": {
    "FM": {
-    "resor_h": 31.74052795031055,
-    "andel_O_centrum": 0.19451757325512412,
-    "andel_D_centrum": 0.46331559636550845,
-    "andel_resor_via_centrum": 0.6578331696206325,
+    "resor_h": 31.740527950310558,
+    "andel_O_centrum": 0.19472696625121425,
+    "andel_D_centrum": 0.4721549597222037,
+    "andel_resor_via_centrum": 0.666881925973418,
     "andel_gangpar": 0.0
    },
    "EM": {
-    "resor_h": 29.64526870070349,
-    "andel_O_centrum": 0.46331559636550845,
-    "andel_D_centrum": 0.19451757325512412,
-    "andel_resor_via_centrum": 0.6578331696206325,
+    "resor_h": 29.645268700703483,
+    "andel_O_centrum": 0.47215495972220384,
+    "andel_D_centrum": 0.19472696625121416,
+    "andel_resor_via_centrum": 0.666881925973418,
     "andel_gangpar": 0.0
    }
   },

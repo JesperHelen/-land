@@ -179,8 +179,17 @@ def _pil_polygon(B, s, a, b, w, pil_l, pil_b, n=36):
                       (P - N * w / 2)[::-1]])
 
 
-def rita_floden(ax, floden, pos, vmax, span=None, radie=None, cmap=BLA, zorder=6):
-    """floden: DataFrame(fran, till, resor) ; pos: {zon: np.array([x, y])} ; vmax gemensam skala."""
+def _mittpil(B, s, w, langd, bredd):
+    """Fylld pilspets mitt på bågen, riktad i färdriktningen."""
+    m = s[-1] / 2
+    a, b = _langs(B, s, [m - langd / 2, m + langd / 2])
+    t = (b - a) / max(np.hypot(*(b - a)), 1e-9); n = np.array([-t[1], t[0]])
+    return np.vstack([b, a + n * bredd / 2, a + t * langd * 0.25, a - n * bredd / 2])
+
+
+def rita_floden(ax, floden, pos, vmax, span=None, radie=None, cmap=BLA, zorder=6, mittpil=True):
+    """floden: DataFrame(fran, till, resor) ; pos: {zon: np.array([x, y])} ; vmax gemensam skala.
+    Varje flöde ritas som en båge med pilspets vid målet och (mittpil) en pilspets mitt på bågen."""
     x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
     span = span or max(x1 - x0, y1 - y0)
     radie = radie or (lambda z: span * 0.004)
@@ -195,10 +204,13 @@ def rita_floden(ax, floden, pos, vmax, span=None, radie=None, cmap=BLA, zorder=6
         B, s = _bage(p0, p2)
         w = bredd(r.resor)
         poly = _pil_polygon(B, s, radie(r.fran) + span * 0.002, s[-1] - radie(r.till) - span * 0.002, w,
-                            max(2.4 * w, span * 0.008), max(2.3 * w, span * 0.006))
+                            max(2.6 * w, span * 0.011), max(2.4 * w, span * 0.008))
         if poly is not None:
             ax.add_patch(Polygon(poly, closed=True, facecolor=farg(r.resor), edgecolor='white', lw=0.4,
                                  alpha=0.93, zorder=zorder))
+            if mittpil and s[-1] > span * 0.06:
+                ax.add_patch(Polygon(_mittpil(B, s, w, max(2.4 * w, span * 0.010), max(2.6 * w, span * 0.008)),
+                                     closed=True, facecolor=farg(r.resor), edgecolor='white', lw=0.35, zorder=zorder))
     return bredd, farg
 
 

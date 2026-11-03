@@ -16,8 +16,8 @@ Ny tvättad data (höst 2026, beställaren 2026-11-02; data_las.pastigande)
   K1  Registrering vid ändhållplatsen: andel av centrumpåstigningarna på turens första hållplats
   K2  Startsegmentet: påstigande på de 3 första hållplatserna efter centrum / centrum, mot kontrollgruppen
   H   OD-matris med samma gravitationsmodell, linje Ö och gångpar exkluderade. Linjerna N, S, V och Ö ur
-      höstdatan utan centrumkorrigering (registreringen är rättad i datan). Linje J saknas i höstdatan och tas
-      ur sommardatan med centrumkorrigeringen S4  => OD-matrisen som används i kapitel 4
+      höstdatan och linje J (saknas i höstdatan) ur sommardatan – allt som det är, utan centrumkorrigering
+      (beställaren 2026-11-03)  => OD-matrisen som används i kapitel 4
       (a1_od_{FM,EM}_korrigerad*.csv; sommarmatrisen sparas som a1_od_{FM,EM}_sommar*.csv).
 Utdata: data/processed/a1_*.csv/json, output/kartor/a1_*.png
 """
@@ -387,17 +387,10 @@ def main():
     k_host, seg_h = kontroll_host(host, R)
     k_host.to_csv(P / 'a1_kontroll_host.csv', index=False)
     stad_J = vardagsurval([l for l in C.STADSLINJER if l not in C.LINJER_NY_DATA])     # linje J: sommardata
-    flytt_J, _, _ = centrumkorrigering(stad_J, R, BAS_K)
     O_host, mat_host = {}, {}
-    for per in ['FM', 'EM']:
+    for per in ['FM', 'EM']:                    # underlaget används som det är – ingen centrumkorrigering
         o = host[host.period == per].groupby('omrade').P.sum() / C.TIMMAR_PER_PERIOD
-        oj = o_per_omrade(stad_J, per)
-        f = flytt_J[flytt_J.period == per] if len(flytt_J) else flytt_J
-        if len(f):
-            oj[C.CENTRUM] = oj.get(C.CENTRUM, 0.0) - f.resor_h.sum()
-            for z, v in f.groupby('till_omrade').resor_h.sum().items():
-                oj[z] = oj.get(z, 0.0) + v
-        O_host[per] = o.add(oj, fill_value=0.0)
+        O_host[per] = o.add(o_per_omrade(stad_J, per), fill_value=0.0)
     for per in ['FM', 'EM']:
         m = gravitation(O_host[per], O_host[spegel[per]], c1, tillaten=~g1)
         mat_host[per] = m

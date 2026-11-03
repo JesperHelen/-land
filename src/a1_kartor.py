@@ -114,11 +114,11 @@ def fig_omfordelning():
 
 # ---------------------------------------------------------------- figur 3: påstigande före/efter (karta)
 def fig_pastigande():
-    fore = zon['O_FM_korr'] + zon['O_EM_korr']
+    fore = zon['O_FM_medO'] + zon['O_EM_medO']                 # sommardatan som den är (inkl. linje Ö), utan korrigering
     efter = zon['O_FM_host'] + zon['O_EM_host']
     vmax = max(fore.max(), efter.max())
     fig, axs = plt.subplots(1, 2, figsize=(10.4, 10.2))
-    for ax, v, t in [(axs[0], fore, 'Sommardata (korrigerad)'), (axs[1], efter, 'Höstdata (tvättad)')]:
+    for ax, v, t in [(axs[0], fore, 'Sommardata (som levererad)'), (axs[1], efter, 'Höstdata (tvättad)')]:
         K.ny_karta('tatort', ax=ax, titel=t)
         K.rita_linjer(ax, alpha=0.45, lw=1.3, zorder=3)
         cirklar(ax, v, vmax, 520, etiketter=8)
@@ -140,27 +140,31 @@ def urval(L, andel=0.85, maxn=260):
 
 
 def fig_od(per):
-    lev = pd.read_csv(P / f'a1_od_{per}_sommar.csv')
+    """OD-matrisen som används i kapitel 4 (höstdata, linje J ur sommardatan, utan korrigering): de största
+    flödena som bågar med pilar i färdriktningen."""
     kor = pd.read_csv(P / f'a1_od_{per}_korrigerad.csv')
-    A, B = urval(lev), urval(kor)
-    vmax = max(A.resor.max(), B.resor.max())
+    B = urval(kor)
+    vmax = B.resor.max()
     namn = {'FM': 'förmiddag 06–09', 'EM': 'eftermiddag 15–18'}[per]
-    fig, axs = plt.subplots(1, 2, figsize=(10.4, 10.2))
-    for ax, L, full, t in [(axs[0], A, lev, 'OD-matris sommar (korrigerad)'), (axs[1], B, kor, 'OD-matris höst (tvättad data)')]:
-        K.ny_karta('tatort', ax=ax, titel=f'{t}, {namn}')
-        tot = full.resor_h.sum()
-        odsum = full.groupby('fran').resor_h.sum().add(full.groupby('till').resor_h.sum(), fill_value=0)
-        span = 14800
-        rad = lambda z: span * (0.0025 + 0.012 * math.sqrt(odsum.get(z, 0) / odsum.max()))
-        bredd, farg = K.rita_floden(ax, L, POS, vmax, span=span, radie=rad)
-        for z, v in odsum.items():
-            if z in POS:
-                ax.add_patch(plt.Circle(POS[z], rad(z), facecolor='white', edgecolor='#52514e', lw=0.6, zorder=7))
-        via = (full.loc[(full.fran == C.CENTRUM) | (full.till == C.CENTRUM), 'resor_h'].sum()) / tot
-        ax.text(0.02, 0.975, f'{tot:.1f} resor/h · {via:.0%} av resorna till/från {C.CENTRUM}'.replace('.', ',', 1),
-                transform=ax.transAxes, fontsize=7.3, va='top', color=K.TEXT, path_effects=K.HALO, zorder=30)
-        K.flodes_forklaring(ax, vmax, bredd, farg, loc=(0.03, 0.06))
-        K.skalstock(ax, loc=(0.62, 0.035)); K.norrpil(ax); K.kalla(ax)
+    fig, ax = plt.subplots(1, 1, figsize=(8.4, 10.4))
+    K.ny_karta('tatort', ax=ax, titel=f'OD-matris, {namn} (höst 2026)')
+    tot = kor.resor_h.sum()
+    odsum = kor.groupby('fran').resor_h.sum().add(kor.groupby('till').resor_h.sum(), fill_value=0)
+    span = 14800
+    rad = lambda z: span * (0.0025 + 0.012 * math.sqrt(odsum.get(z, 0) / odsum.max()))
+    bredd, farg = K.rita_floden(ax, B, POS, vmax, span=span, radie=rad)
+    for z, v in odsum.items():
+        if z in POS:
+            ax.add_patch(plt.Circle(POS[z], rad(z), facecolor='white', edgecolor='#52514e', lw=0.6, zorder=7))
+    K.placera_etiketter(ax, [(z, POS[z], rad(z)) for z in odsum.sort_values(ascending=False).index[:12] if z in POS],
+                        fontsize=6.6)
+    via = (kor.loc[(kor.fran == C.CENTRUM) | (kor.till == C.CENTRUM), 'resor_h'].sum()) / tot
+    ax.text(0.03, 0.235, f'{tot:.1f} resor/h · {via:.0%} av resorna till/från {C.CENTRUM}\n'.replace('.', ',', 1)
+            + 'Pilarna visar färdriktningen (från ursprung\ntill destination); bågarna böjer åt höger.',
+            transform=ax.transAxes, fontsize=7.3, va='bottom', color=K.TEXT, zorder=30, linespacing=1.4,
+            bbox=dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.94))
+    K.flodes_forklaring(ax, vmax, bredd, farg, loc=(0.03, 0.06))
+    K.skalstock(ax, loc=(0.62, 0.035)); K.norrpil(ax); K.kalla(ax)
     fig.tight_layout()
     return K.spara(fig, f'a1_{4 if per == "FM" else 5}_od_{per}_fore_efter.png')
 

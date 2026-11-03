@@ -2,18 +2,19 @@
 
 > **Sammanfattning.** Utredningen bygger på tvättad påstigandedata för vardagar hösten 2026, med linjerna N, S, V
 > och Ö. Den ersätter den tidigare sommardatan (maj–september 2026), som hade flera fel. Linje J finns inte i
-> höstdatan och hämtas därför ur sommardatan, med samma korrigering som tidigare.
+> höstdatan och hämtas därför ur sommardatan. All data används som den är, utan centrumkorrigering
+> (beställaren 2026-11-03).
 >
 > - **Registreringsfelet är borta.** 93–98 % av påstigningarna vid Centrum, Nygatan registreras på turens första
 >   hållplats. Det är i nivå med landsbygdslinjerna (95–99 %); i sommardatan var andelen 0 %.
 > - **Startsegmentet:** hållplatserna närmast efter centrum har 0,24 (N) respektive 0,21 (S) gånger så många
 >   påstigningar som centrumhållplatsen. Det ligger nära kontrollgruppens 0,30, och i sommardatan var kvoten
->   0,02–0,14. Någon centrumkorrigering görs därför inte för höstdatan.
+>   0,02–0,14.
 > - **Resandet:** cirka 321 påstigande per vardag, varav 21,5 på linje J. Det är ungefär tre gånger
 >   sommarnivån, eftersom mätperioden ligger under terminstid.
 > - **OD-matrisen:** framtagen med samma gravitationsmodell som tidigare. Den ger 31,7 (FM) respektive 29,6
->   (EM) resor per timme, och 66 % av resorna går till eller från Centrum, Nygatan (sommardata efter korrigering:
->   63 %). Matrisen används som grund för utredningsalternativen i kapitel 4.
+>   (EM) resor per timme, och 67 % av resorna går till eller från Centrum, Nygatan (sommardatan: 75 %). Matrisen
+>   används som grund för utredningsalternativen i kapitel 4. Kartorna visar flödena som pilar i färdriktningen.
 >
 > Granskningen av sommardatan redovisas i avsnitt 1.3 som bakgrund. Där var stadslinjernas påstigningar vid
 > ändhållplatsen knutna till fel tur, linje Ö saknades och gångpar räknades som bussresor.
@@ -70,8 +71,8 @@ K1 är i nivå med kontrollgruppen. Linje Ö lämnar centrumområdet direkt och 
 
 Om korrigeringsmetoden från sommardatan (steg S4) ändå tillämpades skulle 8 % (FM) respektive 6 % (EM) av
 centrums påstigningar flyttas. I sommardatan var andelen 21 % respektive 15 %. Skillnaden ligger inom vad som
-kan förklaras av slumpvariation och verkliga skillnader mellan linjerna. **Ingen centrumkorrigering görs
-därför för höstdatan.** Linje J, som bara finns i sommardatan, korrigeras som tidigare.
+kan förklaras av slumpvariation och verkliga skillnader mellan linjerna. **Ingen centrumkorrigering görs.**
+Underlaget används som det är, även för linje J, som bara finns i sommardatan.
 
 ![Figur 1.1](../output/kartor/a1_1_registreringsdiagnos.png)
 
@@ -81,8 +82,8 @@ första hållplatserna efter ändhållplatsen i förhållande till påstigande v
 
 ## 1.3 Granskning av sommardatan (bakgrund)
 
-Avsnittet beskriver felen i den tidigare sommardatan och hur de korrigerades. Den korrigerade sommarmatrisen
-redovisas som jämförelse i avsnitt 1.4.
+Avsnittet beskriver felen i den tidigare sommardatan och hur de korrigerades i den tidigare versionen av
+utredningen. Korrigeringen används inte längre.
 
 ### Registrering av påstigning vid ändhållplatsen
 
@@ -152,12 +153,12 @@ linjernas startsegment (FM + EM, resor per timme).*
 
 ## 1.4 Resultat: OD-matrisen ur höstdatan
 
-*Tabell 1.4. OD-matrisen ur höstdatan jämförd med den korrigerade sommarmatrisen.*
+*Tabell 1.4. OD-matrisen ur höstdatan jämförd med sommardatan.*
 
 | | Resor/h FM | Resor/h EM | Andel resor till/från centrum | Påstigande per vardag |
 |---|---:|---:|---:|---:|
-| Sommardata, korrigerad (S4) | 10,4 | 9,7 | 63 % | 104 |
-| **Höstdata, tvättad (används i kapitel 4)** | **31,7** | **29,6** | **66 %** | **321** |
+| Sommardata som levererad, med linje Ö (S3) | 10,4 | 9,7 | 75 % | 104 |
+| **Höstdata, tvättad, utan korrigering (används i kapitel 4)** | **31,7** | **29,6** | **67 %** | **321** |
 
 Resandet under hösten är ungefär tre gånger så stort som under sommaren. Ökningen är störst på linje Ö
 (4,5 gånger), som trafikerar Strandnäs skola, och minst på linje N (3,1 gånger). Centrum, Nygatan har 37 % av påstigningarna på
@@ -165,31 +166,33 @@ linjerna N, S, V och Ö. Övriga större hållplatser är Strandnäs skola södr
 Maxinge (19), Solberget (16), Hindersbölevägen (12), Kalmarnäs vändplan (10) och Ytternäs skola (10)
 (figur 1.3).
 
-Andelen resor via centrum, 66 %, ligger nära den korrigerade sommarmatrisen (63 %). Korrigeringen av
-sommardatan gav alltså en rimlig bild av resmönstret, medan nivåerna var låga. De största OD-flödena under FM
-går från Solberget (2,3 resor per timme), Ytternäs skola (1,6), Kalmarnäs vändplan (1,5) och Doppingvägen (1,1)
-till centrum, och från centrum till Strandnäs skola södra (1,4) och Maxinge (1,2). Under EM går flödena i
+Andelen resor via centrum, 67 %, är lägre än i sommardatan (75 %), där påstigningar efter avgång
+registrerades på centrumhållplatsen. De största OD-flödena under FM går från Solberget (2,3 resor per timme),
+Ytternäs skola (1,6), Kalmarnäs vändplan (1,5) och Doppingvägen (1,1) till centrum, och från centrum till
+Strandnäs skola södra (1,5) och Maxinge (1,2). Under EM går flödena i
 motsatt riktning (figur 1.4 och 1.5). Mellan Solberget och Strandnäs skola södra går 0,7–0,8 resor per timme
 utan att passera centrum.
 
 ![Figur 1.3](../output/kartor/a1_3_pastigande_fore_efter.png)
 
-*Figur 1.3. Påstigande per hållplatsområde (FM + EM, resor per timme) i den korrigerade sommardatan respektive
-den tvättade höstdatan.*
+*Figur 1.3. Påstigande per hållplatsområde (FM + EM, resor per timme) i sommardatan som levererad (med linje Ö)
+respektive den tvättade höstdatan, båda utan korrigering.*
 
 ![Figur 1.4](../output/kartor/a1_4_od_FM_fore_efter.png)
 
-*Figur 1.4. Största OD-flödena (85 % av resorna), förmiddag 06–09. Bågarna går från ursprung till destination
-och böjer åt höger i färdriktningen. Bredd och färg anger antal resor.*
+*Figur 1.4. OD-matrisen, förmiddag 06–09: de största flödena (85 % av resorna). Varje flöde är en pil från
+ursprung till destination, med pilspets mitt på bågen och vid målet. Bågarna böjer åt höger i färdriktningen,
+så att resor åt var sitt håll mellan samma hållplatser syns som två bågar. Bredd och färg anger antal resor.*
 
 ![Figur 1.5](../output/kartor/a1_5_od_EM_fore_efter.png)
 
-*Figur 1.5. Största OD-flödena (85 % av resorna), eftermiddag 15–18.*
+*Figur 1.5. OD-matrisen, eftermiddag 15–18 (som figur 1.4).*
 
 ## 1.5 Osäkerheter och rekommendation
 
-- **Linje J** finns bara i sommardatan, korrigerad för registreringsfelet. Linjens resande under terminstid är
-  därför sannolikt underskattat. Linje J berörs inte av utredningsalternativen i kapitel 4.
+- **Linje J** finns bara i sommardatan, som används utan korrigering. Linjens påstigande vid centrum kan därför
+  vara något överskattat och resandet under terminstid underskattat. Linje J berörs inte av
+  utredningsalternativen i kapitel 4.
 - **Sommar och höst:** skillnaden i nivå beror främst på att höstdatan avser terminstid. Höstdatan bedöms
   därför vara mest representativ för en typvardag.
 - **Speglade destinationer:** modellen antar att resor under FM speglar resor under EM. Det är rimligt för
@@ -200,7 +203,7 @@ Turbytet i valideringsutrustningen fungerar i den tvättade höstdatan. Det reko
 behåller tvättningen, eller kontrollerar turbytet, även framöver. Linje J bör läggas till i den tvättade datan.
 
 **Filer.** OD-matrisen ur höstdatan: `data/processed/a1_od_FM_korrigerad.csv` och `a1_od_EM_korrigerad.csv`
-(långt format) samt `..._matris.csv`. Den korrigerade sommarmatrisen: `a1_od_FM_sommar.csv` och
+(långt format) samt `..._matris.csv`. Den tidigare korrigerade sommarmatrisen (bakgrund): `a1_od_FM_sommar.csv` och
 `a1_od_EM_sommar.csv`. Kontroll av höstdatan: `a1_kontroll_host.csv`. Påstigande per hållplatsområde:
 `a1_zoner_pastigande.csv`. Restider: `a1_restider_min.csv`. Nyckeltal: `a1_sammanfattning.json`. Skript:
 `src/a1_od_granskning.py`, `src/data_las.py` och `src/a1_kartor.py`.

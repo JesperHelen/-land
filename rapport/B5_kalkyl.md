@@ -5,23 +5,20 @@
 > 5 minuter i centrum.
 >
 > - **UA 1a – Möckelö Strand ny via dagens vägar:**
->   - ★ med V och Ö sammanslagna (15 av 20 turer, fem bussar): cirka 11 000 euro per år (9 000–14 000);
+>   - ★ med V och Ö sammanslagna (16 av 20 turer, fem bussar): cirka 12 000 euro per år (9 500–15 700);
 >   - alla turer med dagens tidtabell kräver en sjätte buss, cirka 216 000 euro per år, och är utesluten.
-> - **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen ★:** V och Ö sammanslagna, 15 av 20 turer, cirka
->   6 000 euro per år (5 000–8 000), utöver vägen.
+> - **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen ★:** V och Ö sammanslagna, 16 av 20 turer, cirka
+>   6 500 euro per år (5 100–8 600), utöver vägen.
 > - **UA 2 – N2 på linje Ö ★:** praktiskt taget kostnadsneutralt.
 > - **UA 3 – Linje N via Bo-Bil ★:** sparar cirka 2 000 euro per år.
 > - **UA 4 – Linje V–Ö via flygplatsen:**
->   - ★ V och Ö sammanslagna (15 av 20 turer): cirka 6 000 euro per år;
->   - UA 4Y med 7 av de 8 flygturerna: cirka 2 500 euro per år;
+>   - ★ V och Ö sammanslagna (16 av 20 turer): cirka 6 700 euro per år;
+>   - UA 4Y med alla 8 flygturerna: cirka 3 000 euro per år;
 >   - bara förlängning av V kräver en sjätte buss, cirka 209 000 euro per år, och är utesluten.
 >
-> Körs S 10:50 av omlopp 204 i stället för 209 ryms ytterligare en V-tur (16 av 20, UA 4Y 8 av 8). Det ökar
-> kostnaden med några hundra euro per år.
->
 > Förlängningen av Norrgårdsvägen (UA 1b) är motiverad ur busstrafikens perspektiv om den kostar mindre än
-> 2,4–3,6 miljoner euro, om jämförelsen är UA 1a med en extra buss. Mot huvudalternativet för UA 1a är
-> driftbesparingen bara cirka 5 000 euro per år, och båda ger 15 av 20 turer. Vägen motiveras då av kortare
+> 2,4–3,5 miljoner euro, om jämförelsen är UA 1a med en extra buss. Mot huvudalternativet för UA 1a är
+> driftbesparingen bara cirka 5 500 euro per år, och båda ger 16 av 20 turer. Vägen motiveras då av kortare
 > restid, större marginal i centrum och att Ö kan behålla pulsen, inte av busstrafikens driftkostnad.
 
 ## 5.1 Metod och antaganden
@@ -61,14 +58,14 @@ Kalkylen omfattar förändrad driftkostnad per år jämfört med i dag:
 |---|---|---|---|---|---|
 | UA 1a dagens vägar, alla 20 turer – utesluten | +1 | +2 860 | +14 300 | +216 000 (175 000–258 000) | 1 206 €/år |
 | UA 1a dagens vägar, dagens tidtabell (8 av 20 turer) | 0 | +38 | +5 700 | +7 000 (5 600–9 000) | 39 €/år |
-| UA 1a ★ dagens vägar, V och Ö sammanslagna (15 av 20 turer) | 0 | +25 | +10 700 | +10 900 (8 500–14 300) | 61 €/år |
-| UA 1b ★ förlängd Norrgårdsvägen, V och Ö sammanslagna (15 av 20 turer) | 0 | +10 | +6 300 | +6 200 (4 800–8 100) | 34 €/år |
+| UA 1a ★ dagens vägar, V och Ö sammanslagna (16 av 20 turer) | 0 | +35 | +11 400 | +12 000 (9 500–15 700) | 67 €/år |
+| UA 1b ★ förlängd Norrgårdsvägen, V och Ö sammanslagna (16 av 20 turer) | 0 | +10 | +6 700 | +6 500 (5 100–8 600) | 37 €/år |
 | UA 2 ★ N2 på linje Ö | 0 | +2 | 0 | ±0 | – |
 | UA 3 ★ Linje N via Bo-Bil | 0 | 0 | −2 500 | −2 200 | – |
 | UA 4 flygplatsen, alla 20 turer – utesluten | +1 | +2 850 | +7 300 | +209 000 (170 000–249 000) | 10 452 €/år |
-| UA 4 ★ flygplatsen, V och Ö sammanslagna (15 av 20 turer) | 0 | +22 | +5 400 | +6 000 (4 800–7 800) | 301 €/år |
-| UA 4 flygplatsen, dito + Solberget indragen (16 av 20) | 0 | +12 | +5 800 | +5 900 (4 600–7 700) | 293 €/år |
-| UA 4Y flygturerna (7 av 8), V och Ö sammanslagna | 0 | 0 | +2 700 | +2 500 (1 900–3 300) | 123 €/år |
+| UA 4 ★ flygplatsen, V och Ö sammanslagna (16 av 20 turer) | 0 | +30 | +5 800 | +6 700 (5 300–8 700) | 337 €/år |
+| UA 4 flygplatsen, dito + Solberget indragen (17 av 20) | 0 | +8 | +6 200 | +5 900 (4 600–7 900) | 297 €/år |
+| UA 4Y flygturerna (8 av 8), V och Ö sammanslagna | 0 | +5 | +3 100 | +3 000 (2 400–4 000) | 152 €/år |
 
 Kostnaden per invånare med bättre tillgänglighet är inte rättvisande för UA 4. Nyttan gäller främst
 flygresenärer, som inte finns i OD-matrisen.
@@ -84,19 +81,19 @@ minskar då.
 
 **Förlängningen av Norrgårdsvägen** har inte kostnadsberäknats. Jämförelsen beror på alternativet:
 
-- **Mot 1a med en extra buss:** merkostnaden är cirka 210 000 euro per år (170 000–250 000). Med 3,5 %
-  kalkylränta motsvarar det ett nuvärde på 2,4–3,6 miljoner euro över 20 år. En vägförlängning som kostar
+- **Mot 1a med en extra buss:** merkostnaden är cirka 209 000 euro per år (170 000–249 000). Med 3,5 %
+  kalkylränta motsvarar det ett nuvärde på 2,4–3,5 miljoner euro över 20 år. En vägförlängning som kostar
   mindre än så är billigare än att köra 1a med en extra buss.
-- **Mot 1a med V och Ö sammanslagna:** skillnaden i driftkostnad är bara cirka 5 000 euro per år, ett nuvärde
-  på cirka 0,05–0,09 miljoner euro. Båda ger 15 av 20 turer. Vägen ger i stället:
+- **Mot 1a med V och Ö sammanslagna:** skillnaden i driftkostnad är bara cirka 5 500 euro per år, ett nuvärde
+  på cirka 0,06–0,10 miljoner euro. Båda ger 16 av 20 turer. Vägen ger i stället:
   - en kortare omväg, 2,5 i stället för 4,5 minuter per tur;
   - större marginal i centrum, minst 7,5 i stället för 5,5 minuter per varv;
   - Ö kan behålla sina avgångar i pulsen.
 
 Vägen ger dessutom nytta för annan trafik.
 
-**Intäkter.** Det tillkommande påstigandet vid den nya hållplatsen i Möckelö Strand beräknas till 1,4–6,1 per
-vardag med höstens nivå, dvs. cirka 350–1 500 resor per år. Biljettintäkterna är små jämfört med
+**Intäkter.** Det tillkommande påstigandet vid den nya hållplatsen i Möckelö Strand beräknas till 1,5–6,5 per
+vardag med höstens nivå, dvs. cirka 400–1 600 resor per år. Biljettintäkterna är små jämfört med
 driftkostnaden och påverkar inte bedömningen.
 
 ![Figur 5.1](../output/kartor/b5_1_kalkyl.png)

@@ -257,7 +257,6 @@ def omlopp_scenarier(f, t, r, ref):
     scen = {}
 
     plan0 = O.omlopp_operator(t)                              # dagens omlopp (operatörens) – fast vid linje V–Ö
-    plan_j = O.omlopp_operator(t, flytta=FLYTTA_JUST)          # variant: S 10:50 i omlopp 204 i stället för 209
     v_regel = f['linje'] == 'V'                                # linje V: kravet på tid i centrum per varv V + Ö
     vv = O.bygg_omlopp(t, referens=ref) if v_regel else None
 
@@ -290,8 +289,6 @@ def omlopp_scenarier(f, t, r, ref):
             kor(p + 'robust', O.turer_som_ryms(t, berorda, d, r, robust=True, referens=ref), d)
         if f['linje'] == 'V':
             vo(p + 'VO', berorda, d)
-            if not prefix:
-                vo('VO_just', berorda, d, plan=plan_j)
 
     pröva('', f['delta'])
     if f.get('delta_konservativ'):
@@ -302,7 +299,6 @@ def omlopp_scenarier(f, t, r, ref):
         y = list(flygturer(t))
         kor('Y_ryms', O.turer_som_ryms(t, y, f['delta'], r, varv=vv, referens=ref), f['delta'])
         vo('Y_VO', y, f['delta'])
-        vo('Y_VO_just', y, f['delta'], plan=plan_j)
         vo('Y_VO_sol', y, f['delta'], solberget_delta(t))
     for d in f.get('kansl', []):                               # känslighet för körtiden (V och Ö sammanslagna)
         vo(f'kansl_{d:g}_VO', berorda, d)
@@ -317,7 +313,6 @@ def drift(f, scen):
     return 'alla' if scen['alla']['ok'] else ('VO' if 'VO' in scen else 'ryms')
 
 
-FLYTTA_JUST = {'1000000250': '204'}   # S 10:50 körs av omlopp 204 (står i centrum 10:16–11:20) i stället för 209
 KANSL_OMVAG = [3.0, 4.0, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0]      # min/tur – omvägen till flygplatsen (känslighet)
 KANSL_POLICY = [('A', 'Varvet V + Ö ≤ 55 min (krav), Solberget kvar', O.MARGINAL_VARV, False),
                 ('B', 'Varvet V + Ö ≤ 55 min (krav), Solberget indragen där det behövs', O.MARGINAL_VARV, True),

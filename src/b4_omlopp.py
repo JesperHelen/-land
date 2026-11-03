@@ -143,16 +143,26 @@ def bygg_omlopp(t, min_vand=MIN_VANDTID, par=NORMPAR, genomgang_min=GENOMGANG_MI
     return ut
 
 
+# Rättelser av omloppen i datan enligt beställaren (2026-11-03):
+#   N 11:20, S 11:50, N 12:20 (i datan 204) och S 10:50 (i datan 209) hör till omlopp 205 – ren följd S/N;
+#   N 16:50, S 17:20, N 17:50 (i datan 208) hör till omlopp 204.
+OPERATOR_RATTELSE = {'1000000761': '205', '1000000251': '205', '120010': '205', '1000000250': '205',
+                     '120017': '204', '130018': '204', '120019': '204'}
+
+
 def omlopp_operator(t, flytta=None):
     """Operatörens omlopp ur den tvättade höstdatan (kolumnen Omlopp, beställaren 2026-11-02) för N, S, V och Ö.
     Linje J saknas i datan och bildar ett eget omlopp ('J'). Turer utan påstigande i datan (V 09:50, Ö 18:10) läggs
-    i det omlopp där de passar in i tid. flytta: {trip_id: omlopp} flyttar enskilda turer (variant).
+    i det omlopp där de passar in i tid. OPERATOR_RATTELSE rättar turer som ligger i fel omlopp i datan.
+    flytta: {trip_id: omlopp} flyttar enskilda turer (variant).
     Returnerar en plan i samma form som bygg_omlopp (buss = löpnummer, omlopp = operatörens nummer)."""
     t = t.reset_index(drop=True)
     p = D.pastigande()
     om = p[p.omlopp.notna()].drop_duplicates('trip_id').set_index('trip_id').omlopp.astype(int).astype(str)
     o = t.trip_id.map(om).astype(object)
     o[t.linje == 'J'] = 'J'
+    for tid, k in OPERATOR_RATTELSE.items():
+        o[t.trip_id == tid] = k
     for i in np.where(o.isna())[0]:
         kand = []
         for k in o.dropna().unique():
@@ -163,7 +173,7 @@ def omlopp_operator(t, flytta=None):
         o[i] = min(kand)[1] if kand else f'extra {i}'
     for tid, k in (flytta or {}).items():
         o[t.trip_id == tid] = k
-    ordning = sorted(o.unique(), key=lambda k: (k == 'J', t.avg[o == k].min()))
+    ordning = sorted(o.unique(), key=lambda k: (k == 'J', str(k)))           # omlopp 204, 205, … och sist linje J
     nr = {k: n + 1 for n, k in enumerate(ordning)}
     nasta = np.full(len(t), -1)
     for k in ordning:
@@ -457,7 +467,9 @@ def omlopp_forklaring(fig, extra=(), y=0.005, ncol=None):
     h = [Patch(facecolor=C.FARG_LINJE[l], label=f'Linje {l}') for l in C.STADSLINJER]
     h += list(extra)
     h += [Line2D([], [], color='#e8590c', lw=2.2, label=f'Vändtid < {REKOMMENDERAD_VANDTID:g} min'),
-          Line2D([], [], color='#c0392b', lw=2.2, label=f'Vändtid < {MIN_VANDTID:g} min (ryms ej)')]
+          Line2D([], [], color='#c0392b', lw=2.2, label=f'Vändtid < {MIN_VANDTID:g} min (ryms ej)'),
+          Line2D([], [], color='#1c5cab', lw=2.2, marker='v', ms=4,
+                 label=f'Byte inom paret (t.ex. V → Ö) < {REKOMMENDERAD_VANDTID:g} min')]
     lg = fig.legend(handles=h, loc='lower left', bbox_to_anchor=(0.01, y), ncol=ncol or len(h), fontsize=7,
                     frameon=False, handlelength=1.6, columnspacing=1.2)
     return lg
@@ -469,17 +481,14 @@ def fig_idag(t, plan, harledd):
     rita_omlopp(ax, plan, titel=f'Operatörens omlopp (påstigandedatan höst 2026), typvardag {D.typvardag():%Y-%m-%d} – '
                                 f'linje J i eget omlopp')
     tid, n = fordon_i_trafik(plan)
-    ax2.step(*fordon_i_trafik(harledd), where='post', color='#c0392b', lw=0.9, ls=(0, (3, 2)),
-             label=f'Minsta antal fordon enligt tidtabellen ({nh["fordon"]})')
     ax2.fill_between(tid, n, step='post', color='#9aa7b4', alpha=0.55, lw=0)
     ax2.step(tid, n, where='post', color='#3d4a57', lw=0.9)
     ax2.set_xlim(ax.get_xlim()); ax2.set_xticks(ax.get_xticks()); ax2.set_xticklabels(ax.get_xticklabels())
     ax2.set_ylim(0, nt['fordon_samtidigt'] + 0.6); ax2.set_yticks(range(0, nt['fordon_samtidigt'] + 1))
-    ax2.legend(loc='upper right', fontsize=6.8, frameon=False)
     ax2.tick_params(labelsize=7); ax2.grid(axis='both', color='#e6e4de', lw=0.5)
     for s in ['top', 'right']:
         ax2.spines[s].set_visible(False)
-    ax2.set_title('Omlopp i trafik samtidigt (kör eller vänder i centrum)', loc='left', fontsize=8.5, fontweight='bold', pad=3)
+    ax2.set_title('Bussar i trafik samtidigt (kör eller vänder i centrum)', loc='left', fontsize=8.5, fontweight='bold', pad=3)
     txt = (f"Turer {nt['turer']}   ·   körtid {nt['korttid_h']:.1f} h   ·   omloppstid {nt['omloppstid_h']:.1f} h "
            f"(därav vändtid i centrum {nt['regleringstid_h']:.1f} h, uppställning {nt['uppstallning_h']:.1f} h)   ·   "
            f"{nt['km']:.0f} km   ·   minsta vändtid {nt['min_vandtid']:g} min")

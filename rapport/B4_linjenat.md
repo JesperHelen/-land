@@ -14,27 +14,24 @@
 
 > **Sammanfattning.** Stadstrafiken körs i dag med fem bussar. Förarna byter linje i centrum enligt en fast
 > norm: Syd ↔ Norr (S ↔ N) och Öst ↔ Väst (Ö ↔ V). Bussen som har kört linje V fortsätter alltså som linje Ö
-> och tvärtom. Verifieringen utgår från operatörens omlopp. Linje V kan inte förlängas utan att V och Ö slås ihop till en genomgående linje V–Ö. Bussen
+> och tvärtom. Verifieringen utgår från operatörens omlopp, med beställarens rättelser (avsnitt 4.1). Linje V kan
+> inte förlängas utan att V och Ö slås ihop till en genomgående linje V–Ö. Bussen
 > fortsätter då som Ö efter en halv minut, och resenärer mellan V och Ö kan sitta kvar. Ö startar när V har
 > kommit tillbaka. Det enda kravet är att varje varv V + Ö ryms inom 55 minuter, dvs. minst 5 minuter i
 > centrum, och helst inom 50 minuter. I huvudalternativen startar Ö 0–2 minuter efter pulsen.
 >
 > | UA | Huvudalternativ (★) | Turer | Bussar | Uteslutet |
 > |---|---|---|---|---|
-> | UA 1a – Möckelö Strand ny via dagens vägar (+4,5 min/tur) | V och Ö sammanslagna | 15 av 20 | 5 | Alla turer med dagens tidtabell (6 bussar) |
-> | UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (+2,5 min/tur) | V och Ö sammanslagna | 15 av 20 | 5 | – |
+> | UA 1a – Möckelö Strand ny via dagens vägar (+4,5 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | Alla turer med dagens tidtabell (6 bussar) |
+> | UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (+2,5 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | – |
 > | UA 2 – N2 på linje Ö (+0,5 min/tur) | Alla turer | 20 av 20 | 5 | – |
 > | UA 3 – Linje N via Bo-Bil (+0,1 min/tur) | Alla turer | 22 av 22 | 5 | – |
-> | UA 4 – Linje V–Ö via flygplatsen (+4 min/tur) | V och Ö sammanslagna | 15 av 20 | 5 | Bara förlängning av V (6 bussar) |
+> | UA 4 – Linje V–Ö via flygplatsen (+4 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | Bara förlängning av V (6 bussar) |
 >
-> I UA 1a, 1b och 4 kör fem V-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
+> I UA 1a, 1b och 4 kör fyra V-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 >
 > - V 07:50, 13:40 och 14:40 följs av Ö:s skolturer (28–29 minuter);
-> - V 08:20 vänder direkt, utan uppehåll, till Ö:s skoltur 08:45;
-> - V 10:20 fortsätter som linje S 10:50 efter 3 minuter.
->
-> Om S 10:50 i stället körs av omlopp 204, som står i centrum 10:16–11:20, ryms även V 10:20. Då blir det 16 av
-> 20 turer i alla tre UA, fortfarande med fem bussar.
+> - V 08:20 vänder direkt, utan uppehåll, till Ö:s skoltur 08:45.
 >
 > Övriga driftformer:
 >
@@ -43,10 +40,10 @@
 >   centrum och uppfyller inte kravet.
 > - **UA 4:**
 >   - med dagens tidtabell 8 av 20 turer;
->   - med Solberget indragen 16 av 20 turer. Då ryms även V 08:20, med 5,1 minuter i centrum;
->   - **UA 4Y:** bara de 8 V-turer som behövs för flygen 11:00 och 17:10. 7 av 8 ryms med V och Ö sammanslagna
->     och minst 6 minuter i centrum, utan att Solberget dras in. V 10:20, som tar emot flyget som landar 10:25,
->     ryms bara om S 10:50 flyttas till omlopp 204. Då ryms alla 8.
+>   - med Solberget indragen 17 av 20 turer. Då ryms även V 08:20, med 5,1 minuter i centrum, men 49 invånare
+>     får 20 avgångar färre per vardag;
+>   - **UA 4Y:** bara de 8 V-turer som behövs för flygen 11:00 och 17:10. Alla 8 ryms med V och Ö sammanslagna
+>     och minst 6 minuter i centrum, utan att Solberget dras in.
 >
 > **Effekter:**
 >
@@ -56,9 +53,12 @@
 > - **Bo-Bil (UA 3):** 44 invånare får minst 30 avgångar per vardag, medan 23 invånare vid Vikingagränd förlorar
 >   hållplatsen.
 > - **Flygplatsen (UA 4):** 20 invånare nära flygplatsen får en hållplats inom 400 m.
+> - **Fler och färre avgångar (figur 4.16):** i UA 1a och 1b får 179 invånare 16 avgångar mer per vardag inom
+>   400 m, i UA 2 får 55 invånare 20 mer och i UA 4 får 20 invånare 16 mer. Bara UA 3 ger någon färre avgångar:
+>   24 invånare vid Vikingagränd får 22 avgångar färre, medan 44 vid Bo-Bil får 22 fler.
 > - **Genomgående linje V–Ö:** resor mellan V- och Ö-området slipper bytet i centrum. Med höstens resande
 >   gäller det cirka 1,5 resor per vardag, och effekten ingår i restiderna.
-> - **Påstigande (höst 2026):** den nya hållplatsen i Möckelö Strand beräknas få 1,4–6,1 påstigande per vardag
+> - **Påstigande (höst 2026):** den nya hållplatsen i Möckelö Strand beräknas få 1,5–6,5 påstigande per vardag
 >   och N2 2,1–11,2.
 >
 > UA 1a, 1b och 4 använder samma tidsutrymme på linje V. Två av dem ryms inte tillsammans inom kravet utan fler
@@ -72,14 +72,16 @@ De används som dagens omlopp för en typisk vardag (tisdag 2026-09-01):
 
 - **Operatörens omlopp:** sex omlopp (204–209) för linjerna N, S, V och Ö, och linje J i ett eget omlopp. Turer
   som saknas i påstigandedatan har lagts in i det omlopp där de passar i tid.
-- **Antal fordon:** tidtabellen kräver minst fem fordon. Det har kontrollerats genom att omloppen också har
-  härletts ur tidtabellen, med minimikostnadstilldelning. Den härledda planen följer förarnas norm för
-  linjebyten och har minst 1 minuts vändtid, eller 0,5 minut vid byte inom paret. Ramen är fem fordon. I
-  operatörens plan är sex omlopp i trafik samtidigt under tre minuter, 16:40–16:43, när omlopp 207 startar
-  innan omlopp 204 har kommit in.
+- **Rättelser (beställaren 2026-11-03):** några turer ligger i fel omlopp i datan och har flyttats:
+  - N 11:20, S 11:50 och N 12:20 (i datan omlopp 204) och S 10:50 (i datan omlopp 209) hör till omlopp 205,
+    som därmed kör S och N växelvis hela dagen;
+  - N 16:50, S 17:20 och N 17:50 (i datan omlopp 208) hör till omlopp 204.
+- **Antal fordon:** med rättelserna är högst fem omlopp i trafik samtidigt, lika många som tidtabellen kräver.
+  Det har kontrollerats genom att omloppen också har härletts ur tidtabellen, med minimikostnadstilldelning.
+  Den härledda planen följer förarnas norm för linjebyten och har minst 1 minuts vändtid, eller 0,5 minut vid
+  byte inom paret. Ramen är fem fordon.
 - **Norm för linjebyten:** enligt beställaren byter föraren linje vid varje vändning i centrum, Syd ↔ Norr
-  (S ↔ N) och Öst ↔ Väst (Ö ↔ V), så långt tidtabellen medger. Operatörens omlopp följer normen med några
-  undantag, bland annat V 10:20, som fortsätter som S 10:50.
+  (S ↔ N) och Öst ↔ Väst (Ö ↔ V), så långt tidtabellen medger. Operatörens omlopp följer normen.
 - **Vändtid:** vid byte inom paret (t.ex. V → Ö) räcker 0,5 minut, eftersom regleringen då kan tas vid nästa
   byte i varvet. Vändningar som redan i dag är kortare godtas oförändrade.
 
@@ -98,15 +100,20 @@ Ett UA har verifierats på följande sätt:
    55 minuter, så att det blir minst 5 minuter i centrum per timme, och helst inom 50 minuter. Tiden i centrum är genomgången V → Ö plus regleringen
    före bussens nästa avgång. Kravet tillämpas på alla driftformer för UA på linje V, även med dagens tidtabell.
    Varv som redan i dag har mindre marginal godtas oförändrade. I operatörens omlopp gäller det V 07:50 följd av
-   Ö:s skoltur 08:20 (4 minuter) och V 10:20, som fortsätter som S 10:50 efter 3 minuter.
+   Ö:s skoltur 08:20 (4 minuter).
 6. **Robusthet (UA 2 och 3):** varje varv, dvs. två på varandra följande byten, bör ha minst 3 minuters
    reglering vid något av bytena. Antalet varv utan sådan reglering redovisas. I dag finns ett sådant varv
    (linje J 13:17–15:20).
 
-**Resultat.** Dagens 93 vardagsturer kräver minst fem fordon (figur 4.1). I operatörens plan växlar omlopp 204
-och 205 mellan N och S och omlopp 208 och 209 mellan V och Ö under dagen. På kvällen tar omlopp 206 över N och S
-och omlopp 207 V och Ö. Linje J kör i ett eget omlopp. Körtiden är 42,5 timmar och omloppstiden 61,4 timmar per
-vardag.
+**Resultat.** Dagens 93 vardagsturer körs med fem fordon (figur 4.1):
+
+- **N och S:** omlopp 205 växlar mellan S och N från 06:50 till 16:46. Omlopp 204 kör N och S på förmiddagen
+  och från 14:20 till 18:16, och omlopp 206 tar över på kvällen.
+- **V och Ö:** omlopp 208 och 209 växlar mellan V och Ö under dagen, och omlopp 207 tar över på kvällen.
+- **Linje J** kör i ett eget omlopp.
+
+Körtiden är 42,5 timmar per vardag. Omloppstiden är 61,2 timmar i operatörens omlopp och 61,4 timmar i den
+härledda planen. Jämförelserna i kapitlet utgår från 61,4 timmar, så att alla driftformer räknas på samma sätt.
 
 Linjerna N, S, V och Ö avgår från centrum i en gemensam puls (:20 och :50) med 30 minuters intervall i
 rusningstid. Linje J går ungefär en gång i timmen. Vändtiden i centrum varierar mellan linjerna:
@@ -128,15 +135,15 @@ normalt 10 minuter i centrum. I operatörens omlopp finns följande undantag:
 - **4 minuter:** V 07:50 följs av Ö:s skoltur 08:20 (29 min).
 - **5 minuter:** V 13:40 och 14:40 följs av Ö:s skolturer 14:10 och 15:10 (28 min).
 - **7 minuter:** V 08:20 vänder direkt, utan uppehåll, till Ö:s extra skoltur 08:45 (28 min).
-- **3 minuter:** V 10:20 fortsätter som S 10:50.
-- **13–20 minuter:** V 13:10 och 14:10 följs av Ö:s korta turer (20 min). Efter V 15:40 och Ö 16:10 byter
-  bussen till linje N.
+- **13 minuter:** V 13:10 och 14:10 följs av Ö:s korta turer (20 min).
+- **Ingen gräns:** efter V 09:50 + Ö 10:20 och V 10:20 står bussen till eftermiddagen, och efter V 15:40 + Ö
+  16:10 och V 17:10 + Ö 17:40 slutar omloppet.
 
 ![Figur 4.1](../output/kartor/b4_1_omlopp_idag.png)
 
-*Figur 4.1. Operatörens omlopp för en typisk vardag, ur påstigandedatan hösten 2026. Varje rad är ett omlopp
-och varje stapel en tur i linjens färg. Markeringar anger byten under 3 minuter. Det nedre diagrammet visar
-antalet omlopp i trafik och det minsta antal fordon som tidtabellen kräver (fem).*
+*Figur 4.1. Operatörens omlopp för en typisk vardag, ur påstigandedatan hösten 2026, med beställarens
+rättelser. Varje rad är ett omlopp och varje stapel en tur i linjens färg. Markeringar anger byten under
+3 minuter (blått: byte inom paret V → Ö). Det nedre diagrammet visar antalet bussar i trafik.*
 
 ## 4.2 UA 1a och UA 1b – Möckelö Strand ny
 
@@ -168,18 +175,18 @@ kör) plus den befintliga vägen (2 min). Två varianter har prövats:
 | | UA 1a – dagens vägar | UA 1b – förlängd Norrgårdsvägen, slinga |
 |---|---|---|
 | Körtid per tur | +4,5 min | +2,5 min (känslighet +3,5) |
-| **V och Ö sammanslagna** | **★ 15 av 20 turer, 5 bussar** | **★ 15 av 20 turer, 5 bussar** (känslighet: 15 av 20) |
-| Dito, S 10:50 i omlopp 204 | 16 av 20 turer, 5 bussar | 16 av 20 turer, 5 bussar |
+| **V och Ö sammanslagna** | **★ 16 av 20 turer, 5 bussar** | **★ 16 av 20 turer, 5 bussar** (känslighet: 16 av 20) |
 | Minsta tid i centrum i de ändrade varven (krav 5 min) | 5,5 min | 7,5 min (känslighet 6,5) |
 | Ö-turer som avgår senare än i dag | 14, 2 min efter pulsen | inga (känslighet: 14, 1 min) |
-| V-turer som kör som i dag | 07:50, 08:20, 10:20, 13:40, 14:40 | 07:50, 08:20, 10:20, 13:40, 14:40 |
+| V-turer som kör som i dag | 07:50, 08:20, 13:40, 14:40 | 07:50, 08:20, 13:40, 14:40 |
 | Alla 20 turer, dagens tidtabell | 6 bussar – **utesluten** (omloppstid +11,4 h/dag) | 5 bussar, men 1,5–2,5 min i centrum i varven med Ö:s skolturer – uppfyller inte kravet |
-| Dagens tidtabell, de turer som ryms | 8 av 20 | 16 av 20, om omloppen planeras om |
-| Fordonskilometer per vardag | +41 km | +24 km |
+| Dagens tidtabell, de turer som ryms | 8 av 20 | 16 av 20 (samma som sammanslagna) |
+| Fordonskilometer per vardag | +43 km | +26 km |
 | Invånare som får hållplats inom 400 m | 179 | 179 |
-| Avgångar vid nya hållplatsen | 15 per vardag | 15 per vardag |
-| Uppskattat påstigande (höst 2026) | 1,4–6,1 per vardag | 1,4–6,1 per vardag |
-| Restid, befintliga resenärer | +23 resenärsminuter per vardag | +11 resenärsminuter per vardag |
+| Avgångar vid nya hållplatsen | 16 per vardag | 16 per vardag |
+| Invånare med fler / färre avgångar inom 400 m | 179 (+16) / 0 | 179 (+16) / 0 |
+| Uppskattat påstigande (höst 2026) | 1,5–6,5 per vardag | 1,5–6,5 per vardag |
+| Restid, befintliga resenärer | +25 resenärsminuter per vardag | +12 resenärsminuter per vardag |
 
 Restiden för befintliga resenärer är netto: omvägen för genomresande på linje V, cirka 8 resor per vardag, minus
 vinsten för resor mellan V och Ö som slipper bytet (cirka 3 resenärsminuter per vardag).
@@ -189,27 +196,23 @@ vinsten för resor mellan V och Ö som slipper bytet (cirka 3 resenärsminuter p
 - **UA 1a, alla turer med dagens tidtabell – utesluten:** kräver en sjätte buss och nästan 11,5 timmar mer
   omloppstid per vardag.
 - **UA 1a med dagens tidtabell:** ryms bara på 8 turer.
-- **UA 1a ★ med V och Ö sammanslagna (huvudalternativ):** 15 av 20 turer ryms med fem bussar (avsnitt 4.5,
+- **UA 1a ★ med V och Ö sammanslagna (huvudalternativ):** 16 av 20 turer ryms med fem bussar (avsnitt 4.5,
   figur 4.9). Ö avgår då 2 minuter efter pulsen på 14 turer, och de ändrade varven har minst 5,5 minuter i
   centrum. Möckelö Strand ny kan alltså trafikeras redan med dagens vägar, utan fler bussar.
-- **UA 1b ★ med V och Ö sammanslagna (huvudalternativ):** 15 av 20 turer ryms med fem bussar. V-turen kommer
+- **UA 1b ★ med V och Ö sammanslagna (huvudalternativ):** 16 av 20 turer ryms med fem bussar. V-turen kommer
   tillbaka en halv minut före Ö:s avgång, så Ö kan behålla pulsen, och varven har minst 7,5 minuter i centrum.
   Med alla 20 turer får varven med Ö:s skolturer bara 1,5–2,5 minuter i centrum.
-- **Samma fem turer kör som i dag i båda varianterna:**
+- **Samma fyra turer kör som i dag i båda varianterna:**
   - V 07:50, 13:40 och 14:40 följs av Ö:s skolturer (28–29 minuter). De varven har redan i dag bara 4–5
     minuter i centrum.
   - V 08:20 vänder direkt till Ö:s skoltur 08:45. Varvet har 7 minuter i centrum, men med omvägen startar
     Ö 08:45 så mycket senare att det inte blir 5 minuter kvar (1a: 2,5 minuter, 1b: 4,5 minuter).
-  - V 10:20 fortsätter som S 10:50 efter 3 minuter.
-- **S 10:50 i omlopp 204:** omlopp 204 står i centrum 10:16–11:20 och kan köra S 10:50 i stället för omlopp
-  209. Då ryms även V 10:20, alltså 16 av 20 turer, med samma fem bussar och oförändrad tidtabell. Det är en
-  ändring av operatörens omloppsplan som bör stämmas av med operatören.
-- **UA 1b med Solberget indraget på Ö:s skolturer 14:10 och 15:10:** då ryms även V 13:40 och 14:40, alltså 17
-  av 20 turer, eller 18 med S 10:50 i omlopp 204. Varven blir dock 55,2 minuter, dvs. 4,8 minuter i centrum,
+- **UA 1b med Solberget indraget på Ö:s skolturer 14:10 och 15:10:** då ryms även V 13:40 och 14:40, alltså 18
+  av 20 turer. Varven blir dock 55,2 minuter, dvs. 4,8 minuter i centrum,
   strax under kravet på 5 minuter. Med "säg 5 minuter" som riktvärde är det en möjlig variant att pröva mot
   verkliga körtider. Solberget har cirka 16 påstigande per vardag (höst 2026).
-- **Effekt:** båda varianterna ger 179 invånare en hållplats inom 400 m med 15 avgångar per vardag. Det
-  beräknade påstigandet är 1,4–6,1 per vardag med höstens nivå.
+- **Effekt:** båda varianterna ger 179 invånare en hållplats inom 400 m med 16 avgångar per vardag. Ingen får
+  färre avgångar. Det beräknade påstigandet är 1,5–6,5 per vardag med höstens nivå.
 
 UA 1a och UA 1b ger alltså lika många turer. Förlängningen av Norrgårdsvägen ger kortare omväg (2,5 i stället
 för 4,5 minuter), större marginal i centrum och att Ö kan behålla pulsen, men den förutsätter en ny väg. För 1a
@@ -240,7 +243,7 @@ läget från kapitel 3. Bussen passerar läget i båda riktningarna. Ett uppehå
   Skolturen 08:20 kommer tillbaka 08:49,5 och bussen fortsätter som linje V 08:50 efter ett kort byte. Om
   kravet på 5 minuter i centrum per varv V + Ö ska gälla även här får varven med Ö:s skolturer 3,5–4,5
   minuter, mot 4–5 minuter i dag.
-- **Täckning:** 55 invånare får en hållplats inom 400 m med 20 avgångar per vardag.
+- **Täckning:** 55 invånare får en hållplats inom 400 m med 20 avgångar per vardag. Ingen får färre avgångar.
 - **Påstigande:** det uppskattade påstigandet är 2,1–11,2 per vardag med höstens nivå. Linje Ö har stadsnätets
   högsta påstigande per invånare.
 - **Ombordvarande:** cirka 15 resor per vardag passerar N2 och får en halv minut längre restid, sammanlagt
@@ -277,6 +280,8 @@ landsbygdslinjerna 2–4.
   därmed minst 30 avgångar per vardag i stället för 15–29.
 - **Vikingagränd:** 23 invånare förlorar hållplats inom 400 m. Påstigandet vid Vikingagränd är cirka 0,06 per
   vardag (höst 2026), och hållplatsen bedömdes redan i kapitel 3 som en hållplats som bör prövas.
+- **Fler och färre avgångar (figur 4.16):** 44 invånare vid Bo-Bil får 22 avgångar fler per vardag inom 400 m,
+  och 24 invånare vid Vikingagränd får 22 färre. Av dem förlorar 23 hållplatsen inom 400 m helt.
 - **Restid:** cirka 27 resor per vardag på linje N berörs, men förändringen är liten, cirka 9
   resenärsminuter per vardag.
 
@@ -339,7 +344,7 @@ minuter finns bara 0,5 minut kvar för Ö. Tabellen gäller vanliga varv. I varv
 mindre.
 
 **Resor som kan bli direkta.** Skyltas bytet som genomgående linje kan resenärerna sitta kvar. För dagens
-par ger det cirka 2,6 resor per vardag (N/S) respektive 1,5 (V/Ö), med höstens resande. Paret S/Ö skulle ge
+par ger det cirka 2,5 resor per vardag (N/S) respektive 1,5 (V/Ö), med höstens resande. Paret S/Ö skulle ge
 flest, cirka 7 per vardag, men är inte ett av dagens par. Paren avgår från samma hållplatsläge i centrum
 (V och Ö från läge 66202, N och S från läge 66201).
 
@@ -367,20 +372,20 @@ Ett varv V → Ö → V tar 60 minuter, och två bussar kör varvet med 30 minut
 
 Varje V-tur har prövats för sig med operatörens omlopp (b4_omlopp.py, figur 4.3). Resultatet:
 
-- **Turer:** 15 av 20 V-turer kan trafikera Möckelö Strand ny med fem bussar, både i 1a och 1b. 07:50, 08:20,
-  10:20, 13:40 och 14:40 kör som i dag. Med S 10:50 i omlopp 204 ryms även 10:20, alltså 16 av 20.
+- **Turer:** 16 av 20 V-turer kan trafikera Möckelö Strand ny med fem bussar, både i 1a och 1b. 07:50, 08:20,
+  13:40 och 14:40 kör som i dag.
 - **Ö:s avgångar (1a):** 14 av Ö:s 20 turer avgår 2 minuter senare än i dag, dvs. :22/:52 i stället för
   :20/:50 på förmiddagen och :12/:42 i stället för :10/:40 på eftermiddagen. I 1b avgår Ö som i dag.
-- **Kostnad:** i 1a ökar omloppstiden med cirka 6 minuter och körsträckan med 41 km per vardag.
+- **Kostnad:** i 1a ökar omloppstiden med cirka 8 minuter och körsträckan med 43 km per vardag.
 
 **Konsekvenser för resenärerna.** Resenärer som byter till linje Ö i pulsen får i 1a 2 minuter längre väntan,
 och Ö kommer tillbaka till centrum 2 minuter senare. Ö når ändå centrum före nästa pulsavgång. Resenärer som åker
 vidare från V till Ö kan sitta kvar. Nätverksmodellen räknar med det: resor mellan V- och Ö-området slipper
 bytesstraffet. Med höstens resande gäller det cirka 1,5 resor per vardag, och restiden minskar med cirka 3
-resenärsminuter per vardag (2,2 minuter per resa). Modellen räknar med en schablon för byten och fångar därför inte de 2 minuterna.
+resenärsminuter per vardag (2,3 minuter per resa). Modellen räknar med en schablon för byten och fångar därför inte de 2 minuterna.
 
-**Bedömning.** Ja – med V och Ö sammanslagna kan Möckelö Strand ny trafikeras redan med dagens vägar, på 15 av
-20 turer och med dagens fem bussar, eller 16 av 20 om S 10:50 flyttas till omlopp 204. Förlängningen av Norrgårdsvägen (1b) ger inte fler turer, men den ger
+**Bedömning.** Ja – med V och Ö sammanslagna kan Möckelö Strand ny trafikeras redan med dagens vägar, på 16 av
+20 turer och med dagens fem bussar. Förlängningen av Norrgårdsvägen (1b) ger inte fler turer, men den ger
 följande:
 
 - **Kortare omväg:** 2,5 i stället för 4,5 minuter per tur.
@@ -426,34 +431,28 @@ varvet V + Ö.
 |---|---|---|---|---|---|---|
 | Alla turer, dagens tidtabell – **utesluten** | 20 av 20 | **6** | – | +11,4 h/dag | +28 | +209 000 € |
 | Dagens tidtabell, de turer som ryms | 8 av 20 | 5 | 9 min | +8 min/dag | +11 | – |
-| **★ V och Ö sammanslagna** | **15 av 20** | 5 | 6 min | +5 min/dag | +21 | +6 000 € |
-| V och Ö sammanslagna, S 10:50 i omlopp 204 | 16 av 20 | 5 | 6 min | +5 min/dag | +22 | – |
-| V och Ö sammanslagna + Solberget indragen | 16 av 20 | 5 | 5,1 min | +3 min/dag | +22 | +5 900 € |
+| **★ V och Ö sammanslagna** | **16 av 20** | 5 | 6 min | +7 min/dag | +22 | +6 700 € |
+| V och Ö sammanslagna + Solberget indragen | 17 av 20 | 5 | 5,1 min | +2 min/dag | +24 | +5 900 € |
 | UA 4Y: flygturerna, dagens tidtabell | 4 av 8 | 5 | 9 min | ±0 | +6 | – |
-| **UA 4Y: flygturerna, V och Ö sammanslagna** | **7 av 8** | 5 | 6 min | ±0 | +10 | +2 500 € |
-| UA 4Y: dito, S 10:50 i omlopp 204 | 8 av 8 | 5 | 6 min | ±0 | +11 | – |
-| UA 4Y: dito + Solberget indragen | 7 av 8 | 5 | 8,1 min | −2 min/dag | +10 | – |
-| Känslighet 3 min, sammanslagna | 15 av 20 | 5 | 7 min | +4 min/dag | +21 | – |
-| Känslighet 5 min, sammanslagna | 15 av 20 | 5 | 5 min | +7 min/dag | +21 | – |
+| **UA 4Y: flygturerna, V och Ö sammanslagna** | **8 av 8** | 5 | 6 min | +1 min/dag | +11 | +3 000 € |
+| UA 4Y: dito + Solberget indragen | 8 av 8 | 5 | 8,1 min | −4 min/dag | +11 | – |
+| Känslighet 3 min, sammanslagna | 16 av 20 | 5 | 7 min | +4 min/dag | +22 | – |
+| Känslighet 5 min, sammanslagna | 16 av 20 | 5 | 5 min | +10 min/dag | +22 | – |
 
 **Resultat.**
 
 - **Dagens tidtabell:** omvägen ryms inte. Alla turer kräver en sjätte buss och drygt 11 timmar mer omloppstid
   per vardag, och utan extra buss ryms bara 8 av 20 turer.
 - **V och Ö sammanslagna:** bussen fortsätter direkt som linje Ö, och Ö avgår 1,5 minut efter pulsen. Då ryms
-  15 av 20 turer, och de ändrade varven har minst 6 minuter i centrum. Fem turer ryms inte:
+  16 av 20 turer, och de ändrade varven har minst 6 minuter i centrum. Fyra turer ryms inte:
   - V 07:50, 13:40 och 14:40 följs av Ö:s skolturer: 31 + 28 minuter lämnar bara 1 minut i centrum;
-  - V 08:20 vänder direkt till Ö:s skoltur 08:45 och skulle få 3 minuter;
-  - V 10:20 fortsätter som S 10:50 efter 3 minuter.
-- **S 10:50 i omlopp 204:** då ryms även V 10:20, alltså 16 av 20 turer, med samma fem bussar (avsnitt 4.2).
+  - V 08:20 vänder direkt till Ö:s skoltur 08:45 och skulle få 3 minuter.
 - **Solberget indragen dessutom:** Ö 08:45 blir 2,2 minuter kortare, och då ryms även V 08:20 (5,1 minuter i
-  centrum), alltså 16 av 20 turer. Varven med skolturerna 14:10 och 15:10 får ändå bara cirka 3 minuter i
+  centrum), alltså 17 av 20 turer. Men 49 invånare runt Solberget får då 20 avgångar färre per vardag. Varven med skolturerna 14:10 och 15:10 får ändå bara cirka 3 minuter i
   centrum.
-- **UA 4Y:** 7 av 8 flygturer ryms med V och Ö sammanslagna, utan att Solberget dras in. Varven med flygturerna
-  har minst 6 minuter i centrum, och 7 Ö-turer avgår 1,5 minut efter pulsen. V 10:20, turen *från* flyget som
-  landar 10:25, ryms inte eftersom den fortsätter som S 10:50. Med S 10:50 i omlopp 204 ryms alla 8. De varv som
-  har mindre än 5 minuter (Ö:s skoltur 08:20 före V 08:50) är oförändrade mot i dag.
-- **Känslighet:** med 3–5 minuters omväg ryms samma 15 turer, vid 5 minuter med exakt 5 minuter i centrum. Med
+- **UA 4Y:** alla 8 flygturer ryms med V och Ö sammanslagna, utan att Solberget dras in. Varven med flygturerna
+  har minst 6 minuter i centrum, och 7 Ö-turer avgår 1,5 minut efter pulsen. De varv som har mindre än 5 minuter (Ö:s skoltur 08:20 före V 08:50) är oförändrade mot i dag.
+- **Känslighet:** med 3–5 minuters omväg ryms samma 16 turer, vid 5 minuter med exakt 5 minuter i centrum. Med
   5,5–7 minuter behöver Solberget dras in på en del Ö-turer (se känsligheten nedan).
 
 **Känslighet – omvägens körtid och Solberget på utvalda turer (figur 4.15).** Omvägens körtid är osäker,
@@ -470,26 +469,24 @@ för omvägar på 3–8 minuter:
 
 | Omväg per tur | A ≤ 55 min | B ≤ 55 min, Solberget där det behövs | C ≤ 50 min | D ≤ 50 min, Solberget där det behövs |
 |---|---|---|---|---|
-| 3 min | 15 / 7 | 16 / 7 – Solberget indraget på Ö 08:45 | 6 / 2 | 6 / 2 |
-| 4 min (beräknad) | **15 / 7** | 16 / 7 – Solberget indraget på Ö 08:45 | 4 / 2 | 6 / 2 |
-| 5 min | 15 / 7 (Ö startar 2,5 min efter pulsen) | 15 / 7 | 4 / 2 | 4 / 2 |
-| 5,5–7 min | 6 / 2 | **15 / 7** – Solberget indraget på 9 / 5 Ö-turer, Ö startar 3–4,5 min efter pulsen | 4 / 2 | 4 / 2 |
-| 7,5–8 min | 6 / 2 | 6 / 2 | 4 / 2 | 4 / 2 |
+| 3 min | 16 / 8 | 17 / 8 – Solberget indraget på Ö 08:45 | 7 / 3 | 7 / 3 |
+| 4 min (beräknad) | **16 / 8** | 17 / 8 – Solberget indraget på Ö 08:45 | 5 / 3 | 7 / 3 |
+| 5 min | 16 / 8 (Ö startar 2,5 min efter pulsen) | 16 / 8 | 5 / 3 | 5 / 3 |
+| 5,5–7 min | 7 / 3 | **16 / 8** – Solberget indraget på 9 / 5 Ö-turer, Ö startar 3–4,5 min efter pulsen | 5 / 3 | 5 / 3 |
+| 7,5–8 min | 7 / 3 | 7 / 3 | 5 / 3 | 5 / 3 |
 
-Med S 10:50 i omlopp 204 ryms även V 10:20: med den beräknade omvägen 16 av 20 turer och UA 4Y 8 av 8
-(tabell 4.4).
-
-- **Upp till 5 minuters omväg** ryms 15 av 20 turer (UA 4Y 7 av 8) utan att Solberget dras in. Vid 5 minuter
+- **Upp till 5 minuters omväg** ryms 16 av 20 turer (UA 4Y 8 av 8) utan att Solberget dras in. Vid 5 minuter
   startar Ö 2,5 minuter efter pulsen och varven har exakt 5 minuter i centrum. Med upp till 4 minuter ryms
   dessutom V 08:20 om Solberget dras in på Ö 08:45.
 - **Med 5,5–7 minuters omväg** behövs Solberget. Dras hållplatsen in på de Ö-turer som följer en V-tur via
-  flygplatsen ryms fortfarande 15 av 20 turer (UA 4Y 7 av 8). Det gäller 9 Ö-turer (UA 4Y: 5, kring flygen),
+  flygplatsen ryms fortfarande 16 av 20 turer (UA 4Y 8 av 8). Det gäller 9 Ö-turer (UA 4Y: 5, kring flygen),
   och Ö-turen blir då 1,6–2,5 minuter kortare. Ö startar 3–4,5 minuter efter pulsen.
 - **Solberget i B:** hållplatsen behålls med 11 av 20 avgångar (alla turer) eller 15 av 20 (UA 4Y). Ingen
-  förlorar hållplatsen inom 400 m, men 49 respektive 7 invånare får lägre turtäthetsklass. Det berör cirka 7
+  förlorar hållplatsen inom 400 m, men 49 respektive 7 invånare får lägre turtäthetsklass (9 respektive 5 avgångar
+  färre per vardag). Det berör cirka 7
   respektive 4 påstigande per vardag av Solbergets cirka 16 (höst 2026).
-- **Över 7 minuter** ryms bara 6 V-turer: de som följs av uppställning eller dagens slut (V 09:50, 17:10 och
-  20:40), Ö:s korta eftermiddagsturer (V 13:10 och 14:10) och V 15:40, som har 20 minuter i centrum i dag.
+- **Över 7 minuter** ryms bara 7 V-turer: de som följs av uppställning eller dagens slut (V 09:50, 10:20, 15:40,
+  17:10 och 20:40) och de som följs av Ö:s korta eftermiddagsturer (V 13:10 och 14:10).
 - **Helst ≤ 50 minuter (C och D)** nås bara i varv där Ö-turen är kort (13:40 och 14:40, 20 minuter) eller
   bussen ställs upp efteråt. Dagens vanliga varv ligger redan på exakt 50 minuter.
 
@@ -500,24 +497,25 @@ de turer där den verkligen behövs.
 
 **Effekter.**
 
-- **Täckning:** 20 invånare nära terminalen får en hållplats inom 400 m.
+- **Täckning:** 20 invånare nära terminalen får en hållplats inom 400 m med 16 avgångar per vardag (UA 4Y 8).
+  Ingen får färre avgångar.
 - **Restid:** genomresande på linje V får cirka 4 minuter längre restid på de turer som kör via flygplatsen.
-  Netto, med vinsten för resor mellan V och Ö som slipper bytet, blir det cirka 25 resenärsminuter per vardag
-  (UA 4Y cirka 10).
+  Netto, med vinsten för resor mellan V och Ö som slipper bytet, blir det cirka 27 resenärsminuter per vardag
+  (UA 4Y cirka 12).
 - **Flygresenärerna:** OD-matrisen saknar flygplatsen som målpunkt, så nyttan för dem ingår inte i beräkningen.
-- **Solberget (bara i varianten med indragning på alla turer):** 42 invånare skulle förlora sin hållplats inom
-  400 m. Hållplatsen har cirka 16 påstigande per vardag (höst 2026), vilket talar emot att dra in den på alla
-  turer.
+- **Solberget (bara i varianten med indragning på alla turer):** 49 invånare får 20 avgångar färre per vardag,
+  och 42 av dem förlorar hållplatsen inom 400 m. Hållplatsen har cirka 16 påstigande per vardag (höst 2026),
+  vilket talar emot att dra in den på alla turer.
 
 **Bedömning.**
 
 - **Utesluten:** att bara förlänga linje V till flygplatsen. Med dagens tidtabell krävs en sjätte buss.
 - **Det enda rimliga är en genomgående linje V–Ö:** V och Ö slås ihop, och Ö avgår upp till 1,5 minut efter
   pulsen.
-- **Huvudalternativ ★:** linje V–Ö via flygplatsen. 15 av 20 turer ryms med fem bussar, och Solberget behålls.
-  Med S 10:50 i omlopp 204 blir det 16 av 20. Huvudalternativet visas i figur 4.10.
-- **UA 4Y:** samma linje, men bara de 8 flygturerna går via flygplatsen. 7 av 8 ryms med kravet uppfyllt, och
-  Solberget behålls. Turen från förmiddagsflyget (V 10:20) kräver att S 10:50 flyttas till omlopp 204.
+- **Huvudalternativ ★:** linje V–Ö via flygplatsen. 16 av 20 turer ryms med fem bussar, och Solberget behålls.
+  Huvudalternativet visas i figur 4.10.
+- **UA 4Y:** samma linje, men bara de 8 flygturerna går via flygplatsen. Alla 8 ryms med kravet uppfyllt, och
+  Solberget behålls.
 
 Det som behöver beslutas är om en 1,5 minut senare avgång för Ö är acceptabel (14 turer, i UA 4Y 7 turer).
 Den verkliga körtiden till terminalen och flygens ankomsttider bör kontrolleras innan alternativet går vidare.
@@ -556,26 +554,46 @@ Mariehamn (14 821). UA 4 redovisas i tabell 4.4.
 
 | | I dag | UA 1a alla turer (utesluten) | UA 1a dagens tidtabell | UA 1a ★ V och Ö sammanslagna | UA 1b ★ V och Ö sammanslagna | UA 2 ★ N2 | UA 3 ★ Bo-Bil |
 |---|---|---|---|---|---|---|---|
-| Turer via alternativet | – | 20 av 20 | 8 av 20 | 15 av 20 | 15 av 20 | 20 av 20 | 22 av 22 |
+| Turer via alternativet | – | 20 av 20 | 8 av 20 | 16 av 20 | 16 av 20 | 20 av 20 | 22 av 22 |
 | Hållplats inom 400 m | 83,6 % | 84,8 % | 84,8 % | 84,8 % | 84,8 % | 84,0 % | 83,4 % |
 | Minst 15 avgångar per vardag | 81,0 % | 82,2 % | 81,0 % | 82,2 % | 82,2 % | 81,4 % | 80,8 % |
 | Minst 30 avgångar per vardag | 55,6 % | 55,6 % | 55,6 % | 55,6 % | 55,6 % | 55,6 % | 55,9 % |
 | Svag tillgänglighet (1–29 avg.) | 28,0 % | 29,2 % | 29,2 % | 29,2 % | 29,2 % | 28,4 % | 27,6 % |
-| Invånare med bättre / sämre | – | 179 / 0 | 179 / 0 | 179 / 0 | 179 / 0 | 55 / 0 | 44 / 24 |
+| Invånare med bättre / sämre turtäthetsklass | – | 179 / 0 | 179 / 0 | 179 / 0 | 179 / 0 | 55 / 0 | 44 / 24 |
+| **Invånare med fler / färre avgångar inom 400 m** (avgångar per vardag) | – | **179 (+20) / 0** | **179 (+8) / 0** | **179 (+16) / 0** | **179 (+16) / 0** | **55 (+20) / 0** | **44 (+22) / 24 (−22)** |
+| Invånare × avgångar per vardag, netto | – | +3 573 | +1 429 | +2 859 | +2 859 | +1 099 | +444 |
 | Bussar | 5 | **6** | 5 | 5 | 5 | 5 | 5 |
-| Omloppstid (h per vardag) | 61,4 | 72,9 | 61,6 | 61,5 | 61,5 | 61,4 | 61,4 |
-| Fordonskilometer per vardag | 1 136 | 1 191 | 1 158 | 1 177 | 1 160 | 1 136 | 1 127 |
-| Varv V + Ö med < 5 min i centrum | 1 (operatörens omlopp: 2) | 1 | 1 | 2 | 2 | 3 | 1 |
-| Längre restid, befintliga resenärer (resenärsmin. per vardag) | – | 35 | 14 | 23 | 11 | 8 | 9 |
+| Omloppstid (h per vardag) | 61,4 | 72,9 | 61,6 | 61,6 | 61,5 | 61,4 | 61,4 |
+| Fordonskilometer per vardag | 1 136 | 1 191 | 1 158 | 1 180 | 1 162 | 1 136 | 1 127 |
+| Varv V + Ö med < 5 min i centrum | 1 | 1 | 1 | 1 | 1 | 3 | 1 |
+| Längre restid, befintliga resenärer (resenärsmin. per vardag) | – | 35 | 14 | 25 | 12 | 8 | 9 |
 
 Restiden för UA 1a och 1b med V och Ö sammanslagna är netto, efter vinsten för resor mellan V och Ö som slipper
-bytet. Varven med under 5 minuter i centrum räknas i den härledda omloppsplanen för driftformerna där omloppen
-byggs om, och i operatörens omlopp för V och Ö sammanslagna. I operatörens omlopp gäller det i dag V 07:50
-(4 minuter) och V 10:20 (3 minuter); sammanslagningen lägger inte till några.
+bytet. Det varv som redan i dag har under 5 minuter i centrum är V 07:50 med Ö:s skoltur 08:20 (4 minuter).
+
+**Fler och färre avgångar.** Turtäthetsklassen visar bara när invånarna byter klass. Därför redovisas också
+hur antalet avgångar per vardag inom 400 m ändras för varje invånare, viktat med befolkningen i rutorna
+(figur 4.16). Antalet avgångar är antalet unika turer som stannar inom 400 m.
+
+- **Fler avgångar:** i UA 1a och 1b får 179 invånare vid Möckelö Strand ny 16 avgångar mer per vardag. I UA 2
+  får 55 invånare vid N2 20 mer, och i UA 4 får 20 invånare vid flygplatsen 16 mer (UA 4Y 8 mer).
+- **Färre avgångar:** bara i UA 3, där 24 invånare vid Vikingagränd får 22 avgångar färre. Samtidigt får 44
+  invånare vid Bo-Bil 22 fler, så att nettot blir positivt (+444 invånare × avgångar per vardag).
+- **Solberget indragen (variant av UA 4):** 49 invånare får 20 avgångar färre, mot 20 invånare med 17 fler vid
+  flygplatsen. Nettot blir negativt (−633 invånare × avgångar per vardag).
+
+I QGIS finns förändringen som lagret `b4_avgangar_forandring` i gruppen för varje UA, med grönt för fler och
+rött för färre avgångar och etiketter med antal avgångar och invånare.
+
+![Figur 4.16](../output/kartor/b4_16_avgangar_forandring.png)
+
+*Figur 4.16. Fler (grönt) och färre (rött) avgångar per vardag inom 400 m per UA, med antal invånare. Ljusare
+färg anger rutor med färre invånare. Till höger nere: invånare i Mariehamn som får fler respektive färre
+avgångar.*
 
 Förändringarna är lokala och syns bara i de berörda områdena (figur 4.14):
 
-- **Möckelö Strand ny:** 179 invånare som i dag saknar hållplats får en med 15 avgångar per vardag. Med
+- **Möckelö Strand ny:** 179 invånare som i dag saknar hållplats får en med 16 avgångar per vardag. Med
   dagens tidtabell blir det 8 avgångar. Andelen med svag tillgänglighet ökar därför. Det är en förbättring:
   invånarna flyttar från *ingen hållplats* till *svag tillgänglighet*.
 - **N2:** 55 invånare får en hållplats inom 400 m med 20 avgångar.
@@ -584,11 +602,12 @@ Förändringarna är lokala och syns bara i de berörda områdena (figur 4.14):
 - **Flygplatsen:** 20 invånare nära terminalen får en hållplats inom 400 m. Nyttan för flygresenärerna ingår
   inte, eftersom OD-matrisen saknar flygplatsen som målpunkt.
 - **Solberget indragen (bara en variant av UA 4):** 42 invånare skulle förlora sin hållplats inom 400 m och 7
-  få färre avgångar.
+  få färre avgångar, sammanlagt 49 med 20 avgångar färre per vardag.
 
 Förlusten för befintliga resenärer är högst 35 resenärsminuter per vardag, i det uteslutna alternativet med
 alla turer i UA 1a. Med höstens resande, cirka tre gånger sommarens, är restidsförlusterna större än i den
-tidigare versionen men fortfarande små: högst cirka 4,5 minuter per berörd resa. Kostnaderna redovisas i kapitel 5.
+tidigare versionen men fortfarande små: högst cirka 4,5 minuter per berörd resa, och cirka 3 minuter i
+huvudalternativen. Kostnaderna redovisas i kapitel 5.
 
 ![Figur 4.13](../output/kartor/b4_13_systemeffekter.png)
 
@@ -606,8 +625,7 @@ Nästa leverans ska redovisa följande:
 
 1. **V och Ö sammanslagna.** Pröva tidtabellen mot verkliga körtider, särskilt Ö:s skolturer, som avgör vilka
    V-turer som ryms. Pröva Ö:s senare start (0–2 minuter efter pulsen) mot bytena i centrum, och undersök vändmöjligheten
-   vid den nya hållplatsen (1a). Stäm av med operatören om S 10:50 kan köras av omlopp 204, så att även V 10:20
-   ryms.
+   vid den nya hållplatsen (1a).
 2. **Paret N ↔ S.** Reglering vid bytet N → S, med S som startar senare än pulsen, ger utrymme för linje N
    att nå Örtvägen. Pröva det tillsammans med Bo-Bil (3), alternativt i kombination med indragning av
    hållplatser på linje S enligt kapitel 3.
@@ -620,9 +638,8 @@ Nästa leverans ska redovisa följande:
 
 ## 4.9 Osäkerheter
 
-- **Omloppen** är operatörens, enligt påstigandedatan från hösten 2026. Omloppsnumren kan avse förartjänster
-  snarare än fordon: under 16:40–16:43 är sex omlopp i trafik, medan tidtabellen kräver fem fordon. Förarnas
-  raster ingår inte. Driftformerna där omloppen byggs om (UA 2 och 3, dagens tidtabell) använder omlopp som är
+- **Omloppen** är operatörens, enligt påstigandedatan från hösten 2026, med beställarens rättelser av omlopp
+  204, 205 och 208 (avsnitt 4.1). Förarnas raster ingår inte. Driftformerna där omloppen byggs om (UA 2 och 3, dagens tidtabell) använder omlopp som är
   härledda ur tidtabellen.
 - **Körtider för nya delsträckor** bygger på beställarens restider (Möckelö Strand: 2 minuter på den befintliga
   vägen, 1 minut på förlängningen) och fågelvägsavstånd (Bo-Bil). Längden på den befintliga vägen är mätt i
@@ -643,6 +660,6 @@ Nästa leverans ska redovisa följande:
 - **Normen för linjebyten** (S ↔ N, Ö ↔ V) bygger på beställarens uppgift och bör stämmas av mot
   operatörens omloppsplaner.
 - **Påstigande och restider** bygger på den tvättade höstdatan (kapitel 1), som avser terminstid. Linje J
-  bygger på sommardata, men berörs inte av utredningsalternativen.
+  bygger på sommardata, men berörs inte av utredningsalternativen. Ingen data har korrigerats.
 - **Hållplatslägena** för Möckelö Strand och N2 är indikativa. Befolkningen är jämnt fördelad inom varje
   1 km-ruta, så antalet invånare som får täckning beror på det exakta läget.

@@ -23,6 +23,7 @@ import pandas as pd
 import pyogrio
 import shapely
 from shapely.geometry import LineString
+from shapely.ops import substring
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import config as C  # noqa: E402
@@ -77,6 +78,22 @@ def linje(namn, farg, bredd, pil=False, streckad=False, alpha=255, halo=False):
         lager.append(f'<layer class="MarkerLine" enabled="1" locked="0" pass="0">' + _props({
             'placement': 'lastvertex', 'rotate': 1, 'offset': 0, 'interval': 3, 'interval_unit': 'MM'}) + sub + '</layer>')
     return f'<symbol type="line" name="{namn}" alpha="1" clip_to_extent="1" force_rhr="0">{"".join(lager)}</symbol>'
+
+
+def pil(namn, farg, bredd, alpha=235):
+    """Böjd pilsymbol (QGIS ArrowLine genom start-, mitt- och slutpunkten): kropp med bredden bredd mm och
+    pilspets i slutet, fylld i farg med tunn vit kant – visar färdriktningen för OD-flöden."""
+    p = {'arrow_width': bredd, 'arrow_width_unit': 'MM', 'arrow_start_width': bredd, 'arrow_start_width_unit': 'MM',
+         'head_length': round(max(1.8, 2.6 * bredd), 2), 'head_length_unit': 'MM',
+         'head_thickness': round(max(0.9, 1.25 * bredd), 2), 'head_thickness_unit': 'MM',
+         'head_type': 0, 'arrow_type': 0, 'is_curved': 1, 'is_repeated': 0, 'offset': 0, 'offset_unit': 'MM'}
+    sub = fyll(f'@{namn}@0', farg, alpha, 'solid', '#ffffff', 0.15)
+    mitt = markor(f'@{namn}@1', 'filled_arrowhead', farg, round(max(2.0, 2.4 * bredd), 2), '#ffffff', 0.15, alpha)
+    return (f'<symbol type="line" name="{namn}" alpha="1" clip_to_extent="1" force_rhr="0">'
+            f'<layer class="ArrowLine" enabled="1" locked="0" pass="0">{_props(p)}{sub}</layer>'
+            f'<layer class="MarkerLine" enabled="1" locked="0" pass="0">'
+            + _props({'placement': 'centralpoint', 'rotate': 1, 'offset': 0, 'interval': 3, 'interval_unit': 'MM'})
+            + f'{mitt}</layer></symbol>')
 
 
 def linje_forskjuten(namn, farg, bredd, mm_per_spar=1.1, attr='forskjutning'):
@@ -251,8 +268,8 @@ def a1():
          labeling=etiketter('if("resor_h_FM_EM" >= 0.02, "till" || \' +\' || format_number("resor_h_FM_EM", 2), \'\')', placering=2)), True)
 
     blå = ['#cde2fb', '#86b6ef', '#3987e5', '#1c5cab', '#0d366b']
-    kl = [(0, 0.01, '< 0,01 resor/h', blå[0], 0.15), (0.01, 0.05, '0,01–0,05', blå[1], 0.3), (0.05, 0.1, '0,05–0,1', blå[2], 0.6),
-          (0.1, 0.25, '0,1–0,25', blå[3], 1.1), (0.25, 99, '≥ 0,25', blå[4], 1.9)]
+    kl = [(0, 0.05, '< 0,05 resor/h', blå[0], 0.2), (0.05, 0.2, '0,05–0,2', blå[1], 0.4), (0.2, 0.5, '0,2–0,5', blå[2], 0.8),
+          (0.5, 1.0, '0,5–1', blå[3], 1.3), (1.0, 99, '≥ 1', blå[4], 2.0)]
     for per, fig in [('FM', '1.4'), ('EM', '1.5')]:
         for typ, fil, txt in [('host', 'korrigerad', 'höst, tvättad data'), ('sommar', 'sommar', 'sommar, korrigerad'),
                               ('levererad', 'levererad', 'sommar, levererad')]:
@@ -264,12 +281,14 @@ def a1():
             L = L[L.resor_h >= 0.001]
             geoms = []
             for r in L.itertuples():
-                B, _ = K._bage(pos[r.fran], pos[r.till], n=30)
-                geoms.append(LineString(B))
+                B, _ = K._bage(pos[r.fran], pos[r.till], n=40)
+                g_ = LineString(B)
+                a_, b_ = min(70.0, 0.2 * g_.length), max(g_.length - min(90.0, 0.25 * g_.length), 0.5 * g_.length)
+                geoms.append(substring(g_, a_, b_))           # kortad i ändarna så att pilspetsen syns vid målet
             namn = f'a1_od_{per}_{typ}'
             skriv(gpd.GeoDataFrame(L.round({'resor_h': 5}), geometry=geoms, crs=C.CRS_METRISK), namn)
-            stil(namn, f'OD-flöden {per} {txt} (fig {fig})',
-                 qml(r_klassad('resor_h', kl, lambda n, fa, w: linje(n, fa, w, pil=True), '"resor_h"')), True)
+            stil(namn, f'OD-flöden {per} {txt} (fig {fig}) – pilar i färdriktningen',
+                 qml(r_klassad('resor_h', kl, lambda n, fa, w: pil(n, fa, w), '"resor_h"')), True)
 
 
 def a2():
@@ -391,6 +410,35 @@ def b4():
          qml(r_kategori('forandring', [('Bättre', 'Bättre än i dag (ny hållplats inom 400 m eller fler avgångar)', '#2f9e44'),
                                        ('Sämre', 'Sämre än i dag (ingen hållplats inom 400 m eller färre avgångar)', '#c0392b')],
                         lambda n, f: fyll(n, f, 150, 'solid', f, 0.6))), True)
+    # fler / färre avgångar per vardag inom 400 m per scenario – exakta 400 m-cirklar, invånare ur delpunkterna
+    dl = []
+    for sid in [k for k in se if k != 'idag']:
+        d = (yt[f'avg_{sid}'] - yt.avg_idag).round().astype(int)
+        y_ = yt.loc[d != 0, ['geometry']].assign(delta_avgangar=d[d != 0].to_numpy())
+        if y_.empty:
+            continue
+        y_ = y_.dissolve(by='delta_avgangar', as_index=False)
+        dd = (tk[f'avg_{sid}'] - tk.avg_idag).round().astype(int)
+        mh_ = tk.mariehamn.astype(bool)
+        y_['invanare'] = y_.delta_avgangar.map(tk.groupby(dd).bef.sum()).fillna(0).round(0)
+        y_['invanare_mariehamn'] = y_.delta_avgangar.map(tk[mh_].groupby(dd[mh_]).bef.sum()).fillna(0).round(0)
+        y_['invanare_per_km2'] = (y_.invanare / (y_.area / 1e6)).round(0)
+        y_['forandring'] = np.where(y_.delta_avgangar > 0, 'Fler avgångar', 'Färre avgångar')
+        y_['etikett'] = [f"{dv:+d} avg./vardag, {iv:.0f} inv.".replace('-', '−') for dv, iv in
+                         zip(y_.delta_avgangar, y_.invanare)]
+        y_['scenario'] = sid; y_['namn'] = se[sid]['namn']
+        dl.append(y_[['scenario', 'namn', 'forandring', 'delta_avgangar', 'invanare', 'invanare_mariehamn',
+                      'invanare_per_km2', 'etikett', 'geometry']])
+    ag = pd.concat(dl, ignore_index=True)
+    ag['geometry'] = mp(ag.geometry)
+    skriv(gpd.GeoDataFrame(ag, geometry='geometry', crs=C.CRS_METRISK), 'b4_avgangar_forandring')
+    kl_d = [(-999, -19.5, '20 eller fler färre avgångar per vardag', '#a50f15'),
+            (-19.5, -9.5, '10–19 färre', '#de2d26'), (-9.5, -0.5, '1–9 färre', '#fc9272'),
+            (0.5, 9.5, '1–9 fler', '#a1d99b'), (9.5, 19.5, '10–19 fler', '#41ab5d'),
+            (19.5, 999, '20 eller fler fler avgångar per vardag', '#006d2c')]
+    stil('b4_avgangar_forandring', 'Fler (grönt) och färre (rött) avgångar per vardag inom 400 m',
+         qml(r_klassad('delta_avgangar', kl_d, lambda n, f: fyll(n, f, 170, 'solid', f, 0.5)),
+             labeling=etiketter('if("invanare" >= 1, "etikett", \'\')', storlek=8, placering=1)), True)
     namn = ['Ingen hållplats inom 400 m', 'Mycket låg (1–14 avg/vardag)', 'Låg (15–29)', 'Medel (30–59)', 'God (≥ 60)']
     ts = []
     for sid in se:
@@ -475,6 +523,11 @@ def b4():
                       'andel_inom_400m': t_['inom_400m_andel'], 'andel_minst_30_avg': t_['minst_30_avg_andel'],
                       'andel_svag': t_['svag_andel'], 'inv_battre': fi['battre_klass'], 'inv_samre': fi['samre_klass'],
                       'inv_ny_tackning': fi['ny_tackning'], 'inv_forlorad_tackning': fi['forlorad_tackning'],
+                      'inv_fler_avgangar': v.get('forandring_avgangar_mariehamn', {}).get('inv_fler', 0),
+                      'inv_farre_avgangar': v.get('forandring_avgangar_mariehamn', {}).get('inv_farre', 0),
+                      'invanare_x_avgangar_fler': v.get('forandring_avgangar_mariehamn', {}).get('invavg_fler', 0),
+                      'invanare_x_avgangar_farre': v.get('forandring_avgangar_mariehamn', {}).get('invavg_farre', 0),
+                      'invanare_x_avgangar_netto': v.get('forandring_avgangar_mariehamn', {}).get('invavg_netto', 0),
                       'restid_resenarsmin_vardag_inkl_genomgaende': v['resenarer']['resenarsminuter_vardag'],
                       'driftkostnad_eur_ar_bas': int(kalk.at[sid, 'drift_ar_bas']) if sid in kalk.index else 0,
                       'driftkostnad_eur_ar_lag': int(kalk.at[sid, 'drift_ar_låg']) if sid in kalk.index else 0,

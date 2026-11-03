@@ -153,6 +153,19 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         `VO_just`); **UA 4Y 7/8** (8/8 med S 10:50 flyttad); 4 + Solberget 16/20. Solberget ≈ 16 påstigande/vardag.
         Restid 1a +23, 1b +11, 4 +25 resenärsmin/vardag. Kostnad 1a ★ +10,9 k€, 1b ★ +6,2 k€, 4 ★ +6,0 k€,
         4Y +2,5 k€. Rapporter A1, A3, B4, B5, PM, GIS (lager `a1_od_*_host`, `_sommar`) uppdaterade.
+- [x] **Ingen korrigering, pilar, fler/färre avgångar och rättade omlopp** (beställaren 2026-11-03):
+      - Ingen centrumkorrigering alls – även linje J (sommardata) används som den är. OD 31,7 / 29,6 resor/h,
+        67 % via centrum. Figur 1.3 jämför med sommardatan som levererad.
+      - OD-flöden med pilar i färdriktningen: PNG (a1_4, a1_5, en panel, pilspets mitt på bågen och vid målet) och
+        QGIS (`pil()` i gis_export: böjd ArrowLine + mittpil, bågarna kortade i ändarna, filter `"i_karta" = 1`).
+      - Fler/färre avgångar per vardag inom 400 m, viktat med befolkningen: `b4_systemeffekter.avgangar_forandring`
+        (json `forandring_avgangar_mariehamn`), GIS-lagret `b4_avgangar_forandring` (grönt/rött, etiketter, i varje
+        UA-grupp), figur `b4_16_avgangar_forandring.png`, tabell 4.3 / PM tabell 3. 1a/1b 179 inv. +16, UA 2 55 +20,
+        UA 3 44 +22 / 24 −22, UA 4 20 +16, Solberget indragen 49 −20.
+      - Omloppen rättade (`b4_omlopp.OPERATOR_RATTELSE`): N 11:20, S 11:50, N 12:20 och S 10:50 → omlopp 205,
+        N 16:50, S 17:20, N 17:50 → omlopp 204. Högst 5 bussar samtidigt. V 10:20 fortsätter inte längre som S →
+        **UA 1a, 1b och 4: 16/20, UA 4Y 8/8, 4 + Solberget 17/20**; varianten S 10:50 utgår. Figur b4_1 utan den
+        streckade linjen, omloppen i nummerordning. Kostnad 1a ★ +12,0 k€, 1b ★ +6,5 k€, 4 ★ +6,7 k€, 4Y +3,0 k€.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
