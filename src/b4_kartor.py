@@ -24,7 +24,8 @@ OTACKT = '#b9b4a8'
 BATTRE, SAMRE, BLA = '#2f9e44', '#c0392b', '#1c5cab'
 F_HPL_MOCKELO = '9025302000066401'
 UTS = {'mockelo': (104450, 107350, 6682650, 6685750), 'n2': (109150, 111550, 6681850, 6685550),
-       'bobil': (106950, 109350, 6685250, 6687550), 'flyg': (105450, 107850, 6685250, 6687650)}
+       'bobil': (106950, 109350, 6685250, 6687550), 'flyg': (105450, 107850, 6685250, 6687650),
+       'svang': (106650, 108450, 6683650, 6686150)}
 
 
 def sv(x, d=1):
@@ -235,6 +236,187 @@ def fig_bobil():
     return K.spara(fig, 'b4_6_bobil_karta.png')
 
 
+def fig_svangen():
+    """UA 5 – linje V tar över svängen Stenhuggarvägen – Cedersvägen – Klintvägen, linje N kör rakt på Västra utfarten."""
+    import geopandas as gpd
+    f = RES['ua']['5']; u = f['ua5']; sg_ = u['svang']; o = f['omlopp']
+    uts = UTS['svang']
+    fig, ax = plt.subplots(figsize=(8.6, 11.6))
+    bakgrund(ax, uts, 'UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten')
+    tackningslager(ax, '5', uts)
+    K.rita_linjer(ax, lw=2.0, zorder=4, alpha=0.55, etikett=False)
+    etik = hallplatser(ax, uts, ['Sjukhuset', 'Stenhuggarvägen', 'Cedersvägen', 'Klintvägen', 'Elverksgatan',
+                                 'Västra macken', 'Tekniska verken', 'Räddningsverket', 'Ålandsplan', 'Nabben', 'Åsvägen'])
+    g = gpd.read_file(P / 'b4_ua.gpkg', layer='ua'); g = g[g.ua == '5']
+    halo = [K.pe.Stroke(linewidth=5.0, foreground='white'), K.pe.Normal()]
+    for r in g[g.geom_type.isin(['LineString', 'MultiLineString'])].itertuples():
+        if r.objekt == 'körväg utgår':
+            stil = dict(color='#3d3d3a', lw=3.0, ls=(0, (1.2, 1.6)))
+        else:
+            stil = dict(color=C.FARG_LINJE[r.linje], lw=3.2, ls='-')
+        for d in getattr(r.geometry, 'geoms', [r.geometry]):
+            x, y = d.xy
+            ax.plot(x, y, zorder=6 if r.objekt != 'körväg utgår' else 5.5, solid_capstyle='round',
+                    path_effects=halo if r.objekt != 'körväg utgår' else None, **stil)
+        geoms = list(getattr(r.geometry, 'geoms', [r.geometry]))
+        if r.objekt != 'körväg utgår':                         # körriktning mot centrum
+            d = geoms[len(geoms) // 2]; xy_ = np.asarray(d.coords)
+            k = max(len(xy_) // 2 - 1, 0)
+            a_, b_ = xy_[k], xy_[min(k + 1, len(xy_) - 1)]
+            ax.annotate('', xy=tuple(b_), xytext=tuple(a_), zorder=7,
+                        arrowprops=dict(arrowstyle='-|>', color=C.FARG_LINJE[r.linje], lw=0, mutation_scale=15))
+    pk = g[g.geom_type == 'Point']
+    for r in pk.itertuples():
+        if 'utgår' in r.objekt:
+            ax.scatter([r.geometry.x], [r.geometry.y], s=90, marker='X', color=SAMRE, edgecolor='white', lw=0.7, zorder=8)
+        else:
+            ax.scatter([r.geometry.x], [r.geometry.y], s=150, marker='o', color=C.FARG_LINJE['V'], edgecolor='white',
+                       lw=1.2, zorder=8)
+    # gångavstånd till hållplatserna på Västra utfarten
+    xy = HPL.groupby('namn')[['x', 'y']].mean()
+    for a, b in [('Cedersvägen', 'Västra macken'), ('Klintvägen', 'Tekniska verken')]:
+        pa, pb = xy.loc[a], xy.loc[b]
+        ax.annotate('', xy=(pb.x, pb.y), xytext=(pa.x, pa.y), zorder=7,
+                    arrowprops=dict(arrowstyle='<->', color='#52514e', lw=0.9, ls=(0, (2, 1.5)), shrinkA=6, shrinkB=6))
+        m = ((pa.x + pb.x) / 2, (pa.y + pb.y) / 2)
+        ax.annotate(f"{u['svang']['avstand_till_vastra_utfarten_m'][a]} m", m, xytext=(6, -2), textcoords='offset points',
+                    fontsize=6.8, color=K.TEXT, path_effects=K.HALO, zorder=9)
+    hinder = K.punkt_hinder(ax, list(pk.geometry.x), list(pk.geometry.y), px=11)
+    K.placera_etiketter(ax, etik, fontsize=6.8, undvik=hinder)
+    vo, ry, al = o['VO'], o['ryms'], o['alla']
+    n0, n1 = u['n_uppehall_centrum_idag'], u['n_uppehall_centrum_efter']
+    k1 = u.get('resenarer_kansl_1', {})
+    rm = f['resenarer']['vardag']['resenarsminuter']
+    pst = u['pastigande_vardag']
+    infobox(ax, [
+        r'$\bf{Förslag\ (operatören)}$' + '   V tar svängen, N kör rakt på Västra utfarten (mot centrum)',
+        r'$\bf{Körtid\ per\ tur}$' + f"   N −{sv(-f['delta_n_min_per_tur'], 0)} min (alla {u['n_turer']} turer), "
+        f"V +{sv(f['delta_min_per_tur'], 0)} min; tidtabellen ger ≈ {sv(sg_['vinst_enligt_tidtabell_min'])} min (känslighet 1 min)",
+        r'$\bf{Linje\ N}$' + f"   uppehåll i centrum {sv(n0['median'], 0)} → {sv(n1['median'], 0)} min vid alla "
+        f"{n1['antal']} vändningar (+{sv(n1['summa_h'] - n0['summa_h'])} h reglering/vardag)",
+        r'$\bf{Linje\ V\ –\ huvudalternativ}$' + f"   V och Ö sammanslagna: {vo['turer_med_andring']} av "
+        f"{f['linjens_turer']} turer via svängen, 5 bussar",
+        f"      som i dag (rakt): {', '.join(vo['turer_utan_andring'])}; dagens drift {ry['turer_med_andring']} av "
+        f"{f['linjens_turer']}; alla {f['linjens_turer']} ryms inte ({sv(al['min_centrum_vo'])} min i centrum)",
+        r'$\bf{Påstigande\ i\ svängen}$' + f"   {sv(u['pastigande_vardag_summa'], 2)} per vardag (Stenhuggarvägen "
+        f"{sv(pst['Stenhuggarvägen'], 2)}, Cedersvägen {sv(pst['Cedersvägen'], 2)}, Klintvägen {sv(pst['Klintvägen'], 2)})",
+        r'$\bf{Resenärer}$' + f"   {sv(u['genomresande_n_vardag'])} per vardag åker genom svängen på N och sparar "
+        f"{sv(-f['delta_n_min_per_tur'], 0)} min;",
+        f"      netto {'+' if rm > 0 else ''}{sv(rm, 0)} resenärsminuter/vardag"
+        + (f" (med 1 min: {'+' if k1.get('resenarsminuter', 0) > 0 else ''}{sv(k1.get('resenarsminuter', 0), 0)})" if k1 else ''),
+        r'$\bf{Täckning}$' + f"   ingen förlorar hållplats inom 400 m; Cedersvägen och Klintvägen får "
+        f"{vo['turer_med_andring']} V-turer i stället för {u['n_turer']} N-turer"], loc=(0.025, 0.975))
+    extra = [Line2D([], [], color=C.FARG_LINJE['V'], lw=3, label='Linje V via svängen (ny)'),
+             Line2D([], [], color=C.FARG_LINJE['N'], lw=3, label='Linje N rakt på Västra utfarten (ny)'),
+             Line2D([], [], color='#3d3d3a', lw=3, ls=(0, (1.2, 1.6)), label='Linje N:s sväng i dag (utgår för N)'),
+             Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['V'], markersize=9,
+                    label='Hållplats byter linje N → V'),
+             Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Stenhuggarvägen utgår (Västra macken 50 m)'),
+             Line2D([], [], color='#52514e', lw=0.9, ls=(0, (2, 1.5)), label='Gångavstånd till Västra utfarten')]
+    lg = K.teckenforklaring(ax, forklaring_tackning(extra), loc='lower left', fontsize=6.8)
+    lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
+    K.ram(ax)
+    return K.spara(fig, 'b4_17_svangen_karta.png')
+
+
+def fig_flygtider():
+    """UA 4: flygen (avgångar och ankomster), fönstret då bussen ska vara vid flygplatsen och de V-turer som når
+    flygen – i huvudalternativet, i UA 4Y och som extra turer."""
+    import b5_kalkyl as B5
+    fp = RES['flygplatsen']; f = RES['ua']['4']; vo = f['omlopp'][f['huvudalternativ']]
+    tl = SCEN[SCEN.scenario == 'idag'].set_index('trip_id')
+    hm = lambda x: int(x[:2]) * 60 + int(x[3:])
+    fram = fp['framme_vid_flygplatsen_min_efter_avgang']
+    v = SCEN[(SCEN.scenario == 'idag') & (SCEN.linje == 'V')].sort_values('avg')
+    via = set(SCEN[(SCEN.scenario == f"4_{f['huvudalternativ']}") & (SCEN.delta > 0)].trip_id)
+    m = fp['matchning']; ex = {e['flyg']: e for e in fp['extraturer']}
+    fig, (ax, ax2) = plt.subplots(2, 1, figsize=(13.4, 7.9), gridspec_kw={'height_ratios': [1.0, 0.4], 'hspace': 0.12})
+    rader = [r['flyg'] for r in m]
+    ny = len(rader)
+    for yy, r in enumerate(m):
+        a, b = r['fonster'].split('–')
+        ax.axhspan(yy - 0.32, yy + 0.32, xmin=0, xmax=0, color='none')
+        ax.fill_betweenx([yy - 0.3, yy + 0.3], hm(a), hm(b), color='#cfe3f8', zorder=1, lw=0)
+        t_ = hm(r['tid'])
+        ax.scatter([t_], [yy], marker='^' if r['typ'] == 'avgång' else 'v', s=110, color='#1f1f1e', zorder=4)
+        ax.annotate(f"{r['tid']}", (t_, yy), xytext=(0, 9), textcoords='offset points', ha='center', fontsize=7,
+                    color=K.TEXT, zorder=5)
+        if r.get('v_tur'):
+            x = hm(r['vid_flygplatsen'])
+            ax.scatter([x], [yy], marker='o', s=70, color=FARG_VO, edgecolor='white', lw=0.8, zorder=5)
+            ax.annotate(f"V {r['v_tur']} – vid flygplatsen {r['vid_flygplatsen']}", (x, yy), xytext=(0, -13),
+                        textcoords='offset points', ha='center', fontsize=6.8, color=FARG_VO, zorder=5)
+        elif r['flyg'] in ex:
+            e = ex[r['flyg']]; x = hm(e['vid_flygplatsen'])
+            ax.scatter([x], [yy], marker='o', s=70, color='#e8590c', edgecolor='white', lw=0.8, zorder=5)
+            ax.annotate(f"extra tur {e['avg_centrum']} – vid flygplatsen {e['vid_flygplatsen']} (omlopp {e['omlopp']})",
+                        (x, yy), xytext=(0, -13), textcoords='offset points', ha='center', fontsize=6.8, color='#e8590c',
+                        zorder=5)
+    # alla V-turer vid flygplatsen (huvudalternativet) och de som kör som i dag
+    yv = ny + 0.4
+    for r in v.itertuples():
+        x = r.avg + fram
+        ax.plot([x, x], [yv - 0.25, yv + 0.25], color=FARG_VO if r.trip_id in via else '#b9b4a8', lw=2.2, zorder=3)
+    ax.set_yticks(list(range(ny)) + [yv])
+    ax.set_yticklabels(rader + [f"V-turer vid flygplatsen, UA 4 ★\n({vo['turer_med_andring']} av {f['linjens_turer']}; "
+                                f"grå = som i dag, ej via flygplatsen)"], fontsize=7.4)
+    ax.set_ylim(yv + 0.7, -0.8)
+    tick = list(range(5 * 60, 23 * 60 + 1, 60))
+    ax.set_xticks(tick); ax.set_xticklabels([f'{t // 60:02d}' for t in tick], fontsize=7.4)
+    ax.set_xlim(5 * 60 - 10, 23 * 60 + 10); ax.grid(axis='x', color='#e6e4de', lw=0.6); ax.set_axisbelow(True)
+    for s_ in ['top', 'right']:
+        ax.spines[s_].set_visible(False)
+    ax.set_title(f"Flygen och bussen (vardag): vid flygplatsen {FF(fp['fore_avgang_min'][0])}–{FF(fp['fore_avgang_min'][1])} "
+                 f"före avgång, lämnar cirka {fp['efter_ankomst_min'][2]} min efter landning "
+                 f"(godtas {fp['efter_ankomst_min'][0]}–{fp['efter_ankomst_min'][1]} min)", loc='left', fontsize=9.5,
+                 fontweight='bold')
+    hnd = [Patch(facecolor='#cfe3f8', label='Fönster då bussen ska vara vid flygplatsen'),
+           Line2D([], [], marker='^', ls='', color='#1f1f1e', markersize=8, label='Flyget avgår'),
+           Line2D([], [], marker='v', ls='', color='#1f1f1e', markersize=8, label='Flyget landar'),
+           Line2D([], [], marker='o', ls='', color=FARG_VO, markersize=8, label='V-tur i dagens tidtabell (via flygplatsen)'),
+           Line2D([], [], marker='o', ls='', color='#e8590c', markersize=8, label='Extra V-tur via flygplatsen')]
+    ax.legend(handles=hnd, loc='upper right', fontsize=7, ncol=1, frameon=True, facecolor='white', edgecolor='#e0ded7')
+    # tabell
+    ax2.axis('off')
+    e_ = lambda k, n: k['fordonstimmar'] * B5.ENHET['per_fordonstimme'][n] + k['km'] * B5.ENHET['per_km'][n]
+    cell = []
+    for r in m:
+        if r.get('v_tur'):
+            cell.append([r['flyg'], r['fonster'], f"V {r['v_tur']} (vid flygplatsen {r['vid_flygplatsen']})",
+                         f"{r['min_fore_eller_efter_flyget']} min " + ('före' if r['typ'] == 'avgång' else 'efter'),
+                         'UA 4 ★ och UA 4Y', '–'])
+        else:
+            e = ex[r['flyg']]
+            cell.append([r['flyg'], r['fonster'], f"extra tur {e['avg_centrum']}–{e['ank_centrum']} (vid flygplatsen "
+                         f"{e['vid_flygplatsen']})", f"{e['min_fore_eller_efter_flyget']} min " +
+                         ('före' if r['typ'] == 'avgång' else 'efter'),
+                         f"omlopp {e['omlopp']}" + (' (i paus)' if e['inom_omloppet'] else
+                                                     f" (+{sv(e['forlangning_min'] / 60)} h)"),
+                         f"{e_(e, 'bas') * B5.VARDAGAR / 1000:,.0f} ({e_(e, 'låg') * B5.VARDAGAR / 1000:,.0f}–"
+                         f"{e_(e, 'hög') * B5.VARDAGAR / 1000:,.0f})"])
+    tb = ax2.table(cellText=cell, colLabels=['Flyg', 'Bussen vid\nflygplatsen', 'Buss', 'Före avgång /\nefter landning',
+                                             'Körs av', 'Kostnad k€/år\n(bas, låg–hög)'],
+                   loc='upper left', cellLoc='left', colLoc='left', colWidths=[0.27, 0.09, 0.27, 0.1, 0.14, 0.13])
+    tb.auto_set_font_size(False); tb.set_fontsize(7.2); tb.scale(1, 1.6)
+    for (r_, c_), ce in tb.get_celld().items():
+        ce.set_edgecolor('#e0ded7'); ce.set_linewidth(0.5)
+        if r_ == 0:
+            ce.set_facecolor('#f1efe9'); ce.get_text().set_fontweight('bold'); ce.set_height(ce.get_height() * 1.6)
+    fig.suptitle('UA 4 – flygplatsen: vilka flyg når bussen? (vardag, flygtider november 2026)', x=0.01, ha='left',
+                 fontsize=12, fontweight='bold')
+    fig.text(0.99, 0.01, f"Bussen är vid flygplatsen {sv(fram)} min efter avgång från centrum. Extra tur = V-tur via "
+             f"flygplatsen ({sv(fp['extraturer'][0]['kortid_min'] if fp['extraturer'] else 0, 0)} min, "
+             f"{sv(fp['extraturer'][0]['km'] if fp['extraturer'] else 0)} km); kostnad = (körtid + förlängning av omloppet) × "
+             f"timkostnad + km × km-kostnad, {B5.VARDAGAR} vardagar (B5).", ha='right', fontsize=6.4, color=K.TEXT2)
+    ut = C.KARTOR / 'b4_19_flygtider.png'
+    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    return ut
+
+
+def FF(m):
+    return f"{m // 60} h" if m % 60 == 0 else sv(m / 60) + ' h'
+
+
 # ====================================================================== omloppsfigurer
 def panel_titel(fid, k):
     t, ok = _panel_titel(fid, k)
@@ -265,17 +447,22 @@ def _panel_titel(fid, k):
             t += f" – ryms inte: varv med Ö:s skolturer får {sv(o['min_centrum_vo'])} min i centrum"
         else:
             t += ' – ryms'
+    elif k == 'N':
+        t = f"{fid} variant – bara linje N rakt på ({sv(f['delta_n_min_per_tur'], 0)} min/tur, alla 22 turer), ingen linje i svängen: {o['fordon']} bussar – ryms"
     elif k == 'robust':
         t = f"{fid} robust – {n} av {tot} turer ändrade: {o['fordon']} bussar – ryms"
     elif k.startswith('VO'):
         sk = max(o['skiftade_turer'].values()) if o['skiftade_turer'] else 0
         t = (f"{fid} V och Ö sammanslagna{', Solberget indragen' if 'sol' in k else ''} – {n} av {tot} turer ändrade, "
-             + (f"{len(o['skiftade_turer'])} Ö-turer startar {sv(sk)} min senare" if sk else 'Ö i pulsen')
+             + (f"{len(o['skiftade_turer'])} Ö-tur{'er' if len(o['skiftade_turer']) > 1 else ''} startar {sv(sk)} min senare"
+                if sk else 'Ö i pulsen')
              + f": {o['fordon']} bussar – ryms")
     else:
         t = f"{fid} dagens tidtabell – {n} av {tot} turer ändrade (de som ryms): {o['fordon']} bussar – ryms"
     d = (o['omloppstid_h'] - RES['idag']['omloppstid_h']) * 60
     t += '   ·   omloppstid ' + (f"+{sv(d / 60)} h/dag" if d >= 60 else f"{'+' if d >= 0 else ''}{sv(d, 0)} min/dag")
+    if f.get('delta_n_min_per_tur'):
+        t += f"   ·   N {sv(f['delta_n_min_per_tur'] * o['delta_min_per_tur'] / f['delta_min_per_tur'], 0)} min/tur"
     return t + varv_text(f, o), o['ryms']
 
 
@@ -309,8 +496,9 @@ def fig_omlopp(namn, paneler, rubrik):
     if any(SCEN.loc[SCEN.scenario == p[0], 'skift'].fillna(0).gt(0).any() for p in paneler):
         extra.append(Patch(facecolor='none', edgecolor='#1f1f1e', ls=(0, (1, 1)), label='Avgår senare än i dag'))
     if any(SCEN.loc[SCEN.scenario == p[0], 'delta'].fillna(0).lt(0).any() for p in paneler):
+        n_kort = any(((SCEN.scenario == p[0]) & (SCEN.delta < 0) & (SCEN.linje == 'N')).any() for p in paneler)
         extra.append(Line2D([], [], color='#1f1f1e', lw=0.9, marker='|', ls='', markersize=8,
-                            label='Kortare Ö-tur (Solberget indragen)'))
+                            label='Kortare N-tur (rakt på Västra utfarten)' if n_kort else 'Kortare Ö-tur (Solberget indragen)'))
     O.omlopp_forklaring(fig, extra=extra, y=-0.01)
     fig.tight_layout(rect=(0, 0.035, 1, 0.975), h_pad=0.9)
     ut = C.KARTOR / namn
@@ -332,6 +520,13 @@ def main():
                      [('idag', None, None), ('4_alla', '4', 'alla'), ('4_ryms', '4', 'ryms'), ('4_VO', '4', 'VO'),
                       ('4_VO_sol', '4', 'VO_sol'), ('4_Y_VO', '4', 'Y_VO')],
                      'UA 4 linje V–Ö via flygplatsen – omlopp före och efter (★ = huvudalternativ)'))
+    print(fig_svangen())
+    print(fig_omlopp('b4_18_svangen_omlopp.png',
+                     [('idag', None, None), ('5_alla', '5', 'alla'), ('5_ryms', '5', 'ryms'), ('5_VO', '5', 'VO'),
+                      ('5_N', '5', 'N')],
+                     'UA 5 linje V via Cedersvägen, linje N rakt på Västra utfarten – omlopp före och efter '
+                     '(★ = huvudalternativ)'))
+    print(fig_flygtider())
 
 
 if __name__ == '__main__':

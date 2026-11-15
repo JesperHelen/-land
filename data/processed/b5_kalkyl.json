@@ -54,7 +54,7 @@
    "km_hög": 17136,
    "drift_ar_hög": 258016,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 1206
+   "drift_per_battre_inv_bas": 1206.0
   },
   {
    "scenario": "1a_ryms",
@@ -80,7 +80,7 @@
    "km_hög": 6848,
    "drift_ar_hög": 9023,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 39
+   "drift_per_battre_inv_bas": 39.0
   },
   {
    "scenario": "1a_VO",
@@ -106,7 +106,7 @@
    "km_hög": 13696,
    "drift_ar_hög": 15291,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 65
+   "drift_per_battre_inv_bas": 65.0
   },
   {
    "scenario": "1b",
@@ -132,7 +132,7 @@
    "km_hög": 8047,
    "drift_ar_hög": 8772,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 37
+   "drift_per_battre_inv_bas": 37.0
   },
   {
    "scenario": "2",
@@ -158,7 +158,7 @@
    "km_hög": 0,
    "drift_ar_hög": 145,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 2
+   "drift_per_battre_inv_bas": 2.0
   },
   {
    "scenario": "3",
@@ -184,7 +184,7 @@
    "km_hög": -2984,
    "drift_ar_hög": -2984,
    "investering_hög": 0,
-   "drift_per_battre_inv_bas": -51
+   "drift_per_battre_inv_bas": -51.0
   },
   {
    "scenario": "4",
@@ -210,7 +210,7 @@
    "km_hög": 8711,
    "drift_ar_hög": 249011,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 10452
+   "drift_per_battre_inv_bas": 10452.0
   },
   {
    "scenario": "4_VO",
@@ -236,7 +236,7 @@
    "km_hög": 6974,
    "drift_ar_hög": 8279,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 318
+   "drift_per_battre_inv_bas": 318.0
   },
   {
    "scenario": "4_VO_sol",
@@ -262,33 +262,111 @@
    "km_hög": 7416,
    "drift_ar_hög": 8141,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 309
+   "drift_per_battre_inv_bas": 309.0
   },
   {
    "scenario": "4_Y",
-   "namn": "UA 4Y flygturerna (8 av 8), V och Ö sammanslagna",
+   "namn": "UA 4Y flygturerna (3 av 3), V och Ö sammanslagna",
    "delta_fordon": 0,
-   "delta_fordonstimmar_ar": 0,
-   "delta_km_ar": 3109,
+   "delta_fordonstimmar_ar": 8,
+   "delta_km_ar": 1384,
    "nya_hallplatser": 1,
    "ny_tackning_inv": 20,
    "battre_inv": 20,
    "fordon_låg": 0,
-   "tid_låg": 0,
-   "km_låg": 2176,
-   "drift_ar_låg": 2176,
+   "tid_låg": 315,
+   "km_låg": 969,
+   "drift_ar_låg": 1284,
    "investering_låg": 8000,
    "fordon_bas": 0,
-   "tid_bas": 0,
-   "km_bas": 2798,
-   "drift_ar_bas": 2798,
+   "tid_bas": 375,
+   "km_bas": 1245,
+   "drift_ar_bas": 1620,
    "investering_bas": 15000,
    "fordon_hög": 0,
-   "tid_hög": 0,
-   "km_hög": 3731,
-   "drift_ar_hög": 3731,
+   "tid_hög": 435,
+   "km_hög": 1661,
+   "drift_ar_hög": 2096,
    "investering_hög": 30000,
-   "drift_per_battre_inv_bas": 140
+   "drift_per_battre_inv_bas": 81.0
+  },
+  {
+   "scenario": "5",
+   "namn": "UA 5 ★ svängen till linje V – V och Ö sammanslagna (17 av 20 V-turer)",
+   "delta_fordon": 0,
+   "delta_fordonstimmar_ar": 0,
+   "delta_km_ar": 752,
+   "nya_hallplatser": 0,
+   "ny_tackning_inv": 0,
+   "battre_inv": 79,
+   "fordon_låg": 0,
+   "tid_låg": 0,
+   "km_låg": 526,
+   "drift_ar_låg": 526,
+   "investering_låg": 0,
+   "fordon_bas": 0,
+   "tid_bas": 0,
+   "km_bas": 676,
+   "drift_ar_bas": 676,
+   "investering_bas": 0,
+   "fordon_hög": 0,
+   "tid_hög": 0,
+   "km_hög": 902,
+   "drift_ar_hög": 902,
+   "investering_hög": 0,
+   "drift_per_battre_inv_bas": 9.0
+  },
+  {
+   "scenario": "5_ryms",
+   "namn": "UA 5 svängen till linje V – dagens drift (16 av 20 V-turer)",
+   "delta_fordon": 0,
+   "delta_fordonstimmar_ar": 0,
+   "delta_km_ar": 700,
+   "nya_hallplatser": 0,
+   "ny_tackning_inv": 0,
+   "battre_inv": 79,
+   "fordon_låg": 0,
+   "tid_låg": 0,
+   "km_låg": 490,
+   "drift_ar_låg": 490,
+   "investering_låg": 0,
+   "fordon_bas": 0,
+   "tid_bas": 0,
+   "km_bas": 630,
+   "drift_ar_bas": 630,
+   "investering_bas": 0,
+   "fordon_hög": 0,
+   "tid_hög": 0,
+   "km_hög": 840,
+   "drift_ar_hög": 840,
+   "investering_hög": 0,
+   "drift_per_battre_inv_bas": 8.0
+  },
+  {
+   "scenario": "5_N",
+   "namn": "UA 5 variant – bara linje N rakt på (svängen utan buss)",
+   "delta_fordon": 0,
+   "delta_fordonstimmar_ar": -8,
+   "delta_km_ar": 225,
+   "nya_hallplatser": 0,
+   "ny_tackning_inv": 0,
+   "battre_inv": 0,
+   "fordon_låg": 0,
+   "tid_låg": -315,
+   "km_låg": 158,
+   "drift_ar_låg": -158,
+   "investering_låg": 0,
+   "fordon_bas": 0,
+   "tid_bas": -375,
+   "km_bas": 202,
+   "drift_ar_bas": -172,
+   "investering_bas": 0,
+   "fordon_hög": 0,
+   "tid_hög": -435,
+   "km_hög": 270,
+   "drift_ar_hög": -165,
+   "investering_hög": 0,
+   "drift_per_battre_inv_bas": NaN
   }
  ],
  "break_even_vagforlangning": {
@@ -319,5 +397,69 @@
    "nuvarde_eur": 92651
   }
  },
- "turer_1b": "16 av 20"
+ "turer_1b": "16 av 20",
+ "flyg_extraturer": [
+  {
+   "flyg": "avgång 07:15 till Stockholm-Arlanda (HP 281)",
+   "fonster": "05:15–05:45",
+   "avg_centrum": "05:15",
+   "vid_flygplatsen": "05:31",
+   "ank_centrum": "05:46",
+   "min_fore_eller_efter_flyget": 104,
+   "omlopp": "204",
+   "omlopp_ledigt_fran": null,
+   "omlopp_nasta_tur": "06:50",
+   "forlangning_min": 98.0,
+   "inom_omloppet": false,
+   "kortid_min": 31.0,
+   "km": 12.92,
+   "fordonstimmar": 2.15,
+   "kostnad_ar_låg": 24836,
+   "kostnad_ar_bas": 29782,
+   "kostnad_ar_hög": 35051
+  },
+  {
+   "flyg": "ankomst 10:35 från Stockholm-Arlanda (HP 282)",
+   "fonster": "11:00–11:20",
+   "avg_centrum": "10:50",
+   "vid_flygplatsen": "11:06",
+   "ank_centrum": "11:21",
+   "min_fore_eller_efter_flyget": 31,
+   "omlopp": "204",
+   "omlopp_ledigt_fran": "10:16",
+   "omlopp_nasta_tur": "14:20",
+   "forlangning_min": 0.0,
+   "inom_omloppet": true,
+   "kortid_min": 31.0,
+   "km": 12.92,
+   "fordonstimmar": 0.52,
+   "kostnad_ar_låg": 7721,
+   "kostnad_ar_bas": 9407,
+   "kostnad_ar_hög": 11416
+  },
+  {
+   "flyg": "ankomst 21:35 från Stockholm-Arlanda (HP 284)",
+   "fonster": "22:00–22:20",
+   "avg_centrum": "21:50",
+   "vid_flygplatsen": "22:06",
+   "ank_centrum": "22:21",
+   "min_fore_eller_efter_flyget": 31,
+   "omlopp": "205",
+   "omlopp_ledigt_fran": "21:13",
+   "omlopp_nasta_tur": null,
+   "forlangning_min": 71.0,
+   "inom_omloppet": false,
+   "kortid_min": 31.0,
+   "km": 12.92,
+   "fordonstimmar": 1.7,
+   "kostnad_ar_låg": 20111,
+   "kostnad_ar_bas": 24157,
+   "kostnad_ar_hög": 28526
+  }
+ ],
+ "flyg_extraturer_summa": {
+  "låg": 52668,
+  "bas": 63346,
+  "hög": 74993
+ }
 }

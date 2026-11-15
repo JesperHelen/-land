@@ -424,7 +424,8 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
     vändningar under rekommenderad nivå markeras (röd < 1 min, orange < 3 min)."""
     andrade = set(andrade)
     nb = plan.buss.max()
-    etik = (plan.drop_duplicates('buss').set_index('buss').omlopp.to_dict() if 'omlopp' in plan else {})
+    etik = (plan.drop_duplicates('buss').set_index('buss').omlopp.to_dict()
+            if 'omlopp' in plan and plan.omlopp.notna().all() and (plan.omlopp.astype(str) != 'nan').all() else {})
     for r in plan.itertuples():
         y = nb - r.buss
         f = C.FARG_LINJE[r.linje]

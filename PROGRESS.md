@@ -176,6 +176,22 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       (S/N från 16:50) körs av 205 och 207 (V/Ö från 16:40) av 208. Fyra omlopp + J = 5 bussar, omloppstid 61,4 h.
       Antal turer oförändrat (16/20, 4Y 8/8, Solberget 17/20). Kostnad 1a ★ +11,6 k€, 1b ★ +6,7 k€, 4 ★ +6,4 k€,
       4Y +2,8 k€. Känslighet UA 4: 5,5–7 min → Solberget på 10 / 6 Ö-turer; över 7 min 6 / 2 turer.
+- [x] **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten** (operatörens förslag via beställaren
+      2026-11-15): `b4_ua` typ `flytta` (`SVANG`, `svang()`, `flytta_monster`, `flytta_hallplatser`,
+      `ua5_detaljer`), N −2 min på alla 22 turer (bas), V +2 min (känslighet 1 min; tidtabellen ger ≈ 0,6 min).
+      Resultat: ★ V/Ö 17/20 V-turer (som i dag 07:50, 13:40, 14:40; Ö 08:45 +2,5 min), dagens drift 16/20, alla
+      20 ryms inte (2 min i centrum). N i centrum 4 → 6 min (+0,7 h reglering/vardag). Påstigande i svängen 0,95
+      per vardag; 121 inv. fler avgångar (+22), ingen färre, 62 lyfts till ≥ 30; effekt +2 196; restid −10 min/vardag.
+      Variant `N` (bara N rakt på, ingen i svängen): ingen förlorar hållplats/avgångar, 28 inv. +22, −21 min/vardag,
+      −0,2 k€. Kostnad ★ +0,7 k€. Figurer b4_17 (karta), b4_18 (omlopp); B4 4.7, PM 3.6, B5, GIS (grupp UA 5,
+      `b4_ua_linjer` ua 5/5N), QGIS-projektet.
+- [x] **UA 4 – exakta flygtider** (beställaren 2026-11-15: på flygplatsen 2–1,5 h före avgång, buss därifrån ≈ 30
+      min efter landning): `FLYG_AVGANGAR` 07:15/11:00/17:10, `FLYG_ANKOMSTER` 10:35/16:45/21:35, `FLYG_FORE` (120, 90),
+      `FLYG_EFTER` (25, 45, 30); `flygmatchning`, `flyg_extraturer`. Dagens V-turer når 3 av 6 flyg (V 08:50, 15:10,
+      17:10) → **UA 4Y 3/3** (+1,6 k€); UA 4 ★ (16/20) når samma 3. Extra turer 05:15 (omlopp 204, +2,2 h),
+      10:50 (204 i uppehåll, +0,5 h), 21:50 (205, +1,7 h): +63,3 k€/år (52,7–75,0), varav 10:50 +9,4 k€. Figur b4_19
+      (flygtider), tabell 4.4a–b i B4, 5.2 i B5. Känslighet: 5,5–7 min omväg → 4Y kräver Solberget på Ö 09:20 och 15:40.
+- [x] **Omloppsfigurerna** visar operatörens omlopp för i dag (tidigare "Omlopp nan") och "Buss n" för ombyggda planer.
 - [ ] **OSRM-vägdragning i kartor** (beställaren 2026-11-03: linjerna och UA längs vägarna). Blockerat: proxyn
       nekar router.project-osrm.org (403). Kräver att domänen tillåts i miljöns nätverksinställningar, eller att
       `rutta_med_osrm.py` körs i QGIS och GeoPackage-filen skickas tillbaka (`s01_vagdragning.py --fran-gis`).

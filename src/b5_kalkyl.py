@@ -42,7 +42,7 @@ ENHET = {   # EUR, 2026
 }
 KALKYLRANTA = 0.035
 KALKYLTID = 20
-SCEN = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y']
+SCEN = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y', '5', '5_ryms', '5_N']
 
 
 def kort(sid, v):
@@ -55,7 +55,10 @@ def kort(sid, v):
             '4': f"UA 4 flygplatsen – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
             '4_VO': f'UA 4 ★ flygplatsen – V och Ö sammanslagna ({n} av {tot} turer)',
             '4_VO_sol': f'UA 4 flygplatsen – dito + Solberget indragen ({n} av {tot})',
-            '4_Y': f'UA 4Y flygturerna ({n} av {tot}), V och Ö sammanslagna'}[sid]
+            '4_Y': f'UA 4Y flygturerna ({n} av {tot}), V och Ö sammanslagna',
+            '5': f'UA 5 ★ svängen till linje V – V och Ö sammanslagna ({n} av {tot} V-turer)',
+            '5_ryms': f'UA 5 svängen till linje V – dagens drift ({n} av {tot} V-turer)',
+            '5_N': 'UA 5 variant – bara linje N rakt på (svängen utan buss)'}[sid]
 
 
 def main():
@@ -95,6 +98,12 @@ def main():
            'break_even_vagforlangning_vo': {n: {'merkostnad_1a_VO_jfr_1b_per_ar': round(diff_vo[n]),
                                                 'nuvarde_eur': round(diff_vo[n] * an)} for n in NIVAER}}
     res['turer_1b'] = f"{se['1b']['turer']} av {se['1b']['turer_tot']}"
+    # UA 4: extra V-turer via flygplatsen för flyg som ingen tur i dagens tidtabell når (b4_ua.flyg_extraturer)
+    ex = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['flygplatsen']['extraturer']
+    res['flyg_extraturer'] = [{**e, **{f'kostnad_ar_{n}': round((e['fordonstimmar'] * ENHET['per_fordonstimme'][n] +
+                                                                e['km'] * ENHET['per_km'][n]) * VARDAGAR)
+                                       for n in NIVAER}} for e in ex]
+    res['flyg_extraturer_summa'] = {n: sum(e[f'kostnad_ar_{n}'] for e in res['flyg_extraturer']) for n in NIVAER}
     df.to_csv(P / 'b5_kalkyl.csv', index=False)
     with open(P / 'b5_kalkyl.json', 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1, default=float)
@@ -119,7 +128,8 @@ def figur(df, res):
     tot = d.drift_ar_bas.to_numpy() / 1000
     a_, b_ = d['drift_ar_låg'].to_numpy() / 1000, d['drift_ar_hög'].to_numpy() / 1000
     lo, hi = np.minimum(a_, b_), np.maximum(a_, b_)
-    ax.errorbar(tot, y, xerr=[tot - lo, hi - tot], fmt='none', ecolor='#1f1f1e', elinewidth=0.8, capsize=3, zorder=5)
+    ax.errorbar(tot, y, xerr=[np.clip(tot - lo, 0, None), np.clip(hi - tot, 0, None)], fmt='none', ecolor='#1f1f1e',
+                elinewidth=0.8, capsize=3, zorder=5)
     for yy, t, h_ in zip(y, tot, hi):
         ax.text(max(h_, t, 0) + 4, yy, f'{t:+,.0f} k€/år'.replace(',', ' ').replace('-', '−'), va='center', fontsize=7.6,
                 color=K.TEXT)
@@ -135,9 +145,10 @@ def figur(df, res):
 
     ax2.axis('off')
     be = res['break_even_vagforlangning']
-    tkort = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ V + Ö', '1b': 'UA 1b ★ V + Ö',
+    tkort = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a tidtabell', '1a_VO': 'UA 1a ★ V + Ö', '1b': 'UA 1b ★ V + Ö',
              '2': 'UA 2 ★ N2', '3': 'UA 3 ★ Bo-Bil', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ V + Ö',
-             '4_VO_sol': 'UA 4 V + Ö, Solberget', '4_Y': 'UA 4Y flygturerna'}
+             '4_VO_sol': 'UA 4 + Solberget', '4_Y': 'UA 4Y flygturerna', '5': 'UA 5 ★ V + Ö',
+             '5_ryms': 'UA 5 dagens drift', '5_N': 'UA 5 bara N'}
     cell = [[tkort[s], f"{d.at[s, 'delta_fordon']:+d}", f"{d.at[s, 'delta_fordonstimmar_ar']:+,d}".replace(',', ' '),
              f"{d.at[s, 'delta_km_ar']:+,d}".replace(',', ' '), f"{d.at[s, 'investering_bas'] / 1000:,.0f}".replace(',', ' '),
              '–' if d.at[s, 'drift_per_battre_inv_bas'] is None or pd.isna(d.at[s, 'drift_per_battre_inv_bas'])

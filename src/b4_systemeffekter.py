@@ -47,7 +47,8 @@ P = C.PROCESSED
 # id, UA, driftform (nyckel i b4_ua.omlopp_scenarier)
 SCENARIER = [('idag', None, None), ('1a', '1a', 'alla'), ('1a_ryms', '1a', 'ryms'), ('1a_VO', '1a', 'VO'),
              ('1b', '1b', 'VO'), ('2', '2', 'alla'), ('3', '3', 'alla'),
-             ('4', '4', 'alla'), ('4_VO', '4', 'VO'), ('4_VO_sol', '4', 'VO_sol'), ('4_Y', '4', 'Y_VO')]
+             ('4', '4', 'alla'), ('4_VO', '4', 'VO'), ('4_VO_sol', '4', 'VO_sol'), ('4_Y', '4', 'Y_VO'),
+             ('5', '5', 'VO'), ('5_ryms', '5', 'ryms'), ('5_N', '5', 'N')]
 BATTRE, SAMRE = '#2f9e44', '#c0392b'
 
 
@@ -68,7 +69,7 @@ def berorda_turer(f, t):
 
 
 UTESLUTEN = ('1a', '4')        # driftformer som kräver fler bussar – uteslutna, redovisas bara i rapporten
-HUVUD = {'1a_VO': '1a', '1b': '1b', '2': '2', '3': '3', '4_VO': '4'}   # huvudalternativ per UA (kartan)
+HUVUD = {'1a_VO': '1a', '1b': '1b', '2': '2', '3': '3', '4_VO': '4', '5': '5'}   # huvudalternativ per UA (kartan)
 
 
 def namn(sid, v):
@@ -82,7 +83,11 @@ def namn(sid, v):
             '4': f"UA 4 Linje V till flygplatsen – alla {tot} turer, dagens tidtabell ({b} bussar, utesluten)",
             '4_VO': f"UA 4 Linje V–Ö via flygplatsen – V och Ö sammanslagna, {n} av {tot} turer (huvudalternativ)",
             '4_VO_sol': f"UA 4 – dito med Solberget indragen, {n} av {tot} turer",
-            '4_Y': f"UA 4Y – bara turerna för flygen ({n} av {tot}), V och Ö sammanslagna"}[sid]
+            '4_Y': f"UA 4Y – bara turerna för flygen ({n} av {tot}), V och Ö sammanslagna",
+            '5': f"UA 5 Linje V via Cedersvägen, linje N rakt på Västra utfarten – V och Ö sammanslagna, {n} av {tot} "
+                 f"V-turer via svängen (huvudalternativ)",
+            '5_ryms': f"UA 5 – dagens drift, {n} av {tot} V-turer via svängen",
+            '5_N': "UA 5 variant – bara linje N rakt på, svängen utan buss"}[sid]
 
 
 def kort(sid, v):
@@ -92,7 +97,9 @@ def kort(sid, v):
             '1a_VO': f"UA 1a ★ V och Ö samman-\nslagna ({n} av {tot} turer)",
             '1b': f"UA 1b ★ förlängd Norr-\ngårdsvägen, V + Ö ({n} av {tot})", '2': 'UA 2 ★ N2 linje Ö', '3': 'UA 3 ★ N via Bo-Bil',
             '4': f"UA 4 alla turer\n({b} bussar – utesluten)", '4_VO': f"UA 4 ★ V och Ö samman-\nslagna ({n} av {tot} turer)",
-            '4_VO_sol': f"UA 4 dito + Solberget\nindragen ({n} av {tot})", '4_Y': f"UA 4Y flygturerna\n({n} av {tot}), V + Ö"}[sid]
+            '4_VO_sol': f"UA 4 dito + Solberget\nindragen ({n} av {tot})", '4_Y': f"UA 4Y flygturerna\n({n} av {tot}), V + Ö",
+            '5': f"UA 5 ★ svängen till V,\nV + Ö ({n} av {tot})", '5_ryms': f"UA 5 dagens drift\n({n} av {tot})",
+            '5_N': "UA 5 variant: bara N\nrakt på (ingen i svängen)"}[sid]
 
 
 # ====================================================================== täckning
@@ -100,6 +107,9 @@ def hallplatser_scenario(hpl0, atg, turer, xy):
     h = hpl0.copy()
     for a, valda in turer.items():
         f = atg[a]; tn = frozenset(valda)
+        if f['typ'] == 'flytta':                         # UA 5: N rakt på (alla turer), V tar svängen (valda)
+            h = F.flytta_hallplatser(h, f, valda, f['turer_n'], xy)
+            continue
         if not tn:
             continue
         if f['typ'] == 'ny':
@@ -122,11 +132,16 @@ def hallplatser_scenario(hpl0, atg, turer, xy):
 def monster_scenario(mon0, atg, turer, t, gen=()):
     """Mönster med UA:ns körtider; andelen turer som trafikerar en åtgärd skalar tillägget."""
     mon = []
+    for a, valda in turer.items():                     # UA 5: N rakt på, V via svängen (tillägget skalat med andelen)
+        f = atg[a]
+        if f['typ'] == 'flytta':
+            mon0 = F.flytta_monster(mon0, f, med_v=bool(valda),
+                                    andel_v=len(valda) / max(len(berorda_turer(f, t)), 1))
     for m in mon0:
         m = dict(m); m['akt'] = m['akt'].copy(); s = list(m['stopp'])
         for a, valda in turer.items():
             f = atg[a]
-            if m['linje'] != f['linje'] or not valda:
+            if m['linje'] != f['linje'] or not valda or f['typ'] == 'flytta':
                 continue
             andel = len(valda) / max(len(berorda_turer(f, t)), 1)
             if f['typ'] == 'ny':
@@ -422,7 +437,7 @@ def fig_vo(res, fid='1a'):
     return ut
 
 
-IDS = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y']
+IDS = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y', '5']
 
 
 def fig_systemeffekter(res):
@@ -468,9 +483,9 @@ def fig_systemeffekter(res):
     rub = ['Mariehamn (14 821 inv.)', 'I dag', 'UA 1a\nalla turer\n(utesluten)', 'UA 1a\ndagens\ntidtabell',
            'UA 1a ★\nV + Ö\nsamman-\nslagna', 'UA 1b ★\nV + Ö\nsamman-\nslagna', 'UA 2 ★\nN2', 'UA 3 ★\nBo-Bil',
            'UA 4\nalla turer\n(utesluten)', 'UA 4 ★\nV + Ö\nsamman-\nslagna', 'UA 4\ndito +\nSolberget\nindragen',
-           'UA 4Y\nflyg-\nturerna,\nV + Ö']
+           'UA 4Y\nflyg-\nturerna,\nV + Ö', 'UA 5 ★\nsvängen\ntill V,\nV + Ö']
     tb = ax2.table(cellText=cell, colLabels=rub, loc='upper left', cellLoc='right', colLoc='center',
-                   colWidths=[0.175] + [0.075] * len(kol))
+                   colWidths=[0.15] + [0.0655] * len(kol))
     tb.auto_set_font_size(False); tb.set_fontsize(7.4); tb.scale(1, 1.55)
     rad_bussar = 1 + len(rad) + 1
     for (r_, c_), ce in tb.get_celld().items():
@@ -508,6 +523,10 @@ def rita_ua(ax, fid):
                     path_effects=[K.pe.Stroke(linewidth=4.2, foreground='white'), K.pe.Normal()], **stil)
     for r in g[g.geom_type == 'Point'].itertuples():
         utgar = 'utgår' in r.objekt or 'dras in' in r.objekt
+        if 'byter linje' in r.objekt:                  # UA 5: hållplatsen trafikeras av en annan linje
+            ax.scatter([r.geometry.x], [r.geometry.y], s=110, marker='o', color=C.FARG_LINJE.get(r.linje, '#1c5cab'),
+                       edgecolor='white', lw=1.0, zorder=8)
+            continue
         ax.scatter([r.geometry.x], [r.geometry.y], s=90 if utgar else 190, marker='X' if utgar else '*',
                    color=SAMRE if utgar else '#1c5cab', edgecolor='white', lw=0.8, zorder=8)
 
@@ -594,6 +613,8 @@ def fig_ua4_karta(res):
            f"som i dag: {', '.join(vo['turer_utan_andring'])}",
            r'$\bf{UA\ 4Y}$' + f"   bara de {ny} turerna för flygen ({', '.join(fp['flygturer'])}):",
            f"{y_['turer_med_andring']} av {ny} ryms med samma linje, minst {sv(centrum_andrade(y_))} min i centrum",
+           r'$\bf{Flygen}$' + f"   {sum(1 for m in fp['matchning'] if m.get('v_tur'))} av {len(fp['matchning'])} nås med "
+           f"dagens V-turer; extra turer {', '.join(e['avg_centrum'] for e in fp['extraturer'])} för övriga (B4 fig. 19)",
            r'$\bf{Solberget\ indragen}$' + f"   ger inga fler turer ({vs['turer_med_andring']} av {f['linjens_turer']}), "
            f"bara större marginal – ingår inte",
            r'$\bf{Uteslutet}$' + f"   bara förlängning av V (dagens tidtabell): alla turer kräver {o['alla']['fordon']} bussar",
@@ -623,7 +644,10 @@ def fig_tackning_fore_efter(res):
              ('2', 'UA 2 N2 på linje Ö', (109250, 111650, 6682050, 6684450), ''),
              ('3', 'UA 3 linje N via Bo-Bil', (106950, 109350, 6685150, 6687550), ''),
              ('4_VO', 'UA 4 flygplatsen', (105500, 107900, 6685100, 6687500),
-              f"Huvudalternativet: V och Ö sammanslagna,\n{n4} avgångar vid flygplatsen (UA 4Y {ny}).")]
+              f"Huvudalternativet: V och Ö sammanslagna,\n{n4} avgångar vid flygplatsen (UA 4Y {ny})."),
+             ('5', 'UA 5 svängen till linje V', (106350, 108750, 6683300, 6685700),
+              f"Cedersvägen och Klintvägen: {res['5']['turer']} V-turer i\nstället för 22 N-turer; N stannar vid "
+              f"Västra macken.")]
     fig, axs = plt.subplots(len(rader), 2, figsize=(11.6, 5.4 * len(rader)))
     for (sid, rub, uts, fot), (a0, a1) in zip(rader, axs):
         for ax, s_, t_ in [(a0, 'idag', f'{rub} – i dag'), (a1, sid, f'{rub} – med huvudalternativet')]:
@@ -653,6 +677,7 @@ def fig_tackning_fore_efter(res):
             Patch(facecolor='none', edgecolor=SAMRE, lw=1.2, label='Sämre klass än i dag'),
             Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=11, label='Ny hållplats'),
             Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Hållplats utgår för linjen'),
+            Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['V'], markersize=8, label='Hållplats byter linje N → V'),
             Line2D([], [], color='#7a776f', lw=2, label='Ny körväg (linjens färg)'),
             Line2D([], [], color='#7a776f', lw=2, ls=(0, (3, 2)), label='Planerad väg'),
             Line2D([], [], color='#3d3d3a', lw=2, ls=(0, (1, 1.4)), label='Körväg som utgår')]
@@ -738,7 +763,8 @@ def fig_avgangar_forandring(res):
              ('2', 'UA 2 – N2 på linje Ö', '2', (109250, 111650, 6682050, 6684450)),
              ('3', 'UA 3 – linje N via Bo-Bil', '3', (106950, 109350, 6685150, 6687550)),
              ('4_VO', 'UA 4 – linje V–Ö via flygplatsen', '4', (105500, 107900, 6685100, 6687500)),
-             ('4_VO_sol', 'UA 4 med Solberget indragen (variant)', 'sol', None)]
+             ('4_VO_sol', 'UA 4 med Solberget indragen (variant)', 'sol', None),
+             ('5', 'UA 5 – svängen till linje V, N rakt på', '5', (106350, 108750, 6683300, 6685700))]
     import s01_vagdragning as V
     hxy = V.alla_xy()[0]
     yt = ytor_alla()
@@ -750,8 +776,9 @@ def fig_avgangar_forandring(res):
         x0, y0, x1, y1 = yt.loc[d].total_bounds
         cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
         return (cx - halv, cx + halv, cy - halv, cy + halv)
-    fig = plt.figure(figsize=(13.2, 9.4))
-    gs = fig.add_gridspec(2, 3, wspace=0.06, hspace=0.14, left=0.01, right=0.99, top=0.92, bottom=0.1)
+    fig = plt.figure(figsize=(13.2, 13.6))
+    gs = fig.add_gridspec(3, 3, wspace=0.06, hspace=0.14, left=0.01, right=0.99, top=0.94, bottom=0.08,
+                          height_ratios=[1, 1, 0.62])
     for n_, (sid, rub, fid, uts) in enumerate(rader):
         uts = uts or utsnitt(sid, farre=(fid == 'sol'))
         ax = fig.add_subplot(gs[n_ // 3, n_ % 3])
@@ -779,9 +806,10 @@ def fig_avgangar_forandring(res):
                 bbox=dict(boxstyle='round,pad=0.45', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.95))
         K.skalstock(ax, loc=(0.05, 0.04)); K.norrpil(ax)
     # sammanställning: invånare som får fler (grönt) respektive färre (rött) avgångar
-    ax = fig.add_subplot(gs[1, 2])
+    ax = fig.add_subplot(gs[2, 1:])
     sc = [('1a_VO', 'UA 1a ★'), ('1b', 'UA 1b ★'), ('2', 'UA 2 ★'), ('3', 'UA 3 ★'), ('4_VO', 'UA 4 ★'),
-          ('4_Y', 'UA 4Y'), ('4_VO_sol', 'UA 4 + Solberget\nindragen')]
+          ('4_Y', 'UA 4Y'), ('4_VO_sol', 'UA 4 + Solberget indragen'), ('5', 'UA 5 ★'),
+          ('5_N', 'UA 5 bara N rakt på')]
     y_ = np.arange(len(sc))[::-1]
     for yy, (sid, lab) in zip(y_, sc):
         f = res[sid]['forandring_avgangar_mariehamn']
@@ -809,7 +837,8 @@ def fig_avgangar_forandring(res):
     hnd += [Line2D([], [], marker='o', ls='', color=f, markeredgecolor='white' if i != 3 else '#8a877e',
                    markersize=7, label=f'Hållplats: {l}') for i, (l, f) in enumerate(HPL_KLASSER)]
     hnd += [Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=11, label='Ny hållplats (UA)'),
-            Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Hållplats utgår för linjen')]
+            Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Hållplats utgår för linjen'),
+            Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['V'], markersize=8, label='Hållplats byter linje N → V (UA 5)')]
     fig.legend(handles=hnd, loc='lower center', ncol=4, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.01))
     fig.text(0.99, -0.035, 'Underlag: Ålandstrafiken (GTFS, påstigandedata), befolkningsrutor 2024, kust GSHHG. Effekt = '
              '(avgångar efter − i dag) × invånare per 50 m-punkt, utjämnad (gauss, 150 m). Antal avgångar = unika turer som '
@@ -833,7 +862,8 @@ def fig_kanslighet_ua4():
            ('C', 'C  Varvet ≤ 50 min (helst),\nSolberget kvar'), ('D', 'D  Varvet ≤ 50 min (helst),\nSolberget indragen där det behövs')]
     om = sorted(k.omvag_min.unique())
     fig, axs = plt.subplots(2, 1, figsize=(13.6, 9.6), gridspec_kw={'hspace': 0.42})
-    for ax, (u, rub) in zip(axs, [('alla', 'Alla 20 V-turer'), ('Y', 'UA 4Y – de 8 flygturerna')]):
+    ny_ = int(k[k.urval == 'Y'].turer_tot.iloc[0])
+    for ax, (u, rub) in zip(axs, [('alla', 'Alla 20 V-turer'), ('Y', f'UA 4Y – de {ny_} flygturerna')]):
         d = k[k.urval == u]
         tot = int(d.turer_tot.iloc[0])
         for yi, (pid, _) in enumerate(pol):

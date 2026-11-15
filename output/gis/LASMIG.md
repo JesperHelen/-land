@@ -33,14 +33,15 @@ Alla kartor i PM:et finns som GIS-lager i **`linjenatsutredning.gpkg`** (GeoPack
 | 3.1 Nya hållplatslägen | `a3_nya_hallplatser`, `a3_nya_hallplatser_400m`, `a3_behov_ny_linjestrackning`, `a3_behov_400m` | Standard |
 | 3.2 Bedömning av hållplatser | `a3_hallplatsbedomning` | Hållplatsbedömning |
 | 4.2, 4.4, 4.6 utredningsalternativ 1–3 | `b4_ua_hallplatser`, `b4_ua_korvagar` (fält `ua`: 1a, 1b, 2, 3; `objekt`: befintlig väg / planerad väg / utgår) | Standard |
-| Linjerna i UA (huvudalternativ) | `b4_ua_linjer` (fält `ua`: 1a, 1b och 4 = linje V–Ö, 2, 3) | Linjer i utredningsalternativen (huvudalternativ) |
+| Linjerna i UA (huvudalternativ) | `b4_ua_linjer` (fält `ua`: 1a, 1b, 4 och 5 = linje V–Ö, 2, 3, 5N = linje N rakt på i UA 5) | Linjer i utredningsalternativen (huvudalternativ) |
 | 4.10 UA 4 – linje V–Ö via flygplatsen | `b4_ua_hallplatser`, `b4_ua_korvagar`, `b4_ua_linjer` (ua 4), `b4_tackning_forandring` (scenario 4_VO) | Standard |
+| 4.17 UA 5 – linje V via Cedersvägen, linje N rakt på | `b4_ua_hallplatser` (ua 5: hållplats byter linje N → V, Stenhuggarvägen utgår), `b4_ua_korvagar` (ua 5), `b4_ua_linjer` (ua 5 och 5N), `b4_effekt` / `b4_hallplatser_frekvens` (scenario 5) | Standard |
 | 4.16 Effekt: avgångar × befolkning (vinnare/förlorare) | `b4_effekt` (fält `scenario`, `klass`, `effekt_min`/`effekt_max` i invånare × avgångar per vardag och ha) och `b4_hallplatser_frekvens` (fält `scenario`, `avgangar_idag`, `avgangar_efter`, `andring_pct`, `klass`) | Grönt vinnare, rött förlorare (tio klasser); hållplatser −100 % till +100 % |
 | 4.16 Fler och färre avgångar per vardag inom 400 m (exakta ytor) | `b4_avgangar_forandring` (fält `scenario`; `delta_avgangar`, `invanare`, `invanare_mariehamn`, `invanare_per_km2`, `etikett`) | Grönt fler, rött färre avgångar (sex klasser), etikett med avgångar och invånare |
-| 4.13–4.14 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` och `b4_tackning_forandring` (fält `scenario`: idag, 1a, 1a_ryms, 1a_VO, 1b, 2, 3, 4, 4_VO, 4_VO_sol, 4_Y) | Turtäthet inom 400 m / Förändrad turtäthetsklass |
+| 4.13–4.14 Systemeffekter, turtäthet före/efter | `b4_tackning_scenarier` och `b4_tackning_forandring` (fält `scenario`: idag, 1a, 1a_ryms, 1a_VO, 1b, 2, 3, 4, 4_VO, 4_VO_sol, 4_Y, 5, 5_ryms, 5_N) | Turtäthet inom 400 m / Förändrad turtäthetsklass |
 | Nyckeltal per scenario (bussar, omloppstid, km, täckning, kostnad) | `b4_nyckeltal_scenarier` (tabell utan geometri) | – |
 | 4.8 Sammanslagning av linjer | `b4_sammanslagning_omraden` | Behövd tid per tur |
-| 4.1, 4.3, 4.5, 4.7, 4.9, 4.11, 4.12 Omlopp och tidsbudget | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv`, `b4_systemeffekter_omlopp.csv` |
+| 4.1, 4.3, 4.5, 4.7, 4.9, 4.11, 4.12, 4.18, 4.19 Omlopp, tidsbudget och flygtider | – (diagram, ingen geografi) | Data: `data/processed/b4_omlopp_scenarier.csv`, `b4_systemeffekter_omlopp.csv` |
 | Via-punkter för OSRM ("gömda stopp") | `00_viapunkter` (fält `from_stop`, `to_stop`, `kommentar`) | Via-punkter för OSRM |
 
 ## Linjer som delar gata
@@ -91,11 +92,13 @@ Gruppen *Kap 4 Utredningsalternativ (UA)* har en undergrupp per UA (filter på f
 - *UA 2*
 - *UA 3*
 - *UA 4*
+- *UA 5*
 
 Varje undergrupp visar **huvudalternativet**, dvs. den mest realistiska driftformen: ny hållplats, körväg, linjen
-och **förändrad turtäthet** (gröna celler = bättre, röda = sämre än i dag). I UA 1a, UA 1b och UA 4 visas linje V
+och **förändrad turtäthet** (gröna celler = bättre, röda = sämre än i dag). I UA 1a, UA 1b, UA 4 och UA 5 visas linje V
 och Ö som en genomgående linje V–Ö (V och Ö sammanslagna, varje varv V + Ö inom timmen med minst 5 minuter i
-centrum). UA 4 visar linje V–Ö via flygplatsen; Solberget behålls. Tänd och släck grupperna för att jämföra.
+centrum). UA 4 visar linje V–Ö via flygplatsen; Solberget behålls. UA 5 visar linje V via Cedersvägen och linje N
+rakt på Västra utfarten. Tänd och släck grupperna för att jämföra.
 
 **Systemeffekter – huvudalternativ per UA (välj ett)** är en *exklusiv* grupp: tänd gruppen och klicka i ett
 scenario. Varje scenario visar turtäthetsklassen inom 400 m och, ovanpå, cellerna som förändras mot i dag.
@@ -107,9 +110,11 @@ i rapporten:
 - UA 1a, dagens tidtabell;
 - UA 4, alla turer med dagens tidtabell;
 - UA 4 med Solberget indragen (samma turer, större marginal);
-- UA 4Y, bara flygturerna.
+- UA 4Y, bara flygturerna;
+- UA 5 med dagens drift (V och Ö var för sig);
+- UA 5 variant, bara linje N rakt på (ingen buss i svängen).
 
-Förändringarna är lokala – zooma in vid Möckelö Strand, Kalmarnäs, Bo-Bil, flygplatsen eller Solberget för att se
+Förändringarna är lokala – zooma in vid Möckelö Strand, Kalmarnäs, Bo-Bil, flygplatsen, Cedersvägen eller Solberget för att se
 dem. Nyckeltalen finns i tabellen *Nyckeltal per UA och driftform* (högerklick > *Öppna attributtabell*), med
 fälten `huvudalternativ` och `utesluten`. Filtren kan ändras under *Lageregenskaper > Källa > Frågebyggare*.
 

@@ -10,6 +10,9 @@ UA (beställarens urval efter granskningen av Fas A, 2026-10-14)
   4   Linje V till flygplatsen (beställaren 2026-10-14): från Posten upp till terminalen, slinga runt terminalen och
       tillbaka till Norra Svibyvägen. Varianter: alla turer, V och Ö sammanslagna, sammanslagna med hållplatsen
       Solberget indragen på linje Ö, och 'Y' – bara de V-turer som behövs för flygen.
+  5   Linje V tar över svängen Stenhuggarvägen – Cedersvägen – Klintvägen och linje N kör rakt på Västra utfarten
+      (operatörens förslag via beställaren 2026-11-15). Linje N: Sjukhuset → Västra macken → Elverksgatan;
+      linje V: Västra macken → Cedersvägen → Klintvägen → Tekniska verken.
 Antaganden
   * Möckelö Strand (beställarens restider och skiss 2026-10-14): den befintliga vägen mellan Norrgårdsvägen och
     den nya hållplatsen tar 2 min (RESTID_BEFINTLIG_VAG), förlängningen av Norrgårdsvägen från dagens vändpunkt
@@ -33,9 +36,14 @@ Antaganden
   * Flygplatsen: körvägen enligt beställarens skiss (s01_vagdragning). Tilläggs-km = skissens längd Posten →
     terminalen → Norra Svibyvägen → Källarvägen minus dagens Posten → Källarvägen; tilläggstid = tilläggs-km i
     KMH_FLYG km/h + 0,5 min uppehåll, avrundat uppåt till halv minut (känslighet ± 1 min).
-    Flygen (Finavia, avgångar 2026-10-14): 07:15 Arlanda, 11:00 Åbo, 17:10 Arlanda. Ankomsttiderna saknas i
-    underlaget och antas vara 35 min före avgångarna 11:00 och 17:10 (samma flygplan vänder). 'Y': V-turer som
-    är vid flygplatsen 2 h – 30 min före en avgång, och den första turen 10–40 min efter en ankomst.
+    Flygen (bokningssidan, beställaren 2026-11-15): avgångar 07:15 Arlanda, 11:00 Åbo, 17:10 Arlanda; ankomster
+    10:35 från Arlanda, 16:45 från Åbo, 21:35 från Arlanda. 'Y': V-turer som är vid flygplatsen 2 h – 1,5 h före
+    en avgång (FLYG_FORE), och den tur som lämnar flygplatsen närmast 30 min efter en ankomst (20–45 min,
+    FLYG_EFTER). Flyg som ingen tur i dagens tidtabell når prövas som extra turer (flyg_extraturer).
+  * Svängen (UA 5): linje N kör i dag Sjukhuset → Elverksgatan via Stenhuggarvägen, Cedersvägen och Klintvägen på
+    3,0 min; rak väg på Västra utfarten tar enligt tidtabellen för linje Ö cirka 2,3 min. Operatören bedömer
+    vinsten till 'ett par minuter' (verklig körtid): DELTA_SVANG = 2 min, känslighet 1 min. Linje N blir lika
+    mycket kortare (alla turer) som linje V blir längre (de V-turer som ryms).
   * Solberget indragen (linje Ö): bussen kör direkt mellan hållplatserna före och efter Solberget, med den
     kortaste tid som tidtabellen har för den direkta sträckan (1,6–2,5 min kortare per tur).
 Verifiering (ramen 'inga fler bussar'): se b4_omlopp.py – omloppen följer normen att föraren byter linje
@@ -75,23 +83,34 @@ HPL = {'Möckelö Strand': '9025302000066401', 'Norrgårdsvägen ut': '902530200
        'Österkullagatan': '9025302000061501', 'Kalmarnäs vändplan': '9025302000063001',
        'Maxinge': '9025302000031201', 'Vikingagränd': '9025302000063201', 'Bolstavägen': '9025302000063301',
        'Bo-Bil A': '9025302000003501', 'Bo-Bil B': '9025302000003502',
-       'Posten': '9025302000035802', 'Källarvägen': '9025302000025902', 'Solberget': '9025302000062201'}
+       'Posten': '9025302000035802', 'Källarvägen': '9025302000025902', 'Solberget': '9025302000062201',
+       'Sjukhuset': '9025302000039601', 'Stenhuggarvägen': '9025302000062401', 'Cedersvägen': '9025302000062701',
+       'Klintvägen': '9025302000062901', 'Elverksgatan': '9025302000063701',
+       'Västra macken in': '9025302000055901', 'Tekniska verken in': '9025302000049201'}
 UPPEHALL = 0.5
 RESTID_BEFINTLIG_VAG = 2.0     # min – befintlig väg Norrgårdsvägen ↔ ny hållplats Möckelö Strand (beställaren)
 RESTID_FORLANGNING = 1.0       # min – förlängd Norrgårdsvägen, Möckelö Strand → ny hållplats (beställaren)
 # Utredningsalternativ (UA): titel och huvudalternativ = den mest realistiska driftformen, som visas på kartan.
 # Övriga driftformer redovisas i rapporten (alternativ som kräver fler bussar är uteslutna).
 TITEL = {'1a': 'UA 1a – Möckelö Strand ny via dagens vägar', '1b': 'UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen',
-         '2': 'UA 2 – N2 på linje Ö', '3': 'UA 3 – Linje N via Bo-Bil', '4': 'UA 4 – Linje V–Ö via flygplatsen'}
+         '2': 'UA 2 – N2 på linje Ö', '3': 'UA 3 – Linje N via Bo-Bil', '4': 'UA 4 – Linje V–Ö via flygplatsen',
+         '5': 'UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten'}
 HUVUD_TEXT = {'1a': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)',
               '1b': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)',
               '2': 'alla turer', '3': 'alla turer',
-              '4': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)'}
+              '4': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum)',
+              '5': 'V och Ö sammanslagna (varv V + Ö inom timmen, ≥ 5 min i centrum); linje N alla turer'}
+# UA 5 (Axbuss via beställaren 2026-11-15): linje V tar över svängen Stenhuggarvägen – Cedersvägen – Klintvägen och linje N
+# kör rakt på Västra utfarten. Svängen tar enligt operatören "ett par minuter"; tidtabellen ger cirka 1 minut.
+DELTA_SVANG = 2.0              # min per tur – svängen (operatörens uppgift); känslighet 1 min (tidtabellen)
 KMH_FLYG = 25.0                # km/h – medelhastighet på omvägen till flygplatsen
-FLYG_AVGANGAR = ['07:15', '11:00', '17:10']     # Finavia, avgångar från Mariehamn 2026-10-14
-FLYG_ANKOMSTER = ['10:25', '16:35']             # antagande: 35 min före avgångarna 11:00 och 17:10 (ersätts)
-FLYG_FORE = (120, 30)          # min – bussen vid flygplatsen mellan 2 h och 30 min före avgång
-FLYG_EFTER = (10, 40)          # min – bussen vid flygplatsen 10–40 min efter ankomst
+# Flygen enligt bokningssidan (beställaren 2026-11-15, vardagar i november 2026; flygbolag Amapola Flyg)
+FLYG_AVGANGAR = {'07:15': 'Stockholm-Arlanda (HP 281)', '11:00': 'Åbo (HP 285)', '17:10': 'Stockholm-Arlanda (HP 283)'}
+FLYG_ANKOMSTER = {'10:35': 'från Stockholm-Arlanda (HP 282)', '16:45': 'från Åbo (HP 286)',
+                  '21:35': 'från Stockholm-Arlanda (HP 284)'}
+FLYG_FORE = (120, 90)          # min – bussen vid flygplatsen 2 h till 1,5 h före avgång (beställaren)
+FLYG_EFTER = (25, 45, 30)      # min – bussen lämnar flygplatsen cirka 30 min efter landning (godtas 25–45 min)
+EXTRA_VAND = 3.0               # min – minsta uppehåll före och efter en extra tur i omloppet
 
 
 def _a3():
@@ -140,23 +159,82 @@ def flygplatsen():
             'langd_posten_kallarvagen_idag_m': round(idag), 'extra_km_per_tur': round(extra / 1000, 2),
             'delta_min_per_tur': float(delta), 'kalla': ut_['kalla'],
             'framme_vid_flygplatsen_min_efter_avgang': round(framme, 1), 'kmh': KMH_FLYG,
-            'flyg_avgangar': FLYG_AVGANGAR, 'flyg_ankomster_antagna': FLYG_ANKOMSTER}
+            'flyg_avgangar': FLYG_AVGANGAR, 'flyg_ankomster': FLYG_ANKOMSTER,
+            'fore_avgang_min': list(FLYG_FORE), 'efter_ankomst_min': list(FLYG_EFTER)}
+
+
+def _flygkrav():
+    """Varje flyg och tidsfönstret då bussen ska vara vid flygplatsen (min efter midnatt) och måltiden."""
+    ut = []
+    for a, txt in FLYG_AVGANGAR.items():
+        ut.append({'flyg': f'avgång {a} till {txt}', 'typ': 'avgång', 'tid': a, 'fran': hhmm(a) - FLYG_FORE[0],
+                   'till': hhmm(a) - FLYG_FORE[1], 'mal': hhmm(a) - (FLYG_FORE[0] + FLYG_FORE[1]) / 2})
+    for a, txt in FLYG_ANKOMSTER.items():
+        ut.append({'flyg': f'ankomst {a} {txt}', 'typ': 'ankomst', 'tid': a, 'fran': hhmm(a) + FLYG_EFTER[0],
+                   'till': hhmm(a) + FLYG_EFTER[1], 'mal': hhmm(a) + FLYG_EFTER[2]})
+    return sorted(ut, key=lambda k: k['fran'])
+
+
+def flygmatchning(t):
+    """Den V-tur i dagens tidtabell som passar varje flyg (vid flygplatsen inom fönstret, närmast måltiden)."""
+    fp = flygplatsen(); vt = t[t.linje == 'V'].sort_values('avg')
+    vid = {r.trip_id: r.avg + fp['framme_vid_flygplatsen_min_efter_avgang'] for r in vt.itertuples()}
+    tl = t.set_index('trip_id'); ut = []
+    for k in _flygkrav():
+        kand = sorted((abs(x - k['mal']), x, tid) for tid, x in vid.items() if k['fran'] - 1e-9 <= x <= k['till'] + 1e-9)
+        r = {kk: k[kk] for kk in ('flyg', 'typ', 'tid')}
+        r['fonster'] = f"{O.hm(k['fran'])}–{O.hm(k['till'])}"
+        if kand:
+            _, x, tid = kand[0]
+            r.update({'trip_id': tid, 'v_tur': O.hm(tl.at[tid, 'avg']), 'vid_flygplatsen': O.hm(x),
+                      'min_fore_eller_efter_flyget': int(round(abs(x - hhmm(k['tid']))))})
+        ut.append(r)
+    return ut
 
 
 def flygturer(t):
     """V-turer som behövs för flygen ('Y'): {trip_id: syfte}."""
-    fp = flygplatsen(); vt = t[t.linje == 'V'].sort_values('avg')
-    vid = {r.trip_id: r.avg + fp['framme_vid_flygplatsen_min_efter_avgang'] for r in vt.itertuples()}
     ut = {}
-    for a in FLYG_AVGANGAR:
-        for k, x in vid.items():
-            if hhmm(a) - FLYG_FORE[0] <= x <= hhmm(a) - FLYG_FORE[1]:
-                ut.setdefault(k, []).append(f'till flyget {a}')
-    for a in FLYG_ANKOMSTER:
-        kand = [(x, k) for k, x in vid.items() if hhmm(a) + FLYG_EFTER[0] <= x <= hhmm(a) + FLYG_EFTER[1]]
-        if kand:
-            ut.setdefault(min(kand)[1], []).append(f'från flyget (ankomst {a})')
+    for r in flygmatchning(t):
+        if r.get('trip_id'):
+            ut.setdefault(r['trip_id'], []).append(('till flyget ' if r['typ'] == 'avgång' else 'från flyget ') + r['tid'])
     return {k: ', '.join(v) for k, v in ut.items()}
+
+
+def flyg_extraturer(t, plan=None):
+    """Extra V-turer via flygplatsen för flyg som ingen tur i dagens tidtabell når. Avgång från centrum avrundad till
+    5 min så att bussen är vid flygplatsen nära måltiden; körs av ett omlopp som står stilla (minst EXTRA_VAND min
+    före och efter) – annars förlängs det omlopp som ger minst förlängning. Extra fordonstimmar = turens körtid
+    plus eventuell förlängning av omloppet (försiktigt: även en tur i en befintlig paus räknas)."""
+    fp = flygplatsen(); plan = O.omlopp_operator(t) if plan is None else plan
+    v0 = t[t.linje == 'V'].iloc[0]
+    kortid = float(v0.kortid + fp['delta_min_per_tur']); km = float(v0.km + fp['extra_km_per_tur'])
+    fram = fp['framme_vid_flygplatsen_min_efter_avgang']
+    ut = []
+    for k, m in zip(_flygkrav(), flygmatchning(t)):
+        if m.get('trip_id'):
+            continue
+        avg = 5 * round((k['mal'] - fram) / 5); ank = avg + kortid; vid = avg + fram
+        kand = []
+        for (b, om), d in plan.groupby(['buss', 'omlopp']):
+            if om == 'J':
+                continue
+            upptagen = ((d.avg < ank + EXTRA_VAND) & (d.ank > avg - EXTRA_VAND)).any()
+            if upptagen:
+                continue
+            forl = max(0.0, d.avg.min() - (avg - EXTRA_VAND)) + max(0.0, ank + EXTRA_VAND - d.ank.max())
+            fore, efter = d[d.ank <= avg], d[d.avg >= ank]
+            kand.append((forl, str(om), O.hm(fore.ank.max()) if len(fore) else None,
+                         O.hm(efter.avg.min()) if len(efter) else None))
+        forl, om, fore, efter = min(kand) if kand else (np.nan, None, None, None)
+        ut.append({'flyg': k['flyg'], 'fonster': m['fonster'], 'avg_centrum': O.hm(avg), 'vid_flygplatsen': O.hm(vid),
+                   'ank_centrum': O.hm(ank),
+                   'min_fore_eller_efter_flyget': int(round(abs(vid - hhmm(k['tid'])))),
+                   'omlopp': om, 'omlopp_ledigt_fran': fore, 'omlopp_nasta_tur': efter,
+                   'forlangning_min': round(float(forl), 1), 'inom_omloppet': bool(forl == 0),
+                   'kortid_min': round(kortid, 1), 'km': round(km, 2),
+                   'fordonstimmar': round((kortid + forl) / 60, 2)})
+    return ut
 
 
 @lru_cache(maxsize=1)
@@ -180,6 +258,125 @@ def solberget_delta(t):
             k = ids.index(HPL['Solberget'])
             ut[r.trip_id] = -round((ta[k + 1] - ta[k - 1]) - dt[(ids[k - 1], ids[k + 1])], 2)
     return ut
+
+
+# ---------------------------------------------------------------------- UA 5: svängen
+SVANG = {'n_fore': ['Sjukhuset', 'Stenhuggarvägen', 'Cedersvägen', 'Klintvägen', 'Elverksgatan'],
+         'n_efter': ['Sjukhuset', 'Västra macken in', 'Elverksgatan'],
+         'v_fore': ['Västra macken in', 'Tekniska verken in'],
+         'v_efter': ['Västra macken in', 'Cedersvägen', 'Klintvägen', 'Tekniska verken in']}
+
+
+@lru_cache(maxsize=1)
+def _xy():
+    return stopp_xy()
+
+
+def _avst(a, b):
+    xy = _xy()
+    return float(np.hypot(*(xy.loc[a, ['x', 'y']].to_numpy(float) - xy.loc[b, ['x', 'y']].to_numpy(float))))
+
+
+@lru_cache(maxsize=1)
+def svang():
+    """Längder och tidtabellstider för UA 5 (svängen Stenhuggarvägen – Cedersvägen – Klintvägen)."""
+    import s01_vagdragning as V
+    sg = V.segmentgeometri(); H = HPL
+    L = lambda a, b: V.langd(sg[(H[a], H[b])]) if (H[a], H[b]) in sg else 1.25 * _avst(H[a], H[b])
+    n_idag = sum(L(a, b) for a, b in zip(SVANG['n_fore'][:-1], SVANG['n_fore'][1:]))
+    n_rak = L('Sjukhuset', 'Västra macken in') + L('Västra macken in', 'Tekniska verken in') + \
+        _avst(H['Tekniska verken in'], H['Elverksgatan'])
+    v_idag = L('Västra macken in', 'Tekniska verken in')
+    v_svang = _avst(H['Västra macken in'], H['Stenhuggarvägen']) + L('Stenhuggarvägen', 'Cedersvägen') + \
+        L('Cedersvägen', 'Klintvägen') + _avst(H['Klintvägen'], H['Tekniska verken in'])
+    t = O.turer(); g = D.gtfs()['stop_times']
+    def tid(ln, a, b):
+        r = t[t.linje == ln].iloc[0]; st = g[g.trip_id == r.trip_id].set_index('stop_id')
+        return float(st.loc[H[b], 't_arr'] - st.loc[H[a], 't_dep'])
+    n_tt = tid('N', 'Sjukhuset', 'Elverksgatan')
+    o_tt = tid('Ö', 'Sjukhuset', 'Tekniska verken in')
+    hast = (n_idag / 1000) / (n_tt / 60)                       # km/h i svängen enligt tidtabellen
+    rak_tt = o_tt + _avst(H['Tekniska verken in'], H['Elverksgatan']) / 1000 / hast * 60
+    gang = {k: round(min(_avst(H[k], H[x]) for x in ('Västra macken in', 'Tekniska verken in', 'Elverksgatan')))
+            for k in ('Stenhuggarvägen', 'Cedersvägen', 'Klintvägen')}
+    return {'langd_n_svang_m': round(n_idag), 'langd_n_rak_m': round(n_rak),
+            'langd_v_idag_m': round(v_idag), 'langd_v_svang_m': round(v_svang),
+            'km_n_per_tur': round((n_rak - n_idag) / 1000, 3), 'km_v_per_tur': round((v_svang - v_idag) / 1000, 3),
+            'tidtabell_n_sjukhuset_elverksgatan_min': round(n_tt, 2),
+            'tidtabell_o_sjukhuset_tekniska_verken_min': round(o_tt, 2),
+            'tidtabell_v_vastra_macken_tekniska_verken_min': round(tid('V', 'Västra macken in', 'Tekniska verken in'), 2),
+            'rak_vag_enligt_tidtabell_min': round(rak_tt, 2), 'vinst_enligt_tidtabell_min': round(n_tt - rak_tt, 2),
+            'delta_operatoren_min': DELTA_SVANG, 'avstand_till_vastra_utfarten_m': gang}
+
+
+def _ersatt(m, fore, efter, tid):
+    """Byter delsträckan fore (hållplatser i följd) mot efter i mönstret m; tid = ny total åktid, fördelad efter
+    fågelvägen mellan hållplatserna."""
+    s = list(m['stopp']); n = len(fore)
+    i = next((i for i in range(len(s) - n + 1) if s[i:i + n] == fore), None)
+    if i is None:
+        return m, False
+    om = D.hallplatsomraden()['omrade']
+    d = [_avst(a, b) for a, b in zip(efter[:-1], efter[1:])]
+    akt = list(m['akt'])
+    m = dict(m)
+    m['stopp'] = tuple(s[:i] + efter + s[i + n:])
+    m['zoner'] = tuple(list(m['zoner'])[:i] + [om.get(x, '?') for x in efter] + list(m['zoner'])[i + n:])
+    m['akt'] = np.array(akt[:i] + [tid * x / sum(d) for x in d] + akt[i + n - 1:], float)
+    return m, True
+
+
+def _akt(m, fore):
+    s = list(m['stopp']); n = len(fore)
+    i = next((i for i in range(len(s) - n + 1) if s[i:i + n] == fore), None)
+    return None if i is None else float(np.sum(m['akt'][i:i + n - 1]))
+
+
+def flytta_monster(mon, f, d_v=None, d_n=None, med_v=True, andel_v=1.0):
+    """UA 5: linje N kör rakt (d_n min, negativt = kortare) och linje V tar svängen (d_v min; andel_v skalar
+    tillägget när bara en del av V-turerna kör svängen)."""
+    d_v = f['delta'] if d_v is None else d_v; d_n = f['delta_n'] if d_n is None else d_n
+    ut = []
+    for m in mon:
+        if m['linje'] == f['fran_linje'] and _akt(m, f['n_fore']) is not None:
+            m, _ = _ersatt(m, f['n_fore'], f['n_efter'], max(_akt(m, f['n_fore']) + d_n, 0.3))
+        elif med_v and m['linje'] == f['linje'] and _akt(m, f['v_fore']) is not None:
+            m, _ = _ersatt(m, f['v_fore'], f['v_efter'], _akt(m, f['v_fore']) + d_v * andel_v)
+        ut.append(m)
+    return ut
+
+
+def flytta_hallplatser(h, f, turer_v, turer_n, xy):
+    """UA 5: linje N:s turer lämnar svängen och stannar vid Västra macken; linje V:s turer (turer_v) trafikerar
+    Cedersvägen och Klintvägen."""
+    h = h.copy()
+    for fore, efter, tn, ln in ((f['n_fore'], f['n_efter'], frozenset(turer_n), f['fran_linje']),
+                                (f['v_fore'], f['v_efter'], frozenset(turer_v), f['linje'])):
+        if not tn:
+            continue
+        for s in set(fore) - set(efter):
+            if s in h.index:
+                h.at[s, 'turer'] = h.at[s, 'turer'] - tn
+                h.at[s, 'linjer'] = ','.join(x for x in str(h.at[s, 'linjer']).split(',') if x != ln)
+        for s in set(efter) - set(fore):
+            if s in h.index:
+                h.at[s, 'turer'] = h.at[s, 'turer'] | tn
+                lj = [x for x in str(h.at[s, 'linjer']).split(',') if x]
+                h.at[s, 'linjer'] = ','.join(sorted(set(lj) | {ln}))
+            else:
+                h.loc[s] = {'turer': tn, 'linjer': ln, 'avgangar': len(tn), 'x': xy.at[s, 'x'], 'y': xy.at[s, 'y'],
+                            'namn': xy.at[s, 'namn']}
+    h = h[h.turer.map(len) > 0].copy()
+    h['avgangar'] = h.turer.map(len)
+    return h
+
+
+def n_vandtider(plan, linje='N'):
+    """Uppehållet i centrum efter linjens turer (vändning/byte till partnerlinjen) – min, median, antal < 3 min."""
+    v = plan.loc[(plan.linje == linje) & plan.vand_efter.notna() & (plan.vand_efter <= O.DEPA_GRANS), 'vand_efter']
+    return {'min': round(float(v.min()), 1), 'median': round(float(v.median()), 1),
+            'under_3_min': int((v < O.REKOMMENDERAD_VANDTID - 1e-9).sum()), 'antal': int(len(v)),
+            'summa_h': round(float(v.sum() / 60), 2)}
 
 
 def alternativ():
@@ -215,6 +412,17 @@ def alternativ():
                'korvag': 'Posten → flygplatsen (slinga runt terminalen) → Norra Svibyvägen → Källarvägen',
                'delta': fp['delta_min_per_tur'], 'km_tur': fp['extra_km_per_tur'], 'genomgaende': [('V', 'Ö')],
                'solberget': True, 'flygturer': True, 'kansl': [fp['delta_min_per_tur'] - 1, fp['delta_min_per_tur'] + 1]})
+    sv = svang(); t = O.turer(); H = HPL; xy = _xy()
+    ced = [H['Cedersvägen'], H['Klintvägen']]
+    ut.append({'id': '5', 'namn': 'Linje V via Cedersvägen, linje N rakt på Västra utfarten', 'kort': '5 Svängen till V',
+               'titel': TITEL['5'], 'huvud': 'VO', 'linje': 'V', 'fran_linje': 'N', 'typ': 'flytta',
+               **{k: [H[x] for x in v] for k, v in SVANG.items()},
+               'korvag': 'Linje V: Västra macken → Stenhuggarvägen – Cedersvägen – Klintvägen → Tekniska verken; '
+                         'linje N: Sjukhuset → Västra utfarten (Västra macken) → Elverksgatan',
+               'hpl_namn': 'Cedersvägen och Klintvägen', 'xy': tuple(xy.loc[ced, ['x', 'y']].mean().to_numpy(float)),
+               'delta': DELTA_SVANG, 'delta_n': -DELTA_SVANG, 'km_tur': sv['km_v_per_tur'], 'km_n': sv['km_n_per_tur'],
+               'turer_n': list(t[t.linje == 'N'].sort_values('avg').trip_id), 'genomgaende': [('V', 'Ö')],
+               'kansl': [1.0]})
     return ut
 
 
@@ -248,7 +456,10 @@ def omlopp_scenarier(f, t, r, ref):
       robust        (om alla ryms men ger fler varv utan reglering än i dag) turer som kan ändras utan det
       VO            (linje V) genomgående linje V–Ö: varv V + Ö inom timmen med minst 5 min i centrum
       VO_sol        (UA 4) dito med Solberget indragen; Y_VO, Y_VO_sol bara turerna för flygen
-      konservativ…  (1b) känslighet med den högre körtiden delta_konservativ"""
+      konservativ…  (1b) känslighet med den högre körtiden delta_konservativ
+      kansl_…       känslighet för körtiden (UA 4: VO; UA 5: alla, ryms och VO med 1 min)
+      N             (UA 5) variant: bara linje N rakt på, ingen linje i svängen (dagens omlopp)
+    UA 5 (typ 'flytta'): linje N:s turer blir alla delta min kortare (bas), linje V:s turer delta min längre."""
     linjeturer = t[t.linje == f['linje']]
     if f['typ'] == 'ny' and f['segment'][1] is None:          # Möckelö: turer som passerar vändpunkten
         berorda = list(linjeturer[linjeturer.monster.map(lambda m: f['segment'][0] in m)].trip_id)
@@ -259,49 +470,60 @@ def omlopp_scenarier(f, t, r, ref):
     plan0 = O.omlopp_operator(t)                              # dagens omlopp (operatörens) – fast vid linje V–Ö
     v_regel = f['linje'] == 'V'                                # linje V: kravet på tid i centrum per varv V + Ö
     vv = O.bygg_omlopp(t, referens=ref) if v_regel else None
+    flytta = f['typ'] == 'flytta'
+    nbas = (lambda d: {k: -d for k in f['turer_n']}) if flytta else (lambda d: None)   # UA 5: linje N kortare
 
-    def kor(namn, valda, d, skift=None, bas=None, vo=False, fast=None):
+    def kor(namn, valda, d, skift=None, bas=None, vo=False, fast=None, sol=False):
         dd = dict(bas or {})
         for k in valda:
             dd[k] = dd.get(k, 0.0) + d
         fast = fast if fast is not None else (plan0 if vo else None)
-        plan, nt, ok = O.verifiera(t, dd, r, km_delta={k: f['km_tur'] for k in valda}, skift=skift, referens=ref,
-                                   fast=fast)
+        km = {k: f['km_tur'] for k in valda}
+        if flytta:
+            km.update({k: f['km_n'] for k in f['turer_n']})
+        plan, nt, ok = O.verifiera(t, dd, r, km_delta=km, skift=skift, referens=ref, fast=fast)
         if v_regel and not vo:
             ok = ok and O.varv_ok(plan, vv)
         rob = (nt['varv_vo_under_marginal'] <= O.nyckeltal(fast if fast is not None else vv)['varv_vo_under_marginal']) \
             if v_regel else O.ar_robust(nt, r)
         scen[namn] = {'plan': plan, 'nt': nt, 'ok': ok, 'robust': rob, 'turer': list(valda), 'vo': vo,
-                      'skift': dict(skift or {}), 'delta': d, 'solberget': bool(bas)}
+                      'skift': dict(skift or {}), 'delta': d, 'solberget': sol}
 
-    def vo(namn, kand, d, bas=None, plan=None):
+    def vo(namn, kand, d, bas=None, plan=None, sol=False):
         plan = plan0 if plan is None else plan
         v, s_ = O.genomgaende_ryms(t, kand, d, plan, bas=bas)
-        kor(namn, v, d, s_, bas=bas, vo=True, fast=plan)
+        kor(namn, v, d, s_, bas=bas, vo=True, fast=plan, sol=sol)
 
     def pröva(prefix, d):
         p = prefix + '_' if prefix else ''
-        kor(p + 'alla', berorda, d)
+        b = nbas(d)
+        kor(p + 'alla', berorda, d, bas=b)
         bas = scen[p + 'alla']
         if not bas['ok']:
-            kor(p + 'ryms', O.turer_som_ryms(t, berorda, d, r, varv=vv, referens=ref), d)
+            kor(p + 'ryms', O.turer_som_ryms(t, berorda, d, r, bas=b, varv=vv, referens=ref), d, bas=b)
         elif not bas['robust'] and f['linje'] != 'V':
-            kor(p + 'robust', O.turer_som_ryms(t, berorda, d, r, robust=True, referens=ref), d)
+            kor(p + 'robust', O.turer_som_ryms(t, berorda, d, r, robust=True, bas=b, referens=ref), d, bas=b)
         if f['linje'] == 'V':
-            vo(p + 'VO', berorda, d)
+            vo(p + 'VO', berorda, d, bas=b)
 
     pröva('', f['delta'])
+    if flytta:                                                 # variant: bara linje N rakt på, svängen utan buss
+        kor('N', [], f['delta'], bas=nbas(f['delta']), vo=True)
+        scen['N']['vo'] = False
     if f.get('delta_konservativ'):
         pröva('konservativ', f['delta_konservativ'])
     if f.get('solberget'):                                     # dito med Solberget indragen på linje Ö
-        vo('VO_sol', berorda, f['delta'], solberget_delta(t))
+        vo('VO_sol', berorda, f['delta'], solberget_delta(t), sol=True)
     if f.get('flygturer'):                                     # 'Y': bara turerna för flygen
         y = list(flygturer(t))
         kor('Y_ryms', O.turer_som_ryms(t, y, f['delta'], r, varv=vv, referens=ref), f['delta'])
         vo('Y_VO', y, f['delta'])
-        vo('Y_VO_sol', y, f['delta'], solberget_delta(t))
-    for d in f.get('kansl', []):                               # känslighet för körtiden (V och Ö sammanslagna)
-        vo(f'kansl_{d:g}_VO', berorda, d)
+        vo('Y_VO_sol', y, f['delta'], solberget_delta(t), sol=True)
+    for d in f.get('kansl', []):                               # känslighet för körtiden
+        if flytta:
+            pröva(f'kansl_{d:g}', d)
+        else:
+            vo(f'kansl_{d:g}_VO', berorda, d)
     return scen
 
 
@@ -364,7 +586,9 @@ def kanslighet_ua4(t, plan0, pkt, hpl0, xy, pastigande_solberget):
 # ====================================================================== täckning
 def tackning(pkt, hpl0, f, turer_som_trafikerar, xy):
     h = hpl0.copy()
-    if f['typ'] == 'ny':
+    if f['typ'] == 'flytta':
+        h = flytta_hallplatser(h, f, turer_som_trafikerar, f['turer_n'], xy)
+    elif f['typ'] == 'ny':
         ny = pd.DataFrame({'turer': [frozenset(turer_som_trafikerar)], 'linjer': [f['linje']],
                            'avgangar': [len(turer_som_trafikerar)], 'x': [f['xy'][0]], 'y': [f['xy'][1]],
                            'namn': [f['hpl_namn']]}, index=['NY'])
@@ -380,7 +604,10 @@ def tackning(pkt, hpl0, f, turer_som_trafikerar, xy):
                             'y': xy.at[s, 'y'], 'namn': xy.at[s, 'namn']}
         h = h[h.turer.map(len) > 0]
     # bara delpunkter nära ändringen behöver räknas om
-    cx, cy = (f['xy'] if f['typ'] == 'ny' else xy.loc[[f['bort']] + f['till'], ['x', 'y']].mean())
+    if f['typ'] == 'flytta':
+        cx, cy = xy.loc[sorted(set(f['n_fore']) | set(f['v_efter'])), ['x', 'y']].mean()
+    else:
+        cx, cy = (f['xy'] if f['typ'] == 'ny' else xy.loc[[f['bort']] + f['till'], ['x', 'y']].mean())
     nara = np.hypot(pkt.x - cx, pkt.y - cy) <= 1500
     p = pkt[nara].copy()
     p['avg_efter'], _ = avgangar_inom(p, h)
@@ -417,6 +644,13 @@ def pastigande_per_inv(pkt):
 
 # ====================================================================== resenärer (OD-utläggning)
 def resenarseffekt(f, zoner, mon0, nat0, andel_turer, extra=None):
+    if f['typ'] == 'flytta':
+        # UA 5: linje N kör rakt på alla turer; svängen trafikeras av linje V på andelen andel_turer av V-turerna,
+        # på övriga turer finns bara gång till Västra utfarten – viktat medel av de två fallen
+        j1 = N.jamfor(nat0, N.Nat(flytta_monster(mon0, f), zoner))
+        j0 = N.jamfor(nat0, N.Nat(flytta_monster(mon0, f, med_v=False), zoner)) if andel_turer < 1 else j1
+        j = {p: {k: andel_turer * j1[p][k] + (1 - andel_turer) * j0[p][k] for k in j1[p]} for p in ('FM', 'EM')}
+        return _resenarer_ut(j, 1.0)
     mon1 = []
     for m in mon0:
         m = dict(m); m['akt'] = m['akt'].copy()
@@ -435,7 +669,10 @@ def resenarseffekt(f, zoner, mon0, nat0, andel_turer, extra=None):
                     m['akt'][k - 1] += f['delta'] / 2; m['akt'][k] += f['delta'] / 2
         mon1.append(m)
     nat1 = N.Nat(mon1, zoner)
-    j = N.jamfor(nat0, nat1)
+    return _resenarer_ut(N.jamfor(nat0, nat1), andel_turer)
+
+
+def _resenarer_ut(j, andel_turer):
     fak = N.dagsfaktor()
     ut = {}
     for per in ('FM', 'EM'):
@@ -456,6 +693,44 @@ def genomgaende_effekt(zoner, mon0, nat0):
             'min_per_resa': round(medel('resenarsminuter_h') / max(medel('resor_kortare_h'), 1e-9), 1)}
 
 
+def ua5_detaljer(f, scen, val, t, zoner, mon0, nat0):
+    """UA 5: påstigande i svängen, resenärer som åker genom svängen på linje N, restid för resor till och från
+    svängens hållplatser och linje N:s uppehåll i centrum före och efter."""
+    H = HPL; bed = pd.read_csv(P / 'a3_hallplatsbedomning.csv').set_index('omrade')
+    past = {k: round(float(bed.at[k, 'pastigande_vardag']), 2) for k in ('Stenhuggarvägen', 'Cedersvägen', 'Klintvägen')}
+    fak = N.dagsfaktor()
+    mi = next(i for i, m in enumerate(mon0) if m['linje'] == f['fran_linje'] and H['Sjukhuset'] in m['stopp'])
+    k_ = list(mon0[mi]['stopp']).index(H['Sjukhuset'])
+    gen = []
+    for per in ('FM', 'EM'):
+        fl, ps = nat0.utlagg(N.od_matris(per))
+        gen.append(fl.get((mi, k_), 0.0))
+    genom = float(np.mean(gen)) * fak                          # resenärer ombord Sjukhuset → Stenhuggarvägen per vardag
+    om = D.hallplatsomraden()['omrade']
+    zs = sorted({om[x] for x in f['n_fore'][1:-1]})
+    andel = len(scen[val]['turer']) / max(len(scen['alla']['turer']), 1)
+    c0 = nat0.restider()
+    c1 = N.Nat(flytta_monster(mon0, f), zoner).restider().reindex(index=nat0.zoner, columns=nat0.zoner)
+    c1u = N.Nat(flytta_monster(mon0, f, med_v=False), zoner).restider().reindex(index=nat0.zoner, columns=nat0.zoner)
+    zon = {}
+    for z in zs:
+        T = sum(N.od_matris(p).reindex(index=nat0.zoner, columns=nat0.zoner).fillna(0.0) for p in ('FM', 'EM')) / 2
+        m = T.index.isin([z])[:, None] | T.columns.isin([z])[None, :]
+        Tm = T.to_numpy() * m
+        d = andel * (c1 - c0).to_numpy() + (1 - andel) * (c1u - c0).to_numpy()
+        fin = np.isfinite(d)
+        zon[z] = {'resor_vardag': round(float(Tm.sum()) * fak, 2),
+                  'resenarsminuter_vardag': round(float((Tm[fin] * d[fin]).sum()) * fak, 1)}
+    plan0 = O.omlopp_operator(t)
+    return {'svang': svang(), 'pastigande_vardag': past, 'pastigande_vardag_summa': round(sum(past.values()), 2),
+            'genomresande_n_vardag': round(genom, 1),
+            'tidsvinst_genomresande_min_vardag': round(genom * -f['delta_n'], 1),
+            'resor_till_fran_svangen': zon,
+            'n_uppehall_centrum_idag': n_vandtider(plan0), 'n_uppehall_centrum_efter': n_vandtider(scen[val]['plan']),
+            'v_turer_via_svangen': len(scen[val]['turer']), 'v_turer_tot': len(scen['alla']['turer']),
+            'n_turer': len(f['turer_n'])}
+
+
 # ====================================================================== geometri
 def geometri(f, trafikerar, xy, fg, sg):
     """UA:ts objekt för kartor och GIS. Linjer som MultiLineString med en del per hållplatssegment (kan bytas
@@ -464,6 +739,31 @@ def geometri(f, trafikerar, xy, fg, sg):
     import s01_vagdragning as V
     ml = lambda *d: shapely.MultiLineString([LineString(x) for x in d])
     n = len(trafikerar)
+    if f['typ'] == 'flytta':
+        H = HPL; P_ = lambda k: xy.loc[H[k], ['x', 'y']].to_numpy(float)
+        seg = lambda a, b: sg.get((H[a], H[b]), np.array([P_(a), P_(b)]))
+        rak = lambda a, b: np.array([P_(a), P_(b)])
+        vag = 'OSRM' if V.kalla_text().startswith('Linjernas') else 'schematisk'
+        nn = len(f['turer_n'])
+        ut = [{'ua': '5', 'objekt': 'körväg utgår', 'vagdragning': vag, 'linje': 'N', 'avgangar': 0, 'planerad_del': '',
+               'namn': 'Linje N: Sjukhuset – Stenhuggarvägen – Cedersvägen – Klintvägen – Elverksgatan (svängen)',
+               'geometry': ml(seg('Sjukhuset', 'Stenhuggarvägen'), seg('Stenhuggarvägen', 'Cedersvägen'),
+                              seg('Cedersvägen', 'Klintvägen'), seg('Klintvägen', 'Elverksgatan'))},
+              {'ua': '5', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag, 'linje': 'N', 'avgangar': nn,
+               'planerad_del': '', 'namn': 'Linje N rakt på Västra utfarten: Sjukhuset – Västra macken – Elverksgatan',
+               'geometry': ml(seg('Sjukhuset', 'Västra macken in'), seg('Västra macken in', 'Tekniska verken in'),
+                              rak('Tekniska verken in', 'Elverksgatan'))},
+              {'ua': '5', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag, 'linje': 'V', 'avgangar': n,
+               'planerad_del': '',
+               'namn': 'Linje V via svängen: Västra macken – Stenhuggarvägen – Cedersvägen – Klintvägen – Tekniska verken',
+               'geometry': ml(rak('Västra macken in', 'Stenhuggarvägen'), seg('Stenhuggarvägen', 'Cedersvägen'),
+                              seg('Cedersvägen', 'Klintvägen'), rak('Klintvägen', 'Tekniska verken in'))}]
+        for k in ('Cedersvägen', 'Klintvägen'):
+            ut.append({'ua': '5', 'objekt': 'hållplats byter linje N → V', 'namn': k, 'linje': 'V', 'avgangar': n,
+                       'geometry': Point(*P_(k))})
+        ut.append({'ua': '5', 'objekt': 'hållplats utgår för linje N', 'linje': 'N', 'avgangar': 0,
+                   'namn': 'Stenhuggarvägen (Västra macken 50 m)', 'geometry': Point(*P_('Stenhuggarvägen'))})
+        return ut
     if f['typ'] == 'ny':
         ut = [{'ua': f['id'], 'objekt': 'ny hållplats', 'namn': f['hpl_namn'], 'linje': f['linje'], 'avgangar': n,
                'geometry': Point(*f['xy'])}]
@@ -536,20 +836,23 @@ def main():
                'pastigande_vardag': float(bed.loc[bed.omrade == 'Solberget', 'pastigande_vardag'].sum())
                if 'pastigande_vardag' in bed else None}
     res_flyg = {**flygplatsen(), 'flygturer': {O.hm(tl0.at[k, 'avg']): v for k, v in
-                                               sorted(flygturer(t).items(), key=lambda kv: tl0.at[kv[0], 'avg'])}}
+                                               sorted(flygturer(t).items(), key=lambda kv: tl0.at[kv[0], 'avg'])},
+                'matchning': flygmatchning(t), 'extraturer': flyg_extraturer(t)}
     res = {'idag': nt0, 'genomgaende_vo': gen_vo, 'osrm_kontroll_nya_delstrackor': kontroll, 'solberget_indragen': res_sol, 'flygplatsen': res_flyg,
            'antaganden': {'uppehall_min': UPPEHALL, 'mockelo': mockelo(), 'max_skift_partner_min': O.MAX_SKIFT_PARTNER,
                           'bobil': bb, 'pastigande_per_inv': {k: v for k, v in rate.items() if k != 'per_hpl'},
                           'dagsfaktor': round(N.dagsfaktor(), 2)},
            'ua': {}}
     tl = t.set_index('trip_id')
-    planer, tack, geo = [plan0.assign(scenario='idag', delta=0.0, skift=0.0)], [], []
+    planer, tack, geo = [O.omlopp_operator(t).assign(scenario='idag', delta=0.0, skift=0.0)], [], []   # dagens = operatörens
     for f in alternativ():
         if f['typ'] == 'byt':
             f['delta'], f['km_tur'] = bb['delta_min'], bb['delta_km']
         scen = omlopp_scenarier(f, t, r, ref)
         val = drift(f, scen)
         trafikerar = scen[val]['turer']
+        if f['typ'] == 'flytta':
+            print('   UA 5 svängen:', svang())
         alla_linjeturer = int((t.linje == f['linje']).sum())
         tk, p = tackning(pkt, hpl0, f, trafikerar, xy)
         tack.append(p.assign(ua=f['id']))
@@ -585,6 +888,22 @@ def main():
             ut['nytt_pastigande_vardag'] = [round(tk['ny_tackning_inv'] * r_ln * andel, 2),
                                             round(tk['ny_tackning_inv'] * max(r_hi, r_ln) * andel, 2)]
             ut['xy'] = list(map(float, f['xy']))
+        if f['typ'] == 'flytta':
+            ut['km_n_per_tur'] = f['km_n']; ut['delta_n_min_per_tur'] = f['delta_n']
+            ut['ua5'] = ua5_detaljer(f, scen, val, t, zoner, mon0, nat0)
+            for d_ in f.get('kansl', []):                      # resenärer med känslighetens körtid
+                k_ = f'kansl_{d_:g}_' + ('VO' if f'kansl_{d_:g}_VO' in scen else 'alla')
+                a_ = len(scen[k_]['turer']) / max(len(scen['alla']['turer']), 1)
+                ut['ua5'][f'resenarer_kansl_{d_:g}'] = resenarseffekt({**f, 'delta': d_, 'delta_n': -d_}, zoner, mon0,
+                                                                      nat0, a_)['vardag']
+            ut['ua5']['bara_n_rakt_pa'] = {'resenarer': resenarseffekt(f, zoner, mon0, nat0, 0.0)['vardag'],
+                                           'tackning': tackning(pkt, hpl0, f, [], xy)[0]}
+            print('   UA 5:', json.dumps({k: v for k, v in ut['ua5'].items() if k != 'svang'}, ensure_ascii=False,
+                                         default=float))
+        if f.get('flygturer'):                                 # vilka flyg varje driftform når
+            fm = flygmatchning(t)
+            ut['flyg_per_driftform'] = {k: [m['flyg'] for m in fm if m.get('trip_id') in set(s['turer'])]
+                                        for k, s in scen.items()}
         res['ua'][f['id']] = ut
         for k, s in scen.items():
             pl = s['plan'].copy(); pl['scenario'] = f"{f['id']}_{k}"

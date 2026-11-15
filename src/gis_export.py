@@ -375,7 +375,9 @@ def b4():
     kat = [('ny hållplats', 'Ny hållplats', 'star', '#1c5cab', 5.0, '#ffffff'),
            ('ny hållplats för linje N', 'Hållplats som linje N börjar trafikera', 'star', '#1c5cab', 5.0, '#ffffff'),
            ('hållplats utgår för linje N', 'Hållplats som linje N slutar trafikera', 'cross_fill', '#c0392b', 3.4, '#ffffff'),
-           ('hållplats dras in', 'Hållplats som dras in', 'cross_fill', '#c0392b', 3.4, '#ffffff')]
+           ('hållplats dras in', 'Hållplats som dras in', 'cross_fill', '#c0392b', 3.4, '#ffffff'),
+           ('hållplats byter linje N → V', 'Hållplats som byter linje N → V (UA 5)', 'circle', C.FARG_LINJE['V'], 3.6,
+            '#ffffff')]
     stil('b4_ua_hallplatser', 'UA – hållplatser',
          qml(r_kategori('objekt', kat, lambda n, form, f, st, k: markor(n, form, f, st, k, 0.3)),
              labeling=etiketter('"ua" || \': \' || "namn"')), True)
@@ -530,10 +532,25 @@ def b4():
     po, ka = '9025302000035802', '9025302000025902'
     ip = vm.index(po); assert vm[ip + 1] == ka
     v_4 = kedja(vm[:ip + 1]) + [fg[(po, 'FLYGPLATSEN')]['xy'], fg[('FLYGPLATSEN', ka)]['xy']] + kedja(vm[ip + 1:])
+    import b4_ua as F                                  # UA 5: V via svängen, N rakt på Västra utfarten
+    f5 = next(x for x in F.alternativ() if x['id'] == '5')
+    def ersatt(stopp, fore, efter, extra):
+        i = next(i for i in range(len(stopp)) if stopp[i:i + len(fore)] == fore)
+        return kedja(stopp[:i + 1]) + extra + kedja(stopp[i + len(fore) - 1:])
+    H5 = F.HPL; p5 = lambda k: np.array(hxy[H5[k]])
+    s5 = lambda a, b: sg.get((H5[a], H5[b]), np.array([p5(a), p5(b)]))
+    v_5 = ersatt(vm, f5['v_fore'], f5['v_efter'], [np.array([p5('Västra macken in'), p5('Stenhuggarvägen')]),
+                                                   s5('Stenhuggarvägen', 'Cedersvägen'), s5('Cedersvägen', 'Klintvägen'),
+                                                   np.array([p5('Klintvägen'), p5('Tekniska verken in')])])
+    n_5 = ersatt(nm, f5['n_fore'], f5['n_efter'], [s5('Sjukhuset', 'Västra macken in'),
+                                                   s5('Västra macken in', 'Tekniska verken in'),
+                                                   np.array([p5('Tekniska verken in'), p5('Elverksgatan')])])
     osrm = V.kalla_text().startswith('Linjernas')
     vag = lambda nycklar: ('OSRM' if osrm and all(fg[n]['kalla'] == 'osrm' for n in nycklar) else
                            'delvis schematisk (raka streck)' if not osrm else 'delvis schematisk')
     o1, o1b, o4 = fs['1a']['omlopp']['VO'], fs['1b']['omlopp']['VO'], fs['4']['omlopp']['VO']
+    o5 = fs['5']['omlopp'][fs['5']['huvudalternativ']]
+    ny4 = fs['4']['omlopp']['Y_VO']['turer_med_andring']
     krav = 'varje varv V + Ö inom timmen med minst 5 min i centrum'
     # bara huvudalternativet per UA (det som visas på kartan); övriga driftformer redovisas i rapporten
     rad = [('1a', 'V–Ö', fs['1a']['titel'], f"Huvudalternativ: V och Ö sammanslagna till genomgående linje ({krav}); "
@@ -549,8 +566,14 @@ def b4():
             vag([(nm[iv - 1], bobil_id), (bobil_id, nm[iv + 1])]), ''),
            ('4', 'V–Ö', fs['4']['titel'], f"Huvudalternativ: V och Ö sammanslagna ({krav}); "
             f"{o4['turer_med_andring']} av 20 V-turer via flygplatsen (+{fs['4']['delta_min_per_tur']:g} min/tur); "
-            "UA 4Y: bara de 8 flygturerna".replace('.', ','), fs['4']['delta_min_per_tur'], v_4 + o_,
-            vag([(po, 'FLYGPLATSEN'), ('FLYGPLATSEN', ka)]), '')]
+            f"UA 4Y: bara de {ny4} flygturerna".replace('.', ','), fs['4']['delta_min_per_tur'], v_4 + o_,
+            vag([(po, 'FLYGPLATSEN'), ('FLYGPLATSEN', ka)]), ''),
+           ('5', 'V–Ö', fs['5']['titel'], f"Huvudalternativ: V och Ö sammanslagna ({krav}); {o5['turer_med_andring']} av 20 "
+            f"V-turer via svängen Stenhuggarvägen – Cedersvägen – Klintvägen (+{fs['5']['delta_min_per_tur']:g} min/tur)"
+            .replace('.', ','), fs['5']['delta_min_per_tur'], v_5 + o_, 'OSRM' if osrm else 'raka streck', ''),
+           ('5N', 'N', fs['5']['titel'], f"Linje N rakt på Västra utfarten (Sjukhuset – Västra macken – Elverksgatan), alla "
+            f"22 turer ({fs['5']['delta_n_min_per_tur']:g} min/tur)".replace('.', ',').replace('-', '−'),
+            fs['5']['delta_n_min_per_tur'], n_5, 'OSRM' if osrm else 'raka streck', '')]
     lg = gpd.GeoDataFrame([{'ua': a, 'linje': b, 'ua_titel': c, 'beskrivning': d, 'korttid_per_tur_min': e,
                             'vagdragning': g_, 'planerad_del': pdel} for a, b, c, d, e, _, g_, pdel in rad],
                           geometry=[shapely.MultiLineString([LineString(x) for x in r_[5]]) for r_ in rad],
@@ -560,7 +583,8 @@ def b4():
     kat = [('1a', 'UA 1a – linje V–Ö via Möckelö Strand ny, dagens vägar', vo),
            ('1b', 'UA 1b – linje V–Ö via förlängd Norrgårdsvägen', vo),
            ('2', 'UA 2 – linje Ö med N2', C.FARG_LINJE['Ö']), ('3', 'UA 3 – linje N via Bo-Bil', C.FARG_LINJE['N']),
-           ('4', 'UA 4 – linje V–Ö via flygplatsen', vo)]
+           ('4', 'UA 4 – linje V–Ö via flygplatsen', vo),
+           ('5', 'UA 5 – linje V–Ö via Cedersvägen', vo), ('5N', 'UA 5 – linje N rakt på Västra utfarten', C.FARG_LINJE['N'])]
     stil('b4_ua_linjer', 'Linjer i utredningsalternativen (huvudalternativ)',
          qml(r_kategori('ua', kat, lambda n, f: linje(n, f, 1.0, halo=True))), True)
 
@@ -571,7 +595,7 @@ def b4():
         t_ = v['tackning_mariehamn']; fi = v['forandring_invanare_mariehamn']
         rader.append({'scenario': sid, 'namn': v['namn'], 'ryms_i_omloppen': 'Ja' if v['ryms'] else 'Nej',
                       'robust': 'Ja' if v.get('robust', True) else 'Nej',
-                      'huvudalternativ': 'Ja' if sid in ('1a_VO', '1b', '2', '3', '4_VO') else 'Nej',
+                      'huvudalternativ': 'Ja' if sid in ('1a_VO', '1b', '2', '3', '4_VO', '5') else 'Nej',
                       'utesluten': 'Ja (kräver fler bussar)' if v['omlopp']['fordon'] > se['idag']['omlopp']['fordon'] else 'Nej',
                       'turer_via_ua': v['turer'], 'turer_totalt': v['turer_tot'],
                       'turer_som_avgar_senare': v['skiftade_turer'],
