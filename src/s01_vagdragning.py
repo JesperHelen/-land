@@ -65,7 +65,7 @@ SKISS_NORRGARDSVAGEN_NY_MOCKELO = [
 # Norra Svibyvägen, digitaliserad ur beställarens skiss (2026-10-14). Skalan (≈ 1,19 m/px) är bestämd så att
 # terminalen hamnar ≈ 390 m öster om banans mittlinje (banändarna 60,1144/19,8914 och 60,1300/19,9049).
 # Osäkerhet i läget ≈ ± 25 %. Ersätts av OSRM-rutten när den hämtats.
-FLYGPLATSEN_XY = (106462.0, 6686544.0)
+FLYGPLATSEN_XY = (106411.8, 6686458.8)   # vid vändslingan framför terminalbyggnaden (OSM), 2026-11-23; skissens läge (106462, 6686544)
 SKISS_POSTEN_FLYGPLATSEN = [
     (106913, 6686152), (106908, 6686168), (106888, 6686190), (106858, 6686223), (106828, 6686259), (106798, 6686297),
     (106772, 6686336), (106745, 6686384), (106715, 6686426), (106685, 6686461), (106656, 6686483), (106620, 6686503),

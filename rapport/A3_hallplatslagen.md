@@ -90,7 +90,7 @@ på omloppen redovisas i kapitel 4.
 
 ![Figur 3.1](../output/kartor/a3_1_nya_hallplatser.png)
 
-*Figur 3.1. Nya hållplatslägen längs dagens linjer (stjärnor) och indikativa lägen där ändrad
+*Figur 3.1. Nya hållplatslägen längs dagens linjer (stjärnor, N1–N5) och indikativa lägen där ändrad
 linjesträckning krävs (romber), med 400 m upptagningsområde. Bakgrund: tillgänglighet i dag enligt kapitel 2.*
 
 ## 3.3 Områden som kräver ändrad linjesträckning
@@ -162,8 +162,8 @@ Sex hållplatser *bör prövas*. De har lika få påstigningar, men en indragnin
 
 ![Figur 3.2](../output/kartor/a3_2_hallplatsbedomning.png)
 
-*Figur 3.2. Bedömning av stadslinjernas hållplatser. Siffran inom parentes anger påstigande per vardag
-(höst 2026; linje J sommar).*
+*Figur 3.2. Bedömning av stadslinjernas hållplatser (påstigande per vardag, höst 2026; linje J sommar).
+Hållplatser som bör prövas eller är kandidater för indragning är namngivna.*
 
 ## 3.5 Osäkerheter
 

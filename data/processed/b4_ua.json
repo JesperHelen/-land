@@ -48,13 +48,13 @@
   },
   "9025302000035802→FLYGPLATSEN": {
    "kalla": "osrm",
-   "langd_m": 768,
-   "tid_min": 1.1
+   "langd_m": 820,
+   "tid_min": 1.2
   },
   "FLYGPLATSEN→9025302000025902": {
    "kalla": "osrm",
-   "langd_m": 1880,
-   "tid_min": 2.8
+   "langd_m": 1827,
+   "tid_min": 2.7
   },
   "9025302000055901→9025302000063701": {
    "kalla": "osrm",
@@ -62,9 +62,9 @@
    "tid_min": 0.9
   },
   "9025302000067401→9025302000062401": {
-   "kalla": "rak",
-   "langd_m": 457,
-   "tid_min": null
+   "kalla": "osrm",
+   "langd_m": 516,
+   "tid_min": 1.0
   },
   "9025302000062901→9025302000049201": {
    "kalla": "osrm",
@@ -105,13 +105,13 @@
   "pastigande_vardag": 15.649
  },
  "flygplatsen": {
-  "langd_posten_flygplatsen_m": 768,
-  "langd_flygplatsen_kallarvagen_m": 1880,
+  "langd_posten_flygplatsen_m": 820,
+  "langd_flygplatsen_kallarvagen_m": 1827,
   "langd_posten_kallarvagen_idag_m": 939,
   "extra_km_per_tur": 1.71,
   "delta_min_per_tur": 5.0,
   "kalla": "osrm",
-  "framme_vid_flygplatsen_min_efter_avgang": 16.5,
+  "framme_vid_flygplatsen_min_efter_avgang": 16.7,
   "kmh": 25.0,
   "flyg_avgangar": {
    "07:15": "Stockholm-Arlanda (HP 281)",
@@ -151,8 +151,8 @@
     "fonster": "09:00–09:30",
     "trip_id": "150004",
     "v_tur": "08:50",
-    "vid_flygplatsen": "09:06",
-    "min_fore_eller_efter_flyget": 114
+    "vid_flygplatsen": "09:07",
+    "min_fore_eller_efter_flyget": 113
    },
    {
     "flyg": "ankomst 10:35 från Stockholm-Arlanda (HP 282)",
@@ -167,8 +167,8 @@
     "fonster": "15:10–15:40",
     "trip_id": "150016",
     "v_tur": "15:10",
-    "vid_flygplatsen": "15:26",
-    "min_fore_eller_efter_flyget": 104
+    "vid_flygplatsen": "15:27",
+    "min_fore_eller_efter_flyget": 103
    },
    {
     "flyg": "ankomst 16:45 från Åbo (HP 286)",
@@ -177,7 +177,7 @@
     "fonster": "17:10–17:30",
     "trip_id": "150020",
     "v_tur": "17:10",
-    "vid_flygplatsen": "17:26",
+    "vid_flygplatsen": "17:27",
     "min_fore_eller_efter_flyget": 42
    },
    {
@@ -194,7 +194,7 @@
     "avg_centrum": "05:15",
     "vid_flygplatsen": "05:32",
     "ank_centrum": "05:47",
-    "min_fore_eller_efter_flyget": 104,
+    "min_fore_eller_efter_flyget": 103,
     "omlopp": "204",
     "omlopp_ledigt_fran": null,
     "omlopp_nasta_tur": "06:50",
@@ -208,7 +208,7 @@
     "flyg": "ankomst 10:35 från Stockholm-Arlanda (HP 282)",
     "fonster": "11:00–11:20",
     "avg_centrum": "10:50",
-    "vid_flygplatsen": "11:06",
+    "vid_flygplatsen": "11:07",
     "ank_centrum": "11:22",
     "min_fore_eller_efter_flyget": 32,
     "omlopp": "204",
@@ -224,7 +224,7 @@
     "flyg": "ankomst 21:35 från Stockholm-Arlanda (HP 284)",
     "fonster": "22:00–22:20",
     "avg_centrum": "21:50",
-    "vid_flygplatsen": "22:06",
+    "vid_flygplatsen": "22:07",
     "ank_centrum": "22:22",
     "min_fore_eller_efter_flyget": 32,
     "omlopp": "205",
@@ -1730,10 +1730,10 @@
     }
    },
    "tackning": {
-    "ny_tackning_inv": 20,
+    "ny_tackning_inv": 21,
     "forlorad_tackning_inv": 0,
     "lyft_fran_svag_inv": 0,
-    "battre_klass_inv": 20,
+    "battre_klass_inv": 22,
     "samre_klass_inv": 0,
     "inv_inom_400m_ny_hpl": 25
    },
@@ -1763,12 +1763,12 @@
     "vardag_inkl_genomgaende": 34.7
    },
    "nytt_pastigande_vardag": [
-    0.16,
-    0.16
+    0.17,
+    0.17
    ],
    "xy": [
-    106462.0,
-    6686544.0
+    106411.8,
+    6686458.8
    ],
    "flyg_per_driftform": {
     "alla": [
@@ -3723,7 +3723,7 @@
    "linje": "V",
    "korvag": "Linje V: Åsvägen → Stenhuggarvägen – Cedersvägen – Klintvägen → Tekniska verken; linje N: Sjukhuset → Västra utfarten (Västra macken) → Elverksgatan",
    "delta_min_per_tur": 2.0,
-   "km_per_tur": 0.12,
+   "km_per_tur": 0.18,
    "delta_konservativ_min_per_tur": null,
    "linjens_turer": 20,
    "turer_som_trafikerar": 17,
@@ -3737,7 +3737,7 @@
      "omloppstid_h": 61.43,
      "regleringstid_h": 8.02,
      "uppstallning_h": 11.03,
-     "km": 1285.4,
+     "km": 1286.6,
      "min_vandtid": 1.0,
      "vandningar_under_rek": 3,
      "varv_utan_reglering": 8,
@@ -3787,7 +3787,7 @@
      "omloppstid_h": 61.43,
      "regleringstid_h": 8.15,
      "uppstallning_h": 11.03,
-     "km": 1284.9,
+     "km": 1285.9,
      "min_vandtid": 1.0,
      "vandningar_under_rek": 3,
      "varv_utan_reglering": 3,
@@ -3842,7 +3842,7 @@
      "omloppstid_h": 61.43,
      "regleringstid_h": 8.12,
      "uppstallning_h": 11.03,
-     "km": 1285.0,
+     "km": 1286.1,
      "min_vandtid": 0.5,
      "vandningar_under_rek": 2,
      "varv_utan_reglering": 3,
@@ -3969,7 +3969,7 @@
      "omloppstid_h": 61.43,
      "regleringstid_h": 7.98,
      "uppstallning_h": 11.03,
-     "km": 1285.4,
+     "km": 1286.6,
      "min_vandtid": 1.0,
      "vandningar_under_rek": 3,
      "varv_utan_reglering": 8,
@@ -4019,7 +4019,7 @@
      "omloppstid_h": 61.43,
      "regleringstid_h": 8.05,
      "uppstallning_h": 11.03,
-     "km": 1284.9,
+     "km": 1285.9,
      "min_vandtid": 1.0,
      "vandningar_under_rek": 3,
      "varv_utan_reglering": 3,
@@ -4074,7 +4074,7 @@
      "omloppstid_h": 61.43,
      "regleringstid_h": 8.03,
      "uppstallning_h": 11.03,
-     "km": 1285.0,
+     "km": 1286.1,
      "min_vandtid": 0.5,
      "vandningar_under_rek": 2,
      "varv_utan_reglering": 3,
@@ -4162,9 +4162,9 @@
      "langd_n_svang_m": 1251,
      "langd_n_rak_m": 1066,
      "langd_v_idag_m": 1079,
-     "langd_v_svang_m": 1202,
+     "langd_v_svang_m": 1262,
      "km_n_per_tur": -0.185,
-     "km_v_per_tur": 0.123,
+     "km_v_per_tur": 0.183,
      "tidtabell_n_sjukhuset_elverksgatan_min": 3.0,
      "tidtabell_o_sjukhuset_tekniska_verken_min": 2.0,
      "tidtabell_v_vastra_macken_tekniska_verken_min": 1.18,

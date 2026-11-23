@@ -19,7 +19,7 @@ import b4_omlopp as O  # noqa: E402
 P = C.PROCESSED
 RES = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
 SCEN = pd.read_csv(P / 'b4_omlopp_scenarier.csv', dtype={'trip_id': str})
-HPL = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0)
+HPL = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0, dtype={'stop_id': str})
 OTACKT = '#b9b4a8'
 BATTRE, SAMRE, BLA = '#2f9e44', '#c0392b', '#1c5cab'
 F_HPL_MOCKELO = '9025302000066401'
@@ -236,86 +236,110 @@ def fig_bobil():
     return K.spara(fig, 'b4_6_bobil_karta.png')
 
 
+def _pilar(ax, xy, farg, steg=230.0, uts=None, ms=15, zorder=7):
+    """Riktningspilar längs en linje ((N,2)-array i körriktningen) med ungefär steg m mellanrum."""
+    L = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(xy, axis=0).T))])
+    for d in np.arange(steg / 2, L[-1], steg):
+        j = int(np.searchsorted(L, d)); j = min(max(j, 1), len(xy) - 1)
+        a, b = xy[j - 1], xy[j]
+        if uts and not (uts[0] < b[0] < uts[1] and uts[2] < b[1] < uts[3]):
+            continue
+        ax.annotate('', xy=tuple(b), xytext=tuple(a), zorder=zorder,
+                    arrowprops=dict(arrowstyle='-|>', color=farg, lw=0, mutation_scale=ms))
+
+
+def _kedja(stopp, sg, fg):
+    """Hållplatsföljd → sammanhängande linje längs gatunätet (OSRM)."""
+    delar = []
+    for a, b in zip(stopp[:-1], stopp[1:]):
+        if (a, b) in sg:
+            delar.append(sg[(a, b)])
+        elif (a, b) in fg:
+            delar.append(fg[(a, b)]['xy'])
+    return K.sammanfoga(delar, tol=60)
+
+
 def fig_svangen():
-    """UA 5 – linje V tar över svängen Stenhuggarvägen – Cedersvägen – Klintvägen, linje N kör rakt på Västra utfarten."""
-    import geopandas as gpd
-    f = RES['ua']['5']; u = f['ua5']; sg_ = u['svang']; o = f['omlopp']
-    uts = UTS['svang']
-    fig, ax = plt.subplots(figsize=(8.6, 11.6))
-    bakgrund(ax, uts, 'UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten')
-    tackningslager(ax, '5', uts)
-    K.rita_linjer(ax, lw=2.0, zorder=4, alpha=0.55, etikett=False)
-    etik = hallplatser(ax, uts, ['Sjukhuset', 'Stenhuggarvägen', 'Cedersvägen', 'Klintvägen', 'Elverksgatan',
-                                 'Västra macken', 'Tekniska verken', 'Räddningsverket', 'Ålandsplan', 'Nabben', 'Åsvägen'])
-    g = gpd.read_file(P / 'b4_ua.gpkg', layer='ua'); g = g[g.ua == '5']
-    halo = [K.pe.Stroke(linewidth=5.0, foreground='white'), K.pe.Normal()]
-    for r in g[g.geom_type.isin(['LineString', 'MultiLineString'])].itertuples():
-        if r.objekt == 'körväg utgår':
-            stil = dict(color='#3d3d3a', lw=3.0, ls=(0, (1.2, 1.6)))
-        else:
-            stil = dict(color=C.FARG_LINJE[r.linje], lw=3.2, ls='-')
-        delar = K.sammanfoga([np.asarray(g_.coords) for g_ in getattr(r.geometry, 'geoms', [r.geometry])])
-        for d in delar:
-            ax.plot(d[:, 0], d[:, 1], zorder=6 if r.objekt != 'körväg utgår' else 5.5, solid_capstyle='round',
-                    solid_joinstyle='round', path_effects=halo if r.objekt != 'körväg utgår' else None, **stil)
-        if r.objekt != 'körväg utgår':                         # körriktning mot centrum
-            xy_ = max(delar, key=len)
-            k = max(len(xy_) // 2 - 1, 0)
-            a_, b_ = xy_[k], xy_[min(k + 1, len(xy_) - 1)]
-            ax.annotate('', xy=tuple(b_), xytext=tuple(a_), zorder=7,
-                        arrowprops=dict(arrowstyle='-|>', color=C.FARG_LINJE[r.linje], lw=0, mutation_scale=15))
-    pk = g[g.geom_type == 'Point']
-    for r in pk.itertuples():
-        if 'utgår' in r.objekt:
-            ax.scatter([r.geometry.x], [r.geometry.y], s=90, marker='X', color=SAMRE, edgecolor='white', lw=0.7, zorder=8)
-        else:
-            ax.scatter([r.geometry.x], [r.geometry.y], s=150, marker='o', color=C.FARG_LINJE[r.linje], edgecolor='white',
-                       lw=1.2, zorder=8)
-    # gångavstånd till hållplatserna på Västra utfarten
-    xy = HPL.groupby('namn')[['x', 'y']].mean()
-    for a, b in [('Cedersvägen', 'Västra macken'), ('Klintvägen', 'Tekniska verken')]:
-        pa, pb = xy.loc[a], xy.loc[b]
-        ax.annotate('', xy=(pb.x, pb.y), xytext=(pa.x, pa.y), zorder=7,
-                    arrowprops=dict(arrowstyle='<->', color='#52514e', lw=0.9, ls=(0, (2, 1.5)), shrinkA=6, shrinkB=6))
-        m = ((pa.x + pb.x) / 2, (pa.y + pb.y) / 2)
-        ax.annotate(f"{u['svang']['avstand_till_vastra_utfarten_m'][a]} m", m, xytext=(6, -2), textcoords='offset points',
-                    fontsize=6.8, color=K.TEXT, path_effects=K.HALO, zorder=9)
-    hinder = K.punkt_hinder(ax, list(pk.geometry.x), list(pk.geometry.y), px=11)
-    K.placera_etiketter(ax, etik, fontsize=6.8, undvik=hinder)
-    vo, ry, al = o['VO'], o['ryms'], o['alla']
+    """UA 5 – var linje N och V kör i dag och med UA 5 (två kartor sida vid sida på OSM-bakgrund)."""
+    import bakgrundskarta as BK
+    import s01_vagdragning as V
+    from shapely.geometry import LineString as LS
+    f = RES['ua']['5']; u = f['ua5']; o = f['omlopp']
+    H = {'Sjukhuset': '9025302000039601', 'Stenhuggarvägen': '9025302000062401', 'Cedersvägen': '9025302000062701',
+         'Klintvägen': '9025302000062901', 'Elverksgatan': '9025302000063701', 'Västra macken': '9025302000055901',
+         'Tekniska verken': '9025302000049201', 'Åsvägen': '9025302000067401', 'Räddningsverket': '9025302000064201',
+         'Ålandsplan': '9025302000056701', 'Nabben': '9025302000032401'}
+    sg = V.segmentgeometri(); fg = V.uageometri(); mon = V.monster_per_linje()
+    nm, vm = list(mon['N'][0][0]), list(mon['V'][0][0])
+    def ersatt(s_, fore, efter):
+        i = next(i for i in range(len(s_)) if s_[i:i + len(fore)] == fore)
+        return s_[:i] + efter + s_[i + len(fore):]
+    sv_ = [H[k] for k in ('Sjukhuset', 'Stenhuggarvägen', 'Cedersvägen', 'Klintvägen', 'Elverksgatan')]
+    nm5 = ersatt(nm, sv_, [H['Sjukhuset'], H['Västra macken'], H['Elverksgatan']])
+    vm5 = ersatt(vm, [H['Åsvägen'], H['Västra macken'], H['Tekniska verken']],
+                 [H['Åsvägen'], H['Stenhuggarvägen'], H['Cedersvägen'], H['Klintvägen'], H['Tekniska verken']])
+    scen = [('I dag', nm, vm), ('UA 5 – V via Cedersvägen, N rakt på Västra utfarten', nm5, vm5)]
+    uts = (107170, 107900, 6684150, 6685420)
+    xy = HPL.groupby(level=0)[['x', 'y']].first()
+    fig, axs = plt.subplots(1, 2, figsize=(13.2, 11.6), gridspec_kw={'wspace': 0.03})
+    FN, FV = C.FARG_LINJE['N'], C.FARG_LINJE['V']
+    for ax, (rub, n_, v_) in zip(axs, scen):
+        BK.rita(ax, uts)
+        ax.set_xlim(uts[0], uts[1]); ax.set_ylim(uts[2], uts[3]); ax.set_aspect('equal')
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.set_title(rub, loc='left', fontsize=10.5, fontweight='bold', pad=6)
+        for ln, stopp, farg, off in (('N', n_, FN, 5.0), ('V', v_, FV, -5.0)):
+            for d in _kedja(stopp, sg, fg):
+                try:
+                    d2 = np.asarray(LS(d).offset_curve(off).coords)
+                    if len(d2) < 2 or np.hypot(*(d2[0] - d[0])) > 30:
+                        d2 = d
+                except Exception:
+                    d2 = d
+                ax.plot(d2[:, 0], d2[:, 1], color=farg, lw=4.4, zorder=5, solid_capstyle='round',
+                        solid_joinstyle='round', path_effects=[K.pe.Stroke(linewidth=6.8, foreground='white'), K.pe.Normal()])
+                _pilar(ax, d2, farg, steg=240, uts=uts, ms=22)
+        # hållplatser: färgade efter vilken linje (N eller V) som stannar där
+        n_set, v_set = set(n_), set(v_)
+        etik = []
+        for namn_, sid in H.items():
+            if sid not in xy.index:
+                continue
+            x_, y_ = xy.loc[sid, ['x', 'y']]
+            if not (uts[0] < x_ < uts[1] and uts[2] < y_ < uts[3]):
+                continue
+            i_n, i_v = sid in n_set, sid in v_set
+            if not (i_n or i_v):
+                ax.scatter([x_], [y_], s=26, facecolor='white', edgecolor='#7a776f', lw=0.8, zorder=8)
+                etik.append((namn_, (x_, y_), 30)); continue
+            fc = FN if i_n and not i_v else FV if i_v and not i_n else 'white'
+            ax.scatter([x_], [y_], s=90, facecolor=fc, edgecolor='#1f1f1e' if (i_n and i_v) else 'white', lw=1.4,
+                       zorder=9)
+            lin = '+'.join(l for l, ok in (('N', i_n), ('V', i_v)) if ok)
+            etik.append((f'{namn_} ({lin})', (x_, y_), 60))
+        hinder = K.punkt_hinder(ax, [p[1][0] for p in etik], [p[1][1] for p in etik], px=9)
+        K.placera_etiketter(ax, etik, fontsize=7.2, fet=True, undvik=hinder)
+        K.skalstock(ax, langd_m=200)
+    vo, ry = o['VO'], o['ryms']
     n0, n1 = u['n_uppehall_centrum_idag'], u['n_uppehall_centrum_efter']
-    k1 = u.get('resenarer_kansl_1', {})
-    rm = f['resenarer']['vardag']['resenarsminuter']
     pst = u['pastigande_vardag']
-    infobox(ax, [
-        r'$\bf{Förslag\ (operatören)}$' + '   V tar svängen via Stenhuggarvägen, N kör rakt på Västra utfarten',
-        r'$\bf{Körtid\ per\ tur}$' + f"   N −{sv(-f['delta_n_min_per_tur'], 0)} min (alla {u['n_turer']} turer), "
-        f"V +{sv(f['delta_min_per_tur'], 0)} min; tidtabellen ger ≈ {sv(sg_['vinst_enligt_tidtabell_min'])} min (känslighet 1 min)",
-        r'$\bf{Linje\ N}$' + f"   uppehåll i centrum {sv(n0['median'], 0)} → {sv(n1['median'], 0)} min vid alla "
-        f"{n1['antal']} vändningar (+{sv(n1['summa_h'] - n0['summa_h'])} h reglering/vardag)",
-        r'$\bf{Linje\ V\ –\ huvudalternativ}$' + f"   V och Ö sammanslagna: {vo['turer_med_andring']} av "
-        f"{f['linjens_turer']} turer via svängen, 5 bussar",
-        f"      som i dag (rakt): {', '.join(vo['turer_utan_andring'])}; dagens drift {ry['turer_med_andring']} av "
-        f"{f['linjens_turer']}; alla {f['linjens_turer']} ryms inte ({sv(al['min_centrum_vo'])} min i centrum)",
-        r'$\bf{Påstigande\ i\ svängen}$' + f"   {sv(u['pastigande_vardag_summa'], 2)} per vardag (Stenhuggarvägen "
-        f"{sv(pst['Stenhuggarvägen'], 2)}, Cedersvägen {sv(pst['Cedersvägen'], 2)}, Klintvägen {sv(pst['Klintvägen'], 2)})",
-        r'$\bf{Resenärer}$' + f"   {sv(u['genomresande_n_vardag'])} per vardag åker genom svängen på N och sparar "
-        f"{sv(-f['delta_n_min_per_tur'], 0)} min;",
-        f"      netto {'+' if rm > 0 else ''}{sv(rm, 0)} resenärsminuter/vardag"
-        + (f" (med 1 min: {'+' if k1.get('resenarsminuter', 0) > 0 else ''}{sv(k1.get('resenarsminuter', 0), 0)})" if k1 else ''),
-        r'$\bf{Täckning}$' + f"   ingen förlorar hållplats inom 400 m; svängens hållplatser får "
-        f"{vo['turer_med_andring']} V-turer i stället för {u['n_turer']} N-turer"], loc=(0.025, 0.975))
-    extra = [Line2D([], [], color=C.FARG_LINJE['V'], lw=3, label='Linje V via svängen (ny)'),
-             Line2D([], [], color=C.FARG_LINJE['N'], lw=3, label='Linje N rakt på Västra utfarten (ny)'),
-             Line2D([], [], color='#3d3d3a', lw=3, ls=(0, (1.2, 1.6)), label='Linje N:s sväng i dag (utgår för N)'),
-             Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['V'], markersize=9,
-                    label='Hållplats byter linje N → V'),
-             Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['N'], markersize=9,
-                    label='Västra macken: linje N i stället för V'),
-             Line2D([], [], color='#52514e', lw=0.9, ls=(0, (2, 1.5)), label='Gångavstånd till Västra utfarten')]
-    lg = K.teckenforklaring(ax, forklaring_tackning(extra), loc='lower left', fontsize=6.8)
-    lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
-    K.ram(ax)
+    txt = [r'$\bf{Linje\ N}$' + f"  kör rakt på Västra utfarten och stannar vid Västra macken: −{sv(-f['delta_n_min_per_tur'], 0)} min "
+           f"per tur (operatören), {sv(n0['median'], 0)} → {sv(n1['median'], 0)} min i centrum före bytet till S",
+           r'$\bf{Linje\ V}$' + f"  svänger av vid Stenhuggarvägen och kör via Cedersvägen och Klintvägen: +{sv(f['delta_min_per_tur'], 0)} min "
+           f"per tur; {vo['turer_med_andring']} av {f['linjens_turer']} V-turer med V och Ö sammanslagna "
+           f"({ry['turer_med_andring']} av {f['linjens_turer']} med dagens drift)",
+           r'$\bf{Resande}$' + f"  svängen har {sv(u['pastigande_vardag_summa'], 2)} påstigande per vardag. Pilarna visar "
+           f"körriktningen: svängen körs mot centrum (söderut)"]
+    fig.text(0.125, 0.085, '\n'.join(txt), fontsize=8.4, color=K.TEXT, va='top', linespacing=1.6)
+    hnd = [Line2D([], [], color=FN, lw=4, label='Linje N'),
+           Line2D([], [], color=FV, lw=4, label='Linje V (båda riktningarna)'),
+           Line2D([], [], marker='o', ls='', markerfacecolor=FN, markeredgecolor='white', markersize=9, label='Hållplats för N'),
+           Line2D([], [], marker='o', ls='', markerfacecolor=FV, markeredgecolor='white', markersize=9, label='Hållplats för V'),
+           Line2D([], [], marker='o', ls='', markerfacecolor='white', markeredgecolor='#1f1f1e', markersize=9,
+                  label='Hållplats för N och V')]
+    fig.legend(handles=hnd, loc='lower center', ncol=5, fontsize=8, frameon=False, bbox_to_anchor=(0.5, 0.095))
+    fig.suptitle('UA 5 – linje N och V före och efter: svängen via Cedersvägen byter från N till V', x=0.125, ha='left',
+                 fontsize=12.5, fontweight='bold', y=0.93)
     return K.spara(fig, 'b4_17_svangen_karta.png')
 
 
@@ -411,6 +435,68 @@ def fig_flygtider():
     ut = C.KARTOR / 'b4_19_flygtider.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
+
+
+def fig_flygplatsen_zoom():
+    """UA 4 inzoomat: linje V–Ö via flygterminalen längs gatunätet (OSRM) på en OSM-bakgrund."""
+    import bakgrundskarta as BK
+    import s01_vagdragning as V
+    fp = RES['flygplatsen']; f = RES['ua']['4']; o = f['omlopp'][f['huvudalternativ']]
+    uts = (106080, 107320, 6685760, 6687320)
+    fig, ax = plt.subplots(figsize=(8.4, 10.4))
+    BK.rita(ax, uts)
+    ax.set_xlim(uts[0], uts[1]); ax.set_ylim(uts[2], uts[3]); ax.set_aspect('equal')
+    ax.set_xticks([]); ax.set_yticks([])
+    ax.set_title('UA 4 – flygplatsen: linje V–Ö via terminalen (huvudalternativ)', loc='left', pad=6,
+                 fontsize=11, fontweight='bold')
+    K.rita_linjer(ax, lw=1.8, alpha=0.45, zorder=2, etikett=False)
+    sg = V.segmentgeometri(); fg = V.uageometri()
+    PO, KA, FL = '9025302000035802', '9025302000025902', 'FLYGPLATSEN'
+    halo = [K.pe.Stroke(linewidth=6.6, foreground='white'), K.pe.Normal()]
+    mon = V.monster_per_linje()['V'][0][0]
+    i = list(mon).index(PO)
+    delar = [sg[k] for k in zip(mon[:i], mon[1:i + 1])] + [fg[(PO, FL)]['xy'], fg[(FL, KA)]['xy']] + \
+        [sg[k] for k in zip(mon[i + 1:-1], mon[i + 2:])]
+    for d in K.sammanfoga(delar):
+        ax.plot(d[:, 0], d[:, 1], color=FARG_VO, lw=4.2, zorder=5, solid_capstyle='round', solid_joinstyle='round',
+                path_effects=halo)
+    for k in [(PO, FL), (FL, KA)]:                              # körriktning
+        p = fg[k]['xy']; L = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(p, axis=0).T))])
+        for t_ in (0.3, 0.7):
+            j = int(np.searchsorted(L, t_ * L[-1])); j = min(max(j, 1), len(p) - 1)
+            ax.annotate('', xy=tuple(p[j]), xytext=tuple(p[j - 1]), zorder=6,
+                        arrowprops=dict(arrowstyle='-|>', color='#4a1d3e', lw=0, mutation_scale=24))
+    flx, fly = V.FLYGPLATSEN_XY
+    ax.add_patch(plt.Circle((flx, fly), C.TACKNING_M, facecolor=to_rgba(BLA, 0.06), edgecolor=BLA, lw=1.0,
+                            ls='--', zorder=3))
+    etik = hallplatser(ax, uts, ['Posten', 'Källarvägen', 'Dalkullavägen', 'Lönnhagsvägen', 'Sviby bro'])
+    ax.scatter([flx], [fly], s=320, marker='*', color=BLA, edgecolor='white', lw=1.0, zorder=8)
+    hinder = K.punkt_hinder(ax, [flx], [fly], px=13)
+    K.placera_etiketter(ax, etik + [('Flygterminalen\n(ny hållplats)', (flx, fly), 120)], fontsize=7.2, fet=True,
+                        undvik=hinder)
+    L_ut, L_ti, L_id = fp['langd_posten_flygplatsen_m'], fp['langd_flygplatsen_kallarvagen_m'], fp['langd_posten_kallarvagen_idag_m']
+    nar = [m for m in fp['matchning'] if m.get('v_tur')]
+    infobox(ax, [
+        r'$\bf{Körväg}$' + '   från Posten söderut till Flygfältsvägen, upp till terminalen, vänder i slingan',
+        'och tillbaka samma väg förbi Posten mot Källarvägen',
+        f"{sv((L_ut + L_ti) / 1000, 1)} km i stället för {sv(L_id / 1000, 1)} km i dag: omväg "
+        f"+{sv(fp['extra_km_per_tur'], 1)} km och +{sv(fp['delta_min_per_tur'], 0)} min per tur",
+        r'$\bf{Vid\ terminalen}$' + f"   {sv(fp['framme_vid_flygplatsen_min_efter_avgang'])} min efter avgång från centrum",
+        r'$\bf{Turer}$' + f"   {o['turer_med_andring']} av {f['linjens_turer']} V-turer (UA 4 ★), "
+        f"{len(fp['flygturer'])} i UA 4Y ({', '.join(fp['flygturer'])})",
+        r'$\bf{Flyg\ som\ nås}$' + '   ' + '; '.join(f"{m['flyg'].split(' till ')[0].split(' från ')[0]} (V {m['v_tur']})"
+                                                     for m in nar),
+        r'$\bf{Täckning}$' + f"   {f['tackning']['ny_tackning_inv']} invånare får hållplats inom 400 m"],
+        loc=(0.025, 0.975))
+    hnd = [Line2D([], [], color=FARG_VO, lw=4, label='Linje V–Ö via flygterminalen'),
+           Line2D([], [], marker='*', ls='', color=BLA, markersize=13, label='Ny hållplats vid terminalen'),
+           Patch(facecolor=to_rgba(BLA, 0.06), edgecolor=BLA, ls='--', label='400 m runt den nya hållplatsen'),
+           Line2D([], [], marker='o', ls='', markerfacecolor='white', markeredgecolor='#1f1f1e', label='Hållplats'),
+           Line2D([], [], color='#9a978f', lw=1.8, alpha=0.6, label='Övriga linjer i dag')]
+    lg = K.teckenforklaring(ax, hnd, loc='lower left', fontsize=7)
+    lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
+    K.skalstock(ax, langd_m=200)
+    return K.spara(fig, 'b4_20_flygplatsen_zoom.png')
 
 
 def FF(m):
@@ -527,6 +613,7 @@ def main():
                      'UA 5 linje V via Cedersvägen, linje N rakt på Västra utfarten – omlopp före och efter '
                      '(★ = huvudalternativ)'))
     print(fig_flygtider())
+    print(fig_flygplatsen_zoom())
 
 
 if __name__ == '__main__':

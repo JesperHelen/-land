@@ -103,7 +103,7 @@ Strand–Norrgårdsvägen (cirka 240), längs Lillåkersvägen–Örtvägen (cir
 ![Figur 2.3](../output/kartor/a2_3_svag_tillganglighet.png)
 
 *Figur 2.3. Ytor inom 400 m från hållplats med färre än 30 avgångar per vardag (orange/röd) samt ytor utan
-hållplats inom 400 m (grå). Siffrorna anger berörda invånare per 1 km-ruta.*
+hållplats inom 400 m (grå).*
 
 ## 2.4 Osäkerheter
 

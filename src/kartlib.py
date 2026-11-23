@@ -24,8 +24,9 @@ TEXT2 = '#52514e'
 HALO = [pe.withStroke(linewidth=2.6, foreground='white')]
 BLA = LinearSegmentedColormap.from_list('bla', ['#cde2fb', '#86b6ef', '#3987e5', '#256abf', '#184f95', '#0d366b'])
 
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 8.5, 'axes.titlesize': 11,
-                     'axes.titleweight': 'bold', 'savefig.facecolor': 'white'})
+plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 8.5, 'axes.titlesize': 9.5,
+                     'axes.titleweight': 'normal', 'axes.titlelocation': 'left', 'figure.titlesize': 10,
+                     'figure.titleweight': 'normal', 'legend.fontsize': 7, 'savefig.facecolor': 'white'})
 
 # Kartutsnitt (xmin, xmax, ymin, ymax) i EPSG:3067
 UTSNITT = {
@@ -36,20 +37,27 @@ UTSNITT = {
 }
 
 
-def ny_karta(utsnitt='tatort', figsize=None, titel=None, ax=None):
+def ny_karta(utsnitt='tatort', figsize=None, titel=None, ax=None, bakgrund='osm'):
+    """Ny karta i EPSG:3067 med ljusgrå OSM-bakgrund (bakgrund='kust' ger enbart kustlinjen)."""
     x0, x1, y0, y1 = UTSNITT[utsnitt] if isinstance(utsnitt, str) else utsnitt
     if ax is None:
         h = 9.0
         w = figsize[0] if figsize else min(7.4, h * (x1 - x0) / (y1 - y0) + 0.3)
         fig, ax = plt.subplots(figsize=figsize or (w, h))
-    ax.set_facecolor(VATTEN)
-    D.land().plot(ax=ax, color=LAND, edgecolor=KUST, linewidth=0.45, zorder=0)
+    if bakgrund == 'osm':
+        import bakgrundskarta as BK
+        stor = (x1 - x0) > 4500
+        BK.rita(ax, (x0, x1, y0, y1), vagnamn=False, stil='gra', zoom=13 if stor else 14,
+                smala_vagar=0.4 if stor else 0.7, zorder=0.0)
+    else:
+        ax.set_facecolor(VATTEN)
+        D.land().plot(ax=ax, color=LAND, edgecolor=KUST, linewidth=0.45, zorder=0)
     ax.set_xlim(x0, x1); ax.set_ylim(y0, y1); ax.set_aspect('equal')
     ax.set_xticks([]); ax.set_yticks([]); ax.set_xlabel(''); ax.set_ylabel('')
     for sp in ax.spines.values():
-        sp.set_edgecolor('#c9c6bd'); sp.set_linewidth(0.8)
+        sp.set_edgecolor('#d0d0cc'); sp.set_linewidth(0.7)
     if titel:
-        ax.set_title(titel, loc='left', pad=6)
+        ax.set_title(titel, loc='left', pad=4)
     return ax.figure, ax
 
 
@@ -57,13 +65,13 @@ def skalstock(ax, langd_m=None, loc=(0.05, 0.035)):
     x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
     langd_m = langd_m or (2000 if (x1 - x0) > 7000 else 1000 if (x1 - x0) > 3000 else 500)
     bx, by = x0 + loc[0] * (x1 - x0), y0 + loc[1] * (y1 - y0)
-    h = 0.007 * (y1 - y0)
+    h = 0.005 * (y1 - y0)
     for k in range(2):
-        ax.add_patch(Rectangle((bx + k * langd_m / 2, by), langd_m / 2, h, facecolor='#1f1f1e' if k == 0 else 'white',
-                               edgecolor='#1f1f1e', lw=0.6, zorder=20))
-    for v, etik in [(0, '0'), (langd_m, f'{langd_m / 1000:g} km'.replace('.', ','))]:
-        ax.text(bx + v, by + 1.8 * h, etik, ha='center', va='bottom', fontsize=7, color=TEXT, zorder=20,
-                path_effects=HALO)
+        ax.add_patch(Rectangle((bx + k * langd_m / 2, by), langd_m / 2, h, facecolor='#52514e' if k == 0 else 'white',
+                               edgecolor='#52514e', lw=0.5, zorder=20))
+    etik = f'{langd_m / 1000:g} km'.replace('.', ',') if langd_m >= 1000 else f'{langd_m:g} m'
+    ax.text(bx + langd_m + 0.012 * (x1 - x0), by + h / 2, etik, ha='left', va='center', fontsize=6.3, color=TEXT2,
+            zorder=20, path_effects=HALO)
 
 
 def norrpil(ax, loc=(0.94, 0.93)):
@@ -83,7 +91,8 @@ def kalla(ax, text=None):
 
 
 def ram(ax, **kw):
-    skalstock(ax, **kw); norrpil(ax); kalla(ax)
+    """Liten skalstock (norr är uppåt på alla kartor). Källhänvisningar sätts av beställaren i rapporten."""
+    skalstock(ax, **kw)
 
 
 def spara(fig, namn, dpi=200):
@@ -96,13 +105,14 @@ def spara(fig, namn, dpi=200):
     return ut
 
 
-def teckenforklaring(ax, rader, titel=None, loc='upper left', fontsize=7.5):
-    """rader: lista av matplotlib-handles med label."""
-    lg = ax.legend(handles=rader, title=titel, loc=loc, fontsize=fontsize, title_fontsize=fontsize + 0.5,
-                   frameon=True, framealpha=0.94, edgecolor='#d6d5d0', borderpad=0.7, labelspacing=0.6)
+def teckenforklaring(ax, rader, titel=None, loc='upper left', fontsize=6.8):
+    """Liten teckenförklaring. rader: lista av matplotlib-handles med label."""
+    lg = ax.legend(handles=rader, title=titel, loc=loc, fontsize=fontsize, title_fontsize=fontsize + 0.2,
+                   frameon=True, framealpha=0.94, edgecolor='#d6d5d0', borderpad=0.6, labelspacing=0.45,
+                   handlelength=1.8)
     lg.get_frame().set_linewidth(0.6)
     if titel:
-        lg.get_title().set_fontweight('bold')
+        lg._legend_box.align = 'left'
     lg.set_zorder(30)
     return lg
 
@@ -202,14 +212,16 @@ def _mittpil(B, s, w, langd, bredd):
     return np.vstack([b, a + n * bredd / 2, a + t * langd * 0.25, a - n * bredd / 2])
 
 
-def rita_floden(ax, floden, pos, vmax, span=None, radie=None, cmap=BLA, zorder=6, mittpil=True):
+def rita_floden(ax, floden, pos, vmax, span=None, radie=None, cmap=BLA, zorder=6, mittpil=True, fast_farg=None,
+                alpha=0.93):
     """floden: DataFrame(fran, till, resor) ; pos: {zon: np.array([x, y])} ; vmax gemensam skala.
-    Varje flöde ritas som en båge med pilspets vid målet och (mittpil) en pilspets mitt på bågen."""
+    Varje flöde ritas som en båge med pilspets vid målet och (mittpil) en pilspets mitt på bågen.
+    fast_farg: en färg för alla bågar (bredden visar antalet resor)."""
     x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
     span = span or max(x1 - x0, y1 - y0)
     radie = radie or (lambda z: span * 0.004)
     bredd = lambda v: span * (0.0006 + 0.0095 * v / vmax)
-    farg = lambda v: cmap(0.15 + 0.85 * math.sqrt(min(v / vmax, 1.0)))
+    farg = (lambda v: fast_farg) if fast_farg else (lambda v: cmap(0.15 + 0.85 * math.sqrt(min(v / vmax, 1.0))))
     for r in floden.sort_values('resor').itertuples(index=False):
         if r.fran not in pos or r.till not in pos or r.fran == r.till:
             continue
@@ -222,33 +234,36 @@ def rita_floden(ax, floden, pos, vmax, span=None, radie=None, cmap=BLA, zorder=6
                             max(2.6 * w, span * 0.011), max(2.4 * w, span * 0.008))
         if poly is not None:
             ax.add_patch(Polygon(poly, closed=True, facecolor=farg(r.resor), edgecolor='white', lw=0.4,
-                                 alpha=0.93, zorder=zorder))
+                                 alpha=alpha, zorder=zorder))
             if mittpil and s[-1] > span * 0.06:
                 ax.add_patch(Polygon(_mittpil(B, s, w, max(2.4 * w, span * 0.010), max(2.6 * w, span * 0.008)),
                                      closed=True, facecolor=farg(r.resor), edgecolor='white', lw=0.35, zorder=zorder))
     return bredd, farg
 
 
-def flodes_forklaring(ax, vmax, bredd, farg, enhet='resor/h', loc=(0.03, 0.035), varden=None):
-    """Teckenförklaring för bågbredd (ritad i dataenheter)."""
+def flodes_forklaring(ax, vmax, bredd, farg, enhet='resor/h', loc=(0.03, 0.035), varden=None, titel=None,
+                      storlek=1.0):
+    """Liten teckenförklaring för bågbredd (ritad i dataenheter). storlek < 1 krymper rutan (smala paneler)."""
     x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
     span = max(x1 - x0, y1 - y0)
     snygga = [m * 10 ** e for e in range(-3, 4) for m in (1, 2, 2.5, 5)]
     topp = max([t for t in snygga if t <= vmax] or [vmax])
     varden = varden or [topp, topp / 2, topp / 10]
-    W, H = 0.36, 0.035 + 0.036 * len(varden)
+    titel = titel or f'Resor ({enhet})'
+    k_ = storlek
+    W, H, dy = 0.36 * k_, (0.035 + 0.036 * len(varden)) * k_ * 0.9, 0.032 * k_
     ax.add_patch(FancyBboxPatch(loc, W, H, boxstyle='round,pad=0,rounding_size=0.01', transform=ax.transAxes,
                                 facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.94, zorder=25))
-    ax.text(loc[0] + 0.02, loc[1] + H - 0.02, f'Resor ({enhet})', transform=ax.transAxes, fontsize=7.5,
-            fontweight='bold', color=TEXT, va='center', zorder=26)
+    ax.text(loc[0] + 0.03 * k_, loc[1] + H - 0.018 * k_, titel, transform=ax.transAxes, fontsize=7.0,
+            color=TEXT, va='center', zorder=26)
     for k, v in enumerate(varden):
-        fy = loc[1] + H - 0.052 - k * 0.036
-        a = np.array([x0 + (loc[0] + 0.02) * (x1 - x0), y0 + fy * (y1 - y0)])
-        b = np.array([x0 + (loc[0] + 0.17) * (x1 - x0), y0 + fy * (y1 - y0)])
+        fy = loc[1] + H - 0.046 * k_ - k * dy
+        a = np.array([x0 + (loc[0] + 0.03 * k_) * (x1 - x0), y0 + fy * (y1 - y0)])
+        b = np.array([x0 + (loc[0] + 0.20 * k_) * (x1 - x0), y0 + fy * (y1 - y0)])
         w = bredd(v); B = np.vstack([a, b]); s = np.array([0.0, np.hypot(*(b - a))])
         ax.add_patch(Polygon(_pil_polygon(B, s, 0, s[-1], w, max(2.4 * w, span * 0.008), max(2.3 * w, span * 0.006), n=2),
                              closed=True, facecolor=farg(v), edgecolor='white', lw=0.4, zorder=26))
-        ax.text(loc[0] + 0.195, fy, f'{v:g}'.replace('.', ','), transform=ax.transAxes, fontsize=7.5, color=TEXT,
+        ax.text(loc[0] + 0.235 * k_, fy, f'{v:g}'.replace('.', ','), transform=ax.transAxes, fontsize=6.8, color=TEXT,
                 va='center', zorder=26)
 
 

@@ -38,12 +38,11 @@ def cirklar(ax, varden, vmax, rmax, farg='#3987e5', kant='#184f95', etiketter=0,
 def cirkel_forklaring(ax, vmax, rmax, varden, enhet, farg='#3987e5', kant='#184f95', loc=(0.05, 0.13)):
     x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
     bx = x0 + loc[0] * (x1 - x0); by = y0 + loc[1] * (y1 - y0)
-    ax.text(bx, by + 2.6 * rmax, f'Påstigande ({enhet})', fontsize=7.2, fontweight='bold', color=K.TEXT, zorder=21,
-            path_effects=K.HALO)
+    ax.text(bx, by + 2.6 * rmax, enhet, fontsize=7.0, color=K.TEXT, zorder=21, path_effects=K.HALO)
     for v in varden:
         r = rmax * math.sqrt(v / vmax)
         ax.add_patch(plt.Circle((bx + rmax, by + r), r, facecolor='none', edgecolor=kant, lw=0.7, zorder=21))
-        ax.text(bx + 2 * rmax + 60, by + 2 * r, f'{v:g}'.replace('.', ','), fontsize=6.8, va='center', color=K.TEXT,
+        ax.text(bx + 2 * rmax + 60, by + 2 * r, f'{v:g}'.replace('.', ','), fontsize=6.6, va='center', color=K.TEXT,
                 zorder=21, path_effects=K.HALO)
 
 
@@ -65,8 +64,8 @@ def fig_registrering():
     for yy, (_, v, _) in zip(y, rad):
         a.text(100 * v + 1.5, yy, f'{100 * v:.0f} %', va='center', fontsize=6.6, color=K.TEXT)
     a.set_yticks(y, [n for n, _, _ in rad], fontsize=7.2)
-    a.set_xlim(0, 112); a.set_xlabel('Andel registrerad som turens första hållplats (%)')
-    a.set_title('Påstigning vid ändhållplatsen: registrerad på rätt tur?', loc='left', fontsize=10)
+    a.set_xlim(0, 112); a.set_xlabel('Andel (%)')
+    a.set_title('Påstigning vid ändhållplatsen registrerad på rätt tur')
     for sp in ['top', 'right']:
         a.spines[sp].set_visible(False)
     oo = o[(o.k_hpl == 3) & (o.period == 'dygn')]
@@ -79,8 +78,8 @@ def fig_registrering():
     b.bar(x[1:] + w / 2, [float(kh[kh.linje == l].kvot_dygn.iat[0]) for l in lin], width=w, color='#59A14F',
           label='Höst (tvättad)')
     b.set_xticks(x, ['Landsbygd\n(kontroll)'] + [f'Linje {l}' for l in lin])
-    b.set_ylabel('Påstigande startsegment / ändhållplats (dygn)')
-    b.set_title('Påstigande på de 3 första hållplatserna efter\nändhållplatsen, i förhållande till ändhållplatsen', loc='left', fontsize=10)
+    b.set_ylabel('Kvot (dygn)')
+    b.set_title('Påstigande på tre första hållplatserna / ändhållplatsen')
     b.legend(fontsize=7, frameon=False)
     for sp in ['top', 'right']:
         b.spines[sp].set_visible(False)
@@ -92,7 +91,7 @@ def fig_registrering():
 def fig_omfordelning():
     f = pd.read_csv(P / 'a1_centrum_omfordelning.csv')
     tot = f.groupby('till_omrade').resor_h.sum()
-    fig, ax = K.ny_karta('centrum', titel='Omfördelning av felregistrerade centrumpåstigningar', figsize=(7, 8.2))
+    fig, ax = K.ny_karta('centrum', titel='Omfördelning av centrumpåstigningar', figsize=(7, 8.2))
     K.rita_linjer(ax, alpha=0.55, lw=1.6, zorder=3)
     c = POS[C.CENTRUM]
     vmax = tot.max()
@@ -100,14 +99,14 @@ def fig_omfordelning():
         ax.annotate('', xy=POS[z], xytext=c, arrowprops=dict(arrowstyle='-|>', color='#c0392b', lw=0.8 + 4.5 * v / vmax,
                     mutation_scale=9 + 8 * v / vmax, shrinkA=14, shrinkB=10), zorder=9)
     ax.add_patch(plt.Circle(c, 55, facecolor='white', edgecolor='#c0392b', lw=1.6, zorder=11))
-    h = [Line2D([], [], color='#c0392b', lw=2.5, label='Flyttade påstigningar (FM + EM)')]
+    h = [Line2D([], [], color='#c0392b', lw=2.5, label='Flyttade påstigningar')]
     h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
     lg = K.teckenforklaring(ax, h, loc='lower right')
     lg.set_bbox_to_anchor((0.99, 0.03), transform=ax.transAxes)
-    upp = K.placera_etiketter(ax, [(f'{C.CENTRUM}\n−{tot.sum():.2f} resor/h (FM + EM)'.replace('.', ','), c, 60)],
-                              fontsize=7.4, farg='#c0392b', fet=True, undvik=[K.ruta_axes(ax, 0.55, 0.02, 1, 0.3)])
-    K.placera_etiketter(ax, [(f'{z}\n+{v:.2f} resor/h'.replace('.', ','), POS[z], 30)
-                             for z, v in tot.sort_values(ascending=False).items() if v >= 0.02], undvik=upp)
+    upp = K.placera_etiketter(ax, [('Centrum', c, 60)], fontsize=7.0, farg='#c0392b',
+                              undvik=[K.ruta_axes(ax, 0.6, 0.02, 1, 0.3)])
+    K.placera_etiketter(ax, [(z, POS[z], 30) for z, v in tot.sort_values(ascending=False).items() if v >= 0.02],
+                        fontsize=6.6, undvik=upp)
     K.ram(ax)
     return K.spara(fig, 'a1_2_omfordelning_centrum.png')
 
@@ -122,12 +121,8 @@ def fig_pastigande():
         K.ny_karta('tatort', ax=ax, titel=t)
         K.rita_linjer(ax, alpha=0.45, lw=1.3, zorder=3)
         cirklar(ax, v, vmax, 520, etiketter=8)
-        cirkel_forklaring(ax, vmax, 520, [10, 4, 1], 'resor/h, FM + EM', loc=(0.06, 0.09))
-        K.ram(ax)
-    axs[0].text(0.02, 0.975, f'Maj–sep 2026: {fore.sum():.1f} resor/h (FM + EM)'.replace('.', ','),
-                transform=axs[0].transAxes, fontsize=7.5, va='top', color=K.TEXT, path_effects=K.HALO)
-    axs[1].text(0.02, 0.975, f'Höst 2026: {efter.sum():.1f} resor/h (FM + EM); linje J ur sommardatan'.replace('.', ','),
-                transform=axs[1].transAxes, fontsize=7.5, va='top', color='#1c5cab', path_effects=K.HALO)
+    cirkel_forklaring(axs[0], vmax, 520, [10, 4, 1], 'Påstigande per timme', loc=(0.06, 0.07))
+    K.ram(axs[0])
     fig.tight_layout()
     return K.spara(fig, 'a1_3_pastigande_fore_efter.png')
 
@@ -139,36 +134,36 @@ def urval(L, andel=0.85, maxn=260):
     return L.head(min(int(np.searchsorted(cs.to_numpy(), andel)) + 1, maxn)).rename(columns={'resor_h': 'resor'})
 
 
-def fig_od(per):
-    """OD-matrisen som används i kapitel 4 (höstdata, linje J ur sommardatan, utan korrigering): de största
-    flödena som bågar med pilar i färdriktningen."""
-    kor = pd.read_csv(P / f'a1_od_{per}_korrigerad.csv')
-    B = urval(kor)
-    vmax = B.resor.max()
-    namn = {'FM': 'förmiddag 06–09', 'EM': 'eftermiddag 15–18'}[per]
-    fig, ax = plt.subplots(1, 1, figsize=(8.4, 10.4))
-    K.ny_karta('tatort', ax=ax, titel=f'OD-matris, {namn} (höst 2026)')
-    tot = kor.resor_h.sum()
-    odsum = kor.groupby('fran').resor_h.sum().add(kor.groupby('till').resor_h.sum(), fill_value=0)
-    span = 14800
-    rad = lambda z: span * (0.0025 + 0.012 * math.sqrt(odsum.get(z, 0) / odsum.max()))
-    bredd, farg = K.rita_floden(ax, B, POS, vmax, span=span, radie=rad)
-    for z, v in odsum.items():
-        if z in POS:
-            ax.add_patch(plt.Circle(POS[z], rad(z), facecolor='white', edgecolor='#52514e', lw=0.6, zorder=7))
-    K.placera_etiketter(ax, [(z, POS[z], rad(z)) for z in odsum.sort_values(ascending=False).index[:12] if z in POS],
-                        fontsize=6.6)
-    via = (kor.loc[(kor.fran == C.CENTRUM) | (kor.till == C.CENTRUM), 'resor_h'].sum()) / tot
-    ax.text(0.03, 0.235, f'{tot:.1f} resor/h · {via:.0%} av resorna till/från {C.CENTRUM}\n'.replace('.', ',', 1)
-            + 'Pilarna visar färdriktningen (från ursprung\ntill destination); bågarna böjer åt höger.',
-            transform=ax.transAxes, fontsize=7.3, va='bottom', color=K.TEXT, zorder=30, linespacing=1.4,
-            bbox=dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.94))
-    K.flodes_forklaring(ax, vmax, bredd, farg, loc=(0.03, 0.06))
-    K.skalstock(ax, loc=(0.62, 0.035)); K.norrpil(ax); K.kalla(ax)
-    fig.tight_layout()
-    return K.spara(fig, f'a1_{4 if per == "FM" else 5}_od_{per}_fore_efter.png')
+OD_BLA = '#2f6fb7'
+OD_UTS = (105200, 112400, 6672800, 6687400)
+
+
+def fig_od():
+    """OD-matrisen som används i kapitel 4 (höstdata, linje J ur sommardatan): förmiddag och eftermiddag sida vid
+    sida. De största flödena (75 % av resorna) som blå bågar med pilspets vid målet; bredden = resor per timme."""
+    od = {per: pd.read_csv(P / f'a1_od_{per}_korrigerad.csv') for per in ('FM', 'EM')}
+    vmax = max(urval(d, 0.75).resor.max() for d in od.values())
+    fig, axs = plt.subplots(1, 2, figsize=(9.6, 9.6))
+    span = OD_UTS[3] - OD_UTS[2]
+    for ax, per, titel in [(axs[0], 'FM', 'Förmiddag (FM 06–09)'), (axs[1], 'EM', 'Eftermiddag (EM 15–18)')]:
+        K.ny_karta(OD_UTS, ax=ax, titel=titel)
+        kor = od[per]
+        B = urval(kor, 0.75)
+        odsum = kor.groupby('fran').resor_h.sum().add(kor.groupby('till').resor_h.sum(), fill_value=0)
+        rad = lambda z: span * 0.0032
+        bredd, farg = K.rita_floden(ax, B, POS, vmax, span=span, radie=rad, mittpil=False, fast_farg=OD_BLA,
+                                    alpha=0.78)
+        zoner = sorted(set(B.fran) | set(B.till))
+        ax.scatter([POS[z][0] for z in zoner if z in POS], [POS[z][1] for z in zoner if z in POS], s=7, c='white',
+                   edgecolors='#5f5e5a', linewidths=0.5, zorder=8)
+        storsta = [z for z in odsum.sort_values(ascending=False).index if z in POS][:7]
+        K.placera_etiketter(ax, [(z.replace('Centrum, Nygatan', 'Centrum'), POS[z], rad(z)) for z in storsta],
+                            fontsize=6.4, undvik=[K.ruta_axes(ax, 0.0, 0.0, 0.42, 0.16)])
+    K.flodes_forklaring(axs[0], vmax, bredd, farg, loc=(0.03, 0.025), titel='Resor per timme', storlek=0.82)
+    fig.tight_layout(w_pad=0.8)
+    return K.spara(fig, 'a1_4_od_fm_em.png')
 
 
 if __name__ == '__main__':
-    for f in (fig_registrering, fig_omfordelning, fig_pastigande, lambda: fig_od('FM'), lambda: fig_od('EM')):
+    for f in (fig_registrering, fig_omfordelning, fig_pastigande, fig_od):
         print(f())

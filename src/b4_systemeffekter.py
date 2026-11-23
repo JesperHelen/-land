@@ -803,7 +803,7 @@ def fig_avgangar_forandring(res):
         ax.text(0.02, 0.98, '\n'.join(txt), transform=ax.transAxes, ha='left', va='top', fontsize=7.4, color=K.TEXT,
                 zorder=30, linespacing=1.5,
                 bbox=dict(boxstyle='round,pad=0.45', facecolor='white', edgecolor='#d6d5d0', lw=0.6, alpha=0.95))
-        K.skalstock(ax, loc=(0.05, 0.04)); K.norrpil(ax)
+        K.skalstock(ax, loc=(0.05, 0.04))
     # sammanställning: invånare som får fler (grönt) respektive färre (rött) avgångar
     ax = fig.add_subplot(gs[2, 1:])
     sc = [('1a_VO', 'UA 1a ★'), ('1b', 'UA 1b ★'), ('2', 'UA 2 ★'), ('3', 'UA 3 ★'), ('4_VO', 'UA 4 ★'),
@@ -839,11 +839,8 @@ def fig_avgangar_forandring(res):
             Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Hållplats utgår för linjen'),
             Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['V'], markersize=8, label='Hållplats byter linje N → V (UA 5)')]
     fig.legend(handles=hnd, loc='lower center', ncol=4, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.01))
-    fig.text(0.99, -0.035, 'Underlag: Ålandstrafiken (GTFS, påstigandedata), befolkningsrutor 2024, kust GSHHG. Effekt = '
-             '(avgångar efter − i dag) × invånare per 50 m-punkt, utjämnad (gauss, 150 m). Antal avgångar = unika turer som '
-             'stannar inom 400 m; invånare i Mariehamn. ' + ('Linjernas vägdragning: OSRM, © OpenStreetMap-bidragsgivare.'
-             if __import__('s01_vagdragning').kalla_text().startswith('Linjernas') else 'Linjerna ritade som raka streck.'),
-             ha='right', fontsize=6.2, color=K.TEXT2)
+    fig.text(0.99, -0.035, 'Effekt = (avgångar efter − i dag) × invånare per 50 m-punkt, utjämnad (gauss, 150 m). Antal '
+             'avgångar = unika turer som stannar inom 400 m; invånare i Mariehamn.', ha='right', fontsize=6.2, color=K.TEXT2)
     fig.suptitle('Effekt per UA: förändrat antal avgångar inom 400 m × befolkning (grönt vinnare, rött förlorare)',
                  x=0.01, ha='left', fontsize=12, fontweight='bold')
     ut = C.KARTOR / 'b4_16_avgangar_forandring.png'

@@ -170,7 +170,7 @@ Andelen resor via centrum, 67 %, är lägre än i sommardatan (75 %), där påst
 registrerades på centrumhållplatsen. De största OD-flödena under FM går från Solberget (2,3 resor per timme),
 Ytternäs skola (1,6), Kalmarnäs vändplan (1,5) och Doppingvägen (1,1) till centrum, och från centrum till
 Strandnäs skola södra (1,5) och Maxinge (1,2). Under EM går flödena i
-motsatt riktning (figur 1.4 och 1.5). Mellan Solberget och Strandnäs skola södra går 0,7–0,8 resor per timme
+motsatt riktning (figur 1.4). Mellan Solberget och Strandnäs skola södra går 0,7–0,8 resor per timme
 utan att passera centrum.
 
 ![Figur 1.3](../output/kartor/a1_3_pastigande_fore_efter.png)
@@ -178,15 +178,11 @@ utan att passera centrum.
 *Figur 1.3. Påstigande per hållplatsområde (FM + EM, resor per timme) i sommardatan som levererad (med linje Ö)
 respektive den tvättade höstdatan, båda utan korrigering.*
 
-![Figur 1.4](../output/kartor/a1_4_od_FM_fore_efter.png)
+![Figur 1.4](../output/kartor/a1_4_od_fm_em.png)
 
-*Figur 1.4. OD-matrisen, förmiddag 06–09: de största flödena (85 % av resorna). Varje flöde är en pil från
-ursprung till destination, med pilspets mitt på bågen och vid målet. Bågarna böjer åt höger i färdriktningen,
-så att resor åt var sitt håll mellan samma hållplatser syns som två bågar. Bredd och färg anger antal resor.*
-
-![Figur 1.5](../output/kartor/a1_5_od_EM_fore_efter.png)
-
-*Figur 1.5. OD-matrisen, eftermiddag 15–18 (som figur 1.4).*
+*Figur 1.4. OD-matrisen, förmiddag 06–09 och eftermiddag 15–18: de största flödena (75 % av resorna). Varje
+pil går från ursprung till destination och böjer åt höger i färdriktningen, så att resor åt var sitt håll mellan
+samma hållplatser syns som två pilar. Bredden anger antalet resor per timme.*
 
 ## 1.5 Osäkerheter och rekommendation
 

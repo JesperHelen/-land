@@ -38,18 +38,18 @@ def fig_nya():
     for r in behov.itertuples():
         ax.add_patch(plt.Circle((r.x, r.y), C.TACKNING_M, facecolor=ORANGE, alpha=0.10, edgecolor=ORANGE, lw=0.8, ls='--', zorder=4))
     ax.scatter(behov.x, behov.y, s=70, marker='D', color=ORANGE, edgecolor='white', lw=0.7, zorder=8)
-    etik = [(f"N{r.nr}: linje {r.linjer}\n+{r.nytta_inv} inv.", (r.x, r.y), 140) for r in nya.itertuples()]
-    etik += [(f"{r.narmaste_hpl}\n≈{int(round(r.inv, -1))} inv.", (r.x, r.y), 110) for r in behov.itertuples()]
+    etik = [(f"N{r.nr}", (r.x, r.y), 140) for r in nya.itertuples()]
+    etik += [(f"{r.narmaste_hpl}", (r.x, r.y), 110) for r in behov.itertuples()]
     hinder = K.punkt_hinder(ax, list(nya.x) + list(behov.x), list(nya.y) + list(behov.y), px=8)
     K.placera_etiketter(ax, etik, fontsize=6.6, undvik=hinder)
-    h = [Line2D([], [], marker='*', ls='', color=BLA, markersize=12, label='Nytt läge längs dagens linje (N1–N5)'),
-         Line2D([], [], marker='D', ls='', color=ORANGE, markersize=7, label='Nytt läge som kräver ändrad linjesträckning'),
+    h = [Line2D([], [], marker='*', ls='', color=BLA, markersize=11, label='Nytt läge längs dagens linje'),
+         Line2D([], [], marker='D', ls='', color=ORANGE, markersize=6, label='Nytt läge, ändrad linjesträckning'),
          Patch(facecolor='none', edgecolor='#52514e', ls='--', label='400 m runt nytt läge'),
-         Patch(facecolor=SVAGFARG[1], alpha=0.55, label='Mycket låg turtäthet i dag (1–14 avg/vardag)'),
-         Patch(facecolor=SVAGFARG[2], alpha=0.55, label='Låg turtäthet i dag (15–29 avg/vardag)'),
+         Patch(facecolor=SVAGFARG[1], alpha=0.55, label='1–14 avgångar per vardag i dag'),
+         Patch(facecolor=SVAGFARG[2], alpha=0.55, label='15–29 avgångar per vardag i dag'),
          Patch(facecolor='#a8a49a', alpha=0.55, label='Ingen hållplats inom 400 m i dag')]
     h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
-    lg = K.teckenforklaring(ax, h, loc='lower left', fontsize=7)
+    lg = K.teckenforklaring(ax, h, loc='lower left')
     lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
     K.ram(ax)
     return K.spara(fig, 'a3_1_nya_hallplatser.png')
@@ -63,7 +63,7 @@ def fig_bedomning():
             'Kandidat för indragning': dict(s=70, marker='X', facecolor='#c0392b', edgecolor='white', lw=0.6)}
     fig, axs = plt.subplots(1, 2, figsize=(12.4, 8.2), gridspec_kw={'width_ratios': [1.0, 1.05]})
     cx0, cx1, cy0, cy1 = UTS_C = (106950, 109350, 6681650, 6684550)
-    for ax, uts, t in [(axs[0], 'stad', 'Översikt'), (axs[1], UTS_C, 'Centrum')]:
+    for ax, uts, t in [(axs[0], 'stad', 'Hållplatsbedömning, översikt'), (axs[1], UTS_C, 'Centrum')]:
         K.ny_karta(uts, ax=ax, titel=t)
         K.rita_linjer(ax, alpha=0.55, lw=1.3, zorder=3)
         for k, st in stil.items():
@@ -75,16 +75,13 @@ def fig_bedomning():
                                        ls='--', zorder=7))
             d = d[~(d.x.between(cx0, cx1) & d.y.between(cy0, cy1))]
         hinder = K.punkt_hinder(ax, bed.x, bed.y, px=5)
-        K.placera_etiketter(ax, [(f"{r.omrade} ({r.pastigande_vardag:.2f})".replace('.', ','), (r.x, r.y), 35)
-                                 for r in d.itertuples()], fontsize=6.4, undvik=hinder)
+        K.placera_etiketter(ax, [(r.omrade, (r.x, r.y), 35) for r in d.itertuples()], fontsize=6.3, undvik=hinder)
         K.ram(ax)
     h = [Line2D([], [], ls='', label=k, markersize=8 if k != 'Behålls' else 5, marker=v['marker'],
                 markerfacecolor=v['facecolor'], markeredgecolor=v['edgecolor']) for k, v in stil.items()]
-    h += [Line2D([], [], ls='', label='(n) = påstigande per vardag (höst 2026)')]
-    lg = K.teckenforklaring(axs[1], h, loc='lower left', fontsize=7)
+    lg = K.teckenforklaring(axs[1], h, loc='lower left')
     lg.set_bbox_to_anchor((1.02, 0.0), transform=axs[1].transAxes)
-    fig.suptitle('Bedömning av befintliga hållplatser (stadslinjer)', x=0.01, ha='left', fontsize=12, fontweight='bold')
-    fig.tight_layout(rect=(0, 0, 1, 0.985))
+    fig.tight_layout()
     return K.spara(fig, 'a3_2_hallplatsbedomning.png')
 
 

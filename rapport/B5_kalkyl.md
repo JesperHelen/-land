@@ -17,7 +17,7 @@
 >   - extra turer för de tre flyg som dagens tidtabell inte når (avgång 07:15, ankomst 10:35 och 21:35): cirka
 >     65 000 euro per år (54 000–77 000), varav 10:50-turen för ankomsten 10:35 cirka 10 000 euro;
 >   - bara förlängning av V kräver en sjätte buss, cirka 211 500 euro per år, och är utesluten.
-> - **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten ★:** sparar cirka 400 euro per år, eftersom
+> - **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten ★:** sparar cirka 200 euro per år, eftersom
 >   linje N:s väg rakt på är kortare än svängen. Varianten med bara linje N rakt på sparar cirka 1 300 euro per år.
 >
 > Kilometrarna är vägavstånd längs gatunätet (OSRM).
@@ -68,13 +68,13 @@ Kalkylen omfattar förändrad driftkostnad per år jämfört med i dag:
 | UA 1b ★ förlängd Norrgårdsvägen, V och Ö sammanslagna (16 av 20 turer) | 0 | +12 | +6 500 | +6 500 (5 100–8 600) | 36 €/år |
 | UA 2 ★ N2 på linje Ö | 0 | +2 | 0 | ±0 | – |
 | UA 3 ★ Linje N via Bo-Bil | 0 | +2 | −100 | ±0 | – |
-| UA 4 flygplatsen, alla 20 turer – utesluten | +1 | +2 870 | +9 000 | +211 500 (171 700–252 100) | 10 574 €/år |
-| UA 4 ★ flygplatsen, V och Ö sammanslagna (16 av 20 turer) | 0 | +32 | +7 200 | +8 100 (6 400–10 500) | 406 €/år |
-| UA 4 flygplatsen, dito + Solberget indragen (16 av 20) | 0 | +22 | +7 200 | +7 600 (6 000–10 000) | 380 €/år |
-| UA 4Y flygturerna (3 av 3), V och Ö sammanslagna | 0 | +12 | +1 700 | +2 200 (1 700–2 800) | 110 €/år |
+| UA 4 flygplatsen, alla 20 turer – utesluten | +1 | +2 870 | +9 000 | +211 500 (171 700–252 100) | 9 612 €/år |
+| UA 4 ★ flygplatsen, V och Ö sammanslagna (16 av 20 turer) | 0 | +32 | +7 200 | +8 100 (6 400–10 500) | 369 €/år |
+| UA 4 flygplatsen, dito + Solberget indragen (16 av 20) | 0 | +22 | +7 200 | +7 600 (6 000–10 000) | 346 €/år |
+| UA 4Y flygturerna (3 av 3), V och Ö sammanslagna | 0 | +12 | +1 700 | +2 200 (1 700–2 800) | 105 €/år |
 | UA 4 extra turer för flygen 07:15, 10:35 och 21:35 (tabell 5.2) | 0 | +1 110 | +10 900 | +65 200 (54 100–77 300) | – |
-| UA 5 ★ svängen till linje V, V och Ö sammanslagna (17 av 20 V-turer) | 0 | 0 | −500 | −400 (−300 – −600) | – |
-| UA 5 svängen till linje V, dagens drift (16 av 20 V-turer) | 0 | 0 | −500 | −500 (−400 – −600) | – |
+| UA 5 ★ svängen till linje V, V och Ö sammanslagna (17 av 20 V-turer) | 0 | 0 | −200 | −200 (−100 – −200) | – |
+| UA 5 svängen till linje V, dagens drift (16 av 20 V-turer) | 0 | 0 | −200 | −200 (−200 – −300) | – |
 | UA 5 variant: bara linje N rakt på (svängen utan buss) | 0 | −8 | −1 000 | −1 300 (−1 000 – −1 600) | – |
 
 Kostnaden per invånare med bättre tillgänglighet är inte rättvisande för UA 4. Nyttan gäller främst
@@ -89,8 +89,8 @@ Fordonstimmarna räknas försiktigt: turens körtid plus den tid omloppet förl�
 | Flyg | Extra tur | Körs av | Fordonstimmar per vardag | Kostnad per år, bas (låg–hög) |
 |---|---|---|---|---|
 | Avgång 07:15 | 05:15 (vid flygplatsen 05:32) | omlopp 204, som i dag börjar 06:50 | 2,2 | 30 400 (25 300–35 800) |
-| Ankomst 10:35 | 10:50 (vid flygplatsen 11:06) | omlopp 204, i uppehållet 10:16–14:20 | 0,5 | 9 900 (8 100–12 000) |
-| Ankomst 21:35 | 21:50 (vid flygplatsen 22:06) | omlopp 205, efter sista turen 21:13 | 1,7 | 24 900 (20 700–29 400) |
+| Ankomst 10:35 | 10:50 (vid flygplatsen 11:07) | omlopp 204, i uppehållet 10:16–14:20 | 0,5 | 9 900 (8 100–12 000) |
+| Ankomst 21:35 | 21:50 (vid flygplatsen 22:07) | omlopp 205, efter sista turen 21:13 | 1,7 | 24 900 (20 700–29 400) |
 | **Summa** | | | **4,4** | **65 200 (54 100–77 300)** |
 
 Turen 10:50 kostar bara körtiden, men uppehållet i omlopp 204 används troligen för förarens rast. Morgon- och
@@ -98,8 +98,9 @@ kvällsturen förlänger trafikdygnet och består till stor del av väntan; anro
 billigare för dessa flyg.
 
 **UA 5.** Linje N blir 2 minuter kortare och linje V 2 minuter längre per tur. Omloppstiden ändras inte,
-eftersom vinsten för N blir väntetid i centrum. Längs gatunätet är N:s väg rakt på cirka 210 m kortare per tur
-än svängen, medan V kör cirka 115 m längre. Det ger en liten besparing i fordonskilometer. I varianten med bara
+eftersom vinsten för N blir väntetid i centrum. Längs gatunätet är N:s väg rakt på cirka 185 m kortare per tur
+än svängen, och V kör lika mycket längre. Eftersom N kör fler turer genom svängen än V ger det en liten
+besparing i fordonskilometer. I varianten med bara
 linje N rakt på slutar dessutom N:s sista tur 2 minuter tidigare.
 
 **UA 1a med alla turer.** Merkostnaden domineras av den sjätte bussen, cirka 60 000 euro per år, och
