@@ -1,12 +1,13 @@
 # 3 Hållplatslägen – nya och överflödiga hållplatser
 
-> **Sammanfattning.** Fem nya hållplatslägen längs dagens linjer (N1–N5) ger cirka 140 invånare en
-> hållplats inom 400 m. Ytterligare cirka 95 invånare får minst 30 avgångar per vardag i stället för färre. De
-> största vinsterna finns sydost om Lervik på linje J, längs linje Ö mot Kalmarnäs och söder om Maxinge på linje N.
+> **Sammanfattning.** Fem nya hållplatslägen längs dagens linjer (N1–N5) ger cirka 155 invånare en
+> hållplats inom 400 m. Ytterligare cirka 180 invånare får minst 30 avgångar per vardag i stället för färre. De
+> största vinsterna finns öster om Musikinstitutet på linje Ö, söder om Lervik på linje J och längs linje Ö
+> mot Kalmarnäs. Körvägarna följer gatunätet (OSRM).
 > Läget N5 innebär i praktiken att linje V och Ö också stannar vid Klintvägen. Huvuddelen av den otäckta
 > befolkningen, cirka 2 000 invånare, bor dock mer än 400 m från stadslinjernas körvägar. Den kan bara nås med
-> ändrad linjesträckning. Nio sådana områden med sammanlagt cirka 1 130 invånare har identifierats, de största
-> vid Möckelö Strand, Lillåkersvägen och Solberget–Örtvägen. De utgör underlag för utredningsalternativen (UA) i kapitel 4.
+> ändrad linjesträckning. Nio sådana områden med sammanlagt cirka 1 120 invånare har identifierats, de största
+> vid Möckelö Strand, Lillåkersvägen och Solberget–Kalmsta. De utgör underlag för utredningsalternativen (UA) i kapitel 4.
 > Med den tvättade påstigandedatan från hösten 2026 bedöms elva hållplatser som kandidater för indragning:
 >
 > - **linje S:** Torggatan, Stadshuset, Hamngatan, Skillnadsgatan, Östra Esplanadgatan, Neptunigatan och Gröna Udden;
@@ -21,9 +22,8 @@
 ## 3.1 Metod
 
 **Nya hållplatslägen längs dagens linjer.** Kandidatlägen har genererats var 50:e meter längs
-stadslinjernas körvägar. I den här versionen återges körvägen som rak linje mellan hållplatserna i GTFS.
-Analysen är förberedd för att i stället använda linjernas faktiska vägdragning längs gatunätet (OSRM) och
-körs om när vägdragningen har hämtats. Lägen på vatten och lägen närmare än 250 m från en befintlig hållplats på samma linje har
+stadslinjernas körvägar. Körvägen följer gatunätet: varje sträcka mellan två hållplatser är ruttad med OSRM
+(OpenStreetMap), så kandidatlägena ligger på de gator där bussen kör. Lägen på vatten och lägen närmare än 250 m från en befintlig hållplats på samma linje har
 uteslutits. Ett läges nytta är antalet invånare som
 
 - i dag saknar hållplats inom 400 m och skulle få det, eller
@@ -32,7 +32,9 @@ uteslutits. Ett läges nytta är antalet invånare som
 
 Lägena har valts stegvis med det mest nyttiga först. Nyttan räknas om efter varje val, så att samma invånare
 inte räknas två gånger, och det är minst 300 m mellan nya lägen. Urvalet avbryts när nyttan understiger 30
-invånare.
+invånare. Numreringen N1–N5 från Fas A ligger fast: varje läge har behållit sitt nummer, och alla fem ligger
+inom 50–240 m från läget i den tidigare versionen, där körvägarna var raka linjer mellan hållplatserna. UA 2
+i kapitel 4 avser N2.
 
 **Behov av ändrad linjesträckning.** Otäckt befolkning som ligger mer än 400 m från stadslinjernas körvägar
 kan inte nås med nya hållplatser på dagens linjer. Den har sammanställts per 1 km-ruta (minst 75 invånare).
@@ -70,14 +72,17 @@ linjerna N, S, V och Ö.
 
 | Nr | Linje | Läge | Avgångar/vardag | Ny täckning, inv. | Lyfts från svag tillgänglighet, inv. |
 |---|---|---|---:|---:|---:|
-| N1 | J | Sydost om Lervik (cirka 400 m från befintlig hållplats) | 9 | 61 | 3 |
-| N2 | Ö | Längs linjen mot Kalmarnäs vändplan (cirka 780 m norr om vändplatsen) | 20 | 55 | – |
-| N3 | N | Söder om Maxinge (cirka 370 m) | 22 | 17 | 24 |
-| N4 | Ö | Öster om Musikinstitutet (cirka 340 m), på linje Ö:s körväg | 16 | 3 | 33 |
-| N5 | V, Ö | Vid Klintvägen, där i dag endast linje N stannar | 40 | – | 35 |
-| | | **Summa** | | **136** | **95** |
+| N1 | J | Söder om Lervik (cirka 490 m från befintlig hållplats) | 9 | 80 | 15 |
+| N2 | Ö | Längs linjen mot Kalmarnäs vändplan (cirka 800 m norr om vändplatsen) | 20 | 58 | – |
+| N3 | N | Söder om Maxinge, nära Vikingagränd (cirka 310 m) | 22 | 15 | 29 |
+| N4 | Ö | Öster om Musikinstitutet (cirka 220 m), på linje Ö:s körväg | 16 | 1 | 97 |
+| N5 | V, Ö | Vid Klintvägen, där i dag endast linje N stannar | 40 | – | 39 |
+| | | **Summa** | | **154** | **180** |
 
-Med de fem lägena ökar andelen av Mariehamns invånare med hållplats inom 400 m från 83,6 % till 84,5 %.
+Med de fem lägena ökar andelen av Mariehamns invånare med hållplats inom 400 m från 83,6 % till 84,6 %.
+Jämfört med versionen med raka körvägar ger N4 betydligt större nytta (97 i stället för 33 invånare lyfts ur
+svag tillgänglighet). Linje Ö:s körväg mellan centrum och Nabben följer gator genom tätare bebyggelse än den
+raka linjen gjorde.
 Andelen med svag tillgänglighet är i stort sett oförändrad. De som får sin första hållplats nära, på linjer
 med 9–22 avgångar per vardag, hamnar i gruppen svag tillgänglighet, medan ungefär lika många lyfts ur den.
 Varje ny hållplats förlänger körtiden med uppskattningsvis 20–30 sekunder per tur när den används. Effekten
@@ -95,18 +100,18 @@ linjesträckning krävs (romber), med 400 m upptagningsområde. Bakgrund: tillg�
 | Område (närmaste hållplats) | Invånare utan hållplats inom 400 m | Avstånd till närmaste körväg (median) |
 |---|---:|---:|
 | Möckelö Strand | 240 | 750 m |
-| Lillåkersvägen | 180 | 930 m |
+| Lillåkersvägen | 180 | 910 m |
 | Solberget | 160 | 770 m |
-| Örtvägen | 130 | 560 m |
-| Dalkullavägen | 100 | 540 m |
-| Österkalmare | 90 | 1 510 m |
-| Skrakvägen | 80 | 470 m |
-| Solberget södra | 80 | 600 m |
-| Strömsnäs | 80 | 1 600 m |
-| **Summa** | **≈ 1 130** | |
+| Kalmsta (tidigare redovisat som Örtvägen) | 120 | 550 m |
+| Dalkullavägen | 90 | 530 m |
+| Österkalmare | 90 | 1 490 m |
+| Lervik (tidigare redovisat som Skrakvägen) | 80 | 590 m |
+| Solberget södra | 80 | 580 m |
+| Strömsnäs | 80 | 1 590 m |
+| **Summa** | **≈ 1 120** | |
 
-Områdena i norr och nordost (Lillåkersvägen, Örtvägen, Solberget och Österkalmare), med sammanlagt cirka
-560 invånare, ligger mellan linje N:s och linje Ö:s nuvarande körvägar. De kan sannolikt nås genom en
+Områdena i norr och nordost (Lillåkersvägen, Kalmsta, Solberget och Österkalmare), med sammanlagt cirka
+550 invånare, ligger mellan linje N:s och linje Ö:s nuvarande körvägar. De kan sannolikt nås genom en
 justering av endera linjen. Möckelö Strand och Dalkullavägen ligger väster respektive norr om linje V.
 Strömsnäs och Österkalmare ligger så långt från nätet att en betjäning bedöms kräva oproportionerligt
 lång omväg inom ramen för dagens fordonsresurser.
@@ -162,8 +167,8 @@ Sex hållplatser *bör prövas*. De har lika få påstigningar, men en indragnin
 
 ## 3.5 Osäkerheter
 
-- **Underlagets upplösning.** Befolkningen är fördelad jämnt inom 1 km-rutor och körvägarna är förenklade till
-  raka linjer mellan hållplatser. Nyttan per läge är därför ungefärlig, och lägena ska justeras mot gatunät,
+- **Underlagets upplösning.** Befolkningen är fördelad jämnt inom 1 km-rutor. Körvägarna följer gatunätet
+  enligt OSRM (OpenStreetMap), som i enstaka fall kan välja en annan gata än bussen. Nyttan per läge är därför ungefärlig, och lägena ska justeras mot gatunät,
   bebyggelse och trafiksäkerhet innan de fastställs.
 - **Påstigandet avser hösten 2026.** Höstdatan är tvättad och avser terminstid, men en hållplats kan ha
   annan funktion än påstigning, till exempel som avstigningshållplats eller för enstaka resenärer med särskilda

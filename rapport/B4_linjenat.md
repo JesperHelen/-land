@@ -19,15 +19,18 @@
 > inte förlängas utan att V och Ö slås ihop till en genomgående linje V–Ö. Bussen
 > fortsätter då som Ö efter en halv minut, och resenärer mellan V och Ö kan sitta kvar. Ö startar när V har
 > kommit tillbaka. Det enda kravet är att varje varv V + Ö ryms inom 55 minuter, dvs. minst 5 minuter i
-> centrum, och helst inom 50 minuter. I huvudalternativen startar Ö 0–2 minuter efter pulsen.
+> centrum, och helst inom 50 minuter. I huvudalternativen startar Ö 0–2,5 minuter efter pulsen.
+>
+> Linjerna och utredningsalternativens körvägar följer gatunätet (OSRM, OpenStreetMap), och
+> fordonskilometrarna är vägavstånd. Med den verkliga vägdragningen kör stadstrafiken 1 287 km per vardag.
 >
 > | UA | Huvudalternativ (★) | Turer | Bussar | Uteslutet |
 > |---|---|---|---|---|
 > | UA 1a – Möckelö Strand ny via dagens vägar (+4,5 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | Alla turer med dagens tidtabell (6 bussar) |
 > | UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen (+2,5 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | – |
 > | UA 2 – N2 på linje Ö (+0,5 min/tur) | Alla turer | 20 av 20 | 5 | – |
-> | UA 3 – Linje N via Bo-Bil (+0,1 min/tur) | Alla turer | 22 av 22 | 5 | – |
-> | UA 4 – Linje V–Ö via flygplatsen (+4 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | Bara förlängning av V (6 bussar) |
+> | UA 3 – Linje N via Bo-Bil (+0,5 min/tur) | Alla turer | 22 av 22 | 5 | – |
+> | UA 4 – Linje V–Ö via flygplatsen (+5 min/tur) | V och Ö sammanslagna | 16 av 20 | 5 | Bara förlängning av V (6 bussar) |
 > | UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten (V +2, N −2 min/tur) | V och Ö sammanslagna | 17 av 20 V-turer | 5 | – |
 >
 > I UA 1a, 1b och 4 kör fyra V-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
@@ -41,37 +44,37 @@
 > - **UA 1b med alla turer:** ryms med fem bussar, men varven med Ö:s skolturer får bara 1,5–2,5 minuter i
 >   centrum och uppfyller inte kravet.
 > - **UA 4:**
->   - med dagens tidtabell 8 av 20 turer;
->   - med Solberget indragen 17 av 20 turer. Då ryms även V 08:20, med 5,1 minuter i centrum, men 49 invånare
->     får 20 avgångar färre per vardag;
+>   - med dagens tidtabell 7 av 20 turer;
+>   - med Solberget indragen ryms inga fler turer (16 av 20), bara mer tid i centrum, medan 49 invånare får 20
+>     avgångar färre per vardag;
 >   - **UA 4Y:** bara de 3 V-turer som når ett flyg (V 08:50, 15:10 och 17:10). Alla 3 ryms med V och Ö
->     sammanslagna och minst 6 minuter i centrum, utan att Solberget dras in;
+>     sammanslagna och minst 5 minuter i centrum, utan att Solberget dras in;
 >   - **flygen (tider från beställaren 2026-11-15):** dagens V-turer når tre av sex flyg (avgångarna 11:00 och
 >     17:10 och ankomsten 16:45). Avgången 07:15 och ankomsterna 10:35 och 21:35 kräver extra turer, cirka
->     63 000 € per år för alla tre, varav 10:50-turen ryms i ett befintligt omlopp (cirka 9 000 €).
+>     65 000 € per år för alla tre, varav 10:50-turen ryms i ett befintligt omlopp (cirka 10 000 €).
 > - **UA 5:** med dagens drift ryms 16 av 20 V-turer via svängen, alltså utan att V och Ö slås ihop. Linje N får
 >   6 minuter i centrum i stället för 4 vid alla byten N → S. Varianten med bara linje N rakt på (svängen utan
 >   buss) ger samma vinst för N utan att belasta V.
 >
 > **Effekter:**
 >
-> - **Möckelö Strand ny (UA 1a eller 1b):** 179 invånare får en hållplats inom 400 m, och andelen i Mariehamn
+> - **Möckelö Strand ny (UA 1a eller 1b):** 178 invånare får en hållplats inom 400 m, och andelen i Mariehamn
 >   ökar från 83,6 till 84,8 %.
-> - **N2 (UA 2):** 55 invånare får en hållplats inom 400 m.
+> - **N2 (UA 2):** 58 invånare får en hållplats inom 400 m.
 > - **Bo-Bil (UA 3):** 44 invånare får minst 30 avgångar per vardag, medan 23 invånare vid Vikingagränd förlorar
 >   hållplatsen.
 > - **Flygplatsen (UA 4):** 20 invånare nära flygplatsen får en hållplats inom 400 m.
-> - **Svängen (UA 5):** ingen förlorar hållplatsen inom 400 m och ingen får färre avgångar. 121 invånare får
->   fler avgångar, och 62 lyfts till minst 30 avgångar per vardag. Svängen har i dag cirka 1 påstigande per
->   vardag.
-> - **Fler och färre avgångar (figur 4.16):** i UA 1a och 1b får 179 invånare 16 avgångar mer per vardag inom
->   400 m, i UA 2 får 55 invånare 20 mer, i UA 4 får 20 invånare 16 mer och i UA 5 får 121 invånare upp till 22
->   mer. Bara UA 3 ger någon färre avgångar:
->   24 invånare vid Vikingagränd får 22 avgångar färre, medan 44 vid Bo-Bil får 22 fler.
+> - **Svängen (UA 5):** ingen förlorar hållplatsen inom 400 m. 125 invånare får fler avgångar och 62 lyfts till
+>   minst 30 avgångar per vardag, medan 11 invånare väster om Västra macken får 17 färre, eftersom linje V inte
+>   längre stannar där. Svängen har i dag cirka 1 påstigande per vardag.
+> - **Fler och färre avgångar (figur 4.16):** i UA 1a och 1b får 178 invånare 16 avgångar mer per vardag inom
+>   400 m, i UA 2 får 58 invånare 20 mer, i UA 4 får 20 invånare 16 mer och i UA 5 får 125 invånare upp till 22
+>   mer. Färre avgångar ger UA 3, där 24 invånare vid Vikingagränd får 22 färre medan 44 vid Bo-Bil får 22 fler,
+>   och UA 5, där 11 invånare får 17 färre.
 > - **Genomgående linje V–Ö:** resor mellan V- och Ö-området slipper bytet i centrum. Med höstens resande
 >   gäller det cirka 1,5 resor per vardag, och effekten ingår i restiderna.
 > - **Påstigande (höst 2026):** den nya hållplatsen i Möckelö Strand beräknas få 1,5–6,5 påstigande per vardag
->   och N2 2,1–11,2.
+>   och N2 2,2–11,8.
 >
 > UA 1a, 1b, 4 och 5 använder samma tidsutrymme på linje V. Två av dem ryms inte tillsammans inom kravet utan
 > fler bussar. UA 5 i varianten med bara linje N rakt på påverkar inte linje V.
@@ -162,12 +165,26 @@ rättelser. Varje rad är ett omlopp och varje stapel en tur i linjens färg. Ma
 
 ## 4.2 UA 1a och UA 1b – Möckelö Strand ny
 
+**Introduktion.** Linje V slutar i dag vid hållplatsen Möckelö Strand i stadstrafikens västra del. Där vänder
+bussen och kör tillbaka mot Norrgårdsvägen. Söder om vändpunkten bor cirka 240 invånare som har mer än 400 m till
+närmaste hållplats. Det är det största av de områden i kapitel 3 som bara kan nås med ändrad linjesträckning.
+UA 1a och 1b förlänger linje V till en ny hållplats, *Möckelö Strand ny*, cirka 700 m söder om dagens vändpunkt.
+
+- **Syfte:** ge invånarna söder om Möckelö Strand en hållplats inom 400 m. Den nya hållplatsen når 178 av dem.
+- **I dag:** Möckelö Strand har 20 avgångar per vardag med linje V och cirka 5 påstigande per vardag (höst 2026).
+- **Två vägval:**
+  - UA 1a använder dagens vägar, och bussen kör samma väg fram och tillbaka till den nya hållplatsen.
+  - UA 1b förutsätter att Norrgårdsvägen förlängs till Hamnskärsvägen, så att bussen kan köra en slinga. Vägen
+    finns inte i dag.
+- **Det som avgör:** om den längre körtiden på linje V ryms i dagens omlopp utan fler bussar, och om
+  förlängningen av Norrgårdsvägen är värd att bygga.
+
 **Utformning.** Linje V vänder i dag vid hållplatsen Möckelö Strand: bussen kör Norrgårdsvägen →
 Möckelö Strand (1,6 min) → Norrgårdsvägen (1 min). Den nya hållplatsen, *Möckelö Strand ny*, placeras i det
 indikativa läget från kapitel 3, cirka 700 m söder om dagens vändpunkt. Restiderna är beställarens:
 
-- **den befintliga vägen** mellan Norrgårdsvägen och den nya hållplatsen tar 2 minuter (cirka 1,4 km, mätt i
-  beställarens skiss);
+- **den befintliga vägen** mellan Norrgårdsvägen och den nya hållplatsen tar 2 minuter (cirka 1,4 km längs
+  gatunätet enligt OSRM, som i beställarens skiss);
 - **förlängningen av Norrgårdsvägen** från Möckelö Strand till den nya hållplatsen skulle ta 1 minut
   (cirka 0,7 km). Vägen finns inte i dag.
 
@@ -180,7 +197,7 @@ kör) plus den befintliga vägen (2 min). Två varianter har prövats:
 - **1b – förlängd Norrgårdsvägen, slinga:** bussen kör Möckelö Strand → förlängningen (1 min) → den nya
   hållplatsen (0,5 min) → den befintliga vägen (2 min) → Norrgårdsvägen. Sträckan Möckelö Strand →
   Norrgårdsvägen (1 min enligt tidtabellen) körs inte längre. Tillägget blir 1 + 0,5 + 2 − 1 = **2,5 minuter
-  per tur** och 1,6 km per tur. Som känslighet har 3,5 minuter prövats, om tidtabellens minut inte kan
+  per tur** och 1,5 km per tur. Som känslighet har 3,5 minuter prövats, om tidtabellens minut inte kan
   räknas av. Bussen kör alltså rakt fram från Möckelö Strand på den nya vägen till den nya hållplatsen och
   tillbaka till Norrgårdsvägen på befintlig väg, bl.a. Möckelövägen, i stället för att vända. Det motsvarar
   beställarens skiss 2026-10-15 (slingan 3 min, minus 1 min som inte körs tillbaka, plus 0,5 min uppehåll).
@@ -196,10 +213,10 @@ kör) plus den befintliga vägen (2 min). Två varianter har prövats:
 | V-turer som kör som i dag | 07:50, 08:20, 13:40, 14:40 | 07:50, 08:20, 13:40, 14:40 |
 | Alla 20 turer, dagens tidtabell | 6 bussar – **utesluten** (omloppstid +11,4 h/dag) | 5 bussar, men 1,5–2,5 min i centrum i varven med Ö:s skolturer – uppfyller inte kravet |
 | Dagens tidtabell, de turer som ryms | 8 av 20 | 16 av 20 (samma som sammanslagna) |
-| Fordonskilometer per vardag | +43 km | +26 km |
-| Invånare som får hållplats inom 400 m | 179 | 179 |
+| Fordonskilometer per vardag | +44 km | +25 km |
+| Invånare som får hållplats inom 400 m | 178 | 178 |
 | Avgångar vid nya hållplatsen | 16 per vardag | 16 per vardag |
-| Invånare med fler / färre avgångar inom 400 m | 179 (+16) / 0 | 179 (+16) / 0 |
+| Invånare med fler / färre avgångar inom 400 m | 178 (+16) / 0 | 178 (+16) / 0 |
 | Uppskattat påstigande (höst 2026) | 1,5–6,5 per vardag | 1,5–6,5 per vardag |
 | Restid, befintliga resenärer | +25 resenärsminuter per vardag | +12 resenärsminuter per vardag |
 
@@ -226,7 +243,7 @@ vinsten för resor mellan V och Ö som slipper bytet (cirka 3 resenärsminuter p
   av 20 turer. Varven blir dock 55,2 minuter, dvs. 4,8 minuter i centrum,
   strax under kravet på 5 minuter. Med "säg 5 minuter" som riktvärde är det en möjlig variant att pröva mot
   verkliga körtider. Solberget har cirka 16 påstigande per vardag (höst 2026).
-- **Effekt:** båda varianterna ger 179 invånare en hållplats inom 400 m med 16 avgångar per vardag. Ingen får
+- **Effekt:** båda varianterna ger 178 invånare en hållplats inom 400 m med 16 avgångar per vardag. Ingen får
   färre avgångar. Det beräknade påstigandet är 1,5–6,5 per vardag med höstens nivå.
 
 UA 1a och UA 1b ger alltså lika många turer. Förlängningen av Norrgårdsvägen ger kortare omväg (2,5 i stället
@@ -237,8 +254,8 @@ behövs en vändmöjlighet vid den nya hållplatsen.
 
 *Figur 4.2. UA 1a och UA 1b – huvudalternativen. Linje V visas som del av den genomgående linjen V–Ö. Grönt
 anger invånare som får bättre tillgänglighet och grått befolkning som
-fortfarande saknar hållplats inom 400 m. Den befintliga vägen är ritad efter beställarens skiss, och
-förlängningen (streckad) är schematisk.*
+fortfarande saknar hållplats inom 400 m. Linjerna och den befintliga vägen följer gatunätet (OSRM), och
+förlängningen (streckad) är schematisk eftersom vägen inte finns i dag.*
 
 ![Figur 4.3](../output/kartor/b4_3_mockelo_omlopp.png)
 
@@ -247,6 +264,17 @@ anger att turen avgår senare än i dag. Rubriker i rött anger lösningar som k
 uppfyller kravet på 5 minuter i centrum per varv. Blå markering anger kort byte inom linjeparet.*
 
 ## 4.3 UA 2 – N2 på linje Ö
+
+**Introduktion.** Linje Ö kör från Österkullagatan ut till Kalmarnäs vändplan i sydöstra Mariehamn och tillbaka
+samma väg. Sträckan är cirka 1,8 km lång och saknar hållplats. Invånarna längs mitten av sträckan har därför mer
+än 400 m till närmaste hållplats, trots att bussen passerar dem. UA 2 lägger hållplatsen N2 från kapitel 3 där
+bussen redan kör.
+
+- **Syfte:** 58 invånare får en hållplats inom 400 m utan att körvägen ändras.
+- **I dag:** Kalmarnäs vändplan har 21 avgångar per vardag (linje Ö och landsbygdslinje 5) och cirka 10
+  påstigande per vardag. Österkullagatan har cirka 2.
+- **Prövas:** ett uppehåll vid N2 på alla 20 Ö-turer, i genomsnitt 0,5 minut per tur.
+- **Det som avgör:** att den extra halva minuten ryms i varven V + Ö, särskilt i varven med Ö:s skolturer.
 
 **Utformning.** Hållplatsen N2 placeras på sträckan mellan Österkullagatan och Kalmarnäs vändplan, i
 läget från kapitel 3. Bussen passerar läget i båda riktningarna. Ett uppehåll per tur i genomsnitt
@@ -258,8 +286,8 @@ läget från kapitel 3. Bussen passerar läget i båda riktningarna. Ett uppehå
   Skolturen 08:20 kommer tillbaka 08:49,5 och bussen fortsätter som linje V 08:50 efter ett kort byte. Om
   kravet på 5 minuter i centrum per varv V + Ö ska gälla även här får varven med Ö:s skolturer 3,5–4,5
   minuter, mot 4–5 minuter i dag.
-- **Täckning:** 55 invånare får en hållplats inom 400 m med 20 avgångar per vardag. Ingen får färre avgångar.
-- **Påstigande:** det uppskattade påstigandet är 2,1–11,2 per vardag med höstens nivå. Linje Ö har stadsnätets
+- **Täckning:** 58 invånare får en hållplats inom 400 m med 20 avgångar per vardag. Ingen får färre avgångar.
+- **Påstigande:** det uppskattade påstigandet är 2,2–11,8 per vardag med höstens nivå. Linje Ö har stadsnätets
   högsta påstigande per invånare.
 - **Ombordvarande:** cirka 15 resor per vardag passerar N2 och får en halv minut längre restid, sammanlagt
   cirka 8 resenärsminuter per vardag.
@@ -276,20 +304,31 @@ läget från kapitel 3. Bussen passerar läget i båda riktningarna. Ett uppehå
 
 ## 4.4 UA 3 – Linje N via Bo-Bil
 
+**Introduktion.** Linje N kör norrut från centrum till Maxinge och vidare via Vikingagränd mot Bolstavägen.
+Enligt beställaren måste bussen ofta vänta vid Nya Godbyvägen för att komma till Maxinge. UA 3 låter linje N i
+stället köra Maxinge – Bo-Bil – Bolstavägen och stanna vid Bo-Bil på Nya Godbyvägen, där landsbygdslinjerna
+redan stannar.
+
+- **Syfte:** en jämnare körtid för linje N, utan väntan vid Nya Godbyvägen, och linje N:s avgångar vid Bo-Bil.
+- **I dag:**
+  - Vikingagränd har 22 avgångar per vardag med linje N men bara cirka 0,06 påstigande per vardag.
+  - Bo-Bil trafikeras av landsbygdslinjerna 1–4, med 14–15 avgångar per vardag och riktning.
+- **Prövas:** den nya körvägen på alla 22 turer. Längs gatunätet är den ungefär lika lång som dagens.
+- **Det som avgör:** att körtiden blir i stort sett oförändrad, och om förlusten för de närmast boende vid
+  Vikingagränd vägs upp av vinsten vid Bo-Bil.
+
 **Utformning.** Linje N kör i dag Maxinge – Vikingagränd – Bolstavägen. I alternativet kör linjen i stället
-Maxinge – Bo-Bil – Bolstavägen och stannar vid hållplatsen Bo-Bil på Nya Godbyvägen. Syftet är att bussen
-inte ska behöva vänta vid Nya Godbyvägen för att komma till Maxinge. Bo-Bil trafikeras i dag främst av
-landsbygdslinjerna 2–4.
+Maxinge – Bo-Bil – Bolstavägen och stannar vid hållplatsen Bo-Bil på Nya Godbyvägen (figur 4.6).
 
 **Resultat.**
 
-- **Körtid:** den nya körvägen är cirka 27 % kortare fågelvägen. Med dagens schemalagda tid för
-  delsträckan ger det 0,4 minut kortare körtid per tur. Bo-Bil blir däremot ett verkligt uppehåll
-  (+0,5 minut), medan bussen i dag sällan stannar vid Vikingagränd. Netto blir körtiden +0,1 minut per tur,
-  dvs. i praktiken oförändrad. Fordonskilometrarna minskar med cirka 9 km per vardag. Den minskade väntan
-  vid Nya Godbyvägen ingår inte, eftersom den inte kan beräknas utan realtidsdata. Den talar för kortare och
-  jämnare körtid.
-- **Omlopp:** alternativet ryms med alla 22 turer och fem bussar (figur 4.7). Linje N:s vändtid blir 3,9
+- **Körtid:** längs gatunätet (OSRM) är den nya körvägen ungefär lika lång som dagens, 1,45 km mot 1,47 km.
+  Körtiden för själva vägen blir därför oförändrad, men Bo-Bil blir ett verkligt uppehåll (+0,5 minut),
+  medan bussen i dag sällan stannar vid Vikingagränd. Netto blir körtiden +0,5 minut per tur, och
+  fordonskilometrarna är i stort sett oförändrade. Den minskade väntan vid Nya Godbyvägen ingår inte,
+  eftersom den inte kan beräknas utan realtidsdata. Den talar för kortare och jämnare körtid. (I den
+  tidigare versionen, med fågelvägen, var vägen 27 % kortare och körtiden +0,1 minut.)
+- **Omlopp:** alternativet ryms med alla 22 turer och fem bussar (figur 4.7). Linje N:s vändtid blir 3,5
   minuter i stället för 4.
 - **Bo-Bil:** hållplatsen får linje N:s 22 avgångar utöver landsbygdslinjernas. Cirka 44 invånare får
   därmed minst 30 avgångar per vardag i stället för 15–29.
@@ -297,7 +336,7 @@ landsbygdslinjerna 2–4.
   vardag (höst 2026), och hållplatsen bedömdes redan i kapitel 3 som en hållplats som bör prövas.
 - **Fler och färre avgångar (figur 4.16):** 44 invånare vid Bo-Bil får 22 avgångar fler per vardag inom 400 m,
   och 24 invånare vid Vikingagränd får 22 färre. Av dem förlorar 23 hållplatsen inom 400 m helt.
-- **Restid:** cirka 27 resor per vardag på linje N berörs, men förändringen är liten, cirka 9
+- **Restid:** cirka 27 resor per vardag på linje N berörs, men förändringen är liten, cirka 20
   resenärsminuter per vardag.
 
 **Bedömning.** Alternativet ryms och förbättrar körtidens tillförlitlighet. Den förlorade täckningen vid
@@ -345,11 +384,10 @@ centrum, vilket är kravet.
 hastigheten 25 km/h plus 0,5 minuts uppehåll. För Möckelö Strand har beställarens restider via dagens vägar
 (1a, 4,5 min) använts.
 
-- **Ryms som genomgående linje med Ö i pulsen:** Solberget (linje Ö, cirka 5 min) och Solberget södra
-  (linje Ö, cirka 4 min).
+- **Ryms som genomgående linje med Ö i pulsen:** Solberget (linje Ö, cirka 5 min), Kalmsta (linje Ö, cirka
+  4,5 min) och Solberget södra (linje Ö, cirka 4 min).
 - **Ryms om partnerlinjen startar senare än pulsen:**
   - Möckelö Strand (linje V, 4,5 min, se avsnitt 4.5.2);
-  - Örtvägen (linje N, 4,4 min);
   - Dalkullavägen (linje V, 4,4 min).
 - **Ryms inte:** Lillåkersvägen (linje N, 6,5 min), Österkalmare (linje N, 10 min) och Strömsnäs (linje Ö,
   10 min) kräver en större omläggning.
@@ -391,7 +429,7 @@ Varje V-tur har prövats för sig med operatörens omlopp (b4_omlopp.py, figur 4
   13:40 och 14:40 kör som i dag.
 - **Ö:s avgångar (1a):** 14 av Ö:s 20 turer avgår 2 minuter senare än i dag, dvs. :22/:52 i stället för
   :20/:50 på förmiddagen och :12/:42 i stället för :10/:40 på eftermiddagen. I 1b avgår Ö som i dag.
-- **Kostnad:** i 1a ökar omloppstiden med cirka 7 minuter och körsträckan med 43 km per vardag.
+- **Kostnad:** i 1a ökar omloppstiden med cirka 7 minuter och körsträckan med 44 km per vardag.
 
 **Konsekvenser för resenärerna.** Resenärer som byter till linje Ö i pulsen får i 1a 2 minuter längre väntan,
 och Ö kommer tillbaka till centrum 2 minuter senare. Ö når ändå centrum före nästa pulsavgång. Resenärer som åker
@@ -416,12 +454,27 @@ och antal turer som ryms per alternativ.*
 
 ## 4.6 UA 4 – Linje V–Ö via flygplatsen
 
+**Introduktion.** Mariehamns flygplats har vardagar sex flyg till och från Stockholm-Arlanda och Åbo, men ingen
+busslinje når terminalen i dag. Närmaste hållplats är Posten på Flygfältsvägen, cirka 800 m längs vägen från
+terminalen. Där stannar linje V och landsbygdslinjerna 1 och 4. UA 4 leder linje V upp till terminalen.
+
+- **Syfte:** kollektivtrafik till och från flyget. Resenären ska kunna vara på flygplatsen 2–1,5 timmar före
+  avgång och åka därifrån cirka 30 minuter efter landning (beställaren).
+- **I dag:** Posten har 24 avgångar per vardag och cirka 2 påstigande per vardag på linje V.
+- **Prövas:**
+  - alla V-turer via terminalen, med dagens tidtabell och med V och Ö sammanslagna;
+  - med hållplatsen Solberget indragen;
+  - bara de turer som når ett flyg (UA 4Y);
+  - extra turer för de flyg som tidtabellen inte når.
+- **Det som avgör:** omvägens körtid, cirka 5 minuter per tur, och vilka flyg som ska nås.
+
 **Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
 flygterminalen, runt terminalen och tillbaka till Norra Svibyvägen, och därefter vidare mot Källarvägen som i
-dag (figur 4.10). Körvägen är digitaliserad ur beställarens skiss.
+dag (figur 4.10). Körvägen följer gatunätet enligt OSRM och stämmer i huvudsak med beställarens skiss, men
+vägen till och från terminalen är något längre än skissen.
 
-- **Omväg:** cirka 1,4 km per tur. Med 25 km/h och 0,5 minuts uppehåll blir tillägget cirka **4 minuter per
-  tur** (känslighet 3–5 minuter).
+- **Omväg:** cirka 1,7 km per tur längs vägarna. Med 25 km/h och 0,5 minuts uppehåll blir tillägget cirka
+  **5 minuter per tur** (känslighet 4–6 minuter). Med skissens längd, 1,4 km, var tillägget 4 minuter.
 - **Vid flygplatsen:** bussen är där cirka 16 minuter efter avgången från centrum, t.ex. 09:06 med turen 08:50.
 
 **Flygen (beställaren 2026-11-15).** Flygtiderna kommer från bokningssidan för vardagar i november 2026. Kravet
@@ -454,10 +507,10 @@ ingen extra buss behövs:
 
 | Flyg | Extra tur från centrum | Vid flygplatsen | Körs av | Extra fordonstimmar per vardag | Kostnad per år, bas (låg–hög) |
 |---|---|---|---|---|---|
-| Avgång 07:15 | 05:15–05:46 | 05:31 (1 h 44 min före) | omlopp 204, som i dag börjar 06:50 | 2,2 h (inkl. väntan till 06:50) | 29 800 € (24 800–35 100) |
-| Ankomst 10:35 | 10:50–11:21 | 11:06 (31 min efter) | omlopp 204, i uppehållet 10:16–14:20 | 0,5 h | 9 400 € (7 700–11 400) |
-| Ankomst 21:35 | 21:50–22:21 | 22:06 (31 min efter) | omlopp 205, efter sista turen 21:13 | 1,7 h (inkl. väntan från 21:13) | 24 200 € (20 100–28 500) |
-| **Summa** | | | | **4,4 h** | **63 300 € (52 700–75 000)** |
+| Avgång 07:15 | 05:15–05:47 | 05:32 (1 h 43 min före) | omlopp 204, som i dag börjar 06:50 | 2,2 h (inkl. väntan till 06:50) | 30 400 € (25 300–35 800) |
+| Ankomst 10:35 | 10:50–11:22 | 11:06 (31 min efter) | omlopp 204, i uppehållet 10:16–14:20 | 0,5 h | 9 900 € (8 100–12 000) |
+| Ankomst 21:35 | 21:50–22:22 | 22:06 (31 min efter) | omlopp 205, efter sista turen 21:13 | 1,7 h (inkl. väntan från 21:13) | 24 900 € (20 700–29 400) |
+| **Summa** | | | | **4,4 h** | **65 200 € (54 100–77 300)** |
 
 - **Ankomsten 10:35** är billigast att nå: omlopp 204 står stilla mitt på dagen, och den extra turen kostar
   bara körtiden. Uppehållet används troligen för förarens rast, och det behöver stämmas av med operatören.
@@ -474,38 +527,39 @@ varvet V + Ö.
 
 | Driftform | Turer via flygplatsen | Bussar | Minsta tid i centrum i de ändrade varven (krav 5 min) | Omloppstid | Fordonskm per vardag | Driftkostnad per år (bas) |
 |---|---|---|---|---|---|---|
-| Alla turer, dagens tidtabell – **utesluten** | 20 av 20 | **6** | – | +11,4 h/dag | +28 | +209 000 € |
-| Dagens tidtabell, de turer som ryms | 8 av 20 | 5 | 9 min | +8 min/dag | +11 | – |
-| **★ V och Ö sammanslagna** | **16 av 20** | 5 | 6 min | +5 min/dag | +22 | +6 400 € |
-| V och Ö sammanslagna + Solberget indragen | 17 av 20 | 5 | 5,1 min | +3 min/dag | +24 | +6 200 € |
+| Alla turer, dagens tidtabell – **utesluten** | 20 av 20 | **6** | – | +11,5 h/dag | +34 | +211 500 € |
+| Dagens tidtabell, de turer som ryms | 7 av 20 | 5 | 8 min | +5 min/dag | +12 | – |
+| **★ V och Ö sammanslagna** | **16 av 20** | 5 | 5 min | +8 min/dag | +27 | +8 100 € |
+| V och Ö sammanslagna + Solberget indragen | 16 av 20 | 5 | 7,1 min | +5 min/dag | +27 | +7 600 € |
 | UA 4Y: flygturerna, dagens tidtabell | 0 av 3 | 5 | – | ±0 | ±0 | – |
-| **UA 4Y: flygturerna, V och Ö sammanslagna** | **3 av 3** | 5 | 6 min | +2 min/dag | +4 | +1 600 € |
-| UA 4Y: dito + Solberget indragen | 3 av 3 | 5 | 8,1 min | ±0 | +4 | – |
-| Extra turer för flygen 07:15, 10:35 och 21:35 (tabell 4.4b) | 3 extra turer | 5 | – | +4,4 h/dag | +39 | +63 300 € |
-| Känslighet 3 min, sammanslagna | 16 av 20 | 5 | 7 min | +4 min/dag | +22 | – |
-| Känslighet 5 min, sammanslagna | 16 av 20 | 5 | 5 min | +8 min/dag | +22 | – |
+| **UA 4Y: flygturerna, V och Ö sammanslagna** | **3 av 3** | 5 | 5 min | +3 min/dag | +5 | +2 200 € |
+| UA 4Y: dito + Solberget indragen | 3 av 3 | 5 | 7,1 min | ±0 | +5 | – |
+| Extra turer för flygen 07:15, 10:35 och 21:35 (tabell 4.4b) | 3 extra turer | 5 | – | +4,4 h/dag | +44 | +65 200 € |
+| Känslighet 4 min, sammanslagna | 16 av 20 | 5 | 6 min | +5 min/dag | +27 | – |
+| Känslighet 6 min, sammanslagna | 6 av 20 | 5 | 7 min | +10 min/dag | +10 | – |
 
 **Resultat.**
 
 - **Dagens tidtabell:** omvägen ryms inte. Alla turer kräver en sjätte buss och drygt 11 timmar mer omloppstid
-  per vardag, och utan extra buss ryms bara 8 av 20 turer.
-- **V och Ö sammanslagna:** bussen fortsätter direkt som linje Ö, och Ö avgår 1,5 minut efter pulsen. Då ryms
-  16 av 20 turer, och de ändrade varven har minst 6 minuter i centrum. Fyra turer ryms inte:
-  - V 07:50, 13:40 och 14:40 följs av Ö:s skolturer: 31 + 28 minuter lämnar bara 1 minut i centrum;
-  - V 08:20 vänder direkt till Ö:s skoltur 08:45 och skulle få 3 minuter.
-- **Solberget indragen dessutom:** Ö 08:45 blir 2,2 minuter kortare, och då ryms även V 08:20 (5,1 minuter i
-  centrum), alltså 17 av 20 turer. Men 49 invånare runt Solberget får då 20 avgångar färre per vardag. Varven med skolturerna 14:10 och 15:10 får ändå bara cirka 3 minuter i
-  centrum.
+  per vardag, och utan extra buss ryms bara 7 av 20 turer.
+- **V och Ö sammanslagna:** bussen fortsätter direkt som linje Ö, och Ö avgår 2,5 minuter efter pulsen. Då ryms
+  16 av 20 turer, och de ändrade varven har minst 5 minuter i centrum, alltså precis kravet. Fyra turer ryms inte:
+  - V 07:50, 13:40 och 14:40 följs av Ö:s skolturer: 32 + 28 minuter lämnar ingen tid i centrum;
+  - V 08:20 vänder direkt till Ö:s skoltur 08:45 och skulle få 2 minuter.
+- **Solberget indragen dessutom:** Ö 08:45 blir 2,2 minuter kortare, men V 08:20 ryms ändå inte. Indragningen
+  ger alltså inga fler turer, bara mer tid i centrum (minst 7,1 minuter), medan 49 invånare runt Solberget får
+  20 avgångar färre per vardag.
 - **UA 4Y:** de tre flygturerna (V 08:50, 15:10 och 17:10) ryms med V och Ö sammanslagna, utan att Solberget
-  dras in. Varven har minst 6 minuter i centrum, och Ö 09:20, 15:40 och 17:40 avgår 1,5 minut efter pulsen.
+  dras in. Varven har minst 5 minuter i centrum, och Ö 09:20, 15:40 och 17:40 avgår 2,5 minuter efter pulsen.
   Med dagens tidtabell ryms ingen av dem.
 - **Flygen:** huvudalternativet (16 av 20 turer) innehåller alla tre turer som når ett flyg. Både UA 4 ★ och
   UA 4Y når därmed tre av sex flyg; övriga tre kräver extra turer (tabell 4.4b).
-- **Känslighet:** med 3–5 minuters omväg ryms samma 16 turer, vid 5 minuter med exakt 5 minuter i centrum. Med
-  5,5–7 minuter behöver Solberget dras in på en del Ö-turer (se känsligheten nedan).
+- **Känslighet:** med 3–5 minuters omväg ryms samma 16 turer. Den beräknade omvägen, 5 minuter, ligger precis
+  på gränsen med exakt 5 minuter i centrum. Med 5,5–7 minuter behöver Solberget dras in på en del Ö-turer (se
+  känsligheten nedan).
 
 **Känslighet – omvägens körtid och Solberget på utvalda turer (figur 4.15).** Omvägens körtid är osäker,
-eftersom körvägen är uppskattad ur en skiss. Ö startar när V har kommit tillbaka, och fyra driftformer har prövats
+eftersom bussens verkliga körtid till terminalen inte är mätt. Ö startar när V har kommit tillbaka, och fyra driftformer har prövats
 för omvägar på 3–8 minuter:
 
 - **A:** varvet V + Ö ≤ 55 minuter (kravet), Solberget kvar. Det är huvudalternativet.
@@ -519,8 +573,8 @@ för omvägar på 3–8 minuter:
 | Omväg per tur | A ≤ 55 min | B ≤ 55 min, Solberget där det behövs | C ≤ 50 min | D ≤ 50 min, Solberget där det behövs |
 |---|---|---|---|---|
 | 3 min | 16 / 3 | 17 / 3 – Solberget indraget på Ö 08:45 | 6 / 1 | 6 / 1 |
-| 4 min (beräknad) | **16 / 3** | 17 / 3 – Solberget indraget på Ö 08:45 | 4 / 1 | 6 / 1 |
-| 5 min | 16 / 3 (Ö startar 2,5 min efter pulsen) | 16 / 3 | 4 / 1 | 4 / 1 |
+| 4 min | 16 / 3 | 17 / 3 – Solberget indraget på Ö 08:45 | 4 / 1 | 6 / 1 |
+| 5 min (beräknad) | **16 / 3** (Ö startar 2,5 min efter pulsen) | 16 / 3 | 4 / 1 | 4 / 1 |
 | 5,5–7 min | 6 / 1 | **16 / 3** – Solberget indraget på 10 / 2 Ö-turer, Ö startar 3–4,5 min efter pulsen | 4 / 1 | 4 / 1 |
 | 7,5–8 min | 6 / 1 | 6 / 1 | 4 / 1 | 4 / 1 |
 
@@ -549,9 +603,9 @@ de turer där den verkligen behövs.
 
 - **Täckning:** 20 invånare nära terminalen får en hållplats inom 400 m med 16 avgångar per vardag (UA 4Y 3).
   Ingen får färre avgångar.
-- **Restid:** genomresande på linje V får cirka 4 minuter längre restid på de turer som kör via flygplatsen.
-  Netto, med vinsten för resor mellan V och Ö som slipper bytet, blir det cirka 27 resenärsminuter per vardag
-  (UA 4Y cirka 3).
+- **Restid:** genomresande på linje V får cirka 5 minuter längre restid på de turer som kör via flygplatsen.
+  Netto, med vinsten för resor mellan V och Ö som slipper bytet, blir det cirka 35 resenärsminuter per vardag
+  (UA 4Y cirka 4).
 - **Flygresenärerna:** OD-matrisen saknar flygplatsen som målpunkt, så nyttan för dem ingår inte i beräkningen.
 - **Solberget (bara i varianten med indragning på alla turer):** 49 invånare får 20 avgångar färre per vardag,
   och 42 av dem förlorar hållplatsen inom 400 m. Hållplatsen har cirka 16 påstigande per vardag (höst 2026),
@@ -560,20 +614,20 @@ de turer där den verkligen behövs.
 **Bedömning.**
 
 - **Utesluten:** att bara förlänga linje V till flygplatsen. Med dagens tidtabell krävs en sjätte buss.
-- **Det enda rimliga är en genomgående linje V–Ö:** V och Ö slås ihop, och Ö avgår upp till 1,5 minut efter
+- **Det enda rimliga är en genomgående linje V–Ö:** V och Ö slås ihop, och Ö avgår upp till 2,5 minuter efter
   pulsen.
 - **Huvudalternativ ★:** linje V–Ö via flygplatsen. 16 av 20 turer ryms med fem bussar, och Solberget behålls.
   Huvudalternativet visas i figur 4.10.
 - **UA 4Y:** samma linje, men bara de tre flygturerna (V 08:50, 15:10 och 17:10) går via flygplatsen. Alla tre
-  ryms med kravet uppfyllt, och Solberget behålls. Kostnaden är cirka 1 600 € per år.
+  ryms med kravet uppfyllt, och Solberget behålls. Kostnaden är cirka 2 200 € per år.
 - **Flygen:** både UA 4 ★ och UA 4Y når tre av sex flyg (avgångarna 11:00 och 17:10 och ankomsten 16:45). För
-  alla sex flyg behövs tre extra turer, cirka 63 000 € per år (tabell 4.4b). Den extra turen 10:50 för
-  ankomsten 10:35 är den enda som ryms i ett befintligt omlopp (cirka 9 000 € per år). Morgonflyget 07:15 och
+  alla sex flyg behövs tre extra turer, cirka 65 000 € per år (tabell 4.4b). Den extra turen 10:50 för
+  ankomsten 10:35 är den enda som ryms i ett befintligt omlopp (cirka 10 000 € per år). Morgonflyget 07:15 och
   kvällsflyget 21:35 ligger utanför dagens trafikdygn och bör jämföras med anropsstyrd trafik.
 
-Det som behöver beslutas är om en 1,5 minut senare avgång för Ö är acceptabel (14 turer, i UA 4Y 3 turer), och
+Det som behöver beslutas är om en 2,5 minuter senare avgång för Ö är acceptabel (14 turer, i UA 4Y 3 turer), och
 vilka av de tre flygen utanför dagens tidtabell som ska nås. Den verkliga körtiden till terminalen bör mätas
-innan alternativet går vidare.
+innan alternativet går vidare, eftersom den beräknade omvägen ligger precis på gränsen för kravet.
 UA 4 konkurrerar om samma tidsutrymme som Möckelö Strand ny (UA 1a och 1b), eftersom båda förlänger linje V. Två
 förlängningar av V ryms inte tillsammans inom kravet utan fler bussar. Hur UA kan kombineras prövas i ett senare
 skede.
@@ -581,7 +635,7 @@ skede.
 ![Figur 4.10](../output/kartor/b4_10_ua4_karta.png)
 
 *Figur 4.10. UA 4 – huvudalternativet: linje V–Ö (V och Ö sammanslagna) via flygplatsen.
-Körvägen är ritad efter beställarens skiss. Kartan visar bara huvudalternativet; övriga driftformer finns i tabell 4.4.*
+Körvägen följer gatunätet (OSRM). Kartan visar bara huvudalternativet; övriga driftformer finns i tabell 4.4.*
 
 ![Figur 4.11](../output/kartor/b4_11_flygplatsen_vo.png)
 
@@ -607,10 +661,20 @@ i dagens tidtabell som når flygen och de extra turer som behövs för övriga f
 
 ## 4.7 UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten
 
-**Bakgrund.** Operatören har via beställaren (2026-11-15) föreslagit att linje V tar över svängen via
-Cedersvägen och att linje N kör rakt på Västra utfarten. Enligt operatören sparar det linje N ett par minuter,
-vilket kan göra stor skillnad. För de flesta är det inte långt att gå till hållplatserna på Västra utfarten,
-t.ex. för den som ska till Maxinge.
+**Introduktion.** Linje N kör på väg mot centrum en sväng öster om Västra utfarten, via Stenhuggarvägen,
+Cedersvägen och Klintvägen. Operatören har via beställaren (2026-11-15) föreslagit att linje V tar över svängen
+och att linje N kör rakt på Västra utfarten. Enligt operatören sparar det linje N ett par minuter, vilket kan göra
+stor skillnad. För de flesta är det inte långt att gå till hållplatserna på Västra utfarten, t.ex. för den som ska
+till Maxinge.
+
+- **Syfte:** mer marginal för linje N, som i dag har 4 minuter i centrum före bytet till linje S.
+- **I dag:** svängens tre hållplatser har 22 avgångar per vardag med linje N, men tillsammans bara cirka 1
+  påstigande per vardag.
+- **Prövas:**
+  - linje N rakt på Västra utfarten på alla 22 turer;
+  - linje V via svängen, med dagens drift och med V och Ö sammanslagna;
+  - en variant utan buss i svängen.
+- **Det som avgör:** om linje V:s längre körtid ryms, och om gångavståndet till Västra utfarten är acceptabelt.
 
 **Utformning (figur 4.17).** Båda linjerna kör svängen i riktning mot centrum.
 
@@ -619,29 +683,30 @@ t.ex. för den som ska till Maxinge.
 - **Linje N i UA 5:** rakt på Västra utfarten, Sjukhuset → Västra macken → Elverksgatan. N stannar vid Västra
   macken, där V och Ö redan stannar, i stället för vid Stenhuggarvägen 50 m bort.
 - **Linje V i dag:** Åsvägen → Västra macken → Tekniska verken på Västra utfarten.
-- **Linje V i UA 5:** svänger av efter Västra macken och kör Stenhuggarvägen → Cedersvägen → Klintvägen tillbaka
-  till Västra utfarten vid Tekniska verken.
-- **Längd:** för linje N är svängen ungefär lika lång som vägen rakt på (967 respektive 1 007 m). Linje V får
-  cirka 120 m längre väg per tur.
+- **Linje V i UA 5:** svänger av vid Stenhuggarvägen och kör Stenhuggarvägen → Cedersvägen → Klintvägen tillbaka
+  till Västra utfarten vid Tekniska verken. Avfarten ligger norr om hållplatsen Västra macken, så linje V
+  stannar vid Stenhuggarvägen i stället för vid Västra macken 50 m bort.
+- **Längd (längs gatunätet):** linje N får cirka 210 m kortare väg per tur (1 085 i stället för 1 297 m), och
+  linje V cirka 115 m längre.
 
 **Körtid.**
 
 - **Huvudberäkningen** utgår från operatörens uppgift: svängen tar 2 minuter. Linje N blir 2 minuter kortare på
   alla 22 turer, och linje V blir 2 minuter längre på de turer som kör svängen.
 - **Tidtabellen** ger en mindre skillnad. N kör Sjukhuset → Elverksgatan på 3,0 minuter. Ö kör Sjukhuset →
-  Tekniska verken rakt på Västra utfarten på 2,0 minuter, och med resten till Elverksgatan blir det cirka 2,4
-  minuter. Skillnaden enligt tidtabellen är alltså cirka 0,6 minuter. Tidtabellens tider mellan hållplatserna i
+  Tekniska verken rakt på Västra utfarten på 2,0 minuter, och med resten till Elverksgatan blir det cirka 2,3
+  minuter. Skillnaden enligt tidtabellen är alltså cirka 0,7 minuter. Tidtabellens tider mellan hållplatserna i
   svängen är grova, och operatörens uppgift bygger på verklig körtid. Därför redovisas 1 minut som känslighet.
 
 *Tabell 4.6. UA 5 – driftformer, verifiering mot dagens omlopp (★ = huvudalternativ).*
 
 | Driftform | V-turer via svängen | Bussar | Minsta tid i centrum, ändrade varv V + Ö (krav 5 min) | Linje N i centrum | Omloppstid | Fordonskm per vardag | Driftkostnad per år (bas) |
 |---|---|---|---|---|---|---|---|
-| Alla V-turer, dagens drift | 20 av 20 | 5 | 2 min – ryms inte | 4 → 6 min | ±0 | +3 | – |
-| Dagens drift, de turer som ryms | 16 av 20 | 5 | 8 min | 4 → 6 min | ±0 | +3 | +600 € |
-| **★ V och Ö sammanslagna** | **17 av 20** | 5 | 5 min | 4 → 6 min | ±0 | +3 | +700 € |
-| Känslighet 1 min, sammanslagna | 17 av 20 | 5 | 6 min | 4 → 5 min | ±0 | +3 | – |
-| Variant: bara linje N rakt på, svängen utan buss | 0 | 5 | – (V oförändrad) | 4 → 6 min | −2 min/dag | +1 | −200 € |
+| Alla V-turer, dagens drift | 20 av 20 | 5 | 2 min – ryms inte | 4 → 6 min | ±0 | −2 | – |
+| Dagens drift, de turer som ryms | 16 av 20 | 5 | 8 min | 4 → 6 min | ±0 | −2 | −500 € |
+| **★ V och Ö sammanslagna** | **17 av 20** | 5 | 5 min | 4 → 6 min | ±0 | −2 | −400 € |
+| Känslighet 1 min, sammanslagna | 17 av 20 | 5 | 6 min | 4 → 5 min | ±0 | −2 | – |
+| Variant: bara linje N rakt på, svängen utan buss | 0 | 5 | – (V oförändrad) | 4 → 6 min | −2 min/dag | −4 | −1 300 € |
 
 **Omlopp (figur 4.18).**
 
@@ -654,7 +719,8 @@ t.ex. för den som ska till Maxinge.
 - **Dagens drift (V och Ö var för sig):** 16 av 20 V-turer ryms via svängen, och då kör även V 08:20 rakt.
   UA 5 kräver alltså inte att V och Ö slås ihop, till skillnad från UA 1a, 1b och 4.
 - **Alla 20 V-turer** ryms inte. Varven med Ö:s skolturer får bara 2 minuter i centrum.
-- **Omloppstiden** ändras inte, eftersom linje N:s vinst blir väntetid i centrum.
+- **Omloppstiden** ändras inte, eftersom linje N:s vinst blir väntetid i centrum. Körsträckan minskar något,
+  eftersom N:s väg rakt på är kortare än svängen.
 
 **Effekter.**
 
@@ -662,14 +728,16 @@ t.ex. för den som ska till Maxinge.
   och 0,43 vid Klintvägen. Svängen används alltså nästan inte för påstigning.
 - **Gångavstånd till Västra utfarten:** 50 m från Stenhuggarvägen till Västra macken, 130 m från Klintvägen
   till Tekniska verken och 300 m från Cedersvägen till Västra macken.
-- **Täckning (figur 4.16):** ingen förlorar hållplatsen inom 400 m och ingen får färre avgångar. 121 invånare
-  får fler avgångar, upp till 22 fler per vardag. Det gäller dels invånare kring Cedersvägen och Klintvägen som
-  redan har linje N vid Sjukhuset och nu också får V, dels invånare väster om Västra macken som får linje N.
-  62 invånare lyfts till minst 30 avgångar per vardag. Effekten är netto +2 196 invånare × avgångar per vardag.
-- **Cedersvägen och Klintvägen** får 17 V-turer i stället för 22 N-turer. Vid V 07:50, 13:40 och 14:40 kör ingen
-  buss svängen, och resenärerna får gå till Västra utfarten.
+- **Täckning (figur 4.16):** ingen förlorar hållplatsen inom 400 m. 125 invånare får fler avgångar, upp till
+  22 fler per vardag. Det gäller dels invånare kring Cedersvägen och Klintvägen som redan har linje N vid
+  Sjukhuset och nu också får V, dels invånare väster om Västra macken som får linje N. 62 invånare lyfts till
+  minst 30 avgångar per vardag. 11 invånare väster om Västra macken får 17 avgångar färre, eftersom linje V inte
+  längre stannar där och de redan har linje N inom 400 m. Effekten är netto +1 837 invånare × avgångar per vardag.
+- **Svängens hållplatser** (Stenhuggarvägen, Cedersvägen och Klintvägen) får 17 V-turer i stället för 22 N-turer,
+  och Västra macken får 22 N-turer i stället för 17 V-turer. Vid V 07:50, 13:40 och 14:40 kör ingen buss
+  svängen, och resenärerna får gå till Västra utfarten.
 - **Restid:** cirka 4 resenärer per vardag åker genom svängen på linje N och sparar 2 minuter. Netto blir det
-  cirka 10 resenärsminuter kortare restid per vardag, inklusive resor mellan V och Ö som slipper bytet. Med
+  cirka 9–10 resenärsminuter kortare restid per vardag, inklusive resor mellan V och Ö som slipper bytet. Med
   1 minuts körtid är effekten i stort sett noll (+2 resenärsminuter).
 - **Till Maxinge:** linje N går i dag Centrum → Maxinge → … → Sjukhuset → svängen → Centrum. Den som ska från
   Cedersvägen till Maxinge åker alltså redan i dag via centrum. Från Västra macken (riktning ut från stan) går
@@ -693,10 +761,10 @@ Västra macken, och lutningen bör bedömas på plats.
   och alternativet ryms med fem bussar. Med dagens drift ryms 16 av 20 utan sammanslagning.
 - **Den stora vinsten är linje N:s robusthet:** 2 minuter mer reglering i varje varv N → S, utan fler bussar.
   Kostnaden för resenärerna är försumbar, eftersom svängen har cirka ett påstigande per vardag.
-- **Varianten med bara linje N rakt på** ger samma vinst för N utan att belasta V, och ingen förlorar
-  hållplatsen inom 400 m. Den bör övervägas om gångvägen till Västra utfarten bedöms acceptabel.
+- **Varianten med bara linje N rakt på** ger samma vinst för N utan att belasta V. Ingen förlorar hållplatsen
+  inom 400 m och ingen får färre avgångar. Den bör övervägas om gångvägen till Västra utfarten bedöms acceptabel.
 - **Konflikt med UA 1a, 1b och 4:** UA 5 lägger 2 minuter på linje V och konkurrerar om samma tidsutrymme.
-  Tillsammans med UA 4 blir tillägget cirka 6 minuter. Enligt tabell 4.5 kräver det att Solberget dras in på
+  Tillsammans med UA 4 blir tillägget cirka 7 minuter. Enligt tabell 4.5 kräver det att Solberget dras in på
   en del Ö-turer. Varianten med bara linje N rakt på konkurrerar inte med de andra alternativen.
 - Operatörens uppgift om 2 minuter bör kontrolleras med restidsdata eller en provkörning.
 
@@ -725,14 +793,14 @@ Mariehamn (14 821). UA 4 redovisas i tabell 4.4 och UA 5 i tabell 4.6 och 4.7.
 | Minst 15 avgångar per vardag | 81,0 % | 82,2 % | 81,0 % | 82,2 % | 82,2 % | 81,4 % | 80,8 % |
 | Minst 30 avgångar per vardag | 55,6 % | 55,6 % | 55,6 % | 55,6 % | 55,6 % | 55,6 % | 55,9 % |
 | Svag tillgänglighet (1–29 avg.) | 28,0 % | 29,2 % | 29,2 % | 29,2 % | 29,2 % | 28,4 % | 27,6 % |
-| Invånare med bättre / sämre turtäthetsklass | – | 179 / 0 | 179 / 0 | 179 / 0 | 179 / 0 | 55 / 0 | 44 / 24 |
-| **Invånare med fler / färre avgångar inom 400 m** (avgångar per vardag) | – | **179 (+20) / 0** | **179 (+8) / 0** | **179 (+16) / 0** | **179 (+16) / 0** | **55 (+20) / 0** | **44 (+22) / 24 (−22)** |
-| Invånare × avgångar per vardag, netto | – | +3 573 | +1 429 | +2 859 | +2 859 | +1 099 | +444 |
+| Invånare med bättre / sämre turtäthetsklass | – | 178 / 0 | 178 / 0 | 178 / 0 | 178 / 0 | 58 / 0 | 44 / 24 |
+| **Invånare med fler / färre avgångar inom 400 m** (avgångar per vardag) | – | **178 (+20) / 0** | **178 (+8) / 0** | **178 (+16) / 0** | **178 (+16) / 0** | **58 (+20) / 0** | **44 (+22) / 24 (−22)** |
+| Invånare × avgångar per vardag, netto | – | +3 557 | +1 423 | +2 846 | +2 846 | +1 164 | +444 |
 | Bussar | 5 | **6** | 5 | 5 | 5 | 5 | 5 |
 | Omloppstid (h per vardag) | 61,4 | 72,9 | 61,6 | 61,5 | 61,5 | 61,4 | 61,4 |
-| Fordonskilometer per vardag | 1 136 | 1 191 | 1 158 | 1 180 | 1 162 | 1 136 | 1 127 |
+| Fordonskilometer per vardag | 1 287 | 1 342 | 1 309 | 1 331 | 1 312 | 1 287 | 1 287 |
 | Varv V + Ö med < 5 min i centrum | 1 | 1 | 1 | 1 | 1 | 3 | 1 |
-| Längre restid, befintliga resenärer (resenärsmin. per vardag) | – | 35 | 14 | 25 | 12 | 8 | 9 |
+| Längre restid, befintliga resenärer (resenärsmin. per vardag) | – | 35 | 14 | 25 | 12 | 8 | 20 |
 
 Restiden för UA 1a och 1b med V och Ö sammanslagna är netto, efter vinsten för resor mellan V och Ö som slipper
 bytet. Det varv som redan i dag har under 5 minuter i centrum är V 07:50 med Ö:s skoltur 08:20 (4 minuter).
@@ -746,14 +814,15 @@ Effekten räknas per 50 m-punkt och läggs ut som en utjämnad yta (gaussisk utj
 var vinnarna (grönt) och förlorarna (rött) bor. Hållplatserna färgas efter hur mycket antalet avgångar ändras i
 procent (figur 4.16). Antalet avgångar är antalet unika turer som stannar inom 400 m.
 
-- **Fler avgångar:** i UA 1a och 1b får 179 invånare vid Möckelö Strand ny 16 avgångar mer per vardag. I UA 2
-  får 55 invånare vid N2 20 mer, och i UA 4 får 20 invånare vid flygplatsen 16 mer (UA 4Y 3 mer).
-- **Färre avgångar:** bara i UA 3, där 24 invånare vid Vikingagränd får 22 avgångar färre. Samtidigt får 44
-  invånare vid Bo-Bil 22 fler, så att nettot blir positivt (+444 invånare × avgångar per vardag).
-- **Solberget indragen (variant av UA 4):** 49 invånare får 20 avgångar färre, mot 20 invånare med 17 fler vid
-  flygplatsen. Nettot blir negativt (−633 invånare × avgångar per vardag).
-- **UA 5:** ingen får färre avgångar. 121 invånare får fler, upp till 22 per vardag, och nettot blir
-  +2 196 invånare × avgångar per vardag. Med bara linje N rakt på får 28 invånare fler (+607).
+- **Fler avgångar:** i UA 1a och 1b får 178 invånare vid Möckelö Strand ny 16 avgångar mer per vardag. I UA 2
+  får 58 invånare vid N2 20 mer, och i UA 4 får 20 invånare vid flygplatsen 16 mer (UA 4Y 3 mer).
+- **Färre avgångar i UA 3:** 24 invånare vid Vikingagränd får 22 avgångar färre. Samtidigt får 44 invånare vid
+  Bo-Bil 22 fler, så att nettot blir positivt (+444 invånare × avgångar per vardag).
+- **Solberget indragen (variant av UA 4):** 49 invånare får 20 avgångar färre, mot 20 invånare med 16 fler vid
+  flygplatsen. Nettot blir negativt (−653 invånare × avgångar per vardag).
+- **UA 5:** 125 invånare får fler avgångar, upp till 22 per vardag, och 11 invånare väster om Västra macken får
+  17 färre. Nettot blir +1 837 invånare × avgångar per vardag. Med bara linje N rakt på får 28 invånare fler
+  (+607) och ingen färre.
 
 *Tabell 4.7. Systemeffekter av UA 5 (Mariehamn).*
 
@@ -763,11 +832,11 @@ procent (figur 4.16). Antalet avgångar är antalet unika turer som stannar inom
 | Hållplats inom 400 m | 83,6 % | 83,6 % | 83,6 % | 83,6 % |
 | Minst 30 avgångar per vardag | 55,6 % | 56,0 % | 56,0 % | 55,6 % |
 | Svag tillgänglighet (1–29 avg.) | 28,0 % | 27,6 % | 27,6 % | 28,0 % |
-| Invånare med fler / färre avgångar inom 400 m | – | 121 (+22) / 0 | 121 (+22) / 0 | 28 (+22) / 0 |
-| Invånare × avgångar per vardag, netto | – | +2 196 | +2 102 | +607 |
+| Invånare med fler / färre avgångar inom 400 m | – | 125 (+22) / 11 (−17) | 125 (+22) / 11 (−16) | 28 (+22) / 0 |
+| Invånare × avgångar per vardag, netto | – | +1 837 | +1 765 | +607 |
 | Omloppstid (h per vardag) | 61,4 | 61,4 | 61,4 | 61,4 |
-| Fordonskilometer per vardag | 1 136 | 1 139 | 1 139 | 1 137 |
-| Restid befintliga resenärer (resenärsmin. per vardag) | – | −10 | −8 | −21 |
+| Fordonskilometer per vardag | 1 287 | 1 285 | 1 285 | 1 283 |
+| Restid befintliga resenärer (resenärsmin. per vardag) | – | −9 | −8 | −21 |
 
 I QGIS finns effekten i gruppen för varje UA:
 
@@ -785,10 +854,10 @@ Mariehamn som får fler respektive färre avgångar.*
 
 Förändringarna är lokala och syns bara i de berörda områdena (figur 4.14):
 
-- **Möckelö Strand ny:** 179 invånare som i dag saknar hållplats får en med 16 avgångar per vardag. Med
+- **Möckelö Strand ny:** 178 invånare som i dag saknar hållplats får en med 16 avgångar per vardag. Med
   dagens tidtabell blir det 8 avgångar. Andelen med svag tillgänglighet ökar därför. Det är en förbättring:
   invånarna flyttar från *ingen hållplats* till *svag tillgänglighet*.
-- **N2:** 55 invånare får en hållplats inom 400 m med 20 avgångar.
+- **N2:** 58 invånare får en hållplats inom 400 m med 20 avgångar.
 - **Bo-Bil:** 44 invånare lyfts till minst 30 avgångar per vardag, medan 23 invånare vid Vikingagränd förlorar
   hållplatsen inom 400 m.
 - **Flygplatsen:** 20 invånare nära terminalen får en hållplats inom 400 m. Nyttan för flygresenärerna ingår
@@ -796,7 +865,8 @@ Förändringarna är lokala och syns bara i de berörda områdena (figur 4.14):
 - **Solberget indragen (bara en variant av UA 4):** 42 invånare skulle förlora sin hållplats inom 400 m och 7
   få färre avgångar, sammanlagt 49 med 20 avgångar färre per vardag.
 - **Svängen (UA 5):** invånarna kring Cedersvägen och Klintvägen har redan linje N inom 400 m vid Sjukhuset
-  eller Västra utfarten. Därför förlorar ingen avgångar när N lämnar svängen, medan de som får V lyfts.
+  eller Västra utfarten. Därför förlorar ingen avgångar när N lämnar svängen, medan de som får V lyfts. Några
+  få väster om Västra macken förlorar V-turerna där.
 
 Förlusten för befintliga resenärer är högst 35 resenärsminuter per vardag, i det uteslutna alternativet med
 alla turer i UA 1a. Med höstens resande, cirka tre gånger sommarens, är restidsförlusterna större än i den
@@ -818,7 +888,7 @@ röd ram sämre klass än i dag.*
 Nästa leverans ska redovisa följande:
 
 1. **V och Ö sammanslagna.** Pröva tidtabellen mot verkliga körtider, särskilt Ö:s skolturer, som avgör vilka
-   V-turer som ryms. Pröva Ö:s senare start (0–2 minuter efter pulsen) mot bytena i centrum, och undersök vändmöjligheten
+   V-turer som ryms. Pröva Ö:s senare start (0–2,5 minuter efter pulsen) mot bytena i centrum, och undersök vändmöjligheten
    vid den nya hållplatsen (1a).
 2. **Paret N ↔ S.** Reglering vid bytet N → S, med S som startar senare än pulsen, ger utrymme för linje N
    att nå Örtvägen. Pröva det tillsammans med Bo-Bil (3), alternativt i kombination med indragning av
@@ -827,7 +897,7 @@ Nästa leverans ska redovisa följande:
    Solberget och Österkalmare, med och utan bibehållen puls.
 4. **Dalkullavägen** på linje V ryms enligt screeningen i vanliga varv om Ö avgår efter pulsen, men konkurrerar
    om samma utrymme som Möckelö Strand och flygplatsen.
-5. **Flygplatsen.** Hämta flygens ankomsttider och kontrollera körtiden Posten – terminalen (OSRM eller
+5. **Flygplatsen.** Kontrollera körtiden Posten – terminalen (restidsdata eller
    provkörning). Den avgör om Solberget behöver dras in på flygturerna (tabell 4.5). Stäm av de extra turerna
    (tabell 4.4b) med operatören, särskilt förarens rast i omlopp 204 mitt på dagen, och jämför morgon- och
    kvällsflyget med anropsstyrd trafik. Pröva vändmöjligheten vid terminalen.
@@ -841,14 +911,15 @@ Nästa leverans ska redovisa följande:
   204, 205 och 208 och kvällens omlopp sammanslagna med dagens (avsnitt 4.1). Förarnas raster ingår inte. Driftformerna där omloppen byggs om (UA 2 och 3, dagens tidtabell) använder omlopp som är
   härledda ur tidtabellen.
 - **Körtider för nya delsträckor** bygger på beställarens restider (Möckelö Strand: 2 minuter på den befintliga
-  vägen, 1 minut på förlängningen) och fågelvägsavstånd (Bo-Bil). Längden på den befintliga vägen är mätt i
-  beställarens skiss. När vägdragningen hämtas från OSRM ruttas även utredningsalternativens nya delsträckor, och OSRM:s
-  körtider redovisas för kontroll i `b4_ua.json`. I den här versionen kunde OSRM inte nås från
-  analysmiljön.
-- **Vägdragningen i GIS** hämtas med `output/gis/rutta_med_osrm.py` i QGIS. Där OSRM väljer en annan väg än
-  bussen, t.ex. huvudvägen i stället för vägen söder om den mellan Lönnhagsvägen och Norrgårdsvägen, styrs
-  rutten med via-punkter (lagret `00_viapunkter`).
-- **Flygplatsen:** körvägen och terminalens läge är uppskattade ur beställarens skiss (± 25 %). Flygtiderna
+  vägen, 1 minut på förlängningen) och på vägavstånd längs gatunätet (Bo-Bil, flygplatsen). Alla linjer och nya
+  delsträckor är ruttade med OSRM (OpenStreetMap). Den befintliga vägen till Möckelö Strand ny är 1,37 km enligt
+  OSRM, nästan exakt som i beställarens skiss (1,36 km). OSRM:s egna körtider redovisas för kontroll i `b4_ua.json`.
+- **Vägdragningen** följer OSRM:s bilprofil. Där OSRM väljer en annan väg än bussen styrs rutten med via-punkter
+  (lagret `00_viapunkter`; t.ex. linje V mellan Lönnhagsvägen och Norrgårdsvägen). Linje N:s busslänk mellan
+  Doktorsvägen och Uppgårdsvägen är inte öppen för bilar och ritas rak (cirka 100 m).
+- **Flygplatsen:** körvägen följer gatunätet (OSRM), men hållplatsens läge vid terminalen är uppskattat ur
+  beställarens skiss, och bussens verkliga körtid är inte mätt. Den beräknade omvägen (5 minuter) ligger precis
+  på gränsen för kravet på 5 minuter i centrum. Flygtiderna
   gäller vardagar i november 2026 och antas vara desamma alla vardagar; de ändras med flygbolagets
   tidtabell. Extraturernas kostnad räknar väntan som fordonstimmar (försiktigt).
 - **Svängen (UA 5):** körtidsvinsten är operatörens uppgift (2 minuter). Tidtabellen ger cirka 0,6 minuter, och

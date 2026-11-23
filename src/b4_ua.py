@@ -12,7 +12,8 @@ UA (beställarens urval efter granskningen av Fas A, 2026-10-14)
       Solberget indragen på linje Ö, och 'Y' – bara de V-turer som behövs för flygen.
   5   Linje V tar över svängen Stenhuggarvägen – Cedersvägen – Klintvägen och linje N kör rakt på Västra utfarten
       (operatörens förslag via beställaren 2026-11-15). Linje N: Sjukhuset → Västra macken → Elverksgatan;
-      linje V: Västra macken → Cedersvägen → Klintvägen → Tekniska verken.
+      linje V: Åsvägen → Stenhuggarvägen → Cedersvägen → Klintvägen → Tekniska verken. Avfarten till
+      Stenhuggarvägen ligger norr om hållplatsen Västra macken, så V stannar vid Stenhuggarvägen (50 m bort).
 Antaganden
   * Möckelö Strand (beställarens restider och skiss 2026-10-14): den befintliga vägen mellan Norrgårdsvägen och
     den nya hållplatsen tar 2 min (RESTID_BEFINTLIG_VAG), förlängningen av Norrgårdsvägen från dagens vändpunkt
@@ -28,8 +29,8 @@ Antaganden
     förlängningen: rak linje). Hållplatsläget är det indikativa läget i A3.
   * N2: hållplatsen ligger på återvändsgatan mot Kalmarnäs vändplan som bussen kör i båda riktningarna;
     0,5 min per tur (ett uppehåll per tur i genomsnitt).
-  * Bo-Bil: körvägen Maxinge – Bo-Bil – Bolstavägen är 27 % kortare fågelvägen än Maxinge – Vikingagränd –
-    Bolstavägen. Med dagens schemalagda tid för delsträckan (1,5 min) ger det −0,4 min. Bo-Bil blir däremot
+  * Bo-Bil: körtiden skalas med vägavståndet (OSRM) Maxinge – Bo-Bil – Bolstavägen mot Maxinge – Vikingagränd –
+    Bolstavägen och dagens schemalagda tid för delsträckan (1,5 min). Bo-Bil blir däremot
     ett verkligt uppehåll (+0,5 min), medan bussen i praktiken sällan stannar vid Vikingagränd (≈ 0,05
     påstigande per vardag). Netto +0,1 min per tur. Minskad väntan vid Nya Godbyvägen kan inte kvantifieras
     utan realtidsdata och ingår inte (försiktig bedömning).
@@ -86,7 +87,7 @@ HPL = {'Möckelö Strand': '9025302000066401', 'Norrgårdsvägen ut': '902530200
        'Posten': '9025302000035802', 'Källarvägen': '9025302000025902', 'Solberget': '9025302000062201',
        'Sjukhuset': '9025302000039601', 'Stenhuggarvägen': '9025302000062401', 'Cedersvägen': '9025302000062701',
        'Klintvägen': '9025302000062901', 'Elverksgatan': '9025302000063701',
-       'Västra macken in': '9025302000055901', 'Tekniska verken in': '9025302000049201'}
+       'Västra macken in': '9025302000055901', 'Tekniska verken in': '9025302000049201', 'Åsvägen': '9025302000067401'}
 UPPEHALL = 0.5
 RESTID_BEFINTLIG_VAG = 2.0     # min – befintlig väg Norrgårdsvägen ↔ ny hållplats Möckelö Strand (beställaren)
 RESTID_FORLANGNING = 1.0       # min – förlängd Norrgårdsvägen, Möckelö Strand → ny hållplats (beställaren)
@@ -263,8 +264,8 @@ def solberget_delta(t):
 # ---------------------------------------------------------------------- UA 5: svängen
 SVANG = {'n_fore': ['Sjukhuset', 'Stenhuggarvägen', 'Cedersvägen', 'Klintvägen', 'Elverksgatan'],
          'n_efter': ['Sjukhuset', 'Västra macken in', 'Elverksgatan'],
-         'v_fore': ['Västra macken in', 'Tekniska verken in'],
-         'v_efter': ['Västra macken in', 'Cedersvägen', 'Klintvägen', 'Tekniska verken in']}
+         'v_fore': ['Åsvägen', 'Västra macken in', 'Tekniska verken in'],
+         'v_efter': ['Åsvägen', 'Stenhuggarvägen', 'Cedersvägen', 'Klintvägen', 'Tekniska verken in']}
 
 
 @lru_cache(maxsize=1)
@@ -281,14 +282,13 @@ def _avst(a, b):
 def svang():
     """Längder och tidtabellstider för UA 5 (svängen Stenhuggarvägen – Cedersvägen – Klintvägen)."""
     import s01_vagdragning as V
-    sg = V.segmentgeometri(); H = HPL
-    L = lambda a, b: V.langd(sg[(H[a], H[b])]) if (H[a], H[b]) in sg else 1.25 * _avst(H[a], H[b])
-    n_idag = sum(L(a, b) for a, b in zip(SVANG['n_fore'][:-1], SVANG['n_fore'][1:]))
-    n_rak = L('Sjukhuset', 'Västra macken in') + L('Västra macken in', 'Tekniska verken in') + \
-        _avst(H['Tekniska verken in'], H['Elverksgatan'])
-    v_idag = L('Västra macken in', 'Tekniska verken in')
-    v_svang = _avst(H['Västra macken in'], H['Stenhuggarvägen']) + L('Stenhuggarvägen', 'Cedersvägen') + \
-        L('Cedersvägen', 'Klintvägen') + _avst(H['Klintvägen'], H['Tekniska verken in'])
+    sg = V.segmentgeometri(); fg = V.uageometri(); H = HPL
+    def L(a, b):                                               # vägavstånd längs gatunätet (OSRM)
+        k = (H[a], H[b])
+        return V.langd(sg[k]) if k in sg else (fg[k]['langd_m'] if k in fg else 1.25 * _avst(*k))
+    kedja = lambda s_: sum(L(a, b) for a, b in zip(s_[:-1], s_[1:]))
+    n_idag, n_rak = kedja(SVANG['n_fore']), kedja(SVANG['n_efter'])
+    v_idag, v_svang = kedja(SVANG['v_fore']), kedja(SVANG['v_efter'])
     t = O.turer(); g = D.gtfs()['stop_times']
     def tid(ln, a, b):
         r = t[t.linje == ln].iloc[0]; st = g[g.trip_id == r.trip_id].set_index('stop_id')
@@ -298,7 +298,7 @@ def svang():
     hast = (n_idag / 1000) / (n_tt / 60)                       # km/h i svängen enligt tidtabellen
     rak_tt = o_tt + _avst(H['Tekniska verken in'], H['Elverksgatan']) / 1000 / hast * 60
     gang = {k: round(min(_avst(H[k], H[x]) for x in ('Västra macken in', 'Tekniska verken in', 'Elverksgatan')))
-            for k in ('Stenhuggarvägen', 'Cedersvägen', 'Klintvägen')}
+            for k in ('Stenhuggarvägen', 'Cedersvägen', 'Klintvägen')}           # fågelvägen (gång)
     return {'langd_n_svang_m': round(n_idag), 'langd_n_rak_m': round(n_rak),
             'langd_v_idag_m': round(v_idag), 'langd_v_svang_m': round(v_svang),
             'km_n_per_tur': round((n_rak - n_idag) / 1000, 3), 'km_v_per_tur': round((v_svang - v_idag) / 1000, 3),
@@ -417,7 +417,7 @@ def alternativ():
     ut.append({'id': '5', 'namn': 'Linje V via Cedersvägen, linje N rakt på Västra utfarten', 'kort': '5 Svängen till V',
                'titel': TITEL['5'], 'huvud': 'VO', 'linje': 'V', 'fran_linje': 'N', 'typ': 'flytta',
                **{k: [H[x] for x in v] for k, v in SVANG.items()},
-               'korvag': 'Linje V: Västra macken → Stenhuggarvägen – Cedersvägen – Klintvägen → Tekniska verken; '
+               'korvag': 'Linje V: Åsvägen → Stenhuggarvägen – Cedersvägen – Klintvägen → Tekniska verken; '
                          'linje N: Sjukhuset → Västra utfarten (Västra macken) → Elverksgatan',
                'hpl_namn': 'Cedersvägen och Klintvägen', 'xy': tuple(xy.loc[ced, ['x', 'y']].mean().to_numpy(float)),
                'delta': DELTA_SVANG, 'delta_n': -DELTA_SVANG, 'km_tur': sv['km_v_per_tur'], 'km_n': sv['km_n_per_tur'],
@@ -434,18 +434,18 @@ def stopp_xy():
 
 def bobil_delta(xy):
     """Körtidsförändring för N via Bo-Bil, skalad från dagens schemalagda tid Maxinge -> Bolstavägen."""
+    import s01_vagdragning as V
     t = O.turer(); n = t[t.linje == 'N'].iloc[0]
     g = D.gtfs()['stop_times']; st = g[g.trip_id == n.trip_id].set_index('stop_id')
     tid_idag = st.loc[HPL['Bolstavägen'], 't_arr'] - st.loc[HPL['Maxinge'], 't_dep']
-    d = lambda a, b: float(np.hypot(*(xy.loc[a, ['x', 'y']].to_numpy() - xy.loc[b, ['x', 'y']].to_numpy())))
-    bobil = xy.loc[[HPL['Bo-Bil A'], HPL['Bo-Bil B']], ['x', 'y']].mean()
-    db = lambda a: float(np.hypot(*(xy.loc[a, ['x', 'y']].to_numpy() - bobil.to_numpy())))
-    idag = d(HPL['Maxinge'], HPL['Vikingagränd']) + d(HPL['Vikingagränd'], HPL['Bolstavägen'])
-    ny = db(HPL['Maxinge']) + db(HPL['Bolstavägen'])
+    sg = V.segmentgeometri(); fg = V.uageometri()
+    mx, vg, bv, bb = HPL['Maxinge'], HPL['Vikingagränd'], HPL['Bolstavägen'], HPL['Bo-Bil B']
+    idag = V.langd(sg[(mx, vg)]) + V.langd(sg[(vg, bv)])          # vägavstånd (OSRM)
+    ny = fg[(mx, bb)]['langd_m'] + fg[(bb, bv)]['langd_m']
     kortare = round(float(tid_idag * (ny / idag - 1)), 1)
-    return {'tid_idag_min': float(tid_idag), 'faglvag_idag_m': idag, 'faglvag_ny_m': ny,
-            'kortare_vag_min': kortare, 'uppehall_bobil_min': UPPEHALL,
-            'delta_min': round(kortare + UPPEHALL, 1), 'delta_km': round((ny - idag) * 1.25 / 1000, 2)}
+    return {'tid_idag_min': float(tid_idag), 'vag_idag_m': round(idag), 'vag_ny_m': round(ny),
+            'kalla': fg[(mx, bb)]['kalla'], 'kortare_vag_min': kortare, 'uppehall_bobil_min': UPPEHALL,
+            'delta_min': round(kortare + UPPEHALL, 1), 'delta_km': round((ny - idag) / 1000, 2)}
 
 
 # ====================================================================== omlopp
@@ -741,8 +741,8 @@ def geometri(f, trafikerar, xy, fg, sg):
     n = len(trafikerar)
     if f['typ'] == 'flytta':
         H = HPL; P_ = lambda k: xy.loc[H[k], ['x', 'y']].to_numpy(float)
-        seg = lambda a, b: sg.get((H[a], H[b]), np.array([P_(a), P_(b)]))
-        rak = lambda a, b: np.array([P_(a), P_(b)])
+        seg = lambda a, b: sg[(H[a], H[b])] if (H[a], H[b]) in sg else \
+            (fg[(H[a], H[b])]['xy'] if (H[a], H[b]) in fg else np.array([P_(a), P_(b)]))
         vag = 'OSRM' if V.kalla_text().startswith('Linjernas') else 'schematisk'
         nn = len(f['turer_n'])
         ut = [{'ua': '5', 'objekt': 'körväg utgår', 'vagdragning': vag, 'linje': 'N', 'avgangar': 0, 'planerad_del': '',
@@ -751,18 +751,17 @@ def geometri(f, trafikerar, xy, fg, sg):
                               seg('Cedersvägen', 'Klintvägen'), seg('Klintvägen', 'Elverksgatan'))},
               {'ua': '5', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag, 'linje': 'N', 'avgangar': nn,
                'planerad_del': '', 'namn': 'Linje N rakt på Västra utfarten: Sjukhuset – Västra macken – Elverksgatan',
-               'geometry': ml(seg('Sjukhuset', 'Västra macken in'), seg('Västra macken in', 'Tekniska verken in'),
-                              rak('Tekniska verken in', 'Elverksgatan'))},
+               'geometry': ml(seg('Sjukhuset', 'Västra macken in'), seg('Västra macken in', 'Elverksgatan'))},
               {'ua': '5', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag, 'linje': 'V', 'avgangar': n,
                'planerad_del': '',
-               'namn': 'Linje V via svängen: Västra macken – Stenhuggarvägen – Cedersvägen – Klintvägen – Tekniska verken',
-               'geometry': ml(rak('Västra macken in', 'Stenhuggarvägen'), seg('Stenhuggarvägen', 'Cedersvägen'),
-                              seg('Cedersvägen', 'Klintvägen'), rak('Klintvägen', 'Tekniska verken in'))}]
-        for k in ('Cedersvägen', 'Klintvägen'):
+               'namn': 'Linje V via svängen: Åsvägen – Stenhuggarvägen – Cedersvägen – Klintvägen – Tekniska verken',
+               'geometry': ml(seg('Åsvägen', 'Stenhuggarvägen'), seg('Stenhuggarvägen', 'Cedersvägen'),
+                              seg('Cedersvägen', 'Klintvägen'), seg('Klintvägen', 'Tekniska verken in'))}]
+        for k in ('Stenhuggarvägen', 'Cedersvägen', 'Klintvägen'):
             ut.append({'ua': '5', 'objekt': 'hållplats byter linje N → V', 'namn': k, 'linje': 'V', 'avgangar': n,
                        'geometry': Point(*P_(k))})
-        ut.append({'ua': '5', 'objekt': 'hållplats utgår för linje N', 'linje': 'N', 'avgangar': 0,
-                   'namn': 'Stenhuggarvägen (Västra macken 50 m)', 'geometry': Point(*P_('Stenhuggarvägen'))})
+        ut.append({'ua': '5', 'objekt': 'hållplats byter linje V → N', 'linje': 'N', 'avgangar': nn,
+                   'namn': 'Västra macken (Stenhuggarvägen 50 m)', 'geometry': Point(*P_('Västra macken in'))})
         return ut
     if f['typ'] == 'ny':
         ut = [{'ua': f['id'], 'objekt': 'ny hållplats', 'namn': f['hpl_namn'], 'linje': f['linje'], 'avgangar': n,

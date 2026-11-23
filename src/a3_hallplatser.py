@@ -88,6 +88,31 @@ def kandidater(monster, hpl_xy, land):
     return k
 
 
+
+# Numreringen N1–N5 från Fas A (granskad av beställaren 2026-10-14; UA 2 = N2) ligger fast: ett förslag får samma
+# nummer som det Fas A-läge på samma linje som ligger närmast (inom NR_MAX_M). Nya förslag numreras därefter.
+NR_REFERENS = {1: (108283.0, 6680284.0, 'J'), 2: (110322.0, 6683248.0, 'Ö'), 3: (107895.0, 6686507.0, 'N'),
+               4: (108393.0, 6684738.0, 'Ö'), 5: (107530.0, 6684540.0, 'V,Ö')}
+NR_MAX_M = 500.0
+
+
+def numrera(nya):
+    if nya.empty:
+        return nya
+    par = sorted((math.hypot(r.x - x, r.y - y), i, nr) for i, r in nya.iterrows()
+                 for nr, (x, y, ln) in NR_REFERENS.items() if r.linjer == ln)
+    nr_av, tagna = {}, set()
+    for d, i, nr in par:
+        if d <= NR_MAX_M and i not in nr_av and nr not in tagna:
+            nr_av[i] = nr; tagna.add(nr)
+    nasta = max(NR_REFERENS) + 1
+    for i in nya.index:
+        if i not in nr_av:
+            nr_av[i] = nasta; nasta += 1
+    nya = nya.copy(); nya['rang'] = nya['nr']; nya['nr'] = nya.index.map(nr_av)
+    return nya.sort_values('nr').reset_index(drop=True)
+
+
 def main():
     P = C.PROCESSED
     pkt = pd.read_csv(P / 'a2_delpunkter.csv.gz')
@@ -156,7 +181,7 @@ def main():
         valda.append({'nr': len(valda) + 1, 'x': r.x, 'y': r.y, 'linjer': r.linjer, 'avgangar_vardag': len(r.turer),
                       'ny_tackning_inv': round(bast_v[0]), 'lyft_fran_svag_inv': round(bast_v[1]),
                       'nytta_inv': round(sum(bast_v)), 'segment': r.seg})
-    nya = pd.DataFrame(valda)
+    nya = numrera(pd.DataFrame(valda))
     from pyproj import Transformer
     tr = Transformer.from_crs(C.CRS_METRISK, C.CRS_WGS84, always_xy=True)  # noqa: E501
     if len(nya):

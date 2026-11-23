@@ -47,7 +47,11 @@ ORDNING = {l: i for i, l in enumerate(C.STADSLINJER)}
 # FLYGPLATSEN = hållplats vid flygterminalen (UA 4): Posten → flygplatsen → Källarvägen (beställarens skiss).
 UA_SEGMENT = [('9025302000067701', 'NY_MOCKELO', 'UA 1a'), ('NY_MOCKELO', '9025302000067701', 'UA 1a, 1b'),
                    ('9025302000031201', '9025302000003502', 'UA 3'), ('9025302000003502', '9025302000063301', 'UA 3'),
-                   ('9025302000035802', 'FLYGPLATSEN', 'UA 4'), ('FLYGPLATSEN', '9025302000025902', 'UA 4')]
+                   ('9025302000035802', 'FLYGPLATSEN', 'UA 4'), ('FLYGPLATSEN', '9025302000025902', 'UA 4'),
+                   # UA 5: linje N rakt på Västra utfarten (Västra macken → Elverksgatan) och linje V via svängen
+                   # (Åsvägen → Stenhuggarvägen, Klintvägen → Tekniska verken)
+                   ('9025302000055901', '9025302000063701', 'UA 5'), ('9025302000067401', '9025302000062401', 'UA 5'),
+                   ('9025302000062901', '9025302000049201', 'UA 5')]
 # UA 1b: Norrgårdsvägen förlängd från Möckelö Strand till den nya hållplatsen (planerad väg, 1 min). Vägen finns
 # inte i dag och ruttas därför inte; den ritas schematiskt (rak linje).
 PLANERAD_VAG = ('9025302000066401', 'NY_MOCKELO')
@@ -135,6 +139,10 @@ VIA_PUNKTER = [
     {'from_stop': '9025302000029202', 'to_stop': '9025302000067702', 'x': 106101.0, 'y': 6684603.0,
      'kommentar': 'Linje V Lönnhagsvägen – Norrgårdsvägen kör vägen söder om huvudvägen och vänder inte vid '
                   'hållplatsen (beställaren 2026-10-14)'}]
+# Busslänkar som inte är öppna för bilar och därför saknas i OSRM:s bilprofil: segmentet ruttas med OSRM fram till
+# länkens början, följer länken (punkterna nedan, EPSG:3067) och ruttas med OSRM från länkens slut.
+BUSSLANK = {('9025302000064001', '9025302000063801'):       # linje N Doktorsvägen 1B/1C → Uppgårdsvägen 10
+            [(107768.0, 6685498.0), (107783.0, 6685583.0), (107799.0, 6685601.0)]}
 TVILLING_M = 100.0     # motsatt riktning: ändpunkterna inom detta avstånd från segmentets ändpunkter i omvänd ordning
 
 
@@ -233,7 +241,8 @@ def hamta(paus_s=1.0):
         rak = float(math.hypot(xy[a][0] - xy[b][0], xy[a][1] - xy[b][1]))
         v_ = via.get((a, b), [])
         bas = {'from_stop': a, 'to_stop': b, 'linjer': ','.join(sorted(linjer, key=lambda l: ORDNING.get(l, 99))),
-               'rak_m': round(rak, 1), 'via': via_text(v_)}
+               'rak_m': round(rak, 1), 'via': via_text(v_) + (('busslänk ' + via_text(BUSSLANK[(a, b)]))
+                                                              if (a, b) in BUSSLANK else '')}
         if (a, b) in cache and (cache[(a, b)].via or '') == bas['via']:      # ruttad med samma via-punkter
             r = cache[(a, b)]
             rader.append({**bas, 'kalla': 'osrm', 'langd_m': r.langd_m, 'tid_s': r.tid_s, 'geometry': r.geometry})
@@ -241,6 +250,21 @@ def hamta(paus_s=1.0):
         sk = skiss(a, b)
         geom, kalla, langd_, tid = ((LineString(sk), 'skiss', langd(sk), np.nan) if sk is not None
                                     else (LineString([xy[a], xy[b]]), 'rak', rak, np.nan))
+        if not natet_nere and (a, b) in BUSSLANK:                  # OSRM fram till länken, länken, OSRM därifrån
+            try:
+                bl = BUSSLANK[(a, b)]
+                p1, l1, t1 = osrm_rutt(ll.loc[a].values, tr_inv.transform(*bl[0]), s)
+                p2, l2, t2 = osrm_rutt(tr_inv.transform(*bl[-1]), ll.loc[b].values, s)
+                X1, Y1 = tr.transform(p1[:, 0], p1[:, 1]); X2, Y2 = tr.transform(p2[:, 0], p2[:, 1])
+                pts = [xy[a]] + list(zip(X1, Y1)) + list(bl) + list(zip(X2, Y2)) + [xy[b]]
+                lank = langd(np.array(bl))
+                geom, kalla, langd_, tid = LineString(pts), 'osrm', l1 + lank + l2, t1 + t2 + lank / (25 / 3.6)
+                n_hamtade += 2; time.sleep(paus_s)
+            except Exception as e:
+                natet_nere = True
+                print(f'OSRM kunde inte nås ({type(e).__name__}: {e}) – raka linjer används för återstående segment.')
+            rader.append({**bas, 'kalla': kalla, 'langd_m': round(langd_, 1), 'tid_s': tid, 'geometry': geom})
+            continue
         if not natet_nere:
             try:
                 p, langd_o, tid_o = osrm_rutt(ll.loc[a].values, ll.loc[b].values, s,
@@ -280,6 +304,13 @@ def spara(seg):
 
 
 # ====================================================================== läsning för kartor och analys
+def _utan_spetsar(xy):
+    """OSRM-geometrin utan de korta anslutningarna till hållplatsens exakta läge (som ligger bredvid gatan): linjen
+    börjar och slutar där OSRM fäster hållplatsen på gatan, så att på varandra följande segment möts utan krokar."""
+    xy = np.asarray(xy, float)
+    return xy[1:-1] if len(xy) >= 4 else xy
+
+
 @lru_cache(maxsize=1)
 def segmentgeometri():
     """{(från, till): (N,2)-array} – OSRM-geometri om den finns i cachen, annars rak linje."""
@@ -289,7 +320,8 @@ def segmentgeometri():
         c = gpd.read_file(CACHE, layer='segment')
         for r in c.itertuples():
             if (r.from_stop, r.to_stop) in ut:
-                ut[(r.from_stop, r.to_stop)] = np.asarray(r.geometry.coords)
+                g = np.asarray(r.geometry.coords)
+                ut[(r.from_stop, r.to_stop)] = _utan_spetsar(g) if r.kalla == 'osrm' else g
     return ut
 
 
@@ -307,7 +339,7 @@ def uageometri():
         c = gpd.read_file(CACHE, layer='segment')
         for r in c.itertuples():
             if (r.from_stop, r.to_stop) in ut and r.kalla == 'osrm':
-                ut[(r.from_stop, r.to_stop)] = {'xy': np.asarray(r.geometry.coords), 'kalla': 'osrm',
+                ut[(r.from_stop, r.to_stop)] = {'xy': _utan_spetsar(r.geometry.coords), 'kalla': 'osrm',
                                                 'langd_m': float(r.langd_m), 'tid_s': float(r.tid_s)}
     return ut
 

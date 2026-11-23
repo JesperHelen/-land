@@ -153,6 +153,21 @@ def rita_linjer(ax, geom=None, alpha=1.0, lw=2.0, etikett=True, zorder=5, forskj
     return h
 
 
+def sammanfoga(delar, tol=40.0):
+    """Slår ihop delsträckor ((N,2)-arrayer i körordning) till sammanhängande linjer där en del börjar inom tol m
+    från föregående dels slut – så att linjen ritas utan vita avbrott vid hållplatserna."""
+    ut = []
+    for d in delar:
+        d = np.asarray(d, float)
+        if len(d) < 2:
+            continue
+        if ut and np.hypot(*(ut[-1][-1] - d[0])) <= tol:
+            ut[-1] = np.vstack([ut[-1], d])
+        else:
+            ut.append(d)
+    return ut
+
+
 # ------------------------------------------------------------------ OD-bågar
 def _bage(p0, p2, krok=0.22, n=160):
     d = p2 - p0; L = float(np.hypot(*d))

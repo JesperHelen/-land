@@ -254,13 +254,12 @@ def fig_svangen():
             stil = dict(color='#3d3d3a', lw=3.0, ls=(0, (1.2, 1.6)))
         else:
             stil = dict(color=C.FARG_LINJE[r.linje], lw=3.2, ls='-')
-        for d in getattr(r.geometry, 'geoms', [r.geometry]):
-            x, y = d.xy
-            ax.plot(x, y, zorder=6 if r.objekt != 'körväg utgår' else 5.5, solid_capstyle='round',
-                    path_effects=halo if r.objekt != 'körväg utgår' else None, **stil)
-        geoms = list(getattr(r.geometry, 'geoms', [r.geometry]))
+        delar = K.sammanfoga([np.asarray(g_.coords) for g_ in getattr(r.geometry, 'geoms', [r.geometry])])
+        for d in delar:
+            ax.plot(d[:, 0], d[:, 1], zorder=6 if r.objekt != 'körväg utgår' else 5.5, solid_capstyle='round',
+                    solid_joinstyle='round', path_effects=halo if r.objekt != 'körväg utgår' else None, **stil)
         if r.objekt != 'körväg utgår':                         # körriktning mot centrum
-            d = geoms[len(geoms) // 2]; xy_ = np.asarray(d.coords)
+            xy_ = max(delar, key=len)
             k = max(len(xy_) // 2 - 1, 0)
             a_, b_ = xy_[k], xy_[min(k + 1, len(xy_) - 1)]
             ax.annotate('', xy=tuple(b_), xytext=tuple(a_), zorder=7,
@@ -270,7 +269,7 @@ def fig_svangen():
         if 'utgår' in r.objekt:
             ax.scatter([r.geometry.x], [r.geometry.y], s=90, marker='X', color=SAMRE, edgecolor='white', lw=0.7, zorder=8)
         else:
-            ax.scatter([r.geometry.x], [r.geometry.y], s=150, marker='o', color=C.FARG_LINJE['V'], edgecolor='white',
+            ax.scatter([r.geometry.x], [r.geometry.y], s=150, marker='o', color=C.FARG_LINJE[r.linje], edgecolor='white',
                        lw=1.2, zorder=8)
     # gångavstånd till hållplatserna på Västra utfarten
     xy = HPL.groupby('namn')[['x', 'y']].mean()
@@ -289,7 +288,7 @@ def fig_svangen():
     rm = f['resenarer']['vardag']['resenarsminuter']
     pst = u['pastigande_vardag']
     infobox(ax, [
-        r'$\bf{Förslag\ (operatören)}$' + '   V tar svängen, N kör rakt på Västra utfarten (mot centrum)',
+        r'$\bf{Förslag\ (operatören)}$' + '   V tar svängen via Stenhuggarvägen, N kör rakt på Västra utfarten',
         r'$\bf{Körtid\ per\ tur}$' + f"   N −{sv(-f['delta_n_min_per_tur'], 0)} min (alla {u['n_turer']} turer), "
         f"V +{sv(f['delta_min_per_tur'], 0)} min; tidtabellen ger ≈ {sv(sg_['vinst_enligt_tidtabell_min'])} min (känslighet 1 min)",
         r'$\bf{Linje\ N}$' + f"   uppehåll i centrum {sv(n0['median'], 0)} → {sv(n1['median'], 0)} min vid alla "
@@ -304,14 +303,15 @@ def fig_svangen():
         f"{sv(-f['delta_n_min_per_tur'], 0)} min;",
         f"      netto {'+' if rm > 0 else ''}{sv(rm, 0)} resenärsminuter/vardag"
         + (f" (med 1 min: {'+' if k1.get('resenarsminuter', 0) > 0 else ''}{sv(k1.get('resenarsminuter', 0), 0)})" if k1 else ''),
-        r'$\bf{Täckning}$' + f"   ingen förlorar hållplats inom 400 m; Cedersvägen och Klintvägen får "
+        r'$\bf{Täckning}$' + f"   ingen förlorar hållplats inom 400 m; svängens hållplatser får "
         f"{vo['turer_med_andring']} V-turer i stället för {u['n_turer']} N-turer"], loc=(0.025, 0.975))
     extra = [Line2D([], [], color=C.FARG_LINJE['V'], lw=3, label='Linje V via svängen (ny)'),
              Line2D([], [], color=C.FARG_LINJE['N'], lw=3, label='Linje N rakt på Västra utfarten (ny)'),
              Line2D([], [], color='#3d3d3a', lw=3, ls=(0, (1.2, 1.6)), label='Linje N:s sväng i dag (utgår för N)'),
              Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['V'], markersize=9,
                     label='Hållplats byter linje N → V'),
-             Line2D([], [], marker='X', ls='', color=SAMRE, markersize=8, label='Stenhuggarvägen utgår (Västra macken 50 m)'),
+             Line2D([], [], marker='o', ls='', color=C.FARG_LINJE['N'], markersize=9,
+                    label='Västra macken: linje N i stället för V'),
              Line2D([], [], color='#52514e', lw=0.9, ls=(0, (2, 1.5)), label='Gångavstånd till Västra utfarten')]
     lg = K.teckenforklaring(ax, forklaring_tackning(extra), loc='lower left', fontsize=6.8)
     lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)

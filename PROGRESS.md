@@ -192,9 +192,19 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       10:50 (204 i uppehåll, +0,5 h), 21:50 (205, +1,7 h): +63,3 k€/år (52,7–75,0), varav 10:50 +9,4 k€. Figur b4_19
       (flygtider), tabell 4.4a–b i B4, 5.2 i B5. Känslighet: 5,5–7 min omväg → 4Y kräver Solberget på Ö 09:20 och 15:40.
 - [x] **Omloppsfigurerna** visar operatörens omlopp för i dag (tidigare "Omlopp nan") och "Buss n" för ombyggda planer.
-- [ ] **OSRM-vägdragning i kartor** (beställaren 2026-11-03: linjerna och UA längs vägarna). Blockerat: proxyn
-      nekar router.project-osrm.org (403). Kräver att domänen tillåts i miljöns nätverksinställningar, eller att
-      `rutta_med_osrm.py` körs i QGIS och GeoPackage-filen skickas tillbaka (`s01_vagdragning.py --fran-gis`).
+- [x] **OSRM-vägdragning i kartor och analys** (beställaren 2026-11-03 och 2026-11-23: "sluta använda fågelvägen"):
+      router.project-osrm.org tillåten i miljön; alla 138 segment ruttade med OSRM. Linje N:s busslänk Doktorsvägen –
+      Uppgårdsvägen (ej öppen för bil) ruttas till länkens ändar, länken rak (`BUSSLANK`). Anslutningsspetsarna till
+      hållplatsernas exakta läge tas bort (`_utan_spetsar`), och kartorna ritar linjerna sammanhängande
+      (`kartlib.sammanfoga`). UA 5: nya delsträckor Västra macken → Elverksgatan, Åsvägen → Stenhuggarvägen,
+      Klintvägen → Tekniska verken; linje V stannar vid Stenhuggarvägen (avfarten ligger norr om Västra macken).
+      Bo-Bil (UA 3) räknas med vägavstånd i stället för fågelväg. A3:s numrering N1–N5 låst till Fas A-lägena
+      (`NR_REFERENS`). Följder: fordonskm 1 136 → 1 287/vardag; UA 1a/1b 178 inv. (179); UA 2 58 inv. (55);
+      UA 3 +0,5 min/tur (+0,1); UA 4 omväg 1,7 km, +5 min/tur (+4), 16/20 med Ö +2,5 min, Solberget ger inga fler
+      turer, 4Y +2,2 k€, extra flygturer 65,2 k€; UA 5 125 inv. fler / 11 färre (V lämnar Västra macken), −0,4 k€.
+      Kostnader: 1a ★ +11,8 k€, 1b ★ +6,5 k€, 3 ±0, 4 ★ +8,1 k€. A3: 154 inv. ny täckning, 180 lyfts (N4 97).
+- [x] **Introduktion till varje UA** (beställaren 2026-11-23): B4 4.2–4.7 och PM 3.1–3.6 inleds med syfte, dagens
+      trafik, vad som prövas och vad som avgör.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

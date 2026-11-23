@@ -1,12 +1,12 @@
 {
  "nya_hallplatser": 5,
- "ny_tackning_inv": 136,
- "lyft_fran_svag_inv": 95,
+ "ny_tackning_inv": 154,
+ "lyft_fran_svag_inv": 180,
  "mariehamn_inom_400m_fore": 0.836,
- "mariehamn_inom_400m_efter": 0.8452,
+ "mariehamn_inom_400m_efter": 0.8464,
  "mariehamn_svag_fore": 0.2802,
- "mariehamn_svag_efter": 0.2829,
- "otackt_utom_korvag_inv": 2013,
+ "mariehamn_svag_efter": 0.2785,
+ "otackt_utom_korvag_inv": 1970,
  "bedomning": {
   "Behålls": 69,
   "Kandidat för indragning": 11,

@@ -8,7 +8,7 @@
   "omloppstid_h": 61.43,
   "regleringstid_h": 7.95,
   "uppstallning_h": 11.03,
-  "km": 1136.5,
+  "km": 1287.0,
   "min_vandtid": 1.0,
   "vandningar_under_rek": 3,
   "varv_utan_reglering": 1,
@@ -29,7 +29,7 @@
   "omloppstid_h": 61.43,
   "regleringstid_h": 7.45,
   "uppstallning_h": 11.53,
-  "km": 1136.5,
+  "km": 1287.0,
   "min_vandtid": 0.0,
   "vandningar_under_rek": 2,
   "varv_utan_reglering": 1,
@@ -85,7 +85,7 @@
    "turintervall_rusning": 60.0,
    "vandtid_median": 7.0,
    "vandtid_min": 1.0,
-   "km_tur": 25.92
+   "km_tur": 29.82
   },
   "N": {
    "turer_dag": 22,
@@ -94,7 +94,7 @@
    "turintervall_rusning": 30.0,
    "vandtid_median": 4.0,
    "vandtid_min": 4.0,
-   "km_tur": 10.18
+   "km_tur": 11.66
   },
   "S": {
    "turer_dag": 22,
@@ -103,7 +103,7 @@
    "turintervall_rusning": 30.0,
    "vandtid_median": 7.0,
    "vandtid_min": 2.0,
-   "km_tur": 8.76
+   "km_tur": 10.01
   },
   "V": {
    "turer_dag": 20,
@@ -112,7 +112,7 @@
    "turintervall_rusning": 30.0,
    "vandtid_median": 3.0,
    "vandtid_min": 3.0,
-   "km_tur": 11.54
+   "km_tur": 12.8
   },
   "Ö": {
    "turer_dag": 20,
@@ -121,7 +121,7 @@
    "turintervall_rusning": 30.0,
    "vandtid_median": 7.0,
    "vandtid_min": 1.0,
-   "km_tur": 12.81
+   "km_tur": 14.27
   }
  },
  "genomgangar_idag": [

@@ -53,8 +53,11 @@ ritning. Linjerna hålls därmed isär i alla skalor. Spåravståndet ändras i 
 
 ## Vägdragning längs gatorna (OSRM) – direkt i QGIS
 
-Linjerna levereras som raka streck mellan hållplatserna, eftersom OSRM inte kunde nås från analysmiljön.
-Vägdragningen hämtas enklast i QGIS:
+Linjerna och utredningsalternativens körvägar levereras längs gatunätet: varje sträcka mellan två hållplatser
+är ruttad med OSRM (OpenStreetMap) i analyskedjan (`src/s01_vagdragning.py`). Linje N:s busslänk mellan
+Doktorsvägen och Uppgårdsvägen är inte öppen för bilar och saknas i OSRM; där ruttas gatorna fram till länken,
+och själva länken (cirka 100 m) ritas rak (`BUSSLANK`). Förlängningen av Norrgårdsvägen (UA 1b) finns inte i dag
+och ritas schematiskt. Vägdragningen kan också hämtas om i QGIS, t.ex. efter att via-punkter har lagts till:
 
 1. Öppna QGIS Python-konsol (*Insticksprogram > Python-konsol*), klicka *Visa redigerare*, öppna
    **`rutta_med_osrm.py`** (samma mapp som GeoPackage-filen) och kör det. Datorn behöver internetåtkomst till

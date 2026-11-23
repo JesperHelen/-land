@@ -377,6 +377,8 @@ def b4():
            ('hållplats utgår för linje N', 'Hållplats som linje N slutar trafikera', 'cross_fill', '#c0392b', 3.4, '#ffffff'),
            ('hållplats dras in', 'Hållplats som dras in', 'cross_fill', '#c0392b', 3.4, '#ffffff'),
            ('hållplats byter linje N → V', 'Hållplats som byter linje N → V (UA 5)', 'circle', C.FARG_LINJE['V'], 3.6,
+            '#ffffff'),
+           ('hållplats byter linje V → N', 'Hållplats som byter linje V → N (UA 5)', 'circle', C.FARG_LINJE['N'], 3.6,
             '#ffffff')]
     stil('b4_ua_hallplatser', 'UA – hållplatser',
          qml(r_kategori('objekt', kat, lambda n, form, f, st, k: markor(n, form, f, st, k, 0.3)),
@@ -537,14 +539,11 @@ def b4():
     def ersatt(stopp, fore, efter, extra):
         i = next(i for i in range(len(stopp)) if stopp[i:i + len(fore)] == fore)
         return kedja(stopp[:i + 1]) + extra + kedja(stopp[i + len(fore) - 1:])
-    H5 = F.HPL; p5 = lambda k: np.array(hxy[H5[k]])
-    s5 = lambda a, b: sg.get((H5[a], H5[b]), np.array([p5(a), p5(b)]))
-    v_5 = ersatt(vm, f5['v_fore'], f5['v_efter'], [np.array([p5('Västra macken in'), p5('Stenhuggarvägen')]),
-                                                   s5('Stenhuggarvägen', 'Cedersvägen'), s5('Cedersvägen', 'Klintvägen'),
-                                                   np.array([p5('Klintvägen'), p5('Tekniska verken in')])])
-    n_5 = ersatt(nm, f5['n_fore'], f5['n_efter'], [s5('Sjukhuset', 'Västra macken in'),
-                                                   s5('Västra macken in', 'Tekniska verken in'),
-                                                   np.array([p5('Tekniska verken in'), p5('Elverksgatan')])])
+    def s5(a, b):                                      # gatunätet (OSRM): linjesegment eller UA-segment
+        k = (a, b)
+        return sg[k] if k in sg else (fg[k]['xy'] if k in fg else np.array([hxy[a], hxy[b]]))
+    v_5 = ersatt(vm, f5['v_fore'], f5['v_efter'], [s5(a, b) for a, b in zip(f5['v_efter'][:-1], f5['v_efter'][1:])])
+    n_5 = ersatt(nm, f5['n_fore'], f5['n_efter'], [s5(a, b) for a, b in zip(f5['n_efter'][:-1], f5['n_efter'][1:])])
     osrm = V.kalla_text().startswith('Linjernas')
     vag = lambda nycklar: ('OSRM' if osrm and all(fg[n]['kalla'] == 'osrm' for n in nycklar) else
                            'delvis schematisk (raka streck)' if not osrm else 'delvis schematisk')

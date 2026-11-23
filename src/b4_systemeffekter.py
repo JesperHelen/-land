@@ -517,9 +517,8 @@ def rita_ua(ax, fid):
         f = C.FARG_LINJE.get(r.linje, '#1f1f1e')
         stil = dict(color='#3d3d3a', lw=2.4, ls=(0, (1, 1.4))) if r.objekt == 'körväg utgår' else \
             dict(color=f, lw=2.4, ls=(0, (3, 2)) if 'planerad' in r.objekt else '-')
-        for d in getattr(r.geometry, 'geoms', [r.geometry]):
-            x, y = d.xy
-            ax.plot(x, y, zorder=6, solid_capstyle='round',
+        for d in K.sammanfoga([np.asarray(g_.coords) for g_ in getattr(r.geometry, 'geoms', [r.geometry])]):
+            ax.plot(d[:, 0], d[:, 1], zorder=6, solid_capstyle='round', solid_joinstyle='round',
                     path_effects=[K.pe.Stroke(linewidth=4.2, foreground='white'), K.pe.Normal()], **stil)
     for r in g[g.geom_type == 'Point'].itertuples():
         utgar = 'utgår' in r.objekt or 'dras in' in r.objekt
@@ -592,8 +591,8 @@ def fig_ua4_karta(res):
     rita_forandring(ax, '4_VO', fyll=0.6, kant=1.0)
     D.befolkning().boundary.plot(ax=ax, color='#b9b4a8', linewidth=0.35, alpha=0.8, zorder=1.5)
     K.rita_linjer(ax, lw=1.3, alpha=0.35, zorder=3, etikett=False)
-    for xy_ in vo_kedjor('4'):
-        ax.plot(xy_[:, 0], xy_[:, 1], color=FARG_VO, lw=3.0, zorder=5, solid_capstyle='round',
+    for xy_ in K.sammanfoga(vo_kedjor('4')):
+        ax.plot(xy_[:, 0], xy_[:, 1], color=FARG_VO, lw=3.0, zorder=5, solid_capstyle='round', solid_joinstyle='round',
                 path_effects=[K.pe.Stroke(linewidth=4.8, foreground='white'), K.pe.Normal()])
     g = gpd.read_file(P / 'b4_ua.gpkg', layer='ua'); g = g[g.ua == '4']
     fl = g[g.objekt == 'ny hållplats'].geometry.iloc[0]
@@ -842,7 +841,8 @@ def fig_avgangar_forandring(res):
     fig.legend(handles=hnd, loc='lower center', ncol=4, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.01))
     fig.text(0.99, -0.035, 'Underlag: Ålandstrafiken (GTFS, påstigandedata), befolkningsrutor 2024, kust GSHHG. Effekt = '
              '(avgångar efter − i dag) × invånare per 50 m-punkt, utjämnad (gauss, 150 m). Antal avgångar = unika turer som '
-             'stannar inom 400 m; invånare i Mariehamn. Linjerna ritade som raka streck mellan hållplatserna.',
+             'stannar inom 400 m; invånare i Mariehamn. ' + ('Linjernas vägdragning: OSRM, © OpenStreetMap-bidragsgivare.'
+             if __import__('s01_vagdragning').kalla_text().startswith('Linjernas') else 'Linjerna ritade som raka streck.'),
              ha='right', fontsize=6.2, color=K.TEXT2)
     fig.suptitle('Effekt per UA: förändrat antal avgångar inom 400 m × befolkning (grönt vinnare, rött förlorare)',
                  x=0.01, ha='left', fontsize=12, fontweight='bold')
