@@ -51,11 +51,11 @@ def kort(sid, v):
             '5_N': 'UA 5 variant – bara linje N rakt på'}[sid]
 
 
-KORT_FIG = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ V + Ö',
-            '1b': 'UA 1b ★ V + Ö', '2': 'UA 2 ★', '3': 'UA 3 ★', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ V + Ö',
+KORT_FIG = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ Västra + Östra',
+            '1b': 'UA 1b ★ Västra + Östra', '2': 'UA 2 ★', '3': 'UA 3 ★', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ Västra + Östra',
             '4_VO_sol': 'UA 4 + Solberget indragen', '4_Y': 'UA 4Y flygturerna',
-            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ V + Ö', '5_ryms': 'UA 5 dagens drift',
-            '5_N': 'UA 5 bara N rakt på'}
+            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ Västra + Östra', '5_ryms': 'UA 5 dagens drift',
+            '5_N': 'UA 5 bara Norra rakt på'}
 
 
 def main():
@@ -117,7 +117,7 @@ def figur(df):
               loc='lower right', fontsize=7, frameon=True, facecolor='white', edgecolor='#e0ded7')
     ax.set_title('Fordonskilometer och fordon jämfört med i dag')
     ut = C.KARTOR / 'b5_1_kalkyl.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 

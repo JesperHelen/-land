@@ -120,7 +120,7 @@ def r_enkel(sym):
 
 def r_kategori(attr, kat, symbolfn, ordning=None):
     """kat: [(värde, etikett, symbolargument...)] ; symbolfn(namn, *arg) -> symbol-XML."""
-    cats = ''.join(f'<category value={quoteattr(str(v))} label={quoteattr(l)} symbol="{i}" render="true"/>'
+    cats = ''.join(f'<category value={quoteattr(str(v))} label={quoteattr(C.fullnamn(l))} symbol="{i}" render="true"/>'
                    for i, (v, l, *_) in enumerate(kat))
     syms = ''.join(symbolfn(str(i), *a) for i, (v, l, *a) in enumerate(kat))
     ob = (f' enableorderby="1"><orderby><orderByClause asc="1" nullsFirst="0">{escape(ordning)}</orderByClause></orderby'
@@ -190,7 +190,7 @@ def bas():
                            geometry=[shapely.MultiLineString([geo[s] for k in kl for s in k]) for kl in kedjor.values()],
                            crs=C.CRS_METRISK)
     skriv(lin, '00_stadslinjer')
-    stil('00_stadslinjer', 'Stadslinjer', qml(r_kategori('linje', [(l, f'Linje {l}', C.FARG_LINJE[l]) for l in C.STADSLINJER],
+    stil('00_stadslinjer', 'Stadslinjer', qml(r_kategori('linje', [(l, C.NAMN_LINJE[l], C.FARG_LINJE[l]) for l in C.STADSLINJER],
                                                          lambda n, f: linje(n, f, 0.7, halo=True))), True)
     # segment hållplats–hållplats (underlag för OSRM-ruttning i QGIS, se output/gis/rutta_med_osrm.py)
     xy_, ll_ = V.alla_xy(); fg = V.uageometri()
@@ -228,7 +228,7 @@ def bas():
     delar = V.forskjutna_delar()
     skriv(delar, '00_stadslinjer_forskjutna')
     stil('00_stadslinjer_forskjutna', 'Förskjutna stadslinjer',
-         qml(r_kategori('linje', [(l, f'Linje {l}', C.FARG_LINJE[l]) for l in C.STADSLINJER],
+         qml(r_kategori('linje', [(l, C.NAMN_LINJE[l], C.FARG_LINJE[l]) for l in C.STADSLINJER],
                         lambda n, f: linje_forskjuten(n, f, 0.7))), True)
 
     h = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0).reset_index().rename(columns={'stop_id': 'stop_id'})
@@ -529,7 +529,7 @@ def b4():
     v_1a = kedja(vm[:k + 2]) + [fg[(ni, ny)]['xy'], fg[(ny, ni)]['xy']] + kedja(vm[k + 1:])
     v_1b = kedja(vm[:k + 1]) + [V.planerad_vag(), fg[(ny, ni)]['xy']] + kedja(vm[k + 1:])
     o_ = kedja(om)
-    bobil_id = '9025302000003502'; iv = nm.index('9025302000063201')
+    bobil_id = '9025302000003501'; iv = nm.index('9025302000063201')
     n_ny = kedja(nm[:iv]) + [fg[(nm[iv - 1], bobil_id)]['xy'], fg[(bobil_id, nm[iv + 1])]['xy']] + kedja(nm[iv + 1:])
     po, ka = '9025302000035802', '9025302000025902'
     ip = vm.index(po); assert vm[ip + 1] == ka
@@ -578,7 +578,7 @@ def b4():
                           geometry=[shapely.MultiLineString([LineString(x) for x in r_[5]]) for r_ in rad],
                           crs=C.CRS_METRISK)
     skriv(lg, 'b4_ua_linjer')
-    vo = '#8c3b74'
+    vo = C.FARG_LINJE['V']
     kat = [('1a', 'UA 1a – linje V–Ö via Möckelö Strand ny, dagens vägar', vo),
            ('1b', 'UA 1b – linje V–Ö via förlängd Norrgårdsvägen', vo),
            ('2', 'UA 2 – linje Ö med N2', C.FARG_LINJE['Ö']), ('3', 'UA 3 – linje N via Bo-Bil', C.FARG_LINJE['N']),

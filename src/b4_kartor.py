@@ -77,12 +77,12 @@ def forklaring_tackning(extra=()):
          Patch(facecolor=SAMRE, alpha=0.85, label='Sämre tillgänglighet'),
          Patch(facecolor=OTACKT, alpha=0.7, label='Ingen hållplats inom 400 m')]
     h += list(extra)
-    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
+    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=C.NAMN_LINJE[l]) for l in C.STADSLINJER]
     h += [Line2D([], [], marker='o', ls='', markerfacecolor='white', markeredgecolor='#1f1f1e', label='Hållplats')]
     return h
 
 
-FARG_VO = '#8c3b74'
+FARG_VO = C.FARG_LINJE['V']
 
 
 def rita_vo(ax):
@@ -153,7 +153,7 @@ def fig_mockelo():
     extra = [Line2D([], [], marker='*', ls='', color=BLA, markersize=12, label='Ny hållplats'),
              Line2D([], [], color=fv, lw=2.4, label='Väg till ny hållplats'),
              Line2D([], [], color=fv, lw=2.4, ls=(0, (3, 2)), label='Förlängd Norrgårdsvägen (UA 1b)'),
-             Line2D([], [], color=FARG_VO, lw=3, label='Linje V–Ö'),
+             Line2D([], [], color=FARG_VO, lw=3, label='Västra–Östra'),
              Patch(facecolor='none', edgecolor=BLA, ls='--', label='400 m runt ny hållplats')]
     lg = K.teckenforklaring(ax, forklaring_tackning(extra), loc='lower left', fontsize=6.8)
     lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
@@ -203,13 +203,14 @@ def fig_bobil():
     mx, vg, bv, bb = (g[k] for k in ['Maxinge', 'Vikingagränd', 'Bolstavägen', 'Bo-Bil'])
     import s01_vagdragning as V
     sg_ = V.segmentgeometri(); fg_ = V.uageometri()
-    MX, VG, BV, BB = '9025302000031201', '9025302000063201', '9025302000063301', '9025302000003502'
+    MX, VG, BV, BB = '9025302000031201', '9025302000063201', '9025302000063301', '9025302000003501'
     gl = np.vstack([sg_[(MX, VG)], sg_[(VG, BV)][1:]]) if (MX, VG) in sg_ and (VG, BV) in sg_ else \
         np.array([[mx.x, mx.y], [vg.x, vg.y], [bv.x, bv.y]])
     ny_xy = np.vstack([fg_[(MX, BB)]['xy'], fg_[(BB, BV)]['xy'][1:]])
     ax.plot(gl[:, 0], gl[:, 1], color='#3d3d3a', lw=3.2, ls=(0, (1.2, 1.6)), zorder=6,
             solid_capstyle='round')
     ax.plot(ny_xy[:, 0], ny_xy[:, 1], color=C.FARG_LINJE['N'], lw=2.6, ls=(0, (3, 2)), zorder=6)
+    _pilar(ax, ny_xy, C.FARG_LINJE['N'], steg=170, uts=uts, ms=13)        # körriktning (Norra är enkelriktad)
     ax.scatter([vg.x], [vg.y], s=90, marker='X', color=SAMRE, edgecolor='white', lw=0.7, zorder=8)
     ax.scatter([bb.x], [bb.y], s=220, marker='*', color=BLA, edgecolor='white', lw=0.8, zorder=8)
     for p, c in [(vg, SAMRE), (bb, BLA)]:
@@ -323,8 +324,8 @@ def fig_svangen():
         hinder = K.punkt_hinder(ax, [p[1][0] for p in etik], [p[1][1] for p in etik], px=9)
         K.placera_etiketter(ax, etik, fontsize=7.0, undvik=hinder)
     K.skalstock(axs[0], langd_m=200)
-    hnd = [Line2D([], [], color=FN, lw=4, label='Linje N'),
-           Line2D([], [], color=FV, lw=4, label='Linje V'),
+    hnd = [Line2D([], [], color=FN, lw=4, label='Norra'),
+           Line2D([], [], color=FV, lw=4, label='Västra'),
            Line2D([], [], marker='o', ls='', markerfacecolor=FN, markeredgecolor='white', markersize=9, label='Hållplats för N'),
            Line2D([], [], marker='o', ls='', markerfacecolor=FV, markeredgecolor='white', markersize=9, label='Hållplats för V'),
            Line2D([], [], marker='o', ls='', markerfacecolor='white', markeredgecolor='#1f1f1e', markersize=9,
@@ -385,13 +386,13 @@ def fig_flygtider():
     hnd = [Patch(facecolor='#cfe3f8', label='Bussen ska vara vid flygplatsen'),
            Line2D([], [], marker='^', ls='', color='#1f1f1e', markersize=8, label='Flyget avgår'),
            Line2D([], [], marker='v', ls='', color='#1f1f1e', markersize=8, label='Flyget landar'),
-           Line2D([], [], marker='o', ls='', color=FARG_VO, markersize=8, label='V-tur via flygplatsen'),
+           Line2D([], [], marker='o', ls='', color=FARG_VO, markersize=8, label='Västra-tur via flygplatsen'),
            Line2D([], [], marker='o', ls='', color='#e8590c', markersize=8, label='Extra V-tur'),
            Line2D([], [], color='#b9b4a8', lw=2.2, label='V-tur som i dag')]
     ax.legend(handles=hnd, loc='upper right', fontsize=7, ncol=1, frameon=True, facecolor='white', edgecolor='#e0ded7')
     fig.suptitle('UA 4 – flygen och bussen vid flygplatsen (vardag)', x=0.01, ha='left')
     ut = C.KARTOR / 'b4_19_flygtider.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 
@@ -407,7 +408,7 @@ def fig_flygplatsen_zoom():
     ax.set_xticks([]); ax.set_yticks([])
     for sp in ax.spines.values():
         sp.set_edgecolor('#d0d0cc'); sp.set_linewidth(0.7)
-    ax.set_title('UA 4 – linje V–Ö via flygterminalen', loc='left', pad=4)
+    ax.set_title('UA 4 – Västra–Östra via flygterminalen', loc='left', pad=4)
     K.rita_linjer(ax, lw=1.8, alpha=0.45, zorder=2, etikett=False)
     sg = V.segmentgeometri(); fg = V.uageometri()
     PO, KA, FL = '9025302000035802', '9025302000025902', 'FLYGPLATSEN'
@@ -432,7 +433,7 @@ def fig_flygplatsen_zoom():
     ax.scatter([flx], [fly], s=320, marker='*', color=BLA, edgecolor='white', lw=1.0, zorder=8)
     hinder = K.punkt_hinder(ax, [flx], [fly], px=13)
     K.placera_etiketter(ax, etik + [('Flygterminalen', (flx, fly), 120)], fontsize=7.0, undvik=hinder)
-    hnd = [Line2D([], [], color=FARG_VO, lw=4, label='Linje V–Ö'),
+    hnd = [Line2D([], [], color=FARG_VO, lw=4, label='Västra–Östra'),
            Line2D([], [], marker='*', ls='', color=BLA, markersize=13, label='Ny hållplats vid terminalen'),
            Patch(facecolor=to_rgba(BLA, 0.06), edgecolor=BLA, ls='--', label='400 m runt ny hållplats'),
            Line2D([], [], marker='o', ls='', markerfacecolor='white', markeredgecolor='#1f1f1e', label='Hållplats'),
@@ -522,7 +523,7 @@ def fig_omlopp(namn, paneler, rubrik):
     O.omlopp_forklaring(fig, extra=extra, y=-0.01)
     fig.tight_layout(rect=(0, 0.035, 1, 0.975), h_pad=0.9)
     ut = C.KARTOR / namn
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 

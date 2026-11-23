@@ -57,8 +57,8 @@ def fig_registrering():
     fig, (a, b) = plt.subplots(1, 2, figsize=(10.6, 4.6), gridspec_kw={'width_ratios': [1.1, 1]})
     d1 = d1.sort_values(['grupp', 'linje']).reset_index(drop=True)
     rad = [(f"Landsbygd {r.linje}", r.andel_forsta_hpl, '#7a776f') for r in d1[d1.grupp != 'Stadslinje'].itertuples()]
-    rad += [(f"Linje {r.linje} – sommar", r.andel_forsta_hpl, '#E15759') for r in d1[d1.grupp == 'Stadslinje'].itertuples()]
-    rad += [(f"Linje {r.linje} – höst (tvättad)", r.centrum_forsta_hpl_andel, '#59A14F') for r in kh.itertuples()]
+    rad += [(f"{C.NAMN_LINJE.get(r.linje, r.linje)} – sommar", r.andel_forsta_hpl, '#E15759') for r in d1[d1.grupp == 'Stadslinje'].itertuples()]
+    rad += [(f"{C.NAMN_LINJE.get(r.linje, r.linje)} – höst (tvättad)", r.centrum_forsta_hpl_andel, '#59A14F') for r in kh.itertuples()]
     y = np.arange(len(rad))[::-1]
     a.barh(y, [100 * v for _, v, _ in rad], color=[f for _, _, f in rad], height=0.62)
     for yy, (_, v, _) in zip(y, rad):
@@ -77,7 +77,7 @@ def fig_registrering():
           color='#E15759', label='Sommar')
     b.bar(x[1:] + w / 2, [float(kh[kh.linje == l].kvot_dygn.iat[0]) for l in lin], width=w, color='#59A14F',
           label='Höst (tvättad)')
-    b.set_xticks(x, ['Landsbygd\n(kontroll)'] + [f'Linje {l}' for l in lin])
+    b.set_xticks(x, ['Landsbygd\n(kontroll)'] + [C.NAMN_LINJE[l] for l in lin])
     b.set_ylabel('Kvot (dygn)')
     b.set_title('Påstigande på tre första hållplatserna / ändhållplatsen')
     b.legend(fontsize=7, frameon=False)
@@ -100,7 +100,7 @@ def fig_omfordelning():
                     mutation_scale=9 + 8 * v / vmax, shrinkA=14, shrinkB=10), zorder=9)
     ax.add_patch(plt.Circle(c, 55, facecolor='white', edgecolor='#c0392b', lw=1.6, zorder=11))
     h = [Line2D([], [], color='#c0392b', lw=2.5, label='Flyttade påstigningar')]
-    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
+    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=C.NAMN_LINJE[l]) for l in C.STADSLINJER]
     lg = K.teckenforklaring(ax, h, loc='lower right')
     lg.set_bbox_to_anchor((0.99, 0.03), transform=ax.transAxes)
     upp = K.placera_etiketter(ax, [('Centrum', c, 60)], fontsize=7.0, farg='#c0392b',

@@ -440,8 +440,8 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
         if sk > 0:                                                 # avgår senare än i dag
             ax.add_patch(Rectangle((r.avg - sk, y - 0.34), sk, 0.68, facecolor='none', edgecolor='#1f1f1e', ls=(0, (1, 1)),
                                    lw=0.6, zorder=3))
-        if r.kortid >= 14:
-            ax.text(r.avg + (r.kortid - max(d, 0)) / 2, y, r.linje, ha='center', va='center', fontsize=6.3,
+        if r.kortid >= 30:                                         # namnet får bara plats i långa turer
+            ax.text(r.avg + (r.kortid - max(d, 0)) / 2, y, C.NAMN_LINJE.get(r.linje, r.linje), ha='center', va='center', fontsize=5.6,
                     color='white', fontweight='bold', zorder=4)
         if etikett_vand and not np.isnan(r.vand_efter) and r.vand_efter < REKOMMENDERAD_VANDTID - 1e-9:
             farg = '#c0392b' if r.vand_efter < MIN_VANDTID - 1e-9 else '#e8590c'
@@ -451,7 +451,7 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
             ax.plot([r.ank + r.vand_efter / 2], [y + 0.43], marker='v', color=farg, ms=3.2, zorder=5)
     ax.set_ylim(-0.7, nb - 0.3)
     ax.set_yticks(range(nb))
-    ax.set_yticklabels([(f'Omlopp {etik[nb - i]}' if etik.get(nb - i, 'J') != 'J' else 'Linje J') if etik else f'Buss {nb - i}'
+    ax.set_yticklabels([(f'Omlopp {etik[nb - i]}' if etik.get(nb - i, 'J') != 'J' else 'Järsö') if etik else f'Buss {nb - i}'
                         for i in range(nb)], fontsize=7.5)
     ax.set_xlim(t0, t1)
     xt = np.arange(np.ceil(t0 / 60) * 60, t1 + 1, 60)
@@ -468,7 +468,7 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
 
 
 def omlopp_forklaring(fig, extra=(), y=0.005, ncol=None):
-    h = [Patch(facecolor=C.FARG_LINJE[l], label=f'Linje {l}') for l in C.STADSLINJER]
+    h = [Patch(facecolor=C.FARG_LINJE[l], label=C.NAMN_LINJE[l]) for l in C.STADSLINJER]
     h += list(extra)
     h += [Line2D([], [], color='#e8590c', lw=2.2, label=f'Vändtid < {REKOMMENDERAD_VANDTID:g} min'),
           Line2D([], [], color='#c0392b', lw=2.2, label=f'Vändtid < {MIN_VANDTID:g} min (ryms ej)'),
@@ -498,7 +498,8 @@ def fig_idag(t, plan, harledd):
     omlopp_forklaring(fig, y=-0.035)
     fig.subplots_adjust(left=0.06, right=0.99, top=0.9, bottom=0.08)
     ut = C.KARTOR / 'b4_1_omlopp_idag.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    import kartlib as K
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 

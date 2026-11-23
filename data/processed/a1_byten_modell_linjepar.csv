@@ -1,0 +1,45 @@
+period,zon,fran_linje,till_linje,resor_h
+FM,Nabben,Norra,Östra,1.184
+FM,"Centrum, Nygatan",Järsö,Norra,0.686
+FM,"Centrum, Nygatan",Järsö,Östra,0.635
+FM,Doktorsvägen 1A,Östra,Norra,0.549
+FM,Lervik,Järsö,Södra,0.181
+FM,Doktorsvägen 1B/1C,Västra,Norra,0.158
+FM,"Centrum, Nygatan",Järsö,Västra,0.116
+FM,Västra macken,Östra,Västra,0.1
+FM,"Centrum, Nygatan",Östra,Järsö,0.096
+FM,"Centrum, Nygatan",Södra,Norra,0.09
+FM,"Centrum, Nygatan",Södra,Östra,0.083
+FM,Västra macken,Norra,Västra,0.029
+FM,"Centrum, Nygatan",Västra,Östra,0.026
+FM,"Centrum, Nygatan",Västra,Järsö,0.019
+FM,"Centrum, Nygatan",Södra,Västra,0.015
+FM,Kyrkan,Norra,Södra,0.014
+FM,"Centrum, Nygatan",Östra,Södra,0.013
+FM,Norragatan,Norra,Järsö,0.013
+FM,Torget,Södra,Järsö,0.012
+FM,Elverksgatan,Västra,Norra,0.009
+FM,Stenhuggarvägen,Östra,Norra,0.007
+FM,"Centrum, Nygatan",Västra,Södra,0.003
+FM,Stenhuggarvägen,Västra,Norra,0.002
+EM,Nabben,Norra,Östra,2.28
+EM,"Centrum, Nygatan",Östra,Järsö,0.935
+EM,Lervik,Järsö,Södra,0.638
+EM,Norragatan,Norra,Järsö,0.338
+EM,Västra macken,Östra,Västra,0.194
+EM,"Centrum, Nygatan",Järsö,Östra,0.147
+EM,Västra macken,Norra,Västra,0.132
+EM,Kyrkan,Norra,Södra,0.115
+EM,Torget,Södra,Järsö,0.08
+EM,"Centrum, Nygatan",Östra,Södra,0.079
+EM,"Centrum, Nygatan",Västra,Järsö,0.066
+EM,"Centrum, Nygatan",Järsö,Norra,0.051
+EM,"Centrum, Nygatan",Västra,Östra,0.045
+EM,"Centrum, Nygatan",Södra,Östra,0.045
+EM,"Centrum, Nygatan",Järsö,Västra,0.028
+EM,Doktorsvägen 1B/1C,Västra,Norra,0.018
+EM,"Centrum, Nygatan",Södra,Norra,0.016
+EM,Doktorsvägen 1A,Östra,Norra,0.012
+EM,"Centrum, Nygatan",Södra,Västra,0.009
+EM,"Centrum, Nygatan",Västra,Södra,0.006
+EM,Ringvägen vsk.,Södra,Järsö,0.002

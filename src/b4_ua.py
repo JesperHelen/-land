@@ -29,8 +29,11 @@ Antaganden
     förlängningen: rak linje). Hållplatsläget är det indikativa läget i A3.
   * N2: hållplatsen ligger på återvändsgatan mot Kalmarnäs vändplan som bussen kör i båda riktningarna;
     0,5 min per tur (ett uppehåll per tur i genomsnitt).
-  * Bo-Bil: körtiden skalas med vägavståndet (OSRM) Maxinge – Bo-Bil – Bolstavägen mot Maxinge – Vikingagränd –
-    Bolstavägen och dagens schemalagda tid för delsträckan (1,5 min). Bo-Bil blir däremot
+  * Bo-Bil: linje Norra är enkelriktad och Maxinge har bara hållplats på västra sidan, så bussen passerar Maxinge
+    söderut. För att nå Bo-Bil vänder bussen i rondellen söder om Maxinge, kör norrut till rondellen norr om
+    Maxinge, Michaelsvägen österut och Godbyvägen söderut till Bo-Bil (västra sidan) och vidare till Bolstavägen
+    (beställaren 2026-11-23). Körtiden skalas med vägavståndet (OSRM) Maxinge – Bo-Bil – Bolstavägen mot
+    Maxinge – Vikingagränd – Bolstavägen och dagens schemalagda tid för delsträckan (1,5 min). Bo-Bil blir däremot
     ett verkligt uppehåll (+0,5 min), medan bussen i praktiken sällan stannar vid Vikingagränd (≈ 0,05
     påstigande per vardag). Netto +0,1 min per tur. Minskad väntan vid Nya Godbyvägen kan inte kvantifieras
     utan realtidsdata och ingår inte (försiktig bedömning).
@@ -439,7 +442,7 @@ def bobil_delta(xy):
     g = D.gtfs()['stop_times']; st = g[g.trip_id == n.trip_id].set_index('stop_id')
     tid_idag = st.loc[HPL['Bolstavägen'], 't_arr'] - st.loc[HPL['Maxinge'], 't_dep']
     sg = V.segmentgeometri(); fg = V.uageometri()
-    mx, vg, bv, bb = HPL['Maxinge'], HPL['Vikingagränd'], HPL['Bolstavägen'], HPL['Bo-Bil B']
+    mx, vg, bv, bb = HPL['Maxinge'], HPL['Vikingagränd'], HPL['Bolstavägen'], HPL['Bo-Bil A']
     idag = V.langd(sg[(mx, vg)]) + V.langd(sg[(vg, bv)])          # vägavstånd (OSRM)
     ny = fg[(mx, bb)]['langd_m'] + fg[(bb, bv)]['langd_m']
     kortare = round(float(tid_idag * (ny / idag - 1)), 1)
@@ -790,7 +793,7 @@ def geometri(f, trafikerar, xy, fg, sg):
         return ut
     v = xy.loc[f['bort'], ['x', 'y']].to_numpy(float)
     bo = xy.loc[f['till'], ['x', 'y']].mean().to_numpy(float)
-    mx, bv, bb = HPL['Maxinge'], HPL['Bolstavägen'], HPL['Bo-Bil B']
+    mx, bv, bb = HPL['Maxinge'], HPL['Bolstavägen'], HPL['Bo-Bil A']
     xy_ = lambda a: xy.loc[a, ['x', 'y']].to_numpy(float)
     g_gammal = ml(sg.get((mx, f['bort']), np.array([xy_(mx), v])), sg.get((f['bort'], bv), np.array([v, xy_(bv)])))
     ny_ = [fg[(mx, bb)], fg[(bb, bv)]]

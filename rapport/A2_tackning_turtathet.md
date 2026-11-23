@@ -5,8 +5,8 @@
 > vardag, vilket motsvarar ungefär halvtimmestrafik under dagen. 28 % (cirka 4 150 invånare) har en hållplats
 > nära men färre än 30 avgångar per vardag. De har i praktiken en enda stadslinje med 1–2 avgångar i timmen
 > och har därmed svag faktisk tillgänglighet. Svag tillgänglighet finns framför allt i södra Mariehamn
-> längs linje S (kring Källstigen–Lindstigen och Gröna Udden), i stadens norra och nordvästra delar som
-> trafikeras av linje V ensamt, i Strandnäs och i Järsö–Nåtö, där linje J har nio turer per dag.
+> längs linje Södra (kring Källstigen–Lindstigen och Gröna Udden), i stadens norra och nordvästra delar som
+> trafikeras av linje Västra ensamt, i Strandnäs och i Järsö–Nåtö, där linje Järsö har nio turer per dag.
 > Ytterligare 16 % (cirka 2 430 invånare) saknar hållplats inom 400 m. Störst är de grupperna vid Möckelö
 > Strand, längs Lillåkersvägen/Örtvägen och vid Solberget–Kalmsta.
 
@@ -19,14 +19,14 @@ Den här analysen kompletterar måttet med antalet avgångar som finns att nå i
   delpunkter om 50 × 50 m. Landdelen avgränsas med kustlinje enligt GSHHG. En finare fördelning medges inte av
   underlaget, och resultatet ska därför tolkas på rutnivå.
 - **Utbud.** Avgångar en typisk vardag (tisdag 1 september 2026) enligt GTFS, för samtliga busslinjer:
-  stadslinjerna J, N, S, Ö, V och landsbygdslinjerna 1–6. För varje delpunkt räknas antalet *unika turer* som
+  stadslinjerna Järsö, Norra, Södra, Östra, Västra och landsbygdslinjerna 1–6. För varje delpunkt räknas antalet *unika turer* som
   avgår från någon hållplats inom 400 m. En tur som passerar flera närliggande hållplatser räknas en gång, och
   avstigning vid slutstation räknas inte som avgång.
 - **Kartor.** Täckningsytorna i kartorna och i GIS-lagren ritas som exakta cirklar med radien 400 m runt
   hållplatserna, uppdelade efter befolkningsrutorna. Varje yta får antal avgångar och klass med samma regel som
   delpunkterna. Antalet invånare per yta hämtas från delpunkterna och påverkas därmed inte av ritsättet.
 - **Klassning.** Antal avgångar per vardag inom 400 m. Stadslinjerna trafikerar cirka 07–20:30 med 20–22 turer
-  per linje (linje J 9 turer), och klassgränserna har satts utifrån det:
+  per linje (linje Järsö 9 turer), och klassgränserna har satts utifrån det:
 
 | Klass | Avgångar/vardag inom 400 m | Tolkning |
 |---|---|---|
@@ -84,16 +84,16 @@ hållplatsläge.*
 
 Svag faktisk tillgänglighet koncentreras till följande områden (figur 2.3; antal invånare avser 1 km-rutor):
 
-- **Södra Mariehamn längs linje S, delvis J** (Källstigen–Lindstigen–Sälgstigen, Gröna Udden–Parkgatan,
-  Matrosgatan–Skillnadsgatan): cirka 1 500 invånare. Området har tät bebyggelse men trafikeras av linje S
+- **Södra Mariehamn längs linje Södra, delvis Järsö** (Källstigen–Lindstigen–Sälgstigen, Gröna Udden–Parkgatan,
+  Matrosgatan–Skillnadsgatan): cirka 1 500 invånare. Området har tät bebyggelse men trafikeras av linje Södra
   ensamt, med 22 avgångar per vardag i en riktning. Det är det största sammanhängande området med svag
   tillgänglighet.
-- **Norra och nordvästra Mariehamn längs linje V, delvis N** (Kasbergsvägen–Länsmansgränd, Kasbrinken–Åsvägen):
+- **Norra och nordvästra Mariehamn längs linje Västra, delvis Norra** (Kasbergsvägen–Länsmansgränd, Kasbrinken–Åsvägen):
   cirka 530 invånare med 20 avgångar per vardag.
 - **Strandnäs**, öster om centrum: cirka 290 invånare. Området trafikeras av landsbygdslinjerna och delvis
-  av linje N, men sammantaget med färre än 30 avgångar.
-- **Centrumnära västra delen** (Övernäs skola–Norragatan): cirka 320 invånare som bara når linje J.
-- **Järsö och Nåtö**, som trafikeras av linje J med nio turer per vardag. Befolkningen är liten, men här är
+  av linje Norra, men sammantaget med färre än 30 avgångar.
+- **Centrumnära västra delen** (Övernäs skola–Norragatan): cirka 320 invånare som bara når linje Järsö.
+- **Järsö och Nåtö**, som trafikeras av linje Järsö med nio turer per vardag. Befolkningen är liten, men här är
   tillgängligheten svagast i hela nätet.
 
 Av de cirka 2 430 invånare i Mariehamn som saknar hållplats inom 400 m bor de största grupperna vid Möckelö

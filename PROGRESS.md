@@ -224,6 +224,18 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       enhetskostnader och break-even har tagits bort ur B4, B5 och PM; `b5_kalkyl.py` räknar bara fordon och km,
       figur 5.1/13 visar fordonskm per vardag (rött = kräver fler fordon). Huvudalternativen: 1a +44, 1b +25,
       2 ±0, 3 ±0, 4 +27 (4Y +5, extra flygturer +44), 5 −1 fordonskm per vardag; alla med fem fordon.
+- [x] **Linjenamn, färger, UA 3 och påstigandedata** (beställaren 2026-11-23):
+      - Linjerna heter Västra, Östra, Norra, Södra och Järsö (genomgående linje: Västra–Östra) i figurer, rapporter
+        och QGIS (`config.NAMN_LINJE`, `config.fullnamn`, `kartlib.fullnamn_fig` före varje sparning). Färger:
+        Västra #005be6, Östra #a86f00, Norra #6f4388, Södra #00a884, Järsö #ff72df, med vit kontur.
+      - UA 3: Norra är enkelriktad och Maxinge har bara hållplats för södergående buss. Bussen vänder i rondellen
+        söder om Maxinge, kör norrut, Michaelsvägen och Godbyvägen söderut till Bo-Bil (läge A, västra sidan).
+        Via-punkter med angiven ordning i `s01_vagdragning.VIA_PUNKTER`; segment med via-punkter undantas från
+        omvägsspärren. Följd: +450 m och +0,9 min per tur (25 km/h: +1,6), +10 fordonskm per vardag, ryms med fem
+        fordon, Norras vändtid ≈ 3 min, restid +30 resenärsminuter.
+      - Ny `src/a1_pastigande_byten.py` → `output/data/pastigande_byten_skolresor.xlsx` och kartorna a1_6–a1_8:
+        påstigande per hållplats FM/EM (höst), byten (nätutläggning av OD + biljettypen Bussbyte 2h), skolresor
+        (skolkort, sommardata, 34 skoldagar; FM 06–09, EM 12–18). A1 avsnitt 1.5 Målpunkter och bytespunkter.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

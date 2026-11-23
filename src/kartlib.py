@@ -95,7 +95,23 @@ def ram(ax, **kw):
     skalstock(ax, **kw)
 
 
+def fullnamn_fig(fig):
+    """Fullständiga linjenamn (Västra, Östra, Norra, Södra, Järsö) i alla texter i figuren: rubriker,
+    teckenförklaringar, axeletiketter, etiketter och annoteringar."""
+    from matplotlib.text import Text
+    from matplotlib.ticker import FixedFormatter
+    for a in fig.axes:
+        for axis in (a.xaxis, a.yaxis):
+            f = axis.get_major_formatter()
+            if isinstance(f, FixedFormatter):
+                f.seq = [C.fullnamn(x) for x in f.seq]
+    for t in fig.findobj(Text):
+        if t.get_gid() != 'behall':
+            t.set_text(C.fullnamn(t.get_text()))
+
+
 def spara(fig, namn, dpi=200):
+    fullnamn_fig(fig)
     for a in fig.axes:
         if not a.get_xticks().size:
             a.set_xlabel(''); a.set_ylabel('')
@@ -156,7 +172,7 @@ def rita_linjer(ax, geom=None, alpha=1.0, lw=2.0, etikett=True, zorder=5, forskj
         f = C.FARG_LINJE[ln]
         for i, xy in enumerate(kedjor[ln]):
             line, = ax.plot(xy[:, 0], xy[:, 1], color=f, lw=lw, alpha=alpha, solid_capstyle='round',
-                            solid_joinstyle='round', zorder=zorder, label=f'Linje {ln}' if i == 0 else None,
+                            solid_joinstyle='round', zorder=zorder, label=C.NAMN_LINJE.get(ln, ln) if i == 0 else None,
                             path_effects=[pe.Stroke(linewidth=lw + 1.4, foreground='white'), pe.Normal()])
             if i == 0:
                 h.append(line)

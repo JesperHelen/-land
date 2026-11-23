@@ -373,14 +373,14 @@ def fig_vo(res, fid='1a'):
     ax.text(65.0, len(rader) - 0.2, 'Tid i\ncentrum', ha='left', va='bottom', fontsize=7, color=K.TEXT2)
     ax.set_xlim(-46, 92); ax.set_ylim(-0.7, len(rader) + 0.7)
     ax.axis('off')
-    h = [Patch(facecolor=fv, label='Linje V'), Patch(facecolor=fo, label='Linje Ö'),
+    h = [Patch(facecolor=fv, label='Västra'), Patch(facecolor=fo, label='Östra'),
          Patch(facecolor='#b9b4a8', label='Tid i centrum'),
          Patch(facecolor='none', edgecolor=SAMRE, hatch='xxxx', label='Tiden räcker inte')]
     ax.legend(handles=h, loc='upper left', bbox_to_anchor=(0.0, -0.01), ncol=4, fontsize=7.2, frameon=False)
-    fig.suptitle(('UA 1a och 1b – tidsbudget per varv V + Ö' if fid == '1a' else 'UA 4 – tidsbudget per varv V + Ö'),
+    fig.suptitle(('UA 1a och 1b – tidsbudget per varv Västra + Östra' if fid == '1a' else 'UA 4 – tidsbudget per varv Västra + Östra'),
                  x=0.01, ha='left')
     ut = C.KARTOR / ('b4_9_sammanslagning_vo.png' if fid == '1a' else 'b4_11_flygplatsen_vo.png')
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 
@@ -410,7 +410,7 @@ def fig_systemeffekter(res):
     ax.legend(loc='lower right', ncol=2, fontsize=7.3, frameon=True, facecolor='white', edgecolor='#e0ded7')
     ax.set_title('Invånare med bättre och sämre tillgänglighet än i dag')
     ut = C.KARTOR / 'b4_13_systemeffekter.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 
@@ -436,7 +436,7 @@ def rita_ua(ax, fid):
                    color=SAMRE if utgar else '#1c5cab', edgecolor='white', lw=0.8, zorder=8)
 
 
-FARG_VO = '#8c3b74'
+FARG_VO = C.FARG_LINJE['V']
 KLASSFARG = ['#cfcbc2', '#c6dbf5', '#7fb0ec', '#2a78d6', '#0d366b']
 
 
@@ -493,7 +493,7 @@ def fig_ua4_karta(res):
     v = res['4_VO']; fi = v['forandring_invanare_mariehamn']
     uts = (104900, 111700, 6682000, 6689300)
     fig, ax = plt.subplots(figsize=(10.2, 10.6))
-    K.ny_karta(uts, ax=ax, titel='UA 4 – linje V–Ö via flygplatsen')
+    K.ny_karta(uts, ax=ax, titel='UA 4 – Västra–Östra via flygplatsen')
     rita_forandring(ax, '4_VO', fyll=0.6, kant=1.0)
     D.befolkning().boundary.plot(ax=ax, color='#b9b4a8', linewidth=0.35, alpha=0.8, zorder=1.5)
     K.rita_linjer(ax, lw=1.3, alpha=0.35, zorder=3, etikett=False)
@@ -524,7 +524,7 @@ def fig_ua4_karta(res):
            f"bara större marginal – ingår inte",
            r'$\bf{Uteslutet}$' + f"   bara förlängning av V (dagens tidtabell): alla turer kräver {o['alla']['fordon']} bussar",
            r'$\bf{Effekt}$' + f"   +{fi['ny_tackning']} inv. vid flygplatsen får hållplats inom 400 m"]
-    hnd = [Line2D([], [], color=FARG_VO, lw=3, label='Linje V–Ö'),
+    hnd = [Line2D([], [], color=FARG_VO, lw=3, label='Västra–Östra'),
            Line2D([], [], color='#9a978f', lw=1.5, label='Övriga stadslinjer'),
            Line2D([], [], marker='*', ls='', color='#1c5cab', markersize=12, label='Ny hållplats'),
            Line2D([], [], marker='s', ls='', color='#1f1f1e', markersize=8, label='V → Ö i centrum'),
@@ -572,12 +572,12 @@ def fig_tackning_fore_efter(res):
             Line2D([], [], color='#7a776f', lw=2, label='Ny körväg (linjens färg)'),
             Line2D([], [], color='#7a776f', lw=2, ls=(0, (3, 2)), label='Planerad väg'),
             Line2D([], [], color='#3d3d3a', lw=2, ls=(0, (1, 1.4)), label='Körväg som utgår')]
-    hnd += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
+    hnd += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=C.NAMN_LINJE[l]) for l in C.STADSLINJER]
     fig.legend(handles=hnd, loc='lower center', ncol=6, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.012))
     fig.suptitle('Avgångar per vardag inom 400 m – före och efter', x=0.01, ha='left')
     fig.tight_layout(rect=(0, 0.035, 1, 0.985))
     ut = C.KARTOR / 'b4_14_tackning_fore_efter.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 
@@ -722,7 +722,7 @@ def fig_avgangar_forandring(res):
     fig.legend(handles=hnd, loc='lower center', ncol=4, fontsize=7.2, frameon=False, bbox_to_anchor=(0.5, -0.01))
     fig.suptitle('Fler och färre avgångar inom 400 m', x=0.01, ha='left')
     ut = C.KARTOR / 'b4_16_avgangar_forandring.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 
@@ -789,7 +789,7 @@ def fig_kanslighet_ua4():
     fig.suptitle('UA 4 – känslighet för omvägens körtid', x=0.01, ha='left')
     fig.subplots_adjust(left=0.2, right=0.995, top=0.91, bottom=0.06)
     ut = C.KARTOR / 'b4_15_ua4_kanslighet.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 

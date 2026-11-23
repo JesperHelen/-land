@@ -142,7 +142,7 @@ def omraden(prof):
     df['bedomning'] = np.select(
         [df.behov_min_per_tur <= df.utrymme_idag, df.behov_min_per_tur <= df.utrymme_genomgaende,
          df.behov_min_per_tur <= df.utrymme_skift, df.linje == 'J'],
-        ['Ryms i dag', 'Ryms som genomgående linje (Ö i pulsen)', SKIFT_TEXT, 'Linje J (timtrafik) – prövas separat'],
+        ['Ryms i dag', 'Ryms som genomgående linje (Östra i pulsen)', SKIFT_TEXT, 'Järsö (timtrafik) – prövas separat'],
         'Kräver större omläggning')
     return df
 
@@ -155,15 +155,15 @@ def figur(par, resor, omr, prof):
     ax = fig.add_subplot(gs[:, 0])
     K.ny_karta((104900, 112100, 6680300, 6688100), ax=ax, titel='Områden utan hållplats inom 400 m')
     K.rita_linjer(ax, lw=1.9, zorder=4)
-    farg = {'Ryms i dag': '#2f9e44', 'Ryms som genomgående linje (Ö i pulsen)': '#1c5cab', SKIFT_TEXT: '#159a9c',
-            'Kräver större omläggning': '#c0392b', 'Linje J (timtrafik) – prövas separat': '#7a776f'}
+    farg = {'Ryms i dag': '#2f9e44', 'Ryms som genomgående linje (Östra i pulsen)': '#1c5cab', SKIFT_TEXT: '#159a9c',
+            'Kräver större omläggning': '#c0392b', 'Järsö (timtrafik) – prövas separat': '#7a776f'}
     for r in omr.itertuples():
         ax.scatter([r.x], [r.y], s=40 + r.inv * 0.9, marker='D', color=farg[r.bedomning], edgecolor='white',
                    lw=0.8, zorder=8, alpha=0.95)
     etik = [(r.omrade, (r.x, r.y), 90) for r in omr.sort_values('inv', ascending=False).itertuples()]
     K.placera_etiketter(ax, etik, fontsize=6.4, undvik=K.punkt_hinder(ax, omr.x, omr.y, px=9))
     h = [Line2D([], [], marker='D', ls='', color=c, markersize=7, label=k) for k, c in farg.items()]
-    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
+    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=C.NAMN_LINJE[l]) for l in C.STADSLINJER]
     ax.legend(handles=h, loc='upper left', bbox_to_anchor=(0.0, -0.01), ncol=2, fontsize=6.8, frameon=False,
               handlelength=1.6, columnspacing=1.4)
     K.ram(ax)
@@ -182,7 +182,7 @@ def figur(par, resor, omr, prof):
         ax2.text(b + 0.1, yy, f'{b:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
         ax2.text(c + 0.1, yy - 0.27, f'{c:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
     ax2.axvline(0, color='#52514e', lw=0.8)
-    ax2.set_yticks(y); ax2.set_yticklabels([f"Linje {l} ({prof[l]['kortid_median']:.0f} min)" for l in LINJER], fontsize=8)
+    ax2.set_yticks(y); ax2.set_yticklabels([f"{C.NAMN_LINJE[l]} ({prof[l]['kortid_median']:.0f} min)" for l in LINJER], fontsize=8)
     ax2.invert_yaxis()
     ax2.set_xlabel('Minuter per tur', fontsize=7.5)
     ax2.set_xlim(-1.5, 8); ax2.tick_params(labelsize=7.5)
@@ -208,7 +208,7 @@ def figur(par, resor, omr, prof):
     ax3.set_title('Resor som slipper byte i centrum')
     fig.suptitle('Sammanslagning av linjer', x=0.01, ha='left')
     ut = C.KARTOR / 'b4_8_sammanslagning.png'
-    fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut
 
 

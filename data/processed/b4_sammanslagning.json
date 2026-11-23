@@ -216,7 +216,7 @@
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 5.0,
    "utrymme_skift": 5.0,
-   "bedomning": "Ryms som genomgående linje (Ö i pulsen)"
+   "bedomning": "Ryms som genomgående linje (Östra i pulsen)"
   },
   {
    "omrade": "Kalmsta",
@@ -227,7 +227,7 @@
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 5.0,
    "utrymme_skift": 5.0,
-   "bedomning": "Ryms som genomgående linje (Ö i pulsen)"
+   "bedomning": "Ryms som genomgående linje (Östra i pulsen)"
   },
   {
    "omrade": "Dalkullavägen",
@@ -260,7 +260,7 @@
    "utrymme_idag": NaN,
    "utrymme_genomgaende": NaN,
    "utrymme_skift": NaN,
-   "bedomning": "Linje J (timtrafik) – prövas separat"
+   "bedomning": "Järsö (timtrafik) – prövas separat"
   },
   {
    "omrade": "Strömsnäs",
@@ -282,7 +282,7 @@
    "utrymme_idag": 4.0,
    "utrymme_genomgaende": 5.0,
    "utrymme_skift": 5.0,
-   "bedomning": "Ryms som genomgående linje (Ö i pulsen)"
+   "bedomning": "Ryms som genomgående linje (Östra i pulsen)"
   }
  ]
 }

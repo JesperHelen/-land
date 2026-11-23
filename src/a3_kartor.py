@@ -48,7 +48,7 @@ def fig_nya():
          Patch(facecolor=SVAGFARG[1], alpha=0.55, label='1–14 avgångar per vardag i dag'),
          Patch(facecolor=SVAGFARG[2], alpha=0.55, label='15–29 avgångar per vardag i dag'),
          Patch(facecolor='#a8a49a', alpha=0.55, label='Ingen hållplats inom 400 m i dag')]
-    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
+    h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=C.NAMN_LINJE[l]) for l in C.STADSLINJER]
     lg = K.teckenforklaring(ax, h, loc='lower left')
     lg.set_bbox_to_anchor((1.02, 0.0), transform=ax.transAxes)
     K.ram(ax)

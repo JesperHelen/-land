@@ -4,7 +4,7 @@ scenario,namn,huvudalternativ,fordon,delta_fordon,fordonskm_vardag,delta_km_vard
 1a_VO,UA 1a ★ dagens vägar – V och Ö sammanslagna (16 av 20 turer),True,5,0,1330.9,43.9,11500,178,178
 1b,UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna (16 av 20 turer),True,5,0,1311.8,24.8,6500,178,178
 2,UA 2 ★ N2 på linje Ö,True,5,0,1287.0,0.0,0,58,58
-3,UA 3 ★ linje N via Bo-Bil,True,5,0,1286.6,-0.4,-100,0,44
+3,UA 3 ★ linje N via Bo-Bil,True,5,0,1296.9,9.9,2600,0,44
 4,UA 4 flygplatsen – alla turer,False,6,1,1321.2,34.2,9000,21,22
 4_VO,UA 4 ★ flygplatsen – V och Ö sammanslagna (16 av 20 turer),True,5,0,1314.4,27.4,7200,21,22
 4_VO_sol,UA 4 flygplatsen – dito + Solberget indragen (16 av 20),False,5,0,1314.4,27.4,7200,21,22

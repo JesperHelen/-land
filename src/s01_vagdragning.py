@@ -46,7 +46,7 @@ ORDNING = {l: i for i, l in enumerate(C.STADSLINJER)}
 # UA 1a kör den fram och tillbaka, UA 1b kör den tillbaka från den nya hållplatsen (slinga).
 # FLYGPLATSEN = hållplats vid flygterminalen (UA 4): Posten → flygplatsen → Källarvägen (beställarens skiss).
 UA_SEGMENT = [('9025302000067701', 'NY_MOCKELO', 'UA 1a'), ('NY_MOCKELO', '9025302000067701', 'UA 1a, 1b'),
-                   ('9025302000031201', '9025302000003502', 'UA 3'), ('9025302000003502', '9025302000063301', 'UA 3'),
+                   ('9025302000031201', '9025302000003501', 'UA 3'), ('9025302000003501', '9025302000063301', 'UA 3'),
                    ('9025302000035802', 'FLYGPLATSEN', 'UA 4'), ('FLYGPLATSEN', '9025302000025902', 'UA 4'),
                    # UA 5: linje N rakt på Västra utfarten (Västra macken → Elverksgatan) och linje V via svängen
                    # (Åsvägen → Stenhuggarvägen, Klintvägen → Tekniska verken)
@@ -138,7 +138,14 @@ def alla_xy():
 VIA_PUNKTER = [
     {'from_stop': '9025302000029202', 'to_stop': '9025302000067702', 'x': 106101.0, 'y': 6684603.0,
      'kommentar': 'Linje V Lönnhagsvägen – Norrgårdsvägen kör vägen söder om huvudvägen och vänder inte vid '
-                  'hållplatsen (beställaren 2026-10-14)'}]
+                  'hållplatsen (beställaren 2026-10-14)'},
+    # UA 3: linje Norra är enkelriktad och Maxinge har bara hållplats på västra sidan (södergående, beställaren
+    # 2026-11-23). Efter Maxinge vänder bussen i rondellen söder om hållplatsen, kör norrut till rondellen norr om
+    # Maxinge, Michaelsvägen österut och Godbyvägen söderut till Bo-Bil (hållplatsläget på västra sidan).
+    {'from_stop': '9025302000031201', 'to_stop': '9025302000003501', 'x': 107935.0, 'y': 6686660.0,
+     'ordning': 1, 'kommentar': 'UA 3: vändning i rondellen söder om Maxinge'},
+    {'from_stop': '9025302000031201', 'to_stop': '9025302000003501', 'x': 108110.0, 'y': 6687088.0,
+     'ordning': 2, 'kommentar': 'UA 3: Michaelsvägen österut mot Godbyvägen'}]
 # Busslänkar som inte är öppna för bilar och därför saknas i OSRM:s bilprofil: segmentet ruttas med OSRM fram till
 # länkens början, följer länken (punkterna nedan, EPSG:3067) och ruttas med OSRM från länkens slut.
 BUSSLANK = {('9025302000064001', '9025302000063801'):       # linje N Doktorsvägen 1B/1C → Uppgårdsvägen 10
@@ -166,9 +173,10 @@ def via_per_segment(segment, punkter, tvilling_m=TVILLING_M):
         (xa, ya), (xb, yb) = segment[k0]
         for k, (pa, pb) in segment.items():
             if k == k0 or (math.hypot(pa[0] - xb, pa[1] - yb) <= tvilling_m and math.hypot(pb[0] - xa, pb[1] - ya) <= tvilling_m):
-                ut.setdefault(k, []).append(q)
-    for k, lista in ut.items():
-        lista.sort(key=lambda q: _punkt_linje(q, *segment[k])[1])
+                ut.setdefault(k, []).append((q, p.get('ordning') if k == k0 else None))
+    for k, lista in ut.items():                   # angiven ordning gäller, annars läget längs sträckan a → b
+        lista.sort(key=lambda e: e[1] if e[1] is not None else _punkt_linje(e[0], *segment[k])[1])
+        ut[k] = [q for q, _ in lista]
     return ut
 
 
@@ -272,7 +280,7 @@ def hamta(paus_s=1.0):
                 n_hamtade += 1
                 X, Y = tr.transform(p[:, 0], p[:, 1])
                 pts = [xy[a]] + list(zip(X, Y)) + [xy[b]]          # anslut exakt till hållplatserna
-                if langd_o <= MAX_OMVAG[0] * rak + MAX_OMVAG[1]:
+                if v_ or langd_o <= MAX_OMVAG[0] * rak + MAX_OMVAG[1]:    # via-punkter: omvägen är avsiktlig
                     geom, kalla, langd_, tid = LineString(pts), 'osrm', langd_o, tid_o
                 else:
                     kalla, tid = 'osrm_avvisad', tid_o

@@ -849,11 +849,11 @@
    "fordon": 5,
    "fordon_samtidigt": 5,
    "turer": 93,
-   "korttid_h": 42.63,
-   "omloppstid_h": 61.44,
-   "regleringstid_h": 7.78,
-   "uppstallning_h": 11.03,
-   "km": 1286.6,
+   "korttid_h": 42.78,
+   "omloppstid_h": 61.45,
+   "regleringstid_h": 7.65,
+   "uppstallning_h": 11.02,
+   "km": 1296.9,
    "min_vandtid": 1.0,
    "vandningar_under_rek": 3,
    "varv_utan_reglering": 1,
@@ -928,7 +928,7 @@
   },
   "nya_hallplatser": {},
   "resenarer": {
-   "resenarsminuter_vardag": 19.7,
+   "resenarsminuter_vardag": 30.3,
    "resor_langre_vardag": 26.6,
    "resor_kortare_vardag": 0.0
   },
@@ -969,9 +969,9 @@
   },
   "forandring_omlopp": {
    "fordon": 0,
-   "omloppstid_h": 0.01,
-   "korttid_h": 0.18,
-   "km": -0.4
+   "omloppstid_h": 0.02,
+   "korttid_h": 0.33,
+   "km": 9.9
   }
  },
  "4": {

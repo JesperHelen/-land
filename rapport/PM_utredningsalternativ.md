@@ -9,8 +9,8 @@
 
 PM:et redovisar sex utredningsalternativ (UA). Varje UA prövas **för sig** mot ramen för uppdraget: inga fler
 bussar och samma omloppstid som i dag. Verifieringen utgår från operatörens omlopp, som finns i den tvättade
-påstigandedatan från hösten 2026. Omloppen följer förarnas norm att byta linje i centrum, Syd ↔ Norr (S ↔ N)
-och Öst ↔ Väst (Ö ↔ V).
+påstigandedatan från hösten 2026. Omloppen följer förarnas norm att byta linje i centrum, Södra ↔ Norra
+och Östra ↔ Västra.
 
 Varje UA har prövats i flera driftformer:
 
@@ -20,46 +20,46 @@ Varje UA har prövats i flera driftformer:
 
 Kombinationer av UA prövas i ett senare skede.
 
-Stadstrafiken körs i dag med fem bussar. Efter en V-tur har bussen 3 minuter innan den fortsätter som linje Ö,
-och efter en Ö-tur 7 minuter. Linje V kan därför inte förlängas utan att V och Ö slås ihop till en genomgående
-linje V–Ö. Bussen fortsätter då efter en halv minut, och resenärer mellan V och Ö kan sitta kvar. Det enda kravet
-(beställaren 2026-10-15) är att varje varv V + Ö ryms inom 55 minuter, dvs. minst 5 minuter i centrum, och helst
-inom 50 minuter. Ö startar när V har kommit tillbaka, i huvudalternativen 0–2,5 minuter efter pulsen.
+Stadstrafiken körs i dag med fem bussar. Efter en Västra-tur har bussen 3 minuter innan den fortsätter som linje Östra,
+och efter en Östra-tur 7 minuter. Linje Västra kan därför inte förlängas utan att Västra och Östra slås ihop till en genomgående
+linje Västra–Östra. Bussen fortsätter då efter en halv minut, och resenärer mellan Västra och Östra kan sitta kvar. Det enda kravet
+(beställaren 2026-10-15) är att varje varv Västra + Östra ryms inom 55 minuter, dvs. minst 5 minuter i centrum, och helst
+inom 50 minuter. Östra startar när Västra har kommit tillbaka, i huvudalternativen 0–2,5 minuter efter pulsen.
 
 Linjerna och utredningsalternativens körvägar följer gatunätet (OSRM, OpenStreetMap), och fordonskilometrarna
 är vägavstånd. Med den verkliga vägdragningen kör stadstrafiken 1 287 km per vardag.
 
 | UA | Huvudalternativ (★) | Ryms (5 bussar) | Effekt | Kostnad: fordonskm per vardag, fler fordon? | Utesluten driftform |
 |---|---|---|---|---|---|
-| **UA 1a – Möckelö Strand ny via dagens vägar** (+4,5 min/tur) | V och Ö sammanslagna | 16 av 20 turer | 178 inv. får hållplats (+16 avg./vardag) | +44 km, nej | Alla turer med dagens tidtabell (6 fordon, +55 km) |
-| **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen** (+2,5 min/tur) | V och Ö sammanslagna, Ö i pulsen | 16 av 20 | 178 inv. får hållplats (+16 avg./vardag) | +25 km, nej (+ väg) | – |
-| **UA 2 – N2 på linje Ö** (+0,5 min/tur) | Alla turer | 20 av 20 | 58 inv. får hållplats (+20 avg./vardag) | ±0 km, nej | – |
-| **UA 3 – Linje N via Bo-Bil** (+0,5 min/tur) | Alla turer | 22 av 22 | 44 inv. +22 avg./vardag (Bo-Bil); 24 inv. −22 (Vikingagränd) | ±0 km, nej | – |
-| **UA 4 – Linje V–Ö via flygplatsen** (+5 min/tur) | V och Ö sammanslagna | 16 av 20 | 21 inv. får hållplats (+16 avg./vardag); 3 av 6 flyg nås | +27 km, nej (alla 6 flyg: +44 km till, nej) | Bara förlängning av V (6 fordon, +34 km) |
-| **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten** (V +2, N −2 min/tur) | V och Ö sammanslagna | 17 av 20 V-turer | 125 inv. fler avgångar (upp till +22), 11 färre (−17); N 6 i stället för 4 min i centrum | −1 km, nej | – |
+| **UA 1a – Möckelö Strand ny via dagens vägar** (+4,5 min/tur) | Västra och Östra sammanslagna | 16 av 20 turer | 178 inv. får hållplats (+16 avg./vardag) | +44 km, nej | Alla turer med dagens tidtabell (6 fordon, +55 km) |
+| **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen** (+2,5 min/tur) | Västra och Östra sammanslagna, Östra i pulsen | 16 av 20 | 178 inv. får hållplats (+16 avg./vardag) | +25 km, nej (+ väg) | – |
+| **UA 2 – N2 på linje Östra** (+0,5 min/tur) | Alla turer | 20 av 20 | 58 inv. får hållplats (+20 avg./vardag) | ±0 km, nej | – |
+| **UA 3 – Linje Norra via Bo-Bil** (+0,9 min/tur) | Alla turer | 22 av 22 | 44 inv. +22 avg./vardag (Bo-Bil); 24 inv. −22 (Vikingagränd) | +10 km, nej | – |
+| **UA 4 – Linje Västra–Östra via flygplatsen** (+5 min/tur) | Västra och Östra sammanslagna | 16 av 20 | 21 inv. får hållplats (+16 avg./vardag); 3 av 6 flyg nås | +27 km, nej (alla 6 flyg: +44 km till, nej) | Bara förlängning av Västra (6 fordon, +34 km) |
+| **UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten** (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 125 inv. fler avgångar (upp till +22), 11 färre (−17); Norra 6 i stället för 4 min i centrum | −1 km, nej | – |
 
-I UA 1a, 1b och 4 kör samma fyra V-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
+I UA 1a, 1b och 4 kör samma fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 
-- 07:50, 13:40 och 14:40 följs av Ö:s skolturer (28–29 minuter);
-- 08:20 vänder direkt, utan uppehåll, till Ö:s skoltur 08:45.
+- 07:50, 13:40 och 14:40 följs av Östras skolturer (28–29 minuter);
+- 08:20 vänder direkt, utan uppehåll, till Östras skoltur 08:45.
 
 **Övriga driftformer:**
 
 - **UA 1a med dagens tidtabell:** 8 av 20 turer.
-- **UA 1b med alla 20 turer:** ryms med fem bussar, men varven med Ö:s skolturer får bara 1,5–2,5 minuter i
+- **UA 1b med alla 20 turer:** ryms med fem bussar, men varven med Östras skolturer får bara 1,5–2,5 minuter i
   centrum och uppfyller inte kravet.
 - **UA 4 med Solberget indragen dessutom:** inga fler turer (16 av 20), bara mer tid i centrum. Solberget har
   cirka 16 påstigande per vardag, och 49 invånare skulle få 20 avgångar färre per vardag (42 av dem förlorar
   hållplatsen inom 400 m).
-- **UA 4Y:** bara de tre V-turer som når ett flyg (V 08:50 till flyget 11:00, V 15:10 till flyget 17:10 och
-  V 17:10 från flyget som landar 16:45). Alla tre ryms med V och Ö sammanslagna och minst 6 minuter i centrum,
+- **UA 4Y:** bara de tre Västra-turer som når ett flyg (Västra 08:50 till flyget 11:00, Västra 15:10 till flyget 17:10 och
+  Västra 17:10 från flyget som landar 16:45). Alla tre ryms med Västra och Östra sammanslagna och minst 6 minuter i centrum,
   utan att Solberget dras in, för +5 fordonskm per vardag och inga fler fordon.
-- **Flygen (tider från beställaren 2026-11-15):** dagens V-turer når tre av sex flyg. Avgången 07:15 och
+- **Flygen (tider från beställaren 2026-11-15):** dagens Västra-turer når tre av sex flyg. Avgången 07:15 och
   ankomsterna 10:35 och 21:35 kräver extra turer, sammanlagt +44 fordonskm per vardag (14,5 km per tur). De
   körs av fordon som står stilla, så inga fler fordon behövs. Den extra turen 10:50, för ankomsten 10:35, ryms
   mitt på dagen i ett befintligt omlopp.
-- **UA 5 med dagens drift:** 16 av 20 V-turer via svängen, utan att V och Ö slås ihop. **Variant:** bara linje N
-  rakt på och ingen buss i svängen. Det ger samma vinst för N, ingen förlorar hållplatsen inom 400 m och linje V
+- **UA 5 med dagens drift:** 16 av 20 Västra-turer via svängen, utan att Västra och Östra slås ihop. **Variant:** bara linje Norra
+  rakt på och ingen buss i svängen. Det ger samma vinst för Norra, ingen förlorar hållplatsen inom 400 m och linje Västra
   påverkas inte.
 
 **Effekt på täckningen.** Med Möckelö Strand ny ökar andelen invånare i Mariehamn med hållplats inom 400 m från
@@ -71,11 +71,11 @@ och resandet är ungefär tre gånger så stort (cirka 320 påstigande per varda
 utan korrigering. Det ändrar inte vilka alternativ som ryms, men resenärseffekterna blir större. Den nya
 hållplatsen i Möckelö Strand beräknas få 1,5–6,5 påstigande per vardag.
 
-**UA 5** ger linje N 2 minuter mer tid i centrum i varje varv, vilket gör N mer robust mot förseningar. Svängen
+**UA 5** ger linje Norra 2 minuter mer tid i centrum i varje varv, vilket gör Norra mer robust mot förseningar. Svängen
 via Cedersvägen har i dag cirka 1 påstigande per vardag.
 
-**UA 1a, 1b, 4 och 5** förlänger alla linje V och använder samma tidsutrymme. Två av dem ryms inte tillsammans
-inom kravet utan fler bussar. UA 5 med bara linje N rakt på påverkar inte linje V.
+**UA 1a, 1b, 4 och 5** förlänger alla linje Västra och använder samma tidsutrymme. Två av dem ryms inte tillsammans
+inom kravet utan fler bussar. UA 5 med bara linje Norra rakt på påverkar inte linje Västra.
 
 ## 1 Bakgrund och uppdrag
 
@@ -84,23 +84,23 @@ turtätheten. Där identifierades också nya hållplatslägen och områden som b
 linjesträckning. Efter granskningen den 14 oktober 2026 bad beställaren om en utredning av de enskilda
 effekterna av följande utredningsalternativ (UA):
 
-1. **Möckelö Strand.** Linje V till en ny hållplats i Möckelö Strand, via dagens vägar (1a) och via en
+1. **Möckelö Strand.** Linje Västra till en ny hållplats i Möckelö Strand, via dagens vägar (1a) och via en
    förlängning av Norrgårdsvägen till Hamnskärsvägen (1b). Beställarens restider: den befintliga vägen från
    Norrgårdsvägen till den nya hållplatsen tar 2 minuter och förlängningen 1 minut.
-2. **N2.** En ny hållplats N2 på linje Ö mellan Österkullagatan och Kalmarnäs vändplan.
-3. **Bo-Bil.** Linje N stannar vid Bo-Bil i stället för vid Vikingagränd, så att bussen inte behöver vänta vid
+2. **N2.** En ny hållplats N2 på linje Östra mellan Österkullagatan och Kalmarnäs vändplan.
+3. **Bo-Bil.** Linje Norra stannar vid Bo-Bil i stället för vid Vikingagränd, så att bussen inte behöver vänta vid
    Nya Godbyvägen för att komma till Maxinge.
-4. **Flygplatsen.** Linje V följer vägen från Posten upp till flygterminalen. Det ska prövas med V och Ö
+4. **Flygplatsen.** Linje Västra följer vägen från Posten upp till flygterminalen. Det ska prövas med Västra och Östra
    sammanslagna, med hållplatsen Solberget indragen och som en UA 4Y med bara de turer som behövs för flygen.
    Den 15 november 2026 lämnade beställaren de exakta flygtiderna. Resenären ska vara på flygplatsen 2–1,5
    timmar före avgång, och en buss ska gå från flygplatsen cirka 30 minuter efter landning.
-5. **Svängen via Cedersvägen** (operatörens förslag, 2026-11-15). Linje V tar över svängen via Cedersvägen och
-   linje N kör rakt på Västra utfarten, vilket enligt operatören sparar linje N ett par minuter.
+5. **Svängen via Cedersvägen** (operatörens förslag, 2026-11-15). Linje Västra tar över svängen via Cedersvägen och
+   linje Norra kör rakt på Västra utfarten, vilket enligt operatören sparar linje Norra ett par minuter.
 
-Den 15 oktober 2026 preciserade beställaren kravet för en sammanslagen linje V–Ö: varje varv V + Ö ska rymmas
-inom timmen med minst 5 minuter i centrum, och den kortare restiden för resor mellan V och Ö ska räknas med.
+Den 15 oktober 2026 preciserade beställaren kravet för en sammanslagen linje Västra–Östra: varje varv Västra + Östra ska rymmas
+inom timmen med minst 5 minuter i centrum, och den kortare restiden för resor mellan Västra och Östra ska räknas med.
 
-Dessutom skulle möjligheten att slå ihop linjer prövas, särskilt om sammanslagning av V och Ö gör att den nya
+Dessutom skulle möjligheten att slå ihop linjer prövas, särskilt om sammanslagning av Västra och Östra gör att den nya
 hållplatsen i Möckelö Strand kan trafikeras redan med dagens vägar. För 1a skulle kostnaden bedömas.
 Systemeffekterna skulle redovisas för alla UA.
 
@@ -112,31 +112,31 @@ Utredningsalternativen får inte kräva fler bussar. Linjenätet ska rymmas inom
 fordon och samma omloppstid. Varje UA har verifierats mot detta:
 
 - alternativets körtidsförändring läggs på berörda turer;
-- avgångstiderna från centrum ligger fast, så att pulsen och bytena behålls. Undantaget är sammanslagning av V
-  och Ö, där Ö startar när V har kommit tillbaka;
+- avgångstiderna från centrum ligger fast, så att pulsen och bytena behålls. Undantaget är sammanslagning av Västra
+  och Östra, där Östra startar när Västra har kommit tillbaka;
 - omloppen byggs om med minsta möjliga antal fordon och enligt förarnas norm för linjebyten;
 - alternativet ryms om antalet bussar inte ökar och omloppstiden ökar med högst 10 minuter per vardag;
-- **UA på linje V (V och Ö sammanslagna):** operatörens omlopp ligger fast, så att varje V-tur fortsätter som
-  den tur som samma buss kör i dag. Det enda kravet är att varje varv V + Ö ryms inom 55 minuter, dvs. minst
+- **UA på linje Västra (Västra och Östra sammanslagna):** operatörens omlopp ligger fast, så att varje Västra-tur fortsätter som
+  den tur som samma buss kör i dag. Det enda kravet är att varje varv Västra + Östra ryms inom 55 minuter, dvs. minst
   5 minuter i centrum, och helst inom 50 minuter. Varv som redan i dag har mindre marginal godtas oförändrade
-  (V 07:50 följd av Ö:s skoltur 08:20 har i dag 4 minuter);
+  (Västra 07:50 följd av Östras skoltur 08:20 har i dag 4 minuter);
 - **UA 2 och 3:** alternativet är robust om det inte ger fler varv med mindre än 3 minuters reglering än i dag.
 
 ### 2.2 Dagens omlopp
 
 Den tvättade påstigandedatan från hösten 2026 anger operatörens omlopp för varje tur. De används som dagens
 omlopp för en typisk vardag, tisdag 2026-09-01 (figur 1), med beställarens rättelser 2026-11-03:
-N 11:20, S 11:50, N 12:20 och S 10:50 hör till omlopp 205, och N 16:50, S 17:20 och N 17:50 till omlopp 204.
-Kvällens S/N körs vidare av omlopp 205 och kvällens V/Ö av omlopp 208.
+Norra 11:20, Södra 11:50, Norra 12:20 och Södra 10:50 hör till omlopp 205, och Norra 16:50, Södra 17:20 och Norra 17:50 till omlopp 204.
+Kvällens Södra/Norra körs vidare av omlopp 205 och kvällens Västra/Östra av omlopp 208.
 
-- **Trafik:** fem bussar kör 93 turer i fyra omlopp (204, 205, 208 och 209) och linje J i ett eget omlopp.
+- **Trafik:** fem bussar kör 93 turer i fyra omlopp (204, 205, 208 och 209) och linje Järsö i ett eget omlopp.
   Körtiden är 42,5 timmar och omloppstiden 61,4 timmar per vardag.
-- **Puls:** linjerna N, S, V och Ö avgår från Centrum, Nygatan i en gemensam puls med 30 minuters intervall i
-  rusningstid. Linje J går ungefär en gång i timmen.
-- **Linjebyten:** bussarna byter S → N, N → S, V → Ö och Ö → V. Ingen buss fortsätter på samma linje, utom J.
-- **Bytestider i centrum:** V → Ö 3 minuter, Ö → V 7 minuter, S → N 7 minuter och N → S 4 minuter.
-  Efter Ö:s skolturer, som tar 28–29 minuter, är bytestiden 1–2 minuter. Ett varv V + Ö har alltså normalt
-  10 minuter i centrum, och 4–5 minuter i varven med Ö:s skolturer. V 08:20 vänder direkt till Ö:s extra
+- **Puls:** linjerna Norra, Södra, Västra och Östra avgår från Centrum, Nygatan i en gemensam puls med 30 minuters intervall i
+  rusningstid. Linje Järsö går ungefär en gång i timmen.
+- **Linjebyten:** bussarna byter Södra → Norra, Norra → Södra, Västra → Östra och Östra → Västra. Ingen buss fortsätter på samma linje, utom Järsö.
+- **Bytestider i centrum:** Västra → Östra 3 minuter, Östra → Västra 7 minuter, Södra → Norra 7 minuter och Norra → Södra 4 minuter.
+  Efter Östras skolturer, som tar 28–29 minuter, är bytestiden 1–2 minuter. Ett varv Västra + Östra har alltså normalt
+  10 minuter i centrum, och 4–5 minuter i varven med Östras skolturer. Västra 08:20 vänder direkt till Östras extra
   skoltur 08:45, och varvet har 7 minuter.
 - **Marginaler:** med krav på 2 minuters lägsta vändtid i stället för dagens 1 minut skulle det behövas en
   sjätte buss. I dag finns ett varv med mindre än 3 minuters reglering.
@@ -153,12 +153,12 @@ varje stapel en tur.*
   invånare som får fler respektive färre avgångar och hur många som byter turtäthetsklass. Kartornas
   täckningsytor är exakta 400 m-cirklar runt hållplatserna.
 - **Svag tillgänglighet:** hållplats inom 400 m men färre än 30 avgångar per vardag.
-- **Påstigandedata:** tvättad data för vardagar hösten 2026, linjerna N, S, V och Ö. Kontrollen visar att
-  påstigningarna vid centrum nu registreras på rätt tur. Ingen data korrigeras. Linje J finns bara i
+- **Påstigandedata:** tvättad data för vardagar hösten 2026, linjerna Norra, Södra, Västra och Östra. Kontrollen visar att
+  påstigningarna vid centrum nu registreras på rätt tur. Ingen data korrigeras. Linje Järsö finns bara i
   sommardatan och används som den är.
 - **Resenärseffekter:** OD-matrisen ur höstdatan har lagts ut på ett restidsnät byggt på GTFS. Det
-  tillkommande påstigandet har uppskattats med påstigande per invånare vid linjens bostadshållplatser. När V och Ö slås ihop kan resenärer mellan
-  V och Ö sitta kvar; nätet räknar då med en genomgående linje utan bytesstraff.
+  tillkommande påstigandet har uppskattats med påstigande per invånare vid linjens bostadshållplatser. När Västra och Östra slås ihop kan resenärer mellan
+  Västra och Östra sitta kvar; nätet räknar då med en genomgående linje utan bytesstraff.
 - **Körvägar:** linjerna och utredningsalternativens nya delsträckor följer gatunätet. Varje sträcka mellan två
   hållplatser är ruttad med OSRM (OpenStreetMap), och körvägarnas längder ger fordonskilometrarna. Bara
   förlängningen av Norrgårdsvägen (UA 1b), som inte finns i dag, är ritad schematiskt.
@@ -169,30 +169,30 @@ varje stapel en tur.*
 
 | UA | Körtid per tur | Ryms i dagens omlopp (5 bussar) | Invånare med bättre / sämre tillgänglighet | Kostnad: fordonskm per vardag och fordon |
 |---|---|---|---|---|
-| UA 1a – Möckelö Strand ny via dagens vägar | +4,5 min | **★ V och Ö sammanslagna: 16 av 20.** Dagens tidtabell: 8 av 20. Alla turer: 6 bussar (utesluten). | 178 / 0 | **★ +44 km, inga fler fordon** (dagens tidtabell +22 km; utesluten: +55 km och +1 fordon) |
-| UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen | +2,5 min | **★ V och Ö sammanslagna: 16 av 20.** Alla 20 turer: 5 bussar men under 5 min i centrum (uppfyller inte kravet). | 178 / 0 | ★ +25 km, inga fler fordon |
-| UA 2 – N2 på linje Ö | +0,5 min | ★ Alla 20 av 20 | 58 / 0 | ±0 km, inga fler fordon |
-| UA 3 – Linje N via Bo-Bil | +0,5 min | ★ Alla 22 av 22 | 44 / 24 | ±0 km, inga fler fordon |
-| UA 4 – Linje V–Ö via flygplatsen | +5 min | **★ V och Ö sammanslagna: 16 av 20.** Med Solberget indragen: 16 av 20. UA 4Y: 3 av 3. Dagens tidtabell: 7 av 20. Alla turer: 6 bussar (utesluten). | 22 / 0 (Solberget indragen: 22 / 49) | **★ +27 km, inga fler fordon** (UA 4Y +5 km; extra turer för alla flyg +44 km, inga fler fordon; utesluten: +34 km och +1 fordon) |
-| UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten | V +2 min, N −2 min | **★ V och Ö sammanslagna: 17 av 20 V-turer.** Dagens drift: 16 av 20. Bara N rakt på: alla N-turer. | 79 / 0 (bara N rakt på: 0 / 0) | **★ −1 km, inga fler fordon** (bara N rakt på −4 km) |
+| UA 1a – Möckelö Strand ny via dagens vägar | +4,5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Dagens tidtabell: 8 av 20. Alla turer: 6 bussar (utesluten). | 178 / 0 | **★ +44 km, inga fler fordon** (dagens tidtabell +22 km; utesluten: +55 km och +1 fordon) |
+| UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen | +2,5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Alla 20 turer: 5 bussar men under 5 min i centrum (uppfyller inte kravet). | 178 / 0 | ★ +25 km, inga fler fordon |
+| UA 2 – N2 på linje Östra | +0,5 min | ★ Alla 20 av 20 | 58 / 0 | ±0 km, inga fler fordon |
+| UA 3 – Linje Norra via Bo-Bil | +0,9 min | ★ Alla 22 av 22 | 44 / 24 | +10 km, inga fler fordon |
+| UA 4 – Linje Västra–Östra via flygplatsen | +5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Med Solberget indragen: 16 av 20. UA 4Y: 3 av 3. Dagens tidtabell: 7 av 20. Alla turer: 6 bussar (utesluten). | 22 / 0 (Solberget indragen: 22 / 49) | **★ +27 km, inga fler fordon** (UA 4Y +5 km; extra turer för alla flyg +44 km, inga fler fordon; utesluten: +34 km och +1 fordon) |
+| UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten | Västra +2 min, Norra −2 min | **★ Västra och Östra sammanslagna: 17 av 20 Västra-turer.** Dagens drift: 16 av 20. Bara Norra rakt på: alla Norra-turer. | 79 / 0 (bara Norra rakt på: 0 / 0) | **★ −1 km, inga fler fordon** (bara Norra rakt på −4 km) |
 
 ### 3.1 UA 1a och UA 1b – Möckelö Strand ny
 
-**Introduktion.** Linje V slutar i dag vid hållplatsen Möckelö Strand i stadstrafikens västra del. Där vänder
+**Introduktion.** Linje Västra slutar i dag vid hållplatsen Möckelö Strand i stadstrafikens västra del. Där vänder
 bussen och kör tillbaka mot Norrgårdsvägen. Söder om vändpunkten bor cirka 240 invånare som har mer än 400 m till
 närmaste hållplats. Det är det största av de områden i kapitel 3 som bara kan nås med ändrad linjesträckning.
-UA 1a och 1b förlänger linje V till en ny hållplats, *Möckelö Strand ny*, cirka 700 m söder om dagens vändpunkt.
+UA 1a och 1b förlänger linje Västra till en ny hållplats, *Möckelö Strand ny*, cirka 700 m söder om dagens vändpunkt.
 
 - **Syfte:** ge invånarna söder om Möckelö Strand en hållplats inom 400 m. Den nya hållplatsen når 178 av dem.
-- **I dag:** Möckelö Strand har 20 avgångar per vardag med linje V och cirka 5 påstigande per vardag (höst 2026).
+- **I dag:** Möckelö Strand har 20 avgångar per vardag med linje Västra och cirka 5 påstigande per vardag (höst 2026).
 - **Två vägval:**
   - UA 1a använder dagens vägar, och bussen kör samma väg fram och tillbaka till den nya hållplatsen.
   - UA 1b förutsätter att Norrgårdsvägen förlängs till Hamnskärsvägen, så att bussen kan köra en slinga. Vägen
     finns inte i dag.
-- **Det som avgör:** om den längre körtiden på linje V ryms i dagens omlopp utan fler bussar, och om
+- **Det som avgör:** om den längre körtiden på linje Västra ryms i dagens omlopp utan fler bussar, och om
   förlängningen av Norrgårdsvägen är värd att bygga.
 
-**Utformning.** Linje V vänder i dag vid hållplatsen Möckelö Strand: bussen kör Norrgårdsvägen → Möckelö
+**Utformning.** Linje Västra vänder i dag vid hållplatsen Möckelö Strand: bussen kör Norrgårdsvägen → Möckelö
 Strand → Norrgårdsvägen. Den nya hållplatsen, *Möckelö Strand ny*, placeras cirka 700 m söder om dagens
 vändpunkt (figur 2). Den befintliga vägen från Norrgårdsvägen till den nya hållplatsen tar 2 minuter (cirka
 1,4 km längs gatunätet). Dagens 3 minuter från Möckelö Strand är alltså 1 minut tillbaka till Norrgårdsvägen, som bussen redan
@@ -211,23 +211,23 @@ kör, plus den befintliga vägen.
 **Omlopp.**
 
 - **1a, dagens tidtabell:** 8 av 20 turer ryms. Alla turer kräver ett sjätte fordon (figur 3).
-- **1a med V och Ö sammanslagna:** 16 av 20 turer ryms, se avsnitt 3.2.
-- **1b med V och Ö sammanslagna:** 16 av 20 turer ryms med fem bussar. V-turen kommer tillbaka en halv minut
-  före Ö:s avgång, så Ö kan behålla pulsen, och varven har minst 7,5 minuter i centrum. Med alla 20 turer får
-  varven med Ö:s skolturer bara 1,5–2,5 minuter i centrum. Med 3,5 minuter i stället för 2,5 ryms också 16 av 20.
-  Dras Solberget in på Ö:s skolturer 14:10 och 15:10 ryms 18 av 20 turer, men
+- **1a med Västra och Östra sammanslagna:** 16 av 20 turer ryms, se avsnitt 3.2.
+- **1b med Västra och Östra sammanslagna:** 16 av 20 turer ryms med fem bussar. Västra-turen kommer tillbaka en halv minut
+  före Östras avgång, så Östra kan behålla pulsen, och varven har minst 7,5 minuter i centrum. Med alla 20 turer får
+  varven med Östras skolturer bara 1,5–2,5 minuter i centrum. Med 3,5 minuter i stället för 2,5 ryms också 16 av 20.
+  Dras Solberget in på Östras skolturer 14:10 och 15:10 ryms 18 av 20 turer, men
   varven får då 4,8 minuter i centrum (55,2 minuter), strax under kravet.
 
 **Effekter.** 178 invånare får en hållplats inom 400 m med 16 avgångar per vardag, och ingen får färre
 avgångar. Påstigandet uppskattas till 1,5–6,5 per vardag (höst 2026). Restiden för befintliga resenärer ökar
-netto med cirka 12 (1b) respektive 25 (1a) resenärsminuter per vardag, efter vinsten för resor mellan V och Ö som slipper bytet.
+netto med cirka 12 (1b) respektive 25 (1a) resenärsminuter per vardag, efter vinsten för resor mellan Västra och Östra som slipper bytet.
 
 **Kostnad.** Huvudalternativen ryms med dagens fem fordon. Fordonskilometrarna ökar med 44 per vardag i 1a
 (omvägen 2,7 km per tur) och med 25 per vardag i 1b (1,6 km per tur).
 
 ![UA 1, Möckelö Strand](../output/kartor/b4_2_mockelo_karta.png)
 
-*Figur 2. UA 1a och UA 1b – huvudalternativen; linje V visas som del av linje V–Ö. Grönt anger invånare som får hållplats inom 400 m. Linjerna och den befintliga vägen följer
+*Figur 2. UA 1a och UA 1b – huvudalternativen; linje Västra visas som del av linje Västra–Östra. Grönt anger invånare som får hållplats inom 400 m. Linjerna och den befintliga vägen följer
 gatunätet (OSRM); förlängningen (streckad) är schematisk eftersom vägen inte finns i dag.*
 
 ![UA 1, omlopp](../output/kartor/b4_3_mockelo_omlopp.png)
@@ -236,59 +236,59 @@ gatunätet (OSRM); förlängningen (streckad) är schematisk eftersom vägen int
 anger att turen avgår senare än i dag. Röd rubrik anger att lösningen kräver fler bussar eller inte uppfyller
 kravet på 5 minuter i centrum per varv.*
 
-### 3.2 Sammanslagning av V och Ö – Möckelö Strand ny redan med dagens vägar?
+### 3.2 Sammanslagning av Västra och Östra – Möckelö Strand ny redan med dagens vägar?
 
-Ett varv V → Ö → V tar 60 minuter, och två bussar kör varvet med 30 minuters förskjutning (figur 4). Kravet är
+Ett varv Västra → Östra → Västra tar 60 minuter, och två bussar kör varvet med 30 minuters förskjutning (figur 4). Kravet är
 minst 5 minuter i centrum per varv:
 
-- **I dag:** varvet består av V (27 minuter), byte (3 minuter), Ö (23 minuter) och byte (7 minuter), dvs.
-  10 minuter i centrum. I varven med Ö:s skolturer blir det 4–5 minuter.
-- **1a med dagens tidtabell:** V tar 31,5 minuter och kommer tillbaka 1,5 minut efter att Ö ska avgå.
-- **1a med V och Ö sammanslagna:** bussen fortsätter som linje Ö efter en halv minut, och Ö avgår då
+- **I dag:** varvet består av Västra (27 minuter), byte (3 minuter), Östra (23 minuter) och byte (7 minuter), dvs.
+  10 minuter i centrum. I varven med Östras skolturer blir det 4–5 minuter.
+- **1a med dagens tidtabell:** Västra tar 31,5 minuter och kommer tillbaka 1,5 minut efter att Östra ska avgå.
+- **1a med Västra och Östra sammanslagna:** bussen fortsätter som linje Östra efter en halv minut, och Östra avgår då
   2 minuter efter pulsen (:22/:52 i stället för :20/:50). Varvet får 5,5 minuter i centrum och ryms.
-- **1b med V och Ö sammanslagna:** V tar 29,5 minuter och hinner till Ö i pulsen. Varvet får 7,5 minuter.
-- **Varv med Ö:s skolturer** (28–29 minuter): 1a ger 0,5 och 1b 2,5 minuter i centrum. Där kör V-turen som i dag.
+- **1b med Västra och Östra sammanslagna:** Västra tar 29,5 minuter och hinner till Östra i pulsen. Varvet får 7,5 minuter.
+- **Varv med Östras skolturer** (28–29 minuter): 1a ger 0,5 och 1b 2,5 minuter i centrum. Där kör Västra-turen som i dag.
 
-Varje V-tur har prövats för sig med operatörens omlopp. Resultatet:
+Varje Västra-tur har prövats för sig med operatörens omlopp. Resultatet:
 
-- **Turer:** 16 av 20 V-turer kan trafikera Möckelö Strand ny med fem bussar, i både 1a och 1b. 07:50, 08:20,
+- **Turer:** 16 av 20 Västra-turer kan trafikera Möckelö Strand ny med fem bussar, i både 1a och 1b. 07:50, 08:20,
   13:40 och 14:40 kör som i dag.
-- **Ö:s avgångar (1a):** 14 av Ö:s 20 turer avgår 2 minuter senare än i dag. I 1b avgår Ö som i dag.
+- **Östras avgångar (1a):** 14 av Östras 20 turer avgår 2 minuter senare än i dag. I 1b avgår Östra som i dag.
 - **Kostnad:** +44 fordonskm per vardag i 1a och +25 i 1b; inga fler fordon.
 
-**Konsekvenser för resenärerna.** Den som byter till linje Ö i pulsen får i 1a 2 minuter längre väntan, och Ö
-kommer tillbaka till centrum 2 minuter senare, men före nästa pulsavgång. Den som åker vidare från V till Ö kan
+**Konsekvenser för resenärerna.** Den som byter till linje Östra i pulsen får i 1a 2 minuter längre väntan, och Östra
+kommer tillbaka till centrum 2 minuter senare, men före nästa pulsavgång. Den som åker vidare från Västra till Östra kan
 sitta kvar på bussen. Med höstens resande gäller det cirka 1,5 resor per vardag.
 
-**Bedömning.** Ja – med V och Ö sammanslagna kan Möckelö Strand ny trafikeras redan med dagens vägar, på 16 av
+**Bedömning.** Ja – med Västra och Östra sammanslagna kan Möckelö Strand ny trafikeras redan med dagens vägar, på 16 av
 20 turer och med dagens fem bussar. Förlängningen av Norrgårdsvägen (1b) ger inte fler turer, men den ger tre
 fördelar:
 
 - en kortare omväg, 2,5 i stället för 4,5 minuter per tur;
 - större marginal i centrum, minst 7,5 i stället för 5,5 minuter per varv;
-- Ö kan behålla sina avgångar i pulsen.
+- Östra kan behålla sina avgångar i pulsen.
 
-![Sammanslagning V och Ö](../output/kartor/b4_9_sammanslagning_vo.png)
+![Sammanslagning Västra och Östra](../output/kartor/b4_9_sammanslagning_vo.png)
 
-*Figur 4. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter.*
+*Figur 4. Sammanslagning av linje Västra och Östra: tidsbudget per varv med tiden i centrum mot kravet 5 minuter.*
 
-### 3.3 UA 2 – N2 på linje Ö
+### 3.3 UA 2 – N2 på linje Östra
 
-**Introduktion.** Linje Ö kör från Österkullagatan ut till Kalmarnäs vändplan i sydöstra Mariehamn och tillbaka
+**Introduktion.** Linje Östra kör från Österkullagatan ut till Kalmarnäs vändplan i sydöstra Mariehamn och tillbaka
 samma väg. Sträckan är cirka 1,8 km lång och saknar hållplats. Invånarna längs mitten av sträckan har därför mer
 än 400 m till närmaste hållplats, trots att bussen passerar dem. UA 2 lägger hållplatsen N2 från kapitel 3 där
 bussen redan kör.
 
 - **Syfte:** 58 invånare får en hållplats inom 400 m utan att körvägen ändras.
-- **I dag:** Kalmarnäs vändplan har 21 avgångar per vardag (linje Ö och landsbygdslinje 5) och cirka 10
+- **I dag:** Kalmarnäs vändplan har 21 avgångar per vardag (linje Östra och landsbygdslinje 5) och cirka 10
   påstigande per vardag. Österkullagatan har cirka 2.
-- **Prövas:** ett uppehåll vid N2 på alla 20 Ö-turer, i genomsnitt 0,5 minut per tur.
-- **Det som avgör:** att den extra halva minuten ryms i varven V + Ö, särskilt i varven med Ö:s skolturer.
+- **Prövas:** ett uppehåll vid N2 på alla 20 Östra-turer, i genomsnitt 0,5 minut per tur.
+- **Det som avgör:** att den extra halva minuten ryms i varven Västra + Östra, särskilt i varven med Östras skolturer.
 
 **Utformning.** Hållplatsen N2 placeras på sträckan Österkullagatan – Kalmarnäs vändplan, som bussen kör i
 båda riktningarna. Ett uppehåll per tur i genomsnitt (0,5 minut) har antagits.
 
-**Omlopp.** Alla 20 turer ryms, och alternativet är lika robust som i dag (figur 6). Varven V + Ö med Ö:s
+**Omlopp.** Alla 20 turer ryms, och alternativet är lika robust som i dag (figur 6). Varven Västra + Östra med Östras
 skolturer får 3,5–4,5 minuter i centrum, mot 4–5 minuter i dag.
 
 **Effekter.**
@@ -301,73 +301,73 @@ skolturer får 3,5–4,5 minuter i centrum, mot 4–5 minuter i dag.
 
 ![UA 2, N2](../output/kartor/b4_4_n2_karta.png)
 
-*Figur 5. UA 2, ny hållplats N2 på linje Ö.*
+*Figur 5. UA 2, ny hållplats N2 på linje Östra.*
 
 ![UA 2, omlopp](../output/kartor/b4_5_n2_omlopp.png)
 
 *Figur 6. Omlopp före och efter för UA 2.*
 
-### 3.4 UA 3 – Linje N via Bo-Bil
+### 3.4 UA 3 – Linje Norra via Bo-Bil
 
-**Introduktion.** Linje N kör norrut från centrum till Maxinge och vidare via Vikingagränd mot Bolstavägen.
-Enligt beställaren måste bussen ofta vänta vid Nya Godbyvägen för att komma till Maxinge. UA 3 låter linje N i
-stället köra Maxinge – Bo-Bil – Bolstavägen och stanna vid Bo-Bil på Nya Godbyvägen, där landsbygdslinjerna
-redan stannar.
+**Introduktion.** Linje Norra är en enkelriktad slinga. Från centrum kör den norrut till Maxinge och därefter via
+Vikingagränd österut mot Bolstavägen. Maxinge har bara en hållplats, på västra sidan av Nya Godbyvägen, så
+bussen kan bara stanna där när den kör söderut. UA 3 låter linje Norra stanna vid Bo-Bil på Godbyvägen, där
+landsbygdslinjerna redan stannar, i stället för vid Vikingagränd.
 
-- **Syfte:** en jämnare körtid för linje N, utan väntan vid Nya Godbyvägen, och linje N:s avgångar vid Bo-Bil.
+- **Syfte:** linje Norras avgångar vid Bo-Bil, och om möjligt en jämnare körtid.
 - **I dag:**
-  - Vikingagränd har 22 avgångar per vardag med linje N men bara cirka 0,06 påstigande per vardag.
+  - Vikingagränd har 22 avgångar per vardag med linje Norra men bara cirka 0,06 påstigande per vardag.
   - Bo-Bil trafikeras av landsbygdslinjerna 1–4, med 14–15 avgångar per vardag och riktning.
-- **Prövas:** den nya körvägen på alla 22 turer. Längs gatunätet är den ungefär lika lång som dagens.
-- **Det som avgör:** att körtiden blir i stort sett oförändrad, och om förlusten för de närmast boende vid
-  Vikingagränd vägs upp av vinsten vid Bo-Bil.
+- **Prövas:** den nya körvägen på alla 22 turer.
+- **Det som avgör:** om omvägen ryms i omloppen, och om förlusten för de närmast boende vid Vikingagränd vägs
+  upp av vinsten vid Bo-Bil.
 
-**Utformning.** Linje N kör Maxinge – Bo-Bil – Bolstavägen i stället för Maxinge – Vikingagränd –
-Bolstavägen (figur 7).
+**Utformning.** Bussen kör söderut vid Maxinge, och Bo-Bil ligger öster därom. Efter Maxinge vänder bussen därför i
+rondellen söder om hållplatsen, kör norrut till rondellen norr om Maxinge, Michaelsvägen österut och Godbyvägen
+söderut till Bo-Bil och vidare till Bolstavägen (figur 7). Att köra direkt till Bo-Bil utan att stanna vid Maxinge
+ger samma väglängd som i dag, men då förlorar linje Norra Maxinge, en av de största målpunkterna.
 
-**Körtid.** Körtiden ökar med cirka 0,5 minut per tur:
+**Körtid.** Delsträckan Maxinge – Bolstavägen blir cirka 450 m längre (1,92 i stället för 1,47 km). Med
+dagens tidtabellshastighet och uppehållet vid Bo-Bil (+0,5 minut) ökar körtiden med cirka 0,9 minut per tur; med
+25 km/h genom rondellerna med cirka 1,6 minuter. Väntan vid Nya Godbyvägen minskar inte, eftersom bussen
+fortfarande kör förbi Maxinge.
 
-- längs gatunätet (OSRM) är den nya körvägen ungefär lika lång som dagens, 1,45 mot 1,47 km, så själva
-  körningen tar lika lång tid;
-- Bo-Bil blir ett verkligt uppehåll, +0,5 minut. Vid Vikingagränd stannar bussen sällan i dag (cirka 0,06
-  påstigande per vardag).
+**Omlopp.** Alternativet ryms med alla 22 turer och fem fordon. Linje Norras vändtid i centrum blir cirka 3 minuter
+i stället för 4.
 
-Den minskade väntan vid Nya Godbyvägen ingår inte, eftersom den inte kan beräknas utan realtidsdata. Den talar
-för en kortare och framför allt jämnare körtid.
-
-**Omlopp.** Alternativet ryms med alla 22 turer.
-
-**Kostnad.** ±0 fordonskm, eftersom vägen är lika lång som i dag; inga fler fordon.
+**Kostnad.** +10 fordonskm per vardag (450 m per tur); inga fler fordon.
 
 **Effekter.**
 
-- **Bo-Bil:** hållplatsen får linje N:s 22 avgångar utöver landsbygdslinjernas, och 44 invånare får minst 30
+- **Bo-Bil:** hållplatsen får linje Norras 22 avgångar utöver landsbygdslinjernas, och 44 invånare får minst 30
   avgångar per vardag.
 - **Vikingagränd:** 24 invånare får 22 avgångar färre per vardag, och 23 av dem förlorar hållplatsen inom 400 m.
-  Samtidigt får 44 invånare vid Bo-Bil 22 avgångar fler.
-- **Fordonskilometer:** i stort sett oförändrade.
+- **Restid:** cirka 27 resor per vardag får längre restid, sammanlagt cirka 30 resenärsminuter per vardag.
+
+**Bedömning.** Alternativet ryms, men omvägen tar det mesta av linje Norras marginal i centrum, och nyttan är liten
+i förhållande till omvägen. Den verkliga körtiden genom rondellerna bör mätas innan alternativet går vidare.
 
 ![UA 3, Bo-Bil](../output/kartor/b4_6_bobil_karta.png)
 
-*Figur 7. UA 3. Grönt anger bättre och rött sämre tillgänglighet.*
+*Figur 7. UA 3. Grönt anger bättre och rött sämre tillgänglighet. Pilarna visar körriktningen.*
 
-### 3.5 UA 4 – Linje V–Ö via flygplatsen
+### 3.5 UA 4 – Linje Västra–Östra via flygplatsen
 
 **Introduktion.** Mariehamns flygplats har vardagar sex flyg till och från Stockholm-Arlanda och Åbo, men ingen
 busslinje når terminalen i dag. Närmaste hållplats är Posten på Flygfältsvägen, cirka 800 m längs vägen från
-terminalen. Där stannar linje V och landsbygdslinjerna 1 och 4. UA 4 leder linje V upp till terminalen.
+terminalen. Där stannar linje Västra och landsbygdslinjerna 1 och 4. UA 4 leder linje Västra upp till terminalen.
 
 - **Syfte:** kollektivtrafik till och från flyget. Resenären ska kunna vara på flygplatsen 2–1,5 timmar före
   avgång och åka därifrån cirka 30 minuter efter landning (beställaren).
-- **I dag:** Posten har 24 avgångar per vardag och cirka 2 påstigande per vardag på linje V.
+- **I dag:** Posten har 24 avgångar per vardag och cirka 2 påstigande per vardag på linje Västra.
 - **Prövas:**
-  - alla V-turer via terminalen, med dagens tidtabell och med V och Ö sammanslagna;
+  - alla Västra-turer via terminalen, med dagens tidtabell och med Västra och Östra sammanslagna;
   - med hållplatsen Solberget indragen;
   - bara de turer som når ett flyg (UA 4Y);
   - extra turer för de flyg som tidtabellen inte når.
 - **Det som avgör:** omvägens körtid, cirka 5 minuter per tur, och vilka flyg som ska nås.
 
-**Utformning.** Linje V passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
+**Utformning.** Linje Västra passerar i dag Posten på Flygfältsvägen. I alternativet kör bussen från Posten upp till
 flygterminalen, runt terminalen och tillbaka till Norra Svibyvägen, och därefter vidare mot Källarvägen som i
 dag (figur 8 och 8b).
 
@@ -382,22 +382,22 @@ godtas, så att resenärerna hinner hämta bagaget).
 
 *Tabell 2a. Flygen och bussen (figur 10b).*
 
-| Flyg | Bussen ska vara vid flygplatsen | V-tur i dag | Extra tur (om ingen V-tur når flyget) | Fordonskm per vardag |
+| Flyg | Bussen ska vara vid flygplatsen | Västra-tur i dag | Extra tur (om ingen Västra-tur når flyget) | Fordonskm per vardag |
 |---|---|---|---|---|
-| Avgång 07:15 till Stockholm-Arlanda | 05:15–05:45 | – (första V-turen 07:20) | 05:15, vid flygplatsen 05:32 (omlopp 204) | +14,5 |
-| Avgång 11:00 till Åbo | 09:00–09:30 | **V 08:50**, vid flygplatsen 09:07 | – | – |
-| Ankomst 10:35 från Stockholm-Arlanda | 11:00–11:20 | – (V 10:20 är där 10:36) | 10:50, vid flygplatsen 11:07 (omlopp 204, i uppehåll) | +14,5 |
-| Avgång 17:10 till Stockholm-Arlanda | 15:10–15:40 | **V 15:10**, vid flygplatsen 15:27 | – | – |
-| Ankomst 16:45 från Åbo | 17:10–17:30 | **V 17:10**, vid flygplatsen 17:27 | – | – |
-| Ankomst 21:35 från Stockholm-Arlanda | 22:00–22:20 | – (sista V-turen 20:40) | 21:50, vid flygplatsen 22:07 (omlopp 205) | +14,5 |
+| Avgång 07:15 till Stockholm-Arlanda | 05:15–05:45 | – (första Västra-turen 07:20) | 05:15, vid flygplatsen 05:32 (omlopp 204) | +14,5 |
+| Avgång 11:00 till Åbo | 09:00–09:30 | **Västra 08:50**, vid flygplatsen 09:07 | – | – |
+| Ankomst 10:35 från Stockholm-Arlanda | 11:00–11:20 | – (Västra 10:20 är där 10:36) | 10:50, vid flygplatsen 11:07 (omlopp 204, i uppehåll) | +14,5 |
+| Avgång 17:10 till Stockholm-Arlanda | 15:10–15:40 | **Västra 15:10**, vid flygplatsen 15:27 | – | – |
+| Ankomst 16:45 från Åbo | 17:10–17:30 | **Västra 17:10**, vid flygplatsen 17:27 | – | – |
+| Ankomst 21:35 från Stockholm-Arlanda | 22:00–22:20 | – (sista Västra-turen 20:40) | 21:50, vid flygplatsen 22:07 (omlopp 205) | +14,5 |
 
-Dagens V-turer når alltså tre av sex flyg. UA 4Y kör till flygplatsen bara på dessa tre turer. De tre extra
+Dagens Västra-turer når alltså tre av sex flyg. UA 4Y kör till flygplatsen bara på dessa tre turer. De tre extra
 turerna körs av omlopp som står stilla, så inga fler fordon behövs; de ger sammanlagt +44 fordonskm per vardag.
 Morgon- och kvällsturen ligger utanför dagens trafikdygn och förlänger trafikdygnet för omlopp 204 och 205. Där
 bör anropsstyrd trafik eller taxi jämföras. Flygtiderna antas vara desamma alla vardagar.
 
-**Solberget.** Hållplatsen Solberget på linje Ö ligger på en omväg. Dras den in sparas 1,6–2,5 minuter per
-Ö-tur. Det har prövats som ett sätt att få mer tid i varvet V + Ö.
+**Solberget.** Hållplatsen Solberget på linje Östra ligger på en omväg. Dras den in sparas 1,6–2,5 minuter per
+Östra-tur. Det har prövats som ett sätt att få mer tid i varvet Västra + Östra.
 
 *Tabell 2. UA 4 – alla driftformer (fem bussar om inget annat anges; ★ = huvudalternativ).*
 
@@ -405,9 +405,9 @@ bör anropsstyrd trafik eller taxi jämföras. Flygtiderna antas vara desamma al
 |---|---|---|---|---|
 | Alla turer, dagens tidtabell | 20 av 20 | – | +34 | **Ja, +1 (6 fordon)** |
 | Dagens tidtabell utan extra fordon | 7 av 20 | 8 min | +12 | Nej |
-| **★ V och Ö sammanslagna** | **16 av 20** | **5 min** | **+27** | **Nej** |
-| V och Ö sammanslagna + Solberget indragen | 16 av 20 | 7,1 min | +27 | Nej |
-| **Y: de 3 flygturerna, V och Ö sammanslagna** | **3 av 3** | **5 min** | **+5** | **Nej** |
+| **★ Västra och Östra sammanslagna** | **16 av 20** | **5 min** | **+27** | **Nej** |
+| Västra och Östra sammanslagna + Solberget indragen | 16 av 20 | 7,1 min | +27 | Nej |
+| **Y: de 3 flygturerna, Västra och Östra sammanslagna** | **3 av 3** | **5 min** | **+5** | **Nej** |
 | Y: de 3 flygturerna, dito + Solberget indragen | 3 av 3 | 7,1 min | +5 | Nej |
 | Extra turer för flygen 07:15, 10:35 och 21:35 | 3 extra turer | – | +44 | Nej |
 | Känslighet: omvägen 4 min, sammanslagna | 16 av 20 | 6 min | +27 | Nej |
@@ -415,12 +415,12 @@ bör anropsstyrd trafik eller taxi jämföras. Flygtiderna antas vara desamma al
 
 **Resultat.**
 
-- **V och Ö sammanslagna:** Ö avgår 2,5 minuter efter pulsen, och 16 av 20 turer ryms med minst 5 minuter i
-  centrum, alltså precis kravet. V 07:50, 13:40 och 14:40 följs av Ö:s skolturer, där 32 + 28 minuter inte
-  lämnar någon tid i centrum. V 08:20 vänder direkt till Ö:s skoltur 08:45.
+- **Västra och Östra sammanslagna:** Östra avgår 2,5 minuter efter pulsen, och 16 av 20 turer ryms med minst 5 minuter i
+  centrum, alltså precis kravet. Västra 07:50, 13:40 och 14:40 följs av Östras skolturer, där 32 + 28 minuter inte
+  lämnar någon tid i centrum. Västra 08:20 vänder direkt till Östras skoltur 08:45.
 - **Solberget indragen:** ger inga fler turer (16 av 20), bara mer tid i centrum. Solberget har cirka 16
   påstigande per vardag, och 49 invånare skulle få 20 avgångar färre per vardag.
-- **UA 4Y:** de tre flygturerna ryms med V och Ö sammanslagna, utan att Solberget dras in. Varven har minst 5
+- **UA 4Y:** de tre flygturerna ryms med Västra och Östra sammanslagna, utan att Solberget dras in. Varven har minst 5
   minuter i centrum. Huvudalternativet innehåller samma tre turer, så både UA 4 ★ och UA 4Y når tre av sex flyg.
 
 **Effekter.**
@@ -433,19 +433,19 @@ bör anropsstyrd trafik eller taxi jämföras. Flygtiderna antas vara desamma al
 
 **Bedömning.**
 
-- **Utesluten:** att bara förlänga linje V till flygplatsen. Omloppen spricker, och ett sjätte fordon krävs.
-- **Det enda rimliga är en genomgående linje V–Ö.**
-- **Huvudalternativ ★:** linje V–Ö via flygplatsen. 16 av 20 turer ryms med fem bussar, och Solberget behålls;
+- **Utesluten:** att bara förlänga linje Västra till flygplatsen. Omloppen spricker, och ett sjätte fordon krävs.
+- **Det enda rimliga är en genomgående linje Västra–Östra.**
+- **Huvudalternativ ★:** linje Västra–Östra via flygplatsen. 16 av 20 turer ryms med fem bussar, och Solberget behålls;
   se figur 8, som bara visar huvudalternativet. Kostnaden är +27 fordonskm per vardag och inga fler fordon.
 - **UA 4Y:** samma linje men bara de tre flygturerna. Alla tre ryms, och Solberget behålls (+5 fordonskm per
   vardag, inga fler fordon).
 - **Alla sex flyg** kräver tre extra turer, +44 fordonskm per vardag, som körs av befintliga fordon. Turen
   10:50 för ankomsten 10:35 ryms i ett omlopp som står stilla mitt på dagen.
 
-**Känslighet – omvägens körtid och Solberget på utvalda turer (tabell 2c).** Ö startar när V har kommit tillbaka.
+**Känslighet – omvägens körtid och Solberget på utvalda turer (tabell 2c).** Östra startar när Västra har kommit tillbaka.
 Upp till 5 minuters omväg ryms 16 av 20 turer (UA 4Y 3 av 3) utan att Solberget dras in. Den beräknade omvägen,
-5 minuter, ligger precis på gränsen med exakt 5 minuter i centrum. Med 5,5–7 minuters omväg ryms varvet bara om Solberget dras in på de Ö-turer som följer
-en V-tur via flygplatsen. Då ryms fortfarande 16 av 20 turer (UA 4Y 3 av 3). Det gäller 10 Ö-turer (UA 4Y: Ö
+5 minuter, ligger precis på gränsen med exakt 5 minuter i centrum. Med 5,5–7 minuters omväg ryms varvet bara om Solberget dras in på de Östra-turer som följer
+en Västra-tur via flygplatsen. Då ryms fortfarande 16 av 20 turer (UA 4Y 3 av 3). Det gäller 10 Östra-turer (UA 4Y: Östra
 09:20 och 15:40), som blir 1,6–2,5 minuter kortare. Solberget behåller 10 respektive 18 av 20 avgångar, och ingen
 förlorar hållplatsen. Med alla turer får 49 invånare lägre turtäthet och cirka 8 av Solbergets 16 påstigande per
 vardag berörs; med UA 4Y byter ingen klass. Över 7 minuter ryms bara 6 turer, och flygen 11:00 och 17:10 nås inte.
@@ -453,35 +453,35 @@ vardag berörs; med UA 4Y byter ingen klass. Över 7 minuter ryms bara 6 turer, 
 Nivån 50 minuter per varv nås inte med omvägen, eftersom dagens vanliga varv redan ligger på exakt 50 minuter.
 
 Körtiden till terminalen bör därför mätas: blir den högst 5 minuter behövs ingen indragning, och blir den
-5,5–7 minuter är det rimligt att dra in Solberget bara på de Ö-turer som följer flygturerna.
+5,5–7 minuter är det rimligt att dra in Solberget bara på de Östra-turer som följer flygturerna.
 
-*Tabell 2c. UA 4 – känslighet: turer via flygplatsen per omväg och driftform, alla 20 V-turer / UA 4Y:s 3
-flygturer, fem bussar. "Ö startar efter pulsen" gäller driftform A och B.*
+*Tabell 2c. UA 4 – känslighet: turer via flygplatsen per omväg och driftform, alla 20 Västra-turer / UA 4Y:s 3
+flygturer, fem bussar. "Östra startar efter pulsen" gäller driftform A och B.*
 
-| Omväg per tur | Ö startar efter pulsen (högst) | A – varvet ≤ 55 min (krav), Solberget kvar | B – varvet ≤ 55 min, Solberget indraget där det behövs | C – varvet ≤ 50 min (helst), Solberget kvar | D – varvet ≤ 50 min, Solberget indraget där det behövs |
+| Omväg per tur | Östra startar efter pulsen (högst) | A – varvet ≤ 55 min (krav), Solberget kvar | B – varvet ≤ 55 min, Solberget indraget där det behövs | C – varvet ≤ 50 min (helst), Solberget kvar | D – varvet ≤ 50 min, Solberget indraget där det behövs |
 |---|---|---|---|---|---|
-| 3 min | 0,5 min | 16 / 3 | 17 / 3 – Solberget indraget på Ö 08:45 | 6 / 1 | 6 / 1 |
-| 4 min | 1,5 min | 16 / 3 | 17 / 3 – Solberget indraget på Ö 08:45 | 4 / 1 | 6 / 1 – Solberget indraget på 2 Ö-turer |
+| 3 min | 0,5 min | 16 / 3 | 17 / 3 – Solberget indraget på Östra 08:45 | 6 / 1 | 6 / 1 |
+| 4 min | 1,5 min | 16 / 3 | 17 / 3 – Solberget indraget på Östra 08:45 | 4 / 1 | 6 / 1 – Solberget indraget på 2 Östra-turer |
 | **5 min (beräknad)** | **2,5 min** | **16 / 3** | 16 / 3 | 4 / 1 | 4 / 1 |
-| 5,5 min | 3 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Ö-turer | 4 / 1 | 4 / 1 |
-| 6 min | 3,5 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Ö-turer | 4 / 1 | 4 / 1 |
-| 6,5 min | 4 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Ö-turer | 4 / 1 | 4 / 1 |
-| 7 min | 4,5 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Ö-turer | 4 / 1 | 4 / 1 |
+| 5,5 min | 3 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Östra-turer | 4 / 1 | 4 / 1 |
+| 6 min | 3,5 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Östra-turer | 4 / 1 | 4 / 1 |
+| 6,5 min | 4 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Östra-turer | 4 / 1 | 4 / 1 |
+| 7 min | 4,5 min | 6 / 1 | 16 / 3 – Solberget indraget på 10 / 2 Östra-turer | 4 / 1 | 4 / 1 |
 | 7,5 min | 5 min | 6 / 1 | 6 / 1 | 4 / 1 | 4 / 1 |
 | 8 min | 5,5 min | 6 / 1 | 6 / 1 | 4 / 1 | 4 / 1 |
 
 ![UA 4, flygplatsen](../output/kartor/b4_10_ua4_karta.png)
 
-*Figur 8. UA 4 – huvudalternativet: linje V–Ö (V och Ö sammanslagna) via flygplatsen.*
+*Figur 8. UA 4 – huvudalternativet: linje Västra–Östra (Västra och Östra sammanslagna) via flygplatsen.*
 
 ![UA 4, flygplatsen inzoomad](../output/kartor/b4_20_flygplatsen_zoom.png)
 
-*Figur 8b. Flygplatsen inzoomad: linje V–Ö kör från Posten söderut till Flygfältsvägen, upp till terminalen,
+*Figur 8b. Flygplatsen inzoomad: linje Västra–Östra kör från Posten söderut till Flygfältsvägen, upp till terminalen,
 vänder i slingan framför terminalbyggnaden och kör samma väg tillbaka förbi Posten mot Källarvägen.*
 
 ![UA 4, tidsbudget](../output/kartor/b4_11_flygplatsen_vo.png)
 
-*Figur 9. UA 4: tidsbudget per varv V + Ö med tiden i centrum mot kravet 5 minuter.*
+*Figur 9. UA 4: tidsbudget per varv Västra + Östra med tiden i centrum mot kravet 5 minuter.*
 
 ![UA 4, omlopp](../output/kartor/b4_12_flygplatsen_omlopp.png)
 
@@ -489,76 +489,76 @@ vänder i slingan framför terminalbyggnaden och kör samma väg tillbaka förbi
 
 ![UA 4, flygtider](../output/kartor/b4_19_flygtider.png)
 
-*Figur 10b. UA 4 – flygen och bussen en vardag: fönstret då bussen ska vara vid flygplatsen, V-turerna som når
+*Figur 10b. UA 4 – flygen och bussen en vardag: fönstret då bussen ska vara vid flygplatsen, Västra-turerna som når
 flygen och de extra turer som behövs för övriga flyg.*
 
-### 3.6 UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten
+### 3.6 UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten
 
-**Introduktion.** Linje N kör på väg mot centrum en sväng öster om Västra utfarten, via Stenhuggarvägen,
-Cedersvägen och Klintvägen. Operatören har via beställaren (2026-11-15) föreslagit att linje V tar över svängen
-och att linje N kör rakt på Västra utfarten. Enligt operatören sparar det linje N ett par minuter, vilket kan göra
+**Introduktion.** Linje Norra kör på väg mot centrum en sväng öster om Västra utfarten, via Stenhuggarvägen,
+Cedersvägen och Klintvägen. Operatören har via beställaren (2026-11-15) föreslagit att linje Västra tar över svängen
+och att linje Norra kör rakt på Västra utfarten. Enligt operatören sparar det linje Norra ett par minuter, vilket kan göra
 stor skillnad. För de flesta är det inte långt att gå till hållplatserna på Västra utfarten, t.ex. för den som ska
 till Maxinge.
 
-- **Syfte:** mer marginal för linje N, som i dag har 4 minuter i centrum före bytet till linje S.
-- **I dag:** svängens tre hållplatser har 22 avgångar per vardag med linje N, men tillsammans bara cirka 1
+- **Syfte:** mer marginal för linje Norra, som i dag har 4 minuter i centrum före bytet till linje Södra.
+- **I dag:** svängens tre hållplatser har 22 avgångar per vardag med linje Norra, men tillsammans bara cirka 1
   påstigande per vardag.
 - **Prövas:**
-  - linje N rakt på Västra utfarten på alla 22 turer;
-  - linje V via svängen, med dagens drift och med V och Ö sammanslagna;
+  - linje Norra rakt på Västra utfarten på alla 22 turer;
+  - linje Västra via svängen, med dagens drift och med Västra och Östra sammanslagna;
   - en variant utan buss i svängen.
-- **Det som avgör:** om linje V:s längre körtid ryms, och om gångavståndet till Västra utfarten är acceptabelt.
+- **Det som avgör:** om linje Västras längre körtid ryms, och om gångavståndet till Västra utfarten är acceptabelt.
 
 **Utformning (figur 10c).** Båda linjerna kör svängen mot centrum.
 
-- **Linje N:** kör i dag Sjukhuset → Stenhuggarvägen → Cedersvägen → Klintvägen → Elverksgatan. I UA 5 kör N
+- **Linje Norra:** kör i dag Sjukhuset → Stenhuggarvägen → Cedersvägen → Klintvägen → Elverksgatan. I UA 5 kör Norra
   Sjukhuset → Västra macken → Elverksgatan, och stannar vid Västra macken i stället för Stenhuggarvägen 50 m
   bort.
-- **Linje V:** svänger av vid Stenhuggarvägen, norr om hållplatsen Västra macken, och kör Stenhuggarvägen →
-  Cedersvägen → Klintvägen tillbaka till Västra utfarten vid Tekniska verken. V stannar alltså vid
+- **Linje Västra:** svänger av vid Stenhuggarvägen, norr om hållplatsen Västra macken, och kör Stenhuggarvägen →
+  Cedersvägen → Klintvägen tillbaka till Västra utfarten vid Tekniska verken. Västra stannar alltså vid
   Stenhuggarvägen i stället för vid Västra macken.
-- **Körtid:** enligt operatören tar svängen ett par minuter. Huvudberäkningen använder 2 minuter: N blir 2
-  minuter kortare på alla 22 turer och V 2 minuter längre. Tidtabellen ger bara cirka 0,7 minuter, och 1 minut
-  redovisas som känslighet. Längs gatunätet blir N:s väg cirka 185 m kortare per tur och V:s lika mycket längre.
+- **Körtid:** enligt operatören tar svängen ett par minuter. Huvudberäkningen använder 2 minuter: Norra blir 2
+  minuter kortare på alla 22 turer och Västra 2 minuter längre. Tidtabellen ger bara cirka 0,7 minuter, och 1 minut
+  redovisas som känslighet. Längs gatunätet blir Norras väg cirka 185 m kortare per tur och Västras lika mycket längre.
 
 *Tabell 2b. UA 5 – driftformer (fem bussar; ★ = huvudalternativ).*
 
-| Driftform | V-turer via svängen | Linje N i centrum | Fordonskm per vardag | Fler fordon? |
+| Driftform | Västra-turer via svängen | Linje Norra i centrum | Fordonskm per vardag | Fler fordon? |
 |---|---|---|---|---|
-| Alla V-turer, dagens drift | 20 av 20 – ryms inte (2 min i centrum) | – | −1 | Nej |
+| Alla Västra-turer, dagens drift | 20 av 20 – ryms inte (2 min i centrum) | – | −1 | Nej |
 | Dagens drift, de turer som ryms | 16 av 20 | 4 → 6 min | −1 | Nej |
-| **★ V och Ö sammanslagna** | **17 av 20** | **4 → 6 min** | **−1** | **Nej** |
-| Variant: bara linje N rakt på (svängen utan buss) | 0 | 4 → 6 min | −4 | Nej |
+| **★ Västra och Östra sammanslagna** | **17 av 20** | **4 → 6 min** | **−1** | **Nej** |
+| Variant: bara linje Norra rakt på (svängen utan buss) | 0 | 4 → 6 min | −4 | Nej |
 
 **Resultat.**
 
-- **Linje N** får 6 minuter i centrum i stället för 4 vid alla 20 byten N → S (0,7 timmar mer reglering per
-  vardag). En försening på N sprids då inte lika lätt vidare till S. Det är den stora vinsten.
-- **Linje V:** med V och Ö sammanslagna ryms 17 av 20 V-turer via svängen. V 07:50, 13:40 och 14:40 kör rakt som i
-  dag. Med dagens drift ryms 16 av 20, alltså utan att V och Ö slås ihop. Med 1 minuts körtid ryms samma turer.
+- **Linje Norra** får 6 minuter i centrum i stället för 4 vid alla 20 byten Norra → Södra (0,7 timmar mer reglering per
+  vardag). En försening på Norra sprids då inte lika lätt vidare till Södra. Det är den stora vinsten.
+- **Linje Västra:** med Västra och Östra sammanslagna ryms 17 av 20 Västra-turer via svängen. Västra 07:50, 13:40 och 14:40 kör rakt som i
+  dag. Med dagens drift ryms 16 av 20, alltså utan att Västra och Östra slås ihop. Med 1 minuts körtid ryms samma turer.
 - **Påstigande i svängen:** cirka 1 per vardag (Stenhuggarvägen 0,42, Cedersvägen 0,10 och Klintvägen 0,43).
 - **Täckning:** ingen förlorar hållplatsen inom 400 m. 125 invånare får fler avgångar (upp till 22 fler per
   vardag), och 62 lyfts till minst 30 avgångar per vardag. 11 invånare väster om Västra macken får 17 färre,
-  eftersom linje V inte längre stannar där.
-- **Restid:** cirka 4 resenärer per vardag åker genom svängen på N och sparar 2 minuter. Netto blir det cirka
+  eftersom linje Västra inte längre stannar där.
+- **Restid:** cirka 4 resenärer per vardag åker genom svängen på Norra och sparar 2 minuter. Netto blir det cirka
   9–10 resenärsminuter kortare restid per vardag.
-- **Kostnad:** −1 fordonskm per vardag, eftersom linje N:s väg rakt på är kortare än svängen; inga fler fordon.
+- **Kostnad:** −1 fordonskm per vardag, eftersom linje Norras väg rakt på är kortare än svängen; inga fler fordon.
 - **Gångavstånd:** 50–300 m från svängens hållplatser till Västra macken eller Tekniska verken. Till Maxinge åker
   man redan i dag via centrum, eller med landsbygdslinjerna 2–4 från Västra macken (7 avgångar per vardag).
 
 **Bedömning.**
 
-- **Huvudalternativ ★:** linje V via Cedersvägen med V och Ö sammanslagna, 17 av 20 V-turer.
-- **UA 5 kräver inte sammanslagning:** med dagens drift ryms 16 av 20 V-turer.
-- **Variant med bara linje N rakt på:** svängen trafikeras inte, men ingen förlorar hållplatsen inom 400 m och
-  ingen får färre avgångar, linje N får samma vinst och linje V påverkas inte. Resenärerna vinner cirka 21 minuter per vardag. Varianten
+- **Huvudalternativ ★:** linje Västra via Cedersvägen med Västra och Östra sammanslagna, 17 av 20 Västra-turer.
+- **UA 5 kräver inte sammanslagning:** med dagens drift ryms 16 av 20 Västra-turer.
+- **Variant med bara linje Norra rakt på:** svängen trafikeras inte, men ingen förlorar hållplatsen inom 400 m och
+  ingen får färre avgångar, linje Norra får samma vinst och linje Västra påverkas inte. Resenärerna vinner cirka 21 minuter per vardag. Varianten
   bör övervägas om gångvägen till Västra utfarten bedöms acceptabel.
-- **Kombinationer:** UA 5 lägger 2 minuter på linje V och konkurrerar därför med UA 1a, 1b och 4. Varianten med
-  bara linje N rakt på gör det inte.
+- **Kombinationer:** UA 5 lägger 2 minuter på linje Västra och konkurrerar därför med UA 1a, 1b och 4. Varianten med
+  bara linje Norra rakt på gör det inte.
 
 ![UA 5, svängen](../output/kartor/b4_17_svangen_karta.png)
 
-*Figur 10c. UA 5 – linje N och V i dag (vänster) och med UA 5 (höger). Pilarna visar körriktningen, och
+*Figur 10c. UA 5 – linje Norra och Västra i dag (vänster) och med UA 5 (höger). Pilarna visar körriktningen, och
 hållplatserna är färgade efter den linje som stannar där.*
 
 ![UA 5, omlopp](../output/kartor/b4_18_svangen_omlopp.png)
@@ -573,7 +573,7 @@ avgångar per vardag inom 400 m, viktat med befolkningen.
 
 *Tabell 3. Systemeffekter i Mariehamn, i dag och med varje UA för sig.*
 
-| | I dag | 1a V och Ö sammanslagna | 1b V och Ö sammanslagna | 2 N2 | 3 Bo-Bil | 4 V och Ö sammanslagna | 4Y flygturerna | 5 V och Ö sammanslagna |
+| | I dag | 1a Västra och Östra sammanslagna | 1b Västra och Östra sammanslagna | 2 N2 | 3 Bo-Bil | 4 Västra och Östra sammanslagna | 4Y flygturerna | 5 Västra och Östra sammanslagna |
 |---|---|---|---|---|---|---|---|---|
 | Hållplats inom 400 m | 83,6 % | 84,8 % | 84,8 % | 84,0 % | 83,4 % | 83,7 % | 83,7 % | 83,6 % |
 | Minst 15 avgångar per vardag | 81,0 % | 82,2 % | 82,2 % | 81,4 % | 80,8 % | 81,2 % | 81,0 % | 81,0 % |
@@ -585,21 +585,21 @@ avgångar per vardag inom 400 m, viktat med befolkningen.
 | Bussar | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 | Omloppstid (h per vardag) | 61,4 | 61,5 | 61,5 | 61,4 | 61,4 | 61,6 | 61,5 | 61,4 |
 | Fordonskilometer per vardag | 1 287 | 1 331 | 1 312 | 1 287 | 1 287 | 1 314 | 1 292 | 1 286 |
-| Varv V + Ö med < 5 min i centrum | 1 | 1 | 1 | 3 | 1 | 1 | 1 | 1 |
-| Restid, befintliga resenärer (resenärsmin. per vardag; minus = kortare) | – | +25 | +12 | +8 | +20 | +35 | +4 | −9 |
+| Varv Västra + Östra med < 5 min i centrum | 1 | 1 | 1 | 3 | 1 | 1 | 1 | 1 |
+| Restid, befintliga resenärer (resenärsmin. per vardag; minus = kortare) | – | +25 | +12 | +8 | +30 | +35 | +4 | −9 |
 
-Restiderna för alternativen med V och Ö sammanslagna är netto, efter vinsten för resor mellan V och Ö som slipper
+Restiderna för alternativen med Västra och Östra sammanslagna är netto, efter vinsten för resor mellan Västra och Östra som slipper
 bytet (cirka 3 resenärsminuter per vardag). Med höstens resande, cirka tre gånger sommarens, är restidseffekterna
 större än i den tidigare versionen, men högst cirka 3 minuter per berörd resa i huvudalternativen. Det varv som i
-dag har under 5 minuter i centrum är V 07:50 med Ö:s skoltur 08:20; sammanslagningen lägger inte till några.
+dag har under 5 minuter i centrum är Västra 07:50 med Östras skoltur 08:20; sammanslagningen lägger inte till några.
 
 **Effekt: fler och färre avgångar × befolkning.** Effekten är förändrat antal avgångar per vardag inom 400 m
 gånger antalet invånare, utlagd som en utjämnad yta där grönt är vinnare och rött förlorare (figur 12b).
 Hållplatserna färgas efter förändrat antal avgångar i procent. I UA 3 får 24 invånare vid Vikingagränd 22 avgångar
 färre per vardag, medan 44 invånare vid Bo-Bil får 22 fler. I UA 5 får 11 invånare väster om Västra macken 17
-avgångar färre, eftersom linje V inte längre stannar där. Om Solberget dras in på alla Ö-turer (variant av
+avgångar färre, eftersom linje Västra inte längre stannar där. Om Solberget dras in på alla Östra-turer (variant av
 UA 4) får 49 invånare 20 avgångar färre, mot 22 invånare med 16 fler vid flygplatsen, och nettot blir negativt.
-Kring själva svängen i UA 5 får ingen färre avgångar, eftersom invånarna där redan har linje N inom 400 m vid
+Kring själva svängen i UA 5 får ingen färre avgångar, eftersom invånarna där redan har linje Norra inom 400 m vid
 Sjukhuset eller Västra utfarten.
 I QGIS visas effektytan i lagret `b4_effekt` och hållplatserna i `b4_hallplatser_frekvens`, i gruppen för varje UA.
 
@@ -625,7 +625,7 @@ och hållplatserna efter förändrat antal avgångar i procent.*
 ## 5 Kostnad – fordonskilometer och fordon
 
 Kostnaden redovisas som förändrade fordonskilometer och om linjen kräver fler fordon än i dag för att kunna
-hållas. I dag körs stadslinjerna N, S, V och Ö med fem fordon och cirka 1 287 fordonskm per vardag.
+hållas. I dag körs stadslinjerna Norra, Södra, Västra och Östra med fem fordon och cirka 1 287 fordonskm per vardag.
 Fordonskilometrarna är vägavstånd längs gatunätet (OSRM). Årsvärdena bygger på 250 vardagar och
 lördagstrafiken.
 
@@ -635,20 +635,20 @@ lördagstrafiken.
 |---|---|---|---|---|
 | UA 1a alla turer – utesluten | 6 | **Ja, +1** | +55 | +14 400 |
 | UA 1a dagens tidtabell (8 av 20 turer) | 5 | Nej | +22 | +5 800 |
-| UA 1a ★ V och Ö sammanslagna (16 av 20 turer) | 5 | Nej | +44 | +11 500 |
-| UA 1b ★ förlängd Norrgårdsvägen, V och Ö sammanslagna (16 av 20 turer) | 5 | Nej | +25 | +6 500 |
+| UA 1a ★ Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +44 | +11 500 |
+| UA 1b ★ förlängd Norrgårdsvägen, Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +25 | +6 500 |
 | UA 2 ★ N2 | 5 | Nej | ±0 | ±0 |
-| UA 3 ★ Bo-Bil | 5 | Nej | ±0 | −100 |
+| UA 3 ★ Bo-Bil | 5 | Nej | +10 | +2 600 |
 | UA 4 flygplatsen, alla turer – utesluten | 6 | **Ja, +1** | +34 | +9 000 |
-| UA 4 ★ V och Ö sammanslagna (16 av 20 turer) | 5 | Nej | +27 | +7 200 |
+| UA 4 ★ Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +27 | +7 200 |
 | UA 4 dito + Solberget indragen (16 av 20) | 5 | Nej | +27 | +7 200 |
-| UA 4Y flygturerna (3 av 3), V och Ö sammanslagna | 5 | Nej | +5 | +1 700 |
+| UA 4Y flygturerna (3 av 3), Västra och Östra sammanslagna | 5 | Nej | +5 | +1 700 |
 | UA 4 extra turer för flygen 07:15, 10:35 och 21:35 | 5 | Nej | +44 | +10 900 |
-| UA 5 ★ svängen till linje V, V och Ö sammanslagna (17 av 20 V-turer) | 5 | Nej | −1 | −200 |
-| UA 5 dagens drift (16 av 20 V-turer) | 5 | Nej | −1 | −200 |
-| UA 5 variant: bara linje N rakt på | 5 | Nej | −4 | −1 000 |
+| UA 5 ★ svängen till linje Västra, Västra och Östra sammanslagna (17 av 20 Västra-turer) | 5 | Nej | −1 | −200 |
+| UA 5 dagens drift (16 av 20 Västra-turer) | 5 | Nej | −1 | −200 |
+| UA 5 variant: bara linje Norra rakt på | 5 | Nej | −4 | −1 000 |
 
-Alla huvudalternativ ryms med dagens fem fordon. Bara de uteslutna driftformerna, där alla turer på linje V
+Alla huvudalternativ ryms med dagens fem fordon. Bara de uteslutna driftformerna, där alla turer på linje Västra
 förlängs med dagens tidtabell, kräver ett sjätte fordon.
 
 **Förlängningen av Norrgårdsvägen (UA 1b)** ger 19 fordonskm färre per vardag än UA 1a (cirka 5 000 per år),
@@ -656,7 +656,7 @@ och båda ger 16 av 20 turer med fem fordon. Vägen ger dessutom:
 
 - en kortare omväg (1,6 i stället för 2,7 km per tur);
 - större marginal i centrum (minst 7,5 i stället för 5,5 minuter per varv);
-- att Ö kan behålla sina avgångar i pulsen.
+- att Östra kan behålla sina avgångar i pulsen.
 
 Vägen ger också nytta för annan trafik.
 
@@ -668,33 +668,34 @@ fler fordon.*
 ## 6 Slutsatser
 
 1. **Ramen är snäv.** Ingen linje kan förlängas mer än någon minut om varje byte ska ha full reglering.
-   Eftersom bussarna redan växlar i paren S ↔ N och V ↔ Ö kan paren slås ihop till genomgående linjer. Med
-   kravet att varje varv ryms inom timmen med minst 5 minuter i centrum kan linje V då förlängas upp till
-   4,5 minuter per tur i vanliga varv, men inte alls i varven med Ö:s skolturer.
-2. **UA 1a – Möckelö Strand ny via dagens vägar.** Huvudalternativet slår ihop V och Ö och ger 16 av 20 turer
+   Eftersom bussarna redan växlar i paren Södra ↔ Norra och Västra ↔ Östra kan paren slås ihop till genomgående linjer. Med
+   kravet att varje varv ryms inom timmen med minst 5 minuter i centrum kan linje Västra då förlängas upp till
+   4,5 minuter per tur i vanliga varv, men inte alls i varven med Östras skolturer.
+2. **UA 1a – Möckelö Strand ny via dagens vägar.** Huvudalternativet slår ihop Västra och Östra och ger 16 av 20 turer
    med fem fordon, för +44 fordonskm per vardag. Möckelö Strand ny kan alltså trafikeras redan med dagens vägar.
    Alla turer med dagens tidtabell kräver ett sjätte fordon och är utesluten.
-3. **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen.** Med V och Ö sammanslagna ryms också 16 av 20 turer,
-   med fem fordon, men med kortare omväg (+25 fordonskm per vardag), större marginal och Ö kvar i pulsen. UA 1b
+3. **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen.** Med Västra och Östra sammanslagna ryms också 16 av 20 turer,
+   med fem fordon, men med kortare omväg (+25 fordonskm per vardag), större marginal och Östra kvar i pulsen. UA 1b
    förutsätter att vägen byggs.
-4. **UA 2 – N2 på linje Ö** ryms med alla turer och ger 58 invånare en hållplats, utan fler fordonskm eller fordon.
-5. **UA 3 – Linje N via Bo-Bil** ryms, med 0,5 minuts längre körtid per tur för uppehållet vid Bo-Bil (vägen är
-   lika lång som i dag, så fordonskilometrarna ändras inte). 24 invånare vid Vikingagränd får 22 avgångar färre per vardag, medan 44 vid Bo-Bil får
-   22 fler. Förlusten bör vägas in, och
-   den kan mildras med hållplatsen N3 söder om Maxinge från kapitel 3.
-6. **UA 4 – Linje V–Ö via flygplatsen.** Att bara förlänga V är uteslutet, eftersom det kräver ett sjätte fordon.
-   Det enda rimliga är en genomgående linje V–Ö. Längs vägarna är omvägen 1,7 km och cirka 5 minuter per tur.
+4. **UA 2 – N2 på linje Östra** ryms med alla turer och ger 58 invånare en hållplats, utan fler fordonskm eller fordon.
+5. **UA 3 – Linje Norra via Bo-Bil** ryms med fem fordon. Eftersom Norra är enkelriktad och Maxinge bara har
+   hållplats för södergående buss måste bussen vända vid Maxinge för att nå Bo-Bil: 450 m och cirka 1–1,5 minuter
+   längre per tur (+10 fordonskm per vardag), och Norras vändtid i centrum minskar till cirka 3 minuter. 44 invånare
+   vid Bo-Bil får 22 avgångar fler per vardag, medan 24 vid Vikingagränd får 22 färre. Nyttan är liten i förhållande
+   till omvägen. Förlusten vid Vikingagränd kan mildras med hållplatsen N3 söder om Maxinge från kapitel 3.
+6. **UA 4 – Linje Västra–Östra via flygplatsen.** Att bara förlänga Västra är uteslutet, eftersom det kräver ett sjätte fordon.
+   Det enda rimliga är en genomgående linje Västra–Östra. Längs vägarna är omvägen 1,7 km och cirka 5 minuter per tur.
    Huvudalternativet ger 16 av 20 turer med fem fordon och precis 5 minuter i centrum, och Solberget behålls
    (+27 fordonskm per vardag). Både huvudalternativet och UA 4Y (de tre flygturerna, +5 fordonskm) når tre av
    sex flyg; alla sex kräver tre extra turer, +44 fordonskm per vardag, med befintliga fordon.
-7. **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten** ryms med fem fordon (−1 fordonskm per
-   vardag), också utan att V och
-   Ö slås ihop (16 av 20 V-turer). Linje N får 2 minuter mer i centrum i varje varv. Svängen har cirka 1
-   påstigande per vardag, och ingen förlorar hållplatsen inom 400 m. Varianten med bara linje N rakt på ger
-   samma vinst utan att belasta V, och där får ingen färre avgångar.
-8. **Genomgående linje V–Ö** ger kortare restid för resor mellan V och Ö, men med höstens resande gäller det
+7. **UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten** ryms med fem fordon (−1 fordonskm per
+   vardag), också utan att Västra och
+   Östra slås ihop (16 av 20 Västra-turer). Linje Norra får 2 minuter mer i centrum i varje varv. Svängen har cirka 1
+   påstigande per vardag, och ingen förlorar hållplatsen inom 400 m. Varianten med bara linje Norra rakt på ger
+   samma vinst utan att belasta Västra, och där får ingen färre avgångar.
+8. **Genomgående linje Västra–Östra** ger kortare restid för resor mellan Västra och Östra, men med höstens resande gäller det
    bara cirka 1,5 resor per vardag.
-9. **UA 1a, 1b, 4 och 5** förlänger alla linje V. Två av dem ryms inte tillsammans inom kravet utan fler fordon.
+9. **UA 1a, 1b, 4 och 5** förlänger alla linje Västra. Två av dem ryms inte tillsammans inom kravet utan fler fordon.
    Kombinationer av UA prövas i ett senare skede.
 
 ## 7 Osäkerheter och fortsatt arbete
@@ -709,17 +710,17 @@ fler fordon.*
   rast i omlopp 204 mitt på dagen behöver stämmas av.
 - **Svängen (UA 5):** körtidsvinsten är operatörens uppgift (2 minuter); tidtabellen ger cirka 0,6 minuter.
   Den bör kontrolleras med restidsdata eller en provkörning.
-- **Ö efter pulsen:** sammanslagning av V och Ö förutsätter att Ö kan starta 2–2,5 minuter efter pulsen (1a och
+- **Östra efter pulsen:** sammanslagning av Västra och Östra förutsätter att Östra kan starta 2–2,5 minuter efter pulsen (1a och
   4). Effekten på bytesresor ingår inte i nätverksmodellen.
 - **Kravet 5 minuter i centrum per varv** är beställarens riktvärde. För UA 1a ändras resultatet inte om kravet
-  ligger mellan 3 och 5,5 minuter. I UA 1b ryms V 08:20 om kravet sänks till 4,5 minuter.
-- **Ö:s skolturer** avgör vilka V-turer som ryms. Deras verkliga körtider bör kontrolleras.
-- **Vägdragningen** följer OSRM:s bilprofil, som i enstaka fall kan välja en annan gata än bussen. Linje N:s
+  ligger mellan 3 och 5,5 minuter. I UA 1b ryms Västra 08:20 om kravet sänks till 4,5 minuter.
+- **Östras skolturer** avgör vilka Västra-turer som ryms. Deras verkliga körtider bör kontrolleras.
+- **Vägdragningen** följer OSRM:s bilprofil, som i enstaka fall kan välja en annan gata än bussen. Linje Norras
   busslänk vid Doktorsvägen saknas i OSRM och är ritad rak (cirka 100 m).
 - **Hållplatslägena** för Möckelö Strand ny, N2 och flygplatsen är indikativa.
-- **Påstigande och resenärseffekter** bygger på den tvättade höstdatan (terminstid). Linje J finns bara i
+- **Påstigande och resenärseffekter** bygger på den tvättade höstdatan (terminstid). Linje Järsö finns bara i
   sommardatan men berörs inte av utredningsalternativen.
-- **Fortsatt arbete:** pröva sammanslagning av N och S för Örtvägen, en omläggning av linje N och Ö i nordost,
+- **Fortsatt arbete:** pröva sammanslagning av Norra och Södra för Örtvägen, en omläggning av linje Norra och Östra i nordost,
   anropsstyrd trafik för flygen 07:15 och 21:35, och UA 5 tillsammans med UA 1b eller 4.
 
 ## Bilaga – Kartor i QGIS
@@ -732,7 +733,7 @@ Alla kartor finns som lager i `output/gis/linjenatsutredning.gpkg` (EPSG:3067) m
 
 | Grupp i QGIS | Innehåll |
 |---|---|
-| UA 1a, 1b, 2, 3, 4, 5 | Huvudalternativet per UA: ny hållplats, körväg, linjen (V–Ö som en genomgående linje i UA 1a, 1b, 4 och 5) och förändrad turtäthet (grönt bättre, rött sämre) |
+| UA 1a, 1b, 2, 3, 4, 5 | Huvudalternativet per UA: ny hållplats, körväg, linjen (Västra–Östra som en genomgående linje i UA 1a, 1b, 4 och 5) och förändrad turtäthet (grönt bättre, rött sämre) |
 | Systemeffekter – huvudalternativ per UA | Turtäthet inom 400 m och förändring mot i dag för i dag och huvudalternativen. Gruppen är exklusiv: ett scenario i taget |
 | Övriga alternativ | Övriga driftformer, bl.a. de uteslutna som kräver fler bussar (redovisas i rapporten). Exklusiv grupp |
 | Sammanslagning av linjer | Områden utan hållplats och behövd tid per tur |
@@ -746,7 +747,7 @@ se dem.
 att köra `output/gis/rutta_med_osrm.py` i QGIS Python-konsol på en dator med internet.
 
 - **Via-punkter:** där OSRM väljer en annan väg än bussen läggs en *via-punkt* ("gömt stopp") i lagret
-  `00_viapunkter`, och skriptet körs igen. Lagret innehåller redan en punkt: linje V mellan Lönnhagsvägen och
+  `00_viapunkter`, och skriptet körs igen. Lagret innehåller redan en punkt: linje Västra mellan Lönnhagsvägen och
   Norrgårdsvägen kör vägen söder om huvudvägen och vänder inte vid hållplatsen.
 - **Om lager saknas eller är tomma:** se `output/gis/LASMIG.md`. GeoPackage-filer i synkade mappar (OneDrive)
   kan ge felet *unable to open database file*. Kopiera då mappen till en lokal disk.

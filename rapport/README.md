@@ -8,7 +8,7 @@ Rapporttexten skrivs kapitelvis här och sammanställs till ett PM i steg B6. Ka
 | 1 Granskning av påstigandedata och OD-matrisen | `A1_datagranskning_od.md` | Klart (Fas A); omgjort 2026-11-02 med tvättad höstdata |
 | 2 Täckningsgrad med hänsyn till turtäthet | `A2_tackning_turtathet.md` | Klart (Fas A) |
 | 3 Hållplatslägen – nya och överflödiga hållplatser | `A3_hallplatslagen.md` | Klart (Fas A); hållplatsbedömningen omgjord 2026-11-02 |
-| 4 Justering av linjenätet | `B4_linjenat.md` | Pågår: omlopp, enskilda UA 1–5, sammanslagning V/Ö och flygtiderna klara |
+| 4 Justering av linjenätet | `B4_linjenat.md` | Pågår: omlopp, enskilda UA 1–5, sammanslagning Västra/Östra och flygtiderna klara |
 | 5 Ekonomisk kalkyl (överslag) | `B5_kalkyl.md` | Klart för UA 1a, 1b, 2, 3, 4 och 5 (var för sig), inkl. extra turer för flygen |
 | PM – Utredningsalternativ (UA 1a, 1b, 2, 3, 4, 5) | `PM_utredningsalternativ.md` / `PM_utredningsalternativ.docx` | Delleverans 2026-10-15, uppdaterad 2026-11-02 (höstdata, operatörens omlopp) och 2026-11-15 (UA 5, flygtider) |
 | PM (slutlig sammanställning) | – | Fas B, B6 |

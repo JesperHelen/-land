@@ -75,9 +75,9 @@
    "huvudalternativ": true,
    "fordon": 5,
    "delta_fordon": 0,
-   "fordonskm_vardag": 1286.6,
-   "delta_km_vardag": -0.4,
-   "delta_km_ar": -100,
+   "fordonskm_vardag": 1296.9,
+   "delta_km_vardag": 9.9,
+   "delta_km_ar": 2600,
    "ny_tackning_inv": 0,
    "battre_inv": 44
   },

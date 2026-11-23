@@ -47,4 +47,23 @@ TACKNING_M = 400.0         # avstånd till hållplats (fågelväg) som räknas s
 DELRUTA_M = 50.0           # upplösning för fördelning av rutbefolkning inom 1 km-rutan
 
 # --- Kartstil ---
-FARG_LINJE = {'J': '#4E79A7', 'N': '#F28E2B', 'S': '#59A14F', 'V': '#B07AA1', 'Ö': '#E15759'}
+FARG_LINJE = {'J': '#ff72df', 'N': '#6f4388', 'S': '#00a884', 'V': '#005be6', 'Ö': '#a86f00'}   # beställarens färger
+NAMN_LINJE = {'J': 'Järsö', 'N': 'Norra', 'S': 'Södra', 'V': 'Västra', 'Ö': 'Östra'}         # fullständiga linjenamn
+NAMN_VO = 'Västra–Östra'                                                                     # genomgående linje V–Ö
+
+
+import re as _re
+_BOKSTAV = _re.compile(r'(?<![\w/.\-])([JNSVÖ])(:s)?(?![\w])')
+
+
+def fullnamn(t):
+    """Byter linjebokstäver i löptext mot fullständiga linjenamn: 'linje V–Ö' -> 'linje Västra–Östra',
+    'V och Ö' -> 'Västra och Östra', 'Ö:s' -> 'Östras'. Hållplatsnamn som N2 och N1–N5 berörs inte."""
+    if not isinstance(t, str) or not t:
+        return t
+    return _BOKSTAV.sub(lambda m: NAMN_LINJE[m.group(1)] + ('s' if m.group(2) else ''), t)
+
+
+def linjenamn(l):
+    """'V' -> 'Västra', 'V–Ö' -> 'Västra–Östra'."""
+    return NAMN_VO if l in ('V–Ö', 'VO') else NAMN_LINJE.get(l, l)

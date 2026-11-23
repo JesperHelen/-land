@@ -1,10 +1,10 @@
 omrade,inv,x,y,linje,avstand_m,behov_min_per_tur,utrymme_idag,utrymme_genomgaende,utrymme_skift,bedomning
 Möckelö Strand,243.0,105638.56589147287,6683421.8992248075,V,714,4.5,0.0,2.5,5.0,Ryms om partnerlinjen startar senare än pulsen
 Lillåkersvägen,180.0,109508.92857142858,6686508.418367347,N,956,6.5,1.0,3.5,6.0,Kräver större omläggning
-Solberget,157.0,110551.82926829267,6685574.6951219505,Ö,708,4.9,4.0,5.0,5.0,Ryms som genomgående linje (Ö i pulsen)
-Kalmsta,118.0,109749.75728155345,6685762.864077673,Ö,626,4.4,4.0,5.0,5.0,Ryms som genomgående linje (Ö i pulsen)
+Solberget,157.0,110551.82926829267,6685574.6951219505,Ö,708,4.9,4.0,5.0,5.0,Ryms som genomgående linje (Östra i pulsen)
+Kalmsta,118.0,109749.75728155345,6685762.864077673,Ö,626,4.4,4.0,5.0,5.0,Ryms som genomgående linje (Östra i pulsen)
 Dalkullavägen,94.0,107521.53846153848,6687389.230769232,V,627,4.4,0.0,2.5,5.0,Ryms om partnerlinjen startar senare än pulsen
 Österkalmare,90.0,110360.26119402987,6686553.171641792,N,1539,10.1,1.0,3.5,6.0,Kräver större omläggning
-Lervik,82.0,107505.64516129032,6680285.322580646,J,578,4.1,,,,Linje J (timtrafik) – prövas separat
+Lervik,82.0,107505.64516129032,6680285.322580646,J,578,4.1,,,,Järsö (timtrafik) – prövas separat
 Strömsnäs,78.0,111524.20844327178,6681482.915567283,Ö,1558,10.2,4.0,5.0,5.0,Kräver större omläggning
-Solberget södra,78.0,110862.9518072289,6684640.0602409635,Ö,570,4.1,4.0,5.0,5.0,Ryms som genomgående linje (Ö i pulsen)
+Solberget södra,78.0,110862.9518072289,6684640.0602409635,Ö,570,4.1,4.0,5.0,5.0,Ryms som genomgående linje (Östra i pulsen)
