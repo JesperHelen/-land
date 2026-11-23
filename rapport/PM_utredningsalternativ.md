@@ -267,8 +267,7 @@ fördelar:
 
 ![Sammanslagning V och Ö](../output/kartor/b4_9_sammanslagning_vo.png)
 
-*Figur 4. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter, och
-antal turer som ryms per alternativ.*
+*Figur 4. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter.*
 
 ### 3.3 UA 2 – N2 på linje Ö
 
@@ -475,8 +474,7 @@ vänder i slingan framför terminalbyggnaden och kör samma väg tillbaka förbi
 
 ![UA 4, tidsbudget](../output/kartor/b4_11_flygplatsen_vo.png)
 
-*Figur 9. UA 4: tidsbudget per varv V + Ö med tiden i centrum mot kravet 5 minuter, och antal turer som ryms per
-variant.*
+*Figur 9. UA 4: tidsbudget per varv V + Ö med tiden i centrum mot kravet 5 minuter.*
 
 ![UA 4, omlopp](../output/kartor/b4_12_flygplatsen_omlopp.png)
 
@@ -605,7 +603,7 @@ tillgänglighet*, vilket är en förbättring. Förändringarna är lokala och s
 
 ![Systemeffekter](../output/kartor/b4_13_systemeffekter.png)
 
-*Figur 11. Invånare med bättre respektive sämre tillgänglighet och nyckeltal för varje UA för sig.*
+*Figur 11. Invånare med bättre respektive sämre tillgänglighet för varje UA för sig.*
 
 ![Täckning före och efter](../output/kartor/b4_14_tackning_fore_efter.png)
 
@@ -614,7 +612,7 @@ ram sämre klass än i dag.*
 
 ![Fler och färre avgångar](../output/kartor/b4_16_avgangar_forandring.png)
 
-*Figur 12b. Effekt per UA: förändrat antal avgångar inom 400 m × befolkning (grönt vinnare, rött förlorare),
+*Figur 12b. Fler och färre avgångar inom 400 m × befolkning per UA (grönt fler, rött färre),
 och hållplatserna efter förändrat antal avgångar i procent.*
 
 ## 5 Överslagskalkyl

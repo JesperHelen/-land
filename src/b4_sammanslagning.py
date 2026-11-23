@@ -153,15 +153,14 @@ def figur(par, resor, omr, prof):
     gs = fig.add_gridspec(2, 2, width_ratios=[1.0, 0.92], height_ratios=[1.0, 0.85], wspace=0.30, hspace=0.55,
                           left=0.02, right=0.98, top=0.92, bottom=0.14)
     ax = fig.add_subplot(gs[:, 0])
-    K.ny_karta((104900, 112100, 6680300, 6688100), ax=ax, titel='Områden utan hållplats inom 400 m – behövd tid per tur')
+    K.ny_karta((104900, 112100, 6680300, 6688100), ax=ax, titel='Områden utan hållplats inom 400 m')
     K.rita_linjer(ax, lw=1.9, zorder=4)
     farg = {'Ryms i dag': '#2f9e44', 'Ryms som genomgående linje (Ö i pulsen)': '#1c5cab', SKIFT_TEXT: '#159a9c',
             'Kräver större omläggning': '#c0392b', 'Linje J (timtrafik) – prövas separat': '#7a776f'}
     for r in omr.itertuples():
         ax.scatter([r.x], [r.y], s=40 + r.inv * 0.9, marker='D', color=farg[r.bedomning], edgecolor='white',
                    lw=0.8, zorder=8, alpha=0.95)
-    etik = [(f"{r.omrade} ({int(round(r.inv, -1))} inv.)\nlinje {r.linje}: +{str(r.behov_min_per_tur).replace('.', ',')} min/tur",
-             (r.x, r.y), 90) for r in omr.sort_values('inv', ascending=False).itertuples()]
+    etik = [(r.omrade, (r.x, r.y), 90) for r in omr.sort_values('inv', ascending=False).itertuples()]
     K.placera_etiketter(ax, etik, fontsize=6.4, undvik=K.punkt_hinder(ax, omr.x, omr.y, px=9))
     h = [Line2D([], [], marker='D', ls='', color=c, markersize=7, label=k) for k, c in farg.items()]
     h += [Line2D([], [], color=C.FARG_LINJE[l], lw=2, label=f'Linje {l}') for l in C.STADSLINJER]
@@ -175,11 +174,9 @@ def figur(par, resor, omr, prof):
     idag = [INTERVALL - REGLERING - prof[l]['kortid_median'] for l in LINJER]
     gen = [utrymme(prof, l) for l in LINJER]
     sk = [utrymme(prof, l, True) for l in LINJER]
-    ax2.barh(y + 0.27, idag, height=0.25, color='#b9b4a8', label=f'Reglering ≥ {REGLERING:g} min vid varje byte')
-    ax2.barh(y, gen, height=0.25, color='#1c5cab',
-             label=f'Genomgående med partnerlinjen: varvet inom timmen, ≥ {MARGINAL:g} min i centrum')
-    ax2.barh(y - 0.27, sk, height=0.25, color='#159a9c',
-             label='… och partnerlinjen startar när linjen har kommit tillbaka (senare än pulsen)')
+    ax2.barh(y + 0.27, idag, height=0.25, color='#b9b4a8', label='I dag')
+    ax2.barh(y, gen, height=0.25, color='#1c5cab', label='Genomgående linje')
+    ax2.barh(y - 0.27, sk, height=0.25, color='#159a9c', label='Genomgående, partnerlinjen startar senare')
     for yy, a, b, c in zip(y, idag, gen, sk):
         ax2.text(max(a, 0) + 0.1, yy + 0.27, f'{a:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
         ax2.text(b + 0.1, yy, f'{b:g}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
@@ -187,30 +184,29 @@ def figur(par, resor, omr, prof):
     ax2.axvline(0, color='#52514e', lw=0.8)
     ax2.set_yticks(y); ax2.set_yticklabels([f"Linje {l} ({prof[l]['kortid_median']:.0f} min)" for l in LINJER], fontsize=8)
     ax2.invert_yaxis()
-    ax2.set_xlabel('min per tur som linjen kan förlängas (30 min turintervall, puls i centrum)', fontsize=7.5)
+    ax2.set_xlabel('Minuter per tur', fontsize=7.5)
     ax2.set_xlim(-1.5, 8); ax2.tick_params(labelsize=7.5)
     ax2.grid(axis='x', color='#e6e4de', lw=0.6); ax2.set_axisbelow(True)
     for s in ['top', 'right']:
         ax2.spines[s].set_visible(False)
     ax2.legend(loc='upper left', bbox_to_anchor=(0.0, -0.16), fontsize=6.8, frameon=False, ncol=1)
-    ax2.set_title('Tidsutrymme för längre linje utan fler bussar (vanligt varv)', loc='left', fontsize=10, fontweight='bold')
+    ax2.set_title('Tidsutrymme för längre linje utan fler bussar')
 
     # direktresor per par
     ax3 = fig.add_subplot(gs[1, 1])
     r = resor.sort_values('direktresor_vardag', ascending=True)
     ax3.barh(np.arange(len(r)), r.direktresor_vardag, color='#7fb0ec', height=0.6)
     for i, (v, m) in enumerate(zip(r.direktresor_vardag, r.sparade_resenarsminuter_vardag)):
-        ax3.text(v + 0.1, i, f'{v:.1f} resor · {m:.0f} min sparade'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
+        ax3.text(v + 0.1, i, f'{v:.1f}'.replace('.', ','), va='center', fontsize=7, color=K.TEXT)
     ax3.set_yticks(np.arange(len(r)))
     ax3.set_yticklabels([f"{p}{' (dagens par)' if p in ('N/S', 'V/Ö') else ''}" for p in r.par], fontsize=8)
     ax3.set_xlim(0, max(r.direktresor_vardag.max() * 1.6, 1))
-    ax3.set_xlabel('resor per vardag som slipper byte i centrum (höst 2026)', fontsize=7.5)
+    ax3.set_xlabel('Resor per vardag', fontsize=7.5)
     ax3.tick_params(labelsize=7.5); ax3.grid(axis='x', color='#e6e4de', lw=0.6); ax3.set_axisbelow(True)
     for s in ['top', 'right']:
         ax3.spines[s].set_visible(False)
-    ax3.set_title('Resor som slipper byte om bytet skyltas som genomgående linje', loc='left', fontsize=10, fontweight='bold')
-    fig.suptitle('Sammanslagning av linjer – varvet inom timmen med 5 min i centrum (S ↔ N, Ö ↔ V)', x=0.01, ha='left', fontsize=12.5,
-                 fontweight='bold')
+    ax3.set_title('Resor som slipper byte i centrum')
+    fig.suptitle('Sammanslagning av linjer', x=0.01, ha='left')
     ut = C.KARTOR / 'b4_8_sammanslagning.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut

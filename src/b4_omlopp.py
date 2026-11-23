@@ -464,7 +464,7 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
         ax.spines[s].set_visible(False)
     ax.spines['bottom'].set_color('#b9b6ad')
     if titel:
-        ax.set_title(titel, loc='left', fontsize=9.5, fontweight='bold', pad=4)
+        ax.set_title(titel, loc='left', fontsize=8.8, pad=4)
 
 
 def omlopp_forklaring(fig, extra=(), y=0.005, ncol=None):
@@ -473,7 +473,7 @@ def omlopp_forklaring(fig, extra=(), y=0.005, ncol=None):
     h += [Line2D([], [], color='#e8590c', lw=2.2, label=f'Vändtid < {REKOMMENDERAD_VANDTID:g} min'),
           Line2D([], [], color='#c0392b', lw=2.2, label=f'Vändtid < {MIN_VANDTID:g} min (ryms ej)'),
           Line2D([], [], color='#1c5cab', lw=2.2, marker='v', ms=4,
-                 label=f'Byte inom paret (t.ex. V → Ö) < {REKOMMENDERAD_VANDTID:g} min')]
+                 label=f'Byte inom paret < {REKOMMENDERAD_VANDTID:g} min')]
     lg = fig.legend(handles=h, loc='lower left', bbox_to_anchor=(0.01, y), ncol=ncol or len(h), fontsize=7,
                     frameon=False, handlelength=1.6, columnspacing=1.2)
     return lg
@@ -482,8 +482,7 @@ def omlopp_forklaring(fig, extra=(), y=0.005, ncol=None):
 def fig_idag(t, plan, harledd):
     nt = nyckeltal(plan); nh = nyckeltal(harledd)
     fig, (ax, ax2) = plt.subplots(2, 1, figsize=(12.4, 6.0), gridspec_kw={'height_ratios': [3.6, 1.0], 'hspace': 0.32})
-    rita_omlopp(ax, plan, titel=f'Operatörens omlopp (påstigandedatan höst 2026), typvardag {D.typvardag():%Y-%m-%d} – '
-                                f'linje J i eget omlopp')
+    rita_omlopp(ax, plan, titel='Omlopp i dag, typvardag')
     tid, n = fordon_i_trafik(plan)
     ax2.fill_between(tid, n, step='post', color='#9aa7b4', alpha=0.55, lw=0)
     ax2.step(tid, n, where='post', color='#3d4a57', lw=0.9)
@@ -492,11 +491,10 @@ def fig_idag(t, plan, harledd):
     ax2.tick_params(labelsize=7); ax2.grid(axis='both', color='#e6e4de', lw=0.5)
     for s in ['top', 'right']:
         ax2.spines[s].set_visible(False)
-    ax2.set_title('Bussar i trafik samtidigt (kör eller vänder i centrum)', loc='left', fontsize=8.5, fontweight='bold', pad=3)
+    ax2.set_title('Bussar i trafik samtidigt', loc='left', fontsize=8.5, pad=3)
     txt = (f"Turer {nt['turer']}   ·   körtid {nt['korttid_h']:.1f} h   ·   omloppstid {nt['omloppstid_h']:.1f} h "
            f"(därav vändtid i centrum {nt['regleringstid_h']:.1f} h, uppställning {nt['uppstallning_h']:.1f} h)   ·   "
            f"{nt['km']:.0f} km   ·   minsta vändtid {nt['min_vandtid']:g} min")
-    fig.text(0.01, 0.955, txt.replace('.', ','), fontsize=7.5, color=TEXT2)
     omlopp_forklaring(fig, y=-0.035)
     fig.subplots_adjust(left=0.06, right=0.99, top=0.9, bottom=0.08)
     ut = C.KARTOR / 'b4_1_omlopp_idag.png'

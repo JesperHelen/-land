@@ -114,11 +114,11 @@ def main():
 
 
 def figur(df, res):
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(14.6, 7.4), gridspec_kw={'width_ratios': [1.25, 1.0], 'wspace': 0.36})
+    fig, ax = plt.subplots(figsize=(9.6, 6.8))
     d = df.set_index('scenario').loc[SCEN]
     y = np.arange(len(d))
-    delar = [('fordon_bas', 'Fordon (kapital, försäkring)', '#3d4a57'), ('tid_bas', 'Fordonstimmar (förare)', '#7fb0ec'),
-             ('km_bas', 'Fordonskilometer (energi, underhåll)', '#f28e2b')]
+    delar = [('fordon_bas', 'Fordon', '#3d4a57'), ('tid_bas', 'Fordonstimmar', '#7fb0ec'),
+             ('km_bas', 'Fordonskilometer', '#f28e2b')]
     vanster_pos = np.zeros(len(d)); vanster_neg = np.zeros(len(d))
     for k, lbl, f in delar:
         v = d[k].to_numpy() / 1000
@@ -131,53 +131,18 @@ def figur(df, res):
     ax.errorbar(tot, y, xerr=[np.clip(tot - lo, 0, None), np.clip(hi - tot, 0, None)], fmt='none', ecolor='#1f1f1e',
                 elinewidth=0.8, capsize=3, zorder=5)
     for yy, t, h_ in zip(y, tot, hi):
-        ax.text(max(h_, t, 0) + 4, yy, f'{t:+,.0f} k€/år'.replace(',', ' ').replace('-', '−'), va='center', fontsize=7.6,
+        ax.text(max(h_, t, 0) + 4, yy, f'{t:+,.0f}'.replace(',', ' ').replace('-', '−'), va='center', fontsize=7.2,
                 color=K.TEXT)
     ax.axvline(0, color='#52514e', lw=0.8)
     ax.set_yticks(y); ax.set_yticklabels([d.at[s, 'namn'].replace(' – ', '\n') for s in d.index], fontsize=7.6)
     ax.invert_yaxis(); ax.set_xlim(-15, 320)
-    ax.set_xlabel('förändrad driftkostnad, tusen euro per år (bas; streck = låg–hög)', fontsize=8)
+    ax.set_xlabel('Tusen euro per år (streck = låg–hög)', fontsize=8)
     ax.tick_params(labelsize=7.5); ax.grid(axis='x', color='#e6e4de', lw=0.6); ax.set_axisbelow(True)
     for s in ['top', 'right']:
         ax.spines[s].set_visible(False)
-    ax.legend(loc='upper left', bbox_to_anchor=(0, -0.12), ncol=3, fontsize=7.2, frameon=False)
-    ax.set_title('Driftkostnad jämfört med i dag', loc='left', fontsize=10, fontweight='bold')
+    ax.legend(loc='lower right', ncol=1, fontsize=7, frameon=True, facecolor='white', edgecolor='#e0ded7')
 
-    ax2.axis('off')
-    be = res['break_even_vagforlangning']
-    tkort = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a tidtabell', '1a_VO': 'UA 1a ★ V + Ö', '1b': 'UA 1b ★ V + Ö',
-             '2': 'UA 2 ★ N2', '3': 'UA 3 ★ Bo-Bil', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ V + Ö',
-             '4_VO_sol': 'UA 4 + Solberget', '4_Y': 'UA 4Y flygturerna', '5': 'UA 5 ★ V + Ö',
-             '5_ryms': 'UA 5 dagens drift', '5_N': 'UA 5 bara N'}
-    cell = [[tkort[s], f"{d.at[s, 'delta_fordon']:+d}", f"{d.at[s, 'delta_fordonstimmar_ar']:+,d}".replace(',', ' '),
-             f"{d.at[s, 'delta_km_ar']:+,d}".replace(',', ' '), f"{d.at[s, 'investering_bas'] / 1000:,.0f}".replace(',', ' '),
-             '–' if d.at[s, 'drift_per_battre_inv_bas'] is None or pd.isna(d.at[s, 'drift_per_battre_inv_bas'])
-             else f"{d.at[s, 'drift_per_battre_inv_bas']:,.0f}".replace(',', ' ')] for s in SCEN]
-    cell = [[r[0]] + [c.replace('-', '−') for c in r[1:]] for r in cell]
-    tb = ax2.table(cellText=cell, colLabels=['UA', 'Bussar', 'Fordons-\ntimmar/år', 'Fordons-\nkm/år',
-                                             'Hållplats\nk€', 'Drift €/år\nper inv. som\nfår det bättre'],
-                   loc='upper left', cellLoc='right', colLoc='right', colWidths=[0.25, 0.09, 0.15, 0.15, 0.12, 0.22])
-    tb.auto_set_font_size(False); tb.set_fontsize(7.2); tb.scale(1, 1.55)
-    for (r_, c_), ce in tb.get_celld().items():
-        ce.set_edgecolor('#e0ded7'); ce.set_linewidth(0.5)
-        if c_ == 0:
-            ce.get_text().set_ha('left'); ce._loc = 'left'
-        if r_ == 0:
-            ce.set_facecolor('#f1efe9'); ce.get_text().set_fontweight('bold'); ce.set_height(ce.get_height() * 2.1)
-    dec = lambda x: f'{x:.1f}'.replace('.', ',')
-    bv = res['break_even_vagforlangning_vo']
-    txt = (r'$\bf{Break\text{-}even\ för\ förlängd\ Norrgårdsvägen\ (UA\ 1b)}$' + '\n'
-           f"Mot UA 1a med en extra buss: {be['bas']['merkostnad_1a_jfr_1b_per_ar'] / 1000:.0f} k€ per år (bas), nuvärde "
-           f"{dec(be['låg']['nuvarde_eur'] / 1e6)}–{dec(be['hög']['nuvarde_eur'] / 1e6)} M€\n"
-           f"över {KALKYLTID} år ({dec(KALKYLRANTA * 100)} % kalkylränta).\n"
-           f"Mot UA 1a med V och Ö sammanslagna (inga fler bussar): {bv['bas']['merkostnad_1a_VO_jfr_1b_per_ar'] / 1000:+.0f} k€ "
-           f"per år – vägen\nmotiveras då av större marginal i centrum, kortare restid och att Ö kan gå i pulsen,\n"
-           f"inte av driftkostnaden (båda ger {res['turer_1b']} turer).")
-    ax2.text(0.0, 0.02, txt, transform=ax2.transAxes, fontsize=7.6, color=K.TEXT, va='bottom',
-             linespacing=1.5, bbox=dict(boxstyle='round,pad=0.5', facecolor='#f7f6f2', edgecolor='#d6d5d0', lw=0.6))
-    ax2.set_title('Nyckeltal per UA och driftform', loc='left', fontsize=10, fontweight='bold')
-    fig.suptitle('Överslagskalkyl per UA – förändrad driftkostnad per år (EUR, prisnivå 2026; ★ = huvudalternativ)', x=0.01, ha='left',
-                 fontsize=12, fontweight='bold')
+    fig.suptitle('Förändrad driftkostnad per år jämfört med i dag', x=0.01, ha='left')
     ut = C.KARTOR / 'b5_1_kalkyl.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut

@@ -403,8 +403,8 @@ flest, cirka 7 per vardag, men är inte ett av dagens par. Paren avgår från sa
 
 ![Figur 4.8](../output/kartor/b4_8_sammanslagning.png)
 
-*Figur 4.8. Sammanslagning av linjer. Till vänster områden utan hållplats inom 400 m med behövd tid per
-tur. Uppe till höger tidsutrymmet per linje i ett vanligt varv, med kravet 5 minuter i centrum per varv. Nere
+*Figur 4.8. Sammanslagning av linjer. Till vänster områden utan hållplats inom 400 m. Uppe till höger
+tidsutrymmet per linje (minuter per tur) i ett vanligt varv, med kravet 5 minuter i centrum per varv. Nere
 till höger resor per vardag som kan bli direkta om bytet skyltas som genomgående linje.*
 
 ### 4.5.2 V och Ö sammanslagna – Möckelö Strand ny redan med dagens vägar?
@@ -449,8 +449,7 @@ För 1a behövs en vändmöjlighet vid den nya hållplatsen.
 
 ![Figur 4.9](../output/kartor/b4_9_sammanslagning_vo.png)
 
-*Figur 4.9. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter,
-och antal turer som ryms per alternativ.*
+*Figur 4.9. Sammanslagning av linje V och Ö: tidsbudget per varv med tiden i centrum mot kravet 5 minuter.*
 
 ## 4.6 UA 4 – Linje V–Ö via flygplatsen
 
@@ -650,8 +649,7 @@ Pilarna visar körriktningen.*
 
 ![Figur 4.11](../output/kartor/b4_11_flygplatsen_vo.png)
 
-*Figur 4.11. UA 4: tidsbudget per varv V + Ö med tiden i centrum mot kravet 5 minuter, och antal turer som
-ryms per variant.*
+*Figur 4.11. UA 4: tidsbudget per varv V + Ö med tiden i centrum mot kravet 5 minuter.*
 
 ![Figur 4.12](../output/kartor/b4_12_flygplatsen_omlopp.png)
 
@@ -663,7 +661,7 @@ körtid (Solberget indragen).*
 ![Figur 4.19](../output/kartor/b4_19_flygtider.png)
 
 *Figur 4.19. UA 4 – flygen och bussen en vardag: fönstret då bussen ska vara vid flygplatsen (blått), V-turerna
-i dagens tidtabell som når flygen och de extra turer som behövs för övriga flyg, med kostnad.*
+i dagens tidtabell som når flygen och de extra turer som behövs för övriga flyg (se tabellen ovan).*
 
 ## 4.7 UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten
 
@@ -853,9 +851,9 @@ I QGIS finns effekten i gruppen för varje UA:
 
 ![Figur 4.16](../output/kartor/b4_16_avgangar_forandring.png)
 
-*Figur 4.16. Effekt per UA: förändrat antal avgångar inom 400 m × befolkning, utjämnad yta (grönt vinnare,
-rött förlorare), och hållplatserna efter förändrat antal avgångar i procent. Till höger nere: invånare i
-Mariehamn som får fler respektive färre avgångar.*
+*Figur 4.16. Fler och färre avgångar inom 400 m per UA: förändrat antal avgångar × befolkning, utjämnad yta
+(grönt fler, rött färre), och hållplatserna efter förändrat antal avgångar i procent. Till höger nere: invånare
+i Mariehamn som får fler respektive färre avgångar.*
 
 Förändringarna är lokala och syns bara i de berörda områdena (figur 4.14):
 
@@ -880,8 +878,8 @@ huvudalternativen. Kostnaderna redovisas i kapitel 5.
 
 ![Figur 4.13](../output/kartor/b4_13_systemeffekter.png)
 
-*Figur 4.13. Systemeffekter: invånare med bättre respektive sämre tillgänglighet och nyckeltal för varje
-UA för sig (UA 1a och 4 i flera driftformer; ★ = huvudalternativ).*
+*Figur 4.13. Systemeffekter: invånare med bättre respektive sämre tillgänglighet för varje UA för sig
+(UA 1a och 4 i flera driftformer; ★ = huvudalternativ). Nyckeltalen redovisas i tabellen ovan.*
 
 ![Figur 4.14](../output/kartor/b4_14_tackning_fore_efter.png)
 

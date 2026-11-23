@@ -201,10 +201,24 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       Bo-Bil (UA 3) räknas med vägavstånd i stället för fågelväg. A3:s numrering N1–N5 låst till Fas A-lägena
       (`NR_REFERENS`). Följder: fordonskm 1 136 → 1 287/vardag; UA 1a/1b 178 inv. (179); UA 2 58 inv. (55);
       UA 3 +0,5 min/tur (+0,1); UA 4 omväg 1,7 km, +5 min/tur (+4), 16/20 med Ö +2,5 min, Solberget ger inga fler
-      turer, 4Y +2,2 k€, extra flygturer 65,2 k€; UA 5 125 inv. fler / 11 färre (V lämnar Västra macken), −0,4 k€.
+      turer, 4Y +2,2 k€, extra flygturer 65,2 k€; UA 5 125 inv. fler / 11 färre (V lämnar Västra macken), −0,2 k€.
       Kostnader: 1a ★ +11,8 k€, 1b ★ +6,5 k€, 3 ±0, 4 ★ +8,1 k€. A3: 154 inv. ny täckning, 180 lyfts (N4 97).
 - [x] **Introduktion till varje UA** (beställaren 2026-11-23): B4 4.2–4.7 och PM 3.1–3.6 inleds med syfte, dagens
       trafik, vad som prövas och vad som avgör.
+- [x] **Kartor och figurer omarbetade** (beställaren 2026-11-23):
+      - UA 5-kartan (b4_17) visar i dag och UA 5 sida vid sida; ingen täckningsyta, eftersom inga nya hållplatser
+        tillkommer.
+      - Ny inzoomad flygplatskarta (b4_20). Terminalhållplatsen flyttad till vändslingan framför terminalen
+        (`FLYGPLATSEN_XY`); UA 4 ger då 22 inv. bättre (21 ny täckning).
+      - Känsligheten för UA 4 redovisas som tabell i stället för fig 9b/4.15.
+      - Källtexter borttagna från alla kartor; beställaren sätter källor i rapporten.
+      - Rena figurer: små rubriker (9,5 pt, normal vikt) och små teckenförklaringar; inga inforutor, tabeller eller
+        fotnoter i figurerna (siffrorna står i rapporttexten och tabellerna); ingen norrpil, liten skalstock.
+      - Alla kartor har ljusgrå OSM-bakgrund (`src/bakgrundskarta.py`: OpenFreeMap/OpenMapTiles-vektorplattor,
+        cache `data/processed/osm_plattor/`, kräver `mapbox_vector_tile`). Används vid publicering: ange
+        © OpenMapTiles © OpenStreetMap-bidragsgivare.
+      - OD-matrisen är en figur med FM och EM sida vid sida (a1_4_od_fm_em.png, 75 % av resorna); den gamla
+        a1_5 har utgått.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
@@ -241,7 +255,10 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   python src/b4_sammanslagning.py && python src/b4_systemeffekter.py && python src/b5_kalkyl.py &&
   python src/gis_export.py && python src/pm_export.py` (ingår i `kor_alla.py`). Utredningsalternativen definieras i
   `b4_ua.alternativ()`; restider Möckelö enligt beställaren (befintlig väg 2 min, förlängning 1 min).
+- **Kartbakgrund:** `src/bakgrundskarta.py` hämtar OSM-vektorplattor från tiles.openfreemap.org en gång
+  (cache i `data/processed/osm_plattor/`, incheckad). `kartlib.ny_karta(..., bakgrund='kust')` ger den gamla
+  GSHHG-bakgrunden om plattorna saknas.
 - **Test av QGIS-filerna:** `apt-get install python3-qgis qgis-providers` och kör med `/usr/bin/python3.12`,
   `QT_QPA_PLATFORM=offscreen` och `OGR_SQLITE_JOURNAL=DELETE` (molnmiljön klarar inte SQLite-WAL i QGIS).
-- Internet: endast PyPI och repo-GitHub nås. Inga baskarte-tjänster/OSRM – kartor byggs av egna lager.
+- Internet: PyPI, repo-GitHub, router.project-osrm.org (OSRM) och tiles.openfreemap.org (kartbakgrund).
 - Python-bibliotek utöver requirements: geopandas, shapely, pyproj, pyogrio (installeras med pip).

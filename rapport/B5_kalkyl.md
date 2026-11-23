@@ -131,7 +131,7 @@ driftkostnaden och påverkar inte bedömningen.
 
 ![Figur 5.1](../output/kartor/b5_1_kalkyl.png)
 
-*Figur 5.1. Förändrad driftkostnad per år per UA (bas; strecken anger låg–hög) och nyckeltal.*
+*Figur 5.1. Förändrad driftkostnad per år per UA, uppdelad på fordon, fordonstimmar och fordonskilometer (tusen euro, bas; strecken anger låg–hög).*
 
 ## 5.3 Osäkerheter
 
