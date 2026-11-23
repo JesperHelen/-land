@@ -1,14 +1,15 @@
-scenario,namn,delta_fordon,delta_fordonstimmar_ar,delta_km_ar,nya_hallplatser,ny_tackning_inv,battre_inv,fordon_låg,tid_låg,km_låg,drift_ar_låg,investering_låg,fordon_bas,tid_bas,km_bas,drift_ar_bas,investering_bas,fordon_hög,tid_hög,km_hög,drift_ar_hög,investering_hög,drift_per_battre_inv_bas
-1a,"UA 1a dagens vägar – alla turer (6 bussar, utesluten)",1,2860,14437,1,178,178,45000,120120,10106,175226,8000,60000,143000,12994,215994,15000,75000,165880,17325,258205,30000,1213.0
-1a_ryms,UA 1a dagens vägar – dagens tidtabell (8 av 20 turer),0,38,5785,1,178,178,0,1575,4049,5624,8000,0,1875,5206,7081,15000,0,2175,6942,9117,30000,40.0
-1a_VO,UA 1a ★ dagens vägar – V och Ö sammanslagna (16 av 20 turer),0,28,11545,1,178,178,0,1155,8081,9236,8000,0,1375,10390,11765,15000,0,1595,13854,15449,30000,66.0
-1b,UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna (16 av 20 turer),0,12,6522,1,178,178,0,525,4566,5091,8000,0,625,5870,6495,15000,0,725,7827,8552,30000,36.0
-2,UA 2 ★ N2 på linje Ö,0,2,0,1,58,58,0,105,0,105,8000,0,125,0,125,15000,0,145,0,145,30000,2.0
-3,UA 3 ★ Linje N via Bo-Bil,0,2,-105,0,0,44,0,105,-74,31,0,0,125,-95,30,0,0,145,-126,19,0,1.0
-4,"UA 4 flygplatsen – alla turer (6 bussar, utesluten)",1,2868,8995,1,21,22,45000,120435,6296,171731,8000,60000,143375,8095,211470,15000,75000,166315,10794,252109,30000,9612.0
-4_VO,UA 4 ★ flygplatsen – V och Ö sammanslagna (16 av 20 turer),0,32,7206,1,21,22,0,1365,5044,6409,8000,0,1625,6485,8110,15000,0,1885,8647,10532,30000,369.0
-4_VO_sol,UA 4 flygplatsen – dito + Solberget indragen (16 av 20),0,22,7206,1,21,22,0,945,5044,5989,8000,0,1125,6485,7610,15000,0,1305,8647,9952,30000,346.0
-4_Y,"UA 4Y flygturerna (3 av 3), V och Ö sammanslagna",0,12,1745,1,21,21,0,525,1221,1746,8000,0,625,1570,2195,15000,0,725,2094,2819,30000,105.0
-5,UA 5 ★ svängen till linje V – V och Ö sammanslagna (17 av 20 V-turer),0,0,-185,0,0,79,0,0,-130,-130,0,0,0,-167,-167,0,0,0,-222,-222,0,-2.0
-5_ryms,UA 5 svängen till linje V – dagens drift (16 av 20 V-turer),0,0,-238,0,0,79,0,0,-166,-166,0,0,0,-214,-214,0,0,0,-285,-285,0,-3.0
-5_N,UA 5 variant – bara linje N rakt på (svängen utan buss),0,-8,-1000,0,0,0,0,-315,-700,-1015,0,0,-375,-900,-1275,0,0,-435,-1200,-1635,0,
+scenario,namn,huvudalternativ,fordon,delta_fordon,fordonskm_vardag,delta_km_vardag,delta_km_ar,ny_tackning_inv,battre_inv
+1a,UA 1a dagens vägar – alla turer,False,6,1,1341.9,54.9,14400,178,178
+1a_ryms,UA 1a dagens vägar – dagens tidtabell (8 av 20 turer),False,5,0,1309.0,22.0,5800,178,178
+1a_VO,UA 1a ★ dagens vägar – V och Ö sammanslagna (16 av 20 turer),True,5,0,1330.9,43.9,11500,178,178
+1b,UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna (16 av 20 turer),True,5,0,1311.8,24.8,6500,178,178
+2,UA 2 ★ N2 på linje Ö,True,5,0,1287.0,0.0,0,58,58
+3,UA 3 ★ linje N via Bo-Bil,True,5,0,1286.6,-0.4,-100,0,44
+4,UA 4 flygplatsen – alla turer,False,6,1,1321.2,34.2,9000,21,22
+4_VO,UA 4 ★ flygplatsen – V och Ö sammanslagna (16 av 20 turer),True,5,0,1314.4,27.4,7200,21,22
+4_VO_sol,UA 4 flygplatsen – dito + Solberget indragen (16 av 20),False,5,0,1314.4,27.4,7200,21,22
+4_Y,"UA 4Y flygturerna (3 av 3), V och Ö sammanslagna",False,5,0,1292.2,5.2,1700,21,21
+5,UA 5 ★ svängen till linje V – V och Ö sammanslagna (17 av 20 V-turer),True,5,0,1286.1,-0.9,-200,0,79
+5_ryms,UA 5 svängen till linje V – dagens drift (16 av 20 V-turer),False,5,0,1285.9,-1.1,-200,0,79
+5_N,UA 5 variant – bara linje N rakt på,False,5,0,1283.0,-4.0,-1000,0,0
+flyg_extra,UA 4 extra turer för flyg som dagens tidtabell inte når,False,5,0,1330.5,43.5,10900,0,0

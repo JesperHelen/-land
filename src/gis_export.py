@@ -611,9 +611,9 @@ def b4():
                       'invanare_x_avgangar_farre': v.get('forandring_avgangar_mariehamn', {}).get('invavg_farre', 0),
                       'invanare_x_avgangar_netto': v.get('forandring_avgangar_mariehamn', {}).get('invavg_netto', 0),
                       'restid_resenarsmin_vardag_inkl_genomgaende': v['resenarer']['resenarsminuter_vardag'],
-                      'driftkostnad_eur_ar_bas': int(kalk.at[sid, 'drift_ar_bas']) if sid in kalk.index else 0,
-                      'driftkostnad_eur_ar_lag': int(kalk.at[sid, 'drift_ar_låg']) if sid in kalk.index else 0,
-                      'driftkostnad_eur_ar_hog': int(kalk.at[sid, 'drift_ar_hög']) if sid in kalk.index else 0})
+                      'fler_fordon': int(kalk.at[sid, 'delta_fordon']) if sid in kalk.index else 0,
+                      'delta_fordonskm_vardag': float(kalk.at[sid, 'delta_km_vardag']) if sid in kalk.index else 0.0,
+                      'delta_fordonskm_ar': int(kalk.at[sid, 'delta_km_ar']) if sid in kalk.index else 0})
     pyogrio.write_dataframe(pd.DataFrame(rader), GPKG, layer='b4_nyckeltal_scenarier', driver='GPKG')
 
     o = pd.read_csv(P / 'b4_sammanslagning_omraden.csv')

@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
-"""B5 – Grov ekonomisk kalkyl (överslag) för utredningsalternativen.
+"""B5 – Kostnad för utredningsalternativen, uttryckt i fordonskilometer och antal fordon.
 
-Driftkostnad per år = Δfordon × fordonskostnad + Δfordonstimmar × timkostnad + Δfordonskm × km-kostnad.
-  * Δfordon, Δomloppstid (fordonstimmar) och Δkm per vardag kommer från omloppsverifieringen
-    (b4_systemeffekter.json). Varje UA kalkyleras för sig.
-  * Årsvolym: VARDAGAR vardagar med samma tidtabell som typvardagen. Lördagstrafiken (5 turer per linje N, S, V
-    och Ö enligt GTFS) påverkas bara genom km. GTFS-underlaget täcker hösten 2026; helårsvolymen är ett antagande.
-  * Enhetskostnader (EUR, prisnivå 2026, tre nivåer): orienterande värden från Trivector (2023), Trafikeringskostnader
-    för buss 2019 och 2045 (Trafikverket), tätortstrafik 2019 – ca 0,65 MSEK per fordon och år och ca 480 kr per
-    fordonstimme – omräknade (10,6 SEK/EUR) och uppräknade ca 15 %. Ska ersättas med avtalspriserna i Ålands
-    landskapsregerings trafikavtal när de finns tillgängliga.
-  * Lördagstrafiken: samma andel turer via den nya hållplatsen som på vardagar.
-  * Investeringar (engångs): nya hållplatslägen. Förlängningen av Norrgårdsvägen och en vändmöjlighet vid den nya
-    hållplatsen (1a) kostnadsberäknas inte; i stället redovisas vilken vägkostnad som motsvarar nuvärdet av
-    merkostnaden för 1a jämfört med 1b (break-even), både med en extra buss och med V och Ö sammanslagna.
+Beställaren redovisar kostnaden som
+  * förändrade fordonskilometer (per vardag och per år) och
+  * om linjen kräver fler fordon än i dag för att kunna hållas.
+Inga eurobelopp räknas fram.
+
+  * Δfordon och Δkm per vardag kommer från omloppsverifieringen (b4_systemeffekter.json). Varje UA för sig.
+  * Årsvolym: VARDAGAR vardagar med typvardagens tidtabell, plus lördagstrafiken (5 turer per linje enligt GTFS)
+    med samma andel turer via den nya sträckan som på vardagar. GTFS-underlaget täcker hösten 2026, så
+    helårsvolymen är ett antagande.
+  * UA 4: extra V-turer via flygplatsen för de flyg som dagens tidtabell inte når (b4_ua.flyg_extraturer).
 Utdata: data/processed/b5_kalkyl.json, b5_kalkyl.csv, output/kartor/b5_1_kalkyl.png
 """
 import json
@@ -33,116 +30,92 @@ P = C.PROCESSED
 VARDAGAR = 250
 LORDAGAR = 52
 LORDAGSTURER = 5
-NIVAER = ['låg', 'bas', 'hög']
-ENHET = {   # EUR, 2026
-    'fordon_per_ar': {'låg': 45_000, 'bas': 60_000, 'hög': 75_000},
-    'per_fordonstimme': {'låg': 42, 'bas': 50, 'hög': 58},
-    'per_km': {'låg': 0.7, 'bas': 0.9, 'hög': 1.2},
-    'ny_hallplats': {'låg': 8_000, 'bas': 15_000, 'hög': 30_000},
-}
-KALKYLRANTA = 0.035
-KALKYLTID = 20
 SCEN = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y', '5', '5_ryms', '5_N']
+HUVUD = {'1a_VO', '1b', '2', '3', '4_VO', '5'}
+EXTRA = 'flyg_extra'
 
 
 def kort(sid, v):
     n, tot = v['turer'], v['turer_tot']
-    return {'1a': f"UA 1a dagens vägar – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
+    return {'1a': 'UA 1a dagens vägar – alla turer',
             '1a_ryms': f'UA 1a dagens vägar – dagens tidtabell ({n} av {tot} turer)',
             '1a_VO': f'UA 1a ★ dagens vägar – V och Ö sammanslagna ({n} av {tot} turer)',
             '1b': f'UA 1b ★ förlängd Norrgårdsvägen – V och Ö sammanslagna ({n} av {tot} turer)',
-            '2': 'UA 2 ★ N2 på linje Ö', '3': 'UA 3 ★ Linje N via Bo-Bil',
-            '4': f"UA 4 flygplatsen – alla turer ({v['omlopp']['fordon']} bussar, utesluten)",
+            '2': 'UA 2 ★ N2 på linje Ö', '3': 'UA 3 ★ linje N via Bo-Bil',
+            '4': 'UA 4 flygplatsen – alla turer',
             '4_VO': f'UA 4 ★ flygplatsen – V och Ö sammanslagna ({n} av {tot} turer)',
             '4_VO_sol': f'UA 4 flygplatsen – dito + Solberget indragen ({n} av {tot})',
             '4_Y': f'UA 4Y flygturerna ({n} av {tot}), V och Ö sammanslagna',
             '5': f'UA 5 ★ svängen till linje V – V och Ö sammanslagna ({n} av {tot} V-turer)',
             '5_ryms': f'UA 5 svängen till linje V – dagens drift ({n} av {tot} V-turer)',
-            '5_N': 'UA 5 variant – bara linje N rakt på (svängen utan buss)'}[sid]
+            '5_N': 'UA 5 variant – bara linje N rakt på'}[sid]
+
+
+KORT_FIG = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ V + Ö',
+            '1b': 'UA 1b ★ V + Ö', '2': 'UA 2 ★', '3': 'UA 3 ★', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ V + Ö',
+            '4_VO_sol': 'UA 4 + Solberget indragen', '4_Y': 'UA 4Y flygturerna',
+            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ V + Ö', '5_ryms': 'UA 5 dagens drift',
+            '5_N': 'UA 5 bara N rakt på'}
 
 
 def main():
     se = json.load(open(P / 'b4_systemeffekter.json', encoding='utf-8'))
-    uas = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['ua']
-    rader, res = [], {}
+    uas = json.load(open(P / 'b4_ua.json', encoding='utf-8'))
+    rader = []
     for sid in SCEN:
         v = se[sid]; d = v['forandring_omlopp']; fid = v['ua']
         andel = v['turer'] / max(v['turer_tot'], 1)
-        km_ar = d['km'] * VARDAGAR + LORDAGSTURER * uas[fid]['km_per_tur'] * andel * LORDAGAR
-        h_ar = d['omloppstid_h'] * VARDAGAR
-        nya = 1 if fid in ('1a', '1b', '2', '4') else 0
-        r = {'scenario': sid, 'namn': kort(sid, v), 'delta_fordon': d['fordon'], 'delta_fordonstimmar_ar': round(h_ar),
-             'delta_km_ar': round(km_ar), 'nya_hallplatser': nya,
-             'ny_tackning_inv': v['forandring_invanare_mariehamn']['ny_tackning'],
-             'battre_inv': v['forandring_invanare_mariehamn']['battre_klass']}
-        for n in NIVAER:
-            fo = d['fordon'] * ENHET['fordon_per_ar'][n]
-            ti = h_ar * ENHET['per_fordonstimme'][n]
-            km = km_ar * ENHET['per_km'][n]
-            r[f'fordon_{n}'] = round(fo); r[f'tid_{n}'] = round(ti); r[f'km_{n}'] = round(km)
-            r[f'drift_ar_{n}'] = round(fo + ti + km)
-            r[f'investering_{n}'] = nya * ENHET['ny_hallplats'][n]
-        r['drift_per_battre_inv_bas'] = round(r['drift_ar_bas'] / r['battre_inv']) if r['battre_inv'] else None
-        rader.append(r)
+        km_ar = d['km'] * VARDAGAR + LORDAGSTURER * uas['ua'][fid]['km_per_tur'] * andel * LORDAGAR
+        rader.append({'scenario': sid, 'namn': kort(sid, v), 'huvudalternativ': sid in HUVUD,
+                      'fordon': v['omlopp']['fordon'], 'delta_fordon': d['fordon'],
+                      'fordonskm_vardag': round(v['omlopp']['km'], 1), 'delta_km_vardag': round(d['km'], 1),
+                      'delta_km_ar': int(round(km_ar, -2)),
+                      'ny_tackning_inv': v['forandring_invanare_mariehamn']['ny_tackning'],
+                      'battre_inv': v['forandring_invanare_mariehamn']['battre_klass']})
+    ex = uas['flygplatsen']['extraturer']
+    km_ex = sum(e['km'] for e in ex)
+    rader.append({'scenario': EXTRA, 'namn': 'UA 4 extra turer för flyg som dagens tidtabell inte når',
+                  'huvudalternativ': False, 'fordon': se['idag']['omlopp']['fordon'], 'delta_fordon': 0,
+                  'fordonskm_vardag': round(se['idag']['omlopp']['km'] + km_ex, 1), 'delta_km_vardag': round(km_ex, 1),
+                  'delta_km_ar': int(round(km_ex * VARDAGAR, -2)), 'ny_tackning_inv': 0, 'battre_inv': 0})
     df = pd.DataFrame(rader)
-    an = (1 - (1 + KALKYLRANTA) ** -KALKYLTID) / KALKYLRANTA
-    b = df.set_index('scenario')
-    diff = {n: float(b.at['1a', f'drift_ar_{n}'] - b.at['1b', f'drift_ar_{n}']) for n in NIVAER}
-    diff_vo = {n: float(b.at['1a_VO', f'drift_ar_{n}'] - b.at['1b', f'drift_ar_{n}']) for n in NIVAER}
-    res = {'antaganden': {'vardagar_per_ar': VARDAGAR, 'lordagar_per_ar': LORDAGAR, 'lordagsturer_per_linje': LORDAGSTURER,
-                          'enhetskostnader_eur_2026': ENHET, 'kalkylranta': KALKYLRANTA, 'kalkyltid_ar': KALKYLTID,
-                          'nuvardesfaktor': round(an, 2)},
+    res = {'antaganden': {'vardagar_per_ar': VARDAGAR, 'lordagar_per_ar': LORDAGAR,
+                          'lordagsturer_per_linje': LORDAGSTURER},
+           'idag': {'fordon': se['idag']['omlopp']['fordon'], 'fordonskm_vardag': se['idag']['omlopp']['km']},
            'scenarier': df.to_dict('records'),
-           'break_even_vagforlangning': {n: {'merkostnad_1a_jfr_1b_per_ar': round(diff[n]),
-                                             'nuvarde_eur': round(diff[n] * an)} for n in NIVAER},
-           'break_even_vagforlangning_vo': {n: {'merkostnad_1a_VO_jfr_1b_per_ar': round(diff_vo[n]),
-                                                'nuvarde_eur': round(diff_vo[n] * an)} for n in NIVAER}}
-    res['turer_1b'] = f"{se['1b']['turer']} av {se['1b']['turer_tot']}"
-    # UA 4: extra V-turer via flygplatsen för flyg som ingen tur i dagens tidtabell når (b4_ua.flyg_extraturer)
-    ex = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['flygplatsen']['extraturer']
-    res['flyg_extraturer'] = [{**e, **{f'kostnad_ar_{n}': round((e['fordonstimmar'] * ENHET['per_fordonstimme'][n] +
-                                                                e['km'] * ENHET['per_km'][n]) * VARDAGAR)
-                                       for n in NIVAER}} for e in ex]
-    res['flyg_extraturer_summa'] = {n: sum(e[f'kostnad_ar_{n}'] for e in res['flyg_extraturer']) for n in NIVAER}
+           'flyg_extraturer': [{'flyg': e['flyg'], 'avg_centrum': e['avg_centrum'], 'km': e['km'],
+                                'omlopp': e['omlopp'], 'inom_omloppet': e['inom_omloppet']} for e in ex]}
     df.to_csv(P / 'b5_kalkyl.csv', index=False)
     with open(P / 'b5_kalkyl.json', 'w', encoding='utf-8') as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1, default=float)
-    print(df[['scenario', 'delta_fordon', 'delta_fordonstimmar_ar', 'delta_km_ar', 'drift_ar_låg', 'drift_ar_bas',
-              'drift_ar_hög', 'investering_bas', 'drift_per_battre_inv_bas']].to_string())
-    print(res['break_even_vagforlangning']); print(res['break_even_vagforlangning_vo'])
-    print(figur(df, res))
+    print(df[['scenario', 'fordon', 'delta_fordon', 'delta_km_vardag', 'delta_km_ar']].to_string())
+    print(figur(df))
 
 
-def figur(df, res):
-    fig, ax = plt.subplots(figsize=(9.6, 6.8))
-    d = df.set_index('scenario').loc[SCEN]
+def figur(df):
+    ordning = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y', EXTRA, '5', '5_ryms', '5_N']
+    d = df.set_index('scenario').loc[ordning]
+    fig, ax = plt.subplots(figsize=(8.6, 6.2))
     y = np.arange(len(d))
-    delar = [('fordon_bas', 'Fordon', '#3d4a57'), ('tid_bas', 'Fordonstimmar', '#7fb0ec'),
-             ('km_bas', 'Fordonskilometer', '#f28e2b')]
-    vanster_pos = np.zeros(len(d)); vanster_neg = np.zeros(len(d))
-    for k, lbl, f in delar:
-        v = d[k].to_numpy() / 1000
-        start = np.where(v >= 0, vanster_pos, vanster_neg)
-        ax.barh(y, v, left=start, height=0.56, color=f, label=lbl)
-        vanster_pos += np.where(v >= 0, v, 0); vanster_neg += np.where(v < 0, v, 0)
-    tot = d.drift_ar_bas.to_numpy() / 1000
-    a_, b_ = d['drift_ar_låg'].to_numpy() / 1000, d['drift_ar_hög'].to_numpy() / 1000
-    lo, hi = np.minimum(a_, b_), np.maximum(a_, b_)
-    ax.errorbar(tot, y, xerr=[np.clip(tot - lo, 0, None), np.clip(hi - tot, 0, None)], fmt='none', ecolor='#1f1f1e',
-                elinewidth=0.8, capsize=3, zorder=5)
-    for yy, t, h_ in zip(y, tot, hi):
-        ax.text(max(h_, t, 0) + 4, yy, f'{t:+,.0f}'.replace(',', ' ').replace('-', '−'), va='center', fontsize=7.2,
-                color=K.TEXT)
+    ROD, BLA = '#c0392b', '#3987e5'
+    farg = [ROD if f > 0 else BLA for f in d.delta_fordon]
+    ax.barh(y, d.delta_km_vardag, height=0.58, color=farg)
+    for yy, (km, f) in enumerate(zip(d.delta_km_vardag, d.delta_fordon)):
+        t = f'{km:+.0f} km'.replace('-', '−').replace('+0 km', '±0 km').replace('−0 km', '±0 km')
+        if f > 0:
+            t += f'  ·  +{f} fordon'
+        ax.text(max(km, 0) + 1.2, yy, t, va='center', fontsize=7.2, color=ROD if f > 0 else K.TEXT)
     ax.axvline(0, color='#52514e', lw=0.8)
-    ax.set_yticks(y); ax.set_yticklabels([d.at[s, 'namn'].replace(' – ', '\n') for s in d.index], fontsize=7.6)
-    ax.invert_yaxis(); ax.set_xlim(-15, 320)
-    ax.set_xlabel('Tusen euro per år (streck = låg–hög)', fontsize=8)
+    ax.set_yticks(y); ax.set_yticklabels([KORT_FIG[s] for s in d.index], fontsize=7.6)
+    ax.invert_yaxis(); ax.set_xlim(-8, 75)
+    ax.set_xlabel('Fordonskilometer per vardag jämfört med i dag', fontsize=8)
     ax.tick_params(labelsize=7.5); ax.grid(axis='x', color='#e6e4de', lw=0.6); ax.set_axisbelow(True)
     for s in ['top', 'right']:
         ax.spines[s].set_visible(False)
-    ax.legend(loc='lower right', ncol=1, fontsize=7, frameon=True, facecolor='white', edgecolor='#e0ded7')
-
-    fig.suptitle('Förändrad driftkostnad per år jämfört med i dag', x=0.01, ha='left')
+    ax.legend(handles=[Patch(facecolor=BLA, label='Ryms med dagens fordon'),
+                       Patch(facecolor=ROD, label='Kräver fler fordon')],
+              loc='lower right', fontsize=7, frameon=True, facecolor='white', edgecolor='#e0ded7')
+    ax.set_title('Fordonskilometer och fordon jämfört med i dag')
     ut = C.KARTOR / 'b5_1_kalkyl.png'
     fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
     return ut

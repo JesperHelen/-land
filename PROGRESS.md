@@ -219,6 +219,11 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
         © OpenMapTiles © OpenStreetMap-bidragsgivare.
       - OD-matrisen är en figur med FM och EM sida vid sida (a1_4_od_fm_em.png, 75 % av resorna); den gamla
         a1_5 har utgått.
+- [x] **Kostnad som fordonskm och fordon** (beställaren 2026-11-23): kostnaden redovisas bara som förändrade
+      fordonskilometer (per vardag och år) och om linjen kräver fler fordon. Eurobelopp, fordonstimmar,
+      enhetskostnader och break-even har tagits bort ur B4, B5 och PM; `b5_kalkyl.py` räknar bara fordon och km,
+      figur 5.1/13 visar fordonskm per vardag (rött = kräver fler fordon). Huvudalternativen: 1a +44, 1b +25,
+      2 ±0, 3 ±0, 4 +27 (4Y +5, extra flygturer +44), 5 −1 fordonskm per vardag; alla med fem fordon.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

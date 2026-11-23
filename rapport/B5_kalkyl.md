@@ -1,144 +1,106 @@
-# 5 Ekonomisk kalkyl (överslag)
+# 5 Kostnad – fordonskilometer och fordon
 
-> **Sammanfattning.** Varje utredningsalternativ (UA) har kalkylerats för sig, i alla driftformer
-> (★ = huvudalternativ). UA på linje V har prövats med kravet att varje varv V + Ö ryms inom timmen med minst
-> 5 minuter i centrum.
+> **Sammanfattning.** Kostnaden för varje utredningsalternativ (UA) redovisas som förändrade
+> fordonskilometer och om linjen kräver fler fordon än i dag för att kunna hållas. I dag körs stadslinjerna
+> N, S, V och Ö med fem fordon och cirka 1 287 fordonskilometer per vardag. Alla huvudalternativ (★) ryms med
+> dagens fem fordon.
 >
 > - **UA 1a – Möckelö Strand ny via dagens vägar:**
->   - ★ med V och Ö sammanslagna (16 av 20 turer, fem bussar): cirka 11 800 euro per år (9 200–15 400);
->   - alla turer med dagens tidtabell kräver en sjätte buss, cirka 216 000 euro per år, och är utesluten.
-> - **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen ★:** V och Ö sammanslagna, 16 av 20 turer, cirka
->   6 500 euro per år (5 100–8 600), utöver vägen.
-> - **UA 2 – N2 på linje Ö ★:** praktiskt taget kostnadsneutralt.
-> - **UA 3 – Linje N via Bo-Bil ★:** praktiskt taget kostnadsneutralt (vägen är lika lång som i dag).
+>   - ★ med V och Ö sammanslagna (16 av 20 turer): +44 fordonskm per vardag, cirka +11 500 per år; inga fler
+>     fordon;
+>   - alla turer med dagens tidtabell kräver ett sjätte fordon (+55 fordonskm per vardag) och är utesluten.
+> - **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen ★:** V och Ö sammanslagna, 16 av 20 turer:
+>   +25 fordonskm per vardag, cirka +6 500 per år; inga fler fordon.
+> - **UA 2 – N2 på linje Ö ★:** ±0 fordonskm (hållplatsen ligger på linjens väg); inga fler fordon.
+> - **UA 3 – Linje N via Bo-Bil ★:** ±0 fordonskm (vägen är lika lång som i dag); inga fler fordon.
 > - **UA 4 – Linje V–Ö via flygplatsen:**
->   - ★ V och Ö sammanslagna (16 av 20 turer): cirka 8 100 euro per år;
->   - UA 4Y med de tre flygturerna: cirka 2 200 euro per år;
->   - extra turer för de tre flyg som dagens tidtabell inte når (avgång 07:15, ankomst 10:35 och 21:35): cirka
->     65 000 euro per år (54 000–77 000), varav 10:50-turen för ankomsten 10:35 cirka 10 000 euro;
->   - bara förlängning av V kräver en sjätte buss, cirka 211 500 euro per år, och är utesluten.
-> - **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten ★:** sparar cirka 200 euro per år, eftersom
->   linje N:s väg rakt på är kortare än svängen. Varianten med bara linje N rakt på sparar cirka 1 300 euro per år.
+>   - ★ V och Ö sammanslagna (16 av 20 turer): +27 fordonskm per vardag, cirka +7 200 per år; inga fler fordon;
+>   - UA 4Y med de tre flygturerna: +5 fordonskm per vardag; inga fler fordon;
+>   - extra turer för de tre flyg som dagens tidtabell inte når (avgång 07:15, ankomst 10:35 och 21:35):
+>     +44 fordonskm per vardag, cirka +10 900 per år; körs av befintliga fordon;
+>   - bara förlängning av V kräver ett sjätte fordon och är utesluten.
+> - **UA 5 – Linje V via Cedersvägen, linje N rakt på Västra utfarten ★:** −1 fordonskm per vardag, eftersom
+>   linje N:s väg rakt på är kortare än svängen; inga fler fordon. Varianten med bara linje N rakt på ger
+>   −4 fordonskm per vardag.
 >
 > Kilometrarna är vägavstånd längs gatunätet (OSRM).
->
-> Förlängningen av Norrgårdsvägen (UA 1b) är motiverad ur busstrafikens perspektiv om den kostar mindre än
-> 2,4–3,5 miljoner euro, om jämförelsen är UA 1a med en extra buss. Mot huvudalternativet för UA 1a är
-> driftbesparingen bara cirka 5 000 euro per år, och båda ger 16 av 20 turer. Vägen motiveras då av kortare
-> restid, större marginal i centrum och att Ö kan behålla pulsen, inte av busstrafikens driftkostnad.
 
-## 5.1 Metod och antaganden
+## 5.1 Metod
 
-Kalkylen omfattar förändrad driftkostnad per år jämfört med i dag:
-
-> Δ driftkostnad = Δ fordon × fordonskostnad + Δ fordonstimmar × timkostnad + Δ fordonskm × km-kostnad
-
-- **Förändringar:** Δ fordon, Δ omloppstid (fordonstimmar) och Δ km per vardag kommer från
-  omloppsverifieringen i kapitel 4.
-- **Årsvolym:** 250 vardagar per år med typvardagens tidtabell. GTFS-underlaget omfattar bara hösten 2026,
-  så helårsvolymen är ett antagande. Lördagstrafiken, med fem turer per linje, påverkas bara genom körda
-  kilometer. Samma andel av turerna som på vardagar antas gå via den nya hållplatsen.
-- **Enhetskostnader** (euro, prisnivå 2026):
-
-  | Kostnadspost | Låg | Bas | Hög |
-  |---|---|---|---|
-  | Fordon (kapital, försäkring, uppställning), per fordon och år | 45 000 | 60 000 | 75 000 |
-  | Fordonstimme (förare inkl. sociala avgifter och omkostnader) | 42 | 50 | 58 |
-  | Fordonskilometer (energi, däck, underhåll) | 0,7 | 0,9 | 1,2 |
-  | Nytt hållplatsläge (engångs) | 8 000 | 15 000 | 30 000 |
-
-  Förlängningen av Norrgårdsvägen (1b) och en vändmöjlighet vid den nya hållplatsen (1a) har inte
-  kostnadsberäknats.
-
-  Värdena utgår från Trivector (2023), *Trafikeringskostnader för buss 2019 och 2045*, för Trafikverket.
-  Där anges för tätortstrafik 2019 cirka 0,65 MSEK per fordon och år och cirka 480 kr per fordonstimme.
-  Värdena är omräknade till euro och uppräknade till 2026. De är schabloner och ska ersättas med
-  avtalspriserna i landskapsregeringens trafikavtal.
-- **Kalkylränta och tid:** nuvärden har beräknats med 3,5 % kalkylränta och 20 års kalkyltid.
+- **Fordon och fordonskilometer per vardag** kommer från omloppsverifieringen i kapitel 4: antalet fordon som
+  behövs för att köra typvardagens tidtabell med alternativet, och de körda kilometrarna i omloppen.
+- **Fler fordon** behövs när tidtabellen med alternativet inte kan köras med dagens fem fordon (de alternativ
+  som då krävs har uteslutits, eftersom ramen är inga fler fordon).
+- **Årsvolym:** 250 vardagar per år med typvardagens tidtabell, plus lördagstrafiken med fem turer per linje.
+  Samma andel av turerna som på vardagar antas gå via den nya sträckan. GTFS-underlaget omfattar bara hösten
+  2026, så helårsvolymen är ett antagande.
 
 ## 5.2 Resultat
 
-*Tabell 5.1. Förändrad driftkostnad per år jämfört med i dag (euro, prisnivå 2026). Varje UA för sig.*
+*Tabell 5.1. Fordon och fordonskilometer jämfört med i dag (fem fordon, cirka 1 287 fordonskm per vardag).
+Varje UA för sig.*
 
-| UA | Bussar | Fordonstimmar per år | Fordonskm per år | Driftkostnad per år, bas (låg–hög) | Per invånare med bättre tillgänglighet |
-|---|---|---|---|---|---|
-| UA 1a dagens vägar, alla 20 turer – utesluten | +1 | +2 860 | +14 400 | +216 000 (175 200–258 200) | 1 213 €/år |
-| UA 1a dagens vägar, dagens tidtabell (8 av 20 turer) | 0 | +38 | +5 800 | +7 100 (5 600–9 100) | 40 €/år |
-| UA 1a ★ dagens vägar, V och Ö sammanslagna (16 av 20 turer) | 0 | +28 | +11 500 | +11 800 (9 200–15 400) | 66 €/år |
-| UA 1b ★ förlängd Norrgårdsvägen, V och Ö sammanslagna (16 av 20 turer) | 0 | +12 | +6 500 | +6 500 (5 100–8 600) | 36 €/år |
-| UA 2 ★ N2 på linje Ö | 0 | +2 | 0 | ±0 | – |
-| UA 3 ★ Linje N via Bo-Bil | 0 | +2 | −100 | ±0 | – |
-| UA 4 flygplatsen, alla 20 turer – utesluten | +1 | +2 870 | +9 000 | +211 500 (171 700–252 100) | 9 612 €/år |
-| UA 4 ★ flygplatsen, V och Ö sammanslagna (16 av 20 turer) | 0 | +32 | +7 200 | +8 100 (6 400–10 500) | 369 €/år |
-| UA 4 flygplatsen, dito + Solberget indragen (16 av 20) | 0 | +22 | +7 200 | +7 600 (6 000–10 000) | 346 €/år |
-| UA 4Y flygturerna (3 av 3), V och Ö sammanslagna | 0 | +12 | +1 700 | +2 200 (1 700–2 800) | 105 €/år |
-| UA 4 extra turer för flygen 07:15, 10:35 och 21:35 (tabell 5.2) | 0 | +1 110 | +10 900 | +65 200 (54 100–77 300) | – |
-| UA 5 ★ svängen till linje V, V och Ö sammanslagna (17 av 20 V-turer) | 0 | 0 | −200 | −200 (−100 – −200) | – |
-| UA 5 svängen till linje V, dagens drift (16 av 20 V-turer) | 0 | 0 | −200 | −200 (−200 – −300) | – |
-| UA 5 variant: bara linje N rakt på (svängen utan buss) | 0 | −8 | −1 000 | −1 300 (−1 000 – −1 600) | – |
-
-Kostnaden per invånare med bättre tillgänglighet är inte rättvisande för UA 4. Nyttan gäller främst
-flygresenärer, som inte finns i OD-matrisen.
+| UA | Fordon | Fler fordon? | Fordonskm per vardag | Fordonskm per år |
+|---|---|---|---|---|
+| UA 1a dagens vägar, alla 20 turer – utesluten | 6 | **Ja, +1** | +55 | +14 400 |
+| UA 1a dagens vägar, dagens tidtabell (8 av 20 turer) | 5 | Nej | +22 | +5 800 |
+| UA 1a ★ dagens vägar, V och Ö sammanslagna (16 av 20 turer) | 5 | Nej | +44 | +11 500 |
+| UA 1b ★ förlängd Norrgårdsvägen, V och Ö sammanslagna (16 av 20 turer) | 5 | Nej | +25 | +6 500 |
+| UA 2 ★ N2 på linje Ö | 5 | Nej | ±0 | ±0 |
+| UA 3 ★ Linje N via Bo-Bil | 5 | Nej | ±0 | −100 |
+| UA 4 flygplatsen, alla 20 turer – utesluten | 6 | **Ja, +1** | +34 | +9 000 |
+| UA 4 ★ flygplatsen, V och Ö sammanslagna (16 av 20 turer) | 5 | Nej | +27 | +7 200 |
+| UA 4 flygplatsen, dito + Solberget indragen (16 av 20) | 5 | Nej | +27 | +7 200 |
+| UA 4Y flygturerna (3 av 3), V och Ö sammanslagna | 5 | Nej | +5 | +1 700 |
+| UA 4 extra turer för flygen 07:15, 10:35 och 21:35 (tabell 5.2) | 5 | Nej | +44 | +10 900 |
+| UA 5 ★ svängen till linje V, V och Ö sammanslagna (17 av 20 V-turer) | 5 | Nej | −1 | −200 |
+| UA 5 svängen till linje V, dagens drift (16 av 20 V-turer) | 5 | Nej | −1 | −200 |
+| UA 5 variant: bara linje N rakt på (svängen utan buss) | 5 | Nej | −4 | −1 000 |
 
 **Extra turer för flygen (UA 4).** Tre flyg nås inte av dagens V-turer. De extra turerna är V-turer via
-flygplatsen (32 minuter, 14,5 km längs vägarna) och körs av ett omlopp som står stilla, så ingen extra buss behövs.
-Fordonstimmarna räknas försiktigt: turens körtid plus den tid omloppet förlängs, även när bussen väntar.
+flygplatsen (32 minuter, 14,5 km längs vägarna) och körs av ett fordon som står stilla, så inget extra fordon
+behövs.
 
-*Tabell 5.2. Extra V-turer för flygen (euro per år, 250 vardagar).*
+*Tabell 5.2. Extra V-turer för flygen.*
 
-| Flyg | Extra tur | Körs av | Fordonstimmar per vardag | Kostnad per år, bas (låg–hög) |
+| Flyg | Extra tur | Körs av | Fordonskm per vardag | Fler fordon? |
 |---|---|---|---|---|
-| Avgång 07:15 | 05:15 (vid flygplatsen 05:32) | omlopp 204, som i dag börjar 06:50 | 2,2 | 30 400 (25 300–35 800) |
-| Ankomst 10:35 | 10:50 (vid flygplatsen 11:07) | omlopp 204, i uppehållet 10:16–14:20 | 0,5 | 9 900 (8 100–12 000) |
-| Ankomst 21:35 | 21:50 (vid flygplatsen 22:07) | omlopp 205, efter sista turen 21:13 | 1,7 | 24 900 (20 700–29 400) |
-| **Summa** | | | **4,4** | **65 200 (54 100–77 300)** |
+| Avgång 07:15 | 05:15 (vid flygplatsen 05:32) | omlopp 204, som i dag börjar 06:50 | +14,5 | Nej |
+| Ankomst 10:35 | 10:50 (vid flygplatsen 11:07) | omlopp 204, i uppehållet 10:16–14:20 | +14,5 | Nej |
+| Ankomst 21:35 | 21:50 (vid flygplatsen 22:07) | omlopp 205, efter sista turen 21:13 | +14,5 | Nej |
+| **Summa** | | | **+43,5** | **Nej** |
 
-Turen 10:50 kostar bara körtiden, men uppehållet i omlopp 204 används troligen för förarens rast. Morgon- och
-kvällsturen förlänger trafikdygnet och består till stor del av väntan; anropsstyrd trafik eller taxi kan vara
-billigare för dessa flyg.
+Turen 10:50 ryms i ett uppehåll i omlopp 204, men uppehållet används troligen för förarens rast. Morgon- och
+kvällsturen förlänger trafikdygnet för omlopp 204 och 205; anropsstyrd trafik eller taxi kan vara ett
+alternativ för dessa flyg.
 
-**UA 5.** Linje N blir 2 minuter kortare och linje V 2 minuter längre per tur. Omloppstiden ändras inte,
-eftersom vinsten för N blir väntetid i centrum. Längs gatunätet är N:s väg rakt på cirka 185 m kortare per tur
-än svängen, och V kör lika mycket längre. Eftersom N kör fler turer genom svängen än V ger det en liten
-besparing i fordonskilometer. I varianten med bara
-linje N rakt på slutar dessutom N:s sista tur 2 minuter tidigare.
+**UA 1a och 1b.** Med alla turer via Möckelö Strand ny ryms inte varven V + Ö inom timmen, och ett sjätte
+fordon behövs. Med V och Ö sammanslagna ryms 16 av 20 turer med dagens fem fordon (avsnitt 4.5). Omvägen är
+2,7 km per tur via dagens vägar (1a) och 1,6 km per tur via förlängd Norrgårdsvägen (1b), vilket ger +44
+respektive +25 fordonskm per vardag. Förlängningen av Norrgårdsvägen sparar alltså cirka 19 fordonskm per
+vardag (cirka 5 000 per år) jämfört med 1a, och ger dessutom större marginal i centrum (minst 7,5 i stället
+för 5,5 minuter per varv) och att Ö kan behålla sina avgångar i pulsen.
 
-**UA 1a med alla turer.** Merkostnaden domineras av den sjätte bussen, cirka 60 000 euro per år, och
-dess förartimmar, cirka 143 000 euro per år. Kan operatören använda en befintlig reservbuss faller
-fordonskostnaden bort, och driftkostnaden blir cirka 156 000 euro per år. Reserven för fordonsbortfall
-minskar då.
+**UA 4.** Med alla turer via flygplatsen behövs ett sjätte fordon. Med V och Ö sammanslagna ryms 16 av 20
+turer med dagens fem fordon. Omvägen är 1,7 km per tur. Att dra in Solberget på några Ö-turer ger inga fler
+turer och ändrar inte fordonskilometrarna nämnvärt.
 
-**UA 1a med V och Ö sammanslagna.** Bussen fortsätter direkt som linje Ö efter en halv minut, och 14
-Ö-turer avgår 2 minuter efter pulsen (avsnitt 4.5). Kostnaden är nästan bara körda kilometer (omvägen är
-2,7 km per tur). Antalet bussar och fordonstimmar är i praktiken oförändrat.
-
-**Förlängningen av Norrgårdsvägen** har inte kostnadsberäknats. Jämförelsen beror på alternativet:
-
-- **Mot 1a med en extra buss:** merkostnaden är cirka 209 500 euro per år (170 100–249 700). Med 3,5 %
-  kalkylränta motsvarar det ett nuvärde på 2,4–3,5 miljoner euro över 20 år. En vägförlängning som kostar
-  mindre än så är billigare än att köra 1a med en extra buss.
-- **Mot 1a med V och Ö sammanslagna:** skillnaden i driftkostnad är bara cirka 5 000 euro per år, ett nuvärde
-  på cirka 0,06–0,09 miljoner euro. Båda ger 16 av 20 turer. Vägen ger i stället:
-  - en kortare omväg, 2,5 i stället för 4,5 minuter per tur;
-  - större marginal i centrum, minst 7,5 i stället för 5,5 minuter per varv;
-  - Ö kan behålla sina avgångar i pulsen.
-
-Vägen ger dessutom nytta för annan trafik.
+**UA 5.** Längs gatunätet är N:s väg rakt på cirka 185 m kortare per tur än svängen, och V kör lika mycket
+längre. Eftersom N kör fler turer genom svängen än V minskar fordonskilometrarna något. Antalet fordon ändras
+inte.
 
 **Intäkter.** Det tillkommande påstigandet vid den nya hållplatsen i Möckelö Strand beräknas till 1,5–6,5 per
-vardag med höstens nivå, dvs. cirka 400–1 600 resor per år. Biljettintäkterna är små jämfört med
-driftkostnaden och påverkar inte bedömningen.
+vardag med höstens nivå, dvs. cirka 400–1 600 resor per år.
 
 ![Figur 5.1](../output/kartor/b5_1_kalkyl.png)
 
-*Figur 5.1. Förändrad driftkostnad per år per UA, uppdelad på fordon, fordonstimmar och fordonskilometer (tusen euro, bas; strecken anger låg–hög).*
+*Figur 5.1. Förändrade fordonskilometer per vardag per UA jämfört med i dag. Rött anger att alternativet kräver
+fler fordon.*
 
 ## 5.3 Osäkerheter
 
-- **Enhetskostnader:** de är schabloner. Avtalspriserna kan avvika, särskilt för fordon, där det har
-  betydelse om fordonen är eldrivna och om operatören har en reservbuss.
 - **Vardagar per år:** 250 vardagar är ett antagande. Tidtabellen kan skilja mellan termin och sommar.
-- **Fordonstimmar:** den extra bussen i 1a har beräknats med minsta möjliga omloppstid. Kan bussen samordnas
-  med annan trafik, till exempel skolskjutsar, kan kostnaden bli lägre.
+- **Fordon:** antalet fordon gäller typvardagens tidtabell med omloppen enligt kapitel 4. Operatörens
+  reservfordon ingår inte.
 - **Kilometer** är vägavstånd längs gatunätet (OSRM). Den befintliga vägen till Möckelö Strand ny är 1,37 km
   enkel väg, i stort sett som i beställarens skiss.
