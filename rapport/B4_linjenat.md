@@ -824,19 +824,35 @@ mellan Doktorsvägen och Uppgårdsvägen behöver kunna köras i båda riktninga
 - **Turtäthet:** Norras hållplatser får 44 avgångar per vardag i stället för 22. 888 invånare får minst 30
   avgångar per vardag, och 1 459 får minst 60. Andelen av Mariehamns invånare med minst 30 avgångar inom 400 m
   ökar från 55,6 till 61,6 %.
-- **Fordon:** varvet tar 26 minuter. Med 4 minuters reglering i centrum ryms trafiken moturs var 30:e minut i
-  ett eget omlopp, alltså ett extra fordon.
+- **Omlopp:** förarna växlar i dag mellan Södra och Norra vid varje vändning, och linjerna har lika många turer
+  (22 var). Med Norra åt båda hållen blir det 44 Norra-turer men fortfarande 22 Södra-turer, så det går inte att
+  växla Norra – Södra – Norra som i dag. I stället körs Norra/Södra-gruppen av tre bussar i en fast rotation:
+  Norra medurs → Södra → Norra moturs → Norra medurs … (figur 4.22). Vid varje puls avgår en buss på varje
+  linje och riktning. Föraren byter linje eller riktning vid varje vändning och kör Södra var tredje tur. Norra
+  har 4 minuters reglering i centrum (26 minuters varv) och Södra 7 minuter. Västra/Östra och Järsö körs som i
+  dag. Totalt behövs 6 fordon i stället för 5, och omloppstiden ökar från 61,4 till 75,4 timmar per vardag.
+- **Utan extra fordon (variant B):** med dagens fem fordon kan varannan Norra-tur köras moturs, och omloppen
+  ändras inte. Då går varje riktning bara en gång i timmen. Med väntetiden räknad som halva turintervallet blir
+  restiden för dagens resenärer cirka 385 resenärsminuter per vardag längre än i dag, så variant B är sämre än att
+  låta Norra vara som i dag. Med ett extra fordon (variant A) blir restiden cirka 154 resenärsminuter kortare,
+  även med väntetiden medräknad.
 - **Kostnad:** +256 fordonskm per vardag (11,7 km per varv × 22 turer) och ett extra fordon.
 
 **Bedömning.** UA 6 ger den största restidsvinsten av alla alternativ, cirka 15 gånger mer än UA 5, och dubbel
 turtäthet för cirka 6 000 invånare längs Norra. Det kräver ett extra fordon och ligger därför utanför uppdragets
-ram. Ett billigare alternativ är att köra varannan tur moturs med dagens fordon. Då halveras turtätheten i varje
-riktning, och det bör prövas med verkliga restider och väntetider innan det kan bedömas.
+ram. Att köra varannan tur moturs med dagens fordon fungerar inte: turtätheten halveras i varje riktning och
+restiden blir längre än i dag. UA 6 förutsätter alltså ett extra fordon, och omloppen blir effektiva med en fast
+rotation Norra medurs → Södra → Norra moturs på tre bussar.
 
 ![Figur 4.21](../output/kartor/b4_21_norra_bada_riktningar.png)
 
 *Figur 4.21. UA 6 – linje Norra i dag (en riktning) och med UA 6 (båda riktningarna). Grönt anger invånare som
 får minst 30 avgångar per vardag inom 400 m.*
+
+![Figur 4.22](../output/kartor/b4_22_norra_omlopp.png)
+
+*Figur 4.22. UA 6 – omlopp i dag, med Norra i båda riktningarna var 30:e minut (A, sex bussar) och med varannan
+Norra-tur moturs (B, fem bussar). Mörk Norra-stapel = moturs.*
 
 ## 4.9 Systemeffekter per UA
 

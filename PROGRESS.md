@@ -241,6 +241,10 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       via Strandnäs skola/Godbyvägen: −4) och Norra baklänges (−164). UA 6 = Norra även moturs, 22 turer, +1 fordon,
       +257 fordonskm/vardag, 888 inv. får minst 30 avg./vardag (andel 55,6 → 61,6 %). `src/b4_ua6_norra.py`,
       figur b4_21, B4 4.8 (följande avsnitt omnumrerade 4.9–4.11), PM 3.7, B5.
+      Omlopp (beställaren: förarna växlar Norra/Södra): A = tre bussar i rotation Norra medurs → Södra → Norra
+      moturs, Västra/Östra och Järsö som i dag, 6 fordon, omloppstid 61,4 → 75,4 h; B = dagens 5 fordon, varannan
+      Norra-tur moturs. Med väntetid (halva turintervallet, `vantan` i b4_natverk.Nat): A −154, B +385
+      resenärsminuter per vardag. Figur b4_22. Omloppsfigurerna visar åter linjebokstäver (N, S, V, Ö, J) i staplarna.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

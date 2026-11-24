@@ -12,7 +12,13 @@ per vardag. Den som åker ut från centrum på morgonen åker direkt, men hemres
     fordon (eget omlopp). Fordonskm = Norras varvlängd längs gatunätet (OSRM) × 22 turer.
   * Vid Maxinge finns bara hållplats på västra sidan (södergående). Moturs kommer bussen från Vikingagränd, kör norrut
     till rondellen norr om Maxinge och stannar vid Maxinge på väg söderut, spegelvänt mot i dag.
-Utdata: data/processed/b4_ua6_norra.json, output/kartor/b4_21_norra_bada_riktningar.png
+  * Omlopp: förarna växlar i dag Södra ↔ Norra. Med Norra i båda riktningarna blir det dubbelt så många Norra-turer
+    som Södra-turer. A (ett extra fordon): Norra/Södra-gruppen körs av tre bussar i rotationen Norra medurs →
+    Södra → Norra moturs, så att föraren byter linje vid varje vändning; Västra/Östra och Järsö som i dag.
+    B (dagens fem fordon): varannan Norra-tur körs moturs, så att varje riktning går en gång i timmen.
+  * Väntetid (känslighet): halva turintervallet vid första påstigningen (Järsö 60 min, övriga 30 min; i B Norra
+    60 min per riktning).
+Utdata: data/processed/b4_ua6_norra.json, output/kartor/b4_21_norra_bada_riktningar.png, b4_22_norra_omlopp.png
 """
 import json
 import sys
@@ -119,8 +125,79 @@ def figur(res, lyft):
     return K.spara(fig, 'b4_21_norra_bada_riktningar.png')
 
 
+ROTATION = (('N', 'S'), ('S', 'M'), ('M', 'N'))          # Norra medurs → Södra → Norra moturs → …
+INTERVALL = {'J': 60.0}
+
+
+def omlopp():
+    """Omlopp i dag (operatörens), A (+1 fordon, rotation N → S → M) och B (fem fordon, varannan Norra-tur moturs)."""
+    import b4_omlopp as O
+    t = O.turer(); op = O.omlopp_operator(t)
+    m = t[t.linje == 'N'].copy(); m['linje'] = 'M'; m['trip_id'] = m.trip_id.astype(str) + '_M'
+    nsm = pd.concat([t[t.linje.isin(['N', 'S'])], m], ignore_index=True).sort_values(['avg', 'linje']).reset_index(drop=True)
+    gammal = O.ANNAT_BYTE_STRAFF; O.ANNAT_BYTE_STRAFF = 20.0     # rotationen före andra byten
+    a_ns = O.bygg_omlopp(nsm, par=ROTATION)
+    O.ANNAT_BYTE_STRAFF = gammal
+    ovr = op[~op.linje.isin(['N', 'S'])].copy()
+    ovr['buss'] = ovr.buss.rank(method='dense').astype(int) + a_ns.buss.max()
+    a_ns['omlopp'] = a_ns.buss.map(lambda b: f'NS{b}')
+    pa = pd.concat([a_ns, ovr], ignore_index=True)
+    pb = op.copy(); idx = pb[pb.linje == 'N'].sort_values('avg').index[1::2]; pb.loc[idx, 'linje'] = 'M'   # dagens omlopp
+    def nt(o):
+        span = o.groupby('buss').apply(lambda d: d.ank.max() - d.avg.min(), include_groups=False)
+        ln = o.linje.to_numpy(); nx = o.nasta.to_numpy() if 'nasta' in o else None
+        return {'fordon': int(o.buss.nunique()), 'omloppstid_h': round(float(span.sum() / 60), 1),
+                'km': round(float(o.km.sum()), 1), 'turer': int(len(o))}
+    rot = {}
+    for b, d in a_ns.groupby('buss'):
+        rot[int(b)] = ''.join(d.sort_values('avg').linje.map({'N': 'N', 'S': 'S', 'M': 'm'}))
+    return {'idag': op, 'A': pa, 'B': pb}, {'idag': nt(op), 'A': nt(pa), 'B': nt(pb), 'rotation_A': rot}
+
+
+def restid_vantan():
+    """Resenärsminuter per vardag med väntetid (halva turintervallet) för A och B jämfört med i dag."""
+    import b4_natverk as N
+    zoner = list(pd.read_csv(P / 'a1_restider_min.csv', index_col=0).index)
+    mon0 = N.monster(); fak = N.dagsfaktor()
+    nm = max([m for m in mon0 if m['linje'] == 'N'], key=lambda m: len(m['turer']))
+    rev = {'linje': 'N', 'stopp': nm['stopp'][::-1], 'zoner': nm['zoner'][::-1], 'akt': nm['akt'][::-1].copy(),
+           'turer': [], 'moturs': True}
+    def v(mon, h_norra):
+        return [{**m, 'vantan': (h_norra if m['linje'] == 'N' else INTERVALL.get(m['linje'], 30.0)) / 2} for m in mon]
+    n0 = N.Nat(v(mon0, 30.0), zoner)
+    dag = lambda j: float(round((j['FM']['resenarsminuter_h'] + j['EM']['resenarsminuter_h']) / 2 * fak, 0))
+    return {'A': dag(N.jamfor(n0, N.Nat(v(mon0 + [rev], 30.0), zoner))),
+            'B': dag(N.jamfor(n0, N.Nat(v(mon0 + [rev], 60.0), zoner)))}
+
+
+def fig_omlopp(planer, nyck):
+    import b4_omlopp as O
+    C.FARG_LINJE.setdefault('M', '#3c2350'); C.NAMN_LINJE.setdefault('M', 'Norra moturs')
+    fig, axs = plt.subplots(3, 1, figsize=(12.4, 0.75 + 1.75 * 3), squeeze=False)
+    titlar = {'idag': f"I dag – {nyck['idag']['fordon']} bussar",
+              'A': f"★ UA 6 A – Norra i båda riktningarna var 30:e minut: {nyck['A']['fordon']} bussar",
+              'B': f"UA 6 B – varannan Norra-tur moturs (varje riktning en gång i timmen): {nyck['B']['fordon']} bussar"}
+    for ax, k in zip(axs[:, 0], ('idag', 'A', 'B')):
+        pl = planer[k].copy()
+        if k != 'idag' and 'omlopp' in pl:
+            pl = pl.drop(columns=['omlopp'])
+        O.rita_omlopp(ax, pl, titel=titlar[k])
+    fig.suptitle('UA 6 – omlopp', x=0.01, ha='left')
+    extra = [Patch(facecolor=C.FARG_LINJE['M'], label='Norra moturs (mörk)')]
+    O.omlopp_forklaring(fig, extra=extra, y=-0.01)
+    fig.tight_layout(rect=(0, 0.035, 1, 0.975), h_pad=0.9)
+    ut = C.KARTOR / 'b4_22_norra_omlopp.png'
+    K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight', pad_inches=0.08); plt.close(fig)
+    return ut
+
+
 if __name__ == '__main__':
     r, lyft = berakna()
+    planer, nyck = omlopp(); rv = restid_vantan()
+    r['omlopp'] = nyck; r['resenarsminuter_vardag_med_vantan'] = rv
+    json.dump(r, open(P / 'b4_ua6_norra.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=float)
+    print(nyck, rv)
+    print(fig_omlopp(planer, nyck))
     print({k: v for k, v in r.items() if k != 'exempel'})
     for e in r['exempel'][:8]:
         print(e)

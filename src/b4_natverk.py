@@ -61,7 +61,7 @@ class Nat:
                 if zz not in zi:
                     continue
                 if k < len(z) - 1:
-                    kant(zi[zz], ids[k], 0.0)
+                    kant(zi[zz], ids[k], m.get('vantan', 0.0))      # väntetid vid första påstigning (normalt 0)
                     kant(nZ + zi[zz], ids[k], C.BYTESSTRAFF_MIN)
                 if k > 0:
                     kant(ids[k], nZ + zi[zz], 0.0)

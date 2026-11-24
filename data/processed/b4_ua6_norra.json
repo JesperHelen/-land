@@ -162,5 +162,34 @@
    "ua6_min": 2.0,
    "vinst_resenarsmin_h": 0.37
   }
- ]
+ ],
+ "omlopp": {
+  "idag": {
+   "fordon": 5,
+   "omloppstid_h": 61.4,
+   "km": 1287.0,
+   "turer": 93
+  },
+  "A": {
+   "fordon": 6,
+   "omloppstid_h": 75.4,
+   "km": 1543.5,
+   "turer": 115
+  },
+  "B": {
+   "fordon": 5,
+   "omloppstid_h": 61.4,
+   "km": 1287.0,
+   "turer": 93
+  },
+  "rotation_A": {
+   "1": "mNSmNSmNSmNSmNSmNSmNSmNSm",
+   "2": "NSmNSmNSmNSmNSmN",
+   "3": "SmNSmNSmNSmNSmNSmNSmNSmNS"
+  }
+ },
+ "resenarsminuter_vardag_med_vantan": {
+  "A": -154.0,
+  "B": 385.0
+ }
 }

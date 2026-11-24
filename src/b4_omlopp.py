@@ -419,6 +419,9 @@ def hm(m):
     m = int(round(m)); return f'{m // 60:02d}:{m % 60:02d}'
 
 
+BOKSTAV = {'M': 'N'}                # Norra moturs (UA 6) visas som N i mörkare färg
+
+
 def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, etikett_vand=True):
     """Gantt: ett band per fordon, staplar per tur i linjefärg. Förlängd del av ändrade turer skrafferas;
     vändningar under rekommenderad nivå markeras (röd < 1 min, orange < 3 min)."""
@@ -440,8 +443,9 @@ def rita_omlopp(ax, plan, titel=None, andrade=(), t0=6.5 * 60, t1=21.5 * 60, eti
         if sk > 0:                                                 # avgår senare än i dag
             ax.add_patch(Rectangle((r.avg - sk, y - 0.34), sk, 0.68, facecolor='none', edgecolor='#1f1f1e', ls=(0, (1, 1)),
                                    lw=0.6, zorder=3))
-        if r.kortid >= 30:                                         # namnet får bara plats i långa turer
-            ax.text(r.avg + (r.kortid - max(d, 0)) / 2, y, C.NAMN_LINJE.get(r.linje, r.linje), ha='center', va='center', fontsize=5.6,
+        if r.kortid >= 14:                                         # linjebokstav (N, S, V, Ö, J) – namnet får inte plats
+            ax.text(r.avg + (r.kortid - max(d, 0)) / 2, y, BOKSTAV.get(r.linje, r.linje), ha='center', va='center', fontsize=6.3,
+                    gid='behall',
                     color='white', fontweight='bold', zorder=4)
         if etikett_vand and not np.isnan(r.vand_efter) and r.vand_efter < REKOMMENDERAD_VANDTID - 1e-9:
             farg = '#c0392b' if r.vand_efter < MIN_VANDTID - 1e-9 else '#e8590c'
