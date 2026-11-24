@@ -38,7 +38,7 @@ Linjerna och utredningsalternativens körvägar följer gatunätet (OSRM, OpenSt
 | **UA 4 – Linje Västra–Östra via flygplatsen** (+5 min/tur) | Västra och Östra sammanslagna | 16 av 20 | 21 inv. får hållplats (+16 avg./vardag); 3 av 6 flyg nås | +27 km, nej (alla 6 flyg: +44 km till, nej) | Bara förlängning av Västra (6 fordon, +34 km) |
 | **UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten** (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 125 inv. fler avgångar (upp till +22), 11 färre (−17); Norra 6 i stället för 4 min i centrum | −1 km, nej | – |
 | **UA 6 – Linje Norra i båda riktningarna** (kräver extra buss) | Norra även moturs, var 30:e minut | 22 turer till | Restid −164 resenärsmin. per vardag; 888 inv. får minst 30 avg./vardag | +257 km, ja (+1 fordon) | – |
-| **UA 7 – Kvällstrafik efter efterfrågan** | Västra och Östra anropsstyrda efter kl. 18 | 6 turer färre | Cirka 6,5 resenärer per vardag får anropsstyrd resa | −81 km, nej | – |
+| **UA 7 – Kvällstrafik efter efterfrågan** | Norra åt båda hållen efter kl. 18 i stället för Västra | 3 turer flyttas | Restid −16 resenärsmin. per kväll; cirka 4 Västra-resenärer per kväll får anropsstyrd resa | −3 km, nej | – |
 
 I UA 1a, 1b och 4 kör samma fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 
@@ -178,7 +178,7 @@ varje stapel en tur.*
 | UA 4 – Linje Västra–Östra via flygplatsen | +5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Med Solberget indragen: 16 av 20. UA 4Y: 3 av 3. Dagens tidtabell: 7 av 20. Alla turer: 6 bussar (utesluten). | 22 / 0 (Solberget indragen: 22 / 49) | **★ +27 km, inga fler fordon** (UA 4Y +5 km; extra turer för alla flyg +44 km, inga fler fordon; utesluten: +34 km och +1 fordon) |
 | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten | Västra +2 min, Norra −2 min | **★ Västra och Östra sammanslagna: 17 av 20 Västra-turer.** Dagens drift: 16 av 20. Bara Norra rakt på: alla Norra-turer. | 79 / 0 (bara Norra rakt på: 0 / 0) | **★ −1 km, inga fler fordon** (bara Norra rakt på −4 km) |
 | UA 6 – Linje Norra i båda riktningarna (kräver extra buss) | – | Kräver ett extra fordon (22 turer moturs) | 888 inv. får minst 30 avg./vardag; restid −164 resenärsmin. per vardag | +257 km, +1 fordon |
-| UA 7 – Kvällstrafik efter efterfrågan | – | ★ Ryms, omlopp 208 slutar 18:07 | Cirka 6,5 resenärer per vardag får anropsstyrd resa; 116 inv. under 30 avg./vardag | −81 km, inga fler fordon |
+| UA 7 – Kvällstrafik efter efterfrågan | – | ★ Ryms; omlopp 208 kör Östra/Norra moturs efter kl. 18 | Restid −16 resenärsmin. per kväll; cirka 4 Västra-resenärer per kväll får anropsstyrd resa | −3 km, inga fler fordon |
 
 ### 3.1 UA 1a och UA 1b – Möckelö Strand ny
 
@@ -640,39 +640,63 @@ Norra-tur moturs (B, fem bussar). Mörk Norra-stapel = moturs.*
 ### 3.8 UA 7 – Kvällstrafik efter efterfrågan
 
 **Introduktion.** Stadstrafiken har cirka 320 påstigande per vardag, och efterfrågan räcker inte för att motivera
-fler bussar. UA 7 utgår i stället från var resurserna ger minst nytta. Efter kl. 18 kör två bussar: omlopp 205 kör
-Södra och Norra varannan halvtimme till 21:13, och omlopp 208 kör Västra och Östra 18:10–21:07. Efter kl. 18 stiger
-bara cirka 22 resenärer på per vardag (7 % av dagens resor), varav 11 på Norra och 5 på Södra men bara
-4 på Västra och 2 på Östra.
+fler bussar. UA 7 flyttar i stället kvällens resurser till den linje som har resenärerna. Efter kl. 18 kör två
+bussar: omlopp 205 kör Södra och Norra varannan halvtimme, och omlopp 208 kör Östra och Västra. Efter kl. 18 stiger
+cirka 22 resenärer på per vardag, varav 11 på Norra, 5 på Södra, 4 på Västra och 2 på Östra. På
+Norra stiger cirka 3,6 på vid Maxinge, troligen personer som slutar arbetet, och de flesta av dem ska
+till centrum. Med dagens enkelriktade Norra åker de hela varvet runt.
 
-- **Syfte:** anpassa kvällstrafiken till efterfrågan och frigöra resurser utan att resenärerna förlorar sin resa.
-- **Prövas:** omlopp 205 kör Norra och Södra som i dag. De sex turerna på Västra och Östra efter kl. 18
-  (Östra 18:10, Västra 18:40, Östra 19:10, Västra 19:40, Östra 20:10, Västra 20:40) ersätts med anropsstyrd trafik: förbeställd taxi eller minibuss mellan hållplatserna, med samma biljett.
-- **Det som avgör:** hur många som berörs och vad som frigörs.
+- **Syfte:** kortare restid för kvällens resenärer på Norra, utan fler bussar och utan fler fordonskilometer.
+- **Prövas:** omlopp 208 kör Norra moturs i stället för Västra efter kl. 18 (18:40, 19:40, 20:40). Norra går då åt
+  båda hållen varje timme på kvällen, medurs :20 och moturs :40. Östra körs som i dag, och Västras få
+  kvällsresenärer hänvisas till anropsstyrd trafik.
+- **Det som avgör:** om vinsten på Norra är större än förlusten på Västra.
 
-**Resultat.**
+**Varianter.** Flera sätt att flytta kvällsturer till Norra har prövats. Kvällens resor bygger på påstigandet efter
+kl. 18 per hållplats, med destinationer enligt eftermiddagens OD-matris, och väntetiden räknas som halva
+turintervallet.
 
-- **Berörda resenärer:** cirka 6,5 per vardag, alltså ungefär en per tur. De flesta stiger på i Centrum (Västra
-  2,3 och Östra 1,3 per vardag), vid Lönnhagsvägen och Sviby bro på Västra och vid Sjukhuset och Kalmsta på Östra
-  (figur 10g). Med anropsstyrd trafik får de en resa när de behöver den, i stället för en buss en gång i timmen.
-- **Omlopp:** omlopp 208 slutar 18:07 i stället för 21:07, alltså cirka 3 fordonstimmar mindre per vardag. Antalet
-  fordon ändras inte, eftersom bussen behövs på dagen.
-- **Kostnad:** −81 fordonskm per vardag (cirka −20 300 per år, vardagar); inga fler fordon. Därtill kommer
-  kostnaden för de anropsstyrda resorna, några per kväll.
-- **Turtäthet:** Västras och Östras hållplatser får 3 avgångar färre per vardag. 116 invånare hamnar strax under
-  30 avgångar per vardag, och ingen får färre än 15.
-- **Frigjorda timmar:** de 3 fordonstimmar som sparas är mer än de cirka 1,7 timmar som den extra turen till
-  flyget som landar 21:35 kräver (avsnitt 3.5). Kvällens resurser kan alltså flyttas dit där det finns en
-  efterfrågan.
+*Tabell. UA 7 – varianter för kvällstrafiken efter kl. 18 (per kväll, cirka 20 resor).*
 
-**Bedömning.** UA 7 är realistiskt med dagens efterfrågan. Det sparar kvällens svagaste turer, och de få som reser
-får fortfarande en resa. Det förutsätter att landskapsregeringen upphandlar anropsstyrd trafik, och det bör
-prövas under en period med uppföljning av efterfrågan.
+| Variant | Restid (resenärsminuter; minus = kortare) | Resor kortare | Resor längre |
+|---|---|---|---|
+| Alla tre Västra-turer blir Norra moturs | −16 | 2,4 | 0,0 |
+| Varannan Västra-tur blir Norra moturs | ±0 | 1,7 | 0,8 |
+| Varannan Östra-tur blir Norra moturs | +29 | 1,6 | 4,2 |
+| Västra och Östra varannan timme, Norra moturs varje timme | +25 | 2,3 | 4,8 |
+| Södra varannan timme, Norra moturs varannan timme | +14 | 1,7 | 2,1 |
+
+Att göra varannan Västra-tur till Norra moturs ger ingen vinst: Norra moturs och Västra går då båda bara varannan
+timme, och vinsten för Norras resenärer äts upp av förlusten för Västras. Att ta turer från Östra eller Södra ger
+längre restid, eftersom de har fler kvällsresenärer än Västra. Bäst är att låta alla tre Västra-turer bli Norra
+moturs.
+
+**Resultat (huvudvarianten).**
+
+- **Restid:** cirka 16 resenärsminuter kortare per kväll, och cirka 2,4 resor blir kortare, främst
+  Maxinge – Centrum (17 i stället för 8 minuter).
+- **Västra:** de cirka 4 resenärerna per kväll på Västra (de flesta stiger på i Centrum, vid Lönnhagsvägen
+  och Sviby bro) får ingen buss efter kl. 18 och hänvisas till anropsstyrd trafik.
+- **Omlopp:** omlopp 208 kör Östra 18:10 → Norra moturs 18:40 → Östra 19:10 osv. Norra moturs tar 26 minuter, så
+  det blir 4 minuters reglering före Östra och 7 minuter före Norra. Föraren byter linje vid varje vändning.
+- **Kostnad:** −3 fordonskm per vardag (Norra är 1,1 km kortare än Västra per tur); inga fler fordon.
+  Därtill kommer kostnaden för några anropsstyrda resor per kväll.
+- **Turtäthet:** Norras hållplatser får 3 avgångar till per vardag och Västras 3 färre. Det ändrar knappt
+  täckningen (4 invånare kommer över och 12 under 30 avgångar per vardag).
+
+**Jämförelse: Västra och Östra anropsstyrda.** Om både Västra och Östra blir anropsstyrda efter kl. 18 kan omlopp
+208 sluta 18:07. Det sparar 81 fordonskm och 3 fordonstimmar per vardag, men ger ingen förbättring för
+resenärerna, och cirka 6,5 resenärer per kväll får anropsstyrd resa i stället för buss.
+
+**Bedömning.** UA 7 är realistiskt med dagens efterfrågan. Det gör inte nätet dyrare, ger kvällens största
+resenärsgrupp på Norra en direkt resa hem från Maxinge, och påverkar bara ett fåtal resenärer på Västra. Effekten
+är liten i absoluta tal, eftersom kvällens resande är litet, men den går åt rätt håll. Det förutsätter en lösning
+för Västras få kvällsresenärer, till exempel anropsstyrd trafik.
 
 ![UA 7, kvällstrafik](../output/kartor/b4_23_kvall.png)
 
-*Figur 10g. UA 7 – kvällstrafik efter kl. 18. Norra och Södra körs med buss som i dag; Västra och Östra blir
-anropsstyrda. Cirklarna visar påstigande efter kl. 18.*
+*Figur 10g. UA 7 – kvällstrafik efter kl. 18: Norra åt båda hållen varje timme, Södra och Östra som i dag, Västra
+anropsstyrd. Cirklarna visar påstigande efter kl. 18.*
 
 ## 4 Systemeffekter
 
@@ -757,7 +781,7 @@ lördagstrafiken.
 | UA 5 dagens drift (16 av 20 Västra-turer) | 5 | Nej | −1 | −200 |
 | UA 5 variant: bara linje Norra rakt på | 5 | Nej | −4 | −1 000 |
 | UA 6 linje Norra i båda riktningarna (kräver extra buss) | 6 | **Ja, +1** | +257 | +67 200 |
-| UA 7 kvällstrafik: Västra och Östra anropsstyrda efter kl. 18 | 5 | Nej | −81 | −20 300 |
+| UA 7 kvällstrafik: Norra åt båda hållen efter kl. 18 i stället för Västra | 5 | Nej | −3 | −900 |
 
 Alla huvudalternativ ryms med dagens fem fordon. Bara de uteslutna driftformerna, där alla turer på linje Västra
 förlängs med dagens tidtabell, kräver ett sjätte fordon. UA 6 prövas utanför ramen och kräver ett extra fordon.
@@ -815,9 +839,11 @@ fler fordon.*
     Norra medurs → Södra → Norra moturs på tre bussar, så att förarna fortsatt byter linje vid varje vändning. Med
     dagens fem fordon (varannan tur moturs) blir restiden däremot längre än i dag. Med dagens efterfrågan är det
     extra fordonet svårt att motivera; UA 6 är ett alternativ för ett läge med växande resande.
-11. **UA 7 – Kvällstrafik efter efterfrågan** är realistiskt med dagens efterfrågan. Västras och Östras sex turer
-    efter kl. 18 har cirka en resenär per tur och ersätts med anropsstyrd trafik. Det sparar 81 fordonskm och 3
-    fordonstimmar per vardag, med samma antal fordon, och resurserna kan flyttas till exempel till kvällsflyget.
+11. **UA 7 – Kvällstrafik efter efterfrågan** är realistiskt med dagens efterfrågan. Efter kl. 18 kör bussen som i dag
+    kör Västra i stället Norra moturs, så att Norra går åt båda hållen varje timme. Det ger kortare restid för
+    kvällens största resenärsgrupp (Maxinge – Centrum), utan fler fordon eller fordonskilometer. Västras cirka 4
+    kvällsresenärer behöver anropsstyrd trafik. Att i stället göra varannan Västra-tur till Norra moturs ger ingen
+    vinst.
 
 ## 7 Osäkerheter och fortsatt arbete
 

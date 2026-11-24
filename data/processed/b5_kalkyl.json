@@ -191,13 +191,13 @@
   },
   {
    "scenario": "7",
-   "namn": "UA 7 kvällstrafik: Västra och Östra anropsstyrda efter kl. 18",
+   "namn": "UA 7 kvällstrafik: Norra i båda riktningarna efter kl. 18 i stället för Västra",
    "huvudalternativ": false,
    "fordon": 5,
    "delta_fordon": 0,
-   "fordonskm_vardag": 1205.8,
-   "delta_km_vardag": -81.2,
-   "delta_km_ar": -20300,
+   "fordonskm_vardag": 1283.6,
+   "delta_km_vardag": -3.4,
+   "delta_km_ar": -900,
    "ny_tackning_inv": 0,
    "battre_inv": 0
   }

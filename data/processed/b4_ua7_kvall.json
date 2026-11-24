@@ -1,14 +1,5 @@
 {
  "turer_efter_18": 12,
- "turer_utgar": 6,
- "utgar": [
-  "Ö 18:10",
-  "V 18:40",
-  "Ö 19:10",
-  "V 19:40",
-  "Ö 20:10",
-  "V 20:40"
- ],
  "pastigande_efter_18": 22.4,
  "pastigande_efter_18_per_linje": {
   "J": 0.0,
@@ -17,24 +8,66 @@
   "V": 4.0,
   "Ö": 2.4
  },
+ "pastigande_maxinge_norra": 3.6,
  "andel_av_dagen": 0.07,
- "berorda_resenarer_vardag": 6.5,
- "berorda_per_tur": 1.07,
- "berorda_hallplatser": {
-  "V Centrum, Nygatan": 2.33,
-  "Ö Centrum, Nygatan": 1.25,
-  "V Lönnhagsvägen": 0.83,
-  "V Sviby bro": 0.67,
-  "Ö Sjukhuset": 0.5,
-  "Ö Kalmsta": 0.45,
-  "Ö Västra macken": 0.25,
-  "V Källarvägen": 0.17
+ "resor_kvall_modell": 20.3,
+ "vastra_turer": [
+  "18:40",
+  "19:40",
+  "20:40"
+ ],
+ "ostra_turer": [
+  "18:10",
+  "19:10",
+  "20:10"
+ ],
+ "vastra_resenarer_kvall": 4.0,
+ "fordonskm_vardag": -3.4,
+ "fordonskm_ar": -900,
+ "fordon": 5,
+ "inv_battre_klass30": 4,
+ "inv_samre_klass30": 12,
+ "restid": {
+  "huvud": {
+   "namn": "Alla tre Västra-turer blir Norra moturs",
+   "resenarsminuter_kvall": -16.0,
+   "resor_kortare_kvall": 2.4,
+   "resor_langre_kvall": 0.0,
+   "resor_utan_buss_kvall": 0.9
+  },
+  "varannan_vastra": {
+   "namn": "Varannan Västra-tur blir Norra moturs",
+   "resenarsminuter_kvall": -0.0,
+   "resor_kortare_kvall": 1.7,
+   "resor_langre_kvall": 0.8,
+   "resor_utan_buss_kvall": 0.0
+  },
+  "varannan_ostra": {
+   "namn": "Varannan Östra-tur blir Norra moturs",
+   "resenarsminuter_kvall": 29.0,
+   "resor_kortare_kvall": 1.6,
+   "resor_langre_kvall": 4.2,
+   "resor_utan_buss_kvall": 0.0
+  },
+  "vastra_ostra": {
+   "namn": "Västra och Östra varannan timme, Norra moturs varje timme",
+   "resenarsminuter_kvall": 25.0,
+   "resor_kortare_kvall": 2.3,
+   "resor_langre_kvall": 4.8,
+   "resor_utan_buss_kvall": 0.0
+  },
+  "sodra": {
+   "namn": "Södra varannan timme, Norra moturs varannan timme",
+   "resenarsminuter_kvall": 14.0,
+   "resor_kortare_kvall": 1.7,
+   "resor_langre_kvall": 2.1,
+   "resor_utan_buss_kvall": 0.0
+  }
  },
- "fordonskm_vardag": -81.2,
- "fordonskm_ar": -20300,
- "fordonstimmar_vardag": -3.0,
- "omlopp_208_slutar": "18:07",
- "inv_under_30_avg": 116,
- "inv_under_15_avg": 0,
- "fordon": 5
+ "anropsstyrt": {
+  "turer": 6,
+  "resenarer_vardag": 6.5,
+  "fordonskm_vardag": -81.2,
+  "fordonstimmar_vardag": -3.0
+ }
 }

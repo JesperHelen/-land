@@ -25,8 +25,8 @@
 >   −4 fordonskm per vardag.
 >
 > - **UA 6 – Linje Norra i båda riktningarna (kräver extra buss):** +257 fordonskm per vardag och ett extra fordon.
-> - **UA 7 – Kvällstrafik efter efterfrågan:** −81 fordonskm per vardag (Västras och Östras sex kvällsturer blir
->   anropsstyrda); inga fler fordon. Därtill kostnaden för de anropsstyrda resorna.
+> - **UA 7 – Kvällstrafik efter efterfrågan:** −3 fordonskm per vardag (Västras tre kvällsturer körs som Norra
+>   moturs); inga fler fordon. Därtill kostnaden för några anropsstyrda resor på Västra per kväll.
 >
 > Kilometrarna är vägavstånd längs gatunätet (OSRM).
 
@@ -62,7 +62,7 @@ Varje UA för sig.*
 | UA 5 svängen till linje Västra, dagens drift (16 av 20 Västra-turer) | 5 | Nej | −1 | −200 |
 | UA 5 variant: bara linje Norra rakt på (svängen utan buss) | 5 | Nej | −4 | −1 000 |
 | UA 6 linje Norra i båda riktningarna (22 turer moturs, kräver extra buss) | 6 | **Ja, +1** | +257 | +67 200 |
-| UA 7 kvällstrafik: Västra och Östra anropsstyrda efter kl. 18 | 5 | Nej | −81 | −20 300 |
+| UA 7 kvällstrafik: Norra åt båda hållen efter kl. 18 i stället för Västra | 5 | Nej | −3 | −900 |
 
 **Extra turer för flygen (UA 4).** Tre flyg nås inte av dagens Västra-turer. De extra turerna är Västra-turer via
 flygplatsen (32 minuter, 14,5 km längs vägarna) och körs av ett fordon som står stilla, så inget extra fordon

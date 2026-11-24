@@ -249,9 +249,11 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       Prövat utan fler bussar: Västra varje timme + Norra moturs varje timme (+147 resenärsmin./vardag, sämre), vända
       hela Norra (Bo-Bil utan omväg, 64 m kortare, men +105 resenärsmin./vardag – rekommenderas inte; skrivet i
       UA 3-avsnitten). UA 6 markerat som "kräver extra buss", alternativ vid växande resande.
-      UA 7 (`src/b4_ua7_kvall.py`, figur b4_23): Västras och Östras sex turer efter kl. 18 anropsstyrda; 6,5 berörda
-      resenärer/vardag, −81 fordonskm och −3 fordonstimmar per vardag, omlopp 208 slutar 18:07, 116 inv. under 30
-      avg./vardag. B4 4.9 (följande omnumrerade 4.10–4.12), PM 3.8, B5.
+      UA 7 (`src/b4_ua7_kvall.py`, figur b4_23), omarbetat efter beställarens idé (varannan Västra → Norra moturs):
+      varianter prövade med kvällens påstigande som ursprung och väntetid; varannan Västra ±0, varannan Östra +29,
+      Södra varannan timme +14, alla tre Västra-turer → Norra moturs −16 resenärsmin./kväll (huvud). Omlopp 208:
+      Östra/Norra moturs efter 18, −3 fordonskm/vardag, Västras ~4 kvällsresenärer anropsstyrt. Jämförelse:
+      Västra+Östra anropsstyrda (−81 fordonskm). B4 4.9 (följande omnumrerade 4.10–4.12), PM 3.8, B5.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

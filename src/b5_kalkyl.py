@@ -54,7 +54,7 @@ def kort(sid, v):
 KORT_FIG = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ Västra + Östra',
             '1b': 'UA 1b ★ Västra + Östra', '2': 'UA 2 ★', '3': 'UA 3 ★', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ Västra + Östra',
             '4_VO_sol': 'UA 4 + Solberget indragen', '4_Y': 'UA 4Y flygturerna',
-            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ Västra + Östra', '5_ryms': 'UA 5 dagens drift', '6': 'UA 6 Norra båda riktningar', '7': 'UA 7 kväll anropsstyrt',
+            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ Västra + Östra', '5_ryms': 'UA 5 dagens drift', '6': 'UA 6 Norra båda riktningar', '7': 'UA 7 kväll: Norra båda håll',
             '5_N': 'UA 5 bara Norra rakt på'}
 
 
@@ -90,7 +90,7 @@ def main():
                       'ny_tackning_inv': 0, 'battre_inv': u6['inv_lyft_till_minst_30']})
     if (P / 'b4_ua7_kvall.json').exists():                 # UA 7: Västra och Östra anropsstyrda efter kl. 18
         u7 = json.load(open(P / 'b4_ua7_kvall.json', encoding='utf-8'))
-        rader.append({'scenario': '7', 'namn': 'UA 7 kvällstrafik: Västra och Östra anropsstyrda efter kl. 18',
+        rader.append({'scenario': '7', 'namn': 'UA 7 kvällstrafik: Norra i båda riktningarna efter kl. 18 i stället för Västra',
                       'huvudalternativ': False, 'fordon': se['idag']['omlopp']['fordon'], 'delta_fordon': 0,
                       'fordonskm_vardag': round(se['idag']['omlopp']['km'] + u7['fordonskm_vardag'], 1),
                       'delta_km_vardag': u7['fordonskm_vardag'], 'delta_km_ar': u7['fordonskm_ar'],
