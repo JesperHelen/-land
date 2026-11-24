@@ -188,6 +188,18 @@
    "delta_km_ar": 67200,
    "ny_tackning_inv": 0,
    "battre_inv": 888
+  },
+  {
+   "scenario": "7",
+   "namn": "UA 7 kvällstrafik: Västra och Östra anropsstyrda efter kl. 18",
+   "huvudalternativ": false,
+   "fordon": 5,
+   "delta_fordon": 0,
+   "fordonskm_vardag": 1205.8,
+   "delta_km_vardag": -81.2,
+   "delta_km_ar": -20300,
+   "ny_tackning_inv": 0,
+   "battre_inv": 0
   }
  ],
  "flyg_extraturer": [

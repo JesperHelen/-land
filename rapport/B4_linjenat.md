@@ -32,7 +32,8 @@
 > | UA 3 – Linje Norra via Bo-Bil (+0,9 min/tur) | Alla turer | 22 av 22 | 5 (nej) | +10 | – |
 > | UA 4 – Linje Västra–Östra via flygplatsen (+5 min/tur) | Västra och Östra sammanslagna | 16 av 20 | 5 (nej) | +27 | Bara förlängning av Västra (6 fordon) |
 > | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 5 (nej) | −1 | – |
-> | UA 6 – Linje Norra i båda riktningarna (utanför ramen) | Norra även moturs, var 30:e minut | 22 turer till | 6 (ja, +1) | +257 | – |
+> | UA 6 – Linje Norra i båda riktningarna (kräver extra buss) | Norra även moturs, var 30:e minut | 22 turer till | 6 (ja, +1) | +257 | – |
+> | UA 7 – Kvällstrafik efter efterfrågan | Västra och Östra anropsstyrda efter kl. 18 | 6 turer färre | 5 (nej) | −81 | – |
 >
 > I UA 1a, 1b och 4 kör fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 >
@@ -347,6 +348,15 @@ ger samma väglängd som i dag, men då förlorar linje Norra Maxinge, som är d
 - **Restid:** cirka 27 resor per vardag på linje Norra får längre restid, sammanlagt cirka 30 resenärsminuter per
   vardag.
 - **Kostnad:** +10 fordonskm per vardag (450 m per tur); inga fler fordon.
+
+**Vända linje Norra?** Kör hela Norra åt andra hållet kommer bussen från Bolstavägen och kan ta Godbyvägen norrut
+förbi Bo-Bil, Michaelsvägen och rondellen ner till Maxinge utan att vända. Delsträckan Bolstavägen – Maxinge –
+Hjortronstigen blir då 2,47 km, alltså 64 m kortare än i dag och 1 km kortare än UA 3. Men Norras största flöden
+går medurs: Centrum – Maxinge på förmiddagen (cirka 1,2 resor per timme) skulle ta 14 i stället för 8 minuter,
+och de korta resorna från Centrum till Polishuset och Uppgårdsvägen blir längre. Resan Maxinge – Centrum på
+eftermiddagen blir 9 minuter kortare, men totalt får resenärerna cirka 105 resenärsminuter längre restid per
+vardag (mot 30 i UA 3). Att köra medurs på förmiddagen och moturs på eftermiddagen ger längre restid i båda
+perioderna. Att vända linjen rekommenderas därför inte.
 
 **Bedömning.** Alternativet ryms med fem fordon, men omvägen kring Maxinge tar det mesta av linje Norras marginal i
 centrum och ger längre restid för dem som åker förbi. Vinsten är att 44 invånare vid Bo-Bil får fler avgångar,
@@ -840,7 +850,8 @@ mellan Doktorsvägen och Uppgårdsvägen behöver kunna köras i båda riktninga
 
 **Bedömning.** UA 6 ger den största restidsvinsten av alla alternativ, cirka 15 gånger mer än UA 5, och dubbel
 turtäthet för cirka 6 000 invånare längs Norra. Det kräver ett extra fordon och ligger därför utanför uppdragets
-ram. Att köra varannan tur moturs med dagens fordon fungerar inte: turtätheten halveras i varje riktning och
+ram. Med dagens efterfrågan, cirka 320 påstigande per vardag, är ett extra fordon svårt att motivera, och UA 6
+redovisas därför som ett alternativ för ett läge med växande resande, inte som ett förslag nu. Att köra varannan tur moturs med dagens fordon fungerar inte: turtätheten halveras i varje riktning och
 restiden blir längre än i dag. UA 6 förutsätter alltså ett extra fordon, och omloppen blir effektiva med en fast
 rotation Norra medurs → Södra → Norra moturs på tre bussar.
 
@@ -854,7 +865,44 @@ får minst 30 avgångar per vardag inom 400 m.*
 *Figur 4.22. UA 6 – omlopp i dag, med Norra i båda riktningarna var 30:e minut (A, sex bussar) och med varannan
 Norra-tur moturs (B, fem bussar). Mörk Norra-stapel = moturs.*
 
-## 4.9 Systemeffekter per UA
+## 4.9 UA 7 – Kvällstrafik efter efterfrågan
+
+**Introduktion.** Stadstrafiken har cirka 320 påstigande per vardag, och efterfrågan räcker inte för att motivera
+fler bussar. UA 7 utgår i stället från var resurserna ger minst nytta. Efter kl. 18 kör två bussar: omlopp 205 kör
+Södra och Norra varannan halvtimme till 21:13, och omlopp 208 kör Västra och Östra 18:10–21:07. Efter kl. 18 stiger
+bara cirka 22 resenärer på per vardag (7 % av dagens resor), varav 11 på Norra och 5 på Södra men bara
+4 på Västra och 2 på Östra.
+
+- **Syfte:** anpassa kvällstrafiken till efterfrågan och frigöra resurser utan att resenärerna förlorar sin resa.
+- **Prövas:** omlopp 205 kör Norra och Södra som i dag. De sex turerna på Västra och Östra efter kl. 18
+  (Östra 18:10, Västra 18:40, Östra 19:10, Västra 19:40, Östra 20:10, Västra 20:40) ersätts med anropsstyrd trafik: förbeställd taxi eller minibuss mellan hållplatserna, med samma biljett.
+- **Det som avgör:** hur många som berörs och vad som frigörs.
+
+**Resultat.**
+
+- **Berörda resenärer:** cirka 6,5 per vardag, alltså ungefär en per tur. De flesta stiger på i Centrum (Västra
+  2,3 och Östra 1,3 per vardag), vid Lönnhagsvägen och Sviby bro på Västra och vid Sjukhuset och Kalmsta på Östra
+  (figur 4.23). Med anropsstyrd trafik får de en resa när de behöver den, i stället för en buss en gång i timmen.
+- **Omlopp:** omlopp 208 slutar 18:07 i stället för 21:07, alltså cirka 3 fordonstimmar mindre per vardag. Antalet
+  fordon ändras inte, eftersom bussen behövs på dagen.
+- **Kostnad:** −81 fordonskm per vardag (cirka −20 300 per år, vardagar); inga fler fordon. Därtill kommer
+  kostnaden för de anropsstyrda resorna, några per kväll.
+- **Turtäthet:** Västras och Östras hållplatser får 3 avgångar färre per vardag. 116 invånare hamnar strax under
+  30 avgångar per vardag, och ingen får färre än 15.
+- **Frigjorda timmar:** de 3 fordonstimmar som sparas är mer än de cirka 1,7 timmar som den extra turen till
+  flyget som landar 21:35 kräver (avsnitt 4.6). Kvällens resurser kan alltså flyttas dit där det finns en
+  efterfrågan.
+
+**Bedömning.** UA 7 är realistiskt med dagens efterfrågan. Det sparar kvällens svagaste turer, och de få som reser
+får fortfarande en resa. Det förutsätter att landskapsregeringen upphandlar anropsstyrd trafik, och det bör
+prövas under en period med uppföljning av efterfrågan.
+
+![Figur 4.23](../output/kartor/b4_23_kvall.png)
+
+*Figur 4.23. UA 7 – kvällstrafik efter kl. 18. Norra och Södra körs med buss som i dag; Västra och Östra blir
+anropsstyrda. Cirklarna visar påstigande efter kl. 18.*
+
+## 4.10 Systemeffekter per UA
 
 Varje UA har prövats för sig mot dagens nät (figur 4.13 och 4.14). Täckningen gäller invånarna i
 Mariehamn (14 821). UA 4 redovisas i tabell 4.4 och UA 5 i tabell 4.6 och 4.7.
@@ -957,7 +1005,7 @@ huvudalternativen. Kostnaden (fordonskilometer och fordon) sammanfattas i kapite
 *Figur 4.14. Turtäthet inom 400 m i dag och med alternativet, inzoomat per UA. Grön ram anger bättre och
 röd ram sämre klass än i dag.*
 
-## 4.10 Fortsatt arbete
+## 4.11 Fortsatt arbete
 
 Nästa leverans ska redovisa följande:
 
@@ -979,7 +1027,7 @@ Nästa leverans ska redovisa följande:
    från Cedersvägen till Västra utfarten och välj mellan Västra i svängen och bara Norra rakt på. Pröva UA 5
    tillsammans med UA 1b eller UA 4.
 
-## 4.11 Osäkerheter
+## 4.12 Osäkerheter
 
 - **Omloppen** är operatörens, enligt påstigandedatan från hösten 2026, med beställarens rättelser av omlopp
   204, 205 och 208 och kvällens omlopp sammanslagna med dagens (avsnitt 4.1). Förarnas raster ingår inte. Driftformerna där omloppen byggs om (UA 2 och 3, dagens tidtabell) använder omlopp som är

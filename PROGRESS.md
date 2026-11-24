@@ -245,6 +245,13 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       moturs, Västra/Östra och Järsö som i dag, 6 fordon, omloppstid 61,4 → 75,4 h; B = dagens 5 fordon, varannan
       Norra-tur moturs. Med väntetid (halva turintervallet, `vantan` i b4_natverk.Nat): A −154, B +385
       resenärsminuter per vardag. Figur b4_22. Omloppsfigurerna visar åter linjebokstäver (N, S, V, Ö, J) i staplarna.
+- [x] **Realistiskt alternativ och vänd Norra** (beställaren 2026-11-24: låg efterfrågan, ~320 påstigande/vardag).
+      Prövat utan fler bussar: Västra varje timme + Norra moturs varje timme (+147 resenärsmin./vardag, sämre), vända
+      hela Norra (Bo-Bil utan omväg, 64 m kortare, men +105 resenärsmin./vardag – rekommenderas inte; skrivet i
+      UA 3-avsnitten). UA 6 markerat som "kräver extra buss", alternativ vid växande resande.
+      UA 7 (`src/b4_ua7_kvall.py`, figur b4_23): Västras och Östras sex turer efter kl. 18 anropsstyrda; 6,5 berörda
+      resenärer/vardag, −81 fordonskm och −3 fordonstimmar per vardag, omlopp 208 slutar 18:07, 116 inv. under 30
+      avg./vardag. B4 4.9 (följande omnumrerade 4.10–4.12), PM 3.8, B5.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
