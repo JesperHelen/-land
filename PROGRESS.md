@@ -254,6 +254,9 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       Södra varannan timme +14, alla tre Västra-turer → Norra moturs −16 resenärsmin./kväll (huvud). Omlopp 208:
       Östra/Norra moturs efter 18, −3 fordonskm/vardag, Västras ~4 kvällsresenärer anropsstyrt. Jämförelse:
       Västra+Östra anropsstyrda (−81 fordonskm). B4 4.9 (följande omnumrerade 4.10–4.12), PM 3.8, B5.
+- [x] **Färgrättelse och målpunktskarta** (beställaren 2026-11-24): Södra #ff72df, Järsö #00a884 (byttes). Ny
+      `src/a1_malpunkter.py` → figur a1_9 (A1 figur 1.8) och `output/data/malpunkter.csv`: skolor, sjukhus,
+      köpcentrum, hamnar, fritidsanläggningar, arbetsplats- och handelsområden ur OpenStreetMap (poi, landuse).
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A

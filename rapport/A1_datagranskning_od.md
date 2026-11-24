@@ -237,6 +237,17 @@ Järsö sommar 2026).*
 *Figur 1.7. Påstigande med skolkort per skoldag, förmiddag 06–09 och eftermiddag 12–18 (sommardata 2026,
 34 skoldagar 12 maj–5 juni och 20 augusti–14 september).*
 
+**Målpunkter på kartan.** Figur 1.8 visar stadens målpunkter enligt OpenStreetMap: skolor, sjukhus, köpcentrum,
+hamnar, fritidsanläggningar samt arbetsplats- och handelsområden. De stämmer väl med resmönstret ovan: skolorna
+(Strandnäs, Övernäs, Ytternäs, lyceet och yrkesgymnasiet), Maxinge med handels- och industriområdena i norr,
+centrumgallerierna och sjukhuset. Västerhamn med färjeterminalerna och fritidsanläggningarna i Idrottsparken och
+vid Baltichallen är andra målpunkter som busstrafiken passerar. Listan finns i `output/data/malpunkter.csv`.
+
+![Figur 1.8](../output/kartor/a1_9_malpunkter.png)
+
+*Figur 1.8. Målpunkter i Mariehamn: skolor, sjukhus, köpcentrum, hamnar, fritidsanläggningar samt arbetsplats- och
+handelsområden (OpenStreetMap). Linjenätet visas svagt i bakgrunden.*
+
 ## 1.6 Osäkerheter och rekommendation
 
 - **Linje Järsö** finns bara i sommardatan, som används utan korrigering. Linjens påstigande vid centrum kan därför
