@@ -24,6 +24,8 @@
 >   linje Norras väg rakt på är kortare än svängen; inga fler fordon. Varianten med bara linje Norra rakt på ger
 >   −4 fordonskm per vardag.
 >
+> - **UA 6 – Linje Norra i båda riktningarna (utanför ramen):** +257 fordonskm per vardag och ett extra fordon.
+>
 > Kilometrarna är vägavstånd längs gatunätet (OSRM).
 
 ## 5.1 Metod
@@ -57,6 +59,7 @@ Varje UA för sig.*
 | UA 5 ★ svängen till linje Västra, Västra och Östra sammanslagna (17 av 20 Västra-turer) | 5 | Nej | −1 | −200 |
 | UA 5 svängen till linje Västra, dagens drift (16 av 20 Västra-turer) | 5 | Nej | −1 | −200 |
 | UA 5 variant: bara linje Norra rakt på (svängen utan buss) | 5 | Nej | −4 | −1 000 |
+| UA 6 linje Norra i båda riktningarna (22 turer moturs, utanför ramen) | 6 | **Ja, +1** | +257 | +67 200 |
 
 **Extra turer för flygen (UA 4).** Tre flyg nås inte av dagens Västra-turer. De extra turerna är Västra-turer via
 flygplatsen (32 minuter, 14,5 km längs vägarna) och körs av ett fordon som står stilla, så inget extra fordon

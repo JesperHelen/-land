@@ -176,6 +176,18 @@
    "delta_km_ar": 10900,
    "ny_tackning_inv": 0,
    "battre_inv": 0
+  },
+  {
+   "scenario": "6",
+   "namn": "UA 6 linje Norra i båda riktningarna (+22 turer moturs)",
+   "huvudalternativ": false,
+   "fordon": 6,
+   "delta_fordon": 1,
+   "fordonskm_vardag": 1543.5,
+   "delta_km_vardag": 256.5,
+   "delta_km_ar": 67200,
+   "ny_tackning_inv": 0,
+   "battre_inv": 888
   }
  ],
  "flyg_extraturer": [

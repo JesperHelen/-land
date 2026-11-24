@@ -1,0 +1,166 @@
+{
+ "turer_moturs": 22,
+ "kortid_varv_min": 26.0,
+ "reglering_min": 4.0,
+ "fordon_extra": 1,
+ "km_varv": 11.66,
+ "fordonskm_vardag": 256.5,
+ "restid": {
+  "FM": {
+   "resenarsminuter_h": -13.02,
+   "resor_langre_h": 0.0,
+   "resor_kortare_h": 3.6,
+   "resor_utan_forbindelse_h": 0.0
+  },
+  "EM": {
+   "resenarsminuter_h": -18.38,
+   "resor_langre_h": 0.0,
+   "resor_kortare_h": 3.36,
+   "resor_utan_forbindelse_h": 0.0
+  }
+ },
+ "resenarsminuter_vardag": -164.0,
+ "resor_kortare_vardag": 36.0,
+ "inv_inom_400m_norra": 6052,
+ "inv_lyft_till_minst_30": 888,
+ "inv_lyft_till_minst_60": 1459,
+ "andel_minst_30_fore": 0.556,
+ "andel_minst_30_efter": 0.616,
+ "exempel": [
+  {
+   "period": "EM",
+   "fran": "Maxinge",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.77,
+   "idag_min": 17.0,
+   "ua6_min": 8.0,
+   "vinst_resenarsmin_h": 6.9
+  },
+  {
+   "period": "FM",
+   "fran": "Hindersbölevägen",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.59,
+   "idag_min": 14.0,
+   "ua6_min": 11.0,
+   "vinst_resenarsmin_h": 1.78
+  },
+  {
+   "period": "FM",
+   "fran": "Uppgårdsvägen 10",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.22,
+   "idag_min": 13.8,
+   "ua6_min": 6.0,
+   "vinst_resenarsmin_h": 1.69
+  },
+  {
+   "period": "FM",
+   "fran": "Hindersbölevägen",
+   "till": "Maxinge",
+   "resor_h": 0.1,
+   "idag_min": 16.3,
+   "ua6_min": 3.0,
+   "vinst_resenarsmin_h": 1.33
+  },
+  {
+   "period": "FM",
+   "fran": "Maxinge",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.14,
+   "idag_min": 17.0,
+   "ua6_min": 8.0,
+   "vinst_resenarsmin_h": 1.23
+  },
+  {
+   "period": "FM",
+   "fran": "Strandgränd",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.2,
+   "idag_min": 5.8,
+   "ua6_min": 1.1,
+   "vinst_resenarsmin_h": 0.97
+  },
+  {
+   "period": "EM",
+   "fran": "Strandnäs skola södra",
+   "till": "Hindersbölevägen",
+   "resor_h": 0.1,
+   "idag_min": 13.2,
+   "ua6_min": 5.5,
+   "vinst_resenarsmin_h": 0.79
+  },
+  {
+   "period": "EM",
+   "fran": "Hindersbölevägen",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.26,
+   "idag_min": 14.0,
+   "ua6_min": 11.0,
+   "vinst_resenarsmin_h": 0.78
+  },
+  {
+   "period": "EM",
+   "fran": "Doktorsvägen 1B/1C",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.14,
+   "idag_min": 9.2,
+   "ua6_min": 5.2,
+   "vinst_resenarsmin_h": 0.56
+  },
+  {
+   "period": "EM",
+   "fran": "Maxinge",
+   "till": "Ytternäs skola",
+   "resor_h": 0.06,
+   "idag_min": 27.4,
+   "ua6_min": 19.0,
+   "vinst_resenarsmin_h": 0.53
+  },
+  {
+   "period": "FM",
+   "fran": "Doktorsvägen 1B/1C",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.12,
+   "idag_min": 9.2,
+   "ua6_min": 5.2,
+   "vinst_resenarsmin_h": 0.48
+  },
+  {
+   "period": "EM",
+   "fran": "Uppgårdsvägen 10",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.06,
+   "idag_min": 13.8,
+   "ua6_min": 6.0,
+   "vinst_resenarsmin_h": 0.48
+  },
+  {
+   "period": "EM",
+   "fran": "Doktorsvägen 1A",
+   "till": "Centrum, Nygatan",
+   "resor_h": 0.13,
+   "idag_min": 8.3,
+   "ua6_min": 5.0,
+   "vinst_resenarsmin_h": 0.43
+  },
+  {
+   "period": "EM",
+   "fran": "Maxinge",
+   "till": "Doppingvägen",
+   "resor_h": 0.04,
+   "idag_min": 27.7,
+   "ua6_min": 19.3,
+   "vinst_resenarsmin_h": 0.37
+  },
+  {
+   "period": "EM",
+   "fran": "Maxinge",
+   "till": "Uppgårdsvägen 10",
+   "resor_h": 0.09,
+   "idag_min": 6.1,
+   "ua6_min": 2.0,
+   "vinst_resenarsmin_h": 0.37
+  }
+ ]
+}

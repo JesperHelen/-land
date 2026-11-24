@@ -32,6 +32,7 @@
 > | UA 3 – Linje Norra via Bo-Bil (+0,9 min/tur) | Alla turer | 22 av 22 | 5 (nej) | +10 | – |
 > | UA 4 – Linje Västra–Östra via flygplatsen (+5 min/tur) | Västra och Östra sammanslagna | 16 av 20 | 5 (nej) | +27 | Bara förlängning av Västra (6 fordon) |
 > | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 5 (nej) | −1 | – |
+> | UA 6 – Linje Norra i båda riktningarna (utanför ramen) | Norra även moturs, var 30:e minut | 22 turer till | 6 (ja, +1) | +257 | – |
 >
 > I UA 1a, 1b och 4 kör fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 >
@@ -792,7 +793,52 @@ hållplatserna är färgade efter den linje som stannar där.*
 *Figur 4.18. Omlopp före och efter för UA 5, alla driftformer (★ = huvudalternativ). Svart streck i en Norra-tur
 anger kortare körtid (rakt på Västra utfarten).*
 
-## 4.8 Systemeffekter per UA
+## 4.8 UA 6 – Linje Norra i båda riktningarna
+
+**Introduktion.** UA 6 är ett friare förslag än UA 1–5 och prövas utanför ramen om inga fler fordon. Linje Norra
+är i dag en enkelriktad slinga: Centrum – Doktorsvägen – Maxinge – Hindersbölevägen – Nabben – Sjukhuset –
+Norragatan – Centrum, med 22 turer per vardag. Den som åker ut från centrum på morgonen åker oftast direkt, men
+hemresan går hela varvet runt. Maxinge, den tredje största målpunkten (avsnitt 1.5), ligger tidigt i slingan, så
+den som åker hem från Maxinge till centrum på eftermiddagen får åka via Hindersböle, Nabben och Sjukhuset.
+
+- **Syfte:** kortare restid åt båda hållen och dubbel turtäthet längs Norra.
+- **Prövas:** linje Norra kör även moturs, med samma 22 turer per vardag som i dag (var 30:e minut).
+- **Det som avgör:** hur mycket restiden kortas för dagens resenärer, och vad det extra fordonet ger i turtäthet.
+
+Andra idéer har också prövats i nätmodellen, bland annat en tvärlinje Kalmarnäs – Solberget – Kalmsta –
+Hindersböle – Bo-Bil – Maxinge och en tvärlinje via Strandnäs skola och Godbyvägen. De ger högst en
+åttondel av restidsvinsten i UA 6 med dagens resmönster (cirka 4–19 resenärsminuter per vardag) och har därför
+inte gått vidare.
+
+**Utformning.** Moturs kör bussen samma gator och stannar vid samma hållplatser som i dag, i omvänd ordning
+(figur 4.21). Vid Maxinge finns bara hållplats för södergående buss. Moturs kommer bussen från Vikingagränd, kör
+norrut till rondellen norr om Maxinge och stannar vid Maxinge på väg söderut, spegelvänt mot i dag. Busslänken
+mellan Doktorsvägen och Uppgårdsvägen behöver kunna köras i båda riktningarna.
+
+**Resultat.**
+
+- **Restid:** −164 resenärsminuter per vardag för dagens resenärer, och cirka 36 resor per vardag blir kortare.
+  Den största vinsten är hemresan Maxinge – Centrum på eftermiddagen, som går från cirka 17 till 8 minuter.
+  Resor från Hindersbölevägen, Uppgårdsvägen och Doktorsvägen till centrum blir 3–8 minuter kortare.
+  Nätmodellen räknar inte väntetid, så vinsten av den dubblade turtätheten kommer därutöver.
+- **Turtäthet:** Norras hållplatser får 44 avgångar per vardag i stället för 22. 888 invånare får minst 30
+  avgångar per vardag, och 1 459 får minst 60. Andelen av Mariehamns invånare med minst 30 avgångar inom 400 m
+  ökar från 55,6 till 61,6 %.
+- **Fordon:** varvet tar 26 minuter. Med 4 minuters reglering i centrum ryms trafiken moturs var 30:e minut i
+  ett eget omlopp, alltså ett extra fordon.
+- **Kostnad:** +256 fordonskm per vardag (11,7 km per varv × 22 turer) och ett extra fordon.
+
+**Bedömning.** UA 6 ger den största restidsvinsten av alla alternativ, cirka 15 gånger mer än UA 5, och dubbel
+turtäthet för cirka 6 000 invånare längs Norra. Det kräver ett extra fordon och ligger därför utanför uppdragets
+ram. Ett billigare alternativ är att köra varannan tur moturs med dagens fordon. Då halveras turtätheten i varje
+riktning, och det bör prövas med verkliga restider och väntetider innan det kan bedömas.
+
+![Figur 4.21](../output/kartor/b4_21_norra_bada_riktningar.png)
+
+*Figur 4.21. UA 6 – linje Norra i dag (en riktning) och med UA 6 (båda riktningarna). Grönt anger invånare som
+får minst 30 avgångar per vardag inom 400 m.*
+
+## 4.9 Systemeffekter per UA
 
 Varje UA har prövats för sig mot dagens nät (figur 4.13 och 4.14). Täckningen gäller invånarna i
 Mariehamn (14 821). UA 4 redovisas i tabell 4.4 och UA 5 i tabell 4.6 och 4.7.
@@ -895,7 +941,7 @@ huvudalternativen. Kostnaden (fordonskilometer och fordon) sammanfattas i kapite
 *Figur 4.14. Turtäthet inom 400 m i dag och med alternativet, inzoomat per UA. Grön ram anger bättre och
 röd ram sämre klass än i dag.*
 
-## 4.9 Fortsatt arbete
+## 4.10 Fortsatt arbete
 
 Nästa leverans ska redovisa följande:
 
@@ -917,7 +963,7 @@ Nästa leverans ska redovisa följande:
    från Cedersvägen till Västra utfarten och välj mellan Västra i svängen och bara Norra rakt på. Pröva UA 5
    tillsammans med UA 1b eller UA 4.
 
-## 4.10 Osäkerheter
+## 4.11 Osäkerheter
 
 - **Omloppen** är operatörens, enligt påstigandedatan från hösten 2026, med beställarens rättelser av omlopp
   204, 205 och 208 och kvällens omlopp sammanslagna med dagens (avsnitt 4.1). Förarnas raster ingår inte. Driftformerna där omloppen byggs om (UA 2 och 3, dagens tidtabell) använder omlopp som är

@@ -13,3 +13,4 @@ scenario,namn,huvudalternativ,fordon,delta_fordon,fordonskm_vardag,delta_km_vard
 5_ryms,UA 5 svängen till linje V – dagens drift (16 av 20 V-turer),False,5,0,1285.9,-1.1,-200,0,79
 5_N,UA 5 variant – bara linje N rakt på,False,5,0,1283.0,-4.0,-1000,0,0
 flyg_extra,UA 4 extra turer för flyg som dagens tidtabell inte når,False,5,0,1330.5,43.5,10900,0,0
+6,UA 6 linje Norra i båda riktningarna (+22 turer moturs),False,6,1,1543.5,256.5,67200,0,888

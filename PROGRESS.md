@@ -236,6 +236,11 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       - Ny `src/a1_pastigande_byten.py` → `output/data/pastigande_byten_skolresor.xlsx` och kartorna a1_6–a1_8:
         påstigande per hållplats FM/EM (höst), byten (nätutläggning av OD + biljettypen Bussbyte 2h), skolresor
         (skolkort, sommardata, 34 skoldagar; FM 06–09, EM 12–18). A1 avsnitt 1.5 Målpunkter och bytespunkter.
+- [x] **UA 6 – linje Norra i båda riktningarna** (beställaren 2026-11-24: fri förbättring utan ramar).
+      Nätmodellen prövade tvärlinjer (Kalmarnäs – Solberget – Hindersböle – Bo-Bil – Maxinge: −19 resenärsmin./vardag;
+      via Strandnäs skola/Godbyvägen: −4) och Norra baklänges (−164). UA 6 = Norra även moturs, 22 turer, +1 fordon,
+      +257 fordonskm/vardag, 888 inv. får minst 30 avg./vardag (andel 55,6 → 61,6 %). `src/b4_ua6_norra.py`,
+      figur b4_21, B4 4.8 (följande avsnitt omnumrerade 4.9–4.11), PM 3.7, B5.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
