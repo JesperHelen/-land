@@ -47,7 +47,7 @@ TACKNING_M = 400.0         # avstånd till hållplats (fågelväg) som räknas s
 DELRUTA_M = 50.0           # upplösning för fördelning av rutbefolkning inom 1 km-rutan
 
 # --- Kartstil ---
-FARG_LINJE = {'J': '#ff72df', 'N': '#6f4388', 'S': '#00a884', 'V': '#005be6', 'Ö': '#a86f00'}   # beställarens färger
+FARG_LINJE = {'J': '#00a884', 'N': '#6f4388', 'S': '#ff72df', 'V': '#005be6', 'Ö': '#a86f00'}   # beställarens färger
 NAMN_LINJE = {'J': 'Järsö', 'N': 'Norra', 'S': 'Södra', 'V': 'Västra', 'Ö': 'Östra'}         # fullständiga linjenamn
 NAMN_VO = 'Västra–Östra'                                                                     # genomgående linje V–Ö
 
