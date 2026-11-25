@@ -399,8 +399,9 @@ mildras om hållplatsen N3 söder om Maxinge (kapitel 3) genomförs samtidigt.
 
 ![Figur 4.6](../output/kartor/b4_6_bobil_karta.png)
 
-*Figur 4.6. UA 3. Rött anger invånare som får sämre tillgänglighet och grönt invånare som får bättre.
-Körvägarna följer gatunätet (OSRM), och pilarna visar körriktningen.*
+*Figur 4.6. UA 3. Norra angör Maxinge söderut (hållplatsen ligger på västra sidan), vänder i rondellen söder om
+hållplatsen och kör via Michaelsvägen till Bo-Bil. Där sträckan körs åt båda hållen ritas linjen dubbel. Rött anger
+invånare som får sämre tillgänglighet och grönt invånare som får bättre. Pilarna visar körriktningen.*
 
 ![Figur 4.7](../output/kartor/b4_7_bobil_omlopp.png)
 

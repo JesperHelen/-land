@@ -305,3 +305,7 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   `QT_QPA_PLATFORM=offscreen` och `OGR_SQLITE_JOURNAL=DELETE` (molnmiljön klarar inte SQLite-WAL i QGIS).
 - Internet: PyPI, repo-GitHub, router.project-osrm.org (OSRM) och tiles.openfreemap.org (kartbakgrund).
 - Python-bibliotek utöver requirements: geopandas, shapely, pyproj, pyogrio (installeras med pip).
+
+- 2026-11-25: UA 3-kartan (figur 4.6 / PM figur 7) omritad: bara Norra, dubbel linje där sträckan körs åt båda
+  hållen (söderut förbi Maxinge-hållplatsen, vändning i rondellen söder om den, norrut till Michaelsvägen), pilar i rätt
+  riktning, utgående körväg via Vikingagränd prickad, lätt täckningsändring utan grå yta och 400 m-cirklar.

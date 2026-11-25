@@ -391,7 +391,9 @@ i förhållande till omvägen. Den verkliga körtiden genom rondellerna bör mä
 
 ![UA 3, Bo-Bil](../output/kartor/b4_6_bobil_karta.png)
 
-*Figur 7. UA 3. Grönt anger bättre och rött sämre tillgänglighet. Pilarna visar körriktningen.*
+*Figur 7. UA 3. Norra angör Maxinge söderut, vänder i rondellen söder om hållplatsen och kör via Michaelsvägen till
+Bo-Bil (dubbel linje där sträckan körs åt båda hållen). Grönt anger bättre och rött sämre tillgänglighet. Pilarna
+visar körriktningen.*
 
 ### 3.5 UA 4 – Linje Västra–Östra via flygplatsen
 
