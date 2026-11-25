@@ -316,3 +316,6 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
 - 2026-11-26: Presentation (avstämningsmöte): bild 10–13 (UA 1–4) omgjorda med nyckeltal, kort text och nya kartor
   (src/ppt_bilder.py → output/ppt), ny bild 14 med kostnadstabell (fordon, fordonskm per vardag och år, andel av
   dagens cirka 342 000 fordonskm per år). output/ppt/Avstamningsmote_261126.pptx
+- 2026-11-26: Presentationen: den extra kostnadsbilden borttagen; i stället fylls bilden "Analys och
+  konsekvensbeskrivning" i med beställarens nio UA-namn: resenärsnytta, tidtabellspåverkan, genomförbarhet,
+  kommentar samt fordon och fordonskm per vardag och år, med raden "I dag, totalt" (≈ 342 000 fordonskm per år).
