@@ -126,6 +126,15 @@ fordon och samma omloppstid. Varje UA har verifierats mot detta:
 
 ### 2.2 Dagens omlopp
 
+Stadstrafiken har fem linjer som alla utgår från Centrum (figur figur 0). Västra, Norra och Södra är slingor som körs
+i en riktning, med Västras sträcka till Möckelö och Norras till Maxinge fram och tillbaka. Östra kör ut via Nabben
+till Solberget och Kalmarnäs och tillbaka via Sjukhuset. Järsö kör söderut till Järsö och tillbaka.
+
+![Figur 0](../output/kartor/a0_principskiss.png)
+
+*Figur 0. Stadstrafikens linjenät i dag – principskiss med grova drag och körriktningar (ej skalenlig). Dubbelpil anger
+sträckor som körs i båda riktningarna.*
+
 Den tvättade påstigandedatan från hösten 2026 anger operatörens omlopp för varje tur. De används som dagens
 omlopp för en typisk vardag, tisdag 2026-09-01 (figur 1), med beställarens rättelser 2026-11-03:
 Norra 11:20, Södra 11:50, Norra 12:20 och Södra 10:50 hör till omlopp 205, och Norra 16:50, Södra 17:20 och Norra 17:50 till omlopp 204.

@@ -257,6 +257,8 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
 - [x] **Färgrättelse och målpunktskarta** (beställaren 2026-11-24): Södra #ff72df, Järsö #00a884 (byttes). Ny
       `src/a1_malpunkter.py` → figur a1_9 (A1 figur 1.8) och `output/data/malpunkter.csv`: skolor, sjukhus,
       köpcentrum, hamnar, fritidsanläggningar, arbetsplats- och handelsområden ur OpenStreetMap (poi, landuse).
+- [x] **Principskiss över dagens nät** (`src/a0_principskiss.py`, a0_principskiss.png; PM figur 0, B4 figur 4.0):
+      schematisk, linjefärger, körriktningar (dubbelpil = båda riktningarna).
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
