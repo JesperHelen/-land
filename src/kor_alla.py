@@ -10,7 +10,7 @@ from pathlib import Path
 
 SRC = Path(__file__).resolve().parent
 STEG = ['s01_vagdragning', 'a0_principskiss', 'a1_od_granskning', 'a1_kartor', 'a1_pastigande_byten', 'a1_malpunkter', 'a2_tackning', 'a2_kartor',
-        'a3_hallplatser', 'a3_kartor', 'b4_omlopp', 'b4_ua', 'b4_sammanslagning', 'b4_systemeffekter', 'b4_kartor', 'b4_ua3_slinga', 'b4_ua6_norra', 'b4_ua7_kvall',
+        'a3_hallplatser', 'a3_kartor', 'b4_omlopp', 'b4_ua3_slinga', 'b4_ua', 'b4_sammanslagning', 'b4_systemeffekter', 'b4_kartor', 'b4_ua6_norra', 'b4_ua7_kvall',
         'b5_kalkyl', 'gis_export', 'pm_export']
 
 if __name__ == '__main__':

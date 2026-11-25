@@ -309,3 +309,7 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
 - 2026-11-25: UA 3-kartan (figur 4.6 / PM figur 7) omritad: bara Norra, dubbel linje där sträckan körs åt båda
   hållen (söderut förbi Maxinge-hållplatsen, vändning i rondellen söder om den, norrut till Michaelsvägen), pilar i rätt
   riktning, utgående körväg via Vikingagränd prickad, lätt täckningsändring utan grå yta och 400 m-cirklar.
+- 2026-11-25: UA 3 ★ ändrat till norra slingan baklänges via Bo-Bil (beställaren): Bolstavägen – Bo-Bil norrut –
+  Michaelsvägen – Maxinge söderut, ingen vändning. b4_ua3_slinga körs före b4_ua och är källa för UA 3 (körtid
+  −0,3 min, −379 m/tur, −8 fordonskm/vardag, +181 resenärsmin., 5 fordon). Figur 4.6/PM 7 omritad, B4, B5, PM,
+  GIS uppdaterade. Vändningen vid Maxinge (+450 m, +30) och hela Norra baklänges (+105) redovisas som jämförelse.

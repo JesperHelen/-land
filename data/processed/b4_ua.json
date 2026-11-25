@@ -252,14 +252,14 @@
   },
   "max_skift_partner_min": null,
   "bobil": {
-   "tid_idag_min": 1.4499999999999886,
-   "vag_idag_m": 1470,
-   "vag_ny_m": 1920,
-   "kalla": "osrm",
-   "kortare_vag_min": 0.4,
+   "variant": "norra slingan baklänges",
+   "varv_idag_m": 11657,
+   "varv_ny_m": 11278,
+   "kortid_idag_min": 26.0,
+   "kortid_ny_min": 25.7,
    "uppehall_bobil_min": 0.5,
-   "delta_min": 0.9,
-   "delta_km": 0.45
+   "delta_min": -0.3,
+   "delta_km": -0.379
   },
   "pastigande_per_inv": {
    "alla": 0.013999713180581857,
@@ -1014,14 +1014,14 @@
    ]
   },
   "3": {
-   "namn": "Linje N via Bo-Bil i stället för Vikingagränd",
+   "namn": "Linje N via Bo-Bil i stället för Vikingagränd, norra slingan baklänges",
    "titel": "UA 3 – Linje N via Bo-Bil",
    "huvudalternativ": "alla",
    "huvud_text": "alla turer",
    "linje": "N",
    "korvag": "",
-   "delta_min_per_tur": 0.9,
-   "km_per_tur": 0.45,
+   "delta_min_per_tur": -0.3,
+   "km_per_tur": -0.38,
    "delta_konservativ_min_per_tur": null,
    "linjens_turer": 22,
    "turer_som_trafikerar": 22,
@@ -1031,11 +1031,11 @@
      "fordon": 5,
      "fordon_samtidigt": 5,
      "turer": 93,
-     "korttid_h": 42.78,
-     "omloppstid_h": 61.45,
-     "regleringstid_h": 7.65,
-     "uppstallning_h": 11.02,
-     "km": 1296.9,
+     "korttid_h": 42.34,
+     "omloppstid_h": 61.43,
+     "regleringstid_h": 8.05,
+     "uppstallning_h": 11.04,
+     "km": 1278.7,
      "min_vandtid": 1.0,
      "vandningar_under_rek": 3,
      "varv_utan_reglering": 1,
@@ -1050,7 +1050,7 @@
      "ryms": true,
      "robust": true,
      "turer_med_andring": 22,
-     "delta_min_per_tur": 0.9,
+     "delta_min_per_tur": -0.3,
      "turer_utan_andring": [],
      "skiftade_turer": {},
      "genomgaende_vo": false,
@@ -1087,20 +1087,20 @@
    },
    "resenarer": {
     "FM": {
-     "resenarsminuter_h": 1.299,
-     "resor_langre_h": 1.315,
-     "resor_kortare_h": 0.0,
+     "resenarsminuter_h": 22.966,
+     "resor_langre_h": 6.235,
+     "resor_kortare_h": 1.976,
      "resor_utan_forbindelse_h": 0.0
     },
     "EM": {
-     "resenarsminuter_h": 4.495,
-     "resor_langre_h": 3.773,
-     "resor_kortare_h": 0.0,
+     "resenarsminuter_h": 11.736,
+     "resor_langre_h": 4.319,
+     "resor_kortare_h": 3.2,
      "resor_utan_forbindelse_h": 0.0
     },
     "vardag": {
-     "berorda_resor": 26.6,
-     "resenarsminuter": 30.3,
+     "berorda_resor": 82.2,
+     "resenarsminuter": 181.4,
      "resor_utan_forbindelse": 0.0
     }
    }

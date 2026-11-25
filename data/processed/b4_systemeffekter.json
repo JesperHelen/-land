@@ -849,11 +849,11 @@
    "fordon": 5,
    "fordon_samtidigt": 5,
    "turer": 93,
-   "korttid_h": 42.78,
-   "omloppstid_h": 61.45,
-   "regleringstid_h": 7.65,
-   "uppstallning_h": 11.02,
-   "km": 1296.9,
+   "korttid_h": 42.34,
+   "omloppstid_h": 61.43,
+   "regleringstid_h": 8.05,
+   "uppstallning_h": 11.04,
+   "km": 1278.7,
    "min_vandtid": 1.0,
    "vandningar_under_rek": 3,
    "varv_utan_reglering": 1,
@@ -928,9 +928,9 @@
   },
   "nya_hallplatser": {},
   "resenarer": {
-   "resenarsminuter_vardag": 30.3,
-   "resor_langre_vardag": 26.6,
-   "resor_kortare_vardag": 0.0
+   "resenarsminuter_vardag": -1.5,
+   "resor_langre_vardag": 0.8,
+   "resor_kortare_vardag": 25.8
   },
   "namn": "UA 3 Linje N via Bo-Bil (huvudalternativ)",
   "kort": "UA 3 ★ N via Bo-Bil",
@@ -969,9 +969,9 @@
   },
   "forandring_omlopp": {
    "fordon": 0,
-   "omloppstid_h": 0.02,
-   "korttid_h": 0.33,
-   "km": 9.9
+   "omloppstid_h": 0.0,
+   "korttid_h": -0.11,
+   "km": -8.3
   }
  },
  "4": {

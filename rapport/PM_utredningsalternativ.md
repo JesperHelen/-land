@@ -34,7 +34,7 @@ Linjerna och utredningsalternativens körvägar följer gatunätet (OSRM, OpenSt
 | **UA 1a – Möckelö Strand ny via dagens vägar** (+4,5 min/tur) | Västra och Östra sammanslagna | 16 av 20 turer | 178 inv. får hållplats (+16 avg./vardag) | +44 km, nej | Alla turer med dagens tidtabell (6 fordon, +55 km) |
 | **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen** (+2,5 min/tur) | Västra och Östra sammanslagna, Östra i pulsen | 16 av 20 | 178 inv. får hållplats (+16 avg./vardag) | +25 km, nej (+ väg) | – |
 | **UA 2 – N2 på linje Östra** (+0,5 min/tur) | Alla turer | 20 av 20 | 58 inv. får hållplats (+20 avg./vardag) | ±0 km, nej | – |
-| **UA 3 – Linje Norra via Bo-Bil** (+0,9 min/tur) | Alla turer | 22 av 22 | 44 inv. +22 avg./vardag (Bo-Bil); 24 inv. −22 (Vikingagränd) | +10 km, nej | – |
+| **UA 3 – Linje Norra via Bo-Bil**, norra slingan baklänges (−0,3 min/tur) | Alla turer | 22 av 22 | 44 inv. +22 avg./vardag (Bo-Bil); 24 inv. −22 (Vikingagränd) | −8 km, nej | – |
 | **UA 4 – Linje Västra–Östra via flygplatsen** (+5 min/tur) | Västra och Östra sammanslagna | 16 av 20 | 21 inv. får hållplats (+16 avg./vardag); 3 av 6 flyg nås | +27 km, nej (alla 6 flyg: +44 km till, nej) | Bara förlängning av Västra (6 fordon, +34 km) |
 | **UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten** (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 125 inv. fler avgångar (upp till +22), 11 färre (−17); Norra 6 i stället för 4 min i centrum | −1 km, nej | – |
 | **UA 6 – Linje Norra i båda riktningarna** (kräver extra buss) | Norra även moturs, var 30:e minut | 22 turer till | Restid −164 resenärsmin. per vardag; 888 inv. får minst 30 avg./vardag | +257 km, ja (+1 fordon) | – |
@@ -183,7 +183,7 @@ varje stapel en tur.*
 | UA 1a – Möckelö Strand ny via dagens vägar | +4,5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Dagens tidtabell: 8 av 20. Alla turer: 6 bussar (utesluten). | 178 / 0 | **★ +44 km, inga fler fordon** (dagens tidtabell +22 km; utesluten: +55 km och +1 fordon) |
 | UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen | +2,5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Alla 20 turer: 5 bussar men under 5 min i centrum (uppfyller inte kravet). | 178 / 0 | ★ +25 km, inga fler fordon |
 | UA 2 – N2 på linje Östra | +0,5 min | ★ Alla 20 av 20 | 58 / 0 | ±0 km, inga fler fordon |
-| UA 3 – Linje Norra via Bo-Bil | +0,9 min | ★ Alla 22 av 22 | 44 / 24 | +10 km, inga fler fordon |
+| UA 3 – Linje Norra via Bo-Bil, norra slingan baklänges | −0,3 min | ★ Alla 22 av 22 | 44 / 24 | −8 km, inga fler fordon |
 | UA 4 – Linje Västra–Östra via flygplatsen | +5 min | **★ Västra och Östra sammanslagna: 16 av 20.** Med Solberget indragen: 16 av 20. UA 4Y: 3 av 3. Dagens tidtabell: 7 av 20. Alla turer: 6 bussar (utesluten). | 22 / 0 (Solberget indragen: 22 / 49) | **★ +27 km, inga fler fordon** (UA 4Y +5 km; extra turer för alla flyg +44 km, inga fler fordon; utesluten: +34 km och +1 fordon) |
 | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten | Västra +2 min, Norra −2 min | **★ Västra och Östra sammanslagna: 17 av 20 Västra-turer.** Dagens drift: 16 av 20. Bara Norra rakt på: alla Norra-turer. | 79 / 0 (bara Norra rakt på: 0 / 0) | **★ −1 km, inga fler fordon** (bara Norra rakt på −4 km) |
 | UA 6 – Linje Norra i båda riktningarna (kräver extra buss) | – | Kräver ett extra fordon (22 turer moturs) | 888 inv. får minst 30 avg./vardag; restid −164 resenärsmin. per vardag | +257 km, +1 fordon |
@@ -335,65 +335,55 @@ landsbygdslinjerna redan stannar, i stället för vid Vikingagränd.
 - **Det som avgör:** om omvägen ryms i omloppen, och om förlusten för de närmast boende vid Vikingagränd vägs
   upp av vinsten vid Bo-Bil.
 
-**Utformning.** Bussen kör söderut vid Maxinge, och Bo-Bil ligger öster därom. Efter Maxinge vänder bussen därför i
-rondellen söder om hållplatsen, kör norrut till rondellen norr om Maxinge, Michaelsvägen österut och Godbyvägen
-söderut till Bo-Bil och vidare till Bolstavägen (figur 7). Att köra direkt till Bo-Bil utan att stanna vid Maxinge
-ger samma väglängd som i dag, men då förlorar linje Norra Maxinge, en av de största målpunkterna.
+**Utformning.** Linje Norra behåller sitt varv kring centrum (ut via Polishuset, hem via Sjukhuset och
+Yrkesgymnasiet), men den norra slingan körs baklänges: Vedhuggsvägen – Nabben – Hindersböle – Bolstavägen –
+Godbyvägen norrut – Bo-Bil – Michaelsvägen – Maxinge – Hjortronstigen – Doktorsvägen – Sjukhuset (figur 7 och 7b).
+Bussen når då både Bo-Bil och Maxinge i rätt körriktning utan att vända. Vikingagränd trafikeras inte längre.
 
-**Körtid.** Delsträckan Maxinge – Bolstavägen blir cirka 450 m längre (1,92 i stället för 1,47 km). Med
-dagens tidtabellshastighet och uppehållet vid Bo-Bil (+0,5 minut) ökar körtiden med cirka 0,9 minut per tur; med
-25 km/h genom rondellerna med cirka 1,6 minuter. Väntan vid Nya Godbyvägen minskar inte, eftersom bussen
-fortfarande kör förbi Maxinge.
+**Körtid.** Varvet blir 379 m kortare per tur (11,28 i stället för 11,66 km). Med dagens genomsnittshastighet och
+uppehållet vid Bo-Bil (+0,5 minut) blir körtiden 25,7 i stället för 26,0 minuter per tur.
 
-**Omlopp.** Alternativet ryms med alla 22 turer och fem fordon. Linje Norras vändtid i centrum blir cirka 3 minuter
-i stället för 4.
+**Omlopp.** Alternativet ryms med alla 22 turer och fem fordon. Linje Norras vändtid i centrum blir något längre.
 
-**Kostnad.** +10 fordonskm per vardag (450 m per tur); inga fler fordon.
+**Kostnad.** −8 fordonskm per vardag (379 m kortare per tur); inga fler fordon.
 
 **Effekter.**
 
 - **Bo-Bil:** hållplatsen får linje Norras 22 avgångar utöver landsbygdslinjernas, och 44 invånare får minst 30
   avgångar per vardag.
 - **Vikingagränd:** 24 invånare får 22 avgångar färre per vardag, och 23 av dem förlorar hållplatsen inom 400 m.
-- **Restid:** cirka 27 resor per vardag får längre restid, sammanlagt cirka 30 resenärsminuter per vardag.
+- **Restid:** cirka 55 resor per vardag får längre och 27 kortare restid, sammanlagt cirka 181 resenärsminuter
+  längre per vardag. Centrum – Maxinge på förmiddagen, Norras största flöde, går via Nabben och Hindersböle och tar
+  cirka 14 i stället för 8 minuter. Hemresan Maxinge – Centrum blir cirka 6 minuter kortare.
 
-**Vända linje Norra?** Kör hela Norra åt andra hållet når bussen Maxinge från Bo-Bil och Michaelsvägen utan att
-vända, och delsträckan Bolstavägen – Maxinge – Hjortronstigen blir 64 m kortare än i dag. Men Norras största
-flöden går medurs: Centrum – Maxinge på förmiddagen skulle ta 14 i stället för 8 minuter. Totalt får resenärerna
-cirka 105 resenärsminuter längre restid per vardag (mot 30 i UA 3), så att vända linjen rekommenderas inte.
-
-**Vända bara den norra slingan?** Norra kan också behålla sitt varv kring centrum (ut via Polishuset, hem via
-Sjukhuset och Yrkesgymnasiet) och köra bara den norra slingan baklänges: Vedhuggsvägen – Nabben – Hindersböle –
-Bolstavägen – Bo-Bil – Michaelsvägen – Maxinge – Doktorsvägen – Sjukhuset (figur 7b). Bussen når då Bo-Bil och Maxinge
-söderut utan att vända, och varvet blir 379 m kortare per tur (−8 fordonskm per vardag). Men resenärerna förlorar
-mest på den här varianten: Centrum – Maxinge på förmiddagen, Norras största flöde, går då via Nabben och Hindersböle
-och tar cirka 14 i stället för 8 minuter, och resor från Maxinge mot Hindersböle och Solberget blir längre. Hemresan
-Maxinge – Centrum blir cirka 6 minuter kortare. Totalt blir restiden 181 resenärsminuter längre per vardag.
+**Andra sätt att nå Bo-Bil.** Med dagens körriktning kommer bussen söderut till Maxinge och måste vända i rondellen
+söder om hållplatsen för att nå Bo-Bil via Michaelsvägen: 450 m och cirka 0,9 minut längre per tur, vilket tar det
+mesta av Norras marginal i centrum. Att vända hela Norra når också Bo-Bil utan omväg, men Norras största flöden går
+medurs.
 
 *Tabell. Tre sätt att nå Bo-Bil med linje Norra.*
 
 | | Väg per tur | Körtid per tur | Restid, resenärsminuter per vardag |
 |---|---|---|---|
-| UA 3 – medurs, vänder vid Maxinge | +450 m | +0,9 min | +30 |
+| ★ UA 3 – norra slingan baklänges | −379 m | −0,3 min | +181 |
+| Medurs, vänder vid Maxinge | +450 m | +0,9 min | +30 |
 | Hela Norra baklänges | −64 m | ±0 | +105 |
-| Bara norra slingan baklänges | −379 m | −0,3 min | +181 |
 
-Den baklängesvända slingan är alltså bäst för bussen men sämst för resenärerna. Nätmodellen räknar bara med
-stadslinjerna; om landsbygdslinjerna mellan centrum och Maxinge kan användas med samma biljett blir förlusten för
-resan Centrum – Maxinge mindre.
+Den baklängesvända slingan är bäst för bussen men sämst för resenärerna mellan centrum och Maxinge. Nätmodellen
+räknar bara med stadslinjerna; om landsbygdslinjerna mellan centrum och Maxinge kan användas med samma biljett blir
+förlusten för resan Centrum – Maxinge mindre.
 
-![UA 3, norra slingan baklänges](../output/kartor/b4_24_norra_slinga.png)
-
-*Figur 7b. Linje Norra i dag och med den norra slingan baklänges via Bo-Bil. Pilarna visar körriktningen.*
-
-**Bedömning.** Alternativet ryms, men omvägen tar det mesta av linje Norras marginal i centrum, och nyttan är liten
-i förhållande till omvägen. Den verkliga körtiden genom rondellerna bör mätas innan alternativet går vidare.
+**Bedömning.** Alternativet ryms med fem fordon, kortar varvet och ger linje Norra avgångar vid Bo-Bil. Priset är
+längre restid mellan centrum och Maxinge på förmiddagen.
 
 ![UA 3, Bo-Bil](../output/kartor/b4_6_bobil_karta.png)
 
-*Figur 7. UA 3. Norra angör Maxinge söderut, vänder i rondellen söder om hållplatsen och kör via Michaelsvägen till
-Bo-Bil (dubbel linje där sträckan körs åt båda hållen). Grönt anger bättre och rött sämre tillgänglighet. Pilarna
-visar körriktningen.*
+*Figur 7. UA 3. Norras norra slinga körs baklänges: från Bolstavägen norrut förbi Bo-Bil, Michaelsvägen och söderut
+förbi Maxinge. Vikingagränd utgår. Grönt anger bättre och rött sämre tillgänglighet. Pilarna visar körriktningen.*
+
+![UA 3, norra slingan baklänges](../output/kartor/b4_24_norra_slinga.png)
+
+*Figur 7b. Linje Norra i dag och i UA 3, med den norra slingan baklänges via Bo-Bil. Pilarna visar körriktningen.*
 
 ### 3.5 UA 4 – Linje Västra–Östra via flygplatsen
 
@@ -752,9 +742,9 @@ avgångar per vardag inom 400 m, viktat med befolkningen.
 | Invånare × avgångar per vardag, netto | – | +2 846 | +2 846 | +1 164 | +444 | +344 | +64 | +1 837 |
 | Bussar | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 | Omloppstid (h per vardag) | 61,4 | 61,5 | 61,5 | 61,4 | 61,4 | 61,6 | 61,5 | 61,4 |
-| Fordonskilometer per vardag | 1 287 | 1 331 | 1 312 | 1 287 | 1 287 | 1 314 | 1 292 | 1 286 |
+| Fordonskilometer per vardag | 1 287 | 1 331 | 1 312 | 1 287 | 1 279 | 1 314 | 1 292 | 1 286 |
 | Varv Västra + Östra med < 5 min i centrum | 1 | 1 | 1 | 3 | 1 | 1 | 1 | 1 |
-| Restid, befintliga resenärer (resenärsmin. per vardag; minus = kortare) | – | +25 | +12 | +8 | +30 | +35 | +4 | −9 |
+| Restid, befintliga resenärer (resenärsmin. per vardag; minus = kortare) | – | +25 | +12 | +8 | +181 | +35 | +4 | −9 |
 
 Restiderna för alternativen med Västra och Östra sammanslagna är netto, efter vinsten för resor mellan Västra och Östra som slipper
 bytet (cirka 3 resenärsminuter per vardag). Med höstens resande, cirka tre gånger sommarens, är restidseffekterna
@@ -806,7 +796,7 @@ lördagstrafiken.
 | UA 1a ★ Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +44 | +11 500 |
 | UA 1b ★ förlängd Norrgårdsvägen, Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +25 | +6 500 |
 | UA 2 ★ N2 | 5 | Nej | ±0 | ±0 |
-| UA 3 ★ Bo-Bil | 5 | Nej | +10 | +2 600 |
+| UA 3 ★ Bo-Bil, norra slingan baklänges | 5 | Nej | −8 | −2 200 |
 | UA 4 flygplatsen, alla turer – utesluten | 6 | **Ja, +1** | +34 | +9 000 |
 | UA 4 ★ Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +27 | +7 200 |
 | UA 4 dito + Solberget indragen (16 av 20) | 5 | Nej | +27 | +7 200 |
@@ -848,11 +838,12 @@ fler fordon.*
    med fem fordon, men med kortare omväg (+25 fordonskm per vardag), större marginal och Östra kvar i pulsen. UA 1b
    förutsätter att vägen byggs.
 4. **UA 2 – N2 på linje Östra** ryms med alla turer och ger 58 invånare en hållplats, utan fler fordonskm eller fordon.
-5. **UA 3 – Linje Norra via Bo-Bil** ryms med fem fordon. Eftersom Norra är enkelriktad och Maxinge bara har
-   hållplats för södergående buss måste bussen vända vid Maxinge för att nå Bo-Bil: 450 m och cirka 1–1,5 minuter
-   längre per tur (+10 fordonskm per vardag), och Norras vändtid i centrum minskar till cirka 3 minuter. 44 invånare
-   vid Bo-Bil får 22 avgångar fler per vardag, medan 24 vid Vikingagränd får 22 färre. Nyttan är liten i förhållande
-   till omvägen. Förlusten vid Vikingagränd kan mildras med hållplatsen N3 söder om Maxinge från kapitel 3.
+5. **UA 3 – Linje Norra via Bo-Bil** ryms med fem fordon. Norras norra slinga körs baklänges, så att bussen når
+   både Bo-Bil och Maxinge (hållplats bara för södergående buss) utan att vända. Varvet blir 379 m kortare
+   (−8 fordonskm per vardag). 44 invånare vid Bo-Bil får 22 avgångar fler per vardag, medan 24 vid Vikingagränd får
+   22 färre. Priset är längre restid: Centrum – Maxinge på förmiddagen tar cirka 14 i stället för 8 minuter, och
+   totalt blir restiden cirka 181 resenärsminuter längre per vardag. Förlusten vid Vikingagränd kan mildras med
+   hållplatsen N3 söder om Maxinge från kapitel 3.
 6. **UA 4 – Linje Västra–Östra via flygplatsen.** Att bara förlänga Västra är uteslutet, eftersom det kräver ett sjätte fordon.
    Det enda rimliga är en genomgående linje Västra–Östra. Längs vägarna är omvägen 1,7 km och cirka 5 minuter per tur.
    Huvudalternativet ger 16 av 20 turer med fem fordon och precis 5 minuter i centrum, och Solberget behålls

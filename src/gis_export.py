@@ -529,8 +529,8 @@ def b4():
     v_1a = kedja(vm[:k + 2]) + [fg[(ni, ny)]['xy'], fg[(ny, ni)]['xy']] + kedja(vm[k + 1:])
     v_1b = kedja(vm[:k + 1]) + [V.planerad_vag(), fg[(ny, ni)]['xy']] + kedja(vm[k + 1:])
     o_ = kedja(om)
-    bobil_id = '9025302000003501'; iv = nm.index('9025302000063201')
-    n_ny = kedja(nm[:iv]) + [fg[(nm[iv - 1], bobil_id)]['xy'], fg[(bobil_id, nm[iv + 1])]['xy']] + kedja(nm[iv + 1:])
+    u3 = json.load(open(P / 'b4_ua3_slinga.json', encoding='utf-8'))      # UA 3: norra slingan baklänges via Bo-Bil
+    n_ny = [np.array(g) for g in u3['geometri_ny']]
     po, ka = '9025302000035802', '9025302000025902'
     ip = vm.index(po); assert vm[ip + 1] == ka
     v_4 = kedja(vm[:ip + 1]) + [fg[(po, 'FLYGPLATSEN')]['xy'], fg[('FLYGPLATSEN', ka)]['xy']] + kedja(vm[ip + 1:])
@@ -561,8 +561,8 @@ def b4():
             '>'.join(V.PLANERAD_VAG)),
            ('2', 'Ö', fs['2']['titel'], 'Huvudalternativ: alla 20 turer', fs['2']['delta_min_per_tur'], o_,
             'OSRM' if osrm else 'raka streck', ''),
-           ('3', 'N', fs['3']['titel'], 'Huvudalternativ: alla 22 turer', fs['3']['delta_min_per_tur'], n_ny,
-            vag([(nm[iv - 1], bobil_id), (bobil_id, nm[iv + 1])]), ''),
+           ('3', 'N', fs['3']['titel'], 'Huvudalternativ: alla 22 turer, norra slingan baklänges via Bo-Bil', fs['3']['delta_min_per_tur'], n_ny,
+            'OSRM' if osrm else 'delvis schematisk', ''),
            ('4', 'V–Ö', fs['4']['titel'], f"Huvudalternativ: V och Ö sammanslagna ({krav}); "
             f"{o4['turer_med_andring']} av 20 V-turer via flygplatsen (+{fs['4']['delta_min_per_tur']:g} min/tur); "
             f"UA 4Y: bara de {ny4} flygturerna".replace('.', ','), fs['4']['delta_min_per_tur'], v_4 + o_,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""UA 3 – variant: vänd bara Norras norra slinga (beställaren 2026-11-25).
+"""UA 3 – Norra via Bo-Bil: Norras norra slinga körs baklänges (beställaren 2026-11-25).
 
 Norra kör som i dag ut från Centrum via Polishuset till Vedhuggsvägen och hem via Sjukhuset – Yrkesgymnasiet. Den norra
 slingan körs baklänges: Vedhuggsvägen – Nabben – Lemlandsvägen – Hindersböle – Bolstavägen – Bo-Bil – Michaelsvägen –
@@ -9,7 +9,7 @@ Vikingagränd ersätts av Bo-Bil.
     busslänken Doktorsvägen – Uppgårdsvägen baklänges (stängd för bil i OSRM).
   * Åktid: dagens genomsnittshastighet i Norras varv, +0,5 min uppehåll vid Bo-Bil.
   * Restid: OD-matrisen utlagd på restidsnätet (b4_natverk) med Norras mönster ersatt.
-Utdata: data/processed/b4_ua3_slinga.json, output/kartor/b4_24_norra_slinga.png
+Utdata: data/processed/b4_ua3_slinga.json (läses av b4_ua, b4_kartor och gis_export), output/kartor/b4_24_norra_slinga.png
 """
 import json
 import sys
@@ -87,7 +87,10 @@ def berakna():
            'kortid_idag_min': round(float(n0p['akt'].sum()), 1), 'kortid_ny_min': round(float(akt.sum()), 1),
            'resenarsminuter_vardag': round((j['FM']['resenarsminuter_h'] + j['EM']['resenarsminuter_h']) / 2 * fak, 0),
            'resor_kortare_vardag': round((j['FM']['resor_kortare_h'] + j['EM']['resor_kortare_h']) / 2 * fak, 0),
-           'resor_langre_vardag': round((j['FM']['resor_langre_h'] + j['EM']['resor_langre_h']) / 2 * fak, 0)}
+           'resor_langre_vardag': round((j['FM']['resor_langre_h'] + j['EM']['resor_langre_h']) / 2 * fak, 0),
+           'delta_min': round(float(akt.sum() - n0p['akt'].sum()), 1), 'delta_km': round((sum(L1) - sum(L0)) / 1000, 3),
+           'stopp_ny': list(ny), 'akt_ny': [round(float(a), 3) for a in akt],
+           'geometri_ny': [np.round(g, 1).tolist() for g in g1]}
     json.dump(res, open(P / 'b4_ua3_slinga.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     return res, mon, ny, g0, g1, H
 
@@ -97,7 +100,7 @@ def figur(mon, ny, g0, g1, H):
     fig, axs = plt.subplots(1, 2, figsize=(11.6, 7.2))
     FN = C.FARG_LINJE['N']
     for ax, titel, delar, stopp in ((axs[0], 'I dag – Norra medurs', g0, mon),
-                                    (axs[1], 'Variant – norra slingan baklänges via Bo-Bil', g1, ny)):
+                                    (axs[1], 'UA 3 – norra slingan baklänges via Bo-Bil', g1, ny)):
         K.ny_karta(uts, ax=ax, titel=titel)
         for d in K.sammanfoga(delar, tol=60):
             ax.plot(d[:, 0], d[:, 1], color=FN, lw=3.2, zorder=5, solid_capstyle='round', solid_joinstyle='round',
@@ -127,5 +130,5 @@ def figur(mon, ny, g0, g1, H):
 
 if __name__ == '__main__':
     r, mon, ny, g0, g1, H = berakna()
-    print({k: v for k, v in r.items() if k != 'hallplatsfoljd'})
+    print({k: v for k, v in r.items() if k not in ('hallplatsfoljd', 'stopp_ny', 'akt_ny', 'geometri_ny')})
     print(figur(mon, ny, g0, g1, H))

@@ -191,84 +191,54 @@ def fig_n2():
     return K.spara(fig, 'b4_4_n2_karta.png')
 
 
-def _forskjut(xy, d):
-    """Polylinje förskjuten d m åt höger om färdriktningen (för vägsträckor som körs åt båda hållen)."""
-    t = np.gradient(xy, axis=0); t /= np.maximum(np.hypot(t[:, 0], t[:, 1]), 1e-9)[:, None]
-    return xy + d * np.column_stack([t[:, 1], -t[:, 0]])
-
-
 def fig_bobil():
-    """UA 3: Norra via Bo-Bil. Bussen kommer norrifrån till Maxinge (hållplatsen ligger på västra sidan), vänder
-    i rondellen söder om hållplatsen, kör norrut till rondellen vid Michaelsvägen och österut/söderut till Bo-Bil."""
+    """UA 3: Norra via Bo-Bil. Norras norra slinga körs baklänges: Bolstavägen – Bo-Bil (norrut) – Michaelsvägen –
+    Maxinge (söderut, hållplatsen ligger på västra sidan) – Hjortronstigen. Vikingagränd utgår."""
     import s01_vagdragning as V
-    uts = (107300, 108800, 6685720, 6687280)
-    FN = C.FARG_LINJE['N']
-    fig, ax = plt.subplots(figsize=(7.4, 7.6))
-    K.ny_karta(uts, ax=ax, titel='UA 3 – Norra via Bo-Bil')
     import geopandas as gpd
     import tackningsytor as T
+    uts = (107300, 108800, 6685720, 6687280)
+    FN = C.FARG_LINJE['N']; GRA = '#55534e'
+    fig, ax = plt.subplots(figsize=(7.4, 7.6))
+    K.ny_karta(uts, ax=ax, titel='UA 3 – Norra via Bo-Bil')
     f = T.forandring(gpd.read_file(P / 'b4_systemeffekter_ytor.gpkg', layer='ytor'), '3')
     f = f.explode(index_parts=False); f = f[f.area > 5000]          # bort med små flisor
     for r in f.itertuples():
         c = BATTRE if r.forandring == 'Bättre' else SAMRE
         f[f.forandring == r.forandring].plot(ax=ax, facecolor=to_rgba(c, 0.32), edgecolor=to_rgba(c, 0.7),
                                              linewidth=0.7, zorder=1.5)
-    sg_ = V.segmentgeometri(); fg_ = V.uageometri()
-    mon = list(V.monster_per_linje()['N'][0][0])
-    HJ, MX, VG, BV, BB = mon[mon.index('9025302000031201') - 1], '9025302000031201', '9025302000063201', \
-        '9025302000063301', '9025302000003501'
-    ua = np.vstack([fg_[(MX, BB)]['xy'], fg_[(BB, BV)]['xy'][1:]])
-    n0 = len(fg_[(MX, BB)]['xy']) // 2
-    i0 = int(np.argmin(ua[:n0, 1]))                                 # rondellen söder om Maxinge
-    i1 = i0 + int(np.argmax(ua[i0:, 1] >= 6687070))                 # rondellen vid Michaelsvägen
-    stam = ua[i0:i1 + 1]                                            # rondell syd -> rondell nord
-    rs, rn = ua[i0], ua[i1]
-    ansl = sg_[(HJ, MX)]; ansl = ansl[:int(np.argmax(ansl[:, 1] >= rs[1] - 5)) + 1]
-    bort = np.vstack([sg_[(MX, VG)], sg_[(VG, BV)][1:]]); bort = bort[int(np.argmin(bort[:, 1] > rs[1] - 3)):]
-    # dagens Norra utanför den ändrade delen
-    def stil(lw):
-        return dict(color=FN, lw=lw, solid_capstyle='round', solid_joinstyle='round', zorder=5,
-                    path_effects=[K.pe.Stroke(linewidth=lw + 2.2, foreground='white'), K.pe.Normal()])
-    ovr = [sg_[(a, b)] for a, b in zip(mon[:-1], mon[1:]) if (a, b) in sg_ and (a, b) not in
-           {(HJ, MX), (MX, VG), (VG, BV)}]
-    for d in K.sammanfoga(ovr, tol=60):
-        ax.plot(d[:, 0], d[:, 1], **stil(2.4))
-    ax.plot(bort[:, 0], bort[:, 1], color='#55534e', lw=1.8, ls=(0, (1, 1.5)), zorder=4.5)
-    D = 11.0
-    norr = np.vstack([ansl, _forskjut(stam, D)])                   # norrut på östra sidan
-    soder = _forskjut(stam[::-1], D)                                # söderut förbi hållplatsen (västra sidan)
-    vidare = ua[i1:]                                                # Michaelsvägen – Godbyvägen – Bo-Bil – Bolstavägen
-    for d in (norr, soder, vidare):
-        ax.plot(d[:, 0], d[:, 1], **stil(2.8))
-    for c in (rs, rn):                                              # vändning i rondellerna
-        ax.add_patch(plt.Circle(tuple(c), D, facecolor='none', edgecolor=FN, lw=2.6, zorder=5.2))
-    pil = dict(arrowstyle='-|>', color='#2b1838', lw=0, mutation_scale=12)
-    def pilar(xy, steg, start=None):
-        L = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(xy, axis=0).T))])
-        for dist in np.arange(start or steg / 2, L[-1] - 20, steg):
-            j = min(max(int(np.searchsorted(L, dist)), 1), len(xy) - 1)
-            a, b = xy[j - 1], xy[j]
-            if np.hypot(*(b - a)) > 0.5 and uts[0] < b[0] < uts[1] and uts[2] < b[1] < uts[3]:
-                ax.annotate('', xy=tuple(b), xytext=tuple(a), zorder=6, arrowprops=pil)
-    pilar(norr, 260); pilar(soder, 150, start=95); pilar(vidare, 210)
-    for d in K.sammanfoga(ovr, tol=60):
-        pilar(d, 420)
-    # hållplatser
-    h = HPL[HPL.index.isin(mon) & HPL.x.between(*uts[:2]) & HPL.y.between(*uts[2:])]
-    h = h[h.index != VG]
+    u = json.load(open(P / 'b4_ua3_slinga.json', encoding='utf-8'))
+    sg_ = V.segmentgeometri()
+    MX, VG, BV, BB = '9025302000031201', '9025302000063201', '9025302000063301', '9025302000003502'
+    bort = np.vstack([sg_[(MX, VG)], sg_[(VG, BV)][1:]])
+    k = u['stopp_ny'].index(MX)
+    bort = bort[int(np.argmax(bort[:, 1] < np.array(u['geometri_ny'][k])[:, 1].min() + 5)):]   # söder om vändningen
+    ax.plot(bort[:, 0], bort[:, 1], color=GRA, lw=1.8, ls=(0, (1, 1.5)), zorder=4.5)
+    for d in K.sammanfoga([np.array(g) for g in u['geometri_ny']], tol=60):
+        ax.plot(d[:, 0], d[:, 1], color=FN, lw=2.8, solid_capstyle='round', solid_joinstyle='round', zorder=5,
+                path_effects=[K.pe.Stroke(linewidth=5.0, foreground='white'), K.pe.Normal()])
+        L = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(d, axis=0).T))])
+        for dist in np.arange(100, L[-1], 230):
+            j_ = min(max(int(np.searchsorted(L, dist)), 1), len(d) - 1)
+            a, b = d[j_ - 1], d[j_]
+            if np.hypot(*(b - a)) > 0.5 and uts[0] + 30 < b[0] < uts[1] - 30 and uts[2] + 30 < b[1] < uts[3] - 30:
+                ax.annotate('', xy=tuple(b), xytext=tuple(a), zorder=6,
+                            arrowprops=dict(arrowstyle='-|>', color='#2b1838', lw=0, mutation_scale=12))
+    h = HPL.loc[[x for x in u['stopp_ny'] if x in HPL.index]]
+    h = h[h.x.between(*uts[:2]) & h.y.between(*uts[2:]) & (h.index != BB)]
     ax.scatter(h.x, h.y, s=20, facecolor='white', edgecolor='#1f1f1e', lw=0.8, zorder=7)
     vg, bb = HPL.loc[VG], HPL.loc[BB]
-    ax.scatter([vg.x], [vg.y], s=60, marker='X', color='#55534e', edgecolor='white', lw=0.6, zorder=8)
+    ax.scatter([vg.x], [vg.y], s=60, marker='X', color=GRA, edgecolor='white', lw=0.6, zorder=8)
     ax.scatter([bb.x], [bb.y], s=190, marker='*', color=BLA, edgecolor='white', lw=0.8, zorder=8)
-    namn = {'Maxinge': MX, 'Bo-Bil': BB, 'Vikingagränd': VG, 'Bolstavägen': BV, 'Hjortronstigen': HJ}
-    K.placera_etiketter(ax, [(n, (HPL.loc[k].x, HPL.loc[k].y), 40) for n, k in namn.items()], fontsize=6.8,
+    hj = u['stopp_ny'][k + 1]
+    namn = {'Maxinge': MX, 'Bo-Bil': BB, 'Vikingagränd': VG, 'Bolstavägen': BV, 'Hjortronstigen': hj}
+    K.placera_etiketter(ax, [(n, (HPL.loc[x].x, HPL.loc[x].y), 40) for n, x in namn.items()], fontsize=6.8,
                         undvik=K.punkt_hinder(ax, list(h.x) + [vg.x, bb.x], list(h.y) + [vg.y, bb.y], px=7))
     hnd = [Line2D([], [], color=FN, lw=2.8, label='Norra, UA 3'),
            Line2D([], [], color='#2b1838', lw=0, marker='$→$', markersize=9, label='Körriktning'),
-           Line2D([], [], color='#55534e', lw=1.8, ls=(0, (1, 1.5)), label='Körväg som utgår'),
+           Line2D([], [], color=GRA, lw=1.8, ls=(0, (1, 1.5)), label='Körväg som utgår'),
            Line2D([], [], marker='*', ls='', color=BLA, markeredgecolor='white', markersize=11, label='Bo-Bil, ny hållplats'),
-           Line2D([], [], marker='X', ls='', color='#55534e', markeredgecolor='white', markersize=7,
-                  label='Vikingagränd, utgår'),
+           Line2D([], [], marker='X', ls='', color=GRA, markeredgecolor='white', markersize=7, label='Vikingagränd, utgår'),
            Patch(facecolor=to_rgba(BATTRE, 0.32), edgecolor=BATTRE, label='Bättre tillgänglighet'),
            Patch(facecolor=to_rgba(SAMRE, 0.32), edgecolor=SAMRE, label='Sämre tillgänglighet')]
     K.teckenforklaring(ax, hnd, loc='lower right')

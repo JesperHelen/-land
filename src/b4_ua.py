@@ -403,7 +403,7 @@ def alternativ():
                'titel': TITEL['2'], 'huvud': 'alla',
                'xy': n2, 'hpl_namn': 'N2', 'segment': (HPL['Österkullagatan'], HPL['Kalmarnäs vändplan']),
                'delta': UPPEHALL, 'km_tur': 0.0, 'genomgaende': [('Ö', 'V')]})
-    ut.append({'id': '3', 'namn': 'Linje N via Bo-Bil i stället för Vikingagränd', 'kort': '3 N via Bo-Bil',
+    ut.append({'id': '3', 'namn': 'Linje N via Bo-Bil i stället för Vikingagränd, norra slingan baklänges', 'kort': '3 N via Bo-Bil',
                'titel': TITEL['3'], 'huvud': 'alla',
                'linje': 'N', 'typ': 'byt', 'bort': HPL['Vikingagränd'], 'till': [HPL['Bo-Bil A'], HPL['Bo-Bil B']],
                'delta': None, 'km_tur': None, 'genomgaende': []})
@@ -435,20 +435,22 @@ def stopp_xy():
     return pd.DataFrame({'x': x, 'y': y, 'namn': g.stop_name.values}, index=g.index)
 
 
-def bobil_delta(xy):
-    """Körtidsförändring för N via Bo-Bil, skalad från dagens schemalagda tid Maxinge -> Bolstavägen."""
-    import s01_vagdragning as V
-    t = O.turer(); n = t[t.linje == 'N'].iloc[0]
-    g = D.gtfs()['stop_times']; st = g[g.trip_id == n.trip_id].set_index('stop_id')
-    tid_idag = st.loc[HPL['Bolstavägen'], 't_arr'] - st.loc[HPL['Maxinge'], 't_dep']
-    sg = V.segmentgeometri(); fg = V.uageometri()
-    mx, vg, bv, bb = HPL['Maxinge'], HPL['Vikingagränd'], HPL['Bolstavägen'], HPL['Bo-Bil A']
-    idag = V.langd(sg[(mx, vg)]) + V.langd(sg[(vg, bv)])          # vägavstånd (OSRM)
-    ny = fg[(mx, bb)]['langd_m'] + fg[(bb, bv)]['langd_m']
-    kortare = round(float(tid_idag * (ny / idag - 1)), 1)
-    return {'tid_idag_min': float(tid_idag), 'vag_idag_m': round(idag), 'vag_ny_m': round(ny),
-            'kalla': fg[(mx, bb)]['kalla'], 'kortare_vag_min': kortare, 'uppehall_bobil_min': UPPEHALL,
-            'delta_min': round(kortare + UPPEHALL, 1), 'delta_km': round((ny - idag) / 1000, 2)}
+def bobil_delta(xy=None):
+    """UA 3: Norras norra slinga körs baklänges via Bo-Bil (b4_ua3_slinga.py): väglängd och körtid per varv."""
+    u = json.load(open(P / 'b4_ua3_slinga.json', encoding='utf-8'))
+    return {'variant': 'norra slingan baklänges', 'varv_idag_m': u['varv_idag_m'], 'varv_ny_m': u['varv_ny_m'],
+            'kortid_idag_min': u['kortid_idag_min'], 'kortid_ny_min': u['kortid_ny_min'], 'uppehall_bobil_min': UPPEHALL,
+            'delta_min': u['delta_min'], 'delta_km': u['delta_km']}
+
+
+def ua3_monster(mon0):
+    """Restidsnätets mönster med Norras norra slinga baklänges via Bo-Bil (samma som b4_ua3_slinga)."""
+    u = json.load(open(P / 'b4_ua3_slinga.json', encoding='utf-8'))
+    om = D.hallplatsomraden()['omrade']
+    n0p = max([m for m in mon0 if m['linje'] == 'N'], key=lambda m: len(m['turer']))
+    return [m if m is not n0p else {**m, 'stopp': tuple(u['stopp_ny']),
+                                    'zoner': tuple(om.reindex(u['stopp_ny']).fillna('Bo-Bil')),
+                                    'akt': np.array(u['akt_ny'])} for m in mon0]
 
 
 # ====================================================================== omlopp
@@ -654,6 +656,8 @@ def resenarseffekt(f, zoner, mon0, nat0, andel_turer, extra=None):
         j0 = N.jamfor(nat0, N.Nat(flytta_monster(mon0, f, med_v=False), zoner)) if andel_turer < 1 else j1
         j = {p: {k: andel_turer * j1[p][k] + (1 - andel_turer) * j0[p][k] for k in j1[p]} for p in ('FM', 'EM')}
         return _resenarer_ut(j, 1.0)
+    if f.get('id') == '3':                                     # UA 3: norra slingan baklänges via Bo-Bil
+        return _resenarer_ut(N.jamfor(nat0, N.Nat(ua3_monster(mon0), zoner)), andel_turer)
     mon1 = []
     for m in mon0:
         m = dict(m); m['akt'] = m['akt'].copy()
@@ -793,11 +797,12 @@ def geometri(f, trafikerar, xy, fg, sg):
         return ut
     v = xy.loc[f['bort'], ['x', 'y']].to_numpy(float)
     bo = xy.loc[f['till'], ['x', 'y']].mean().to_numpy(float)
-    mx, bv, bb = HPL['Maxinge'], HPL['Bolstavägen'], HPL['Bo-Bil A']
+    mx, bv = HPL['Maxinge'], HPL['Bolstavägen']
     xy_ = lambda a: xy.loc[a, ['x', 'y']].to_numpy(float)
     g_gammal = ml(sg.get((mx, f['bort']), np.array([xy_(mx), v])), sg.get((f['bort'], bv), np.array([v, xy_(bv)])))
-    ny_ = [fg[(mx, bb)], fg[(bb, bv)]]
-    vag_ny = 'OSRM' if all(x['kalla'] == 'osrm' for x in ny_) else 'schematisk'
+    u = json.load(open(P / 'b4_ua3_slinga.json', encoding='utf-8'))
+    k = u['stopp_ny'].index(bv)                                  # Bolstavägen -> Bo-Bil -> Maxinge
+    ny_ = [np.array(u['geometri_ny'][k]), np.array(u['geometri_ny'][k + 1])]
     vag_gl = 'OSRM' if V.kalla_text().startswith('Linjernas') else 'schematisk'
     return [{'ua': '3', 'objekt': 'hållplats utgår för linje N', 'namn': 'Vikingagränd', 'linje': 'N', 'avgangar': 0,
              'geometry': Point(*v)},
@@ -805,8 +810,9 @@ def geometri(f, trafikerar, xy, fg, sg):
              'geometry': Point(*bo)},
             {'ua': '3', 'objekt': 'körväg utgår', 'vagdragning': vag_gl, 'namn': 'Maxinge – Vikingagränd – Bolstavägen',
              'linje': 'N', 'avgangar': 0, 'planerad_del': '', 'geometry': g_gammal},
-            {'ua': '3', 'objekt': 'ny körväg, befintlig väg', 'vagdragning': vag_ny, 'namn': 'Maxinge – Bo-Bil – Bolstavägen',
-             'linje': 'N', 'avgangar': n, 'planerad_del': '', 'geometry': ml(ny_[0]['xy'], ny_[1]['xy'])}]
+            {'ua': '3', 'objekt': 'ny körväg, befintlig väg (norra slingan baklänges)', 'vagdragning': 'OSRM',
+             'namn': 'Bolstavägen – Bo-Bil – Michaelsvägen – Maxinge', 'linje': 'N', 'avgangar': n, 'planerad_del': '',
+             'geometry': ml(*ny_)}]
 
 
 # ====================================================================== huvudflöde

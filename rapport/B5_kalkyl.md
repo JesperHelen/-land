@@ -12,8 +12,8 @@
 > - **UA 1b – Möckelö Strand ny via förlängd Norrgårdsvägen ★:** Västra och Östra sammanslagna, 16 av 20 turer:
 >   +25 fordonskm per vardag, cirka +6 500 per år; inga fler fordon.
 > - **UA 2 – N2 på linje Östra ★:** ±0 fordonskm (hållplatsen ligger på linjens väg); inga fler fordon.
-> - **UA 3 – Linje Norra via Bo-Bil ★:** +10 fordonskm per vardag, eftersom bussen måste vända vid Maxinge för att
->   nå Bo-Bil (450 m per tur); inga fler fordon.
+> - **UA 3 – Linje Norra via Bo-Bil ★:** −8 fordonskm per vardag, cirka −2 200 per år, eftersom den norra slingan
+>   körs baklänges och varvet blir 379 m kortare; inga fler fordon.
 > - **UA 4 – Linje Västra–Östra via flygplatsen:**
 >   - ★ Västra och Östra sammanslagna (16 av 20 turer): +27 fordonskm per vardag, cirka +7 200 per år; inga fler fordon;
 >   - UA 4Y med de tre flygturerna: +5 fordonskm per vardag; inga fler fordon;
@@ -52,7 +52,7 @@ Varje UA för sig.*
 | UA 1a ★ dagens vägar, Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +44 | +11 500 |
 | UA 1b ★ förlängd Norrgårdsvägen, Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +25 | +6 500 |
 | UA 2 ★ N2 på linje Östra | 5 | Nej | ±0 | ±0 |
-| UA 3 ★ Linje Norra via Bo-Bil | 5 | Nej | +10 | +2 600 |
+| UA 3 ★ Linje Norra via Bo-Bil, norra slingan baklänges | 5 | Nej | −8 | −2 200 |
 | UA 4 flygplatsen, alla 20 turer – utesluten | 6 | **Ja, +1** | +34 | +9 000 |
 | UA 4 ★ flygplatsen, Västra och Östra sammanslagna (16 av 20 turer) | 5 | Nej | +27 | +7 200 |
 | UA 4 flygplatsen, dito + Solberget indragen (16 av 20) | 5 | Nej | +27 | +7 200 |
