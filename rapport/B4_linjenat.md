@@ -367,6 +367,30 @@ eftermiddagen blir 9 minuter kortare, men totalt får resenärerna cirka 105 res
 vardag (mot 30 i UA 3). Att köra medurs på förmiddagen och moturs på eftermiddagen ger längre restid i båda
 perioderna. Att vända linjen rekommenderas därför inte.
 
+**Vända bara den norra slingan?** Norra kan också behålla sitt varv kring centrum (ut via Polishuset, hem via
+Sjukhuset och Yrkesgymnasiet) och köra bara den norra slingan baklänges: Vedhuggsvägen – Nabben – Hindersböle –
+Bolstavägen – Bo-Bil – Michaelsvägen – Maxinge – Doktorsvägen – Sjukhuset (figur 4.24). Bussen når då Bo-Bil och Maxinge
+söderut utan att vända, och varvet blir 379 m kortare per tur (−8 fordonskm per vardag). Men resenärerna förlorar
+mest på den här varianten: Centrum – Maxinge på förmiddagen, Norras största flöde, går då via Nabben och Hindersböle
+och tar cirka 14 i stället för 8 minuter, och resor från Maxinge mot Hindersböle och Solberget blir längre. Hemresan
+Maxinge – Centrum blir cirka 6 minuter kortare. Totalt blir restiden 181 resenärsminuter längre per vardag.
+
+*Tabell. Tre sätt att nå Bo-Bil med linje Norra.*
+
+| | Väg per tur | Körtid per tur | Restid, resenärsminuter per vardag |
+|---|---|---|---|
+| UA 3 – medurs, vänder vid Maxinge | +450 m | +0,9 min | +30 |
+| Hela Norra baklänges | −64 m | ±0 | +105 |
+| Bara norra slingan baklänges | −379 m | −0,3 min | +181 |
+
+Den baklängesvända slingan är alltså bäst för bussen men sämst för resenärerna. Nätmodellen räknar bara med
+stadslinjerna; om landsbygdslinjerna mellan centrum och Maxinge kan användas med samma biljett blir förlusten för
+resan Centrum – Maxinge mindre.
+
+![Figur 4.24](../output/kartor/b4_24_norra_slinga.png)
+
+*Figur 4.24. Linje Norra i dag och med den norra slingan baklänges via Bo-Bil. Pilarna visar körriktningen.*
+
 **Bedömning.** Alternativet ryms med fem fordon, men omvägen kring Maxinge tar det mesta av linje Norras marginal i
 centrum och ger längre restid för dem som åker förbi. Vinsten är att 44 invånare vid Bo-Bil får fler avgångar,
 medan 23 vid Vikingagränd förlorar hållplatsen. Alternativet ger därför liten nytta i förhållande till omvägen.

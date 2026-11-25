@@ -362,6 +362,30 @@ vända, och delsträckan Bolstavägen – Maxinge – Hjortronstigen blir 64 m k
 flöden går medurs: Centrum – Maxinge på förmiddagen skulle ta 14 i stället för 8 minuter. Totalt får resenärerna
 cirka 105 resenärsminuter längre restid per vardag (mot 30 i UA 3), så att vända linjen rekommenderas inte.
 
+**Vända bara den norra slingan?** Norra kan också behålla sitt varv kring centrum (ut via Polishuset, hem via
+Sjukhuset och Yrkesgymnasiet) och köra bara den norra slingan baklänges: Vedhuggsvägen – Nabben – Hindersböle –
+Bolstavägen – Bo-Bil – Michaelsvägen – Maxinge – Doktorsvägen – Sjukhuset (figur 7b). Bussen når då Bo-Bil och Maxinge
+söderut utan att vända, och varvet blir 379 m kortare per tur (−8 fordonskm per vardag). Men resenärerna förlorar
+mest på den här varianten: Centrum – Maxinge på förmiddagen, Norras största flöde, går då via Nabben och Hindersböle
+och tar cirka 14 i stället för 8 minuter, och resor från Maxinge mot Hindersböle och Solberget blir längre. Hemresan
+Maxinge – Centrum blir cirka 6 minuter kortare. Totalt blir restiden 181 resenärsminuter längre per vardag.
+
+*Tabell. Tre sätt att nå Bo-Bil med linje Norra.*
+
+| | Väg per tur | Körtid per tur | Restid, resenärsminuter per vardag |
+|---|---|---|---|
+| UA 3 – medurs, vänder vid Maxinge | +450 m | +0,9 min | +30 |
+| Hela Norra baklänges | −64 m | ±0 | +105 |
+| Bara norra slingan baklänges | −379 m | −0,3 min | +181 |
+
+Den baklängesvända slingan är alltså bäst för bussen men sämst för resenärerna. Nätmodellen räknar bara med
+stadslinjerna; om landsbygdslinjerna mellan centrum och Maxinge kan användas med samma biljett blir förlusten för
+resan Centrum – Maxinge mindre.
+
+![UA 3, norra slingan baklänges](../output/kartor/b4_24_norra_slinga.png)
+
+*Figur 7b. Linje Norra i dag och med den norra slingan baklänges via Bo-Bil. Pilarna visar körriktningen.*
+
 **Bedömning.** Alternativet ryms, men omvägen tar det mesta av linje Norras marginal i centrum, och nyttan är liten
 i förhållande till omvägen. Den verkliga körtiden genom rondellerna bör mätas innan alternativet går vidare.
 

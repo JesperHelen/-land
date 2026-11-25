@@ -259,6 +259,9 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
       köpcentrum, hamnar, fritidsanläggningar, arbetsplats- och handelsområden ur OpenStreetMap (poi, landuse).
 - [x] **Principskiss över dagens nät** (`src/a0_principskiss.py`, a0_principskiss.png; PM figur 0, B4 figur 4.0):
       schematisk, linjefärger, körriktningar (dubbelpil = båda riktningarna).
+- [x] **UA 3 – vända bara norra slingan** (`src/b4_ua3_slinga.py`, figur b4_24; B4 figur 4.24, PM figur 7b):
+      varvet -379 m/tur, körtid 25.7 min (i dag 26.0), Bo-Bil utan vändning,
+      men +181 resenärsmin./vardag (Centrum → Maxinge 8 → 14 min). Jämförelsetabell i UA 3-avsnitten.
 - [ ] B6 Färdigställ PM
 
 ## Att ta ställning till vid granskningen av Fas A
