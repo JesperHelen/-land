@@ -5,6 +5,8 @@ output/*
 !output/kartor/
 # GIS-lager för QGIS versionshanteras
 !output/gis/
+# Presentationen och dess kartor versionshanteras
+!output/ppt/
 data/od_long.csv
 
 # Python / Jupyter
