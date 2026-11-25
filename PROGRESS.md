@@ -313,3 +313,6 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   Michaelsvägen – Maxinge söderut, ingen vändning. b4_ua3_slinga körs före b4_ua och är källa för UA 3 (körtid
   −0,3 min, −379 m/tur, −8 fordonskm/vardag, +181 resenärsmin., 5 fordon). Figur 4.6/PM 7 omritad, B4, B5, PM,
   GIS uppdaterade. Vändningen vid Maxinge (+450 m, +30) och hela Norra baklänges (+105) redovisas som jämförelse.
+- 2026-11-26: Presentation (avstämningsmöte): bild 10–13 (UA 1–4) omgjorda med nyckeltal, kort text och nya kartor
+  (src/ppt_bilder.py → output/ppt), ny bild 14 med kostnadstabell (fordon, fordonskm per vardag och år, andel av
+  dagens cirka 342 000 fordonskm per år). output/ppt/Avstamningsmote_261126.pptx
