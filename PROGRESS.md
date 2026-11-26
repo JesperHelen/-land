@@ -337,3 +337,9 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   – Möckelö Strand ny – Sviby bro – Västra macken – Centrum), 27,4 km, 50 min, 10 min reglering (83 % körtid).
   1 060 inv. får stadsbuss inom 400 m. Steg 1: 6 fordon, +411 fordonskm/vardag (+110 000/år, +32 %), restid −14.
   Steg 2: 7 fordon, +822 (+220 000/år, +64 %), restid −84. Kort ring (35 min) redovisas som förkastad.
+- 2026-11-26: UA 8 omarbetat efter beställarens kritik (lös problemet: kyrkbyn saknar användbar förbindelse med
+  Mariehamn; slinga under 27 min för halvtimmestrafik). Jomalapendeln Centrum – Nya Godbyvägen – Dalkarbyvägen –
+  Vikingahallen – Jomala kyrka och tillbaka via Maxinge: 14,1 km, 25,9 min (OSRM × 1,05 + 0,3 min/uppehåll), varje
+  halvtimme 06:20–20:50, en buss: 6 fordon, +424 fordonskm/vardag (+113 300/år, +33 %), restid −69, kyrkbyn
+  29 → 59 avg. B: varannan tur hem via Jomala skola – Vesterkalmare – Nabben (30,3 min), 6 fordon men ~2 min
+  vändtid, +460 fordonskm, Vesterkalmare ~90 inv. Österkalmare ryms inte. Ringlinjen och Norra via kyrkbyn förkastade.

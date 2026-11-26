@@ -27,9 +27,9 @@
 > - **UA 6 – Linje Norra i båda riktningarna (kräver extra buss):** +257 fordonskm per vardag och ett extra fordon.
 > - **UA 7 – Kvällstrafik efter efterfrågan:** −3 fordonskm per vardag (Västras tre kvällsturer körs som Norra
 >   moturs); inga fler fordon. Därtill kostnaden för några anropsstyrda resor på Västra per kväll.
-> - **UA 8 – Jomalaringen, stomsatsning (kräver extra bussar):**
->   - steg 1, medurs varje timme: +411 fordonskm per vardag, cirka +110 000 per år (+32 %), och ett extra fordon;
->   - steg 2, åt båda hållen: +822 fordonskm per vardag, cirka +220 000 per år (+64 %), och två extra fordon.
+> - **UA 8 – Jomalapendeln (kräver extra buss):** pendel Centrum – Maxinge – Jomala kyrkby varje halvtimme:
+>   +424 fordonskm per vardag, cirka +113 000 per år (+33 %), och ett extra fordon. Med varannan tur via
+>   Vesterkalmare +460 fordonskm per vardag.
 >
 > Kilometrarna är vägavstånd längs gatunätet (OSRM).
 
@@ -66,8 +66,8 @@ Varje UA för sig.*
 | UA 5 variant: bara linje Norra rakt på (svängen utan buss) | 5 | Nej | −4 | −1 000 |
 | UA 6 linje Norra i båda riktningarna (22 turer moturs, kräver extra buss) | 6 | **Ja, +1** | +257 | +67 200 |
 | UA 7 kvällstrafik: Norra åt båda hållen efter kl. 18 i stället för Västra | 5 | Nej | −3 | −900 |
-| UA 8 Jomalaringen steg 1, medurs varje timme (kräver extra buss) | 6 | **Ja, +1** | +411 | +109 900 |
-| UA 8 Jomalaringen steg 2, åt båda hållen varje timme (kräver extra bussar) | 7 | **Ja, +2** | +822 | +219 700 |
+| UA 8A Jomalapendeln varje halvtimme (kräver extra buss) | 6 | **Ja, +1** | +424 | +113 300 |
+| UA 8B Jomalapendeln, varannan tur via Vesterkalmare (kräver extra buss) | 6 | **Ja, +1** | +460 | +122 900 |
 
 **Extra turer för flygen (UA 4).** Tre flyg nås inte av dagens Västra-turer. De extra turerna är Västra-turer via
 flygplatsen (32 minuter, 14,5 km längs vägarna) och körs av ett fordon som står stilla, så inget extra fordon

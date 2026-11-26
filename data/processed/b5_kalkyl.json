@@ -202,28 +202,28 @@
    "battre_inv": 0
   },
   {
-   "scenario": "8_1",
-   "namn": "UA 8 Jomalaringen steg 1, medurs varje timme",
+   "scenario": "8A",
+   "namn": "UA 8A Jomalapendeln varje halvtimme",
    "huvudalternativ": false,
    "fordon": 6,
    "delta_fordon": 1,
-   "fordonskm_vardag": 1698.0,
-   "delta_km_vardag": 411.0,
-   "delta_km_ar": 109900,
-   "ny_tackning_inv": 1061,
-   "battre_inv": 1110
+   "fordonskm_vardag": 1710.9,
+   "delta_km_vardag": 423.9,
+   "delta_km_ar": 113300,
+   "ny_tackning_inv": 252,
+   "battre_inv": 252
   },
   {
-   "scenario": "8_2",
-   "namn": "UA 8 Jomalaringen steg 2, åt båda hållen varje timme",
+   "scenario": "8B",
+   "namn": "UA 8B Jomalapendeln, varannan tur via Vesterkalmare",
    "huvudalternativ": false,
-   "fordon": 7,
-   "delta_fordon": 2,
-   "fordonskm_vardag": 2108.9,
-   "delta_km_vardag": 821.9,
-   "delta_km_ar": 219700,
-   "ny_tackning_inv": 1061,
-   "battre_inv": 1529
+   "fordon": 6,
+   "delta_fordon": 1,
+   "fordonskm_vardag": 1746.8,
+   "delta_km_vardag": 459.8,
+   "delta_km_ar": 122900,
+   "ny_tackning_inv": 252,
+   "battre_inv": 252
   }
  ],
  "flyg_extraturer": [
