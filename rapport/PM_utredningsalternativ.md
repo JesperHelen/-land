@@ -39,6 +39,7 @@ Linjerna och utredningsalternativens körvägar följer gatunätet (OSRM, OpenSt
 | **UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten** (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 125 inv. fler avgångar (upp till +22), 11 färre (−17); Norra 6 i stället för 4 min i centrum | −1 km, nej | – |
 | **UA 6 – Linje Norra i båda riktningarna** (kräver extra buss) | Norra även moturs, var 30:e minut | 22 turer till | Restid −164 resenärsmin. per vardag; 888 inv. får minst 30 avg./vardag | +257 km, ja (+1 fordon) | – |
 | **UA 7 – Kvällstrafik efter efterfrågan** | Norra åt båda hållen efter kl. 18 i stället för Västra | 3 turer flyttas | Restid −16 resenärsmin. per kväll; cirka 4 Västra-resenärer per kväll får anropsstyrd resa | −3 km, nej | – |
+| **UA 8 – Stadsbuss till Jomala kyrkby** (kräver extra buss) | B: Jomalalinjen varje timme, genomgående med Järsö | 15 turer + 4 Järsöturer | Kyrkbyn 27 → 42 avg./vardag; restid −56 resenärsmin. per vardag (A: +271) | +373 km, ja (+1 fordon) (A: +174 km, +1) | – |
 
 I UA 1a, 1b och 4 kör samma fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 
@@ -188,6 +189,7 @@ varje stapel en tur.*
 | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten | Västra +2 min, Norra −2 min | **★ Västra och Östra sammanslagna: 17 av 20 Västra-turer.** Dagens drift: 16 av 20. Bara Norra rakt på: alla Norra-turer. | 79 / 0 (bara Norra rakt på: 0 / 0) | **★ −1 km, inga fler fordon** (bara Norra rakt på −4 km) |
 | UA 6 – Linje Norra i båda riktningarna (kräver extra buss) | – | Kräver ett extra fordon (22 turer moturs) | 888 inv. får minst 30 avg./vardag; restid −164 resenärsmin. per vardag | +257 km, +1 fordon |
 | UA 7 – Kvällstrafik efter efterfrågan | – | ★ Ryms; omlopp 208 kör Östra/Norra moturs efter kl. 18 | Restid −16 resenärsmin. per kväll; cirka 4 Västra-resenärer per kväll får anropsstyrd resa | −3 km, inga fler fordon |
+| UA 8 – Stadsbuss till Jomala kyrkby (kräver extra buss) | A: Norra +13 min | Kräver ett extra fordon i båda förslagen | Kyrkbyn 27 → 49 (A) eller 42 (B) avg./vardag; restid +271 (A) eller −56 (B) resenärsmin. per vardag | A +174 km, B +373 km; +1 fordon |
 
 ### 3.1 UA 1a och UA 1b – Möckelö Strand ny
 
@@ -723,6 +725,57 @@ för Västras få kvällsresenärer, till exempel anropsstyrd trafik.
 *Figur 10g. UA 7 – kvällstrafik efter kl. 18: Norra åt båda hållen varje timme, Södra och Östra som i dag, Västra
 anropsstyrd. Cirklarna visar påstigande efter kl. 18.*
 
+### 3.9 UA 8 – Stadsbuss till Jomala kyrkby (kräver extra buss)
+
+**Introduktion.** Beställaren vill pröva stadsbuss till Jomala kyrkby som ett kreativt förslag. Ett extra fordon
+godtas, om omloppen optimeras om. Kyrkbyn ligger cirka 2,7 km norr om Maxinge, med Jomala kyrka, Vikingahallen,
+Jomala skola och Rönngården. I dag går bara landsbygdslinjerna 2–4 dit, med 14 avgångar per vardag och riktning;
+Torget – Jomala kyrka tar cirka 13 minuter. Cirka 260 invånare bor inom 400 m från kyrkbyns hållplatser.
+
+**A – Linje Norra via Jomala kyrkby.** Alla 22 Norraturer kör efter Hjortronstigen norrut till kyrkbyn, vänder
+norr om Rönngården och kommer söderut till Maxinge, där hållplatsen nås i rätt riktning. Därefter som i dag.
+
+- Varvet blir 39 i stället för 26 minuter. Tre bussar kör Norra och Södra om vartannat, så att förarna fortsatt
+  växlar inom paret: 6 fordon (+1) och +174 fordonskm per vardag.
+- Kyrkbyn får 49 i stället för 27 avgångar per vardag.
+- Alla som åker förbi Maxinge får 13 minuter längre resa (Centrum – Maxinge 21 i stället för 8 minuter), totalt
+  cirka 270 resenärsminuter längre restid per vardag.
+
+**B – Jomalalinjen, genomgående med Järsö.** En ny linje går varje timme 06:20–20:20: Centrum – Polishuset –
+Doktorsvägen – Jomala kyrkby – Maxinge – Sjukhuset – Yrkesgymnasiet – Centrum (33 minuter). Två bussar kör Järsö
+och Jomala om vartannat, så att man kan sitta kvar genom centrum mellan Järsö och Jomala. Extrabussens lediga tid
+ger också Järsö timtrafik mitt på dagen och på kvällen (fyra turer till). Norra är som i dag.
+
+- 6 fordon (+1) och +373 fordonskm per vardag (+254 utan de extra Järsöturerna). Norra/Södra och Västra/Östra som
+  i dag.
+- Kyrkbyn får 42 i stället för 27 avgångar per vardag.
+- Dagens resenärer vinner cirka 56 resenärsminuter per vardag, eftersom Jomalalinjen ger en direkt väg
+  Maxinge – Sjukhuset. Ingen får längre restid.
+
+*Tabell. UA 8 – två förslag (typvardag).*
+
+| | A – Norra via kyrkbyn | B – Jomalalinjen + Järsö |
+|---|---|---|
+| Avgångar i kyrkbyn | 27 → 49 | 27 → 42 |
+| Fordon | 6 (+1) | 6 (+1) |
+| Fordonskm per vardag / år | +174 / cirka +45 500 | +373 / cirka +97 600 |
+| Restid dagens resenärer (resenärsmin. per vardag) | +271 | −56 |
+
+**Bedömning.** Efterfrågan till kyrkbyn är okänd, eftersom resorna dit inte finns i stadstrafikens data, och
+landsbygdslinjerna går redan dit lika snabbt. A rekommenderas inte, eftersom Norra blir 13 minuter längre för
+alla som åker förbi Maxinge. B kostar mer körning men ger dagens resenärer kortare restid och Järsö timtrafik över
+hela dagen. Går ett förslag vidare bör det vara B, gärna med Jomala kommun som medfinansiär och samordnad biljett
+mot landsbygdslinjerna, och efter en mätning av resandet till kyrkbyn.
+
+![UA 8, Jomala kyrkby](../output/kartor/b4_25_jomala_karta.png)
+
+*Figur 10h. UA 8 – stadsbuss till Jomala kyrkby: A Norra via kyrkbyn, B Jomalalinjen. Pilarna visar
+körriktningen.*
+
+![UA 8, omlopp](../output/kartor/b4_26_jomala_omlopp.png)
+
+*Figur 10i. Omlopp i dag, med A och med B (K = Jomalalinjen).*
+
 ## 4 Systemeffekter
 
 Systemeffekterna redovisas för varje UA för sig (figur 11, 12 och 12b). Täckningen gäller invånarna i
@@ -807,9 +860,11 @@ lördagstrafiken.
 | UA 5 variant: bara linje Norra rakt på | 5 | Nej | −4 | −1 000 |
 | UA 6 linje Norra i båda riktningarna (kräver extra buss) | 6 | **Ja, +1** | +257 | +67 200 |
 | UA 7 kvällstrafik: Norra åt båda hållen efter kl. 18 i stället för Västra | 5 | Nej | −3 | −900 |
+| UA 8A Norra via Jomala kyrkby (kräver extra buss) | 6 | **Ja, +1** | +174 | +45 500 |
+| UA 8B Jomalalinjen, genomgående med Järsö (kräver extra buss) | 6 | **Ja, +1** | +373 | +97 600 |
 
 Alla huvudalternativ ryms med dagens fem fordon. Bara de uteslutna driftformerna, där alla turer på linje Västra
-förlängs med dagens tidtabell, kräver ett sjätte fordon. UA 6 prövas utanför ramen och kräver ett extra fordon.
+förlängs med dagens tidtabell, kräver ett sjätte fordon. UA 6 och UA 8 prövas utanför ramen och kräver ett extra fordon.
 
 **Förlängningen av Norrgårdsvägen (UA 1b)** ger 19 fordonskm färre per vardag än UA 1a (cirka 5 000 per år),
 och båda ger 16 av 20 turer med fem fordon. Vägen ger dessutom:
@@ -870,6 +925,10 @@ fler fordon.*
     kvällens största resenärsgrupp (Maxinge – Centrum), utan fler fordon eller fordonskilometer. Västras cirka 4
     kvällsresenärer behöver anropsstyrd trafik. Att i stället göra varannan Västra-tur till Norra moturs ger ingen
     vinst.
+12. **UA 8 – Stadsbuss till Jomala kyrkby** kräver ett extra fordon. Att låta Norra gå via kyrkbyn (A) gör linjen
+    13 minuter längre för alla som åker förbi Maxinge. En ny Jomalalinjen varje timme, genomgående med Järsö (B),
+    ger kyrkbyn 42 i stället för 27 avgångar, kortare restid för dagens resenärer och Järsö timtrafik över hela
+    dagen, men kostar +373 fordonskm per vardag. Efterfrågan till kyrkbyn bör mätas innan förslaget går vidare.
 
 ## 7 Osäkerheter och fortsatt arbete
 

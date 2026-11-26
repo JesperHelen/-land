@@ -1,0 +1,80 @@
+{
+ "v_land_kmh": 35.7,
+ "landsbygd_idag": {
+  "avgangar_per_riktning": 14,
+  "torget_jomala_kyrka_min": 13
+ },
+ "stadsbuss_centrum_jomala_kyrka_min": 13.5,
+ "idag": {
+  "fordon": 5,
+  "km": 1287.0,
+  "omloppstid_h": 61.43,
+  "byten_mellan_grupper": 0
+ },
+ "A": {
+  "turer": 22,
+  "varv_min_idag": 26.0,
+  "varv_min": 39.3,
+  "delta_min_per_tur": 13.3,
+  "delta_km_per_tur": 7.9,
+  "fordon": 6,
+  "fler_fordon": 1,
+  "fordonskm_vardag": 173.9,
+  "omloppstid_h": 74.81,
+  "vandningar_under_rek": 2,
+  "byten_enligt_norm": 73,
+  "samma_linje": 0,
+  "byten_mellan_grupper": 2,
+  "resenarsminuter_vardag": 271.0,
+  "resor_langre_vardag": 27.0,
+  "resor_kortare_vardag": 0.0,
+  "tackning": {
+   "invanare_400m": 258,
+   "avgangar_idag": 27,
+   "avgangar_ny": 49,
+   "invanare_battre_klass": 166,
+   "invanare_minst_30_ny": 258,
+   "invanare_minst_30_idag": 91
+  },
+  "centrum_maxinge_min": [
+   8.0,
+   21.3
+  ],
+  "ovanpa_ua3": {
+   "resenarsminuter_vardag": 410.0,
+   "resor_langre_vardag": 56.0,
+   "resor_kortare_vardag": 26.0
+  },
+  "fordonskm_ar": 45500
+ },
+ "B": {
+  "turer_K": 15,
+  "turer_J_extra": 4,
+  "kortid_K_min": 32.7,
+  "km_K": 16.9,
+  "fordon": 6,
+  "fler_fordon": 1,
+  "fordonskm_vardag": 372.8,
+  "omloppstid_h": 77.41,
+  "utan_jarso_extra": {
+   "fordon": 6,
+   "fordonskm_vardag": 253.5
+  },
+  "genomgaende_jarso_jomala": 8,
+  "byten_mellan_grupper": 2,
+  "bussar_jarso_jomala": 2,
+  "vandningar_under_rek": 1,
+  "resenarsminuter_vardag": -56.0,
+  "resor_langre_vardag": 0.0,
+  "resor_kortare_vardag": 14.0,
+  "tackning": {
+   "invanare_400m": 258,
+   "avgangar_idag": 27,
+   "avgangar_ny": 42,
+   "invanare_battre_klass": 166,
+   "invanare_minst_30_ny": 253,
+   "invanare_minst_30_idag": 91
+  },
+  "fordonskm_ar": 97600
+ }
+}

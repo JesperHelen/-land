@@ -319,3 +319,10 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
 - 2026-11-26: Presentationen: den extra kostnadsbilden borttagen; i stället fylls bilden "Analys och
   konsekvensbeskrivning" i med beställarens nio UA-namn: resenärsnytta, tidtabellspåverkan, genomförbarhet,
   kommentar samt fordon och fordonskm per vardag och år, med raden "I dag, totalt" (≈ 342 000 fordonskm per år).
+- 2026-11-26: UA 8 – stadsbuss till Jomala kyrkby (kreativt förslag, +1 fordon godtas), src/b4_ua8_jomala.py.
+  A: alla 22 Norraturer via kyrkbyn (Hjortronstigen → Vikingahallen – Jomala kyrka – Rönngården → Maxinge), varv
+  26 → 39 min, 6 fordon, +174 fordonskm/vardag, restid +271 resenärsmin. (Centrum – Maxinge 8 → 21 min); ovanpå UA 3
+  +410. B: ny Jomalalinjen (K) varje timme 06:20–20:20, 33 min, genomgående med Järsö på två bussar, Järsö +4 turer
+  (timtrafik hela dagen), 6 fordon, +373 fordonskm/vardag (+254 utan Järsöturerna), restid −56. Omlopp: min antal
+  fordon med straff 30 min för byte mellan linjegrupper (förarna växlar inom paren). Kyrkbyn: cirka 260 inv. inom
+  400 m, avgångar 27 → 49 (A) / 42 (B). B4 4.10 (4.11–4.13 omnumrerade), PM 3.9 + slutsats 12, B5, figur 4.25–4.26.

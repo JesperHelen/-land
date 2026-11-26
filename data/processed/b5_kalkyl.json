@@ -200,6 +200,30 @@
    "delta_km_ar": -900,
    "ny_tackning_inv": 0,
    "battre_inv": 0
+  },
+  {
+   "scenario": "8A",
+   "namn": "UA 8A Norra via Jomala kyrkby",
+   "huvudalternativ": false,
+   "fordon": 6,
+   "delta_fordon": 1,
+   "fordonskm_vardag": 1460.9,
+   "delta_km_vardag": 173.9,
+   "delta_km_ar": 45500,
+   "ny_tackning_inv": 0,
+   "battre_inv": 166
+  },
+  {
+   "scenario": "8B",
+   "namn": "UA 8B Jomalalinjen, genomgående med Järsö",
+   "huvudalternativ": false,
+   "fordon": 6,
+   "delta_fordon": 1,
+   "fordonskm_vardag": 1659.8,
+   "delta_km_vardag": 372.8,
+   "delta_km_ar": 97600,
+   "ny_tackning_inv": 0,
+   "battre_inv": 166
   }
  ],
  "flyg_extraturer": [
