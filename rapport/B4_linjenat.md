@@ -34,7 +34,7 @@
 > | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 5 (nej) | −1 | – |
 > | UA 6 – Linje Norra i båda riktningarna (kräver extra buss) | Norra även moturs, var 30:e minut | 22 turer till | 6 (ja, +1) | +257 | – |
 > | UA 7 – Kvällstrafik efter efterfrågan | Norra åt båda hållen efter kl. 18 i stället för Västra | 3 turer flyttas | 5 (nej) | −3 | – |
-> | UA 8 – Jomalaringen, stomsatsning (kräver extra bussar) | Steg 1: ny ringlinje medurs varje timme; steg 2: åt båda hållen | 15 / 30 turer | 6 (ja, +1) / 7 (ja, +2) | +290 / +580 | – |
+> | UA 8 – Jomalaringen, stomsatsning (kräver extra bussar) | Ny ringlinje via Jomala kyrkby, flygplatsen och Möckelö Strand ny; steg 1 medurs varje timme, steg 2 åt båda hållen | 15 / 30 turer | 6 (ja, +1) / 7 (ja, +2) | +411 / +822 | – |
 >
 > I UA 1a, 1b och 4 kör fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 >
@@ -951,66 +951,72 @@ anropsstyrd. Cirklarna visar påstigande efter kl. 18.*
 ## 4.10 UA 8 – Jomalaringen, en stomsatsning mot Jomala (kräver extra bussar)
 
 **Introduktion.** Beställaren efterfrågar ett kreativt förslag med stadsbuss till Jomala kyrkby (2026-11-26).
-Landskapsregeringen vill se en stomsatsning och en vision: linjen får vara en slinga men ska täcka nya områden.
-Med dagens resande, några hundra resor per vardag, motiveras en sådan satsning inte av efterfrågan i dag, utan av
-att Mariehamn och södra Jomala växer ihop. Cirka 3 400 invånare i norra Mariehamn och södra Jomala saknar i dag
-stadsbuss inom 400 m. De största områdena är Österkalmare, Jomala kyrkby och Jomala skola samt Dalkarby. Där går
-i dag bara landsbygdslinjerna, med oregelbundna tider.
+Landskapsregeringen vill se en stomsatsning och en vision: linjen får vara en slinga men ska täcka nya områden, och
+bussen ska användas effektivt. Med dagens resande, några hundra resor per vardag, motiveras en sådan satsning inte
+av efterfrågan i dag, utan av att Mariehamn och södra Jomala växer ihop. Cirka 3 400 invånare i norra Mariehamn och
+södra Jomala saknar i dag stadsbuss inom 400 m. De största områdena är Österkalmare, Jomala kyrkby och Jomala skola
+samt Dalkarby. Där går i dag bara landsbygdslinjerna, med oregelbundna tider.
 
-**Utformning.** Jomalaringen är en ny ringlinje (19 km, cirka 35 minuter per varv) som binder ihop norra Mariehamn
-och södra Jomala (figur 4.25):
+**Utformning.** Jomalaringen är en ny ringlinje, 27 km och 50 minuter per varv (figur 4.25):
 
-> Centrum – Nabben – Kalmsta – **Österkalmare – Jomala skola – Jomala kyrkby (församlingshemmet, Vikingahallen) –
-> Dalkarby** – Källarvägen – Åsvägen – Västra macken – Centrum
+> Centrum – Nabben – Kalmsta – **Österkalmare – Jomala skola – Jomala kyrkby – Dalkarby** – Källarvägen –
+> **flygplatsen** – Posten – Lönnhagsvägen – **Möckelö Strand ny** – Sviby bro – Västra macken – Centrum
 
 - **Ny norra båge (12 km)** genom områden utan stadsbuss i dag. Nya hållplatser antas i bebyggelsen längs bågen,
   ungefär var 500:e meter.
-- **Kopplas ihop med de andra linjerna:** avgångar i pulsen i centrum (:20 medurs, :50 moturs) och byten mot
-  Östra i Kalmsta, mot Västra vid Källarvägen och Åsvägen, nära Sjukhuset vid Västra macken och mot
+- **Flygplatsen och Möckelö Strand ny ingår i ringen.** Därmed nås målen för UA 1 och UA 4 utan att Västra och
+  Östra behöver slås ihop.
+- **Effektiv buss:** varvet tar 50 minuter, så bussen går runt en gång i timmen med 10 minuters reglering i
+  centrum och kör cirka 83 % av tiden. En första, kortare ring utan flygplatsen och Möckelö Strand (35 minuter)
+  förkastades, eftersom bussen då stod still 25 minuter i timmen.
+- **Kopplas ihop med de andra linjerna:** avgångar i pulsen i centrum (:20 medurs, :50 moturs) och byten mot Östra
+  i Kalmsta, mot Västra vid Källarvägen, Posten och Lönnhagsvägen, vid Västra macken nära Sjukhuset och mot
   landsbygdslinjerna 1–6 i Jomala kyrkby.
 - **Steg 1:** medurs varje timme 06:20–20:20 (15 turer), med ett extra fordon.
 - **Steg 2:** dessutom moturs varje timme 06:50–20:50 (30 turer totalt), med två extra fordon.
 
 **Resultat.**
 
-- **Nya områden:** cirka 860 invånare får stadsbuss inom 400 m, att jämföra med 178 för Möckelö Strand ny (UA 1).
-  Längs bågen bor cirka 1 400 invånare. I steg 2 får alla dessa minst 30 avgångar per vardag, mot cirka 500 i dag.
+- **Nya områden:** cirka 1 060 invånare får stadsbuss inom 400 m, inklusive Möckelö Strand ny och flygplatsen.
+  Längs ringens nya delar bor cirka 1 600 invånare, och i steg 2 får alla dessa minst 30 avgångar per vardag, mot
+  cirka 500 i dag.
 - **Omlopp (figur 4.26):** i steg 1 kör en buss ringen hela dagen, och övriga omlopp är som i dag. I steg 2 kör två
   bussar ringen, delvis tillsammans med Norra/Södra och Västra/Östra. Förarna växlar fortsatt inom paren; antalet
   bussar är det minsta som tidtabellen kräver.
 - **Kostnad:**
-  - steg 1: 6 fordon (+1) och +290 fordonskm per vardag, cirka +77 600 per år (+23 % mot i dag);
-  - steg 2: 7 fordon (+2) och +580 fordonskm per vardag, cirka +155 000 per år (+45 %).
-- **Restid för dagens resenärer:** oförändrad i steg 1. I steg 2 cirka 76 resenärsminuter kortare per vardag, för
-  32 resor, eftersom ringen åt båda hållen ger nya direkta förbindelser, till exempel mellan Kalmsta och Västra
-  macken. Resor till och från de nya områdena finns inte i stadstrafikens data och ingår inte.
+  - steg 1: 6 fordon (+1) och +411 fordonskm per vardag, cirka +110 000 per år (+32 % mot i dag);
+  - steg 2: 7 fordon (+2) och +822 fordonskm per vardag, cirka +220 000 per år (+64 %).
+- **Restid för dagens resenärer:** cirka 14 resenärsminuter kortare per vardag i steg 1 och 84 i steg 2, eftersom
+  ringen ger nya direkta förbindelser, till exempel mellan Kalmsta och Västra macken. Resor till och från de nya
+  områdena finns inte i stadstrafikens data och ingår inte.
 
-**Prövade enklare varianter.** Först prövades två enklare sätt att nå kyrkbyn med högst ett extra fordon:
+**Prövade varianter.** Före ringen prövades två enklare sätt att nå kyrkbyn med ett extra fordon:
 
-- **A, Norra via kyrkbyn:** alla 22 Norraturer kör från Hjortronstigen till kyrkbyn och tillbaka till Maxinge.
-  Varvet blir 13 minuter längre, så Centrum – Maxinge tar 21 i stället för 8 minuter.
-- **B, Jomalalinje på Norras gator:** Centrum – Doktorsvägen – kyrkbyn – Maxinge – Sjukhuset – Centrum, varje
-  timme, genomgående med Järsö, och Järsö får timtrafik hela dagen.
+- **A, Norra via kyrkbyn:** alla 22 Norraturer går till kyrkbyn. Varvet blir 13 minuter längre, så Centrum – Maxinge
+  tar 21 i stället för 8 minuter.
+- **B, Jomalalinje på Norras gator:** genomgående med Järsö, varje timme.
 
-Ingen av dem täcker nya områden utanför kyrkbyn.
+Båda når bara kyrkbyn.
 
 *Tabell. UA 8 – Jomalaringen och de prövade varianterna (typvardag).*
 
-| | Jomalaringen steg 1 | Jomalaringen steg 2 | A – Norra via kyrkbyn | B – Jomalalinje på Norras gator |
-|---|---|---|---|---|
-| Nya invånare med stadsbuss inom 400 m | cirka 860 | cirka 860 | cirka 260 (kyrkbyn) | cirka 260 (kyrkbyn) |
-| Turer per vardag | 15 | 30 | 22 (Norra) | 15 (+4 Järsö) |
-| Fordon | 6 (+1) | 7 (+2) | 6 (+1) | 6 (+1) |
-| Fordonskm per vardag | +290 | +580 | +174 | +373 |
-| Fordonskm per år | cirka +77 600 | cirka +155 000 | cirka +45 500 | cirka +97 600 |
-| Restid dagens resenärer, resenärsminuter per vardag | ±0 | −76 | +271 | −56 |
+| | Ringen steg 1 | Ringen steg 2 | Kort ring (förkastad) | A – Norra via kyrkbyn | B – Jomalalinje på Norras gator |
+|---|---|---|---|---|---|
+| Nya invånare med stadsbuss inom 400 m | cirka 1 060 | cirka 1 060 | cirka 860 | cirka 260 | cirka 260 |
+| Varv / tur | 50 min | 50 min | 35 min | Norra 39 min | 33 min |
+| Bussen kör, andel av tiden | cirka 83 % | cirka 83 % | cirka 58 % | – | – |
+| Fordon | 6 (+1) | 7 (+2) | 6 (+1) | 6 (+1) | 6 (+1) |
+| Fordonskm per vardag | +411 | +822 | +290 | +174 | +373 |
+| Fordonskm per år | cirka +110 000 | cirka +220 000 | cirka +77 600 | cirka +45 500 | cirka +97 600 |
+| Restid dagens resenärer, resenärsminuter per vardag | −14 | −84 | ±0 | +271 | −56 |
 
-**Bedömning.** Jomalaringen är en stomsatsning och ett visionsalternativ. Den ger stadsbuss till cirka
-860 invånare som saknar den i dag, knyter ihop Mariehamn och södra Jomala och kopplas ihop med alla stadslinjer.
-Resandet i dag motiverar inte kostnaden, men ringen kan införas stegvis: först medurs varje timme med en extra
-buss, och åt båda hållen när resandet växer. Den bör planeras tillsammans med Jomala kommun (medfinansiering,
-hållplatser och skolskjuts), och biljetterna bör samordnas med landsbygdslinjerna. Av de enklare varianterna
-rekommenderas inte A, eftersom Norra blir 13 minuter längre. B täcker bara kyrkbyn.
+**Bedömning.** Jomalaringen är en stomsatsning och ett visionsalternativ. Den ger stadsbuss till cirka 1 060
+invånare som saknar den i dag, når både flygplatsen och Möckelö Strand ny och knyter ihop Mariehamn och södra
+Jomala med alla stadslinjer. Bussen används effektivt (50 minuters körning per timme). Resandet i dag motiverar
+inte kostnaden, men ringen kan införas stegvis: först medurs varje timme med en extra buss, och åt båda hållen när
+resandet växer. Den bör planeras tillsammans med Jomala kommun (medfinansiering, hållplatser och skolskjuts), och
+biljetterna bör samordnas med landsbygdslinjerna. På sikt kan Västra förenklas, eftersom ringen tar över
+Möckelö Strand och Posten.
 
 ![Figur 4.25](../output/kartor/b4_25_jomala_karta.png)
 

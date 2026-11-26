@@ -5,13 +5,17 @@ slinga men ska täcka nya områden).
 
 Jomalaringen (R/Q) är en ny ringlinje som binder ihop norra Mariehamn och södra Jomala:
   Centrum – Nabben – Kalmsta (Östras väg) – Österkalmare – Jomala skola – Jomala församlingshem – Vikingahallen
-  – Dalkarby – Källarvägen – Dalkullavägen – Åsvägen – Västra macken – Centrum (Västras väg), 19 km, cirka 37 min.
+  – Dalkarby – Källarvägen – flygplatsen – Posten – Lönnhagsvägen – Möckelö Strand ny – Sviby bro – Västra macken
+  – Centrum (Västras väg baklänges), 27 km, cirka 50 min.
 Den nya norra bågen (12 km) går genom områden som i dag saknar stadsbuss: Österkalmare, Jomala skola och kyrkbyn,
-och Dalkarby. Byten: Centrum (pulsen :20/:50), Kalmsta (Östra), Källarvägen och Åsvägen (Västra), Västra macken
+och Dalkarby. Flygplatsen (UA 4) och Möckelö Strand ny (UA 1) ingår, så att bussen går runt en gång i timmen med
+cirka 10 min reglering (en kortare ring på 35 min gav 25 min stillastående per timme och förkastades).
+Byten: Centrum (pulsen :20/:50), Kalmsta (Östra), Källarvägen, Posten och Lönnhagsvägen (Västra), Västra macken
 (nära Sjukhuset) och Jomala kyrkby (landsbygdslinjerna 1–6).
   Steg 1  medurs varje timme 06:20–20:20 (ett extra fordon).
   Steg 2  dessutom moturs varje timme 06:50–20:50 (två extra fordon).
-Nya hållplatser antas längs bågen i bebyggelsen (cirka var 500:e meter); invånare inom 400 m från bågen räknas.
+Nya hållplatser antas längs bågen i bebyggelsen (cirka var 500:e meter); invånare inom 400 m från bågen, flygplatsen
+och Möckelö Strand ny räknas.
 
 Jämförelsevarianter (prövade först, redovisas i tabell):
   A  Linje Norra via Jomala kyrkby (alla 22 turer; Hjortronstigen → kyrkbyn → Maxinge).
@@ -203,22 +207,37 @@ def berakna():
         res[x]['fordonskm_ar'] = int(round(res[x]['fordonskm_vardag'] * 250 + 5 * 52 * (
             res['A']['delta_km_per_tur'] if x == 'A' else res['B']['km_K']), -2))
 
-    # --- Jomalaringen
-    lm = V.monster_per_linje()
-    oo, vv = list(lm['Ö'][0][0]), list(lm['V'][0][0])
-    kal, kv = oo[2], vv[vv.index('9025302000025902')]
-    ut, hem = oo[:3], vv[vv.index(kv):]
+    # --- Jomalaringen: Centrum – Kalmsta – norra bågen – Källarvägen – flygplatsen – Posten – Möckelö Strand ny –
+    #     Sviby bro – Västra macken – Centrum (medurs)
+    lm = V.monster_per_linje(); fg = V.uageometri(); xyv = V.alla_xy()[0]
+    oo = list(lm['Ö'][0][0])
+    nv = max([m for m in mon0 if m['linje'] == 'V'], key=lambda m: len(m['turer'])); vs = list(nv['stopp'])
+    no = max([m for m in mon0 if m['linje'] == 'Ö'], key=lambda m: len(m['turer']))
+    kal, kv, po, nog = oo[2], '9025302000025902', '9025302000035802', '9025302000067701'
+    assert vs[10] == po and vs[11] == kv and nog in (vs[6], vs[8])
     bear = {s_: '180,60' for s_ in BAGE[2:]}; bear[kv] = '180,60'
     bseq = [kal] + BAGE + [kv]
     bage = [_osrm(tuple(H.loc[a, ['x', 'y']]), tuple(H.loc[b, ['x', 'y']]), bear.get(a, ''), bear.get(b, ''))
             for a, b in zip(bseq[:-1], bseq[1:])]
-    geoR = [sg[(a, b)] for a, b in zip(ut[:-1], ut[1:])] + bage + [sg[(a, b)] for a, b in zip(hem[:-1], hem[1:])]
+    rev = lambda a, b: sg[(a, b)][::-1]
+    ua4 = json.load(open(P / 'b4_ua.json', encoding='utf-8'))['ua']['4']['delta_min_per_tur']
+    t_flyg = ua4 + float(nv['akt'][10])                      # Posten – flygplatsen – Källarvägen (UA 4)
+    delar = ([(oo[k], oo[k + 1], sg[(oo[k], oo[k + 1])], float(no['akt'][k])) for k in range(2)]
+             + [(a, b, g_, L(g_) / 1000 / v_land) for (a, b), g_ in zip(zip(bseq[:-1], bseq[1:]), bage)]
+             + [(kv, 'FLYGPLATSEN', fg[('FLYGPLATSEN', kv)]['xy'][::-1], t_flyg / 2),
+                ('FLYGPLATSEN', po, fg[(po, 'FLYGPLATSEN')]['xy'][::-1], t_flyg / 2),
+                (po, vs[9], rev(vs[9], vs[10]), float(nv['akt'][9])),
+                (vs[9], vs[8], rev(vs[8], vs[9]), float(nv['akt'][8])),
+                (vs[8], 'NY_MOCKELO', fg[(nog, 'NY_MOCKELO')]['xy'], 2.0 + 0.5),
+                ('NY_MOCKELO', vs[6], fg[('NY_MOCKELO', nog)]['xy'], 2.0),
+                (vs[6], vs[5], rev(vs[5], vs[6]), float(nv['akt'][5])),
+                (vs[5], vs[4], rev(vs[4], vs[5]), float(nv['akt'][4])),
+                (vs[4], vs[18], rev(vs[3], vs[4]), float(nv['akt'][3]))]
+             + [(vs[k], vs[k + 1], sg[(vs[k], vs[k + 1])], float(nv['akt'][k])) for k in range(18, len(vs) - 1)])
+    geoR = [d_[2] for d_ in delar]
+    stR = [delar[0][0]] + [d_[1] for d_ in delar]
+    aktR = [d_[3] for d_ in delar]
     kmR = sum(L(g) for g in geoR) / 1000; km_bage = sum(L(g) for g in bage) / 1000
-    no = max([m for m in mon0 if m['linje'] == 'Ö'], key=lambda m: len(m['turer']))
-    nv = max([m for m in mon0 if m['linje'] == 'V'], key=lambda m: len(m['turer']))
-    io, iv = list(no['stopp']).index(kal), list(nv['stopp']).index(kv)
-    stR = list(no['stopp'][:io + 1]) + BAGE + list(nv['stopp'][iv:])
-    aktR = list(no['akt'][:io]) + [L(g) / 1000 / v_land for g in bage] + list(nv['akt'][iv:])
     tR = float(sum(aktR))
     pR = {'linje': 'R', 'stopp': tuple(stR), 'zoner': tuple(om.reindex(stR).fillna('?')), 'akt': np.array(aktR),
           'turer': []}
@@ -236,7 +255,7 @@ def berakna():
     from scipy.spatial import cKDTree
     stad = H[H.linjer.astype(str).str.contains('|'.join(C.STADSLINJER))]
     d_stad, _ = cKDTree(stad[['x', 'y']].to_numpy()).query(pkt[['x', 'y']].to_numpy())
-    bxy = np.vstack(bage)
+    bxy = np.vstack(bage + [np.array([V.FLYGPLATSEN_XY, xyv['NY_MOCKELO'][:2]])])
     d_bage, _ = cKDTree(bxy).query(pkt[['x', 'y']].to_numpy())
     nya = pkt[(d_bage <= C.TACKNING_M) & (d_stad > C.TACKNING_M)]
     langs = pkt[d_bage <= C.TACKNING_M]
@@ -248,7 +267,8 @@ def berakna():
                 'invanare_minst_30_idag': round(float(langs.bef[langs.avg_alla >= 30].sum()))}
     ar = lambda dag, n_lor: int(round(dag * 250 + 5 * n_lor * 52 * kmR, -2))
     res['R'] = {'km_ring': round(kmR, 1), 'km_bage': round(km_bage, 1), 'kortid_min': round(tR, 1),
-                'hallplatser': [H.loc[x, 'namn'] for x in stR],
+                'hallplatser': [H.loc[x, 'namn'] if x in H.index else x for x in stR],
+                'reglering_per_varv_min': round(60 - tR, 1), 'andel_kortid': round(tR / 60 * 100, 0),
                 'steg1': {'turer': len(R_AVG), 'fordon': nR1['fordon'], 'fler_fordon': nR1['fordon'] - nt0['fordon'],
                           'fordonskm_vardag': round(nR1['km'] - nt0['km'], 1), 'omloppstid_h': nR1['omloppstid_h'],
                           'byten_mellan_grupper': blandat(plR1), **effekt(mon0 + [pR]),
@@ -281,8 +301,8 @@ def _rita_linje(ax, delar, farg, uts, steg=420, lw=3.0):
 
 def karta(geoR, bage, nya):
     H = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0, dtype={'stop_id': str})
-    uts = (105900, 111900, 6682900, 6690000)
-    fig, ax = plt.subplots(figsize=(9.6, 11.4))
+    uts = (104700, 111900, 6682900, 6690000)
+    fig, ax = plt.subplots(figsize=(10.6, 10.6))
     K.ny_karta(uts, ax=ax, titel='UA 8 – Jomalaringen')
     ax.scatter(nya.x, nya.y, s=3, color=FARG_R, alpha=0.18, lw=0, zorder=1.5)
     K.rita_linjer(ax, alpha=0.45, lw=1.5, zorder=3, etikett=False)
@@ -297,16 +317,24 @@ def karta(geoR, bage, nya):
                 ax.annotate('', xy=tuple(b), xytext=tuple(a), zorder=6,
                             arrowprops=dict(arrowstyle='-|>', color='#8a8780', lw=0, mutation_scale=10))
     namn = ['Centrum, Nygatan', 'Nabben', 'Kalmsta', 'Österkalmare', 'Jomala skola', 'Vikingahallen', 'Jomala kyrka',
-            'Källarvägen', 'Åsvägen', 'Västra macken', 'Sjukhuset', 'Maxinge']
+            'Källarvägen', 'Posten', 'Sviby bro', 'Västra macken', 'Maxinge', 'Lönnhagsvägen']
     g = H[H.namn.isin(namn) & H.x.between(*uts[:2]) & H.y.between(*uts[2:])].groupby('namn')[['x', 'y']].mean()
     ax.scatter(g.x, g.y, s=20, facecolor='white', edgecolor='#1f1f1e', lw=0.8, zorder=7)
-    K.placera_etiketter(ax, [(n.replace('Centrum, Nygatan', 'Centrum'), (r.x, r.y), 40) for n, r in g.iterrows()],
+    import s01_vagdragning as V
+    xyv = V.alla_xy()[0]
+    extra = {'Flygplatsen': V.FLYGPLATSEN_XY, 'Möckelö Strand ny': xyv['NY_MOCKELO'][:2]}
+    ax.scatter([p_[0] for p_ in extra.values()], [p_[1] for p_ in extra.values()], s=150, marker='*', color='#1c5cab',
+               edgecolor='white', lw=0.8, zorder=8)
+    K.placera_etiketter(ax, [(n.replace('Centrum, Nygatan', 'Centrum'), (r.x, r.y), 40) for n, r in g.iterrows()]
+                        + [(n, p_, 60) for n, p_ in extra.items()],
                         fontsize=6.9, undvik=K.punkt_hinder(ax, g.x, g.y, px=6))
     K.skalstock(ax, langd_m=1000, loc=(0.05, 0.03))
     hnd = [Line2D([], [], color=FARG_R, lw=3.4, label='Jomalaringen'),
            Line2D([], [], color='#2b1838', lw=0, marker='$→$', markersize=9, label='Medurs (steg 1)'),
            Line2D([], [], color='#8a8780', lw=0, marker='$→$', markersize=9, label='Moturs (steg 2)'),
            Line2D([], [], color='#8a8780', lw=1.5, alpha=0.6, label='Stadslinjer i dag'),
+           Line2D([], [], marker='*', ls='', color='#1c5cab', markeredgecolor='white', markersize=11,
+                  label='Flygplatsen och Möckelö Strand ny'),
            Patch(facecolor=FARG_R, alpha=0.25, label='Nya områden med stadsbuss')]
     K.teckenforklaring(ax, hnd, loc='lower right')
     return K.spara(fig, 'b4_25_jomala_karta.png')

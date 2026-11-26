@@ -78,9 +78,9 @@
   "fordonskm_ar": 97600
  },
  "R": {
-  "km_ring": 19.3,
+  "km_ring": 27.4,
   "km_bage": 12.1,
-  "kortid_min": 35.1,
+  "kortid_min": 50.0,
   "hallplatser": [
    "Centrum, Nygatan",
    "Nabben",
@@ -90,59 +90,63 @@
    "Jomala församlingshem",
    "Vikingahallen",
    "Källarvägen",
-   "Dalkullavägen",
-   "Kasbergsvägen",
-   "Länsmansgränd",
-   "Åbrinken",
-   "Kasbrinken",
-   "Åsvägen",
+   "FLYGPLATSEN",
+   "Posten",
+   "Lönnhagsvägen",
+   "Norrgårdsvägen",
+   "NY_MOCKELO",
+   "Norrgårdsvägen",
+   "Lönnhagsvägen",
+   "Sviby bro",
    "Västra macken",
    "Tekniska verken",
    "Ålandsplan",
    "Savoy",
    "Centrum, Nygatan"
   ],
+  "reglering_per_varv_min": 10.0,
+  "andel_kortid": 83.0,
   "steg1": {
    "turer": 15,
    "fordon": 6,
    "fler_fordon": 1,
-   "fordonskm_vardag": 290.2,
-   "omloppstid_h": 76.02,
+   "fordonskm_vardag": 411.0,
+   "omloppstid_h": 76.27,
    "byten_mellan_grupper": 2,
-   "resenarsminuter_vardag": 0.0,
+   "resenarsminuter_vardag": -14.0,
    "resor_langre_vardag": 0.0,
-   "resor_kortare_vardag": 0.0,
+   "resor_kortare_vardag": 7.0,
    "tackning": {
-    "invanare_far_stadsbuss": 862,
-    "invanare_langs_bagen": 1395,
-    "invanare_battre_klass": 899,
-    "invanare_minst_30_ny": 692,
+    "invanare_far_stadsbuss": 1061,
+    "invanare_langs_bagen": 1606,
+    "invanare_battre_klass": 1110,
+    "invanare_minst_30_ny": 703,
     "invanare_minst_30_idag": 498
    },
-   "fordonskm_ar": 77600
+   "fordonskm_ar": 109900
   },
   "steg2": {
    "turer": 30,
    "fordon": 7,
    "fler_fordon": 2,
-   "fordonskm_vardag": 580.4,
-   "omloppstid_h": 90.6,
+   "fordonskm_vardag": 821.9,
+   "omloppstid_h": 91.1,
    "byten_mellan_grupper": 4,
-   "resenarsminuter_vardag": -76.0,
+   "resenarsminuter_vardag": -84.0,
    "resor_langre_vardag": 0.0,
-   "resor_kortare_vardag": 32.0,
+   "resor_kortare_vardag": 38.0,
    "tackning": {
-    "invanare_far_stadsbuss": 862,
-    "invanare_langs_bagen": 1395,
-    "invanare_battre_klass": 1319,
-    "invanare_minst_30_ny": 1395,
+    "invanare_far_stadsbuss": 1061,
+    "invanare_langs_bagen": 1606,
+    "invanare_battre_klass": 1529,
+    "invanare_minst_30_ny": 1606,
     "invanare_minst_30_idag": 498
    },
-   "fordonskm_ar": 155200
+   "fordonskm_ar": 219700
   },
   "andel_av_idag_ar": {
-   "steg1": 23.0,
-   "steg2": 45.0
+   "steg1": 32.0,
+   "steg2": 64.0
   }
  }
 }

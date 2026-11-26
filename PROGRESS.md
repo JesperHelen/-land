@@ -332,3 +332,8 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   35 min, ny norra båge 12 km. Cirka 860 invånare får stadsbuss inom 400 m. Steg 1 medurs varje timme: 6 fordon,
   +290 fordonskm/vardag (+77 600/år, +23 %), restid ±0. Steg 2 båda hållen: 7 fordon, +580 (+155 200/år, +45 %),
   restid −76. A (Norra via kyrkbyn) och B (Jomalalinje på Norras gator) redovisas som prövade varianter.
+- 2026-11-26: Jomalaringen förlängd för effektiv bussanvändning (beställaren: 25 min stillastående per timme är
+  ohållbart): ringen tar nu även flygplatsen och Möckelö Strand ny (Källarvägen – flygplatsen – Posten – Lönnhagsvägen
+  – Möckelö Strand ny – Sviby bro – Västra macken – Centrum), 27,4 km, 50 min, 10 min reglering (83 % körtid).
+  1 060 inv. får stadsbuss inom 400 m. Steg 1: 6 fordon, +411 fordonskm/vardag (+110 000/år, +32 %), restid −14.
+  Steg 2: 7 fordon, +822 (+220 000/år, +64 %), restid −84. Kort ring (35 min) redovisas som förkastad.

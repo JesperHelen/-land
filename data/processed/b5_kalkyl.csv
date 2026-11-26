@@ -15,5 +15,5 @@ scenario,namn,huvudalternativ,fordon,delta_fordon,fordonskm_vardag,delta_km_vard
 flyg_extra,UA 4 extra turer för flyg som dagens tidtabell inte når,False,5,0,1330.5,43.5,10900,0,0
 6,UA 6 linje Norra i båda riktningarna (+22 turer moturs),False,6,1,1543.5,256.5,67200,0,888
 7,UA 7 kvällstrafik: Norra i båda riktningarna efter kl. 18 i stället för Västra,False,5,0,1283.6,-3.4,-900,0,0
-8_1,"UA 8 Jomalaringen steg 1, medurs varje timme",False,6,1,1577.2,290.2,77600,862,899
-8_2,"UA 8 Jomalaringen steg 2, åt båda hållen varje timme",False,7,2,1867.4,580.4,155200,862,1319
+8_1,"UA 8 Jomalaringen steg 1, medurs varje timme",False,6,1,1698.0,411.0,109900,1061,1110
+8_2,"UA 8 Jomalaringen steg 2, åt båda hållen varje timme",False,7,2,2108.9,821.9,219700,1061,1529
