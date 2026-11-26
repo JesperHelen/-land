@@ -1,30 +1,32 @@
 # -*- coding: utf-8 -*-
-"""UA 8 – stadsbuss till Jomala kyrkby (beställaren 2026-11-26: kreativt förslag, ett extra fordon godtas om
-omloppen optimeras om).
+"""UA 8 – stomsatsning: Jomalaringen (beställaren 2026-11-26: kreativt förslag till Jomala kyrkby; ett extra fordon
+godtas om omloppen optimeras om; landskapsregeringen vill se en stomsatsning och en vision – linjen får vara en
+slinga men ska täcka nya områden).
 
-Jomala kyrkby ligger cirka 2,7 km norr om Maxinge längs Godbyvägen. I dag trafikeras orten bara av
-landsbygdslinjerna 2–4 (14 avgångar per vardag och riktning, oregelbundna tider; Torget – Jomala kyrka cirka 13 min).
-Hållplatser i kyrkbyn (norrut / söderut): Vikingahallen, Jomala församlingshem, Jomala kyrka och Rönngården; bussen
-vänder norr om Rönngården.
+Jomalaringen (R/Q) är en ny ringlinje som binder ihop norra Mariehamn och södra Jomala:
+  Centrum – Nabben – Kalmsta (Östras väg) – Österkalmare – Jomala skola – Jomala församlingshem – Vikingahallen
+  – Dalkarby – Källarvägen – Dalkullavägen – Åsvägen – Västra macken – Centrum (Västras väg), 19 km, cirka 37 min.
+Den nya norra bågen (12 km) går genom områden som i dag saknar stadsbuss: Österkalmare, Jomala skola och kyrkbyn,
+och Dalkarby. Byten: Centrum (pulsen :20/:50), Kalmsta (Östra), Källarvägen och Åsvägen (Västra), Västra macken
+(nära Sjukhuset) och Jomala kyrkby (landsbygdslinjerna 1–6).
+  Steg 1  medurs varje timme 06:20–20:20 (ett extra fordon).
+  Steg 2  dessutom moturs varje timme 06:50–20:50 (två extra fordon).
+Nya hållplatser antas längs bågen i bebyggelsen (cirka var 500:e meter); invånare inom 400 m från bågen räknas.
 
-  A  Linje Norra via Jomala kyrkby. Alla 22 turer: efter Hjortronstigen kör Norra Nya Godbyvägen norrut till
-     kyrkbyn, vänder vid Rönngården och kommer söderut till Maxinge (hållplatsen på västra sidan nås i rätt
-     riktning). Därefter som i dag (Vikingagränd – Bolstavägen – Hindersböle – Nabben – Sjukhuset – Centrum).
-     Varianten ovanpå UA 3 (norra slingan baklänges) prövas också; den ger längre restid och redovisas bara.
-  B  Ny Jomalalinje (K), genomgående med Järsö. Centrum – Polishuset – Doktorsvägen – Hjortronstigen – Jomala
-     kyrkby – Maxinge – Sjukhuset – Yrkesgymnasiet – Centrum, varje timme 06:20–20:20. Bussarna kör Järsö och
-     Jomala om vartannat, så att resenärer från Järsö kan sitta kvar genom centrum mot Jomala. Med extrabussens
-     lediga tid blir Järsö också timtrafik mitt på dagen och på kvällen (fyra extra turer). Norra som i dag.
+Jämförelsevarianter (prövade först, redovisas i tabell):
+  A  Linje Norra via Jomala kyrkby (alla 22 turer; Hjortronstigen → kyrkbyn → Maxinge).
+  B  Jomalalinje på Norras gator (Centrum – Doktorsvägen – kyrkbyn – Maxinge – Sjukhuset – Centrum), genomgående
+     med Järsö, varje timme, och Järsö timtrafik hela dagen.
 
   * Väglängd: dagens segment (OSRM) och nya delsträckor med OSRM, med körriktning (bearings) vid hållplatserna.
   * Körtid: nya delsträckor med Järsös tidtabellshastighet (landsväg, inkl. uppehåll), övrigt enligt tidtabellen.
-  * Omlopp: b4_omlopp.bygg_omlopp (minsta antal fordon, normparen S ↔ N och Ö ↔ V, i B även Järsö ↔ Jomala).
-    Byte mellan linjegrupperna (Norra/Södra, Västra/Östra, Järsö/Jomala) straffas med BYTE_GRUPP_STRAFF, så att
-    förarna växlar inom paren som i dag; fordonsantalet minimeras först. Avgångstiderna i centrum ligger fast;
-    A förlänger Norras turer, B lägger till turer.
-  * Restid för dagens resenärer: OD-matrisen på restidsnätet (b4_natverk). Resor till och från kyrkbyn finns inte
-    i stadstrafikens data och ingår inte.
-  * Turtäthet: invånare (50 m-punkter, a2_delpunkter) inom 400 m från kyrkbyns hållplatser, avgångar alla linjer.
+  * Omlopp: b4_omlopp.bygg_omlopp (minsta antal fordon, normparen S ↔ N och Ö ↔ V, Järsö ↔ Jomala, ringens två
+    riktningar). Byte mellan linjegrupperna straffas med BYTE_GRUPP_STRAFF, så att förarna växlar inom paren som i
+    dag; fordonsantalet minimeras först. Avgångstiderna i centrum ligger fast.
+  * Restid för dagens resenärer: OD-matrisen på restidsnätet (b4_natverk). Resor till och från de nya områdena
+    finns inte i stadstrafikens data och ingår inte.
+  * Täckning: invånare (50 m-punkter, a2_delpunkter) inom 400 m från den nya bågen som i dag har längre än 400 m
+    till stadsbuss; avgångar per vardag alla linjer.
 Utdata: data/processed/b4_ua8_jomala.json, output/kartor/b4_25_jomala_karta.png, b4_26_jomala_omlopp.png
 """
 import json
@@ -52,7 +54,11 @@ FARG_K = '#d62828'                    # Jomalalinjen (ny linje)
 K_AVG = [h * 60 + 20 for h in range(6, 21)]              # Jomalalinjen varje timme 06:20–20:20
 J_EXTRA = [10 * 60 + 50, 11 * 60 + 50, 18 * 60 + 20, 19 * 60 + 20]   # Järsö: luckan mitt på dagen och kvällen
 BYTE_GRUPP_STRAFF = 30.0             # min – byte mellan linjegrupper (i stället för b4_omlopp:s 2 min)
-GRUPP = {'N': 0, 'S': 0, 'V': 1, 'Ö': 1, 'J': 2, 'K': 2}
+GRUPP = {'N': 0, 'S': 0, 'V': 1, 'Ö': 1, 'J': 2, 'K': 2, 'R': 3, 'Q': 3}
+FARG_R, FARG_Q = '#d62828', '#9d0208'  # Jomalaringen medurs / moturs
+BAGE = ['9025302000067001', '9025302000018902', '9025302000018501', '9025302000054301']  # Österkalmare … Vikingahallen
+R_AVG = [h * 60 + 20 for h in range(6, 21)]              # medurs 06:20–20:20 (steg 1)
+Q_AVG = [h * 60 + 50 for h in range(6, 21)]              # moturs 06:50–20:50 (steg 2)
 
 
 # ---------------------------------------------------------------- geometri
@@ -196,8 +202,67 @@ def berakna():
     for x in ('A', 'B'):
         res[x]['fordonskm_ar'] = int(round(res[x]['fordonskm_vardag'] * 250 + 5 * 52 * (
             res['A']['delta_km_per_tur'] if x == 'A' else res['B']['km_K']), -2))
+
+    # --- Jomalaringen
+    lm = V.monster_per_linje()
+    oo, vv = list(lm['Ö'][0][0]), list(lm['V'][0][0])
+    kal, kv = oo[2], vv[vv.index('9025302000025902')]
+    ut, hem = oo[:3], vv[vv.index(kv):]
+    bear = {s_: '180,60' for s_ in BAGE[2:]}; bear[kv] = '180,60'
+    bseq = [kal] + BAGE + [kv]
+    bage = [_osrm(tuple(H.loc[a, ['x', 'y']]), tuple(H.loc[b, ['x', 'y']]), bear.get(a, ''), bear.get(b, ''))
+            for a, b in zip(bseq[:-1], bseq[1:])]
+    geoR = [sg[(a, b)] for a, b in zip(ut[:-1], ut[1:])] + bage + [sg[(a, b)] for a, b in zip(hem[:-1], hem[1:])]
+    kmR = sum(L(g) for g in geoR) / 1000; km_bage = sum(L(g) for g in bage) / 1000
+    no = max([m for m in mon0 if m['linje'] == 'Ö'], key=lambda m: len(m['turer']))
+    nv = max([m for m in mon0 if m['linje'] == 'V'], key=lambda m: len(m['turer']))
+    io, iv = list(no['stopp']).index(kal), list(nv['stopp']).index(kv)
+    stR = list(no['stopp'][:io + 1]) + BAGE + list(nv['stopp'][iv:])
+    aktR = list(no['akt'][:io]) + [L(g) / 1000 / v_land for g in bage] + list(nv['akt'][iv:])
+    tR = float(sum(aktR))
+    pR = {'linje': 'R', 'stopp': tuple(stR), 'zoner': tuple(om.reindex(stR).fillna('?')), 'akt': np.array(aktR),
+          'turer': []}
+    pQ = {**pR, 'linje': 'Q', 'stopp': tuple(stR[::-1]), 'zoner': tuple(om.reindex(stR[::-1]).fillna('?')),
+          'akt': np.array(aktR[::-1])}
+    par_r = O.NORMPAR + (('R', 'Q'), ('Q', 'R'))
+    def ringturer(cw, ccw):
+        d_ = pd.DataFrame([{'trip_id': f'R{a}', 'avg': a, 'linje': 'R'} for a in cw]
+                          + [{'trip_id': f'Q{a}', 'avg': a, 'linje': 'Q'} for a in ccw])
+        d_['kortid'] = tR; d_['km'] = kmR; d_['ank'] = d_.avg + tR
+        return pd.concat([t, d_], ignore_index=True).sort_values(['avg', 'linje']).reset_index(drop=True)
+    plR1 = O.bygg_omlopp(ringturer(R_AVG, []), par=par_r); nR1 = O.nyckeltal(plR1)
+    plR2 = O.bygg_omlopp(ringturer(R_AVG, Q_AVG), par=par_r); nR2 = O.nyckeltal(plR2)
+    # nya områden: inom 400 m från bågen, i dag längre än 400 m till stadsbuss
+    from scipy.spatial import cKDTree
+    stad = H[H.linjer.astype(str).str.contains('|'.join(C.STADSLINJER))]
+    d_stad, _ = cKDTree(stad[['x', 'y']].to_numpy()).query(pkt[['x', 'y']].to_numpy())
+    bxy = np.vstack(bage)
+    d_bage, _ = cKDTree(bxy).query(pkt[['x', 'y']].to_numpy())
+    nya = pkt[(d_bage <= C.TACKNING_M) & (d_stad > C.TACKNING_M)]
+    langs = pkt[d_bage <= C.TACKNING_M]
+    def ringtack(extra):
+        return {'invanare_far_stadsbuss': round(float(nya.bef.sum())),
+                'invanare_langs_bagen': round(float(langs.bef.sum())),
+                'invanare_battre_klass': round(float(langs.bef[kl(langs.avg_alla + extra) > kl(langs.avg_alla)].sum())),
+                'invanare_minst_30_ny': round(float(langs.bef[(langs.avg_alla + extra) >= 30].sum())),
+                'invanare_minst_30_idag': round(float(langs.bef[langs.avg_alla >= 30].sum()))}
+    ar = lambda dag, n_lor: int(round(dag * 250 + 5 * n_lor * 52 * kmR, -2))
+    res['R'] = {'km_ring': round(kmR, 1), 'km_bage': round(km_bage, 1), 'kortid_min': round(tR, 1),
+                'hallplatser': [H.loc[x, 'namn'] for x in stR],
+                'steg1': {'turer': len(R_AVG), 'fordon': nR1['fordon'], 'fler_fordon': nR1['fordon'] - nt0['fordon'],
+                          'fordonskm_vardag': round(nR1['km'] - nt0['km'], 1), 'omloppstid_h': nR1['omloppstid_h'],
+                          'byten_mellan_grupper': blandat(plR1), **effekt(mon0 + [pR]),
+                          'tackning': ringtack(len(R_AVG))},
+                'steg2': {'turer': len(R_AVG) + len(Q_AVG), 'fordon': nR2['fordon'],
+                          'fler_fordon': nR2['fordon'] - nt0['fordon'],
+                          'fordonskm_vardag': round(nR2['km'] - nt0['km'], 1), 'omloppstid_h': nR2['omloppstid_h'],
+                          'byten_mellan_grupper': blandat(plR2), **effekt(mon0 + [pR, pQ]),
+                          'tackning': ringtack(len(R_AVG) + len(Q_AVG))}}
+    res['R']['steg1']['fordonskm_ar'] = ar(res['R']['steg1']['fordonskm_vardag'], 1)
+    res['R']['steg2']['fordonskm_ar'] = ar(res['R']['steg2']['fordonskm_vardag'], 2)
+    res['R']['andel_av_idag_ar'] = {k: round(res['R'][k]['fordonskm_ar'] / 342000 * 100, 0) for k in ('steg1', 'steg2')}
     json.dump(res, open(P / 'b4_ua8_jomala.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=float)
-    return res, geoA, geoK, pl0, plA, plB, tA
+    return res, geoR, bage, nya, pl0, plR1, plR2
 
 
 # ---------------------------------------------------------------- figurer
@@ -214,46 +279,51 @@ def _rita_linje(ax, delar, farg, uts, steg=420, lw=3.0):
                             arrowprops=dict(arrowstyle='-|>', color='#2b1838', lw=0, mutation_scale=11))
 
 
-def karta(geoA, geoK):
+def karta(geoR, bage, nya):
     H = pd.read_csv(P / 'a2_hallplatser_avgangar.csv', index_col=0, dtype={'stop_id': str})
-    import s01_vagdragning as V
-    uts = (106900, 110100, 6682700, 6690500)
-    fig, axs = plt.subplots(1, 2, figsize=(11.6, 12.2))
-    ovr = V.segmentgeometri()
-    for ax, titel, geo, farg in ((axs[0], 'A – Norra via Jomala kyrkby', geoA, C.FARG_LINJE['N']),
-                                 (axs[1], 'B – Jomalalinjen, genomgående med Järsö', geoK, FARG_K)):
-        K.ny_karta(uts, ax=ax, titel=titel)
-        K.rita_linjer(ax, alpha=0.35, lw=1.4, zorder=3, etikett=False)
-        _rita_linje(ax, geo, farg, uts)
-        stopp = [s for s in H.index if H.loc[s, 'namn'] in KYRKBY]
-        h = H.loc[stopp]
-        ax.scatter(h.x, h.y, s=22, facecolor='white', edgecolor='#1f1f1e', lw=0.8, zorder=7)
-        namn = ['Vikingahallen', 'Jomala kyrka', 'Rönngården', 'Maxinge', 'Sjukhuset', 'Centrum, Nygatan',
-                'Bo-Bil', 'Doktorsvägen 1A', 'Polishuset']
-        g = H[H.namn.isin(namn) & H.x.between(*uts[:2]) & H.y.between(*uts[2:])].groupby('namn')[['x', 'y']].mean()
-        ax.scatter(g.x, g.y, s=18, facecolor='white', edgecolor='#1f1f1e', lw=0.7, zorder=7)
-        K.placera_etiketter(ax, [(n.replace('Centrum, Nygatan', 'Centrum'), (r.x, r.y), 40) for n, r in g.iterrows()],
-                            fontsize=6.8, undvik=K.punkt_hinder(ax, list(h.x) + list(g.x), list(h.y) + list(g.y), px=6))
-    K.skalstock(axs[0], langd_m=1000, loc=(0.06, 0.03))
-    hnd = [Line2D([], [], color=C.FARG_LINJE['N'], lw=3, label='Norra via Jomala kyrkby (A)'),
-           Line2D([], [], color=FARG_K, lw=3, label='Jomalalinjen (B)'),
-           Line2D([], [], color='#8a8780', lw=1.4, alpha=0.6, label='Övriga stadslinjer i dag'),
-           Line2D([], [], color='#2b1838', lw=0, marker='$→$', markersize=9, label='Körriktning')]
-    K.teckenforklaring(axs[1], hnd, loc='lower right')
-    fig.tight_layout()
+    uts = (105900, 111900, 6682900, 6690000)
+    fig, ax = plt.subplots(figsize=(9.6, 11.4))
+    K.ny_karta(uts, ax=ax, titel='UA 8 – Jomalaringen')
+    ax.scatter(nya.x, nya.y, s=3, color=FARG_R, alpha=0.18, lw=0, zorder=1.5)
+    K.rita_linjer(ax, alpha=0.45, lw=1.5, zorder=3, etikett=False)
+    _rita_linje(ax, geoR, FARG_R, uts, steg=650, lw=3.4)
+    for d in K.sammanfoga(geoR, tol=60):                     # moturs (steg 2): pilar åt andra hållet, förskjutna
+        r = d[::-1]
+        Lc = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(r, axis=0).T))])
+        for dist in np.arange(325, Lc[-1], 650):
+            j = min(max(int(np.searchsorted(Lc, dist)), 1), len(r) - 1)
+            a, b = r[j - 1], r[j]
+            if np.hypot(*(b - a)) > 0.5 and uts[0] + 60 < b[0] < uts[1] - 60 and uts[2] + 60 < b[1] < uts[3] - 60:
+                ax.annotate('', xy=tuple(b), xytext=tuple(a), zorder=6,
+                            arrowprops=dict(arrowstyle='-|>', color='#8a8780', lw=0, mutation_scale=10))
+    namn = ['Centrum, Nygatan', 'Nabben', 'Kalmsta', 'Österkalmare', 'Jomala skola', 'Vikingahallen', 'Jomala kyrka',
+            'Källarvägen', 'Åsvägen', 'Västra macken', 'Sjukhuset', 'Maxinge']
+    g = H[H.namn.isin(namn) & H.x.between(*uts[:2]) & H.y.between(*uts[2:])].groupby('namn')[['x', 'y']].mean()
+    ax.scatter(g.x, g.y, s=20, facecolor='white', edgecolor='#1f1f1e', lw=0.8, zorder=7)
+    K.placera_etiketter(ax, [(n.replace('Centrum, Nygatan', 'Centrum'), (r.x, r.y), 40) for n, r in g.iterrows()],
+                        fontsize=6.9, undvik=K.punkt_hinder(ax, g.x, g.y, px=6))
+    K.skalstock(ax, langd_m=1000, loc=(0.05, 0.03))
+    hnd = [Line2D([], [], color=FARG_R, lw=3.4, label='Jomalaringen'),
+           Line2D([], [], color='#2b1838', lw=0, marker='$→$', markersize=9, label='Medurs (steg 1)'),
+           Line2D([], [], color='#8a8780', lw=0, marker='$→$', markersize=9, label='Moturs (steg 2)'),
+           Line2D([], [], color='#8a8780', lw=1.5, alpha=0.6, label='Stadslinjer i dag'),
+           Patch(facecolor=FARG_R, alpha=0.25, label='Nya områden med stadsbuss')]
+    K.teckenforklaring(ax, hnd, loc='lower right')
     return K.spara(fig, 'b4_25_jomala_karta.png')
 
 
-def omloppsfigur(pl0, plA, plB, tA):
+def omloppsfigur(pl0, plR1, plR2):
     import b4_omlopp as O
-    C.FARG_LINJE.setdefault('K', FARG_K)
-    O.BOKSTAV.setdefault('K', 'K')
-    fig, axs = plt.subplots(3, 1, figsize=(11.4, 9.6), gridspec_kw={'height_ratios': [5, 6, 6]})
+    C.FARG_LINJE.setdefault('R', FARG_R); C.FARG_LINJE.setdefault('Q', FARG_Q)
+    O.BOKSTAV.setdefault('Q', 'R')
+    fig, axs = plt.subplots(3, 1, figsize=(11.4, 9.8), gridspec_kw={'height_ratios': [5, 6, 7]})
     O.rita_omlopp(axs[0], pl0, titel='I dag – 5 bussar', t0=6 * 60 + 10)
-    O.rita_omlopp(axs[1], plA.assign(omlopp=np.nan), titel=f'A – Norra via Jomala kyrkby: {plA.buss.nunique()} bussar',
-                  andrade=set(tA[tA.linje == 'N'].trip_id), t0=6 * 60 + 10)
-    O.rita_omlopp(axs[2], plB.assign(omlopp=np.nan), titel=f'B – Jomalalinjen (K) och Järsö: {plB.buss.nunique()} bussar', t0=6 * 60 + 10)
-    O.omlopp_forklaring(fig, extra=[Patch(facecolor=FARG_K, label='Jomalalinjen (K)')])
+    O.rita_omlopp(axs[1], plR1.assign(omlopp=np.nan), titel=f'Steg 1 – Jomalaringen medurs varje timme: '
+                  f'{plR1.buss.nunique()} bussar', t0=6 * 60 + 10)
+    O.rita_omlopp(axs[2], plR2.assign(omlopp=np.nan), titel=f'Steg 2 – Jomalaringen åt båda hållen varje timme: '
+                  f'{plR2.buss.nunique()} bussar', t0=6 * 60 + 10)
+    O.omlopp_forklaring(fig, extra=[Patch(facecolor=FARG_R, label='Jomalaringen medurs (R)'),
+                                    Patch(facecolor=FARG_Q, label='Jomalaringen moturs (R)')])
     fig.tight_layout(rect=(0, 0.04, 1, 1))
     ut = C.KARTOR / 'b4_26_jomala_omlopp.png'
     K.fullnamn_fig(fig); fig.savefig(ut, dpi=200, bbox_inches='tight'); plt.close(fig)
@@ -261,6 +331,6 @@ def omloppsfigur(pl0, plA, plB, tA):
 
 
 if __name__ == '__main__':
-    r, geoA, geoK, pl0, plA, plB, tA = berakna()
-    print(json.dumps(r, ensure_ascii=False, indent=1, default=float))
-    print(karta(geoA, geoK)); print(omloppsfigur(pl0, plA, plB, tA))
+    r, geoR, bage, nya, pl0, plR1, plR2 = berakna()
+    print(json.dumps({k: v for k, v in r.items()}, ensure_ascii=False, indent=1, default=float))
+    print(karta(geoR, bage, nya)); print(omloppsfigur(pl0, plR1, plR2))

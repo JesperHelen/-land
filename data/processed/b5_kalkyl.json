@@ -202,28 +202,28 @@
    "battre_inv": 0
   },
   {
-   "scenario": "8A",
-   "namn": "UA 8A Norra via Jomala kyrkby",
+   "scenario": "8_1",
+   "namn": "UA 8 Jomalaringen steg 1, medurs varje timme",
    "huvudalternativ": false,
    "fordon": 6,
    "delta_fordon": 1,
-   "fordonskm_vardag": 1460.9,
-   "delta_km_vardag": 173.9,
-   "delta_km_ar": 45500,
-   "ny_tackning_inv": 0,
-   "battre_inv": 166
+   "fordonskm_vardag": 1577.2,
+   "delta_km_vardag": 290.2,
+   "delta_km_ar": 77600,
+   "ny_tackning_inv": 862,
+   "battre_inv": 899
   },
   {
-   "scenario": "8B",
-   "namn": "UA 8B Jomalalinjen, genomgående med Järsö",
+   "scenario": "8_2",
+   "namn": "UA 8 Jomalaringen steg 2, åt båda hållen varje timme",
    "huvudalternativ": false,
-   "fordon": 6,
-   "delta_fordon": 1,
-   "fordonskm_vardag": 1659.8,
-   "delta_km_vardag": 372.8,
-   "delta_km_ar": 97600,
-   "ny_tackning_inv": 0,
-   "battre_inv": 166
+   "fordon": 7,
+   "delta_fordon": 2,
+   "fordonskm_vardag": 1867.4,
+   "delta_km_vardag": 580.4,
+   "delta_km_ar": 155200,
+   "ny_tackning_inv": 862,
+   "battre_inv": 1319
   }
  ],
  "flyg_extraturer": [

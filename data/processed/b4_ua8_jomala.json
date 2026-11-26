@@ -76,5 +76,73 @@
    "invanare_minst_30_idag": 91
   },
   "fordonskm_ar": 97600
+ },
+ "R": {
+  "km_ring": 19.3,
+  "km_bage": 12.1,
+  "kortid_min": 35.1,
+  "hallplatser": [
+   "Centrum, Nygatan",
+   "Nabben",
+   "Kalmsta",
+   "Österkalmare",
+   "Jomala skola",
+   "Jomala församlingshem",
+   "Vikingahallen",
+   "Källarvägen",
+   "Dalkullavägen",
+   "Kasbergsvägen",
+   "Länsmansgränd",
+   "Åbrinken",
+   "Kasbrinken",
+   "Åsvägen",
+   "Västra macken",
+   "Tekniska verken",
+   "Ålandsplan",
+   "Savoy",
+   "Centrum, Nygatan"
+  ],
+  "steg1": {
+   "turer": 15,
+   "fordon": 6,
+   "fler_fordon": 1,
+   "fordonskm_vardag": 290.2,
+   "omloppstid_h": 76.02,
+   "byten_mellan_grupper": 2,
+   "resenarsminuter_vardag": 0.0,
+   "resor_langre_vardag": 0.0,
+   "resor_kortare_vardag": 0.0,
+   "tackning": {
+    "invanare_far_stadsbuss": 862,
+    "invanare_langs_bagen": 1395,
+    "invanare_battre_klass": 899,
+    "invanare_minst_30_ny": 692,
+    "invanare_minst_30_idag": 498
+   },
+   "fordonskm_ar": 77600
+  },
+  "steg2": {
+   "turer": 30,
+   "fordon": 7,
+   "fler_fordon": 2,
+   "fordonskm_vardag": 580.4,
+   "omloppstid_h": 90.6,
+   "byten_mellan_grupper": 4,
+   "resenarsminuter_vardag": -76.0,
+   "resor_langre_vardag": 0.0,
+   "resor_kortare_vardag": 32.0,
+   "tackning": {
+    "invanare_far_stadsbuss": 862,
+    "invanare_langs_bagen": 1395,
+    "invanare_battre_klass": 1319,
+    "invanare_minst_30_ny": 1395,
+    "invanare_minst_30_idag": 498
+   },
+   "fordonskm_ar": 155200
+  },
+  "andel_av_idag_ar": {
+   "steg1": 23.0,
+   "steg2": 45.0
+  }
  }
 }

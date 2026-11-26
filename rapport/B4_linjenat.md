@@ -34,8 +34,7 @@
 > | UA 5 – Linje Västra via Cedersvägen, linje Norra rakt på Västra utfarten (Västra +2, Norra −2 min/tur) | Västra och Östra sammanslagna | 17 av 20 Västra-turer | 5 (nej) | −1 | – |
 > | UA 6 – Linje Norra i båda riktningarna (kräver extra buss) | Norra även moturs, var 30:e minut | 22 turer till | 6 (ja, +1) | +257 | – |
 > | UA 7 – Kvällstrafik efter efterfrågan | Norra åt båda hållen efter kl. 18 i stället för Västra | 3 turer flyttas | 5 (nej) | −3 | – |
-> | UA 8A – Norra via Jomala kyrkby (kräver extra buss) | Alla Norraturer via kyrkbyn | 22 av 22 | 6 (ja, +1) | +174 | – |
-> | UA 8B – Jomalalinjen, genomgående med Järsö (kräver extra buss) | Ny linje varje timme + Järsö timtrafik | 15 + 4 turer | 6 (ja, +1) | +373 | – |
+> | UA 8 – Jomalaringen, stomsatsning (kräver extra bussar) | Steg 1: ny ringlinje medurs varje timme; steg 2: åt båda hållen | 15 / 30 turer | 6 (ja, +1) / 7 (ja, +2) | +290 / +580 | – |
 >
 > I UA 1a, 1b och 4 kör fyra Västra-turer som i dag, eftersom deras varv saknar marginal i operatörens omlopp:
 >
@@ -949,78 +948,78 @@ för Västras få kvällsresenärer, till exempel anropsstyrd trafik.
 *Figur 4.23. UA 7 – kvällstrafik efter kl. 18: Norra åt båda hållen varje timme, Södra och Östra som i dag, Västra
 anropsstyrd. Cirklarna visar påstigande efter kl. 18.*
 
-## 4.10 UA 8 – Stadsbuss till Jomala kyrkby (kräver extra buss)
+## 4.10 UA 8 – Jomalaringen, en stomsatsning mot Jomala (kräver extra bussar)
 
-**Introduktion.** Beställaren efterfrågar ett kreativt förslag med stadsbuss till Jomala kyrkby (2026-11-26). Ett
-extra fordon godtas, om omloppen optimeras om. Jomala kyrkby ligger cirka 2,7 km norr om Maxinge längs
-Godbyvägen, med Jomala kyrka, Vikingahallen, Jomala skola och Rönngården. I dag trafikeras orten bara av
-landsbygdslinjerna 2–4, med 14 avgångar per vardag och riktning på oregelbundna tider. Resan Torget – Jomala kyrka
-tar cirka 13 minuter.
+**Introduktion.** Beställaren efterfrågar ett kreativt förslag med stadsbuss till Jomala kyrkby (2026-11-26).
+Landskapsregeringen vill se en stomsatsning och en vision: linjen får vara en slinga men ska täcka nya områden.
+Med dagens resande, några hundra resor per vardag, motiveras en sådan satsning inte av efterfrågan i dag, utan av
+att Mariehamn och södra Jomala växer ihop. Cirka 3 400 invånare i norra Mariehamn och södra Jomala saknar i dag
+stadsbuss inom 400 m. De största områdena är Österkalmare, Jomala kyrkby och Jomala skola samt Dalkarby. Där går
+i dag bara landsbygdslinjerna, med oregelbundna tider.
 
-- **Syfte:** stadsbussens turtäthet och förbindelser till Jomala kyrkby.
-- **Prövas:** två förslag, båda med högst ett extra fordon.
-- **Det som avgör:** hur många som bor och reser till kyrkbyn, hur dagens resenärer påverkas och hur mycket
-  körningen ökar.
+**Utformning.** Jomalaringen är en ny ringlinje (19 km, cirka 35 minuter per varv) som binder ihop norra Mariehamn
+och södra Jomala (figur 4.25):
 
-**A – Linje Norra via Jomala kyrkby.** Alla 22 Norraturer kör efter Hjortronstigen Nya Godbyvägen norrut till
-kyrkbyn (Vikingahallen, Jomala församlingshem, Jomala kyrka, Rönngården), vänder norr om Rönngården och kommer
-söderut till Maxinge. Hållplatsen vid Maxinge nås då i rätt riktning. Därefter går linjen som i dag via Vikingagränd,
-Bolstavägen, Hindersböle, Nabben och Sjukhuset (figur 4.25).
+> Centrum – Nabben – Kalmsta – **Österkalmare – Jomala skola – Jomala kyrkby (församlingshemmet, Vikingahallen) –
+> Dalkarby** – Källarvägen – Åsvägen – Västra macken – Centrum
 
-- **Körtid:** varvet blir 39 i stället för 26 minuter (+13 min) och 7,9 km längre per tur.
-- **Omlopp:** med ett sjätte fordon kör tre bussar Norra och Södra om vartannat. Förarna växlar inom paren som i
-  dag (figur 4.26).
-- **Kostnad:** 6 fordon (+1) och +174 fordonskm per vardag, cirka +45 500 per år.
-- **Kyrkbyn:** cirka 260 invånare inom 400 m får 49 i stället för 27 avgångar per vardag, och 166 av dem får
-  bättre turtäthetsklass.
-- **Restid:** alla som åker förbi Maxinge får 13 minuter längre resa. Centrum – Maxinge tar 21 i stället för
-  8 minuter, och restiden för dagens resenärer blir cirka 270 resenärsminuter längre per vardag. Ovanpå UA 3
-  (norra slingan baklänges) blir det cirka 410.
+- **Ny norra båge (12 km)** genom områden utan stadsbuss i dag. Nya hållplatser antas i bebyggelsen längs bågen,
+  ungefär var 500:e meter.
+- **Kopplas ihop med de andra linjerna:** avgångar i pulsen i centrum (:20 medurs, :50 moturs) och byten mot
+  Östra i Kalmsta, mot Västra vid Källarvägen och Åsvägen, nära Sjukhuset vid Västra macken och mot
+  landsbygdslinjerna 1–6 i Jomala kyrkby.
+- **Steg 1:** medurs varje timme 06:20–20:20 (15 turer), med ett extra fordon.
+- **Steg 2:** dessutom moturs varje timme 06:50–20:50 (30 turer totalt), med två extra fordon.
 
-**B – Jomalalinjen, genomgående med Järsö.** En ny linje går varje timme 06:20–20:20: Centrum – Polishuset –
-Doktorsvägen – Hjortronstigen – Jomala kyrkby – Maxinge – Sjukhuset – Yrkesgymnasiet – Centrum (16,9 km,
-33 minuter). Två bussar kör Järsö och Jomala om vartannat, så att en resenär från Järsö kan sitta kvar genom
-centrum mot Jomala. Det blir en nord–sydlig linje Järsö – Centrum – Jomala kyrkby. Extrabussens lediga tid ger
-också Järsö timtrafik mitt på dagen och på kvällen (turerna 10:50, 11:50, 18:20 och 19:20). Norra är som i dag.
+**Resultat.**
 
-- **Omlopp:** 6 fordon (+1). Två bussar kör bara Järsö och Jomala, med åtta genomgående byten Järsö → Jomala eller
-  Jomala → Järsö per dag. Norra/Södra och Västra/Östra är som i dag (figur 4.26).
-- **Kostnad:** +373 fordonskm per vardag, cirka +97 600 per år. Utan de fyra extra Järsöturerna +254 fordonskm
-  per vardag.
-- **Kyrkbyn:** cirka 260 invånare inom 400 m får 42 i stället för 27 avgångar per vardag, och 166 av dem får bättre
-  turtäthetsklass.
-- **Restid:** dagens resenärer vinner cirka 56 resenärsminuter per vardag, eftersom Jomalalinjen ger en direkt väg
-  Maxinge – Sjukhuset. Ingen får längre restid.
+- **Nya områden:** cirka 860 invånare får stadsbuss inom 400 m, att jämföra med 178 för Möckelö Strand ny (UA 1).
+  Längs bågen bor cirka 1 400 invånare. I steg 2 får alla dessa minst 30 avgångar per vardag, mot cirka 500 i dag.
+- **Omlopp (figur 4.26):** i steg 1 kör en buss ringen hela dagen, och övriga omlopp är som i dag. I steg 2 kör två
+  bussar ringen, delvis tillsammans med Norra/Södra och Västra/Östra. Förarna växlar fortsatt inom paren; antalet
+  bussar är det minsta som tidtabellen kräver.
+- **Kostnad:**
+  - steg 1: 6 fordon (+1) och +290 fordonskm per vardag, cirka +77 600 per år (+23 % mot i dag);
+  - steg 2: 7 fordon (+2) och +580 fordonskm per vardag, cirka +155 000 per år (+45 %).
+- **Restid för dagens resenärer:** oförändrad i steg 1. I steg 2 cirka 76 resenärsminuter kortare per vardag, för
+  32 resor, eftersom ringen åt båda hållen ger nya direkta förbindelser, till exempel mellan Kalmsta och Västra
+  macken. Resor till och från de nya områdena finns inte i stadstrafikens data och ingår inte.
 
-*Tabell. UA 8 – två förslag för stadsbuss till Jomala kyrkby (typvardag).*
+**Prövade enklare varianter.** Först prövades två enklare sätt att nå kyrkbyn med högst ett extra fordon:
 
-| | A – Norra via kyrkbyn | B – Jomalalinjen + Järsö |
-|---|---|---|
-| Turer till kyrkbyn | 22 | 15 |
-| Avgångar i kyrkbyn (alla linjer) | 27 → 49 | 27 → 42 |
-| Fordon | 6 (+1) | 6 (+1) |
-| Fordonskm per vardag | +174 | +373 (+254 utan Järsöturerna) |
-| Fordonskm per år | cirka +45 500 | cirka +97 600 |
-| Restid dagens resenärer, resenärsminuter per vardag | +271 | −56 |
-| Centrum – Maxinge | 8 → 21 min | 8 min (som i dag) |
+- **A, Norra via kyrkbyn:** alla 22 Norraturer kör från Hjortronstigen till kyrkbyn och tillbaka till Maxinge.
+  Varvet blir 13 minuter längre, så Centrum – Maxinge tar 21 i stället för 8 minuter.
+- **B, Jomalalinje på Norras gator:** Centrum – Doktorsvägen – kyrkbyn – Maxinge – Sjukhuset – Centrum, varje
+  timme, genomgående med Järsö, och Järsö får timtrafik hela dagen.
 
-**Bedömning.** Resor till och från kyrkbyn finns inte i stadstrafikens data, så efterfrågan är okänd. Kyrkbyn har
-redan 14 avgångar per riktning med landsbygdslinjerna, och stadsbussen tar ungefär lika lång tid till centrum
-(cirka 13 minuter). Vinsten är turtätheten och förbindelserna till Sjukhuset, Doktorsvägen och skolorna. A är
-billigast i fordonskm men gör Norra 13 minuter längre för alla som åker förbi Maxinge, och rekommenderas inte. B
-kostar mer körning men ger dagens resenärer kortare restid, gör Järsö till en timslinje över hela dagen och knyter
-ihop Järsö och Jomala genom centrum. Om ett förslag ska gå vidare bör det vara B, gärna med Jomala kommun som
-medfinansiär och med samordnad biljett mot landsbygdslinjerna. Först bör man mäta efterfrågan, till exempel med
-landsbygdslinjernas påstigande i kyrkbyn.
+Ingen av dem täcker nya områden utanför kyrkbyn.
+
+*Tabell. UA 8 – Jomalaringen och de prövade varianterna (typvardag).*
+
+| | Jomalaringen steg 1 | Jomalaringen steg 2 | A – Norra via kyrkbyn | B – Jomalalinje på Norras gator |
+|---|---|---|---|---|
+| Nya invånare med stadsbuss inom 400 m | cirka 860 | cirka 860 | cirka 260 (kyrkbyn) | cirka 260 (kyrkbyn) |
+| Turer per vardag | 15 | 30 | 22 (Norra) | 15 (+4 Järsö) |
+| Fordon | 6 (+1) | 7 (+2) | 6 (+1) | 6 (+1) |
+| Fordonskm per vardag | +290 | +580 | +174 | +373 |
+| Fordonskm per år | cirka +77 600 | cirka +155 000 | cirka +45 500 | cirka +97 600 |
+| Restid dagens resenärer, resenärsminuter per vardag | ±0 | −76 | +271 | −56 |
+
+**Bedömning.** Jomalaringen är en stomsatsning och ett visionsalternativ. Den ger stadsbuss till cirka
+860 invånare som saknar den i dag, knyter ihop Mariehamn och södra Jomala och kopplas ihop med alla stadslinjer.
+Resandet i dag motiverar inte kostnaden, men ringen kan införas stegvis: först medurs varje timme med en extra
+buss, och åt båda hållen när resandet växer. Den bör planeras tillsammans med Jomala kommun (medfinansiering,
+hållplatser och skolskjuts), och biljetterna bör samordnas med landsbygdslinjerna. Av de enklare varianterna
+rekommenderas inte A, eftersom Norra blir 13 minuter längre. B täcker bara kyrkbyn.
 
 ![Figur 4.25](../output/kartor/b4_25_jomala_karta.png)
 
-*Figur 4.25. UA 8 – stadsbuss till Jomala kyrkby: A Norra via kyrkbyn, B Jomalalinjen. Pilarna visar
-körriktningen.*
+*Figur 4.25. UA 8 – Jomalaringen: medurs i steg 1, åt båda hållen i steg 2. Rött raster visar områden som i dag
+saknar stadsbuss inom 400 m och får den med ringen.*
 
 ![Figur 4.26](../output/kartor/b4_26_jomala_omlopp.png)
 
-*Figur 4.26. Omlopp i dag, med A och med B. Skrafferat: Norras förlängning via kyrkbyn. K = Jomalalinjen.*
+*Figur 4.26. Omlopp i dag och med Jomalaringen i steg 1 och 2 (R = Jomalaringen).*
 
 ## 4.11 Systemeffekter per UA
 

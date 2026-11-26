@@ -54,8 +54,8 @@ def kort(sid, v):
 KORT_FIG = {'1a': 'UA 1a alla turer', '1a_ryms': 'UA 1a dagens tidtabell', '1a_VO': 'UA 1a ★ Västra + Östra',
             '1b': 'UA 1b ★ Västra + Östra', '2': 'UA 2 ★', '3': 'UA 3 ★', '4': 'UA 4 alla turer', '4_VO': 'UA 4 ★ Västra + Östra',
             '4_VO_sol': 'UA 4 + Solberget indragen', '4_Y': 'UA 4Y flygturerna',
-            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ Västra + Östra', '5_ryms': 'UA 5 dagens drift', '6': 'UA 6 Norra båda riktningar', '7': 'UA 7 kväll: Norra båda håll', '8A': 'UA 8A Norra via Jomala kyrkby',
-            '8B': 'UA 8B Jomalalinjen + Järsö',
+            EXTRA: 'UA 4 extra turer för flygen', '5': 'UA 5 ★ Västra + Östra', '5_ryms': 'UA 5 dagens drift', '6': 'UA 6 Norra båda riktningar', '7': 'UA 7 kväll: Norra båda håll', '8_1': 'UA 8 Jomalaringen steg 1',
+            '8_2': 'UA 8 Jomalaringen steg 2',
             '5_N': 'UA 5 bara Norra rakt på'}
 
 
@@ -96,15 +96,16 @@ def main():
                       'fordonskm_vardag': round(se['idag']['omlopp']['km'] + u7['fordonskm_vardag'], 1),
                       'delta_km_vardag': u7['fordonskm_vardag'], 'delta_km_ar': u7['fordonskm_ar'],
                       'ny_tackning_inv': 0, 'battre_inv': 0})
-    if (P / 'b4_ua8_jomala.json').exists():                # UA 8: stadsbuss till Jomala kyrkby (utanför ramen, +1 fordon)
-        u8 = json.load(open(P / 'b4_ua8_jomala.json', encoding='utf-8'))
-        for sid, x, namn in (('8A', 'A', 'UA 8A Norra via Jomala kyrkby'),
-                             ('8B', 'B', 'UA 8B Jomalalinjen, genomgående med Järsö')):
+    if (P / 'b4_ua8_jomala.json').exists():                # UA 8: Jomalaringen (stomsatsning, utanför ramen)
+        u8 = json.load(open(P / 'b4_ua8_jomala.json', encoding='utf-8'))['R']
+        for sid, x, namn in (('8_1', 'steg1', 'UA 8 Jomalaringen steg 1, medurs varje timme'),
+                             ('8_2', 'steg2', 'UA 8 Jomalaringen steg 2, åt båda hållen varje timme')):
             rader.append({'scenario': sid, 'namn': namn, 'huvudalternativ': False,
                           'fordon': u8[x]['fordon'], 'delta_fordon': u8[x]['fler_fordon'],
                           'fordonskm_vardag': round(se['idag']['omlopp']['km'] + u8[x]['fordonskm_vardag'], 1),
                           'delta_km_vardag': u8[x]['fordonskm_vardag'], 'delta_km_ar': u8[x]['fordonskm_ar'],
-                          'ny_tackning_inv': 0, 'battre_inv': u8[x]['tackning']['invanare_battre_klass']})
+                          'ny_tackning_inv': u8[x]['tackning']['invanare_far_stadsbuss'],
+                          'battre_inv': u8[x]['tackning']['invanare_battre_klass']})
     df = pd.DataFrame(rader)
     res = {'antaganden': {'vardagar_per_ar': VARDAGAR, 'lordagar_per_ar': LORDAGAR,
                           'lordagsturer_per_linje': LORDAGSTURER},
@@ -120,7 +121,7 @@ def main():
 
 
 def figur(df):
-    ordning = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y', EXTRA, '5', '5_ryms', '5_N', '6', '7', '8A', '8B']
+    ordning = ['1a', '1a_ryms', '1a_VO', '1b', '2', '3', '4', '4_VO', '4_VO_sol', '4_Y', EXTRA, '5', '5_ryms', '5_N', '6', '7', '8_1', '8_2']
     ordning = [o for o in ordning if o in set(df.scenario)]
     d = df.set_index('scenario').loc[ordning]
     fig, ax = plt.subplots(figsize=(8.6, 6.2))

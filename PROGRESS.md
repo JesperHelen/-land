@@ -326,3 +326,9 @@ utan fler bussar) och lägg till i todo. Visualisera omloppen före och efter.
   (timtrafik hela dagen), 6 fordon, +373 fordonskm/vardag (+254 utan Järsöturerna), restid −56. Omlopp: min antal
   fordon med straff 30 min för byte mellan linjegrupper (förarna växlar inom paren). Kyrkbyn: cirka 260 inv. inom
   400 m, avgångar 27 → 49 (A) / 42 (B). B4 4.10 (4.11–4.13 omnumrerade), PM 3.9 + slutsats 12, B5, figur 4.25–4.26.
+- 2026-11-26: UA 8 omarbetat till en stomsatsning (beställaren: egen linje, får vara slinga men ska täcka nya
+  områden; landskapsregeringen vill se stomsatsning och vision): Jomalaringen Centrum – Nabben – Kalmsta –
+  Österkalmare – Jomala skola – Jomala kyrkby – Dalkarby – Källarvägen – Åsvägen – Västra macken – Centrum, 19,3 km,
+  35 min, ny norra båge 12 km. Cirka 860 invånare får stadsbuss inom 400 m. Steg 1 medurs varje timme: 6 fordon,
+  +290 fordonskm/vardag (+77 600/år, +23 %), restid ±0. Steg 2 båda hållen: 7 fordon, +580 (+155 200/år, +45 %),
+  restid −76. A (Norra via kyrkbyn) och B (Jomalalinje på Norras gator) redovisas som prövade varianter.
